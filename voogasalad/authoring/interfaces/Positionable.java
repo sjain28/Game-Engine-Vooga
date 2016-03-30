@@ -10,7 +10,7 @@ import tools.Vector;
  *
  */
 public interface Positionable {
-    /*
+    /**
      * gets and sets the X values for the object (ie its position on "Game") as a vector
      */
     public void setPostion(Vector v);
