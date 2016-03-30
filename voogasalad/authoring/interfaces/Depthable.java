@@ -8,5 +8,6 @@ package authoring.interfaces;
  *
  */
 public interface Depthable {
-
+    
+    public void setDepth();
 }

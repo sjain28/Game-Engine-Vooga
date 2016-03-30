@@ -8,5 +8,10 @@ package authoring.interfaces;
  *
  */
 public interface Collidable {
-
+    
+    /**
+     * 
+     * @param object
+     */
+    public void onCollide(Collidable object);
 }
