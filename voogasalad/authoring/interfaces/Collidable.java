@@ -10,8 +10,9 @@ package authoring.interfaces;
 public interface Collidable {
     
     /**
+     * Method implemented for collision of two objects
      * 
-     * @param object
+     * @param object: Another collidable object
      */
     public void onCollide(Collidable object);
 }
