@@ -8,5 +8,19 @@ package authoring.interfaces;
  *
  */
 public interface Sizeable {
-
+    /*
+     * Gets and Sets the size of a given object by height and width
+     */
+    
+    public void setSize(double height, double width);
+    
+    public void setHeight(double height);
+    
+    public void setWidth(double width);
+    
+    public double[] getSize();
+    
+    public double getHeight();
+    
+    public double getWidth();
 }
