@@ -319,8 +319,90 @@ Pop up populated with buttons, comboboxes ect to set the other preferences for t
 * Extensions:
 More Features, More properties, More functionality
 
+### Editing global variables
+* Primary Actor: Author (Registered User)
+* Scope: Authoring Environment, Engine
+* Level: ! (User goal or sea level)
+* Brief: The user wants to edit a global variable such as Text, Timer, that may indicate score or time remaining
+* Stakeholders: Game Authoring Environment
+* Preconditions: A global variable must already be declared for them to edit
+* Postconditions: 
+* Minimal Guarantees: The variable is clickable and editable
+* Success Guarantees: User can edit the variable and it updates the value througout the program
+* Triggers: Author clicks on the variable in the Explorer Window
+* Basic Flow
+Explorer Window is initialized
+A variable has been defined before
+The user double clicks on the variable in the explorer and brings up a window that allows it to change its value
+The value of the Variable object is altered
+The field in the authoring environment reflects the change
+
+* Extensions
+When changed, the authoring environment dynamically reflects the change while the window is still open (not just when the user clicks OK)
+
+###Preview Image file
+* Primary Actor: Author (Registered User)
+* Scope: Authoring Environment, Explorer Window
+* Level: ! (User goal or sea level)
+* Brief: The author clicks on an image in the game explorer and can preview the image as a thumbnail, or double-click and view the image in full resolution.
+* Stakeholders: Game Authoring Environment
+* Preconditions: Images are loaded onto Explorer Window. Images are clickable, draggable, etc. Image is formatted properly and is a valid file.
+* Postconditions: 
+* Minimal Guarantees: The image is presented as a thumbnail.
+* Success Guarantees: The image can be double-clicked and viewed in full resolution. User can easily identify which image is represented by its thumbnail
+* Triggers: Author clicks on image resource in Explorer Window or double clicks on image
+* Basic Flow
+Explorer Window is initialized
+Image is imported into the authoring environment
+If desired, the image can be moved to an appropriate folder
+If desired, the image alias can be renamed
+Image is clicked on, and a thumbnail in the explorer window shows the image
+Image is double-clicked on, and the image is opened in a separate window
+
+* Extensions
+Animated images will animate as a thumbnail
+
+###Preview Audio file
+* Primary Actor: Author (Registered User)
+* Scope: Authoring Environment, Explorer Window
+* Level: ! (User goal or sea level)
+* Brief: The author clicks on an audio file in the explorer window and can see a thumbnail image of a speaker (to represent that it is an audio file), and is able to preview what it sounds like if double-clicked
+* Stakeholders: Game Authoring Environment
+* Preconditions: Audio files are loaded onto Explorer Window. Audio files are clickable. Audio files are formatted properly and is a valid file
+* Postconditions: 
+* Minimal Guarantees: The audio file is presented as a thumbnail
+* Success Guarantees: User can easily identify which audio is represented by the file name. User can listen to the audio if double-click on the file
+* Triggers: Author clicks on an audio resource in Explorer Window or double clicks on an audio file
+* Basic Flow
+Explorer Window is initialized
+Audio file is imported into the authoring environment
+If desired, the audio file can be moved to an appropriate folder
+If desired, the audio file alias can be renamed
+Audio file is clicked on, and a thumbnail in the explorer window shows a speaker logo
+Audio file is double-clicked on, and the audio file is opened in a separate window for preview
+
+* Extensions
+On single click, the waveform of the audio is displayed instead of a default thumbnail
 
 
+### Loading game authoring workspace
+* Primary Actor: Author (Registered User)
+* Scope: Authoring Environment, Engine, Data
+* Level: ! (User goal or sea level)
+* Brief: The user wants to load a previously saved workspace in order to continue editing after closing and reopening the program
+* Stakeholders: Game Authoring Environment, Engine, Data
+* Preconditions: The workspace has already been saved before
+* Postconditions: 
+* Minimal Guarantees: A workspace is opened
+* Success Guarantees: The workspace saved earlier is completely restored and opened
+* Triggers: Author clicks on File -> Open project...
+* Basic Flow
+User clicks on File -> Open project…
+The authoring environment calls on the engine
+The engine calls on the data to restore sprites created before
+The engine passes this to the authoring environment to display the workspace as was saved before
+* Extensions
+When the window is closed and reopened, the session is automatically restored (like how Eclipse does so)
 
 
 ### Setting on Collision 
