@@ -112,27 +112,3 @@ Adding other resources (sound, color, textures, etc)
   1. Dragging other resource onto Design Board
 
 
-Use Case: Main player character moves left
-Primary Actor: Player (Registered User)
-Scope: Game map
-Level: ! (User goal or sea level)
-Brief: (equivalent to a user story or an epic)
-The user presses a left arrow button that causes the main character to move to the left.
-Stakeholders
-...
-Postconditions
-Minimal Guarantees:
-Success Guarantees:
-The character successfully moves left.
-If the character hits another entity, the physics engine runs and detects/solves collisions.
-Preconditions:
-The character is movable in the game. The goal condition hasn’t been met.
-If the position is at the farthest end of the map on the left, the main character 
-Triggers:
-The user makes a move left request (presses left arrow key) while the game is in the game loop.
-Basic flow: (To be written from here)
-The authoring environment provides the user with the ability to bind the left arrow key to move-left action.
-The system saves the game composition using XStream.
-The game player loads the game and the user can play the game. While in gameplay, if the key is pressed, the main character will move.
-Extensions:
-Let the user vary the velocity at which the main character moves.
