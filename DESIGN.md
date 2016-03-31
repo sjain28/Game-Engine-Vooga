@@ -28,13 +28,46 @@ Our design will need to be able to handle these multiple layers of complexity, n
 ![](design_resources/overall_view.png?raw=true)
 
 ### Modules
+Modules
+* Authoring 	
+	* Resources: all resources (author-uploaded and default) available for author to use in game
+		*Explorer.java: Explorer Window- displays the resources to the user to select from
+		*ResourceDragger.java: allow user to drag resource from Explorer window onto Authoring Window
+		*ResourceProperties.properties: maps resource name (as written in XML) to path of the resource on the local device
+		*Resources.xml: uses XML tagging to mirror folder-tree structure where the leaves are
+		*Implementation
+		  	*Double click lets you preview: opens image, plays music, etc
+
+ 	* Authoring Game: how the author creates the game on the Graphics Window
+		* ResourceDragger.java: allow user to drag resource from Explorer window onto Authoring Window
+		* Properties.java: Properties Window- displays variables of selected object
+		* AuthoringWindow.java: Scrollable pane where the user can drag and drop items onto and program interactions
+		* Objects: creating and editing objects and their variables
+
+ 	* Cause-Effect Relationship: regulates the events (causes and effects having to do with variables and collisions)
+		* Event.java: contains a bundle of causes and a bundle of effects
+
+ 	* Saving/Loading Game: process of saving and loading the game data the author created
+		* XMLWriter.java: used to write data onto XML file for Game Engine to run
+		* XMLReader.java: used to read data from XML to load authoring workspace or launch game
+		* Game Data XMLs: tracks all the additions and deletions the author has made to the game
+			* Used by Game Engine to launch game
+			* Used to save progress of user
+
+ 	* Objects: all objects (static, character, AI)
+		* Characteristics (Interfaces)
+			* Imageable.java: can be represented by an image
+			* Moveable.java: can move
+			* Sizeable.java: can be sized (related to Imageable)
+			* Collidable.java: interacts with other objects (onCollision)
+	* StaticObject.java: data and management related to objects that dont move
+	* CharacterObject.java: data and management related to user-controlled objects
+	* AIObject.java: data and management related to computer-generated/controlled objects
+			
+ 	* Miscellaneous:
+		* Vector.java: represents vectors in x,y,z-coordinate axis
 
 
-* Authoring environment
-  * Front-end
-    * (add a description of the front end of authoring environment)
-  * Back-end
-    * (add a description)
 * Player
   * Front-end
     * (add a description)
@@ -56,10 +89,39 @@ Our design will need to be able to handle these multiple layers of complexity, n
 	
 	
 # User Interface
+Authoring: 
 
+UI Design
+![](design_resources/overall_view.png?raw=true)
 
-
-
+* Explorer: resources for user to use (images, sounds, fonts, texture, colors  etc) organized with folders 
+* Properties: where selected objects variables appear and can be edited
+* Graphics Window: GUI for game authoring environment
+ 	* Characteristics
+		* ScrollPane
+		* StackPane inside of ScrollPane
+	* Uses
+		* Drag and drop images
+		* Select objects to edit
+	* Toolbar
+		* Run
+		* Save
+		* Add Object
+	* Menubar
+		* File
+			* New Game
+			* Save
+			* Load
+			* Run
+		* Edit
+			* New
+				* Game Object
+				* Event
+				* Global Variable
+			* Copy
+			* Paste
+		* Help
+		
 # Design Details
 
 
