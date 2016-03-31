@@ -48,3 +48,33 @@ Our design will need to be able to handle these multiple layers of complexity, n
     * (add a description)
 * Resources
     * (add a description)
+	
+
+	
+	
+	
+	
+	
+# User Interface
+
+
+
+
+# Design Details
+
+
+
+* Alternative designs proposed
+  * (not necessary, but we could talk about Unity and how we could have used a scripting language to make it as flexible as possible for the user)
+
+
+
+# Example games
+* Super Mario Bros
+  * Super Mario Bros. has multiple platform types, enemy types, the screen that moves with the main hero (Mario), and a goal of reaching a certain point (castle) or defeating a boss (bowser). Our level creator will work for all of these features. First, we will let users in the authoring environment to set create the goal of reaching a flagpole (castle) for the normal levels or defeat a boss (bowser) in a boss level. This would be done using cause-effect structure that we define for all events. Enemy behavior in Mario is simple in that enemies go forward and backward and change directions when they hit an object (wall). This type of behavior can be set in the authoring environment. The screen scrolling with the hero feature will also be one of our scrolling options that we pre-set for the user. Hero actions include horizontal walking (left and right), jumping, and possible state change (eat a mushroom, eat a flower). The physics engine will be in charge of handling all of the collision detection and collision resolution.
+  
+* Flappy Bird
+  * (Add description)
+
+* Sonic (?)
+  *
