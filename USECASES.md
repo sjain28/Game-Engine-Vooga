@@ -171,5 +171,95 @@ The data will be serialized into XML
 * Extensions:
 Have composition of backend objects in front end to allow for greater encapsulation of backend data and ensures only backend data is written to XML
 
+### Previewing Colors on Package Explorer
+* Primary Actor: Author (Registered User)
+* Scope: Authoring Environment - Package Explorer
+* Level: ! (User goal or sea level)
+* Brief: The User wants to add a colored Sprite to the Design Board. There will be thumbnails of the color of the sprite with the name attached. There will also be an option for the user to define their own colors through inputting RGB values.
+* Stakeholders: Game Authoring Environment
+* Preconditions: A predefined list of sprites must be made with a certain color property. The user will also have the option to create a new sprite of a certain color using RGB values. The files must be clickable. 
+* Postconditions: 
+* Minimal Guarantees: The Sprite must be clickable
+* Success Guarantees: User can see the color of the sprite based on thumbnail
+* Triggers: Author clicks on the colored sprite in the Explorer Window
+* Basic Flow
+Explorer Window is initialized
+A predefined list of sprites with certain color properties are initialized
+A ColoredSpriteCreator class is instantiated that allows for the creation of a new sprite with a certain color and also a GUI feature (button, etc.) is created that allows the user to create a new sprite with a new color and added to the list of sprites mentioned in step 2.
+That list of sprites is imported into the authoring environment
+If desired, sprite can be moved to appropriate folder
+If desired, the sprite alias can be renamed
+     5.    Sprite clicked on, and can be dragged around to the Design Board
+
+* Extensions
+When double clicked, properties of the sprite can be viewed
+
+
+
+### Setting Cause-Effect of Events
+* Primary Actor: Author (Registered User)
+* Scope: Authoring Environment - Package Explorer, Data: Sprite, Event Manager
+* Level: ! (User goal or sea level)
+* Brief: The User wants to set an event that will occur based on interactions of GameObjects within the game.
+* Stakeholders: Game Authoring Environment, Event Manager
+* Preconditions: the Event Manager class must be created and be flexible to handle interactions between object(s) or user (actors, global variables, keyclicks, etc.) and change characteristics of the objects (effect)
+* Postconditions: 
+* Minimal Guarantees: When playing the game, the cause produces the effect and the event is successful
+* Success Guarantees: User sees the event on the Package Explorer and are able to edit the event
+* Triggers: Author uses the Event Manager tab on the Package Explorer to deal with events between objects
+* Basic Flow
+Explorer Window is initialized
+Event Manager is initialized
+The user selects to create an event attached to an object
+Picks a cause (a key is pressed, a global variable is changed)
+Picks an effect (characteristic is changed)
+The event is listed in the Package Explorer and is available to edit
+
+* Extensions
+Events can be linked to previous events, e.g. multiple effects for a singular cause without creating a new instance of event
+
+
+
+
+### Accessing Help Page
+* Primary Actor: Author (Registered User)
+* Scope: Authoring Environment
+* Level: ! (User goal or sea level)
+* Brief: The user needs a resource that explains how our authoring environment works
+* Stakeholders: User
+* Preconditions: Help page must be made
+* Postconditions: 
+* Minimal Guarantees: A web browser launches with the help information
+* Success Guarantees: The help page help
+* Triggers: Author accesses the help page
+* Basic Flow
+Help page initialized
+Help button is pressed
+
+* Extensions
+The Help page has an authoring environment itself for walkthrough purposes
+
+
+
+### Running Simulation
+* Primary Actor: Author (Registered User)
+* Scope: Simulation Window
+* Level: ! (User goal or sea level)
+* Brief: After creating the game, the author wants to launch and play their game
+* Stakeholders: Design Board, Data, Game Engine
+* Preconditions: All aspects of the Game must be programmed and ready to launch
+* Postconditions: 
+* Minimal Guarantees: A new window launches and the user can play their game to some extent
+* Success Guarantees: Every feature works correctly
+* Triggers: Author runs the button “Run Simulation”
+* Basic Flow
+Everything in the game is created and finalized
+“Run Simulation” is pressed
+A new window appears and the game can be played.
+
+* Extensions
+The Game can be run while still in the Authoring Environment
+
+
 
 
