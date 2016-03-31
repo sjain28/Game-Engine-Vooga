@@ -64,8 +64,6 @@ Our design will need to be able to handle these multiple layers of complexity, n
 
 
 
-* Alternative designs proposed
-  * (not necessary, but we could talk about Unity and how we could have used a scripting language to make it as flexible as possible for the user)
 
 
 
@@ -78,3 +76,17 @@ Our design will need to be able to handle these multiple layers of complexity, n
 
 * Sonic (?)
   *
+  
+  
+# Design Considerations
+
+* Key characteristics considered
+  * Abstraction
+    *
+  * Extendability
+    *
+  * Concurrency
+    * (by concurrency, I mean authoring environment and player could be run concurrently?)
+  * And more
+* Alternative designs proposed
+  * (not necessary, but we could talk about Unity and how we could have used a scripting language to make it as flexible as possible for the user)
