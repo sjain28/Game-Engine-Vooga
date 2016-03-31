@@ -22,3 +22,29 @@ Our design will need to be able to handle these multiple layers of complexity, n
 - The primary goal of our project’s design is to write a Scrolling Platformer game framework that can support the seamless interaction of the game authoring environment and game playing environment. A key characteristic we will strive for is the flexibility that users will have when they are creating the game so that they will be able to manage the creation of data from the authoring environment and reading-in of data in the player environment. For this key functionality, we have decided that game data would be a channel through which the game authoring environment and player will interact.
 
 ![](design_resources/author_player_data.png?raw=true)
+
+- This abstraction allows users to create hierarchies of levels and sprites, enabling them to come up with a unique game of their own. The following is the bigger picture of our rough design of the program.
+
+![](design_resources/overall_view?raw=true)
+
+### Modules
+
+
+* Authoring environment
+  * Front-end
+    * (add a description of the front end of authoring environment)
+  * Back-end
+    * (add a description)
+* Player
+  * Front-end
+    * (add a description)
+  * Back-end
+    * (add a description)
+* Data
+    * (Explain the use of XStream here and how it will be dynamically updated for smooth interaction between authoring environment and game engine)
+* Physics
+    * (Copy my writing in google doc with the diagrams)
+* Goal
+    * (add a description)
+* Resources
+    * (add a description)
