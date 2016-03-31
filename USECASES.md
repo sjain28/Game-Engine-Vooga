@@ -260,6 +260,131 @@ A new window appears and the game can be played.
 * Extensions
 The Game can be run while still in the Authoring Environment
 
+### Preview Fonts with Explorer Window
+* Primary Actor: Author (the Game Designer)
+* Scope: Explorer Window
+* Level: ! (User goal or sea level)
+* Brief: 
+  *  The user clicks on the folder shown in the Explorer window entitled fonts. This drops down a list of stored fonts which are displayed as a text image, which the user can double click on to preview.
+* Stakeholders:  Game Authoring Window
+*Preconditions
+   * Text files Loaded
+   * Images set and initialized
+   * Cickable 
+* Postconditions
+	Minimal Guarantees 
+  	* Font file is present
+Success Guarantees:
+* Can Identify and evaluate text
+* Triggers:
+* Clicking on the text file
+* Basic flow: 
+Explorer is initialized, Font files are present, ie initial conditions are met
+User clicks on font file -> dropdown appears
+User double clicks on font file -> popup appears with font displayed
+* Extensions:
+NA
 
 
 
+
+
+
+
+
+### Creating new Game Object
+* Primary Actor: Author (the Game Designer)
+* Scope: MenuBar, Design Board, Backend Sprite, Game Object
+* Level: ! (User goal or sea level)
+* Brief: 
+  *  User clicks on edit dropdown and selects new game object. By clicking on the Design Board, the author selects the initial location, and a popup is opened where the author can set base characteristics, for example: position, automation, image, and events that occur.
+* Stakeholders:  Game Authoring Window
+*Preconditions
+   * None necessarily, however setting an image requires images to be loaded, setting events require events to be initialized.
+* Postconditions
+ Minimal Guarantees 
+  	* New Game Object is initialized
+Success Guarantees:
+* Game Object with a full set of parameters is initialized and linked to backend
+* Triggers:
+* Selecting New  -> Game Object from menubar
+* Basic flow: 
+Screen Initialized
+Selects New -> Game Object
+Initializes a new Game Object
+Game Object initializes a Game Engine Sprite
+Next click sets initial position in Game Object
+New Stage for popup
+Pop up populated with buttons, comboboxes ect to set the other preferences for this object
+* Extensions:
+More Features, More properties, More functionality
+
+
+
+
+
+### Setting on Collision 
+* Primary Actor: Author (the Game Designer)
+* Scope: Sprite, Actormanager, Varaibles
+* Level: ! (User goal or sea level)
+* Brief: 
+  *  User clicks on edit dropdown and selects new event. This makes a popup appear which allows the user to select collision cause, the two colliding objects, and the effect objects of the event. The event is then saved in the Actor Manager Class.
+* Stakeholders:  Game Authoring Window
+*Preconditions
+   * All sprites, text objects and other things which will collide are initialized
+* Postconditions
+ Minimal Guarantees 
+  	* New Event Object is initialized
+Success Guarantees:
+* Event object makes necessary changes when fired
+* Triggers:
+* Selecting New  -> Event Object from menubar
+* Basic flow: 
+Screen Initialized
+Selects New -> Event Object
+Initializes a new Event Object
+Select the Cause and the Effects of the event from pop-up
+Event saved
+* Extensions:
+More causes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### New Global Variable 
+* Primary Actor: Author (the Game Designer)
+* Scope: Varables
+* Level: ! (User goal or sea level)
+* Brief: 
+  *  User clicks on edit dropdown and selects new Global Variable. This makes a popup appear which allows the user to select variable name and initial value
+* Stakeholders:  Game Authoring Window
+*Preconditions
+   * NA
+* Postconditions
+ Minimal Guarantees 
+  	* New Global Variable Initialized
+Success Guarantees:
+* Interacts well with all the other variables and groups
+* Triggers:
+* Selecting New  -> Event Object from menubar
+* Basic flow: 
+Screen Initialized
+Selects New -> Global Variable
+Popup appears with textbox for name and initial value
+Global variable is initialized with these components
+* Extensions:
+NA
