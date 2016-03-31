@@ -1,6 +1,5 @@
 Team DoovalSalad: Use cases
-> Game Engine Use Cases
-
+# Game Engine Use Cases
 ===================
 ### Main Character Jump
 * Primary Actor: Player (Registered User)
@@ -50,7 +49,7 @@ The user makes a jump request (presses jump key) while the game is in the game l
   1. Dragging other resource onto Design Board
 ===========
 
-> Game Authoring Use Cases
+# Game Authoring Use Cases
 
 ### Drag Drop Images
 * Primary Actor: Author (Registered User)
