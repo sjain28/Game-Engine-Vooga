@@ -21,8 +21,4 @@ Our design will need to be able to handle these multiple layers of complexity, n
 # Overview
 - The primary goal of our project’s design is to write a Scrolling Platformer game framework that can support the seamless interaction of the game authoring environment and game playing environment. A key characteristic we will strive for is the flexibility that users will have when they are creating the game so that they will be able to manage the creation of data from the authoring environment and reading-in of data in the player environment. For this key functionality, we have decided that game data would be a channel through which the game authoring environment and player will interact.
 
-```sequence
-Authoring Environment->Player: Here is Game Data!
-Note right of Player: Game Data is created
-Player-->Authoring Environment: Reading the data and play!
-```
+![](design_resources/author_player_data.png?raw=true)
