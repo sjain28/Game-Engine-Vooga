@@ -47,6 +47,41 @@ The user makes a jump request (presses jump key) while the game is in the game l
 * Extensions:
   1. Dragging other resource onto Design Board
 
+=============
+### Importing Image into Project
+* Primary Actor: Author (Registered User)
+* Scope: 
+  * Authoring Environment: Explorer Window, Menubar
+  * Data: ResourceXML
+* Level: ! (User goal or sea level)
+* Brief: (equivalent to a user story or an epic)
+  * The author selects to import resource from his/her local device. The author then selects what folder he/she wishes to put the resource in on the project. The resource path is saved in the ResourceXML and is then imported into the project in the Explorer Window.
+* Stakeholders: Game Authoring Environment, Author, Explorer Window
+* Preconditions:
+  * Image exists on local machine
+  * Image Path does not change through course of project
+  * ResourceXML editable
+  * Explorer Window and Menubar initialized
+* Postconditions:
+* Minimal Guarantees:
+  * Path (String) will be added to list of paths in XML
+* Success Guarantees:
+  * Path is valid
+  * Explorer Window will be able to successfully load data into the window
+  * Image will be visible on the Explorer Window
+* Triggers:
+  * Author selects Import option in Menubar (File → Import)
+* Basic flow: (To be written from here)
+Explorer Window, Menubar initialized and visible to author
+Author selects File → Import option on Menubar
+Author's local machine's directory opens, allowing user to choose image he/she wishes to add to project
+New Stage allows author to store where to store image in project directory
+Author accepts (presses OK)
+ResourceXML written to to add path of new image under subtag (folder) where author wanted to store image
+Explorer Window reloads, loads information back from XML and populates window
+* Extensions:
+Adding other resources (sound, color, textures, etc)
+
 
 ### Main Character Moves Left
 * Primary Actor: Player (Main Character) (Registered User)
