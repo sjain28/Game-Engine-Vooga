@@ -2,7 +2,7 @@ Team DoovalSalad: Use cases
 ===================
 ### Main Character Jump
 * Primary Actor: Player (Registered User)
-* Scope: Game map
+* Scope: Game map (level)
 * Level: ! (User goal or sea level)
 * Brief: (equivalent to a user story or an epic)
   * The user presses a button (spacebar, for example) to make the character jump. The character is allowed to move in either direction while off the ground.
