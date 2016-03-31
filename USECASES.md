@@ -1,6 +1,6 @@
 Team DoovalSalad: Use cases
+
 # Game Engine Use Cases
-===================
 ### Main Character Jump
 * Primary Actor: Player (Registered User)
 * Scope: Game map (level)
@@ -47,10 +47,10 @@ The user makes a jump request (presses jump key) while the game is in the game l
   8. Sprite is part of game play
 * Extensions:
   1. Dragging other resource onto Design Board
+  
 ===========
 
 # Game Authoring Use Cases
-
 ### Drag Drop Images
 * Primary Actor: Author (Registered User)
 * Scope: Authoring Environment- Explorer Window and Design Board
