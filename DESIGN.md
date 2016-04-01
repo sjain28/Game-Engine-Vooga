@@ -92,7 +92,6 @@ Modules
 Authoring: 
 
 UI Design
-![](design_resources/overall_view.png?raw=true)
 
 * Explorer: resources for user to use (images, sounds, fonts, texture, colors  etc) organized with folders 
 * Properties: where selected objects variables appear and can be edited
