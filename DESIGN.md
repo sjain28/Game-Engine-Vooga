@@ -70,7 +70,7 @@ Modules
 
 * Player
   * Front-end
-    * (add a description)
+    * Through the use of the Authoring Module, the player will have full access to the keyboard, mouse, and other events that were created to run the game.
   * Back-end
     * (add a description)
 * Data
@@ -90,6 +90,8 @@ Modules
 	
 # User Interface
 Authoring: 
+
+![enter image description here![\](https://lh3.googleusercontent.com/-NfhZ-ZmDDEg/Vv3xpebci0I/AAAAAAAAAYU/W-PjCQ5QV-Ijd_R9clXvcHz0ghL6lXV3A/s0/IMG_2097.JPG "IMG_2097.JPG")]
 
 UI Design
 
