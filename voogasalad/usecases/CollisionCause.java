@@ -1,11 +1,11 @@
 package usecases;
 
-import GameEngine.Sprite;
+import usecases.Sprite;
 
 public class CollisionCause implements Cause{
 
-	Sprite spriteA;
-	Sprite spriteB;
+	private Sprite spriteA;
+	private Sprite spriteB;
 	
 	public CollisionCause(Sprite spriteA, Sprite b) {
 		// TODO Auto-generated constructor stub

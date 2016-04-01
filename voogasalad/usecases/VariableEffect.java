@@ -2,8 +2,8 @@ package usecases;
 
 public class VariableEffect implements Effect{
 
-	double spriteValue;
-	double increaseAmount;
+	private double spriteValue;
+	private double increaseAmount;
 	
 	public VariableEffect(double spriteInput, double increaseInput) {
 		spriteValue = spriteInput;
@@ -19,7 +19,7 @@ public class VariableEffect implements Effect{
 
 	public double increaseD(double value, double increment) {
 		// TODO Auto-generated method stub
-		return value+increment;
+		return value +(increment);
 	}
 
 }
