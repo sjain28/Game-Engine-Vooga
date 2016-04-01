@@ -27,6 +27,12 @@ Our design will need to be able to handle these multiple layers of complexity, n
 
 ![](design_resources/overall_view.png?raw=true)
 
+#UML
+
+![](design_resources/uml1.png)
+![](design_resources/uml2.png)
+
+
 ### Modules
 Modules
 * Authoring 	
@@ -127,11 +133,7 @@ UI Design
 		* Help
 		
 # Design Details
-
-
-
-
-
+* The modules can be seen above. With each module's purpose and outcome listed, the only remaining parts to discuss are why they are present the way they are and discuss extensions. While the modules are well divided between authoring, player, data, engine, and physics, one item to note is the need to read XML data in both resources for the authoring and player environments. This overlap results from readnig load files when reopening a previously worked on level in authoring, while the player is actively reading the data frame by frame to check for updates, events, and such. Each module centers around the data in the end with the authoring environment seperately reading and writing from it for creating levels while the player reads and may load to update and potentially load mid-level states. From the data core, each module directly branches with no other dependencies. By having this closed, independent module system, we are able to readily add any features and have them operate solely from the data. Whether the module is for resizing windows or implementing physical reactions to detected collisions, we are able to individually create and operate code for testing and use which allows us maximum potential functionality and flexibility. Moving forward, we will apply the above modules seperately and unify them to produce a cohesive, closed, and flexible final project: the best representation of the purpose of this course.
 
 # Example games
 * Super Mario Bros

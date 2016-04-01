@@ -191,6 +191,21 @@ The user makes a jump request (presses jump key) while the game is in the game l
 * Extensions:
   1. Dragging other resource onto Design Board
   
+*Coding Workflow:
+  update method is called by the Player
+  this update method calls EventManager to update
+  EventManager then calls upon all of it's Causes 
+  For all the Causes that evaluate to true, an Effect is placed in a Priority Queue
+  In this case, one of these Effects is Left. When the Left Effect is instantiated,
+  it is given some parameters such as duration and speed for which it should travel left
+  The duration is used to set a counter to determine how many steps the left Effect should 
+  continue to execute in the Effect queue when called by update. When a max counter is reached,
+  the Effect is removed from the queue and no longer takes place.
+  The Left Effect makes use of the Physics Engine, and inputs the xpos to apply an impulse in the -x
+  direction according to physical constants. The Left Effect then updates the Sprite's vector
+  to have the new appropriate xpos , so that after update is called by the Player, and the new
+  positions are display, the xpos will be adjusted according to the speed and physical constants.
+  
 ===========
 
 # Game Authoring Use Cases
