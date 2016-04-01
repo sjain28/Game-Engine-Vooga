@@ -10,9 +10,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class SpriteDataExample {
     public static void main (String[] args){
-        Sprite a = new Sprite("C://Documents/workspace/voogasalad_Doovalsalad/design_resources/IMG_2097.JPG","DA");
-        Sprite b = new Sprite("/design_resources/IMG_2097.JPG","DA");
+        Sprite a = new Sprite("bricks.jpg","DA");
+        Sprite b = new Sprite("bricks.jpg","eA");
+        
         List<Sprite> sprites = new ArrayList<Sprite>();
+        sprites.add(a);
+        sprites.add(b);
         
         XStream mySerializer = new XStream(new DomDriver());
         try {

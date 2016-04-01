@@ -15,7 +15,7 @@ public class Sprite extends ImageView implements Moveable {
 	private Map<String, VoogaData> myProperties;
 
 	public Sprite(String imageID, String id) {
-		super(new Image(imageID));
+		super(imageID);
 		myID = id;
 		myProperties = new HashMap<String, VoogaData>();
 	}
