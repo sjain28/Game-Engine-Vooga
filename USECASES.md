@@ -75,8 +75,8 @@ Josh's use cases
 * Preconditions: The player reaches the correct spot on the screen (checkpoint) or a global variable reaches the target value, 
 
 
-### 
-* Primary Actor: The user gives a sprite an invalid value (such as a string instead of a value).
+### The user gives a sprite an invalid value (such as a string instead of a value).
+* Primary Actor: The user of the game authoring environment
 * Scope: Game Authoring Environment, Sprite class.
 * Level:
 * Brief: The user specifies a value of the sprite that is illegal 
@@ -87,8 +87,8 @@ Josh's use cases
 * Preconditions: A field populated for the sprite is an incorrect format or invalid value.
 
 
-### 
-* Primary Actor: The user deletes a sprite from the game authoring environment
+### The user deletes a sprite from the game authoring environment
+* Primary Actor: The user of the game authoring environment
 * Scope: Game authoring environment
 * Level:
 * Brief: The user decides to take a sprite that has already been made from the game authoring environment
