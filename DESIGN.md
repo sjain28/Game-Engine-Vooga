@@ -31,12 +31,12 @@ Our design will need to be able to handle these multiple layers of complexity, n
 Modules
 * Authoring 	
 	* Resources: all resources (author-uploaded and default) available for author to use in game
-		*Explorer.java: Explorer Window- displays the resources to the user to select from
-		*ResourceDragger.java: allow user to drag resource from Explorer window onto Authoring Window
-		*ResourceProperties.properties: maps resource name (as written in XML) to path of the resource on the local device
-		*Resources.xml: uses XML tagging to mirror folder-tree structure where the leaves are
-		*Implementation
-		  	*Double click lets you preview: opens image, plays music, etc
+		* Explorer.java: Explorer Window- displays the resources to the user to select from
+		* ResourceDragger.java: allow user to drag resource from Explorer window onto Authoring Window
+		* ResourceProperties.properties: maps resource name (as written in XML) to path of the resource on the local device
+		* Resources.xml: uses XML tagging to mirror folder-tree structure where the leaves are
+		* Implementation
+		  	* Double click lets you preview: opens image, plays music, etc
 
  	* Authoring Game: how the author creates the game on the Graphics Window
 		* ResourceDragger.java: allow user to drag resource from Explorer window onto Authoring Window
