@@ -7,13 +7,13 @@ import java.util.Map;
 
 public class Event {
 
-	Map<List<Cause>,List<Effect>> causeEffect;
+	private Map<List<Cause>,List<Effect>> causeEffect;
 	
 	public Event(Map<List<Cause>,List<Effect>> causetoEffect){
 		causeEffect = causetoEffect;
 	}
 	
-	public void checkConditions(){
+	public void checkConditionsandPerformEffects(){
 		for (List<Cause> listofCauses: causeEffect.keySet()){
 			if (checkListConditions(listofCauses)){
 				performEffects(causeEffect.get(listofCauses));

@@ -50,7 +50,53 @@ Anita’s Use Cases
 * Success Guarantees: Changed state for the character according to the keystroke and added parameter of the keystroke toggled on
 * Preconditions:
 
+Josh's use cases
 
+###User hits Play
+* Primary Actor: The user of the game authoring environment.
+* Scope: User action during gameplay, interaction with GamePlayer
+* Level: 
+* Brief: The user has finished creating his game and wants to transition to playing the game. The user hits the play button to instantiate the player.
+* Stakeholders: GamePlayer
+* PostCondition: Game play begins.
+* Minimal Guarantees: Game play will begin.
+* Success Guarantees: User has the ability to resume gameplay, and start playing the game from its previous state
+* Preconditions: The user has created a valid level from the game authoring environment.
+
+### Player defeats a level by defeats a level by reaching the checkpoint or obtaining a score.
+* Primary Actor: The player playing the game.
+* Scope: Player.
+* Level:
+* Brief: The player obtains all the win conditions and the scene on the screen changes, telling the player he has won the game (via text).  Then, a new scene will pop up on the screen.
+* Stakeholders: GamePlayer, VariableManager
+* PostCondition: The state of the Sprites has been modified as per the game author’s instructions (Ex. both Sprites have their health reduced)
+* Minimal Guarantees: There will be a detection of one of the multiple win conditions.
+* Success Guarantees: The scene will switch to either accommodating text or switching a scene, indicating that the user has won the level.
+* Preconditions: The player reaches the correct spot on the screen (checkpoint) or a global variable reaches the target value, 
+
+
+### The user gives a sprite an invalid value (such as a string instead of a value).
+* Primary Actor: The user of the game authoring environment
+* Scope: Game Authoring Environment, Sprite class.
+* Level:
+* Brief: The user specifies a value of the sprite that is illegal 
+* Stakeholders: SpriteManager, Sprite, Game Authoring Environment
+* PostCondition: The sprite will not be placed in the right position (will not appear in the game authoring environment) and an error message will pop up on the screen telling the user of his mistake.
+* Minimal Guarantees: There will be a message that appears on the screen telling the user that he placed the sprite in the wrong location.
+* Success Guarantees: The sprite itself will be removed or not placed on the screen at all.
+* Preconditions: A field populated for the sprite is an incorrect format or invalid value.
+
+
+### The user deletes a sprite from the game authoring environment
+* Primary Actor: The user of the game authoring environment
+* Scope: Game authoring environment
+* Level:
+* Brief: The user decides to take a sprite that has already been made from the game authoring environment
+* Stakeholders: Game Authoring Environment
+* PostCondition: The sprite will no longer exist in its original spot on the screen.
+* Minimal Guarantees: The game authoring environment will detect that the user is trying to take the sprite off the screen.
+* Success Guarantees: The sprite itself will be removed from the screen.
+* Preconditions: The sprite must exist in a location that is shown by the game authoring environment
 
 Saumya’s Use Cases
 ###User hits “Pause” 
