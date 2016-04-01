@@ -191,7 +191,7 @@ The user makes a jump request (presses jump key) while the game is in the game l
 * Extensions:
   1. Dragging other resource onto Design Board
   
-  Coding Workflow
+*Coding Workflow:
   update method is called by the Player
   this update method calls EventManager to update
   EventManager then calls upon all of it's Causes 
