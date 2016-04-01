@@ -1,6 +1,51 @@
 Team DoovalSalad: Use cases
 
 # Game Engine Use Cases
+
+###Player collides with a platform
+* Primary Actor: The Sprite that is colliding with the platform
+* Scope: Action of Sprite during GamePlay
+* Level: Any level type
+* Brief: The Gameplay in action, and a sprite collides with some sort of platform for which a collision is defined.
+* Stakeholders: Player, Sprite
+* PostCondition: Sprite reacts in a way defined by collision, and its new position updates accordingly
+* Minimal Guarantees: Player will perform some sort of colliding action, as defined by collision effect type.
+* Success Guarantees: The Sprite collides in the correct fashion, and this is displayed accordingly in the game player
+* Preconditions: The GamePlayer is running an active game level, and a sprite exists that “collides” with or touches a platform at some point in the game.
+
+###Score exceeds a certain number, and an action is triggered
+* Primary Actor: The VoogaNumber used in the trigger (in this case score), and whatever variables or Sprites are involved in the action being triggered
+* Scope: Cause (a score exceeding a certain number), and Effect (action being triggered), in game play
+* Level: Any level type
+* Brief: Game play is in action, and score exceeds some defined number
+* Stakeholders: Player, Cause, Effect, Event
+* PostCondition: Action is triggered
+* Minimal Guarantees: Action will be triggered once a score exceeds a certain number
+* Success Guarantees: Action is triggered whenever the score exceeds a certain number, and this action is carried out successfully by the game player, and updated and displayed accordingly
+* Preconditions: The GamePlayer is running an active game level, and the variable “Score” exists, and this Event has been defined by the user.
+
+###Player triggers audio clip for specified action (ex. death). 
+* Primary Actor: The Sprite that is performing an action
+* Scope: Action of Sprite during GamePlay
+* Level: Any level type
+* Brief: The Gameplay in action, and a sprite performs some sort of action, like jump, die, or shoot. As a result of this action, an audio clip must play
+* Stakeholders: Player, Sprite
+* PostCondition: Audio clip plays
+* Minimal Guarantees: Sound will play for the specified action
+* Success Guarantees: The sound that plays is the correct sound for the correct action
+* Preconditions: The GamePlayer is running an active game level, and an action is performed that produces an audio clip. This audio clip is defined as an action itself, however, so this interaction must be bundled by the user in the authoring environment.
+
+###User defined Cause bundle is stored in Causes and named as “Cause 1”
+* Primary Actor: The Cause that is being stored
+* Scope: After file read when xstream is being deserialized
+* Level: Any
+* Brief: This Cause is mapped to cause action ids of the Causes that it is composed of in the Cause name map as “Cause 1”
+* Stakeholders: Cause, CauseManager
+* PostCondition: Cause bundle is stored as “Cause 1”
+* Minimal Guarantees: The Cause is then stored as “Cause 1”
+* Success Guarantees: When the Cause is checked for, it will essentially e anding all of the causes that it is composed of, and will result in the correct boolean evaluation.
+* Preconditions: The other Causes work and are stored in a map.
+
 ### Main Character Jump
 * Primary Actor: Player (Registered User)
 * Scope: Game map (level)
