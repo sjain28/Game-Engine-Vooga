@@ -1,5 +1,103 @@
 Team DoovalSalad: Use cases
 
+Anita’s Use Cases 
+
+###Player leaves bounds of map
+
+* Primary Actor: Main character (sprite)
+* Scope: PhysicsManager, EventManager, Sprite
+* Level:  
+* Brief: The character falls off of the ground and there is no other platform to land on- the character is no longer on the screen
+* Stakeholders: Sprite, SpriteManager, VariableManager
+* PostCondition: The character’s state should be set to dead once the character passes a boundary below the bottom of the screen and the user defined event that occurs upon death is executed
+* Minimal Guarantees: The character will be set to dead
+* Success Guarantees: The game will be reset (assuming the on death event is successful) so that the game is once again 
+* Preconditions: There must be an event handler for death established for the game and the user must either set a reasonable below screen boundary or use the default boundary.
+
+###User meets win game conditions
+
+* Primary Actor: User
+* Scope: Event, Cause, Effect, EventManager, VariableManager
+* Level: 
+* Brief: The user defined event for game winning conditions will be met, which triggers the effect of changing the global variable for gameWon to true. The EventManager, which is checking through the update method, will detect that the global variable has been set to true and trigger the effect for the win game event.
+* Stakeholders: EventManager, SpriteManager, VariableManager
+* PostCondition: The effect defined in the win game event will determine the conditions of the game
+* Minimal Guarantees: There will be a change defined by the user, at least going to the next level or a win screen
+* Success Guarantees: The best case scenario would be if the user defines a transition to a game or a win screen that is then displayed
+* Preconditions:The user must define game win conditions and game win effects. The game win conditions must be met.
+
+###User defines a new parameter for sprite
+
+* Primary Actor: User
+* Scope: SpriteHandler, Sprite
+* Level: 
+* Brief: The user decides a new parameter in the front end which then adds the parameter as either a VoogaDouble or a VoogaBoolean to the hashmap of parameters for the sprite. Depending on if it’s a double or a boolean, methods are now available to increment/decrement or toggle the parameter.
+* Stakeholders: Sprite
+* PostCondition: Sprite now has a new active parameter
+* Minimal Guarantees: The sprite has an additional feature than can now be edited
+* Success Guarantees: The parameter can be used in events now
+* Preconditions: The sprite did not have this parameter already
+
+###Keystroke cause triggered
+
+* Primary Actor: User
+* Scope: EventManager, Sprite, GameHandler
+* Level: 
+* Brief: The user hits a keystroke that is associated with a cause in an event. This causes a listener in the GameHandler to add the key as a parameter in the sprite’s parameter hashmap which then triggers the cause in the event. 
+* Stakeholders: Sprite, EventManager, GameHandler
+* PostCondition: The effect associated with that cause in the event gets triggered
+* Minimal Guarantees: The character is changed in state
+* Success Guarantees: Changed state for the character according to the keystroke and added parameter of the keystroke toggled on
+* Preconditions:
+
+
+
+Saumya’s Use Cases
+###User hits “Pause” 
+* Primary Actor: The person using the software
+* Scope: User action during gameplay, interaction with GamePlayer
+* Level: 
+* Brief: The user has selected the option to play an existing game. During the course of the game the user wants to temporarily halt gameplay.
+* Stakeholders: GamePlayer
+* PostCondition: Game play has halted
+* Minimal Guarantees: Game play halts
+* Success Guarantees: User has the ability to resume gameplay, and start playing the game from its previous state
+* Preconditions: The user has started playing a game
+
+###Two Sprites collide
+* Primary Actor: EventManager class in the GameEngine package
+* Scope: EventManager (game engine)
+* Level:
+* Brief: During gameplay, two Sprites on the screen collide, triggering a response predefined by the author of the game. An example response is decreasing the “health” property of both of the Sprites. 
+* Stakeholders: Sprite, EventManager, Event, CollisionCause, Effect
+* PostCondition: The state of the Sprites has been modified as per the game author’s instructions (Ex. both Sprites have their health reduced)
+* Minimal Guarantees: The collision is detected by the EventManager.
+* Success Guarantees: The collision is detected by the EventManager, and the Event that manages this collision executes its Effect, modifying the states of the Sprites. 
+* Preconditions: The author of the game must have created an Event object whose cause is the trigger between these two Sprites, and the effect of that Event must modify the states of both Sprites. 
+
+###User applies gravity-Saumya
+* Primary Actor: Physics engine
+* Scope: Game Engine (game handler class specifically)
+* Level: 
+* Brief: The author of the game applies gravity to Sprites. When the game is played the game engine reads this gravity property from the XML file and initializes its physics engine with the gravity parameter. The Sprites experience gravity during gameplay.
+* Stakeholders: SpriteManager, Physics, Gamehandler, FileReader
+* PostCondition: The Velocity vectors of all of the Sprites have been modified to accelerate downwards
+* Minimal Guarantees: Author has the option to apply gravity, gravity gets written to the XML file, read in game engine. 
+* Success Guarantees: Y-velocities of Sprites modified according to level of gravity.
+* Preconditions: The author of the game has chosen to apply gravity to Sprites
+
+###Authoring environment defines Sprites with different properties -Saumya
+* Primary Actor: Authoring environment, Sprite
+* Scope: Defined in authoring environment, passed via XML, read in by FileReader
+* Level: 
+* Brief: The author will define GameObjects and add properties to them in the game authoring environment. The author can define two Sprites that have different properties, storing them in HashMaps. The game authoring environment serializes these objects and stores them in an XML file. The filereader will read the serialized objects and instantiate Sprites using the SpriteManager. The properties will be read from the HashMap. 
+* Stakeholders: Game authoring environment, filereader, SpriteManager
+* PostCondition: The SpriteManager contains Sprites whose properties accurately match the properties defined in the game authoring environment. 
+* Minimal Guarantees: The properties that the author defined in the authoring environment are present in the game engine during gameplay.
+* Success Guarantees: The properties that the user defined during authoring work the way they are supposed to - they are correctly bound to Events and they can be accessed and updated. 
+
+
+
 # Game Engine Use Cases
 
 ###Player collides with a platform
@@ -515,3 +613,127 @@ Popup appears with textbox for name and initial value
 Global variable is initialized with these components
 * Extensions:
 NA
+
+### Player bouncing off of a wall
+* Primary Actor: Player and Data
+* Scope: 
+  * Player observable
+  * Data
+  * Physics Engine
+  * Collision Engine
+* Brief: 
+  *  Player collides into an object while moving at some velocity greater than zero. Depending on the ‘bounciness’ of the object, the player will change their velocity accordingly.
+* Stakeholders
+  * Sprite data
+* Preconditions:
+  * Player makes contact with a non-damaging, non-transparent sprite
+* Postconditions
+  * Player reflects momentum by some factor of collision velocity
+* Minimal Guarantees:
+  * Collision detected between player and surface
+* Success Guarantees:
+  * Player changes velocity accordingly (reflection of angle, momentum dissipation, etc.)
+* Triggers:
+  * Player contacts object which is ‘bounceable’
+* Basic Flow
+  * Player collision detected with an object
+  * Causes map checked for ‘bounce’, and if valid, objects set to bounce
+  * Velocity and heading entered and modified results and translated positions for next frame returned by physics engine
+  * Data stores new physics values
+  * Player displays changes to environment
+* Extensions
+  * Implement mass for objects and create momentum for both collider and collidee
+  * Destructible environment, if we have a year and a fifty person team
+
+### Player take damage from enemy
+* Primary Actor: Player
+* Scope: 
+  * Data: Player and enemy sprites
+  * Collision Engine
+  * Data: Cause and Effect Interface
+  * Player observable
+* Brief: 
+  *  Our majestic player, running gallantly through the meadows of level 5, lacks the time to look around the corner, makes a brave but fool-hearted leap, and collides face first into the scariest of all mid game foes. Upon hitting each other, the player is terribly hurt, the enemy laughs and the consequences continue to roll in the form of fear of future leaps.
+* Stakeholders
+  * Sprite data
+* Preconditions:
+  * Collision engine detects player contact with enemy
+* Postconditions
+  * Player loses health or a life with possible animation
+  * Enemy potentially loses health or dies as well
+  * Player recoils or gains temporary damage immunity
+* Minimal Guarantees:
+  * Player and enemy contact detected
+* Success Guarantees:
+  * Player loses the health/life associated with contact with the specific enemy
+* Triggers:
+  * Player contacts enemy while player not immune to damage
+* Basic Flow
+  * Collision detected between player and enemy sprite
+  * Cause key for damage checked for any reasons to not take damage ex. Shield
+  * If all conditions for damage true, damage value taken from enemy
+  * Health of player taken and subtracted from in the data
+  * Player and enemy each display any other actions associated with collision
+* Extensions
+  * Allow for recoil or temporary immortality after contact
+  * Allow user-created script animation for death or damage
+
+### Key input generates ‘bullet’
+* Primary Actor: Player
+* Scope: 
+  * Data: Cause and Effect Interface
+  * Data: Sprite
+* Brief: 
+  *  Upon pressing the properly mapped key in game, the game will respond to produce the projectile and any related effects (such as audio or image change) in addition to producing the new game sprite.
+* Stakeholders
+  * Sprite data
+  * Player
+* Preconditions:
+  * Player is in a state in which the ‘fire’ key input boolean is deemed true for the fire effect.
+* Postconditions
+  * The cause for ‘fire’ input in the event map is made true, player produces a projectile, potentially audio, and any additional images or physical recoils. 
+* Minimal Guarantees:
+  * Cause boolean for the key input is read as true.
+* Success Guarantees:
+  * Cause boolean for the key input is read as true
+  * Other conditions associated for firing (ex. Must be on ground) read as true
+  * Effect triggers all associated new sprites and resultant global/sprite changes
+* Triggers:
+  * User enters the mapped ‘fire’ key in game
+* Basic Flow
+  * Event map checks cause’s arraylist for ‘fire’
+  * If all causes ruled true in the frame, each effect for ‘fire’ is triggered
+  * Data produces any sprites and audio associated with fire
+  * Animations of each sprite processed by player and engine
+* Extensions
+  * Allow for grouping of causes to single effect which includes audio, projectile, recoil instead of mapping causes one by one to each effect. 
+
+### Changing Sprites Gravity Value
+* Primary Actor: Author
+* Scope: 
+	*Data: Sprite
+	*Authoring environment: Properties window, design board
+* Brief: 
+  *  Upon selecting a sprite in the UI, the user will select to change physic’s properties in the properties window. Upon entering and confirming a new gravity acceleration constant, the sprite will inherently hold this value, and for every frame update, the sprite position will be influenced in the direction and magnitude indicated by this gravity.
+* Stakeholders
+	*Game authoring environment, author, sprite data
+* Preconditions:
+  * In UI for design of levels and sprite exists
+* Postconditions
+  * Sprite must still exist
+* Minimal Guarantees:
+  * Reader attempts to pass new value to sprite data
+* Success Guarantees:
+  * Data entered by author, value confirmed as valid, data rewritten
+* Triggers:
+  * Author selects sprite within the design board
+* Basic Flow
+  * User selects sprite
+  * Property window opens for sprite
+  * Physics tab selected
+  * Author toggles gravity and/or changes its numerical value
+  * Author confirms input
+  * Inputs are checked for errors 
+  * Data is directly overwritten
+* Extensions
+  * Applying inherent velocity, bouncing from wall contact
