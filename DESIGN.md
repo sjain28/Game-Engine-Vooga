@@ -67,6 +67,8 @@ Modules
  	* Miscellaneous:
 		* Vector.java: represents vectors in x,y,z-coordinate axis
 
+![](design_resources/IMG_2098.JPG?raw=true)
+
 
 * Player
   * Front-end
@@ -91,7 +93,7 @@ Modules
 # User Interface
 Authoring: 
 
-![enter image description here![\](https://lh3.googleusercontent.com/-NfhZ-ZmDDEg/Vv3xpebci0I/AAAAAAAAAYU/W-PjCQ5QV-Ijd_R9clXvcHz0ghL6lXV3A/s0/IMG_2097.JPG "IMG_2097.JPG")]
+![](design_resources/IMG_2097.JPG?raw=true)
 
 UI Design
 
