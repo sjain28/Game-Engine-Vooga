@@ -27,6 +27,12 @@ Our design will need to be able to handle these multiple layers of complexity, n
 
 ![](design_resources/overall_view.png?raw=true)
 
+#UML
+
+![](design_resources/uml1.png)
+![](design_resources/uml2.png)
+
+
 ### Modules
 Modules
 * Authoring 	
