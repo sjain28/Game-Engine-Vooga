@@ -66,23 +66,26 @@ Modules
 			
  	* Miscellaneous:
 		* Vector.java: represents vectors in x,y,z-coordinate axis
-
-![](design_resources/IMG_2098.JPG?raw=true)
-
-
 * Player
-  * Front-end
-    * Through the use of the Authoring Module, the player will have full access to the keyboard, mouse, and other events that were created to run the game.
-  * Back-end
-    * (add a description)
+  	* Front-end
+    		* Display.java: Display all of the positions and visible parameter states for the sprites of the current frame
+  	* Back-end
 * Data
-    * (Explain the use of XStream here and how it will be dynamically updated for smooth interaction between authoring environment and game engine)
+    	* SpriteManager.java: update() sprite data 
+    	* VariableManager.java: update() variables values
+    	* EventManager.java: update() cause booleans for effects
+    		* Cause.java: detect whether booleans of conditions are true
+    		* Effect.java: if causes all true, cause x event to occur
 * Physics
-    * (Copy my writing in google doc with the diagrams)
+    	* PhysicsEntity.java: 
+    	* CollisionDetector.java: detect overlap of Collidable sprites
+    	* CollisionSolver.java: Resolve which two Collidable objects collided
+    	* PhysicsEngine.java: perform calculations for translations of sprites
+
 * Goal
-    * (add a description)
+    	* Transition.java: Move to next level if conditions met
 * Resources
-    * (add a description)
+    	* FileReader.java: Deserialize XML document to obtain data values for use
 	
 
 	
@@ -92,8 +95,6 @@ Modules
 	
 # User Interface
 Authoring: 
-
-![](design_resources/IMG_2097.JPG?raw=true)
 
 UI Design
 
@@ -137,10 +138,10 @@ UI Design
   * Super Mario Bros. has multiple platform types, enemy types, the screen that moves with the main hero (Mario), and a goal of reaching a certain point (castle) or defeating a boss (bowser). Our level creator will work for all of these features. First, we will let users in the authoring environment to set create the goal of reaching a flagpole (castle) for the normal levels or defeat a boss (bowser) in a boss level. This would be done using cause-effect structure that we define for all events. Enemy behavior in Mario is simple in that enemies go forward and backward and change directions when they hit an object (wall). This type of behavior can be set in the authoring environment. The screen scrolling with the hero feature will also be one of our scrolling options that we pre-set for the user. Hero actions include horizontal walking (left and right), jumping, and possible state change (eat a mushroom, eat a flower). The physics engine will be in charge of handling all of the collision detection and collision resolution.
   
 * Flappy Bird
-  * Flappy Bird is a simple game in which the user controls a bird and trys to avoid pipes that stick down from the sky and on the ground, with each set of pipes they pass the user scores more points. It is a continuous scroll with one command, usually keyboard.
+  * Bird constantly falls but can increase upwards acceleration per click input. Goal is to pass through as many randomly generated gaps as possible without touching pipes. Any collision spells certain death.
 
-* Sonic (?)
-  *
+* Sonic 
+  Like Mario, jump on bad fellows to get from point A to B but with emphasis on speed to be able to run across loops, make homing attacks and have freedom to scroll very fast and left or right. 
   
   
 # Design Considerations
