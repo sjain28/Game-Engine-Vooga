@@ -10,9 +10,14 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class SpriteDataExample {
     public static void main (String[] args){
+<<<<<<< HEAD
+        Sprite a = new Sprite("image.jpeg","DA");
+        Sprite b = new Sprite("image.jpeg","DA");
+=======
         Sprite a = new Sprite("bricks.jpg","DA");
         Sprite b = new Sprite("bricks.jpg","eA");
         
+>>>>>>> f8a38843a3b06e38bf377ddb1e36712ca2c5eef2
         List<Sprite> sprites = new ArrayList<Sprite>();
         sprites.add(a);
         sprites.add(b);
