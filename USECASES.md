@@ -568,3 +568,127 @@ Popup appears with textbox for name and initial value
 Global variable is initialized with these components
 * Extensions:
 NA
+
+### Player bouncing off of a wall
+* Primary Actor: Player and Data
+* Scope: 
+  * Player observable
+  * Data
+  * Physics Engine
+  * Collision Engine
+* Brief: 
+  *  Player collides into an object while moving at some velocity greater than zero. Depending on the ‘bounciness’ of the object, the player will change their velocity accordingly.
+* Stakeholders
+  * Sprite data
+* Preconditions:
+  * Player makes contact with a non-damaging, non-transparent sprite
+* Postconditions
+  * Player reflects momentum by some factor of collision velocity
+* Minimal Guarantees:
+  * Collision detected between player and surface
+* Success Guarantees:
+  * Player changes velocity accordingly (reflection of angle, momentum dissipation, etc.)
+* Triggers:
+  * Player contacts object which is ‘bounceable’
+* Basic Flow
+  * Player collision detected with an object
+  * Causes map checked for ‘bounce’, and if valid, objects set to bounce
+  * Velocity and heading entered and modified results and translated positions for next frame returned by physics engine
+  * Data stores new physics values
+  * Player displays changes to environment
+* Extensions
+  * Implement mass for objects and create momentum for both collider and collidee
+  * Destructible environment, if we have a year and a fifty person team
+
+### Player take damage from enemy
+* Primary Actor: Player
+* Scope: 
+  * Data: Player and enemy sprites
+  * Collision Engine
+  * Data: Cause and Effect Interface
+  * Player observable
+* Brief: 
+  *  Our majestic player, running gallantly through the meadows of level 5, lacks the time to look around the corner, makes a brave but fool-hearted leap, and collides face first into the scariest of all mid game foes. Upon hitting each other, the player is terribly hurt, the enemy laughs and the consequences continue to roll in the form of fear of future leaps.
+* Stakeholders
+  * Sprite data
+* Preconditions:
+  * Collision engine detects player contact with enemy
+* Postconditions
+  * Player loses health or a life with possible animation
+  * Enemy potentially loses health or dies as well
+  * Player recoils or gains temporary damage immunity
+* Minimal Guarantees:
+  * Player and enemy contact detected
+* Success Guarantees:
+  * Player loses the health/life associated with contact with the specific enemy
+* Triggers:
+  * Player contacts enemy while player not immune to damage
+* Basic Flow
+  * Collision detected between player and enemy sprite
+  * Cause key for damage checked for any reasons to not take damage ex. Shield
+  * If all conditions for damage true, damage value taken from enemy
+  * Health of player taken and subtracted from in the data
+  * Player and enemy each display any other actions associated with collision
+* Extensions
+  * Allow for recoil or temporary immortality after contact
+  * Allow user-created script animation for death or damage
+
+### Key input generates ‘bullet’
+* Primary Actor: Player
+* Scope: 
+  * Data: Cause and Effect Interface
+  * Data: Sprite
+* Brief: 
+  *  Upon pressing the properly mapped key in game, the game will respond to produce the projectile and any related effects (such as audio or image change) in addition to producing the new game sprite.
+* Stakeholders
+  * Sprite data
+  * Player
+* Preconditions:
+  * Player is in a state in which the ‘fire’ key input boolean is deemed true for the fire effect.
+* Postconditions
+  * The cause for ‘fire’ input in the event map is made true, player produces a projectile, potentially audio, and any additional images or physical recoils. 
+* Minimal Guarantees:
+  * Cause boolean for the key input is read as true.
+* Success Guarantees:
+  * Cause boolean for the key input is read as true
+  * Other conditions associated for firing (ex. Must be on ground) read as true
+  * Effect triggers all associated new sprites and resultant global/sprite changes
+* Triggers:
+  * User enters the mapped ‘fire’ key in game
+* Basic Flow
+  * Event map checks cause’s arraylist for ‘fire’
+  * If all causes ruled true in the frame, each effect for ‘fire’ is triggered
+  * Data produces any sprites and audio associated with fire
+  * Animations of each sprite processed by player and engine
+* Extensions
+  * Allow for grouping of causes to single effect which includes audio, projectile, recoil instead of mapping causes one by one to each effect. 
+
+### Changing Sprites Gravity Value
+* Primary Actor: Author
+* Scope: 
+	*Data: Sprite
+	*Authoring environment: Properties window, design board
+* Brief: 
+  *  Upon selecting a sprite in the UI, the user will select to change physic’s properties in the properties window. Upon entering and confirming a new gravity acceleration constant, the sprite will inherently hold this value, and for every frame update, the sprite position will be influenced in the direction and magnitude indicated by this gravity.
+* Stakeholders
+	*Game authoring environment, author, sprite data
+* Preconditions:
+  * In UI for design of levels and sprite exists
+* Postconditions
+  * Sprite must still exist
+* Minimal Guarantees:
+  * Reader attempts to pass new value to sprite data
+* Success Guarantees:
+  * Data entered by author, value confirmed as valid, data rewritten
+* Triggers:
+  * Author selects sprite within the design board
+* Basic Flow
+  * User selects sprite
+  * Property window opens for sprite
+  * Physics tab selected
+  * Author toggles gravity and/or changes its numerical value
+  * Author confirms input
+  * Inputs are checked for errors 
+  * Data is directly overwritten
+* Extensions
+  * Applying inherent velocity, bouncing from wall contact
