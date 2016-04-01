@@ -1,5 +1,103 @@
 Team DoovalSalad: Use cases
 
+Anita’s Use Cases 
+
+###Player leaves bounds of map
+
+* Primary Actor: Main character (sprite)
+* Scope: PhysicsManager, EventManager, Sprite
+* Level:  
+* Brief: The character falls off of the ground and there is no other platform to land on- the character is no longer on the screen
+* Stakeholders: Sprite, SpriteManager, VariableManager
+* PostCondition: The character’s state should be set to dead once the character passes a boundary below the bottom of the screen and the user defined event that occurs upon death is executed
+* Minimal Guarantees: The character will be set to dead
+* Success Guarantees: The game will be reset (assuming the on death event is successful) so that the game is once again 
+* Preconditions: There must be an event handler for death established for the game and the user must either set a reasonable below screen boundary or use the default boundary.
+
+###User meets win game conditions
+
+* Primary Actor: User
+* Scope: Event, Cause, Effect, EventManager, VariableManager
+* Level: 
+* Brief: The user defined event for game winning conditions will be met, which triggers the effect of changing the global variable for gameWon to true. The EventManager, which is checking through the update method, will detect that the global variable has been set to true and trigger the effect for the win game event.
+* Stakeholders: EventManager, SpriteManager, VariableManager
+* PostCondition: The effect defined in the win game event will determine the conditions of the game
+* Minimal Guarantees: There will be a change defined by the user, at least going to the next level or a win screen
+* Success Guarantees: The best case scenario would be if the user defines a transition to a game or a win screen that is then displayed
+* Preconditions:The user must define game win conditions and game win effects. The game win conditions must be met.
+
+###User defines a new parameter for sprite
+
+* Primary Actor: User
+* Scope: SpriteHandler, Sprite
+* Level: 
+* Brief: The user decides a new parameter in the front end which then adds the parameter as either a VoogaDouble or a VoogaBoolean to the hashmap of parameters for the sprite. Depending on if it’s a double or a boolean, methods are now available to increment/decrement or toggle the parameter.
+* Stakeholders: Sprite
+* PostCondition: Sprite now has a new active parameter
+* Minimal Guarantees: The sprite has an additional feature than can now be edited
+* Success Guarantees: The parameter can be used in events now
+* Preconditions: The sprite did not have this parameter already
+
+###Keystroke cause triggered
+
+* Primary Actor: User
+* Scope: EventManager, Sprite, GameHandler
+* Level: 
+* Brief: The user hits a keystroke that is associated with a cause in an event. This causes a listener in the GameHandler to add the key as a parameter in the sprite’s parameter hashmap which then triggers the cause in the event. 
+* Stakeholders: Sprite, EventManager, GameHandler
+* PostCondition: The effect associated with that cause in the event gets triggered
+* Minimal Guarantees: The character is changed in state
+* Success Guarantees: Changed state for the character according to the keystroke and added parameter of the keystroke toggled on
+* Preconditions:
+
+
+
+Saumya’s Use Cases
+###User hits “Pause” 
+* Primary Actor: The person using the software
+* Scope: User action during gameplay, interaction with GamePlayer
+* Level: 
+* Brief: The user has selected the option to play an existing game. During the course of the game the user wants to temporarily halt gameplay.
+* Stakeholders: GamePlayer
+* PostCondition: Game play has halted
+* Minimal Guarantees: Game play halts
+* Success Guarantees: User has the ability to resume gameplay, and start playing the game from its previous state
+* Preconditions: The user has started playing a game
+
+###Two Sprites collide
+* Primary Actor: EventManager class in the GameEngine package
+* Scope: EventManager (game engine)
+* Level:
+* Brief: During gameplay, two Sprites on the screen collide, triggering a response predefined by the author of the game. An example response is decreasing the “health” property of both of the Sprites. 
+* Stakeholders: Sprite, EventManager, Event, CollisionCause, Effect
+* PostCondition: The state of the Sprites has been modified as per the game author’s instructions (Ex. both Sprites have their health reduced)
+* Minimal Guarantees: The collision is detected by the EventManager.
+* Success Guarantees: The collision is detected by the EventManager, and the Event that manages this collision executes its Effect, modifying the states of the Sprites. 
+* Preconditions: The author of the game must have created an Event object whose cause is the trigger between these two Sprites, and the effect of that Event must modify the states of both Sprites. 
+
+###User applies gravity-Saumya
+* Primary Actor: Physics engine
+* Scope: Game Engine (game handler class specifically)
+* Level: 
+* Brief: The author of the game applies gravity to Sprites. When the game is played the game engine reads this gravity property from the XML file and initializes its physics engine with the gravity parameter. The Sprites experience gravity during gameplay.
+* Stakeholders: SpriteManager, Physics, Gamehandler, FileReader
+* PostCondition: The Velocity vectors of all of the Sprites have been modified to accelerate downwards
+* Minimal Guarantees: Author has the option to apply gravity, gravity gets written to the XML file, read in game engine. 
+* Success Guarantees: Y-velocities of Sprites modified according to level of gravity.
+* Preconditions: The author of the game has chosen to apply gravity to Sprites
+
+###Authoring environment defines Sprites with different properties -Saumya
+* Primary Actor: Authoring environment, Sprite
+* Scope: Defined in authoring environment, passed via XML, read in by FileReader
+* Level: 
+* Brief: The author will define GameObjects and add properties to them in the game authoring environment. The author can define two Sprites that have different properties, storing them in HashMaps. The game authoring environment serializes these objects and stores them in an XML file. The filereader will read the serialized objects and instantiate Sprites using the SpriteManager. The properties will be read from the HashMap. 
+* Stakeholders: Game authoring environment, filereader, SpriteManager
+* PostCondition: The SpriteManager contains Sprites whose properties accurately match the properties defined in the game authoring environment. 
+* Minimal Guarantees: The properties that the author defined in the authoring environment are present in the game engine during gameplay.
+* Success Guarantees: The properties that the user defined during authoring work the way they are supposed to - they are correctly bound to Events and they can be accessed and updated. 
+
+
+
 # Game Engine Use Cases
 ### Main Character Jump
 * Primary Actor: Player (Registered User)
