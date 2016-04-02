@@ -1,7 +1,7 @@
 package authoring.gui;
 
 import java.io.File;
-import java.util.Map;
+import authoring.model.ElementManager;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -15,9 +15,11 @@ import javafx.scene.layout.StackPane;
 
 public class DesignBoard extends ScrollPane {
     private StackPane contentPane;
+    private ElementManager elementManager;
     
     public DesignBoard () {
         contentPane = new StackPane();
+        elementManager = new ElementManager();
         this.setContent(contentPane);
     }
 
@@ -34,20 +36,10 @@ public class DesignBoard extends ScrollPane {
         boolean success = false;
         // If this is a meaningful drop...
 
-//        if (db.hasString()) {
-//            String nodeId = db.getString();
-//            // ...search for the item on body. If it is there...
-//            ImageView cloth = (ImageView) bodyPane.lookup("#" + nodeId);
-//            if (cloth != null) {
-//                // ... the item is removed from body
-//                // and added to an unequipped container.
-//                bodyPane.getChildren().remove(cloth);
-//                itemPane.getChildren().add(cloth);
-//                success = true;
-//            }
-//            // ...anyway, the item is not active or equipped anymore.
-//            items.get(nodeId).takeOff();
-//        }
+        if (db.hasString()) {
+            String nodeId = db.getString();
+            
+        }
         event.setDropCompleted(success);
         event.consume();
     }
@@ -59,5 +51,11 @@ public class DesignBoard extends ScrollPane {
         }
         event.consume();
     }
+    
+    private void addElement(String elementPath){
+        
+    }
+    
+    
 
 }
