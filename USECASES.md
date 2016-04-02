@@ -50,7 +50,53 @@ Anita’s Use Cases
 * Success Guarantees: Changed state for the character according to the keystroke and added parameter of the keystroke toggled on
 * Preconditions:
 
+Josh's use cases
 
+###User hits Play
+* Primary Actor: The user of the game authoring environment.
+* Scope: User action during gameplay, interaction with GamePlayer
+* Level: 
+* Brief: The user has finished creating his game and wants to transition to playing the game. The user hits the play button to instantiate the player.
+* Stakeholders: GamePlayer
+* PostCondition: Game play begins.
+* Minimal Guarantees: Game play will begin.
+* Success Guarantees: User has the ability to resume gameplay, and start playing the game from its previous state
+* Preconditions: The user has created a valid level from the game authoring environment.
+
+### Player defeats a level by defeats a level by reaching the checkpoint or obtaining a score.
+* Primary Actor: The player playing the game.
+* Scope: Player.
+* Level:
+* Brief: The player obtains all the win conditions and the scene on the screen changes, telling the player he has won the game (via text).  Then, a new scene will pop up on the screen.
+* Stakeholders: GamePlayer, VariableManager
+* PostCondition: The state of the Sprites has been modified as per the game author’s instructions (Ex. both Sprites have their health reduced)
+* Minimal Guarantees: There will be a detection of one of the multiple win conditions.
+* Success Guarantees: The scene will switch to either accommodating text or switching a scene, indicating that the user has won the level.
+* Preconditions: The player reaches the correct spot on the screen (checkpoint) or a global variable reaches the target value, 
+
+
+### The user gives a sprite an invalid value (such as a string instead of a value).
+* Primary Actor: The user of the game authoring environment
+* Scope: Game Authoring Environment, Sprite class.
+* Level:
+* Brief: The user specifies a value of the sprite that is illegal 
+* Stakeholders: SpriteManager, Sprite, Game Authoring Environment
+* PostCondition: The sprite will not be placed in the right position (will not appear in the game authoring environment) and an error message will pop up on the screen telling the user of his mistake.
+* Minimal Guarantees: There will be a message that appears on the screen telling the user that he placed the sprite in the wrong location.
+* Success Guarantees: The sprite itself will be removed or not placed on the screen at all.
+* Preconditions: A field populated for the sprite is an incorrect format or invalid value.
+
+
+### The user deletes a sprite from the game authoring environment
+* Primary Actor: The user of the game authoring environment
+* Scope: Game authoring environment
+* Level:
+* Brief: The user decides to take a sprite that has already been made from the game authoring environment
+* Stakeholders: Game Authoring Environment
+* PostCondition: The sprite will no longer exist in its original spot on the screen.
+* Minimal Guarantees: The game authoring environment will detect that the user is trying to take the sprite off the screen.
+* Success Guarantees: The sprite itself will be removed from the screen.
+* Preconditions: The sprite must exist in a location that is shown by the game authoring environment
 
 Saumya’s Use Cases
 ###User hits “Pause” 
@@ -99,6 +145,51 @@ Saumya’s Use Cases
 
 
 # Game Engine Use Cases
+
+###Player collides with a platform
+* Primary Actor: The Sprite that is colliding with the platform
+* Scope: Action of Sprite during GamePlay
+* Level: Any level type
+* Brief: The Gameplay in action, and a sprite collides with some sort of platform for which a collision is defined.
+* Stakeholders: Player, Sprite
+* PostCondition: Sprite reacts in a way defined by collision, and its new position updates accordingly
+* Minimal Guarantees: Player will perform some sort of colliding action, as defined by collision effect type.
+* Success Guarantees: The Sprite collides in the correct fashion, and this is displayed accordingly in the game player
+* Preconditions: The GamePlayer is running an active game level, and a sprite exists that “collides” with or touches a platform at some point in the game.
+
+###Score exceeds a certain number, and an action is triggered
+* Primary Actor: The VoogaNumber used in the trigger (in this case score), and whatever variables or Sprites are involved in the action being triggered
+* Scope: Cause (a score exceeding a certain number), and Effect (action being triggered), in game play
+* Level: Any level type
+* Brief: Game play is in action, and score exceeds some defined number
+* Stakeholders: Player, Cause, Effect, Event
+* PostCondition: Action is triggered
+* Minimal Guarantees: Action will be triggered once a score exceeds a certain number
+* Success Guarantees: Action is triggered whenever the score exceeds a certain number, and this action is carried out successfully by the game player, and updated and displayed accordingly
+* Preconditions: The GamePlayer is running an active game level, and the variable “Score” exists, and this Event has been defined by the user.
+
+###Player triggers audio clip for specified action (ex. death). 
+* Primary Actor: The Sprite that is performing an action
+* Scope: Action of Sprite during GamePlay
+* Level: Any level type
+* Brief: The Gameplay in action, and a sprite performs some sort of action, like jump, die, or shoot. As a result of this action, an audio clip must play
+* Stakeholders: Player, Sprite
+* PostCondition: Audio clip plays
+* Minimal Guarantees: Sound will play for the specified action
+* Success Guarantees: The sound that plays is the correct sound for the correct action
+* Preconditions: The GamePlayer is running an active game level, and an action is performed that produces an audio clip. This audio clip is defined as an action itself, however, so this interaction must be bundled by the user in the authoring environment.
+
+###User defined Cause bundle is stored in Causes and named as “Cause 1”
+* Primary Actor: The Cause that is being stored
+* Scope: After file read when xstream is being deserialized
+* Level: Any
+* Brief: This Cause is mapped to cause action ids of the Causes that it is composed of in the Cause name map as “Cause 1”
+* Stakeholders: Cause, CauseManager
+* PostCondition: Cause bundle is stored as “Cause 1”
+* Minimal Guarantees: The Cause is then stored as “Cause 1”
+* Success Guarantees: When the Cause is checked for, it will essentially e anding all of the causes that it is composed of, and will result in the correct boolean evaluation.
+* Preconditions: The other Causes work and are stored in a map.
+
 ### Main Character Jump
 * Primary Actor: Player (Registered User)
 * Scope: Game map (level)
@@ -145,6 +236,21 @@ The user makes a jump request (presses jump key) while the game is in the game l
   8. Sprite is part of game play
 * Extensions:
   1. Dragging other resource onto Design Board
+  
+*Coding Workflow:
+  update method is called by the Player
+  this update method calls EventManager to update
+  EventManager then calls upon all of it's Causes 
+  For all the Causes that evaluate to true, an Effect is placed in a Priority Queue
+  In this case, one of these Effects is Left. When the Left Effect is instantiated,
+  it is given some parameters such as duration and speed for which it should travel left
+  The duration is used to set a counter to determine how many steps the left Effect should 
+  continue to execute in the Effect queue when called by update. When a max counter is reached,
+  the Effect is removed from the queue and no longer takes place.
+  The Left Effect makes use of the Physics Engine, and inputs the xpos to apply an impulse in the -x
+  direction according to physical constants. The Left Effect then updates the Sprite's vector
+  to have the new appropriate xpos , so that after update is called by the Player, and the new
+  positions are display, the xpos will be adjusted according to the speed and physical constants.
   
 ===========
 
