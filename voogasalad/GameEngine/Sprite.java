@@ -8,14 +8,15 @@ import javafx.scene.image.ImageView;
 import tools.Vector;
 import tools.interfaces.*;
 
-public class Sprite extends ImageView implements Moveable {
+public class Sprite implements Moveable {
 	
 	private Vector myVelocity;
 	private String myID;
 	private Map<String, VoogaData> myProperties;
+	private ImageView myImage;
 
 	public Sprite(String imageID, String id) {
-		super(imageID);
+		myImage = new ImageView(imageID);
 		myID = id;
 		myProperties = new HashMap<String, VoogaData>();
 	}
@@ -40,6 +41,10 @@ public class Sprite extends ImageView implements Moveable {
 	
 	public String getID(){
 		return myID;
+	}
+	
+	public ImageView getImage(){
+		return myImage;
 	}
 
 }
