@@ -1,31 +1,31 @@
-package tools;
+package GameEngine;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 
-import GameEngine.Sprite;
 import events.Event;
-import GameEngine.Variable;
 
-public class FileManager {
+public class FileReadingManager {
 
 	private List<Sprite> spriteList;
 	private List<Event> eventList;
 	private List<Variable> VariableList;
 	
-	public FileManager(XStream xStream){
+	public FileReadingManager(XStream xStream, String fileName){
 		// TODO Auto-generated constructor stub	
-		parse(xStream);
+		createObjects(xStream, fileName);
 	}
 	
-	private void parse(XStream myUnSerializer){
+	@SuppressWarnings("unchecked")
+	private void createObjects(XStream myUnSerializer, String fileName){
 		 try {
-			 spriteList  = (List<Sprite>) myUnSerializer.fromXML("sprites",new FileOutputStream(new File("game_data/ExampleData.xml")));
-			 eventList  = (List<Event>) myUnSerializer.fromXML("events",new FileOutputStream(new File("game_data/ExampleData.xml")));
-			 VariableList  = (List<Variable>) myUnSerializer.fromXML("variables",new FileOutputStream(new File("game_data/ExampleData.xml")));
+			 spriteList  = (List<Sprite>) myUnSerializer.fromXML("sprites",new FileInputStream(new File(fileName)));
+			 eventList  = (List<Event>) myUnSerializer.fromXML("events",new FileInputStream(new File(fileName)));
+			 VariableList  = (List<Variable>) myUnSerializer.fromXML("variables",new FileInputStream(new File(fileName)));
 	    }
 	    catch (FileNotFoundException e) {
 	         // TODO Auto-generated catch block
