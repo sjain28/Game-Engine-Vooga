@@ -1,6 +1,6 @@
 package player.gui;
 
-public interface PlayerGUI {
+public interface GameDisplay {
 	
 	void read();
 	
