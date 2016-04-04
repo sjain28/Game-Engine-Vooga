@@ -19,6 +19,9 @@ public class Sprite implements Moveable {
 		myImage = new ImageView(imageID);
 		myID = id;
 		myProperties = new HashMap<String, VoogaData>();
+		//TODO: Make imagePath a StringProperty, implement listener in update that changes Sprite's image when 
+		//		the imagePath changes (ie in a collision or something)
+				//Add getters/setters for ImagePath
 	}
 
 	@Override
