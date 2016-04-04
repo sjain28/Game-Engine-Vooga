@@ -29,5 +29,9 @@ public class VoogaNumber implements VoogaData{
         }
         return value;
     }
+    
+    public String toString(){
+        return "";
+    }
    
 }

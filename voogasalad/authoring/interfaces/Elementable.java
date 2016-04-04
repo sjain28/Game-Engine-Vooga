@@ -8,6 +8,6 @@ package authoring.interfaces;
  * @author Aditya Srinivasan, Arjun Desai, Harry Guo, Nick Lockett
  *
  */
-public interface Elementable {
+public interface Elementable{
 
 }
