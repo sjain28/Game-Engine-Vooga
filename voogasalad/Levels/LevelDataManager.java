@@ -9,17 +9,17 @@ import GameEngine.Variable;
 import GameEngine.VariableManager;
 import events.Event;
 
-public class LevelManager {
+public class LevelDataManager {
 
 	SpriteManager spriteManager;
 	EventManager eventManager;
 	VariableManager variableManager;
 	
-	public LevelManager() {
+	public LevelDataManager() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LevelManager(List<Sprite> spriteObjects, List<Event> eventObjects, List<Variable> variableObjects) {
+	public LevelDataManager(List<Sprite> spriteObjects, List<Event> eventObjects, List<Variable> variableObjects) {
 		// TODO Auto-generated constructor stub
 		//spriteManager = new SpriteManager(spriteObjects);
 		//eventManager = new EventManager(eventObjects);
