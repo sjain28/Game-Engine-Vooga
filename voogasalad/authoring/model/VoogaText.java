@@ -7,10 +7,12 @@ import javafx.scene.layout.Background;
 
 public class VoogaText extends TextField implements Elementable{
     
+    private String da;
+    
     public VoogaText(){
         setBackground(Background.EMPTY);
-        
     }
     
     
+
 }

@@ -18,8 +18,9 @@ public class Sprite implements Moveable {
 
     private transient ImageView myImage;
 
-    public Sprite (String imageID, String id) {
-        Image image = new Image(this.getClass().getResourceAsStream(imageID));
+    public Sprite (String imagePath, String id) {
+        Image image = new Image(this.getClass().getResourceAsStream(imagePath));
+        
         myImage = new ImageView(image);
         myID = id;
         myProperties = new HashMap<String, VoogaData>();
