@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import tools.Vector;
 import tools.interfaces.*;
 
+
 public class Sprite implements Moveable {
 	
 	private Vector myVelocity;
@@ -19,9 +20,11 @@ public class Sprite implements Moveable {
 		myImage = new ImageView(imageID);
 		myID = id;
 		myProperties = new HashMap<String, VoogaData>();
-		//TODO: Make imagePath a StringProperty, implement listener in update that changes Sprite's image when 
+		//TODO: 
+		//Make imagePath a StringProperty, implement listener in update that changes Sprite's image when 
 		//		the imagePath changes (ie in a collision or something)
-				//Add getters/setters for ImagePath
+		//Add getters/setters for ImagePath
+		//
 	}
 
 	@Override
@@ -49,5 +52,4 @@ public class Sprite implements Moveable {
 	public ImageView getImage(){
 		return myImage;
 	}
-
 }
