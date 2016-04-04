@@ -44,7 +44,6 @@ public class GameObject extends ImageView implements Moveable,IDable, Elementabl
     @Override
     public void setVelocity (Vector v) {
         // TODO Auto-generated method stub
-        
     }
     
     void onDrag(MouseEvent event){
