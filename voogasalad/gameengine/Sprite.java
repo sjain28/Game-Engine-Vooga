@@ -1,4 +1,4 @@
-package GameEngine;
+package gameengine;
 
 import java.util.HashMap;
 import java.util.Map;
