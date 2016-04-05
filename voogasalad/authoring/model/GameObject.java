@@ -13,17 +13,17 @@ import tools.Vector;
 
 public class GameObject extends ImageView implements Moveable, Elementable{
 
-    private Sprite sprite;
+    private Sprite mySprite;
 
     public GameObject (String imagePath, Object id) {
         super(imagePath);
         this.setId(id.toString());
-        sprite = new Sprite(imagePath,getId());
+        mySprite = new Sprite(imagePath,getId());
     }
     
     //TODO: Send back immutable sprite
     Sprite getSprite(){
-        return sprite;
+        return mySprite;
     }
 
 

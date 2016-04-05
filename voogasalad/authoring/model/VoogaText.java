@@ -14,9 +14,14 @@ public class VoogaText extends TextField implements Elementable{
     
     public VoogaText(Object id){
         this.setId(id.toString());
-        //setBackground(Background.EMPTY);
+        setBackground(Background.EMPTY);
         this.setOnDragDetected((MouseEvent e) -> onDrag(e));
     }
+    
+    
+    //TODO: 
+    //This method is repeated in all Elements, we should use some form of inheritance 
+    //hierarchy to determine this
     
     void onDrag(MouseEvent event){
         Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
