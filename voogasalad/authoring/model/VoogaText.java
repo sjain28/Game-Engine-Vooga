@@ -7,9 +7,9 @@ import javafx.scene.layout.Background;
 
 public class VoogaText extends TextField implements Elementable{
     
-    private String da;
     
-    public VoogaText(){
+    public VoogaText(Object id){
+        this.setId(id.toString());
         setBackground(Background.EMPTY);
     }
     

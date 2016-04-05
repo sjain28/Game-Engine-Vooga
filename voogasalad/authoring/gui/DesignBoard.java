@@ -1,10 +1,14 @@
 package authoring.gui;
 
 import java.io.File;
+import java.util.UUID;
 import authoring.model.ElementManager;
+import authoring.model.GameObject;
+import authoring.resourceutility.ResourceDecipherer;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -16,9 +20,10 @@ import javafx.scene.layout.StackPane;
 public class DesignBoard extends ScrollPane {
     private StackPane contentPane;
     private ElementManager elementManager;
-    
+
     public DesignBoard () {
         contentPane = new StackPane();
+        initializeDragAndDrop();
         elementManager = new ElementManager();
         this.setContent(contentPane);
     }
@@ -32,14 +37,17 @@ public class DesignBoard extends ScrollPane {
 
     private void mouseDragDropped (final DragEvent event) {
         Dragboard db = event.getDragboard();
-        // Get item id here, which was stored when the drag started.
         boolean success = false;
-        // If this is a meaningful drop...
-
-        if (db.hasString()) {
+        if (!db.hasString()){
             String nodeId = db.getString();
-            
+            if (elementManager.hasElement(nodeId)){
+                moveElement(nodeId, db);
+            } else {
+                addElement(db.getString());
+            }
+            success=true;
         }
+        
         event.setDropCompleted(success);
         event.consume();
     }
@@ -51,11 +59,20 @@ public class DesignBoard extends ScrollPane {
         }
         event.consume();
     }
-    
-    private void addElement(String elementPath){
+
+    private void addElement (String elementPath) {
+        Node node;
+        if (ResourceDecipherer.isImage(elementPath)){
+            node = new GameObject(elementPath,UUID.randomUUID().toString());
+            elementManager.addGameElements(node);
+        }
         
     }
     
-    
+    private void moveElement(String id,Dragboard db){
+        Node element = elementManager.getElement(id);
+        element.setTranslateX(db.getDragViewOffsetX());
+        element.setTranslateY(db.getDragViewOffsetY());
+    }
 
 }

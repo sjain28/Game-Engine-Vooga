@@ -6,52 +6,82 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import GameEngine.Sprite;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import events.Event;
+import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
-public class ElementManager implements Saveable{
-    private List<Elementable> gameElements;
+
+public class ElementManager implements Saveable {
+    private List<Node> gameElements;
     private List<Event> eventList;
-    private Map<String,VoogaData> globalVariables;
+    private Map<String, VoogaData> globalVariables;
     private File xmlDataFile;
-    
-    public ElementManager(){
-        gameElements = new ArrayList<Elementable>();
+    private HashSet<String> currentIds;
+
+    public ElementManager () {
+        gameElements = new ArrayList<Node>();
         eventList = new ArrayList<Event>();
-        globalVariables = new HashMap<String,VoogaData> ();
+        globalVariables = new HashMap<String, VoogaData>();
         xmlDataFile = null;
     }
-    
-    public ElementManager(File xmlDataFile){
+
+    public ElementManager (File xmlDataFile) {
         this();
-        this.xmlDataFile=xmlDataFile;
+        this.xmlDataFile = xmlDataFile;
     }
-    
-    void addGameElements(Elementable... elements){
+
+    public void addGameElements (Node ... elements) {
+        for (Node e : elements) {
+            while (currentIds.contains(e.getId())) {
+                e.setId(UUID.randomUUID().toString());
+            }
+            currentIds.add(e.getId());
+        }
         gameElements.addAll(Arrays.asList(elements));
     }
-    
-    void removeGameElements(Elementable...elements){
+
+    public void removeGameElements (Node ... elements) {
+        for (Node e:elements){
+            if (currentIds.contains(e.getId())){
+                currentIds.remove(e.getId());
+            }
+        }
         gameElements.removeAll(Arrays.asList(elements));
     }
-    
-    List<Elementable> getElements(){
+
+    public List<Node> getElements () {
         return gameElements;
     }
-    
-    void addEvents(Event... events){
+
+    public void addEvents (Event ... events) {
         eventList.addAll(Arrays.asList(events));
     }
-    
-    void removeEvents(Event...events){
+
+    public void removeEvents (Event ... events) {
         eventList.removeAll(Arrays.asList(events));
+    }
+    
+    public Node getElement(String id){
+        for (Node node : gameElements){
+            if (node.getId().equals(id)){
+                return node;
+            }
+        }
+        
+        return null;
+    }
+    
+    public boolean hasElement(String id){
+        return currentIds.contains(id);
     }
     
     /**
@@ -60,33 +90,33 @@ public class ElementManager implements Saveable{
     @Override
     public void onSave () {
         XStream mySerializer = new XStream(new DomDriver());
-        StringBuilder content= new StringBuilder();
-        
+        StringBuilder content = new StringBuilder();
+
         List<Sprite> sprites = new ArrayList<Sprite>();
         List<VoogaText> text = new ArrayList<VoogaText>();
-        
-        for (Elementable element : gameElements){
-            if (element instanceof GameObject){
+
+        for (Node element : gameElements) {
+            if (element instanceof GameObject) {
                 sprites.add(((GameObject) element).getSprite());
             }
-            
-            if (element instanceof VoogaText){
+
+            if (element instanceof VoogaText) {
                 text.add((VoogaText) element);
             }
         }
-        
-        content.append(mySerializer.toXML(sprites)+"\n");
-        content.append(mySerializer.toXML(text)+"\n");
-        content.append(eventList+"\n");
+
+        content.append(mySerializer.toXML(sprites) + "\n");
+        content.append(mySerializer.toXML(text) + "\n");
+        content.append(eventList + "\n");
         content.append(globalVariables);
-        
+
         writeToFile(content.toString());
     }
-    
-    private void writeToFile(String content){
+
+    private void writeToFile (String content) {
         FileWriter fileWriter;
         try {
-            fileWriter = new FileWriter(xmlDataFile,true);
+            fileWriter = new FileWriter(xmlDataFile, true);
             fileWriter.write(content.toString());
             fileWriter.flush();
             fileWriter.close();
@@ -96,5 +126,5 @@ public class ElementManager implements Saveable{
             e.printStackTrace();
         }
     }
-    
+
 }
