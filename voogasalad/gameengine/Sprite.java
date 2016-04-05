@@ -12,20 +12,20 @@ import tools.interfaces.*;
 public class Sprite implements Moveable {
 
     private Vector myVelocity;
+    private Vector myLoc;
     private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
     private double startingX;
     private double startingY;
     
-    private transient Point2D myLoc;
     private transient ImageView myImage;
     
     public Sprite (String imagePath, String id, double x, double y) {
         myImagePath = imagePath;
         myID = id;
         myProperties = new HashMap<String, VoogaData>();
-        myLoc = new Point2D(x,y);
+        myLoc = new Vector();
         startingX = x;
         startingY = y;
     }
@@ -37,12 +37,11 @@ public class Sprite implements Moveable {
     public void init(){
        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
        myImage = new ImageView(image);
-       myLoc = new Point2D(startingX, startingY);
     }
     
     public void update(){
     	//Still needed: Apply physics to myVelocity
-    	myLoc.add(new Point2D(myVelocity.getX(), myVelocity.getY()));
+    	myLoc.addVector(myVelocity);
     	myImage.setLayoutX(myLoc.getX());
     	myImage.setLayoutY(myLoc.getY());    	
     }
@@ -55,6 +54,14 @@ public class Sprite implements Moveable {
     @Override
     public void setVelocity (Vector v) {
         myVelocity = v;
+    }
+    
+    public Vector getPosition(){
+    	return myLoc;
+    }
+    
+    public void setPosition(Vector v){
+    	myLoc = v;
     }
     public void addProperty (String s, VoogaData v) {
         myProperties.put(s, v);
