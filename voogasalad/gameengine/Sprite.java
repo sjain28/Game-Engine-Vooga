@@ -16,8 +16,6 @@ public class Sprite implements Moveable {
     private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
-    private double startingX;
-    private double startingY;
     
     private transient ImageView myImage;
     
@@ -26,8 +24,6 @@ public class Sprite implements Moveable {
         myID = id;
         myProperties = new HashMap<String, VoogaData>();
         myLoc = new Vector();
-        startingX = x;
-        startingY = y;
     }
     
     /**
