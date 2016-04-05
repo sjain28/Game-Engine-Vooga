@@ -1,4 +1,5 @@
 package authoring.resourceutility;
+import authoring.VoogaScene;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,7 +17,7 @@ public class ResourceUI extends VBox {
 	
 		this.getChildren().addAll(rtv, buttonContainer);
 		
-		Scene scene = new Scene(this);
+		Scene scene = new VoogaScene(this);
 	
 		primaryStage.setScene(scene);
 		primaryStage.show();
