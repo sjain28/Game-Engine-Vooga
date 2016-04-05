@@ -2,10 +2,13 @@ package data;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import gameengine.Sprite;
+import authoring.interfaces.Elementable;
 
 import authoring.model.VoogaText;
 import gameengine.Sprite;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import tools.VoogaBoolean;
 
@@ -19,7 +22,8 @@ public class DataWrittingTest extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
         //Sprite sprite = new Sprite("images/bricks.jpg","6");
-        VoogaText[] vts = new VoogaText[500];
+        Elementable[] vts = new Elementable[500];
+        
         for (int i =0;i<500;i++){
             VoogaText vt = new VoogaText(""+i);
             vt.setTranslateX(100);
@@ -32,8 +36,15 @@ public class DataWrittingTest extends Application {
         XStream mySerializer = new XStream(new DomDriver());
         String xmlFile = mySerializer.toXML(vts);
         System.out.println(xmlFile);
-        VoogaText[] texts = (VoogaText[]) mySerializer.fromXML(xmlFile);
-        System.out.println(texts.length);
-
+        
+        Elementable[] texts = (Elementable[]) mySerializer.fromXML(xmlFile);
+        for (Elementable i:texts){
+            System.out.println(i.getClass());
+        }
+        
+        System.out.println("");
+        System.out.println(texts.getClass());
+        
+        
     }
 }
