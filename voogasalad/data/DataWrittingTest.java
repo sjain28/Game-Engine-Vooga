@@ -20,7 +20,7 @@ public class DataWrittingTest extends Application {
         //Sprite sprite = new Sprite("images/bricks.jpg","6");
         VoogaText[] vts = new VoogaText[500];
         for (int i =0;i<500;i++){
-            VoogaText vt = new VoogaText();
+            VoogaText vt = new VoogaText(""+i);
             vt.setTranslateX(100);
             vt.setTranslateY(100);
             vt.setTranslateZ(1000);

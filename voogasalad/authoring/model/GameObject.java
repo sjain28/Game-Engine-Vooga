@@ -1,31 +1,24 @@
 package authoring.model;
 
-import java.util.HashMap;
-import java.util.Map;
+
 import GameEngine.Sprite;
 import authoring.interfaces.Elementable;
-import authoring.interfaces.IDable;
 import authoring.interfaces.Moveable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import tools.Vector;
-import tools.interfaces.VoogaData;
 
-public class GameObject extends ImageView implements Moveable,IDable, Elementable{
+public class GameObject extends ImageView implements Moveable, Elementable{
 
     private Sprite sprite;
-    public GameObject (String imageID, String id) {
-        super(imageID);
-        this.setId(id);
-        sprite = new Sprite(imageID,id);
-    }
 
-    public String getID () {
-        return "";
+    public GameObject (String imagePath, Object id) {
+        super(imagePath);
+        this.setId(id.toString());
+        sprite = new Sprite(imagePath,getId());
     }
     
     //TODO: Send back immutable sprite
@@ -50,7 +43,7 @@ public class GameObject extends ImageView implements Moveable,IDable, Elementabl
         Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
         ClipboardContent content = new ClipboardContent();
         // Store node ID in order to know what is dragged.
-        content.putString(getID());
+        content.putString(getId());
         db.setContent(content);
         event.consume();
     }
