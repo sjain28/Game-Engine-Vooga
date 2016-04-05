@@ -1,12 +1,13 @@
 package usecases;
 
-import GameEngine.Sprite;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.*;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import gameengine.Sprite;
 
 public class SpriteDataExample {
     public static void main (String[] args){

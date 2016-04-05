@@ -1,4 +1,4 @@
-package GameEngine;
+package gameengine;
 
 public class Variable {
 

@@ -2,8 +2,9 @@ package data;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import GameEngine.Sprite;
+
 import authoring.model.VoogaText;
+import gameengine.Sprite;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import tools.VoogaBoolean;
