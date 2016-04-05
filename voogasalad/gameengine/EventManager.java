@@ -25,7 +25,7 @@ import events.KeyCause;
  */
 public class EventManager {
 
-	private List<Character> keyStrokes;
+	private List<Character> keyStrokes; //Still need to add a listener to update this list with new keystrokes!
 	private List<Event> myEvents;
 	private List<String> keyCombos;
 	private Map<String, KeyCause> keyCauses;

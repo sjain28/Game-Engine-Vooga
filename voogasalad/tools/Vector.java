@@ -7,6 +7,11 @@ package tools;
  */
 public class Vector {
 
+	private double xPrev = 0;
+	private double yPrev = 0;
+	private double x;
+	private double y;
+	
 	/**
 	 * Vector class that keeps information about (x, y) coordinates as well as
 	 * previous coordinates
@@ -15,10 +20,9 @@ public class Vector {
 	 * accordingly
 	 * 
 	 */
-	private double xPrev = 0;
-	private double yPrev = 0;
-	private double x;
-	private double y;
+	public Vector (double x, double y) {
+		setXY(x, y);
+	}
 
 	public double getX(){
 		return x;
@@ -36,6 +40,11 @@ public class Vector {
 	public void setY(double y){
 		this.yPrev = getY();
 		this.y = y;
+	}
+	
+	public void setXY(double x, double y) {
+		setX(x);
+		setY(y);
 	}
 
 	public void addX(double dx){
