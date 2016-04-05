@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import tools.Vector;
 import tools.interfaces.*;
 
-
 public class Sprite implements Moveable {
 
     private Vector myVelocity;
