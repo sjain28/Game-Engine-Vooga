@@ -1,6 +1,7 @@
 package application;
 
 import authoring.Tester;
+import authoring.gui.SpriteProperties;
 import authoring.resourceutility.ResourceUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -11,7 +12,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		//new Launcher();
 		//new Tester();
-		new ResourceUI(primaryStage);
+		//new ResourceUI(primaryStage);
+		new SpriteProperties(primaryStage);
 	}
 	
 	public static void main(String[] args) {
