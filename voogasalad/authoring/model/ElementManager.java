@@ -13,7 +13,6 @@ import java.util.UUID;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import events.Event;
 import gameengine.Sprite;
