@@ -25,7 +25,7 @@ public class Sprite implements Moveable {
         myImage = new ImageView(image);
         myID = id;
         myProperties = new HashMap<String, VoogaData>();
-        myLoc = new Vector();
+        myLoc = new Vector(x,y);
     }
     
     /**
