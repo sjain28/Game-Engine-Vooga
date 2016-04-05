@@ -21,8 +21,8 @@ public class DataWrittingTest extends Application {
 
     @Override
     public void start (Stage primaryStage) throws Exception {
-        //Sprite sprite = new Sprite("images/bricks.jpg","6");
-        Elementable[] vts = new Elementable[500];
+        Sprite sprite = new Sprite("images/bricks.jpg","6",0,0);
+        Node[] vts = new Node[500];
         
         for (int i =0;i<500;i++){
             VoogaText vt = new VoogaText(""+i);
@@ -37,8 +37,8 @@ public class DataWrittingTest extends Application {
         String xmlFile = mySerializer.toXML(vts);
         System.out.println(xmlFile);
         
-        Elementable[] texts = (Elementable[]) mySerializer.fromXML(xmlFile);
-        for (Elementable i:texts){
+        Node[] texts = (Node[]) mySerializer.fromXML(xmlFile);
+        for (Node i:texts){
             System.out.println(i.getClass());
         }
         
