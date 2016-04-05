@@ -1,13 +1,9 @@
 package application;
 
-import java.util.Enumeration;
-
 import authoring.Tester;
 import authoring.resourceutility.ResourceUI;
-import auxiliary.OrderedProperties;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import resources.VoogaBundles;
 
 public class Main extends Application {
 
