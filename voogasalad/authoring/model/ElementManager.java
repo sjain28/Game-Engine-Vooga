@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -25,13 +26,14 @@ public class ElementManager implements Saveable {
     private List<Event> eventList;
     private Map<String, VoogaData> globalVariables;
     private File xmlDataFile;
-    private HashSet<String> currentIds;
+    private Set<String> currentIds;
 
     public ElementManager () {
         gameElements = new ArrayList<Node>();
         eventList = new ArrayList<Event>();
         globalVariables = new HashMap<String, VoogaData>();
         xmlDataFile = null;
+        currentIds = new HashSet<String>();
     }
 
     public ElementManager (File xmlDataFile) {
@@ -41,6 +43,7 @@ public class ElementManager implements Saveable {
 
     public void addGameElements (Node ... elements) {
         for (Node e : elements) {
+            System.out.println(e.getId());
             while (currentIds.contains(e.getId())) {
                 e.setId(UUID.randomUUID().toString());
             }
