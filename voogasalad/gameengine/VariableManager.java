@@ -1,4 +1,4 @@
-package GameEngine;
+package gameengine;
 
 /*
  * This class will handle global variables (such as time, game won/lost, etc.)

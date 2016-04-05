@@ -1,4 +1,4 @@
-package GameEngine;
+package gameengine;
 
 /*
  * This class will hold all of the game events and handle updating the game accordingly.

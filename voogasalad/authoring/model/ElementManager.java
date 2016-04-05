@@ -12,10 +12,10 @@ import java.util.Map;
 import java.util.UUID;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import GameEngine.Sprite;
-import authoring.interfaces.Elementable;
+
 import authoring.interfaces.gui.Saveable;
 import events.Event;
+import gameengine.Sprite;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
