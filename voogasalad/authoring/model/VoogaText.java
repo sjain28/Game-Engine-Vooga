@@ -11,7 +11,7 @@ import javafx.scene.layout.Background;
 
 public class VoogaText extends TextField implements Elementable{
     
-    
+    // stroke, color, font, text, size, name/group, position (x,y,z), 
     public VoogaText(Object id){
         this.setId(id.toString());
         setBackground(Background.EMPTY);
