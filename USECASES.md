@@ -208,13 +208,13 @@ The character is movable in the game. The goal condition hasn’t been met.
 * Triggers:
 The user makes a jump request (presses jump key) while the game is in the game loop.
 
-===========
+
 ### Main Character Moves Left
 * Primary Actor: Player (Main Character) (Registered User)
 * Scope: Game map (level)
 * Level: ! (User goal or sea level)
 * Brief: (equivalent to a user story or an epic)
-  *The user presses a left arrow button that causes the main character to move to the left.
+  * The user presses a left arrow button that causes the main character to move to the left.
 *Stakeholders: Game Engine, Design Board
 *Preconditions:
   * Images are loaded onto Explorer Window
@@ -251,6 +251,79 @@ The user makes a jump request (presses jump key) while the game is in the game l
   direction according to physical constants. The Left Effect then updates the Sprite's vector
   to have the new appropriate xpos , so that after update is called by the Player, and the new
   positions are display, the xpos will be adjusted according to the speed and physical constants.
+  
+#Main player character moves right
+Primary Actor: Player (Registered User)
+Scope: Game map
+Level: ! (User goal or sea level)
+Brief: (equivalent to a user story or an epic)
+The user presses a right arrow button that causes the main character to move to the right.
+Stakeholders
+...
+Postconditions
+Minimal Guarantees:
+Success Guarantees:
+The character successfully moves right.
+If the character hits another entity, the physics engine runs and detects/solves collisions.
+Preconditions:
+The character is movable in the game. The goal condition hasn’t been met.
+Triggers:
+The user makes a move right request (presses right arrow key) while the game is in the game loop.
+Basic flow: (To be written from here)
+The authoring environment provides the user with the ability to bind the right arrow key to move-right action.
+The system saves the game composition using XStream.
+The game player loads the game and the user can play the game. While in gameplay, if the key is pressed, the main character will move.
+
+Extensions:
+Let the user vary the velocity at which the main character moves.
+
+
+###Main player character moves right
+* Primary Actor: Player (Registered User)
+* Scope: Game map
+* Level: ! (User goal or sea level)
+* Brief: (equivalent to a user story or an epic)
+  * The user presses a right arrow button that causes the main character to move to the right.
+* Stakeholders
+  * Map and the main character
+* Success Guarantees:
+  * The character successfully moves right.
+  * If the character hits another entity, the physics engine runs and detects/solves collisions.
+* Preconditions:
+  * The character is movable in the game. The goal condition hasn’t been met.
+* Triggers:
+  * The user makes a move right request (presses right arrow key) while the game is in the game loop.
+* Basic flow: (To be written from here)
+  1. The authoring environment provides the user with the ability to bind the right arrow key to move-right action.
+  2. The system saves the game composition using XStream.
+  3. The game player loads the game and the user can play the game. While in gameplay, if the key is pressed, the main character will move.
+
+* Extensions:
+  * Let the user vary the velocity at which the main character moves.
+
+  
+###Main player character dies (death action)
+* Primary Actor: Player (Registered User)
+* Scope: Game map
+* Level: ! (User goal or sea level)
+* Brief: (equivalent to a user story or an epic)
+  * The main character takes a death action, causing the game to end and rendering the main character no longer be able to move or be controlled by the user.
+* Stakeholders
+  * ...All components of the game
+*  Success Guarantees:
+  * The character successfully jumps on the screen (up and down) and lands.
+  * If the character hits another entity, the physics engine runs and detects/solves collisions.
+* Preconditions:
+  * The game is currently in play.
+* Triggers:
+  * Goal for the death action is met. For example, time is run out. Health is 0.
+* Basic flow: (To be written from here)
+  1. The authoring environment provides the user with the ability to set a death action to the main character.
+  2. The user sets and modifies goal conditions for the death action. More specifically, the action is the effect, and the user will have to specify a bundle(s) of causes.
+  3. The system saves the game composition using XStream.
+  4. The game player loads the game and the user can play the game. While in gameplay, if the death conditions are met, the character will take the death action.
+
+
   
 ===========
 
