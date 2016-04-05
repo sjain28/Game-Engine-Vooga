@@ -1,5 +1,7 @@
 package events;
 
+import java.util.List;
+
 import gameengine.Sprite; 
 
 /*
@@ -9,23 +11,29 @@ import gameengine.Sprite;
 public class KeyCause implements Cause {
 
 	private Sprite mySprite;
-	private char myKey;
+	private String myKeys;
+	private List<Character> keyStrokes;
+	private boolean myValue;
 	
-	public KeyCause(Sprite sprite, char key) {
+	public KeyCause(Sprite sprite, String key) {
 		mySprite = sprite;
-		myKey = key;
-		
-		mySprite.getImageView().setOnKeyPressed(e -> handleKey(e.getCode()));
+		myKeys = key;
 	}
 
 	@Override
 	public boolean check() {
-		// TODO Auto-generated method stub
-		
+		return myValue;
 	}
 	
-	//set sprite to have key as parameter in hashmap
+	public String getKeys(){
+		return myKeys;
+	}
 	
-	//getSprite.getImageView.setOnKeyPress();
+	public void setKeyStrokes(List<Character> strokes){
+		keyStrokes = strokes;
+	}
 
+	public void setValue(boolean val){
+		myValue = val;
+	}
 }
