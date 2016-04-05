@@ -1,4 +1,5 @@
 package authoring.resourceutility;
+import authoring.VoogaScene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -15,7 +16,7 @@ public class NamePrompter extends VBox {
 		
 		addElements();
 		
-		Scene scene = new Scene(this);
+		Scene scene = new VoogaScene(this);
 		stage = new Stage();
 		
 		stage.setScene(scene);

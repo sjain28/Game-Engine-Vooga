@@ -15,7 +15,7 @@ public class UIManager extends Group {
 	}
 	
 	private void initializeComponents() {
-		this.getChildren().add(new Menubar(e -> {
+		this.getChildren().addAll(new Menubar(e -> {
 			try {
 				new MenubarHandlingReflector(e);
 			}
