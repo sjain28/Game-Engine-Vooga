@@ -3,7 +3,6 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import authoring.interfaces.Moveable;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Vector;
@@ -25,7 +24,7 @@ public class Sprite implements Moveable {
         myImage = new ImageView(image);
         myID = id;
         myProperties = new HashMap<String, VoogaData>();
-        myLoc = new Vector();
+        myLoc = new Vector(0,0);
     }
     
     /**

@@ -22,59 +22,59 @@ import tools.interfaces.VoogaData;
 
 
 public class ElementManager implements Saveable {
-    private List<Node> gameElements;
-    private List<Event> eventList;
-    private Map<String, VoogaData> globalVariables;
-    private File xmlDataFile;
-    private Set<String> currentIds;
+    private List<Node> myGameElements;
+    private List<Event> myEventList;
+    private Map<String, VoogaData> myGlobalVariables;
+    private File myXmlDataFile;
+    private Set<String> myIds;
 
     public ElementManager () {
-        gameElements = new ArrayList<Node>();
-        eventList = new ArrayList<Event>();
-        globalVariables = new HashMap<String, VoogaData>();
-        xmlDataFile = null;
-        currentIds = new HashSet<String>();
+        myGameElements = new ArrayList<Node>();
+        myEventList = new ArrayList<Event>();
+        myGlobalVariables = new HashMap<String, VoogaData>();
+        myXmlDataFile = null;
+        myIds = new HashSet<String>();
     }
 
     public ElementManager (File xmlDataFile) {
         this();
-        this.xmlDataFile = xmlDataFile;
+        this.myXmlDataFile = xmlDataFile;
     }
 
     public void addGameElements (Node ... elements) {
         for (Node e : elements) {
             System.out.println(e.getId());
-            while (currentIds.contains(e.getId())) {
+            while (myIds.contains(e.getId())) {
                 e.setId(UUID.randomUUID().toString());
             }
-            currentIds.add(e.getId());
+            myIds.add(e.getId());
         }
-        gameElements.addAll(Arrays.asList(elements));
+        myGameElements.addAll(Arrays.asList(elements));
     }
 
     public void removeGameElements (Node ... elements) {
         for (Node e:elements){
-            if (currentIds.contains(e.getId())){
-                currentIds.remove(e.getId());
+            if (myIds.contains(e.getId())){
+                myIds.remove(e.getId());
             }
         }
-        gameElements.removeAll(Arrays.asList(elements));
+        myGameElements.removeAll(Arrays.asList(elements));
     }
 
     public List<Node> getElements () {
-        return gameElements;
+        return myGameElements;
     }
 
     public void addEvents (Event ... events) {
-        eventList.addAll(Arrays.asList(events));
+        myEventList.addAll(Arrays.asList(events));
     }
 
     public void removeEvents (Event ... events) {
-        eventList.removeAll(Arrays.asList(events));
+        myEventList.removeAll(Arrays.asList(events));
     }
     
     public Node getElement(String id){
-        for (Node node : gameElements){
+        for (Node node : myGameElements){
             if (node.getId().equals(id)){
                 return node;
             }
@@ -84,7 +84,7 @@ public class ElementManager implements Saveable {
     }
     
     public boolean hasElement(String id){
-        return currentIds.contains(id);
+        return myIds.contains(id);
     }
     
     /**
@@ -98,7 +98,7 @@ public class ElementManager implements Saveable {
         List<Sprite> sprites = new ArrayList<Sprite>();
         List<VoogaText> text = new ArrayList<VoogaText>();
 
-        for (Node element : gameElements) {
+        for (Node element : myGameElements) {
             if (element instanceof GameObject) {
                 sprites.add(((GameObject) element).getSprite());
             }
@@ -110,8 +110,8 @@ public class ElementManager implements Saveable {
 
         content.append(mySerializer.toXML(sprites) + "\n");
         content.append(mySerializer.toXML(text) + "\n");
-        content.append(eventList + "\n");
-        content.append(globalVariables);
+        content.append(myEventList + "\n");
+        content.append(myGlobalVariables);
 
         writeToFile(content.toString());
     }
@@ -119,7 +119,7 @@ public class ElementManager implements Saveable {
     private void writeToFile (String content) {
         FileWriter fileWriter;
         try {
-            fileWriter = new FileWriter(xmlDataFile, true);
+            fileWriter = new FileWriter(myXmlDataFile, true);
             fileWriter.write(content.toString());
             fileWriter.flush();
             fileWriter.close();
