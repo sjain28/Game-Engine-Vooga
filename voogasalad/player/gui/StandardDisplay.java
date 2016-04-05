@@ -1,6 +1,3 @@
-/**
- * 
- */
 package player.gui;
 
 import javafx.scene.Scene;
