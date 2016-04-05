@@ -19,7 +19,7 @@ public class Sprite implements Moveable {
     
     private transient ImageView myImage;
     
-    public Sprite (String imagePath, String id, double x, double y) {
+    public Sprite (String imagePath, String id) {
         myImagePath = imagePath;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
