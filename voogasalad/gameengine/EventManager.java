@@ -1,12 +1,100 @@
 package gameengine;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import events.Cause;
+import events.Event;
+import events.KeyCause;
+
+//2 Options (Ask Anita): 
+//1) Set value of keyCauses based on the Map, and reset all the keyCauses every time, makes it so that 
+//	 keyCause is totally blind to the eventsManager
+
+//2) Allow keyCauses to look at the list of keyStrokes and search for themselves in the check() method, eliminates 
+//	 need to maintain a map or reset things. I prefer this b/c you can give a keyCause the list of keyStrokes without
+//	 giving it too much information in my opinion. 
+
+//IDEA: Move all the keyStroke related stuff into a keyHandler class
+
+//Possible: Issue: If up+down is typed but not exactly simultaneously, they might get interpreted separately. 
+
 /*
  * This class will hold all of the game events and handle updating the game accordingly.
  */
 public class EventManager {
 
+	private List<Character> keyStrokes; //Still need to add a listener to update this list with new keystrokes!
+	private List<Event> myEvents;
+	private List<String> keyCombos;
+	private Map<String, KeyCause> keyCauses;
+	
 	public EventManager() {
-		// TODO Auto-generated constructor stub
+		keyStrokes = new ArrayList<Character>();
+		myEvents = new ArrayList<Event>();
+		keyCauses = new TreeMap<String, KeyCause>();
 	}
+	
+	public void addEvent(Event event){
+		for(Cause c: event.getCauses()){
+			if(c instanceof KeyCause){
+				KeyCause keyc = (KeyCause) c;
+				keyCauses.put(keyc.getKeys(), keyc); 
+				keyCombos.add(keyc.getKeys()); 
+				keyCombos.sort((String a, String b) -> -a.length() - b.length());
+			}
+		}
+		myEvents.add(event);
+	}
+	
+	/*
+	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
+	 */
+	public void checkKeys(){
+		for (String keyCombo : keyCombos){
+			for(int i = 0; i < keyStrokes.size() - keyCombo.length(); i++){
+				String temp = keyCombo.substring(i, i+keyCombo.length());
+				if(checkEquivalent(temp, keyCombo)){
+					clearStrokes(i, i+keyCombo.length());
+					keyCauses.get(keyCombo).setValue(true);
+				}
+			}
+		}
+	}	
+	
+	public void update(){
+		checkKeys();
+		for(Event e: myEvents){
+			e.update();
+		}
+		
+		for(String cause: keyCauses.keySet()){
+			keyCauses.get(cause).setValue(false);
+		}
+	}
+	
+	/**
+	 * Tests if String a is a rearranged version of String b
+	 * Precondition: Strings must be same length
+	 * Precondition: Strings must NOT have repeated characterx
+	 */
+	public boolean checkEquivalent(String a, String b){
 
+		for(int i = 0; i < a.length(); i++){
+			if(!b.contains(a.substring(i,i+1))){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/*
+	 * Removes keystrokes from the list once they're used for an event
+	 */
+	public void clearStrokes(int a, int b){
+		for(int i = b; i <= a; i--){
+			keyStrokes.remove(i);
+		}
+	}
 }

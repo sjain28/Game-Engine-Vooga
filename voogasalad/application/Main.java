@@ -10,10 +10,14 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//new Launcher();
+		// Launches Main Program (only MenuBar of GUI implemented as of April 5)
+		new Launcher(primaryStage);
+		
+		// Launches Mosaic
 		//new Tester();
+		
+		// Launches Resource Utility standalone
 		//new ResourceUI(primaryStage);
-		new SpriteProperties(primaryStage);
 	}
 	
 	public static void main(String[] args) {
