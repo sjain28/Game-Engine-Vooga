@@ -1,5 +1,9 @@
 package usecases;
 
+import javafx.scene.Node;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,14 +13,21 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import gameengine.Sprite;
 
-public class SpriteDataExample {
+public class TestAddSprites {
+	
     public static void main (String[] args){
-        Sprite a = new Sprite("bricks.jpg","DA");
-        Sprite b = new Sprite("bricks.jpg","eA");
+       
+        Rectangle r1 = new Rectangle(3,5);
+        Line l2 = new Line(3,5,6,9);
+        Rectangle r2 = new Rectangle(7,19);
+        Rectangle r3 = new Rectangle(3,9);
+        List<Node> sprites = new ArrayList<Node>();
         
-        List<Sprite> sprites = new ArrayList<Sprite>();
-        sprites.add(a);
-        sprites.add(b);
+        sprites.add(r1);
+        sprites.add(l2);
+        sprites.add(r2);
+        sprites.add(r3);
+        		
         
         XStream mySerializer = new XStream(new DomDriver());
         try {

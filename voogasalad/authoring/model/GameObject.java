@@ -1,9 +1,9 @@
 package authoring.model;
 
 
-import GameEngine.Sprite;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
+import gameengine.Sprite;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;

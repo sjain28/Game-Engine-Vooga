@@ -2,9 +2,12 @@ package data;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+<<<<<<< HEAD
 import GameEngine.Sprite;
 import authoring.interfaces.Elementable;
+=======
 
+>>>>>>> master
 import authoring.model.VoogaText;
 import gameengine.Sprite;
 import javafx.application.Application;
