@@ -1,11 +1,13 @@
 package authoring;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class Splash extends Pane {
 
@@ -21,6 +23,10 @@ public class Splash extends Pane {
 		stage.setScene(scene);
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.show();
+		
+		PauseTransition delay = new PauseTransition(UILauncher.SPLASH_DURATION);
+		delay.setOnFinished(event -> stage.close());
+		delay.play();
 		
 	}
 	
