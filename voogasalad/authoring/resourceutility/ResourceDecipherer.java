@@ -1,9 +1,11 @@
 package authoring.resourceutility;
 import java.util.ResourceBundle;
 
+import resources.VoogaBundles;
+
 public class ResourceDecipherer {
 	
-	private static ResourceBundle imageExtensions;
+	private static ResourceBundle fileExtensions;
 	private static final String IMAGE = "IMAGE";
 	private static final String AUDIO = "AUDIO";
 	
@@ -13,8 +15,8 @@ public class ResourceDecipherer {
 	}
 	
 	public static VoogaFileType decipherName(String path) {
-		imageExtensions = ResourceBundle.getBundle("extensions");
-		return VoogaFileType.valueOf(imageExtensions.getString(getExtension(path, '.')));
+		fileExtensions = VoogaBundles.extensionProperties;
+		return VoogaFileType.valueOf(fileExtensions.getString(getExtension(path, '.')));
 	}
 	
 	public static boolean isImage(String path) {
