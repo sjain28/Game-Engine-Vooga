@@ -29,6 +29,15 @@ public class SpriteProperties extends VBox implements Windowable{
 	private ArrayList<Node> myNodes;
 
 	public SpriteProperties(Stage stage) {
+		/**
+		 * For game object,
+		 * Velocity, position, image
+		 * properties
+		 * 
+		 * Vooga text inherits txt, voogabutton inherits a button
+		 * 
+		 */
+		
 		
 		this.setSpacing(10);
 
