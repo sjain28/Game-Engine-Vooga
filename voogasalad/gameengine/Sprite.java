@@ -21,6 +21,8 @@ public class Sprite implements Moveable {
     
     public Sprite (String imagePath, String id, double x, double y) {
         myImagePath = imagePath;
+        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        myImage = new ImageView(image);
         myID = id;
         myProperties = new HashMap<String, VoogaData>();
         myLoc = new Vector();
@@ -28,7 +30,7 @@ public class Sprite implements Moveable {
     
     /**
      * Initializes JavaFX objects that can't be serialized
-     * Need to call this before using the Sprite!
+     * Need to call this before using the Sprite in the game engine!
      */
     public void init(){
        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
