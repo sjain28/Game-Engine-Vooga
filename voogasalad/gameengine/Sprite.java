@@ -12,37 +12,34 @@ import tools.interfaces.*;
 public class Sprite implements Moveable {
 
     private Vector myVelocity;
+    private Vector myLoc;
     private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
-    private double startingX;
-    private double startingY;
     
-    private transient Point2D myLoc;
     private transient ImageView myImage;
     
     public Sprite (String imagePath, String id, double x, double y) {
         myImagePath = imagePath;
+        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        myImage = new ImageView(image);
         myID = id;
         myProperties = new HashMap<String, VoogaData>();
-        myLoc = new Point2D(x,y);
-        startingX = x;
-        startingY = y;
+        myLoc = new Vector(x,y);
     }
     
     /**
      * Initializes JavaFX objects that can't be serialized
-     * Need to call this before using the Sprite!
+     * Need to call this before using the Sprite in the game engine!
      */
     public void init(){
        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
        myImage = new ImageView(image);
-       myLoc = new Point2D(startingX, startingY);
     }
     
     public void update(){
     	//Still needed: Apply physics to myVelocity
-    	myLoc.add(new Point2D(myVelocity.getX(), myVelocity.getY()));
+    	myLoc.addVector(myVelocity);
     	myImage.setLayoutX(myLoc.getX());
     	myImage.setLayoutY(myLoc.getY());    	
     }
@@ -55,6 +52,14 @@ public class Sprite implements Moveable {
     @Override
     public void setVelocity (Vector v) {
         myVelocity = v;
+    }
+    
+    public Vector getPosition(){
+    	return myLoc;
+    }
+    
+    public void setPosition(Vector v){
+    	myLoc = v;
     }
     public void addProperty (String s, VoogaData v) {
         myProperties.put(s, v);
