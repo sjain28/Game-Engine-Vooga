@@ -1,17 +1,26 @@
 package application;
 
+import java.util.Enumeration;
+
 import authoring.Tester;
 import authoring.resourceutility.ResourceUI;
+import auxiliary.OrderedProperties;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import resources.VoogaBundles;
 
 public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//new Launcher();
+		// Launches Main Program (only MenuBar of GUI implemented as of April 5)
+		new Launcher(primaryStage);
+		
+		// Launches Mosaic
 		//new Tester();
-		new ResourceUI(primaryStage);
+		
+		// Launches Resource Utility standalone
+		//new ResourceUI(primaryStage);
 	}
 	
 	public static void main(String[] args) {
