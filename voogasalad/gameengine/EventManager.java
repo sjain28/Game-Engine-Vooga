@@ -24,7 +24,7 @@ public class EventManager {
 		myEvents.add(event);
 	}
 public checkKeys(){
-	for (String keyString : KeyEvents.keySet()){
+	for (String[] keyStrings : KeyCombos){
 		
 	}
 	//check map for string sorted by length
