@@ -14,14 +14,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-
-import GameEngine.FileReadingManager;
-import GameEngine.Sprite;
-import GameEngine.Variable;
 import Player.gui.GameDisplay;
 import Player.gui.GameDisplayer;
 import Player.leveldatamanager.LevelDataManager;
 import events.Event;
+import gameengine.FileReadingManager;
+import gameengine.Sprite;
+import gameengine.Variable;
 
 public class GameRunner {
 

@@ -2,12 +2,13 @@ package Player.leveldatamanager;
 
 import java.util.List;
 
-import GameEngine.EventManager;
-import GameEngine.Sprite;
-import GameEngine.SpriteManager;
-import GameEngine.Variable;
-import GameEngine.VariableManager;
 import events.Event;
+import gameengine.EventManager;
+import gameengine.Sprite;
+import gameengine.SpriteManager;
+import gameengine.Variable;
+import gameengine.VariableManager;
+
 
 public class LevelDataManager {
 

@@ -2,11 +2,19 @@ package data;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+<<<<<<< HEAD
 import GameEngine.Sprite;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaButton;
+=======
+import gameengine.Sprite;
+import authoring.interfaces.Elementable;
+
+>>>>>>> 58c694b938f2a67969dba7efef0d33c348e9c3de
 import authoring.model.VoogaText;
+import gameengine.Sprite;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import tools.VoogaBoolean;
 
@@ -22,6 +30,8 @@ public class DataWrittingTest extends Application {
     public void start (Stage primaryStage) throws Exception {
         //Sprite sprite = new Sprite("images/bricks.jpg","6");
         Elementable[] vts = new Elementable[1000];
+        Sprite sprite = new Sprite("images/bricks.jpg","6",0,0);
+        Node[] vtsd = new Node[500];
         for (int i =0;i<500;i++){
             VoogaText vt = new VoogaText(""+i);
             vt.setTranslateX(100);
@@ -41,8 +51,15 @@ public class DataWrittingTest extends Application {
         XStream mySerializer = new XStream(new DomDriver());
         String xmlFile = mySerializer.toXML(vts);
         System.out.println(xmlFile);
-        VoogaText[] texts = (VoogaText[]) mySerializer.fromXML(xmlFile);
-        System.out.println(texts.length);
-
+        
+        Node[] texts = (Node[]) mySerializer.fromXML(xmlFile);
+        for (Node i:texts){
+            System.out.println(i.getClass());
+        }
+        
+        System.out.println("");
+        System.out.println(texts.getClass());
+        
+        
     }
 }

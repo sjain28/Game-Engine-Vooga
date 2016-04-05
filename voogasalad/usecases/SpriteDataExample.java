@@ -1,6 +1,5 @@
 package usecases;
 
-import GameEngine.Sprite;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,10 +7,12 @@ import java.util.*;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import gameengine.Sprite;
+
 public class SpriteDataExample {
     public static void main (String[] args){
-        Sprite a = new Sprite("bricks.jpg","DA");
-        Sprite b = new Sprite("bricks.jpg","eA");
+        Sprite a = new Sprite("bricks.jpg","DA",0,0);
+        Sprite b = new Sprite("bricks.jpg","eA",0,0);
         
         List<Sprite> sprites = new ArrayList<Sprite>();
         sprites.add(a);
