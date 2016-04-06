@@ -1,10 +1,14 @@
 package authoring.resourceutility;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * This class is the UI for the resource explorer, using a TreeView to display
+ * folders, images, and audio
+ *
+ */
 public class ResourceTreeView extends TreeView<VoogaFile> {
 
 	private TreeItem<VoogaFile> root;

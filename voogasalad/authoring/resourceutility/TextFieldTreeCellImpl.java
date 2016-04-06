@@ -1,42 +1,72 @@
 package authoring.resourceutility;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.TransferMode;
 
+/**
+ * This is a custom TreeCell implementation allowing renaming and drag-and-drop
+ * functionality
+ *
+ */
 public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 
 	private TextField textField;
 	private TreeItem<VoogaFile> draggedFile;
+	private TreeItem<VoogaFile> dragDestination;
 
 	public TextFieldTreeCellImpl() {
 		this.setOnDragDetected(e -> {
-                ClipboardContent content = new ClipboardContent();
-                
-                Dragboard dragboard = getTreeView().startDragAndDrop(TransferMode.MOVE);
-                dragboard.setContent(content);
-                
-                draggedFile = getTreeItem();
-                
-                System.out.println("start");
-                
-                e.consume();
+			System.out.println("Detected");
+	        Dragboard db = startDragAndDrop(TransferMode.MOVE);
+	        ClipboardContent content = new ClipboardContent();
+	        content.putString("placeholder");
+	        db.setContent(content);
+	        if(e.getSource() instanceof TextFieldTreeCellImpl) {
+	    		TextFieldTreeCellImpl cell = (TextFieldTreeCellImpl) e.getSource();
+	    		System.out.println(e.getSource());
+	    		draggedFile = cell.getTreeItem();
+	    	}
+	        e.consume();
+		});
+	    setOnDragOver(e -> {
+	    	if(e.getTarget() instanceof TextFieldTreeCellImpl) {
+	    		TextFieldTreeCellImpl cell = (TextFieldTreeCellImpl) e.getTarget();
+	    		dragDestination = cell.getTreeItem();
+	    		System.out.println(dragDestination);
+	    	}
+	    	
+	        e.consume();
+	    });
+	    setOnDragDone(e -> {
+	        if(dragDestination != null) {
+	        	System.out.println(dragDestination);
+	        }
+	        e.consume();
 		});
 		
-		setOnDragDone(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("Drag dropped on ");
-                dragEvent.consume();
-            }
+
+		/*
+		setOnDragEntered(e -> {
+            System.out.println(" Entered ");
+            e.consume();
         });
-		
+		setOnDragDropped(e -> {
+			System.out.println(" Dropped ");
+	        e.setDropCompleted(true);
+	        e.consume();
+	    });
+	    setOnDragExited(e -> {
+	    	System.out.println(" Exited ");
+	        e.consume();
+	    });
+	    */
+	    
+	    
 	}
 	
 	protected boolean isDraggableToParent() {
