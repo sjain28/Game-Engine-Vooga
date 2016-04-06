@@ -1,5 +1,7 @@
 package authoring.resourceutility;
 
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -10,17 +12,19 @@ import javafx.scene.layout.VBox;
  * @author DoovalSalad
  *
  */
-public class ResourceUI extends VBox {
+public class ResourceUI extends TabPane {
 	
 	/**
 	 * Private instance variables
 	 */
 	private HBox buttonContainer;
 	private ResourceTreeView rtv;
+	private VBox container;
 	
 	/**
 	 * Constants
 	 */
+	private static final String WINDOW_NAME = "Resource Explorer";
 	private static final String DEFAULT_PROJECT_NAME = "My Project";
 	private static final String ADD_FOLDER_PROMPT = "Add Folder";
 	private static final String IMPORT_FILE_PROMPT = "Import File";
@@ -30,13 +34,18 @@ public class ResourceUI extends VBox {
 	 * The constructor, which initializes the nodes that make up the entire UI.
 	 */
 	public ResourceUI() {
+		container = new VBox(SPACING);
 		buttonContainer = new HBox(SPACING);
 		
 		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
 	
-		this.getChildren().addAll(rtv, buttonContainer);
+		container.getChildren().addAll(rtv, buttonContainer);
 		
 		makeAddButtons();
+		
+		Tab holder = new Tab(WINDOW_NAME);
+		holder.setContent(container);
+		this.getTabs().add(holder);
 		
 	}
 	
