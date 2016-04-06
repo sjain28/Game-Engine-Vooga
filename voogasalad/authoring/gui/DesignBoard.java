@@ -6,24 +6,39 @@ import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 
-public class DesignBoard extends ScrollPane {
+public class DesignBoard extends TabPane {
+	
+	private static final String DESIGN_BOARD = "Design Board";
+	private ScrollPane container;
     private StackPane contentPane;
     private ElementManager elementManager;
 
     public DesignBoard () {
-        this.setWidth(1000);
-        this.setWidth(1000);
         contentPane = new StackPane();
         contentPane.setMinSize(1000, 1000);
         elementManager = new ElementManager();
+        container = new ScrollPane();
         initializeDragAndDrop();
-        this.setContent(contentPane);
+        container.setContent(contentPane);
+    	Tab design = new Tab(DESIGN_BOARD);
+    	design.setContent(container);
+    	this.getTabs().add(design);
+    	contentPane.getChildren().add(new ResizableImage(new Rectangle(200, 400, Color.CADETBLUE)));
+    }
+    
+    public StackPane getContent() {
+    	return this.contentPane;
     }
 
     private void initializeDragAndDrop () {

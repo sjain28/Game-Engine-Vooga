@@ -2,29 +2,34 @@ package gameengine;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import authoring.interfaces.Moveable;
+import events.Effectable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Vector;
 import tools.interfaces.*;
 
-public class Sprite implements Moveable {
-
+public class Sprite implements Moveable, Effectable{
+	
     private Vector myVelocity;
     private Vector myLoc;
-    private String myID;
+    private Object myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
-    
+    private String myArchetype;
     private transient ImageView myImage;
     
-    public Sprite (String imagePath, String id) {
+    public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties){
+    	myID = UUID.randomUUID();
+    	myArchetype = archetype;
         myImagePath = imagePath;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
-        myID = id;
         myProperties = new HashMap<String, VoogaData>();
+        myProperties = properties;
         myLoc = new Vector(0,0);
+        myVelocity = new Vector(0,0);
     }
     
     /**
@@ -67,8 +72,12 @@ public class Sprite implements Moveable {
     public VoogaData getProperty (String s) {
         return myProperties.get(s);
     }
+    
+    public HashMap<String, VoogaData> getPropertiesMap() {
+    	return (HashMap<String, VoogaData>) myProperties;
+    }
 
-    public String getID () {
+    public Object getID () {
         return myID;
     }
 
@@ -86,4 +95,11 @@ public class Sprite implements Moveable {
     	return myImagePath;
     }
 
+	@Override
+	public Map<String, VoogaData> getParameterMap() {
+		return myProperties;
+	}
+	public String getArchetype(){
+		return myArchetype;
+	}
 }

@@ -1,6 +1,7 @@
 package authoring.model;
 
 
+import java.util.Map;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
@@ -10,6 +11,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import tools.Vector;
+import tools.interfaces.VoogaData;
 
 public class GameObject extends ImageView implements Moveable, Elementable{
 
@@ -18,7 +20,8 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     public GameObject (String imagePath, Object id) {
         super(imagePath);
         this.setId(id.toString());
-        mySprite = new Sprite(imagePath,getId(),this.getTranslateX(),this.getTranslateY());
+        mySprite = new Sprite(imagePath,getId(),null);
+        mySprite.setPosition(new Vector(this.getTranslateX(),this.getTranslateY()));
     }
     
     //TODO: Send back immutable sprite
@@ -46,5 +49,22 @@ public class GameObject extends ImageView implements Moveable, Elementable{
         content.putString(getId());
         db.setContent(content);
         event.consume();
+    }
+
+    @Override
+    public Map<String, VoogaData> getVoogaProperties () {
+        return null;
+    }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void addProperty (String name, VoogaData data) {
+        mySprite.addProperty(name, data);
+        
     }
 }
