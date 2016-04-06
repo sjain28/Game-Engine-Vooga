@@ -3,10 +3,6 @@ package data;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import gameengine.Sprite;
-import authoring.interfaces.Elementable;
-
-import authoring.model.VoogaText;
-import gameengine.Sprite;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -36,7 +32,7 @@ public class DataWrittingTest extends Application {
     
     @Override
     public void start (Stage primaryStage) throws Exception {
-        Sprite sprite = new Sprite("/bricks.jpg","6",0,0);
+        Sprite sprite = new Sprite("/bricks.jpg","6");
         Node[] vts = new Node[500];
         
         for (int i =0;i<500;i++){
