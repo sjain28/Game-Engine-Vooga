@@ -5,6 +5,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Launches the Splash screen and UI manager
+ */
 public class UILauncher {
 	
 	static final Duration SPLASH_DURATION = Duration.millis(7000);

@@ -1,5 +1,7 @@
 package tools;
 
+import authoring.gui.items.NumberTextField;
+import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 public class VoogaNumber implements VoogaData{
@@ -32,6 +34,13 @@ public class VoogaNumber implements VoogaData{
     
     public String toString(){
         return "";
+    }
+    
+    public Node display(){
+        NumberTextField numberField = new NumberTextField();
+        numberField.setText(""+value);
+        
+        return numberField;
     }
    
 }

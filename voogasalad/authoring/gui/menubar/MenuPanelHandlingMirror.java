@@ -8,7 +8,7 @@ import javafx.scene.control.MenuItem;
  * This is the class that handles reflection on menu panel actions.
  *
  */
-public class MenubarHandlingReflector {
+public class MenuPanelHandlingMirror {
 
 	private static final String ITEM_NOT_IMPLEMENTED_ERROR = "This item has not been implemented. Please do so.";
 	private static final String PACKAGE_LOCATION = "authoring.gui.menubar.";
@@ -22,7 +22,7 @@ public class MenubarHandlingReflector {
      * @param view
      * @param graphicsWindow
      */
-    public MenubarHandlingReflector (ActionEvent e) {
+    public MenuPanelHandlingMirror (ActionEvent e) {
         this.e = e;
         
         handleEvent();

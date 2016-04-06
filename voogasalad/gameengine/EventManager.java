@@ -31,6 +31,17 @@ public class EventManager {
 		keyCauses = new TreeMap<String, KeyCause>();
 	}
 	
+	public void update(){
+		checkKeys();
+		for(Event e: myEvents){
+			e.update();
+		}
+		
+		for(String cause: keyCauses.keySet()){
+			keyCauses.get(cause).setValue(false);
+		}
+	}
+	
 	public void addEvent(Event event){
 		for(Cause c: event.getCauses()){
 			if(c instanceof KeyCause){
@@ -57,17 +68,6 @@ public class EventManager {
 			}
 		}
 	}	
-	
-	public void update(){
-		checkKeys();
-		for(Event e: myEvents){
-			e.update();
-		}
-		
-		for(String cause: keyCauses.keySet()){
-			keyCauses.get(cause).setValue(false);
-		}
-	}
 	
 	/**
 	 * Tests if String a is a rearranged version of String b
