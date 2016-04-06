@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class SpriteManager {
 
-	private Map<String, List<Object>> mySpriteCategories;
-	private Map<Object,Sprite> mySprites;
+	private Map<String, List<Object>> mySpriteCategories; //Maps archetype name to Sprite IDs
+	private Map<Object,Sprite> mySprites;				  //Maps IDs to Sprites	
 	private SpriteFactory mySpriteFactory;
 	
 	/**
