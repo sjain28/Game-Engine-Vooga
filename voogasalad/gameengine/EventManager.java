@@ -8,18 +8,11 @@ import events.Cause;
 import events.Event;
 import events.KeyCause;
 
-//2 Options (Ask Anita): 
-//1) Set value of keyCauses based on the Map, and reset all the keyCauses every time, makes it so that 
-//	 keyCause is totally blind to the eventsManager
-
-//2) Allow keyCauses to look at the list of keyStrokes and search for themselves in the check() method, eliminates 
-//	 need to maintain a map or reset things. I prefer this b/c you can give a keyCause the list of keyStrokes without
-//	 giving it too much information in my opinion. 
-
 //IDEA: Move all the keyStroke related stuff into a keyHandler class
+//Possible Issue: If up+down is typed but not exactly simultaneously, they might get interpreted separately. 
 
-//Possible: Issue: If up+down is typed but not exactly simultaneously, they might get interpreted separately. 
-
+//TODO: 
+//Figure out how close key presses have to be to one another time-wise to be considered simultaneous	 
 /*
  * This class will hold all of the game events and handle updating the game accordingly.
  */

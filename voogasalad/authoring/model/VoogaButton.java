@@ -1,5 +1,6 @@
 package authoring.model;
 
+import java.util.Map;
 import authoring.interfaces.Elementable;
 import javafx.scene.control.Button;
 import javafx.scene.input.ClipboardContent;
@@ -17,4 +18,12 @@ public class VoogaButton extends Button implements Elementable {
         db.setContent(content);
         event.consume();
     }
+
+    @Override
+    public Map<Object, Object> getVoogaProperties () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    
 }
