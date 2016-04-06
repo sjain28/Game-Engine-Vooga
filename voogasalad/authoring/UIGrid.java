@@ -1,6 +1,8 @@
 package authoring;
 
 import authoring.gui.DesignBoard;
+import authoring.gui.EventsWindow;
+import authoring.gui.PropertiesWindow;
 import authoring.resourceutility.ResourceUI;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -36,13 +38,15 @@ public class UIGrid extends GridPane {
 	}
 	
 	private void populate() {
-		ResourceUI explorer = new ResourceUI();
-		this.add(explorer, 0, 0);
-		DesignBoard designBoard = new DesignBoard();
-		this.add(new DesignBoard(), 1, 0);
-		GridPane.setRowSpan(designBoard, 3);
-		this.add(new StackPane(), 0, 1);
-		this.add(new StackPane(), 0, 2);
+	    ResourceUI explorer = new ResourceUI();
+            this.add(explorer, 0, 0);
+            DesignBoard designBoard = new DesignBoard();
+            this.add(designBoard, 1, 0);
+            GridPane.setRowSpan(designBoard, REMAINING);
+            PropertiesWindow properties = new PropertiesWindow();
+            this.add(properties, 0, 1);
+            EventsWindow events = new EventsWindow();
+            this.add(events, 0, 2);
 	}
 	
 	
