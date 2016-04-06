@@ -10,10 +10,10 @@ import tools.Vector;
  *
  */
 public interface Moveable {
-    /*
+    /**
      * Allows for setting and getting of the movement Vectors (ie the velocity) of an object
      */
-   public Vector getMovement();
+   public Vector getVelocity();
    
-   public void SetMovement(Vector v);
+   public void setVelocity(Vector v);
 }
