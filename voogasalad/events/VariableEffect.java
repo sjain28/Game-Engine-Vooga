@@ -3,7 +3,7 @@ package events;
 import tools.VoogaNumber;
 
 
-public class VariableEffect implements Effect {
+public class VariableEffect extends Effect {
 
     private VoogaNumber myValue;
     private double newValue;

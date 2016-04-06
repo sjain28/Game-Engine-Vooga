@@ -2,7 +2,7 @@ package events;
 
 import tools.VoogaNumber;
 
-public class Increment implements Effect{
+public class Increment extends Effect{
 
 	private VoogaNumber variable;
 	private String spriteID;
