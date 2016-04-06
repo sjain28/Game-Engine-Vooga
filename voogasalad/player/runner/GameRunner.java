@@ -11,20 +11,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
-import player.gui.GameDisplay;
+import javafx.animation.Timeline;
 import player.gui.IGameDisplay;
 import player.leveldatamanager.LevelDataManager;
-import events.Event;
-import gameengine.FileReadingManager;
-import gameengine.Sprite;
-import gameengine.Variable;
 import player.gui.StandardDisplay;
 
 public class GameRunner {
 
+	private Timeline animationTimer;
+	private LevelDataManager currentLevelDataManager;
 	private IGameDisplay GameDisplay;
 	private Queue<String> levelQueue;
 	
@@ -32,16 +29,7 @@ public class GameRunner {
 		// TODO Auto-generated constructor stub
 		GameDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
-	}
-	
-	
-	/**
-	 * initFileManager creates a fileManager that contains an ArrayList of Sprites, Events, and Variables.
-	 */
-	private LevelDataManager initFileManager(String fileName){
-		FileReadingManager fileManager = new FileReadingManager(fileName);
-		LevelDataManager levelManager = createLevelObjects(fileManager);
-		return levelManager;	
+		playGame();
 	}
 	
 	/**
@@ -59,23 +47,7 @@ public class GameRunner {
 		    }
 		}
 		return levelQueue;
-	}
-	
-	/**
-	 * Creates the Sprites, Events, and Variables which will be loaded into the LevelManager, which contains
-	 * the sprite, event, and variable managers
-	 * 
-	 * @return- A LevelManager with all the objects it needs to contain (sprites, events, variables).
-	 * 
-	 */
-	
-	private LevelDataManager createLevelObjects(FileReadingManager fileManager){
-		List<Sprite> spriteObjects = fileManager.createSpriteList();
-		List<Event> eventObjects = fileManager.createEventList();
-		List<Variable> variableObjects = fileManager.createVariableList();
-		LevelDataManager levelManager = new LevelDataManager(spriteObjects, eventObjects, variableObjects);
-		return levelManager;
-	}
+	 }
 	
 	
 	/**
@@ -98,15 +70,9 @@ public class GameRunner {
 	 */
 	
 	public void playLevel(String s){
-		GameDisplay.display(initFileManager(s));
+		currentLevelDataManager = new LevelDataManager(s);
+		GameDisplay.display();
 	}
 	
-	/**
-	 * playLevel updates the frames of the GamePlayer.
-	 */
 	
-	public void update(){
-		GameDisplay.update();
-	}
-
 }

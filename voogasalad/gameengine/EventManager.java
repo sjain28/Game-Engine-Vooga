@@ -29,6 +29,15 @@ public class EventManager {
 		keyCauses = new TreeMap<String, KeyCause>();
 	}
 	
+	/*I added a new method to initalize a list of events.
+	 * 
+	 */
+	
+	public void addEventList(List<Event> eventList){
+	
+	}
+	
+	
 	public void addEvent(Event event){
 		for(Cause c: event.getCauses()){
 			if(c instanceof KeyCause){

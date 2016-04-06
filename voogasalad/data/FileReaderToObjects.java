@@ -1,4 +1,4 @@
-package gameengine;
+package data;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,14 +8,16 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import events.Event;
+import gameengine.Variable;
+import javafx.scene.Node;
 
-public class FileReadingManager {
+public class FileReaderToObjects {
 
-	private List<Sprite> spriteList;
+	private List<Node> nodeList;
 	private List<Event> eventList;
 	private List<Variable> VariableList;
 	
-	public FileReadingManager(String fileName){
+	public FileReaderToObjects(String fileName){
 		// TODO Auto-generated constructor stub	
 		createObjects(fileName);
 	}
@@ -24,7 +26,7 @@ public class FileReadingManager {
 	private void createObjects(String fileName){
 		XStream myUnSerializer = new XStream(new StaxDriver());
 		try {
-			 spriteList  = (List<Sprite>) myUnSerializer.fromXML("sprites",new FileInputStream(new File(fileName)));
+			 nodeList  = (List<Node>) myUnSerializer.fromXML("nodes",new FileInputStream(new File(fileName)));
 			 eventList  = (List<Event>) myUnSerializer.fromXML("events",new FileInputStream(new File(fileName)));
 			 VariableList  = (List<Variable>) myUnSerializer.fromXML("variables",new FileInputStream(new File(fileName)));
 	    }
@@ -34,8 +36,8 @@ public class FileReadingManager {
 	    }
 	}
 	
-	public List<Sprite> createSpriteList(){
-		return spriteList;
+	public List<Node> createNodeList(){
+		return nodeList;
 	}
 	
 	public List<Event> createEventList(){

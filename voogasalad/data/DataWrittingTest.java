@@ -1,5 +1,8 @@
 package data;
 
+import java.io.File;
+import java.util.Queue;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import gameengine.Sprite;
@@ -9,7 +12,9 @@ import authoring.model.VoogaText;
 import gameengine.Sprite;
 import javafx.application.Application;
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import player.runner.GameRunner;
 import tools.VoogaBoolean;
 
 
@@ -19,13 +24,25 @@ public class DataWrittingTest extends Application {
         launch(args);
         
     }
-
+    
+    public void serialize(Node...nodes){
+        XStream mySerializer = new XStream(new DomDriver());
+        String xmlFile = mySerializer.toXML(nodes);
+        System.out.println(xmlFile);
+        
+        Node[] texts = (Node[]) mySerializer.fromXML(xmlFile);
+        for (Node i:texts){
+            System.out.println(i.getClass());
+        }
+        
+        System.out.println("");
+        System.out.println(texts.getClass());
+    }
+    
     @Override
     public void start (Stage primaryStage) throws Exception {
-        //Sprite sprite = new Sprite("images/bricks.jpg","6");
-        Elementable[] vts = new Elementable[1000];
-        Sprite sprite = new Sprite("images/bricks.jpg","6",0,0);
-        Node[] vtsd = new Node[500];
+        Sprite sprite = new Sprite("/bricks.jpg","6");
+        Node[] vts = new Node[1000];
         for (int i =0;i<500;i++){
             VoogaText vt = new VoogaText(""+i);
             vt.setTranslateX(100);
@@ -40,19 +57,13 @@ public class DataWrittingTest extends Application {
             vt.setTranslateZ(1000);
             vts[i]=vt;
         }
+        File myFile = new File("voogasalad/data/YOYOYO.txt");
+        System.out.println("Attempting to read from file in: "+myFile.getCanonicalPath());
+        GameRunner gameRunner = new GameRunner(myFile);
 
         VoogaBoolean vb = new VoogaBoolean(true);
-        XStream mySerializer = new XStream(new DomDriver());
-        String xmlFile = mySerializer.toXML(vts);
-        System.out.println(xmlFile);
         
-        Node[] texts = (Node[]) mySerializer.fromXML(xmlFile);
-        for (Node i:texts){
-            System.out.println(i.getClass());
-        }
-        
-        System.out.println("");
-        System.out.println(texts.getClass());
+        serialize(vts);
         
         
     }

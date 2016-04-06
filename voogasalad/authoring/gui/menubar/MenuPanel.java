@@ -16,13 +16,13 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import resources.VoogaBundles;
 
-public class Menubar extends MenuBar implements Windowable {
+public class MenuPanel extends MenuBar implements Windowable {
 	
 	private OrderedProperties menubarProperties;
 	private static final String MENU_KEY = "Menu";
 	private static final String ITEM_KEY = "Item";
 	
-	public Menubar(EventHandler<ActionEvent> menuItemEvent) {
+	public MenuPanel(EventHandler<ActionEvent> menuItemEvent) {
 		
 		menubarProperties = VoogaBundles.menubarProperties;
 		makeMenus(menuMap(menuItemEvent));
