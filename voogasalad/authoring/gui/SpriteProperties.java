@@ -1,7 +1,11 @@
 package authoring.gui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import authoring.VoogaScene;
+import authoring.interfaces.Elementable;
 /**
  * Properties window to see all the current characteristics of a Sprite
  * 
@@ -9,6 +13,7 @@ import java.util.ArrayList;
 import authoring.interfaces.gui.Windowable;
 import authoring.model.PropertiesKeyMouse;
 import authoring.model.PropertiesVariable;
+import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tools.interfaces.VoogaData;
 import usecases.Sprite;
 
 public class SpriteProperties extends VBox implements Windowable{
@@ -39,38 +45,31 @@ public class SpriteProperties extends VBox implements Windowable{
 		 */
 		
 		
-		this.setSpacing(10);
-
-		Text IDText = new Text("ID           = ");
-		Text imageIDText = new Text("ImageID = ");
-		
-		Text gravityText = new Text("Gravity: ");
-		CheckBox cb1 = new CheckBox();
-		cb1.setText("On");
-		cb1.setSelected(true);
-		HBox gravityHBox = new HBox(10, gravityText, cb1);
-		
-		Text keyCommands = new Text("Key/Mouse Events:");
-		keyCommands.setFont(new Font(20));
-		TableView<PropertiesKeyMouse> keyMouseTable = new TableView<PropertiesKeyMouse>();
-		TableColumn<PropertiesKeyMouse, String> keyMouseCol = new TableColumn<>("Key/Mouse");
-		TableColumn<PropertiesKeyMouse, String> eventCol = new TableColumn<>("Event");
-		keyMouseTable.getColumns().setAll(keyMouseCol, eventCol);
-		keyMouseTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		Button addKeyCommand = new Button("Add UI");
 		
 
 		
-		this.getChildren().addAll(IDText, imageIDText, gravityHBox , keyCommands, keyMouseTable, addKeyCommand,
-				variablesText, variablesTable, addVariable);
+		this.getChildren().addAll(IDText, imageIDText, gravityHBox , keyCommands, keyMouseTable, addKeyCommand);
 		
-		Scene scene = new Scene(this);
+		Scene scene = new VoogaScene(this);
 		stage.setScene(scene);
 		stage.show();
 	}
 
-	public void getProperties(Sprite sprite){
-
+	public void getProperties(Elementable element){
+		Map<Object, Object> propertiesMap = element.getVoogaProperties();
+		for(Object o: propertiesMap.keySet()) {
+			HBox temp = new HBox(10, new Text(o));
+			
+		}
+		
+		this.getChildren().add(e)
+	}
+	
+	public void addButtons() {
+		HBox buttonsPanel = new HBox(10);
+		Button apply = new Button("Apply");
+		Button cancel = new Button("Cancel");
+		buttonsPanel.getChildren().addAll(apply, cancel);
 	}
 
 

@@ -67,6 +67,10 @@ public class Sprite implements Moveable {
     public VoogaData getProperty (String s) {
         return myProperties.get(s);
     }
+    
+    public HashMap<String, VoogaData> getPropertiesMap() {
+    	return (HashMap<String, VoogaData>) myProperties;
+    }
 
     public String getID () {
         return myID;
