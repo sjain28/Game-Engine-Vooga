@@ -1,5 +1,6 @@
 package authoring.model;
 
+import java.util.Map;
 import authoring.interfaces.Elementable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -8,6 +9,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
+import tools.interfaces.VoogaData;
 
 public class VoogaText extends TextField implements Elementable{
     
@@ -30,6 +32,12 @@ public class VoogaText extends TextField implements Elementable{
         content.putString(getId());
         db.setContent(content);
         event.consume();
+    }
+
+
+    @Override
+    public Map<Object, Object> getVoogaProperties () {
+        return this.getProperties();
     }
     
     
