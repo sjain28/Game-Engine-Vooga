@@ -3,6 +3,10 @@ package authoring;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ * A custom extension of JavaFX's Scene, that applies CSS stylings automatically
+ *
+ */
 public class VoogaScene extends Scene {
 	
 	private static final String STYLESHEET_PATH = "/application/application.css";

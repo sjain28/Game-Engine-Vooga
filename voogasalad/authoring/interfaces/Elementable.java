@@ -1,5 +1,8 @@
 package authoring.interfaces;
 
+import java.util.Map;
+import tools.interfaces.VoogaData;
+
 /**
  * Forms a relationship between all elements, objects that are going to be present in the game.
  * This relationship makes it easier to define any basic options for these objects, such as dragging them onto the 
@@ -9,5 +12,7 @@ package authoring.interfaces;
  *
  */
 public interface Elementable{
-
+    
+    public Map<Object,Object> getVoogaProperties();
+    
 }

@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+/**
+ * This launches the splash screen for a specified duration, after which it closes.
+ *
+ */
 public class Splash extends Pane {
 
 	public Splash() {
