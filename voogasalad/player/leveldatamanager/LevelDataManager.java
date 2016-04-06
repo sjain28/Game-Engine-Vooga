@@ -7,13 +7,13 @@ import gameengine.EventManager;
 import gameengine.Sprite;
 import gameengine.SpriteManager;
 import gameengine.Variable;
-import gameengine.VariableManager;
+import gameengine.GlobalVariableManager;
 
 public class LevelDataManager {
 
 	SpriteManager spriteManager;
 	EventManager eventManager;
-	VariableManager variableManager;
+	GlobalVariableManager variableManager;
 	
 	public LevelDataManager() {
 		// TODO Auto-generated constructor stub

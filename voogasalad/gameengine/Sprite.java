@@ -27,7 +27,6 @@ public class Sprite implements Moveable, Effectable{
         myImagePath = imagePath;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
-        myID = id;
         myProperties = new HashMap<String, VoogaData>();
         myLoc = new Vector(0,0);
     }
@@ -92,7 +91,7 @@ public class Sprite implements Moveable, Effectable{
     }
 
 	@Override
-	public Map getParameterMap() {
+	public Map<String, VoogaData> getParameterMap() {
 		return myProperties;
 	}
 	public String getArchetype(){
