@@ -20,7 +20,7 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     public GameObject (String imagePath, Object id) {
         super(imagePath);
         this.setId(id.toString());
-        mySprite = new Sprite(imagePath,getId());
+        mySprite = new Sprite(imagePath,getId(),null);
         mySprite.setPosition(new Vector(this.getTranslateX(),this.getTranslateY()));
     }
     

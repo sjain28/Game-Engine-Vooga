@@ -1,16 +1,24 @@
 package authoring;
 
+import java.util.UUID;
+
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
+import authoring.model.ElementManager;
+import authoring.model.GameObject;
+import authoring.resourceutility.ResourceDecipherer;
 import auxiliary.VoogaException;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+
 
 /**
  * The UIManager is responsible for assembling view components, such
@@ -19,27 +27,26 @@ import javafx.scene.layout.VBox;
  */
 // Temporarily extending GridPane, eventually will use Mosaic to display components
 public class UIManager extends VBox {
+    private ElementManager elementManager;
+    private Dragboard db;
+    
+    public UIManager () {
+        initializeComponents();
+    }
 
-	public UIManager() {
-		initializeComponents();
-	}
-	
-	
-	private void initializeComponents() {
-		this.getChildren().addAll(new MenuPanel(e -> {
-			try {
-				new MenuPanelHandlingMirror(e);
-			}
-			catch(VoogaException ee) {
-				Alert exception = new Alert(AlertType.ERROR);
-				exception.setTitle(AlertType.ERROR.toString());
-				exception.setContentText(ee.getMessage());
-				exception.showAndWait();
-			}
-		}), new ToolPanel(e -> {
-			new ToolPanelHandlingMirror(e);
-		}),
-			new UIGrid());
-	}
-	
+    private void initializeComponents () {
+        this.getChildren().addAll(new MenuPanel(e -> {
+            try {
+                new MenuPanelHandlingMirror(e);
+            }
+            catch (VoogaException ee) {
+                Alert exception = new Alert(AlertType.ERROR);
+                exception.setTitle(AlertType.ERROR.toString());
+                exception.setContentText(ee.getMessage());
+                exception.showAndWait();
+            }
+        }), new ToolPanel(e -> {
+            new ToolPanelHandlingMirror(e);
+        }), new UIGrid());
+    }
 }

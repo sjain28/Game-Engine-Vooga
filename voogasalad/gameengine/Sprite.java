@@ -3,7 +3,6 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import authoring.interfaces.Moveable;
 import events.Effectable;
 import javafx.scene.image.Image;
@@ -12,7 +11,7 @@ import tools.Vector;
 import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable{
-
+	
     private Vector myVelocity;
     private Vector myLoc;
     private Object myID;
@@ -21,14 +20,16 @@ public class Sprite implements Moveable, Effectable{
     private String myArchetype;
     private transient ImageView myImage;
     
-    public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties) {
+    public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties){
     	myID = UUID.randomUUID();
     	myArchetype = archetype;
         myImagePath = imagePath;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
+        myProperties = properties;
         myLoc = new Vector(0,0);
+        myVelocity = new Vector(0,0);
     }
     
     /**
