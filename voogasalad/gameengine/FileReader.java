@@ -9,17 +9,28 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import events.Event;
 
-public class FileReadingManager {
+/**File reader uses singleton design pattern**/
 
+public class FileReader {
+    private static FileReader fileReaderInstance = null;
 	private List<Sprite> spriteList;
 	private List<Event> eventList;
 	private List<Variable> VariableList;
 	
-	public FileReadingManager(String fileName){
-		// TODO Auto-generated constructor stub	
-		createObjects(fileName);
-	}
-	
+	/**
+     * Singleton Design Pattern Implementation
+     * 
+     * Only one instance of FileReadingManager can exist in the project
+     * 
+     * @return private instance of filereader
+     */
+    public static FileReader getFileReaderInstance () {
+        if (fileReaderInstance == null) {
+        	fileReaderInstance = new FileReader();
+        }
+        return fileReaderInstance;
+    }
+    
 	@SuppressWarnings("unchecked")
 	private void createObjects(String fileName){
 		XStream myUnSerializer = new XStream(new StaxDriver());
@@ -29,20 +40,19 @@ public class FileReadingManager {
 			 VariableList  = (List<Variable>) myUnSerializer.fromXML("variables",new FileInputStream(new File(fileName)));
 	    }
 	    catch (FileNotFoundException e) {
-	         // TODO Auto-generated catch block
 	         e.printStackTrace();
 	    }
 	}
 	
-	public List<Sprite> createSpriteList(){
+	public List<Sprite> extractSpriteList(){
 		return spriteList;
 	}
 	
-	public List<Event> createEventList(){
+	public List<Event> extractEventList(){
 		return eventList;
 	}
 	
-	public List<Variable> createVariableList(){
+	public List<Variable> extractVariableList(){
 		return VariableList;
 	}
 
