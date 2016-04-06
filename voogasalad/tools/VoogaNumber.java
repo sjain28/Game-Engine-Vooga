@@ -42,5 +42,11 @@ public class VoogaNumber implements VoogaData{
         
         return numberField;
     }
+
+    @Override
+    public void setValue (Object o) {
+        if (!(o instanceof Number)) return;
+        value = (double) o; 
+    }
    
 }
