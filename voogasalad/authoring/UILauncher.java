@@ -16,11 +16,11 @@ public class UILauncher {
 	public UILauncher(Stage primaryStage) {
 		
 		// ***
-		new Splash();
+		// new Splash();
 		
 		// ***
-		PauseTransition delay = new PauseTransition(SPLASH_DURATION);
-		delay.setOnFinished(e -> {
+		// PauseTransition delay = new PauseTransition(SPLASH_DURATION);
+		// delay.setOnFinished(e -> {
 			
 			UIManager manager = new UIManager();
 			Scene scene = new VoogaScene(manager);
@@ -29,8 +29,8 @@ public class UILauncher {
 			primaryStage.show();
 			
 		// ***
-		});
-		delay.play();
+		// });
+		// delay.play();
 		
 	}
 
