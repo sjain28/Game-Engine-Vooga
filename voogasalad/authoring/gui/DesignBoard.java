@@ -17,8 +17,6 @@ public class DesignBoard extends ScrollPane {
     private ElementManager elementManager;
 
     public DesignBoard () {
-        this.setWidth(1000);
-        this.setWidth(1000);
         contentPane = new StackPane();
         contentPane.setMinSize(1000, 1000);
         elementManager = new ElementManager();
