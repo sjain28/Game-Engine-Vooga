@@ -23,28 +23,6 @@ import javafx.scene.layout.VBox;
 public class UIManager extends VBox {
     private ElementManager elementManager;
     
-    public UIManager () {
-        initializeComponents();
-    }
-
-    private void initializeComponents () {
-        this.getChildren().addAll(new MenuPanel(e -> {
-            try {
-                new MenuPanelHandlingMirror(e);
-            }
-            catch (VoogaException ee) {
-                Alert exception = new Alert(AlertType.ERROR);
-                exception.setTitle(AlertType.ERROR.toString());
-                exception.setContentText(ee.getMessage());
-                exception.showAndWait();
-            }
-        }), new ToolPanel(e -> {
-            new ToolPanelHandlingMirror(e);
-        }),
-                                  new UIGrid());
-    }
-
-<<<<<<< HEAD
 	public UIManager() {
 		initializeComponents();
 	}
@@ -66,7 +44,4 @@ public class UIManager extends VBox {
 		}),
 			new WorkspacePanel());
 	}
-	
-=======
->>>>>>> 1783aa88b8f1cc1f42c20edef310da3cbf562bd3
 }
