@@ -1,6 +1,6 @@
-package Player.gui;
+package player.gui;
 
-import Player.leveldatamanager.LevelDataManager;
+import player.leveldatamanager.LevelDataManager;
 
 public interface GameDisplay {
 	

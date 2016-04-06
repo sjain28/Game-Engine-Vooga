@@ -2,7 +2,7 @@
  * The GameEngine holds all of the managers and contains the initialize and update methods for the game. The game player
  * will have an instance of the GameEngine that allows it to update the game.
  */
-package Player.runner;
+package player.runner;
 
 import java.util.Iterator;
 import java.io.BufferedReader;
@@ -14,22 +14,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import Player.gui.GameDisplay;
-import Player.gui.GameDisplayer;
-import Player.leveldatamanager.LevelDataManager;
+import player.gui.GameDisplay;
+import player.gui.IGameDisplay;
+import player.leveldatamanager.LevelDataManager;
 import events.Event;
 import gameengine.FileReadingManager;
 import gameengine.Sprite;
 import gameengine.Variable;
+import player.gui.StandardDisplay;
 
 public class GameRunner {
 
-	private GameDisplay GameDisplay;
+	private IGameDisplay GameDisplay;
 	private Queue<String> levelQueue;
 	
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
 		// TODO Auto-generated constructor stub
-		GameDisplay = new GameDisplayer();
+		GameDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
 	}
 	
