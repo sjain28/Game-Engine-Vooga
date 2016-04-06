@@ -36,8 +36,8 @@ public class VoogaText extends TextField implements Elementable{
 
 
     @Override
-    public Map<Object, Object> getVoogaProperties () {
-        return this.getProperties();
+    public Map<String, VoogaData> getVoogaProperties () {
+        return null;
     }
     
     
