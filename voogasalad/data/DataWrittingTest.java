@@ -2,15 +2,9 @@ package data;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-<<<<<<< HEAD
-import GameEngine.Sprite;
-import authoring.interfaces.Elementable;
-import authoring.model.VoogaButton;
-=======
 import gameengine.Sprite;
 import authoring.interfaces.Elementable;
-
->>>>>>> 58c694b938f2a67969dba7efef0d33c348e9c3de
+import authoring.model.VoogaButton;
 import authoring.model.VoogaText;
 import gameengine.Sprite;
 import javafx.application.Application;
