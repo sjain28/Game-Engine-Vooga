@@ -6,13 +6,18 @@ import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 
 
-public class DesignBoard extends ScrollPane {
+public class DesignBoard extends TabPane {
+	
+	private static final String DESIGN_BOARD = "Design Board";
+	private ScrollPane container;
     private StackPane contentPane;
     private ElementManager elementManager;
 
@@ -20,8 +25,12 @@ public class DesignBoard extends ScrollPane {
         contentPane = new StackPane();
         contentPane.setMinSize(1000, 1000);
         elementManager = new ElementManager();
+        container = new ScrollPane();
         initializeDragAndDrop();
-        this.setContent(contentPane);
+        container.setContent(contentPane);
+    	Tab design = new Tab(DESIGN_BOARD);
+    	design.setContent(container);
+    	this.getTabs().add(design);
     }
 
     private void initializeDragAndDrop () {

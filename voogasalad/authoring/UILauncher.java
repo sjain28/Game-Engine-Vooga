@@ -15,16 +15,17 @@ public class UILauncher {
 	// Removing commented sections below enables splash screen
 	public UILauncher(Stage primaryStage) {
 		
-		//new Splash();
+		new Splash();
 		
-		//PauseTransition delay = new PauseTransition(SPLASH_DURATION);
-		//delay.setOnFinished(e -> {
+		PauseTransition delay = new PauseTransition(SPLASH_DURATION);
+		delay.setOnFinished(e -> {
 			UIManager manager = new UIManager();
 			Scene scene = new VoogaScene(manager);
 			primaryStage.setScene(scene);
+			primaryStage.setMaximized(true);
 			primaryStage.show();
-		//});
-		//delay.play();
+		});
+		delay.play();
 		
 	}
 
