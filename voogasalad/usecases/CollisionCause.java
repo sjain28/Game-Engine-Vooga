@@ -1,26 +1,25 @@
 package usecases;
 
+import java.util.List;
+
 import usecases.Sprite;
 
 public class CollisionCause implements Cause{
 
-	private Sprite spriteA;
-	private Sprite spriteB;
+	private List<Sprite> groupA;
+	private List<Sprite> groupB;
 	
-	public CollisionCause(Sprite spriteA, Sprite b) {
-		// TODO Auto-generated constructor stub
-		this.spriteA = spriteA;  
-		this.spriteB = spriteB; 
+	public CollisionCause(Sprite a, Sprite b) {
+		this.spriteA = a;  
+		this.spriteB = b; 
 	}
 
 	@Override
 	public boolean checkCause() {
-		// TODO Auto-generated method stub
 		return checkCollided(spriteA, spriteB);
 	}
 	
 	public boolean checkCollided(Sprite a, Sprite b) {
-		// TODO Auto-generated method stub
 		return a.getBoundsInParent().intersects(b.getBoundsInParent());
 	}
 
