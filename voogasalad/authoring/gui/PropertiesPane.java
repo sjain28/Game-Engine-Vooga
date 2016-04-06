@@ -30,46 +30,31 @@ import javafx.stage.Stage;
 import tools.interfaces.VoogaData;
 import usecases.Sprite;
 
-public class SpriteProperties extends VBox implements Windowable{
+public class PropertiesPane extends VBox implements Windowable{
 	
 	private ArrayList<Node> myNodes;
 
-	public SpriteProperties(Stage stage) {
-		/**
-		 * For game object,
-		 * Velocity, position, image
-		 * properties
-		 * 
-		 * Vooga text inherits txt, voogabutton inherits a button
-		 * 
-		 */
-		
-		
-		
-
-		
-		this.getChildren().addAll(IDText, imageIDText, gravityHBox , keyCommands, keyMouseTable, addKeyCommand);
-		
-		Scene scene = new VoogaScene(this);
-		stage.setScene(scene);
-		stage.show();
-	}
+	public PropertiesPane() {}
 
 	public void getProperties(Elementable element){
-		Map<Object, Object> propertiesMap = element.getVoogaProperties();
-		for(Object o: propertiesMap.keySet()) {
-			HBox temp = new HBox(10, new Text(o));
-			
+		this.getChildren().clear();
+		Map<String, VoogaData> propertiesMap = element.getVoogaProperties();
+		for(String str: propertiesMap.keySet()) {
+			HBox temp = new HBox(10, new Text(str), propertiesMap.get(str).display());
+			this.getChildren().add(temp);
 		}
 		
-		this.getChildren().add(e)
+		this.getChildren().add(addButtons());
 	}
 	
-	public void addButtons() {
+	public Node addButtons() {
+		Button addProperty = new Button("Add Property");		
+		this.getChildren().add(addProperty);
 		HBox buttonsPanel = new HBox(10);
 		Button apply = new Button("Apply");
 		Button cancel = new Button("Cancel");
 		buttonsPanel.getChildren().addAll(apply, cancel);
+		return buttonsPanel;
 	}
 
 
