@@ -15,4 +15,5 @@ public interface Elementable extends Updatable{
     
     public Map<String,VoogaData> getVoogaProperties();
     public void addProperty(String name, VoogaData data);
+    public void removeProperty(String name);
 }
