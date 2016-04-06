@@ -3,19 +3,21 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import authoring.interfaces.Moveable;
+import events.Effectable;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Vector;
 import tools.interfaces.*;
 
-public class Sprite implements Moveable {
+public class Sprite implements Moveable, Effectable{
 
     private Vector myVelocity;
     private Vector myLoc;
     private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
+    private String myArchetype;
     
     private transient ImageView myImage;
     
@@ -86,5 +88,11 @@ public class Sprite implements Moveable {
     public String getImagePath(){
     	return myImagePath;
     }
+
+	@Override
+	public Map getParameterMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

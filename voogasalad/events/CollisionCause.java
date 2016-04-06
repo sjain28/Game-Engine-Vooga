@@ -12,10 +12,4 @@ public class CollisionCause implements Cause {
         return false;
     }
 
-	@Override
-	public boolean check() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
