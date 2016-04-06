@@ -8,17 +8,19 @@ import events.Cause;
 import events.Event;
 import events.KeyCause;
 
-//IDEA: Move all the keyStroke related stuff into a keyHandler class
 //Possible Issue: If up+down is typed but not exactly simultaneously, they might get interpreted separately. 
 
 //TODO: 
-//Figure out how close key presses have to be to one another time-wise to be considered simultaneous	 
+//Figure out how close key presses have to be to one another time-wise to be considered simultaneous
+//Move all the keyStroke related stuff into a keyHandler class
+//Still need to add a listener to update this list with new keystrokes! This will likely go in one of the Managers/Controllers.
+
 /*
  * This class will hold all of the game events and handle updating the game accordingly.
  */
 public class EventManager {
 
-	private List<Character> keyStrokes; //Still need to add a listener to update this list with new keystrokes!
+	private List<Character> keyStrokes; 
 	private List<Event> myEvents;
 	private List<String> keyCombos;
 	private Map<String, KeyCause> keyCauses;
@@ -41,7 +43,7 @@ public class EventManager {
 		myEvents.add(event);
 	}
 	
-	/*
+	/**
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
 	public void checkKeys(){
@@ -70,7 +72,7 @@ public class EventManager {
 	/**
 	 * Tests if String a is a rearranged version of String b
 	 * Precondition: Strings must be same length
-	 * Precondition: Strings must NOT have repeated characterx
+	 * Precondition: Strings must NOT have repeated characters
 	 */
 	public boolean checkEquivalent(String a, String b){
 
@@ -82,7 +84,7 @@ public class EventManager {
 		return true;
 	}
 	
-	/*
+	/**
 	 * Removes keystrokes from the list once they're used for an event
 	 */
 	public void clearStrokes(int a, int b){
