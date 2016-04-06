@@ -9,12 +9,11 @@ import java.util.List;
  * 
  */
 public class GameController {
-	private FileReadManager myFileReader;
+	//private FileReadManager myFileReader;
 	/**list of levelUrls w links to the xml representing a given level**/
 	private List<String> myLevels;
 	
 	/**levelHandler which it calls the update method on**/
-	private 
 	/**
 	 * Takes in a File of urls and initializes a Queue of 
 	 * urls that each represent a level
@@ -22,7 +21,7 @@ public class GameController {
 	 */
 	public void init(String fileName){
 		//parse through file and extract the urls here
-		myFileReader = new FileReadManager();
+		//myFileReader = new FileReadManager();
 		
 	}
 	public void startLevel(){
