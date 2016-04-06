@@ -1,6 +1,7 @@
 package tools;
 
 import authoring.gui.items.SwitchButton;
+import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 public class VoogaBoolean implements VoogaData{
@@ -19,9 +20,17 @@ public class VoogaBoolean implements VoogaData{
         return (Boolean) value;
     }
     
-    public void display(){
-        SwitchButton switchButton = new SwitchButton();
+    public Node display(){
+        SwitchButton switchButton = new SwitchButton(value);
         switchButton.setOn(value);
+        return switchButton;
+    }
+
+    @Override
+    public void setValue (Object o) {
+        if (!(o instanceof Boolean)) return;
+        value = (Boolean) o;
+        
     }
     
 }
