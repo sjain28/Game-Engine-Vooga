@@ -13,6 +13,6 @@ import tools.interfaces.VoogaData;
  */
 public interface Elementable{
     
-    public Map<Object,Object> getVoogaProperties();
+    public Map<String,VoogaData> getVoogaProperties();
     
 }

@@ -52,7 +52,7 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     }
 
     @Override
-    public Map<Object, Object> getVoogaProperties () {
+    public Map<String, VoogaData> getVoogaProperties () {
         return null;
     }
 }
