@@ -20,7 +20,7 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     public GameObject (String imagePath, Object id) {
         super(imagePath);
         this.setId(id.toString());
-        mySprite = new Sprite(imagePath,getId());
+        mySprite = new Sprite(imagePath,getId(),null);
         mySprite.setPosition(new Vector(this.getTranslateX(),this.getTranslateY()));
     }
     
@@ -54,5 +54,17 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
         return null;
+    }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void addProperty (String name, VoogaData data) {
+        mySprite.addProperty(name, data);
+        
     }
 }

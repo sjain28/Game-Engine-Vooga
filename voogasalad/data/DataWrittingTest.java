@@ -32,7 +32,7 @@ public class DataWrittingTest extends Application {
     
     @Override
     public void start (Stage primaryStage) throws Exception {
-        Sprite sprite = new Sprite("/bricks.jpg","6");
+        Sprite sprite = new Sprite("/bricks.jpg","6",null);
         Node[] vts = new Node[500];
         
         for (int i =0;i<500;i++){
