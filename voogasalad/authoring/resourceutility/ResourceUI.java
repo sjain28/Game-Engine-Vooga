@@ -72,5 +72,9 @@ public class ResourceUI extends TabPane {
 	private void importFile() {
 		new FileImporter(rtv);
 	}
+	
+	public ResourceTreeView getRTV() {
+		return this.rtv;
+	}
 
 }
