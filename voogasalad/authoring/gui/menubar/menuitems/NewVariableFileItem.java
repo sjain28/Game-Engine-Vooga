@@ -1,11 +1,12 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 
 public class NewVariableFileItem extends MenuItemHandler {
 	
-	public NewVariableFileItem() {
-		super();
+	public NewVariableFileItem(CompleteAuthoringModelable model) {
+		super(model);
 	}
 
 	@Override

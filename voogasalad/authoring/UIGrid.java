@@ -1,19 +1,32 @@
 package authoring;
 
+import java.util.UUID;
+
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
 import authoring.gui.PropertiesWindow;
+import authoring.model.GameObject;
+import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.ResourceUI;
+import authoring.resourceutility.VoogaFile;
+import javafx.scene.Node;
+import javafx.scene.control.TreeItem;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-
 
 /**
  * The UIGrid assembles the window components into a grid
  *
  */
 public class UIGrid extends GridPane {
+
+	private DesignBoard designBoard;
+	private ResourceUI explorer;
 	
 	public UIGrid() {
 		sector();
@@ -34,18 +47,17 @@ public class UIGrid extends GridPane {
 		this.getColumnConstraints().addAll(leftColumn, rightColumn);
 		this.getRowConstraints().addAll(topRow, middleRow, bottomRow);
 	}
-	
+
 	private void populate() {
-	    ResourceUI explorer = new ResourceUI();
-            this.add(explorer, 0, 0);
-            DesignBoard designBoard = new DesignBoard();
-            this.add(designBoard, 1, 0);
-            GridPane.setRowSpan(designBoard, REMAINING);
-            PropertiesWindow properties = new PropertiesWindow();
-            this.add(properties, 0, 1);
-            EventsWindow events = new EventsWindow();
-            this.add(events, 0, 2);
+		explorer = new ResourceUI();
+		this.add(explorer, 0, 0);
+		designBoard = new DesignBoard();
+		this.add(designBoard, 1, 0);
+		GridPane.setRowSpan(designBoard, REMAINING);
+		PropertiesWindow properties = new PropertiesWindow();
+		this.add(properties, 0, 1);
+		EventsWindow events = new EventsWindow();
+		this.add(events, 0, 2);
 	}
-	
-	
+
 }

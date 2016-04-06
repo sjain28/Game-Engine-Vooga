@@ -1,11 +1,12 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 
 public class CharWindowItem extends MenuItemHandler {
 	
-	public CharWindowItem() {
-		super();
+	public CharWindowItem(CompleteAuthoringModelable model) {
+		super(model);
 	}
 
 	@Override

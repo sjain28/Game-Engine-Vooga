@@ -17,9 +17,8 @@ public class GameObject extends ImageView implements Moveable, Elementable{
 
     private Sprite mySprite;
 
-    public GameObject (String imagePath, Object id) {
+    public GameObject (String imagePath, String Archtype) {
         super(imagePath);
-        this.setId(id.toString());
         mySprite = new Sprite(imagePath,getId(),null);
         mySprite.setPosition(new Vector(this.getTranslateX(),this.getTranslateY()));
     }
@@ -28,6 +27,7 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     Sprite getSprite(){
         return mySprite;
     }
+    
 
 
     @Override
