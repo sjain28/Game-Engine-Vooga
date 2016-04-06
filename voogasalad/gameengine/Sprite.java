@@ -16,7 +16,6 @@ public class Sprite implements Moveable {
     private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
-    
     private transient ImageView myImage;
     
     public Sprite (String imagePath, String id, double x, double y) {

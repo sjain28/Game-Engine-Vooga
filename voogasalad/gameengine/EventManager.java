@@ -36,6 +36,17 @@ public class EventManager {
 		keyCauses = new TreeMap<String, KeyCause>();
 	}
 	
+	public void update(){
+		checkKeys();
+		for(Event e: myEvents){
+			e.update();
+		}
+		
+		for(String cause: keyCauses.keySet()){
+			keyCauses.get(cause).setValue(false);
+		}
+	}
+	
 	public void addEvent(Event event){
 		for(Cause c: event.getCauses()){
 			if(c instanceof KeyCause){
@@ -48,7 +59,7 @@ public class EventManager {
 		myEvents.add(event);
 	}
 	
-	/*
+	/**
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
 	public void checkKeys(){
@@ -62,17 +73,6 @@ public class EventManager {
 			}
 		}
 	}	
-	
-	public void update(){
-		checkKeys();
-		for(Event e: myEvents){
-			e.update();
-		}
-		
-		for(String cause: keyCauses.keySet()){
-			keyCauses.get(cause).setValue(false);
-		}
-	}
 	
 	/**
 	 * Tests if String a is a rearranged version of String b
@@ -89,7 +89,7 @@ public class EventManager {
 		return true;
 	}
 	
-	/*
+	/**
 	 * Removes keystrokes from the list once they're used for an event
 	 */
 	public void clearStrokes(int a, int b){
