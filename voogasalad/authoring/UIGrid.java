@@ -7,9 +7,7 @@ import authoring.resourceutility.ResourceUI;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
+
 
 /**
  * The UIGrid assembles the window components into a grid
