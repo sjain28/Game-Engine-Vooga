@@ -19,6 +19,7 @@ import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Windowable;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,7 +47,9 @@ import tools.interfaces.VoogaData;
 
 public class PropertiesPane extends VBox implements Windowable{
 
+	private Elementable myElementable;
 	private Map<String, VoogaData> propertiesMap;
+	private VBox propertiesPane = new VBox(10);
 	private VBox propertyName = new VBox(10);
 	private VBox propertyVoogaData = new VBox(10);
 	private HBox propertiesHBox = new HBox(10);
@@ -74,6 +77,7 @@ public class PropertiesPane extends VBox implements Windowable{
 	 * @param element
 	 */
 	public void getProperties(Elementable element){
+		myElementable = element;
 		propertiesMap = element.getVoogaProperties();
 		displayProperties();
 	}
@@ -137,7 +141,7 @@ public class PropertiesPane extends VBox implements Windowable{
 	}
 	
 	public void removeProperty(String str) {
-		propertiesMap.remove(str);
+		myElementable.removeProperty(str);
 		displayProperties();
 	}
 	
@@ -156,45 +160,53 @@ public class PropertiesPane extends VBox implements Windowable{
 	public void addNewProperty() {
 		
 		NewPropertyFactory factory = new NewPropertyFactory();
+		Stage stage = new Stage();
+		Group root = new Group();
 		
-		Dialog<Pair<String, String>> dialog = new Dialog<>();
-		dialog.setTitle("Add New Property");
-		dialog.setHeaderText("Add New Property");
-	
-		ButtonType loginButtonType = new ButtonType("Add", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+		root.getChildren().add(new Text("dafas"));
 		
-		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(20, 150, 10, 10));
 		
-		TextField propertyName = new TextField();
-		propertyName.setPromptText("Property Name");
+		Scene addPropScene = new VoogaScene(root);
 		
-		ChoiceBox propertyType = new ChoiceBox();
-		propertyType.getItems().addAll(factory.getChoices());
-
-		grid.add(new Label("Name:"), 0, 0);
-		grid.add(propertyName, 1, 0);
-		grid.add(new Label("Type:"), 0, 1);
-		grid.add(propertyType, 1, 1);
-
-		dialog.getDialogPane().setContent(grid);
 		
-		dialog.setResultConverter(dialogButton -> {
-		    if (dialogButton == loginButtonType) {
-		        return new Pair<>(propertyName.getText(), propertyType.getValue().toString());
-		    }
-		    return null;
-		});
-
-		Optional<Pair<String, String>> result = dialog.showAndWait();
-
-		result.ifPresent(entry -> {
-		    VoogaData newVGData = factory.createNewProperty(entry.getValue());
-		    propertiesMap.put(entry.getKey(), newVGData);
-		});
+//		Dialog<Pair<String, String>> dialog = new Dialog<>();
+//		dialog.setTitle("Add New Property");
+//		dialog.setHeaderText("Add New Property");
+//	
+//		ButtonType loginButtonType = new ButtonType("Add", ButtonData.OK_DONE);
+//		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+//		
+//		GridPane grid = new GridPane();
+//		grid.setHgap(10);
+//		grid.setVgap(10);
+//		grid.setPadding(new Insets(20, 150, 10, 10));
+//		
+//		TextField propertyName = new TextField();
+//		propertyName.setPromptText("Property Name");
+//		
+//		ChoiceBox propertyType = new ChoiceBox();
+//		propertyType.getItems().addAll(factory.getChoices());
+//
+//		grid.add(new Label("Name:"), 0, 0);
+//		grid.add(propertyName, 1, 0);
+//		grid.add(new Label("Type:"), 0, 1);
+//		grid.add(propertyType, 1, 1);
+//
+//		dialog.getDialogPane().setContent(grid);
+//		
+//		dialog.setResultConverter(dialogButton -> {
+//		    if (dialogButton == loginButtonType) {
+//		        return new Pair<>(propertyName.getText(), propertyType.getValue().toString());
+//		    }
+//		    return null;
+//		});
+//
+//		Optional<Pair<String, String>> result = dialog.showAndWait();
+//
+//		result.ifPresent(entry -> {
+//		    VoogaData newVGData = factory.createNewProperty(entry.getValue());
+//		    myElementable.addProperty(entry.getKey(), newVGData);
+//		});
 		
 		displayProperties();
 	}

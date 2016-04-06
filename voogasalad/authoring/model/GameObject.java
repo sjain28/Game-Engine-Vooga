@@ -67,4 +67,10 @@ public class GameObject extends ImageView implements Moveable, Elementable{
         mySprite.addProperty(name, data);
         
     }
+
+	@Override
+	public void removeProperty(String name) {
+		// TODO Auto-generated method stub
+		
+	}
 }

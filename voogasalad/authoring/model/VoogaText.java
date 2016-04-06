@@ -56,6 +56,13 @@ public class VoogaText extends TextField implements Elementable{
     public void addProperty (String name, VoogaData data) {
         myProperties.put(name,data);
     }
+
+
+	@Override
+	public void removeProperty(String name) {
+		// TODO Auto-generated method stub
+		
+	}
     
     
 
