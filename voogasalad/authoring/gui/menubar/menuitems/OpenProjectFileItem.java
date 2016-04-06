@@ -1,4 +1,6 @@
-package authoring.gui.menubar;
+package authoring.gui.menubar.menuitems;
+
+import authoring.gui.menubar.MenuItemHandler;
 
 public class OpenProjectFileItem extends MenuItemHandler {
 	

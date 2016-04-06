@@ -1,8 +1,8 @@
-package authoring.gui.menubar;
+package authoring.gui.menubar.menuitems;
 
 import java.awt.Desktop;
 import java.net.URI;
-
+import authoring.gui.menubar.MenuItemHandler;
 import auxiliary.VoogaException;
 
 public class GetHelpHelpItem extends MenuItemHandler {

@@ -39,7 +39,7 @@ public class UIManager extends VBox {
 		}), new ToolPanel(e -> {
 			new ToolPanelHandlingMirror(e);
 		}),
-			new UIGrid());
+			new WorkspacePanel());
 	}
 	
 }

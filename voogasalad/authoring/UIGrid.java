@@ -22,9 +22,9 @@ public class UIGrid extends GridPane {
 
 	private void sector() {
 		ColumnConstraints leftColumn = new ColumnConstraints();
-		leftColumn.setPercentWidth(30);
+		leftColumn.setPercentWidth(25);
 		ColumnConstraints rightColumn = new ColumnConstraints();
-		rightColumn.setPercentWidth(70);
+		rightColumn.setPercentWidth(75);
 		RowConstraints topRow = new RowConstraints();
 		topRow.setPercentHeight(33);
 		RowConstraints middleRow = new RowConstraints();

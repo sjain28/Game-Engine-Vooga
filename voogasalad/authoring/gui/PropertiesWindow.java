@@ -7,6 +7,9 @@ public class PropertiesWindow extends Pane{
 
 
     public PropertiesWindow(){
-        this.getChildren().add(new Text("Properties Window"));
+        Text t =new Text("Properties Window");
+        t.setTranslateX(20);
+        t.setTranslateY(20);
+        this.getChildren().add(t);
     }
 }
