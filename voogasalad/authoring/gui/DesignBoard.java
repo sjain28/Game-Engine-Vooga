@@ -32,6 +32,10 @@ public class DesignBoard extends TabPane {
     	design.setContent(container);
     	this.getTabs().add(design);
     }
+    
+    public StackPane getContent() {
+    	return this.contentPane;
+    }
 
     private void initializeDragAndDrop () {
         contentPane.setOnDragOver( (DragEvent e) -> mouseDragOver(e));
