@@ -7,6 +7,10 @@ import tools.interfaces.VoogaData;
 public class VoogaBoolean implements VoogaData{
     private boolean value;
     
+    public VoogaBoolean() {
+    	this.value = true;
+    }
+    
     public VoogaBoolean(boolean value){
         this.value=value;
     }
