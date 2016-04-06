@@ -52,7 +52,19 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     }
 
     @Override
-    public Map<Object, Object> getVoogaProperties () {
+    public Map<String, VoogaData> getVoogaProperties () {
         return null;
+    }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void addProperty (String name, VoogaData data) {
+        mySprite.addProperty(name, data);
+        
     }
 }

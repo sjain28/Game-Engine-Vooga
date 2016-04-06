@@ -12,9 +12,10 @@ import javafx.scene.control.Label;
 
 
 public class SwitchButton extends Label {
-    private SimpleBooleanProperty switchedOn = new SimpleBooleanProperty(true);
+    private SimpleBooleanProperty switchedOn;
 
-    public SwitchButton () {
+    public SwitchButton (boolean on) {
+        switchedOn = new SimpleBooleanProperty(on);
         Button switchBtn = new Button();
         switchBtn.setPrefWidth(40);
         switchBtn.setPrefHeight(this.getHeight());
@@ -48,7 +49,7 @@ public class SwitchButton extends Label {
         switchedOn.set(false);
     }
 
-    boolean switchOnProperty () {
+    public boolean switchOnProperty () {
         return switchedOn.getValue();
     }
     
