@@ -59,15 +59,7 @@ public class SpriteProperties extends VBox implements Windowable{
 		keyMouseTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		Button addKeyCommand = new Button("Add UI");
 		
-		
-		Text variablesText = new Text("Variables:");
-		variablesText.setFont(new Font(20));
-		TableView<PropertiesVariable> variablesTable = new TableView<PropertiesVariable>();
-		TableColumn<PropertiesVariable, String> variablesNameCol = new TableColumn<>("Name");
-		TableColumn<PropertiesVariable, Double> variablesValueCol = new TableColumn<>("Value");
-		variablesTable.getColumns().setAll(variablesNameCol, variablesValueCol);
-		variablesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		Button addVariable = new Button("Add Variable");
+
 		
 		this.getChildren().addAll(IDText, imageIDText, gravityHBox , keyCommands, keyMouseTable, addKeyCommand,
 				variablesText, variablesTable, addVariable);
