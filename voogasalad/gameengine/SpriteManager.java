@@ -65,7 +65,7 @@ public class SpriteManager {
 	}
 	
 	/**
-	 * organizes all the sprites by archtype as well
+	 * organizes all the sprites by archetype as well
 	 * @param s
 	 */
 	private void organizeSpritesByArchetype(Sprite s){
