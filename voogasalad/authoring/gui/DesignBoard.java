@@ -10,8 +10,11 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 
 public class DesignBoard extends TabPane {
@@ -31,6 +34,7 @@ public class DesignBoard extends TabPane {
     	Tab design = new Tab(DESIGN_BOARD);
     	design.setContent(container);
     	this.getTabs().add(design);
+    	contentPane.getChildren().add(new ResizableImage(new Rectangle(200, 400, Color.CADETBLUE)));
     }
     
     public StackPane getContent() {
