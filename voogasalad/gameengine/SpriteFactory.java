@@ -19,11 +19,6 @@ import tools.interfaces.VoogaData;
  *
  */
 
-//TODO: 
-//Add method to create a new Archetype
-//Saving to library
-//Importing from library
-
 public class SpriteFactory {
 
 	private HashMap<String,Sprite> myArchetypes; 
@@ -44,17 +39,39 @@ public class SpriteFactory {
 		newSprite.setProperties(newProperties);
 		return newSprite;
 	}
-	
+	/**
+	 * Sets or creates a new Archetype
+	 * Must specify what you want your default Sprite
+	 * for this archetype to be 
+	 * 
+	 * @param archetype
+	 * @param s
+	 */
 	public void setArchetype(String archetype, Sprite s){
 		myArchetypes.put(archetype, s);
 	}
+	
+	/**
+	 * Returns the default Sprite for a given
+	 * Archetype
+	 * 
+	 * @param archetype
+	 * @return
+	 */
 	public Sprite getArchetype(String archetype){
 		return myArchetypes.get(archetype);
 	}
 	
+	/**
+	 * Returns a set of all possible archetypes
+	 * that you can choose from in your libary
+	 * 
+	 * @return Set<String>
+	 */
 	public Set<String> getAllArchetypeNames(){
 		return myArchetypes.keySet();
 	}
+	
 	/**
 	 * Serializes all Default Sprites for each created archetype 
 	 * In the same file location by a different file name (given
@@ -79,6 +96,7 @@ public class SpriteFactory {
 			}
 		}
 	}
+	
 	/**
 	 * DeSerializes the DefaultSprite specified by the fileLocation.
 	 * Puts it in the map along with the other archetypes.
