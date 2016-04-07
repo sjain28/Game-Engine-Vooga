@@ -1,10 +1,4 @@
-package authoring.gui;
-
-/**
- * Properties window to see all the current characteristics of a Sprite
- * @author Harry Guo, Arjun Desai, Aditya Srininvasan, Nick Lockett
- * 
- */
+package authoring.Properties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,82 +7,63 @@ import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.gui.items.NewPropertyFactory;
 import authoring.interfaces.Elementable;
-
-import authoring.interfaces.gui.Windowable;
 import authoring.resourceutility.ButtonMaker;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tools.VoogaBoolean;
 import tools.interfaces.VoogaData;
 
-public class PropertiesPane extends TabPane implements Windowable {
+public abstract class AbstractPropertiesTab extends Tab {
 	
 	private static final double SPACING = 10;
-
-	private VBox box;
-	private Elementable myElementable;
-	private Map<String, VoogaData> propertiesMap;
+	private static final double FONT_SIZE = 23;
+	
+	private VBox box = new VBox(SPACING);;
+	protected Map<String, VoogaData> propertiesMap;
 	private HBox propertiesHBox = new HBox(10);
-	private ScrollPane myScrollPane;
+	protected ScrollPane myScrollPane = new ScrollPane();;
 	private Stage stage;
-	
-	/**
-	 * Constructor to instantiate the properties Pane
-	 */	
-	// TEST CONSTRUCTOR
-	public PropertiesPane() {
-		Tab properties = new Tab("Properties");
-		box = new VBox(SPACING);
-		propertiesMap = new HashMap<String, VoogaData>();
-		propertiesMap.put("Gravity", new VoogaBoolean());
-		myScrollPane = new ScrollPane();
-		myScrollPane.setContent(box);
-		properties.setContent(myScrollPane);
-		this.getTabs().add(properties);
-		displayProperties();
-	}
-	
-	/**
-	 * Gets the properties of an elementable
-	 * @param element
-	 */
-	public void getProperties(Elementable element){
-		myElementable = element;
-		propertiesMap = element.getVoogaProperties();
-		displayProperties();
-	}
-	
-	/**
-	 * Displays the properties on the Pane
-	 */
 
+	public AbstractPropertiesTab() {
+		
+		//THIS LIL CHUNK USED FOR TEST PURPOSES ONLY
+		propertiesMap = new HashMap<String, VoogaData>();
+		propertiesMap.put("Gravity", new VoogaBoolean());	
+		
+		box.getChildren().add(myScrollPane);
+		this.setContent(box);
+		displayProperties();
+		createButtons();
+		
+	}
+	
 	public void displayProperties() {
-		this.getChildren().clear();
 		propertiesHBox.getChildren().clear();
+		
+		VBox keyCol = new VBox(SPACING);
+		VBox valCol = new VBox(SPACING);
 		
 		Text name = null; Node data = null;
 		
 		for(String property: propertiesMap.keySet()) {
+			
 			name = new CustomText(property);
+			name.setFont(new Font(FONT_SIZE));
 			
 			ContextMenu menu = new ContextMenu();
 			MenuItem delete = new MenuItem("Delete");
@@ -102,19 +77,20 @@ public class PropertiesPane extends TabPane implements Windowable {
 			});
 			
 			data = propertiesMap.get(property).display();
+			
+			keyCol.getChildren().add(name);
+			valCol.getChildren().add(data);
 		}
 		
-		propertiesHBox.getChildren().addAll(name, data);
-		this.box.getChildren().add(propertiesHBox);
-		
-		createButtons();
+		propertiesHBox.getChildren().addAll(keyCol, valCol);
+		myScrollPane.setContent(propertiesHBox);
 	}
 	
 	/**
 	 * Creates the Add, Apply, and Cancel Buttons for the Properties Pane.
 	 */
 	public void createButtons() {
-		Button addProperty = new ButtonMaker().makeButton("Add Property", e -> addNewProperty());
+		Button addProperty = new ButtonMaker().makeButton("Add Property", e -> addNewPropertyPrompt());
 		
 		HBox buttonsPanel = new HBox(SPACING);
 		Button apply = new ButtonMaker().makeButton("Apply", e -> updateProperties());
@@ -124,28 +100,17 @@ public class PropertiesPane extends TabPane implements Windowable {
 		this.box.getChildren().addAll(addProperty, buttonsPanel);
 	}
 	
-	public void removeProperty(String str) {
-		myElementable.removeProperty(str);
-		displayProperties();
-	}
-	
-	/**
-	 * Updates all the properties that the user changed
-	 */
-	public void updateProperties() {
-		for (String s : propertiesMap.keySet()){
-			//propertiesMap.get(s).update();
-		}
-	}
-	
 	/**
 	 * Creates the Dialog Box that allows new Properties to be added
 	 */
-	public void addNewProperty() {
+	public void addNewPropertyPrompt() {
+		
 		NewPropertyFactory factory = new NewPropertyFactory();
 		VBox root = new VBox();
 		stage = new Stage();
 		Scene addPropScene = new VoogaScene(root);
+		stage.setX(500);
+		stage.setY(200);
 		stage.setScene(addPropScene);
 		stage.setTitle("Add new property...");
 		
@@ -169,7 +134,7 @@ public class PropertiesPane extends TabPane implements Windowable {
 		
 		Button add = new ButtonMaker().makeButton("Add", e -> {
 			VoogaData newVGData = factory.createNewProperty(propertyType.getValue());
-		    myElementable.addProperty(propertyName.getText(), newVGData);
+		    addNewProperty(propertyName.getText(), newVGData);
 			displayProperties();
 			this.stage.close();
 		});
@@ -177,10 +142,33 @@ public class PropertiesPane extends TabPane implements Windowable {
 		root.getChildren().addAll(grid, add);		
 		
 	}
-
-	@Override
-	public Node getWindow() {
-		return this;
+	
+	/**
+	 * Updates all the properties that the user changed
+	 */
+	public void updateProperties() {
+		for (String s : propertiesMap.keySet()){
+			//propertiesMap.get(s).update();
+		}
 	}
+	
+	/**
+	 * Gets the properties map based off of generic object
+	 * @param o
+	 */
+	public abstract void getPropertiesMap(Object o);
+	
+	/**
+	 * Adds new property to properties map based on string and vooga Data
+	 * @param s
+	 * @param vgData
+	 */
+	public abstract void addNewProperty(String s, VoogaData vgData);
+	
+	/**
+	 * Removes the property from the property map based on the string
+	 * @param s
+	 */
+	public abstract void removeProperty(String s);
 
 }
