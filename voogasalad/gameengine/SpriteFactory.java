@@ -27,8 +27,7 @@ public class SpriteFactory {
 	public Sprite createSprite(String archetype){
 		Sprite toCopy = myArchetypes.get(archetype);
 		Map<String, VoogaData> newProperties = new HashMap<String, VoogaData>(toCopy.getParameterMap());
-		Sprite clone = new Sprite(toCopy.getImagePath(), archetype);
-		clone.setProperties(newProperties);
+		Sprite clone = new Sprite(toCopy.getImagePath(), archetype,newProperties);
 		return clone;
 	}
 	
