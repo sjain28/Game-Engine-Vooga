@@ -11,7 +11,7 @@ public class GetHelpHelpItem extends MenuItemHandler {
 	private static final String HELP_URL = "https://www.google.com/search?q=how+to+use+voogasalad&oq=how+to+use+voogasalad&aqs=chrome..69i57j69i60j69i65j69i60l3.2085j0j1&sourceid=chrome&ie=UTF-8";
 	
 	public GetHelpHelpItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override
