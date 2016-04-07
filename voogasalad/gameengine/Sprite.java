@@ -14,20 +14,19 @@ public class Sprite implements Moveable, Effectable{
 	
     private Vector myVelocity;
     private Vector myLoc;
-    private Object myID;
+    private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
     private String myArchetype;
     private transient ImageView myImage;
     
-    public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties){
-    	myID = UUID.randomUUID();
+    public Sprite (String imagePath, String archetype){
+    	myID = UUID.randomUUID().toString();
     	myArchetype = archetype;
         myImagePath = imagePath;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
-        myProperties = properties;
         myLoc = new Vector(0,0);
         myVelocity = new Vector(0,0);
     }
@@ -73,6 +72,9 @@ public class Sprite implements Moveable, Effectable{
         return myProperties.get(s);
     }
     
+    public void setProperties(Map<String, VoogaData> properties){
+    	myProperties = properties;
+	}	
     public HashMap<String, VoogaData> getPropertiesMap() {
     	return (HashMap<String, VoogaData>) myProperties;
     }
