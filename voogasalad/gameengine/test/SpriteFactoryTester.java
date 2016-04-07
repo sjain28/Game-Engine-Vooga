@@ -13,6 +13,8 @@ import tools.interfaces.VoogaData;
 
 public class SpriteFactoryTester {
 	//Spite Manager Testing
+	
+	//check if Archetypes are being added upon setArchetype
 	@Test
 	public void test() {
 		SpriteFactory s = new SpriteFactory();

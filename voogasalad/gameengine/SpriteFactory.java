@@ -1,5 +1,10 @@
 package gameengine;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -49,5 +54,52 @@ public class SpriteFactory {
 	
 	public Set<String> getAllArchetypeNames(){
 		return myArchetypes.keySet();
+	}
+	/**
+	 * Serializes all Default Sprites for each created archetype 
+	 * In the same file location by a different file name (given
+	 * by their archetype). 
+	 * 
+	 * todo: must check with front end to see if this is something
+	 * they actually need or not
+	 * 
+	 * @param fileLocation 
+	 */
+	public void serializeArchetypes(String fileLocation){
+		//TODO: Test to see if this actually works
+		for(String archetype: myArchetypes.keySet()){
+			try {
+				FileOutputStream fileOut = new FileOutputStream(fileLocation+"/"+archetype);
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				out.writeObject(myArchetypes.get(archetype));
+				out.close();
+				fileOut.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * DeSerializes the DefaultSprite specified by the fileLocation.
+	 * Puts it in the map along with the other archetypes.
+	 * This could be used to load archetypes over from other games.
+	 * 
+	 * todo: Check to see if this is actually what the front end needs
+	 * 
+	 * @param fileLocation
+	 */
+	public void deSerializeArchetype(String fileLocation){
+		//TODO: Test to see if this actually works
+		try {
+			FileInputStream fileIn = new FileInputStream(fileLocation);
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			
+			Sprite recoveredArchetype = (Sprite) in.readObject();
+			myArchetypes.put(recoveredArchetype.getArchetype(),recoveredArchetype);
+			in.close();
+			fileIn.close();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
