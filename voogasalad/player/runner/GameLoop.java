@@ -4,9 +4,10 @@ import javafx.animation.AnimationTimer;
 
 /**
  * Just for holding maximum step size in case we try other gameLoops
- * Free to change max step size if we choose it matters
+ * such as with variable game loop steps (max computers performance), 
+ * or run without interpolating next frames.
+ * 
  * @author mykuryshev
- *
  */
 public abstract class GameLoop extends AnimationTimer{
 	private float maximumStep = Float.MAX_VALUE;
