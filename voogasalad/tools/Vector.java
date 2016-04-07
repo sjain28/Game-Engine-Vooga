@@ -11,6 +11,7 @@ public class Vector {
 	private double yPrev = 0;
 	private double x;
 	private double y;
+	private double angle = 0;;
 	
 	/**
 	 * Vector class that keeps information about (x, y) coordinates as well as
@@ -24,44 +25,85 @@ public class Vector {
 		setXY(x, y);
 	}
 
-	public double getX(){
+	/**
+	 * Get the current x coordinate
+	 * 
+	 * @return
+	 */
+	public double getX() {
 		return x;
 	}
 
-	public double getY(){
+	/**
+	 * Get the current y coordinate
+	 * 
+	 * @return
+	 */
+	public double getY() {
 		return y;
 	}
 
-	public void setX(double x){
+	/**
+	 * Give x a new value
+	 * 
+	 * @param x
+	 */
+	public void setX(double x) {
 		this.xPrev = getX();
 		this.x = x;
 	}
 
-	public void setY(double y){
+	/**
+	 * Give y a new value
+	 * 
+	 * @param y
+	 */
+	public void setY(double y) {
 		this.yPrev = getY();
 		this.y = y;
 	}
 	
+	/**
+	 * Sets x, y to a new set of values
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void setXY(double x, double y) {
 		setX(x);
 		setY(y);
 	}
 
-	public void addX(double dx){
+	/**
+	 * Adds x coordinate
+	 * 
+	 * @param dx
+	 */
+	public void addX(double dx) {
 		this.xPrev = getX();
-		x+=dx;
+		x += dx;
 	}
 
-	public void addY(double dy){
+	/**
+	 * Adds y coordinate
+	 * 
+	 * @param dy
+	 */
+	public void addY(double dy) {
 		this.yPrev = getY();
-		y+=dy;
+		y += dy;
 	}
 
-	public void addVector(Vector v){
+	/**
+	 * Adds vector v to self
+	 * 
+	 * @param v
+	 */
+	public void addVector(Vector v) {
 		this.xPrev = getX();
 		this.yPrev = getY();
-		x+=v.getX();
-		y+=v.getY();
+		x += v.getX();
+		y += v.getY();
 	}
 
 	/**
@@ -76,5 +118,19 @@ public class Vector {
 	 */
 	public double getyPrev() {
 		return yPrev;
+	}
+
+	/**
+	 * @return the angle
+	 */
+	public double getAngle() {
+		return angle;
+	}
+
+	/**
+	 * @param angle the angle to set
+	 */
+	public void setAngle(double angle) {
+		this.angle = angle;
 	}
 }
