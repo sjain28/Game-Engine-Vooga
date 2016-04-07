@@ -11,6 +11,7 @@ public class Vector {
 	private double yPrev = 0;
 	private double x;
 	private double y;
+	private double angle = 0;;
 	
 	/**
 	 * Vector class that keeps information about (x, y) coordinates as well as
@@ -117,5 +118,19 @@ public class Vector {
 	 */
 	public double getyPrev() {
 		return yPrev;
+	}
+
+	/**
+	 * @return the angle
+	 */
+	public double getAngle() {
+		return angle;
+	}
+
+	/**
+	 * @param angle the angle to set
+	 */
+	public void setAngle(double angle) {
+		this.angle = angle;
 	}
 }
