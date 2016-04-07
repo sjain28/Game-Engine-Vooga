@@ -1,17 +1,19 @@
 package events;
 
+import java.util.List;
+import java.util.Map;
 import gameengine.Sprite;
 import javafx.scene.image.ImageView;
 
-public class CollisionCause implements Cause{
+public class CollisionCause extends Cause{
 
-	private Sprite spriteA;
-	private Sprite spriteB;
+	private List<Sprite> groupA;
+	private List<Sprite> groupB;
 	
+	private Map<Sprite, Sprite> collisionPairs; 
 	
-	public CollisionCause(Sprite a, Sprite b) {
-		spriteA = a;
-		spriteB = b;
+	public CollisionCause(List<Object> groupAID, List<Object> GroupBID){
+		
 	}
 
 	@Override

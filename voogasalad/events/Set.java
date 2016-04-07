@@ -1,6 +1,6 @@
 package events;
 
-public class Set implements Effect{
+public class Set extends Effect{
 
 	public Set() {
 		// TODO Auto-generated constructor stub
