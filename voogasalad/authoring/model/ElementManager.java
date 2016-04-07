@@ -15,13 +15,14 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.interfaces.gui.Saveable;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import events.Event;
 import gameengine.Sprite;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements Saveable {
+public class ElementManager implements Saveable, CompleteAuthoringModelable{
     private List<Node> myGameElements;
     private List<Event> myEventList;
     private Map<String, VoogaData> myGlobalVariables;
