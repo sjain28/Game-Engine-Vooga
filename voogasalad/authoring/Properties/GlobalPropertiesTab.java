@@ -1,24 +1,36 @@
 package authoring.Properties;
 
-import authoring.interfaces.gui.Windowable;
-import javafx.scene.Node;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.input.MouseButton;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import tools.interfaces.VoogaData;
 
-public class GlobalPropertiesTab extends Tab {
+/*
+ * ONLY USED FOR TESTING AS OF NOW, NEED TO IMPLEMENT WITH ELEMENT MANAGER
+ */
+public class GlobalPropertiesTab extends AbstractPropertiesTab{
 
-	public GlobalPropertiesTab() {
-		// TODO Auto-generated constructor stub
-	}
+	public final static String GLOBAL_PROPERTIES = "Global Properties";
 	
+	public GlobalPropertiesTab() {
+		super();
+		this.setText(GLOBAL_PROPERTIES);
+	}
 
-	public Tab getThisTab() {
-		return this;
+	@Override
+	public void getPropertiesMap(Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addNewProperty(String s, VoogaData vgData) {
+		propertiesMap.put(s, vgData);
+		displayProperties();
+	}
+
+	@Override
+	public void removeProperty(String s) {
+		propertiesMap.remove(s);
+		displayProperties();
+		
 	}
 
 }
