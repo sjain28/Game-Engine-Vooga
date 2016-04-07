@@ -2,14 +2,14 @@ package events;
 
 public abstract class Cause {
 	
-	 private Event myEvent;	
+	 private VoogaEvent myEvent;	
 	 public abstract boolean check();
 	 
-	 public Cause(Event event){
-		 myEvent = event;
+	 public Cause(VoogaEvent voogaEvent){
+		 myEvent = voogaEvent;
 	 }
 	 
-	 public Event getEvent(){
+	 public VoogaEvent getEvent(){
 		 return myEvent;
 	 }
 	 

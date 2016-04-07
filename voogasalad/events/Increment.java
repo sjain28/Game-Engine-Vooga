@@ -7,8 +7,8 @@ public class Increment extends Effect{
 	private VoogaNumber variable;
 	private String spriteID;
 	
-	public Increment(Event event){
-		super(event);
+	public Increment(VoogaEvent voogaEvent){
+		super(voogaEvent);
 	}
 
 	@Override
