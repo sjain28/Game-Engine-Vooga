@@ -16,7 +16,8 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import events.Event;
+import authoring.interfaces.model.Event;
+import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
@@ -25,7 +26,7 @@ import tools.interfaces.VoogaData;
 
 public class ElementManager implements Saveable, CompleteAuthoringModelable{
     private List<Node> myGameElements;
-    private List<Event> myEventList;
+    private List<VoogaEvent> myEventList;
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
     private Set<String> myIds;
@@ -34,7 +35,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
-        myEventList = new ArrayList<Event>();
+        myEventList = new ArrayList<VoogaEvent>();
         myGlobalVariables = new HashMap<String, VoogaData>();
         myXmlDataFile = null;
         myIds = new HashSet<String>();
@@ -69,11 +70,11 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
         return myGameElements;
     }
 
-    public void addEvents (Event ... events) {
+    public void addEvents (VoogaEvent ... events) {
         myEventList.addAll(Arrays.asList(events));
     }
 
-    public void removeEvents (Event ... events) {
+    public void removeEvents (VoogaEvent ... events) {
         myEventList.removeAll(Arrays.asList(events));
     }
     
@@ -137,4 +138,5 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
     public SpriteFactory getSpriteFactory(){
         return spriteFactory;
     }
+
 }

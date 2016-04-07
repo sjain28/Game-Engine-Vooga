@@ -3,13 +3,13 @@ package events;
 import tools.VoogaNumber;
 
 
-public class VariableEffect implements Effect {
+public class VariableEffect extends Effect {
 
     private VoogaNumber myValue;
     private double newValue;
 
-    public VariableEffect () {
-        // TODO Auto-generated constructor stub
+    public VariableEffect (VoogaEvent voogaEvent) {
+        super(voogaEvent);
     }
 
     @Override

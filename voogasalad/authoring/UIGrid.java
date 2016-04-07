@@ -2,9 +2,9 @@ package authoring;
 
 import java.util.UUID;
 
+import authoring.Properties.PropertiesPane;
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
-import authoring.gui.PropertiesPane;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.ResourceUI;

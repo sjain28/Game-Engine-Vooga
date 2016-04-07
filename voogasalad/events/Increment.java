@@ -2,13 +2,13 @@ package events;
 
 import tools.VoogaNumber;
 
-public class Increment implements Effect{
+public class Increment extends Effect{
 
 	private VoogaNumber variable;
 	private String spriteID;
 	
-	public Increment() {
-		// TODO Auto-generated constructor stub
+	public Increment(VoogaEvent voogaEvent){
+		super(voogaEvent);
 	}
 
 	@Override
