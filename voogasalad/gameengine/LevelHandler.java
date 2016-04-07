@@ -19,8 +19,11 @@ public class LevelHandler {
         	myEventManager = eventmanager;
         }
 		
-		public List<Object> update(){
+		public void update(){
 			myEventManager.update();
+		}
+		
+		public List<Object> extractUpdatedObjects(){
 			return myObjectManager.getAllDisplayableObjects();
 		}
 }

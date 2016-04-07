@@ -40,8 +40,9 @@ public class GameController {
 	}
 	
 	private void step(){
-		List<Object> updatedObjects = myCurrentLevelHandler.update();
-		//render display 
+		myCurrentLevelHandler.update();
+		List<Object> updatedObjects = myCurrentLevelHandler.extractUpdatedObjects();
+		//render display with updated objects
 	}
 	public void wonLevel(){
 		if(myCurrentLevel == myLevels.size()-1){
