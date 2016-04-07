@@ -12,13 +12,13 @@ public class CollisionCause extends Cause{
 	
 	private List<Sprite> collidedSprites; 
 	
-	public CollisionCause(List<Object> groupAID, List<Object> groupBID, Event event){ //Given 2 lists of IDs
-		super(event);
+	public CollisionCause(List<Object> groupAID, List<Object> groupBID, VoogaEvent voogaEvent){ //Given 2 lists of IDs
+		super(voogaEvent);
 		init(groupAID, groupBID);
 	}
 	
-	public CollisionCause(String archetypeA, String archetypeB, Event event){ //Given 2 archetype names
-		super(event);
+	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Given 2 archetype names
+		super(voogaEvent);
 		List<Object> groupA = getEvent().getManager().getSpriteIDs(archetypeA);
 		List<Object> groupB = getEvent().getManager().getSpriteIDs(archetypeB);
 		init(groupA, groupB);

@@ -8,8 +8,8 @@ public class VariableEffect extends Effect {
     private VoogaNumber myValue;
     private double newValue;
 
-    public VariableEffect (Event event) {
-        super(event);
+    public VariableEffect (VoogaEvent voogaEvent) {
+        super(voogaEvent);
     }
 
     @Override

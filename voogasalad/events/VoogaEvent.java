@@ -4,13 +4,13 @@ import java.util.List;
 
 import gameengine.SpriteManager;
 
-public abstract class Event {
+public abstract class VoogaEvent {
 
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
 	private SpriteManager mySpriteManager;
 	
-	public Event(List<Cause> cause, List<Effect> effect) {
+	public VoogaEvent(List<Cause> cause, List<Effect> effect) {
 		myCauses = cause;
 		myEffects = effect;
 		

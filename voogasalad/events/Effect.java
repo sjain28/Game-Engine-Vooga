@@ -2,19 +2,19 @@ package events;
 
 public abstract class Effect {
 	
-	private Event myEvent;	
+	private VoogaEvent myEvent;	
 
 	public abstract void execute();
 	
-     public Effect(Event event){
-    	 myEvent = event;
+     public Effect(VoogaEvent voogaEvent){
+    	 myEvent = voogaEvent;
      }
      
-	 public void setEvent(Event e){
+	 public void setEvent(VoogaEvent e){
 		 myEvent = e;
 	 }
 	 
-	 public Event getEvent(){
+	 public VoogaEvent getEvent(){
 		 return myEvent;
 	 }
 
