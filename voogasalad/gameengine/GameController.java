@@ -15,18 +15,26 @@ public class GameController {
 	
 	private FileReader myFileReader;
 	
-	private 
 	/**
 	 * Takes in a File of urls and initializes a Queue of 
 	 * urls that each represent a level
 	 * @param file
 	 */
 	public void init(String fileName){
-		//parse through file and extract the urls here
+		myFileReader = new FileReader();
+		
+		//parse through file and extract the game level urls here
+		String 
+		
 		myFileReader = new FileReader();
 		myFileReader.createLevelObjects()
 	}
 	public void startLevel(){
 		
+	}
+	
+	private String extractLevelURLS(){
+		//TODO: Implement this
+		return null;
 	}
 }
