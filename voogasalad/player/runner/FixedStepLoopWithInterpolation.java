@@ -2,18 +2,32 @@ package player.runner;
 
 import java.util.function.Consumer;
 
+/**
+ * @author Michael Kuryshev
+ */
+
 public class FixedStepLoopWithInterpolation extends GameLoop 
 {
-	// TODO remove comments once we decide on what to keep for AnimationTimer
-	// TODO find which constants list, or resource bundle to toss values into
 	private final Consumer<Float> UPDATER;
 	private final Runnable RENDERER;
-	private final Consumer<Float> INTERPOLATER; /* Used for looking at forward frames if time remains in frame calcs*/
-	private final Consumer<Integer> FPS_REPORTER; /* If we want to test fps when running the game */
+	private final Consumer<Float> INTERPOLATER; 
+	private final Consumer<Integer> FPS_REPORTER; 
 
 	private static final Integer FRAMES_PER_SECOND = 60;
 	private static final float frameTime = 1/FRAMES_PER_SECOND;
+	private static final float NANOSECONDS_PER_SECOND = 1e9f;
+	private static final float FPS_REPORTER_UPDATE_RATE = 1f;
 	
+	/**
+	 * Modify the animation timer to fix the frame rate as much as possible when
+	 * playing the game. Also, have a displayable frame rate reporter for users
+	 * to play with
+	 * 
+	 * @param updater
+	 * @param renderer
+	 * @param interpolater
+	 * @param fpsReporter
+	 */
 	public FixedStepLoopWithInterpolation(Consumer<Float> updater,
 			Runnable renderer, Consumer<Float> interpolater,
 			Consumer<Integer> fpsReporter) 
@@ -24,13 +38,16 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		this.FPS_REPORTER = fpsReporter;
 	}
 	
-	// TODO any way to initialize and pass to handle?
 	private float previousTime = 0;
 	private float totalTime = 0;
 	
 	private float secondsSinceLastFpsUpdate = 0f;
 	private int framesSinceLastFpsUpdate = 0;
 	
+	/**
+	 * Set handler to start from stops, find time passed in the current frame,
+	 * and check for FPS reporting update.
+	 */
 	@Override
 	public void handle(long currentTime)
 	{
@@ -39,7 +56,7 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 			return;
 		}
 		
-		float secondsElapsed = (currentTime - previousTime) / 1e9f;
+		float secondsElapsed = (currentTime - previousTime) / NANOSECONDS_PER_SECOND;
 		float secondsElapsedCapForFrame = Math.min(secondsElapsed, getMaximumStep());
 		totalTime += secondsElapsedCapForFrame;
 		previousTime = currentTime;
@@ -49,11 +66,18 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		secondsSinceLastFpsUpdate += secondsElapsed;
 		framesSinceLastFpsUpdate++;
 		
-		if (secondsSinceLastFpsUpdate >= 1f){ /*Set to update once every second */
+		if (secondsSinceLastFpsUpdate >= FPS_REPORTER_UPDATE_RATE)
 			updateFpsReporter(framesSinceLastFpsUpdate, secondsSinceLastFpsUpdate);
-		}
 	}
 	
+	/**
+	 * Calculate time remaining in the frame and if it is greater than zero,
+	 * begin predictions for the next frame.
+	 * 
+	 * @param secondsElapsed
+	 * @param totalTime
+	 * @param frameTime
+	 */
 	private void handleInterpolation(float secondsElapsed, float totalTime, float frameTime)
 	{
 		if (totalTime < frameTime){
@@ -76,6 +100,12 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		INTERPOLATER.accept(alpha);
 	}
 	
+	/**
+	 * Update the FPS rate which can viewed in the GUI for testing or play.
+	 * 
+	 * @param framesSinceLastFpsUpdate
+	 * @param secondsSinceLastFpsUpdate
+	 */
 	private void updateFpsReporter(float framesSinceLastFpsUpdate, float secondsSinceLastFpsUpdate)
 	{
 		int fps = Math.round(framesSinceLastFpsUpdate / secondsSinceLastFpsUpdate);
@@ -84,6 +114,10 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		framesSinceLastFpsUpdate = 0;
 	}
 	
+	/**
+	 * In addition to standard timer stop, also reset all counts to make the
+	 * timer calculations start fresh when play recommences.
+	 */
 	@Override
 	public void stop()
 	{
