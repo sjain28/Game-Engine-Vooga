@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import tools.interfaces.VoogaData;
 /**
  * Factor for creating Sprites from pre-formed Archetypes,
@@ -61,7 +64,7 @@ public class SpriteFactory {
 	public Sprite getArchetype(String archetype){
 		return myArchetypes.get(archetype);
 	}
-	
+
 	/**
 	 * Returns a set of all possible archetypes
 	 * that you can choose from in your libary
