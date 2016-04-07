@@ -36,7 +36,6 @@ public abstract class Event {
 				return;
 			}
 		}
-		
 		for(Effect e: myEffects){
 			e.execute();
 		}
