@@ -39,6 +39,12 @@ public class VoogaButton extends Button implements Elementable {
         myProperties.put(name, data);
         
     }
+
+	@Override
+	public void removeProperty(String name) {
+		// TODO Auto-generated method stub
+		
+	}
     
     
 }

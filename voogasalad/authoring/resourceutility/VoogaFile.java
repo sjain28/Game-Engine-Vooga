@@ -43,7 +43,7 @@ public class VoogaFile extends HBox {
 		this.fileName = name;
 	}
 
-	String getPath() {
+	public String getPath() {
 		return this.filePath;
 	}
 
