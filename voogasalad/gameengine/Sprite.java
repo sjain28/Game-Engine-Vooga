@@ -78,6 +78,12 @@ public class Sprite implements Moveable, Effectable{
     public ImageView getImage () {
         return myImage;
     }
+    public void setArchetype(String archetype){
+    	myArchetype = archetype;
+    }
+    public String getArchetype(){
+    	return myArchetype;
+    }
     
     public void setImagePath(String path){
     	myImagePath = path;
