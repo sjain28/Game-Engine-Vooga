@@ -2,6 +2,7 @@ package authoring.gui;
 
 import java.io.File;
 import authoring.interfaces.model.EditElementable;
+import authoring.model.GameObject;
 import gameengine.Sprite;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,9 +23,9 @@ public class GameObjectBuilder extends Builder{
         super(editor, popup);
         
         makeArchetypePicker();
-        makeImagePicker();
-        makeXLocationPicker();
-        makeYLocationPicker();
+        //makeImagePicker();
+        //makeXLocationPicker();
+        //makeYLocationPicker();
         makeCreate();
     }
     
@@ -34,33 +35,34 @@ public class GameObjectBuilder extends Builder{
         if(getData().getImagePath() != null){
             sprite.setImagePath(getData().getImagePath());
         }
+        getManager().addGameElements(new GameObject(sprite));
         quit();
     }
 
-    private void makeImagePicker () {
-        HBox complete = new HBox();
-        Text label = new Text("Image");
-        label.setFill(Color.WHITE);
-        Button image = new Button("Choose Image");
-        image.setOnAction( new EventHandler<ActionEvent>(){
-            
-            @Override
-            public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();
-                 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-                FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-                fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-                  
-                //Show open file dialog
-                File file = fileChooser.showOpenDialog(null);
-                getData().setImagePath(file.getAbsolutePath());
-            }
-        });
-        complete.getChildren().addAll(label, image);
-        this.getChildren().add(complete);
-    }
+//    private void makeImagePicker () {
+//        HBox complete = new HBox();
+//        Text label = new Text("Image");
+//        label.setFill(Color.WHITE);
+//        Button image = new Button("Choose Image");
+//        image.setOnAction( new EventHandler<ActionEvent>(){
+//            
+//            @Override
+//            public void handle(ActionEvent t) {
+//                FileChooser fileChooser = new FileChooser();
+//                 
+//                //Set extension filter
+//                FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+//                FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+//                fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+//                  
+//                //Show open file dialog
+//                File file = fileChooser.showOpenDialog(null);
+//                getData().setImagePath(file.getAbsolutePath());
+//            }
+//        });
+//        complete.getChildren().addAll(label, image);
+//        this.getChildren().add(complete);
+//    }
 
     private void makeArchetypePicker(){
         HBox complete = new HBox();

@@ -16,10 +16,9 @@ public class TextObjectBuilder extends Builder{
     public TextObjectBuilder (EditElementable editor, Stage popup) {
         super(editor, popup);
         makeText();
-        makeXLocationPicker();
-        makeYLocationPicker();
+       // makeXLocationPicker();
+       // makeYLocationPicker();
         makeCreate();
-        
     }
 
     public void makeText(){
@@ -32,7 +31,8 @@ public class TextObjectBuilder extends Builder{
     }
     @Override
     public void compile () {
-        VoogaText text = new VoogaText(getData().getX(), getData().getY(), myText.getText());
+        VoogaText text = new VoogaText(myText.getText());
+        getManager().addGameElements(text);
         quit();
     }
 

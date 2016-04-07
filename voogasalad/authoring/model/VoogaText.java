@@ -29,6 +29,10 @@ public class VoogaText extends TextField implements Elementable{
         this.setText(text);
     }
     
+    public VoogaText (String text) {
+       this(0, 0, text);
+    }
+
     private void init(){
         this.setId(UUID.randomUUID().toString());
         setBackground(Background.EMPTY);
