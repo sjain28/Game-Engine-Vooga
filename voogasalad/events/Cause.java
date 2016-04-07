@@ -5,8 +5,8 @@ public abstract class Cause {
 	 private Event myEvent;	
 	 public abstract boolean check();
 	 
-	 public void setEvent(Event e){
-		 myEvent = e;
+	 public Cause(Event event){
+		 myEvent = event;
 	 }
 	 
 	 public Event getEvent(){

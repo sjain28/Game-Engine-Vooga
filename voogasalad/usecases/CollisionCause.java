@@ -4,7 +4,7 @@ import java.util.List;
 
 import usecases.Sprite;
 
-public class CollisionCause extends Cause{
+private class CollisionCause extends Cause{
 
 	private List<Sprite> groupA;
 	private List<Sprite> groupB;

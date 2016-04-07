@@ -14,13 +14,12 @@ public abstract class Event {
 		myCauses = cause;
 		myEffects = effect;
 		
-		for(Cause c: myCauses){
-			c.setEvent(this);
-		}
 		for(Effect e: myEffects){
 			e.setEvent(this);
 		}
 	}
+	
+	
 	
 	public void setManager(SpriteManager manager){
 		mySpriteManager = manager;

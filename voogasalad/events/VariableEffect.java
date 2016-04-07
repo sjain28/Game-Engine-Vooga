@@ -8,8 +8,8 @@ public class VariableEffect extends Effect {
     private VoogaNumber myValue;
     private double newValue;
 
-    public VariableEffect () {
-        // TODO Auto-generated constructor stub
+    public VariableEffect (Event event) {
+        super(event);
     }
 
     @Override

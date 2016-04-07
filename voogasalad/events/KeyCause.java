@@ -9,7 +9,8 @@ public class KeyCause extends Cause {
 	private String myKeys;
 	private boolean myValue;
 	
-	public KeyCause(String key) {
+	public KeyCause(String key, Event event) {
+		super(event);
 		myKeys = key;
 	}
 

@@ -2,6 +2,7 @@ package gameengine;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import tools.interfaces.VoogaData;
 /**
@@ -42,5 +43,9 @@ public class SpriteFactory {
 	}
 	public Sprite getArchetype(String archetype){
 		return myArchetypes.get(archetype);
+	}
+	
+	public Set<String> getAllArchetypeNames(){
+		return myArchetypes.keySet();
 	}
 }
