@@ -18,6 +18,7 @@ import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import events.Event;
 import gameengine.Sprite;
+import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -28,6 +29,8 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
     private Set<String> myIds;
+    
+    private SpriteFactory spriteFactory;
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
@@ -130,5 +133,8 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
             e.printStackTrace();
         }
     }
-
+    
+    public SpriteFactory getSpriteFactory(){
+        return spriteFactory;
+    }
 }

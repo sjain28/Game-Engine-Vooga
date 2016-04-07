@@ -12,6 +12,12 @@ import tools.interfaces.VoogaData;
  * @author Krista
  *
  */
+
+//TODO: 
+//Add method to create a new Archetype
+//Saving to library
+//Importing from library
+
 public class SpriteFactory {
 
 	private HashMap<String,Sprite> myArchetypes; 
@@ -19,6 +25,7 @@ public class SpriteFactory {
 	public SpriteFactory() {
 		myArchetypes = new HashMap<String,Sprite>();
 	}
+	
 	/**
 	 * Create a completely new Sprite of a given archetype
 	 * @param archetype
@@ -27,9 +34,7 @@ public class SpriteFactory {
 	public Sprite createSprite(String archetype){
 		Sprite toCopy = myArchetypes.get(archetype);
 		Map<String, VoogaData> newProperties = new HashMap<String, VoogaData>(toCopy.getParameterMap());
-		Sprite clone = new Sprite(toCopy.getImagePath(), archetype);
-		clone.setProperties(newProperties);
-		return clone;
+		return new Sprite(toCopy.getImagePath(), archetype, newProperties);
 	}
 	
 	public void setArchetype(String archetype, Sprite s){

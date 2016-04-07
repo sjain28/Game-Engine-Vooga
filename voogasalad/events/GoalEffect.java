@@ -1,6 +1,6 @@
 package events;
 
-public class GoalEffect implements Effect {
+public class GoalEffect extends Effect {
 
     public GoalEffect () {
         // TODO Auto-generated constructor stub
