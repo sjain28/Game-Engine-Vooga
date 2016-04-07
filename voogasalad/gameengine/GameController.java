@@ -1,5 +1,4 @@
 package gameengine;
-import java.io.File;
 import java.util.List;
 
 /**
@@ -42,8 +41,9 @@ public class GameController {
 	private void step(){
 		myCurrentLevelHandler.update();
 		List<Object> updatedObjects = myCurrentLevelHandler.extractUpdatedObjects();
-		//render display with updated objects
+		//Display.renderWith(updatedObjects);
 	}
+	
 	public void wonLevel(){
 		if(myCurrentLevel == myLevels.size()-1){
 			//tell the display to display whatever they display when you've won a game
