@@ -9,11 +9,13 @@ import java.util.List;
  * 
  */
 public class GameController {
-	//private FileReadManager myFileReader;
-	/**list of levelUrls w links to the xml representing a given level**/
+	/**level logic**/
 	private List<String> myLevels;
-	
 	private FileReader myFileReader;
+	private LevelHandler myCurrentLevelHandler;
+	private int myCurrentLevel;
+	
+	/**display objects**/
 	
 	/**
 	 * Takes in a File of urls and initializes a Queue of 
@@ -24,16 +26,41 @@ public class GameController {
 		myFileReader = new FileReader();
 		
 		//parse through file and extract the game level urls here
-		String 
-		
-		myFileReader = new FileReader();
-		myFileReader.createLevelObjects()
-	}
-	public void startLevel(){
-		
+		myLevels = extractLevelURLS(fileName); 
+		myCurrentLevel = 0;
 	}
 	
-	private String extractLevelURLS(){
+	public void startLevel(){
+		//create all level objects with the file reader for the level you're on
+		myCurrentLevelHandler = myFileReader.createLevelObjects(myLevels.get(myCurrentLevel));
+	}
+	
+	public void runLevel(){
+		//timer in here to run steps and update both the logic and gui
+	}
+	
+	private void step(){
+		List<Object> updatedObjects = myCurrentLevelHandler.update();
+		//render display 
+	}
+	public void wonLevel(){
+		if(myCurrentLevel == myLevels.size()-1){
+			//tell the display to display whatever they display when you've won a game
+		}
+		else{
+			//tell the display to display whatever they display when you've won a level 
+			//and must proceed to the next.
+			myCurrentLevel++;
+		}
+	}
+	
+	public void lostLevel(){
+		//tell the display to display restart game button and a you lost the game sign
+		
+		myCurrentLevel = 1;
+	}
+	
+	private List<String> extractLevelURLS(String filename){
 		//TODO: Implement this
 		return null;
 	}

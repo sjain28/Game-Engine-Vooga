@@ -23,19 +23,21 @@ public class EngineObjectManager {
 	/**Global Variable info**/
 	private Map<String, VoogaData> myGlobalVariables;
 
-	
 	/**
 	 * Takes in a map of Id's to sprite's and a sprite factory
 	 * organizes the sprite's in terms of archetype as well
 	 * @param sprites
 	 * @param factory
 	 */
-	public EngineObjectManager(Map<Object,Sprite> sprites,  SpriteFactory factory) {
-		mySprites = sprites;
+	public EngineObjectManager(List<Sprite> sprites, List<VoogaText> text, SpriteFactory factory) {
+		//mySprites = sprites;
+		
+		//TODO: Once constructor is figured out, intialize all objects here.
+		
 		mySpriteFactory = factory;
 		//place Sprite's by archetype and id in their correct maps
 		for(Object key : mySprites.keySet()){
-			organizeSpritesByArchetype(mySprites.get(key));
+			organizeSpriteByArchetype(mySprites.get(key));
 		}
 	}
 	
@@ -65,7 +67,7 @@ public class EngineObjectManager {
 	public Sprite addSprite(String archetype){
 		Sprite newSprite = mySpriteFactory.createSprite(archetype);
 		mySprites.put(newSprite.getID(),newSprite);
-		organizeSpritesByArchetype(newSprite);
+		organizeSpriteByArchetype(newSprite);
 		return newSprite;
 	}
 	
@@ -82,7 +84,7 @@ public class EngineObjectManager {
 	 * organizes all the Sprite's by archetype as well
 	 * @param s
 	 */
-	private void organizeSpritesByArchetype(Sprite s){
+	private void organizeSpriteByArchetype(Sprite s){
 		String archetype = s.getArchetype();
 		if(!mySpriteCategories.containsKey(archetype)){
 			List<Object> ids = new ArrayList<Object>();
@@ -108,5 +110,26 @@ public class EngineObjectManager {
 	 */
 	public VoogaText getText(Object id){
 		return myText.get(id);
+	}
+	
+	/**
+	 * put all objects into a generic list of display-able objects
+	 * to be accessed by the GameRunner after every update cycle.
+	 * 
+	 * TODO: Make VoogaText and Sprite extend the same thing so they can 
+	 * be stored in the same map in the future and so that they 
+	 * don't need to be transfered to the same list every time they 
+	 * are updated.
+	 * @return
+	 */
+	public List<Object> getAllDisplayableObjects(){
+		List<Object> displayableobjects = new ArrayList<Object>();
+		
+		for(Object key : mySprites.keySet()){
+			displayableobjects.add(mySprites.get(key));
+		}
+		
+		return null;
+		
 	}
 }
