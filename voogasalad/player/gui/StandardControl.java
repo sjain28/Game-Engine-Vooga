@@ -11,7 +11,8 @@ import javafx.scene.layout.HBox;
  * @author Hunter Lee
  *
  */
-public class StandardControl {
+public class StandardControl implements IControl {
+	
 	
 	HBox myControl;
 	

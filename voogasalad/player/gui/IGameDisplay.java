@@ -3,10 +3,14 @@ package player.gui;
 /**
  * Interface for GameDisplay
  * 
- * @author Heeb
+ * @author Hunter Lee
  *
  */
 public interface IGameDisplay {
+	
+	IPromptFactory myPromptFactory = new PromptFactory();
+	
+	IControl myControl = new StandardControl();
 	
 	void read();
 	
