@@ -30,9 +30,9 @@ public class FileReader {
         }
         return fileReaderInstance;
     }
-    
+        
 	@SuppressWarnings("unchecked")
-	private void createObjects(String fileName){
+	public void createLevelObjects(String fileName){
 		XStream myUnSerializer = new XStream(new StaxDriver());
 		try {
 			 spriteList  = (List<Sprite>) myUnSerializer.fromXML("sprites",new FileInputStream(new File(fileName)));
