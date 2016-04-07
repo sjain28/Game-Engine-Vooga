@@ -1,6 +1,11 @@
 package player.gui;
 
-
+/**
+ * Interface for GameDisplay
+ * 
+ * @author Heeb
+ *
+ */
 public interface IGameDisplay {
 	
 	void read();
