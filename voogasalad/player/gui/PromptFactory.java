@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  * @author Hunter Lee
  *
  */
-public class PromptFactory {
+public class PromptFactory implements IPromptFactory {
 
 	//    private static final int XPROMPTSIZE = 500;
 	//    private static final int YPROMPTSIZE = 300;

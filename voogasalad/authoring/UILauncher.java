@@ -17,21 +17,13 @@ public class UILauncher {
 	public UILauncher(Stage primaryStage, CompleteAuthoringModelable model) {
 		
 		// ***
-		// new Splash();
-		
-		// ***
-		// PauseTransition delay = new PauseTransition(SPLASH_DURATION);
-		// delay.setOnFinished(e -> {
-			
+		//new Splash(e -> {
 			UIManager manager = new UIManager(model);
 			Scene scene = new VoogaScene(manager);
 			primaryStage.setScene(scene);
 			primaryStage.setMaximized(true);
 			primaryStage.show();
-			
-		// ***
-		// });
-		// delay.play();
+		//});
 		
 	}
 
