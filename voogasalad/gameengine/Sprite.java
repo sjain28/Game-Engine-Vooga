@@ -74,6 +74,9 @@ public class Sprite implements Moveable, Effectable{
     
     public void setProperties(Map<String, VoogaData> properties){
     	myProperties = properties;
+	}	
+    public HashMap<String, VoogaData> getPropertiesMap() {
+    	return (HashMap<String, VoogaData>) myProperties;
     }
 
     public Object getID () {

@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
-import authoring.gui.PropertiesWindow;
+import authoring.gui.PropertiesPane;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.ResourceUI;
@@ -18,6 +18,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 /**
  * The UIGrid assembles the window components into a grid
@@ -35,9 +36,9 @@ public class UIGrid extends GridPane {
 
 	private void sector() {
 		ColumnConstraints leftColumn = new ColumnConstraints();
-		leftColumn.setPercentWidth(30);
+		leftColumn.setPercentWidth(25);
 		ColumnConstraints rightColumn = new ColumnConstraints();
-		rightColumn.setPercentWidth(70);
+		rightColumn.setPercentWidth(75);
 		RowConstraints topRow = new RowConstraints();
 		topRow.setPercentHeight(33);
 		RowConstraints middleRow = new RowConstraints();
@@ -54,7 +55,7 @@ public class UIGrid extends GridPane {
 		designBoard = new DesignBoard();
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
-		PropertiesWindow properties = new PropertiesWindow();
+		PropertiesPane properties = new PropertiesPane();
 		this.add(properties, 0, 1);
 		EventsWindow events = new EventsWindow();
 		this.add(events, 0, 2);

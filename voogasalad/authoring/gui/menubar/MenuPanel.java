@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import authoring.interfaces.gui.Windowable;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import auxiliary.OrderedProperties;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,14 +23,12 @@ public class MenuPanel extends MenuBar implements Windowable {
 	private static final String MENU_KEY = "Menu";
 	private static final String ITEM_KEY = "Item";
 	
-	public MenuPanel(EventHandler<ActionEvent> menuItemEvent) {
-		
-		menubarProperties = VoogaBundles.menubarProperties;
-		makeMenus(menuMap(menuItemEvent));
-		
+	public MenuPanel (CompleteAuthoringModelable elementManager, EventHandler<ActionEvent> menuItemEvent) {
+	    menubarProperties = VoogaBundles.menubarProperties;
+            makeMenus(menuMap(menuItemEvent));
 	}
-	
-	/**
+
+    /**
 	 * Returns a map of menu names to menu items.
 	 * @param menuItemEvent
 	 * @return

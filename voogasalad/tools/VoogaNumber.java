@@ -7,6 +7,10 @@ import tools.interfaces.VoogaData;
 public class VoogaNumber implements VoogaData{
     private double value;
     
+    public VoogaNumber(){
+    	this.value = (Double) 0.0;
+    }
+    
     public VoogaNumber(Number number){
         this.value = (Double) number;
     }
