@@ -169,44 +169,44 @@ public class PropertiesPane extends VBox implements Windowable{
 		Scene addPropScene = new VoogaScene(root);
 		
 		
-//		Dialog<Pair<String, String>> dialog = new Dialog<>();
-//		dialog.setTitle("Add New Property");
-//		dialog.setHeaderText("Add New Property");
-//	
-//		ButtonType loginButtonType = new ButtonType("Add", ButtonData.OK_DONE);
-//		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
-//		
-//		GridPane grid = new GridPane();
-//		grid.setHgap(10);
-//		grid.setVgap(10);
-//		grid.setPadding(new Insets(20, 150, 10, 10));
-//		
-//		TextField propertyName = new TextField();
-//		propertyName.setPromptText("Property Name");
-//		
-//		ChoiceBox propertyType = new ChoiceBox();
-//		propertyType.getItems().addAll(factory.getChoices());
-//
-//		grid.add(new Label("Name:"), 0, 0);
-//		grid.add(propertyName, 1, 0);
-//		grid.add(new Label("Type:"), 0, 1);
-//		grid.add(propertyType, 1, 1);
-//
-//		dialog.getDialogPane().setContent(grid);
-//		
-//		dialog.setResultConverter(dialogButton -> {
-//		    if (dialogButton == loginButtonType) {
-//		        return new Pair<>(propertyName.getText(), propertyType.getValue().toString());
-//		    }
-//		    return null;
-//		});
-//
-//		Optional<Pair<String, String>> result = dialog.showAndWait();
-//
-//		result.ifPresent(entry -> {
-//		    VoogaData newVGData = factory.createNewProperty(entry.getValue());
-//		    myElementable.addProperty(entry.getKey(), newVGData);
-//		});
+		Dialog<Pair<String, String>> dialog = new Dialog<>();
+		dialog.setTitle("Add New Property");
+		dialog.setHeaderText("Add New Property");
+	
+		ButtonType loginButtonType = new ButtonType("Add", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+		
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(20, 150, 10, 10));
+		
+		TextField propertyName = new TextField();
+		propertyName.setPromptText("Property Name");
+		
+		ChoiceBox propertyType = new ChoiceBox();
+		propertyType.getItems().addAll(factory.getChoices());
+
+		grid.add(new Label("Name:"), 0, 0);
+		grid.add(propertyName, 1, 0);
+		grid.add(new Label("Type:"), 0, 1);
+		grid.add(propertyType, 1, 1);
+
+		dialog.getDialogPane().setContent(grid);
+		
+		dialog.setResultConverter(dialogButton -> {
+		    if (dialogButton == loginButtonType) {
+		        return new Pair<>(propertyName.getText(), propertyType.getValue().toString());
+		    }
+		    return null;
+		});
+
+		Optional<Pair<String, String>> result = dialog.showAndWait();
+
+		result.ifPresent(entry -> {
+		    VoogaData newVGData = factory.createNewProperty(entry.getValue());
+		    myElementable.addProperty(entry.getKey(), newVGData);
+		});
 		
 		displayProperties();
 	}
