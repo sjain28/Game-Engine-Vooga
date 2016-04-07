@@ -19,8 +19,6 @@ public abstract class VoogaEvent {
 		}
 	}
 	
-	
-	
 	public void setManager(SpriteManager manager){
 		mySpriteManager = manager;
 	}
