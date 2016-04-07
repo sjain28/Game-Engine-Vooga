@@ -7,6 +7,8 @@ import authoring.model.VoogaText;
 import tools.interfaces.VoogaData;
 
 /** Manages Sprite's, Text, and GlobalVariables**/
+//TODO: This class is very similar to the ElementManager on the front end
+//Potentially compose the ElementManager w this to reduce redundancy.
 
 public class EngineObjectManager {
 	
