@@ -1,10 +1,17 @@
 package application;
 
 import authoring.Tester;
+import authoring.gui.PropertiesPane;
 import authoring.resourceutility.ResourceUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * This class is the entrypoint to start the program.
+ * It is purely boiler-plate code delegating responsibility
+ * of launching to other classes.
+ *
+ */
 public class Main extends Application {
 
 	@Override
@@ -14,9 +21,6 @@ public class Main extends Application {
 		
 		// Launches Mosaic
 		//new Tester();
-		
-		// Launches Resource Utility standalone
-		//new ResourceUI(primaryStage);
 	}
 	
 	public static void main(String[] args) {

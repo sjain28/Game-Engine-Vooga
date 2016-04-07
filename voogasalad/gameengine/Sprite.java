@@ -2,32 +2,37 @@ package gameengine;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import authoring.interfaces.Moveable;
 import events.Effectable;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Vector;
+import tools.VoogaNumber;
 import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable{
-
+	
+	public static final String MASS = "mass";
     private Vector myVelocity;
     private Vector myLoc;
-    private String myID;
+    private Object myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
     private String myArchetype;
-    
     private transient ImageView myImage;
     
-    public Sprite (String imagePath, String id, double x, double y) {
+    public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties, VoogaNumber mass){
+    	myID = UUID.randomUUID();
+    	myArchetype = archetype;
         myImagePath = imagePath;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
-        myID = id;
         myProperties = new HashMap<String, VoogaData>();
-        myLoc = new Vector(x,y);
+        myProperties = properties;
+        myProperties.put(MASS, mass);
+        myLoc = new Vector(0,0);
+        myVelocity = new Vector(0,0);
     }
     
     /**
@@ -70,17 +75,23 @@ public class Sprite implements Moveable, Effectable{
     public VoogaData getProperty (String s) {
         return myProperties.get(s);
     }
+    
+    public HashMap<String, VoogaData> getPropertiesMap() {
+    	return (HashMap<String, VoogaData>) myProperties;
+    }
 
-    public String getID () {
+    public Object getID () {
         return myID;
     }
 
     public ImageView getImage () {
         return myImage;
     }
+    
     public void setArchetype(String archetype){
     	myArchetype = archetype;
     }
+    
     public String getArchetype(){
     	return myArchetype;
     }
@@ -96,9 +107,7 @@ public class Sprite implements Moveable, Effectable{
     }
 
 	@Override
-	public Map getParameterMap() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, VoogaData> getParameterMap() {
+		return myProperties;
 	}
-
 }

@@ -14,4 +14,6 @@ public class VoogaBundles {
 
 	public final static ResourceBundle extensionProperties = ResourceBundle.getBundle("resources/extensions");
 	public final static OrderedProperties menubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/menunames.properties"));
+	public final static ResourceBundle toolbarProperties = ResourceBundle.getBundle("resources/toolbarbuttons");
+
 }

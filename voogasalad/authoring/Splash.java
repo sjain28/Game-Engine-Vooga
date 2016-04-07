@@ -1,14 +1,21 @@
 package authoring;
 
 import javafx.animation.PauseTransition;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+/**
+ * This launches the splash screen for a specified duration, after which it closes.
+ *
+ */
 public class Splash extends Pane {
 
 	public Splash() {
