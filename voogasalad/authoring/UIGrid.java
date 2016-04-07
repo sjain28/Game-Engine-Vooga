@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
+import authoring.gui.PropertiesPane;
 import authoring.gui.PropertiesWindow;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
@@ -54,7 +55,7 @@ public class UIGrid extends GridPane {
 		designBoard = new DesignBoard();
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
-		PropertiesWindow properties = new PropertiesWindow();
+		PropertiesPane properties = new PropertiesPane();
 		this.add(properties, 0, 1);
 		EventsWindow events = new EventsWindow();
 		this.add(events, 0, 2);

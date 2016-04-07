@@ -6,33 +6,29 @@ package authoring.gui;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
+import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.gui.items.NewPropertyFactory;
 import authoring.interfaces.Elementable;
 
 import authoring.interfaces.gui.Windowable;
-import javafx.application.Platform;
+import authoring.resourceutility.ButtonMaker;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -41,35 +37,34 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import tools.VoogaBoolean;
 import tools.interfaces.VoogaData;
 
-public class PropertiesPane extends VBox implements Windowable{
+public class PropertiesPane extends TabPane implements Windowable {
+	
+	private static final double SPACING = 10;
 
+	private VBox box;
 	private Elementable myElementable;
 	private Map<String, VoogaData> propertiesMap;
-	private VBox propertiesPane = new VBox(10);
-	private VBox propertyName = new VBox(10);
-	private VBox propertyVoogaData = new VBox(10);
 	private HBox propertiesHBox = new HBox(10);
-	private ScrollPane myScrollPane = new ScrollPane();
+	private ScrollPane myScrollPane;
+	private Stage stage;
 	
 	/**
 	 * Constructor to instantiate the properties Pane
 	 */	
 	// TEST CONSTRUCTOR
-	public PropertiesPane(Stage stage) {
-		
+	public PropertiesPane() {
+		Tab properties = new Tab("Properties");
+		box = new VBox(SPACING);
 		propertiesMap = new HashMap<String, VoogaData>();
 		propertiesMap.put("Gravity", new VoogaBoolean());
-		myScrollPane.setPrefSize(300, 100);
+		myScrollPane = new ScrollPane();
+		myScrollPane.setContent(box);
+		properties.setContent(myScrollPane);
+		this.getTabs().add(properties);
 		displayProperties();
-		
-		this.setSpacing(10);
-		Scene scene = new VoogaScene(this);
-		stage.setScene(scene);
-		stage.show();
 	}
 	
 	/**
@@ -88,20 +83,16 @@ public class PropertiesPane extends VBox implements Windowable{
 
 	public void displayProperties() {
 		this.getChildren().clear();
-		propertyName.getChildren().clear();
-		propertyVoogaData.getChildren().clear();
 		propertiesHBox.getChildren().clear();
 		
-		for(String str: propertiesMap.keySet()) {
-			//can refactor here
-			Text name = new Text(str);
-			name.setFill(Paint.valueOf("WHITE"));
-			name.setFont(new Font(23));
+		Text name = null; Node data = null;
+		
+		for(String property: propertiesMap.keySet()) {
+			name = new CustomText(property);
 			
-			// can refactor here
 			ContextMenu menu = new ContextMenu();
 			MenuItem delete = new MenuItem("Delete");
-			delete.setOnAction(e -> removeProperty(str));
+			delete.setOnAction(e -> removeProperty(property));
 			menu.getItems().add(delete);
 		
 			name.setOnMouseClicked(e -> {
@@ -110,13 +101,11 @@ public class PropertiesPane extends VBox implements Windowable{
 				}
 			});
 			
-			propertyName.getChildren().add(name);
-			propertyVoogaData.getChildren().add(propertiesMap.get(str).display());
+			data = propertiesMap.get(property).display();
 		}
 		
-		propertiesHBox.getChildren().addAll(propertyName, propertyVoogaData);
-		myScrollPane.setContent(propertiesHBox);
-		this.getChildren().add(myScrollPane);
+		propertiesHBox.getChildren().addAll(name, data);
+		this.box.getChildren().add(propertiesHBox);
 		
 		createButtons();
 	}
@@ -124,20 +113,15 @@ public class PropertiesPane extends VBox implements Windowable{
 	/**
 	 * Creates the Add, Apply, and Cancel Buttons for the Properties Pane.
 	 */
-	//CAN PUT INTO DIFFERENT CLASS LATER
 	public void createButtons() {
+		Button addProperty = new ButtonMaker().makeButton("Add Property", e -> addNewProperty());
 		
-		Button addProperty = new Button("Add Property");
-		addProperty.setOnAction(e -> addNewProperty());
-		this.getChildren().add(addProperty);
-		
-		HBox buttonsPanel = new HBox(30);
-		Button apply = new Button("Apply");
-		apply.setOnAction(e -> updateProperties());
-		Button cancel = new Button("Cancel"); //wtf to do here?
+		HBox buttonsPanel = new HBox(SPACING);
+		Button apply = new ButtonMaker().makeButton("Apply", e -> updateProperties());
+		Button cancel = new ButtonMaker().makeButton("Cancel", e -> this.stage.close());
 		
 		buttonsPanel.getChildren().addAll(apply, cancel);
-		this.getChildren().add(buttonsPanel);
+		this.box.getChildren().addAll(addProperty, buttonsPanel);
 	}
 	
 	public void removeProperty(String str) {
@@ -149,7 +133,7 @@ public class PropertiesPane extends VBox implements Windowable{
 	 * Updates all the properties that the user changed
 	 */
 	public void updateProperties() {
-		for (String s: propertiesMap.keySet()){
+		for (String s : propertiesMap.keySet()){
 			//propertiesMap.get(s).update();
 		}
 	}
@@ -158,57 +142,40 @@ public class PropertiesPane extends VBox implements Windowable{
 	 * Creates the Dialog Box that allows new Properties to be added
 	 */
 	public void addNewProperty() {
-		
 		NewPropertyFactory factory = new NewPropertyFactory();
-		Stage stage = new Stage();
-		Group root = new Group();
-		
-		root.getChildren().add(new Text("dafas"));
-		
-		
+		VBox root = new VBox();
+		stage = new Stage();
 		Scene addPropScene = new VoogaScene(root);
+		stage.setScene(addPropScene);
+		stage.setTitle("Add new property...");
 		
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(20, 150, 10, 10));
 		
-//		Dialog<Pair<String, String>> dialog = new Dialog<>();
-//		dialog.setTitle("Add New Property");
-//		dialog.setHeaderText("Add New Property");
-//	
-//		ButtonType loginButtonType = new ButtonType("Add", ButtonData.OK_DONE);
-//		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
-//		
-//		GridPane grid = new GridPane();
-//		grid.setHgap(10);
-//		grid.setVgap(10);
-//		grid.setPadding(new Insets(20, 150, 10, 10));
-//		
-//		TextField propertyName = new TextField();
-//		propertyName.setPromptText("Property Name");
-//		
-//		ChoiceBox propertyType = new ChoiceBox();
-//		propertyType.getItems().addAll(factory.getChoices());
-//
-//		grid.add(new Label("Name:"), 0, 0);
-//		grid.add(propertyName, 1, 0);
-//		grid.add(new Label("Type:"), 0, 1);
-//		grid.add(propertyType, 1, 1);
-//
-//		dialog.getDialogPane().setContent(grid);
-//		
-//		dialog.setResultConverter(dialogButton -> {
-//		    if (dialogButton == loginButtonType) {
-//		        return new Pair<>(propertyName.getText(), propertyType.getValue().toString());
-//		    }
-//		    return null;
-//		});
-//
-//		Optional<Pair<String, String>> result = dialog.showAndWait();
-//
-//		result.ifPresent(entry -> {
-//		    VoogaData newVGData = factory.createNewProperty(entry.getValue());
-//		    myElementable.addProperty(entry.getKey(), newVGData);
-//		});
+		TextField propertyName = new TextField();
+		propertyName.setPromptText("Property Name");
 		
-		displayProperties();
+		ChoiceBox<String> propertyType = new ChoiceBox<String>();
+		propertyType.getItems().addAll(factory.getChoices());
+
+		grid.add(new CustomText("Name:"), 0, 0);
+		grid.add(propertyName, 1, 0);
+		grid.add(new CustomText("Type:"), 0, 1);
+		grid.add(propertyType, 1, 1);
+
+		stage.show();
+		
+		Button add = new ButtonMaker().makeButton("Add", e -> {
+			VoogaData newVGData = factory.createNewProperty(propertyType.getValue());
+		    myElementable.addProperty(propertyName.getText(), newVGData);
+			displayProperties();
+			this.stage.close();
+		});
+
+		root.getChildren().addAll(grid, add);		
+		
 	}
 
 	@Override
