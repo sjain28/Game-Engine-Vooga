@@ -2,8 +2,8 @@ package events;
 
 public class GoalEffect extends Effect {
 
-    public GoalEffect () {
-        // TODO Auto-generated constructor stub
+    public GoalEffect (Event event) {
+        super(event);
     }
 
     @Override
