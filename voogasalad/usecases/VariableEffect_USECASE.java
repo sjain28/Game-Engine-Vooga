@@ -1,11 +1,11 @@
 package usecases;
 
-public class VariableEffect implements Effect{
+public class VariableEffect_USECASE implements Effect_USECASE{
 
 	private double spriteValue;
 	private double increaseAmount;
 	
-	public VariableEffect(double spriteInput, double increaseInput) {
+	public VariableEffect_USECASE(double spriteInput, double increaseInput) {
 		spriteValue = spriteInput;
 		increaseAmount = increaseInput;
 		// TODO Auto-generated constructor stub
