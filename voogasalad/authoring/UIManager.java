@@ -6,6 +6,7 @@ import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
@@ -27,15 +28,17 @@ import javafx.scene.layout.VBox;
  */
 // Temporarily extending GridPane, eventually will use Mosaic to display components
 public class UIManager extends VBox {
-    private ElementManager elementManager;
+    private CompleteAuthoringModelable elementManager;
     private Dragboard db;
     
-    public UIManager () {
+
+    public UIManager (CompleteAuthoringModelable model) {
+        elementManager = model;
         initializeComponents();
     }
 
     private void initializeComponents () {
-        this.getChildren().addAll(new MenuPanel(e -> {
+        this.getChildren().addAll(new MenuPanel(elementManager, e -> {
             try {
                 new MenuPanelHandlingMirror(e);
             }

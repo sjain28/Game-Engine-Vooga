@@ -11,7 +11,7 @@ import javafx.scene.control.MenuItem;
 public class MenuPanelHandlingMirror {
 
 	private static final String ITEM_NOT_IMPLEMENTED_ERROR = "This item has not been implemented. Please do so.";
-	private static final String PACKAGE_LOCATION = "authoring.gui.menubar.";
+	private static final String PACKAGE_LOCATION = "authoring.gui.menubar.menuitems.";
 	private static final String HANDLE = "handle";
 	
     private ActionEvent e;
