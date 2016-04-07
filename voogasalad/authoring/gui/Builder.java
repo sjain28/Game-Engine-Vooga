@@ -13,12 +13,10 @@ import javafx.stage.Stage;
 public abstract class Builder extends VBox{
     private SpriteFactory mySpriteFactory;
     private EditElementable myManager;
-    private ObjectData myData;
     private Stage myStage;
     
     protected Builder(EditElementable editor, Stage popup){
         mySpriteFactory = editor.getSpriteFactory();
-        myData = new ObjectData();
         myManager = editor;
         myStage = popup;
     }
@@ -26,10 +24,7 @@ public abstract class Builder extends VBox{
     protected EditElementable getManager(){
         return myManager;
     }
-    
-    protected ObjectData getData(){
-        return myData;
-    }
+   
     protected SpriteFactory getSpriteMaker(){
        return mySpriteFactory;
    }
@@ -42,25 +37,25 @@ public abstract class Builder extends VBox{
         buttons.getChildren().addAll(create, cancel);
         this.getChildren().add(buttons);
     }
-    
-    protected void makeXLocationPicker() {
-        HBox location = new HBox();
-        Text label = new Text("X Location");
-        label.setFill(Color.WHITE);
-        TextField input = new TextField();
-        location.getChildren().addAll(label, input);
-        this.getChildren().add(location);
-    }
-    
-    protected void makeYLocationPicker() {
-        HBox location = new HBox();
-        Text label = new Text("Y Location");
-        label.setFill(Color.WHITE);
-        TextField input = new TextField();
-        location.getChildren().addAll(label, input);
-        this.getChildren().add(location);
-    }
-
+//    
+//    protected void makeXLocationPicker() {
+//        HBox location = new HBox();
+//        Text label = new Text("X Location");
+//        label.setFill(Color.WHITE);
+//        TextField input = new TextField();
+//        location.getChildren().addAll(label, input);
+//        this.getChildren().add(location);
+//    }
+//    
+//    protected void makeYLocationPicker() {
+//        HBox location = new HBox();
+//        Text label = new Text("Y Location");
+//        label.setFill(Color.WHITE);
+//        TextField input = new TextField();
+//        location.getChildren().addAll(label, input);
+//        this.getChildren().add(location);
+//    }
+//
 
     protected void quit () {
         myStage.close();

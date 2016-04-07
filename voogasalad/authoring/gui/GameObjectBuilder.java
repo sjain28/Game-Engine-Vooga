@@ -6,8 +6,10 @@ import authoring.model.GameObject;
 import gameengine.Sprite;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -17,7 +19,7 @@ import tools.Vector;
 
 public class GameObjectBuilder extends Builder{
     
-    
+    private String myArchtype;
     
     public GameObjectBuilder(EditElementable editor, Stage popup){
         super(editor, popup);
@@ -30,13 +32,18 @@ public class GameObjectBuilder extends Builder{
     }
     
     public void compile () {
-        Sprite sprite = getSpriteMaker().createSprite(getData().getArchetype());
-        sprite.setPosition(new Vector(getData().getX(), getData().getY()));
-        if(getData().getImagePath() != null){
-            sprite.setImagePath(getData().getImagePath());
+        try{
+            Sprite sprite = getSpriteMaker().createSprite(myArchtype);
+            getManager().addGameElements(new GameObject(sprite));
+            quit();
         }
-        getManager().addGameElements(new GameObject(sprite));
-        quit();
+        catch(Exception NullPointerException){
+            Alert noArch = new Alert(AlertType.ERROR);
+            noArch.setTitle("Error");
+            noArch.setHeaderText("Initialization Problem");
+            noArch.setContentText("Please Select an Archtype");
+            noArch.showAndWait();
+        }
     }
 
 //    private void makeImagePicker () {
@@ -71,9 +78,10 @@ public class GameObjectBuilder extends Builder{
         ComboBox<String> archtypes = new ComboBox<String>();
         //uncomment once instantiated in order to actually fill with archetype options
         //archtypes.getItems().addAll(mySpriteFactory.getArchetypeOptions());
+        // remove below upon backend completion
         archtypes.getItems().add("Test");
         archtypes.setValue("Archtype");
-        archtypes.setOnAction(e -> getData().setArchetype(archtypes.getValue()));
+        archtypes.setOnAction(e -> myArchtype = archtypes.getValue());
         complete.getChildren().addAll(label, archtypes);
         this.getChildren().add(complete);
         
