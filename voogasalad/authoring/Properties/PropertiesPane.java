@@ -1,4 +1,4 @@
-package authoring.gui;
+package authoring.Properties;
 
 /**
  * Properties window to see all the current characteristics of a Sprite
@@ -43,7 +43,8 @@ import tools.interfaces.VoogaData;
 public class PropertiesPane extends TabPane implements Windowable {
 	
 	private static final double SPACING = 10;
-
+	private static final double FONT_SIZE = 23;
+	
 	private VBox box;
 	private Elementable myElementable;
 	private Map<String, VoogaData> propertiesMap;
@@ -89,7 +90,7 @@ public class PropertiesPane extends TabPane implements Windowable {
 		
 		for(String property: propertiesMap.keySet()) {
 			name = new CustomText(property);
-			
+			name.setFont(new Font(FONT_SIZE));
 			ContextMenu menu = new ContextMenu();
 			MenuItem delete = new MenuItem("Delete");
 			delete.setOnAction(e -> removeProperty(property));
