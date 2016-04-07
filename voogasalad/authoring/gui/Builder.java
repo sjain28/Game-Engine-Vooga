@@ -13,12 +13,12 @@ import javafx.stage.Stage;
 public abstract class Builder extends VBox{
     private SpriteFactory mySpriteFactory;
     private EditElementable myManager;
-    private SpriteData myData;
+    private ObjectData myData;
     private Stage myStage;
     
     protected Builder(EditElementable editor, Stage popup){
         mySpriteFactory = editor.getSpriteFactory();
-        myData = new SpriteData();
+        myData = new ObjectData();
         myManager = editor;
         myStage = popup;
     }
@@ -27,7 +27,7 @@ public abstract class Builder extends VBox{
         return myManager;
     }
     
-    protected SpriteData getData(){
+    protected ObjectData getData(){
         return myData;
     }
     protected SpriteFactory getSpriteMaker(){

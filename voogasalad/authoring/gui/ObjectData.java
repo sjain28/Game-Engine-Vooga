@@ -2,13 +2,13 @@ package authoring.gui;
 
 import javafx.scene.image.Image;
 
-public class SpriteData {
+public class ObjectData {
     private String myArchetype = "Default";
     private double myX = 0;
     private double myY = 0;
     private String myImagePath;
     
-    public SpriteData(){
+    public ObjectData(){
         myArchetype = "Default";
         myX = 0;
         myY = 0;

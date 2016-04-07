@@ -15,6 +15,7 @@ public class NewTextFileItem extends MenuItemHandler {
 	public NewTextFileItem(CompleteAuthoringModelable model) {
 		super();
 		myManager = model;
+		
 	}
 
 	@Override
