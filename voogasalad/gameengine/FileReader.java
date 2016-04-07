@@ -7,14 +7,14 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
-import events.Event;
+import events.VoogaEvent;
 
 /**File reader uses singleton design pattern**/
 
 public class FileReader {
     private static FileReader fileReaderInstance = null;
 	private List<Sprite> spriteList;
-	private List<Event> eventList;
+	private List<VoogaEvent> eventList;
 	private List<Variable> VariableList;
 	
 	/**
@@ -36,7 +36,7 @@ public class FileReader {
 		XStream myUnSerializer = new XStream(new StaxDriver());
 		try {
 			 spriteList  = (List<Sprite>) myUnSerializer.fromXML("sprites",new FileInputStream(new File(fileName)));
-			 eventList  = (List<Event>) myUnSerializer.fromXML("events",new FileInputStream(new File(fileName)));
+			 eventList  = (List<VoogaEvent>) myUnSerializer.fromXML("events",new FileInputStream(new File(fileName)));
 			 VariableList  = (List<Variable>) myUnSerializer.fromXML("variables",new FileInputStream(new File(fileName)));
 	    }
 	    catch (FileNotFoundException e) {
@@ -48,7 +48,7 @@ public class FileReader {
 		return spriteList;
 	}
 	
-	public List<Event> extractEventList(){
+	public List<VoogaEvent> extractEventList(){
 		return eventList;
 	}
 	
