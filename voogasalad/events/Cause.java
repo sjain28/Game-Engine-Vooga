@@ -1,16 +1,24 @@
 package events;
 
-public interface Cause {
+public abstract class Cause {
 	
-	 boolean check();
+	 private Event myEvent;	
+	 public abstract boolean check();
 	 
-	 //Causes Need: 
-	 //Access to Map of IDs to Sprites, and Map of Archetypes to IDs
+	 public void setEvent(Event e){
+		 myEvent = e;
+	 }
 	 
-	 //Effects need: 
-	 //Both of the above, and also the SpriteFactory incase the Effect has to create new Sprites
-	 
-	 //Options for transferring them: 
-	 //Getters in Cause and Effect superclasses
+	 public Event getEvent(){
+		 return myEvent;
+	 }
 	 
 }
+
+//Every cause and effect needs to look at both Sprite Maps from SpriteManager
+//Some effects will need to look at the SpriteFactory
+
+//Solution: Give all causes and effects a SpriteManager
+// EventManager has a SpriteManager
+//EventManager sets the SpriteManager of every Event that gets added
+//2 Options: Allow causes/effects to know their Event, or give them a SpriteManager

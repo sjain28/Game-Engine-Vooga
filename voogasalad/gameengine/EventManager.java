@@ -24,11 +24,15 @@ public class EventManager {
 	private List<Event> myEvents;
 	private List<String> keyCombos;
 	private Map<String, KeyCause> keyCauses;
+	private SpriteManager mySpriteManager;
+	private GlobalVariableManager myVariableManager;
 	
-	public EventManager() {
+	public EventManager(SpriteManager manager, GlobalVariableManager varManager) {
 		keyStrokes = new ArrayList<Character>();
 		myEvents = new ArrayList<Event>();
 		keyCauses = new TreeMap<String, KeyCause>();
+		mySpriteManager = manager;
+		myVariableManager = varManager;
 	}
 	
 	public void update(){
@@ -51,6 +55,8 @@ public class EventManager {
 				keyCombos.sort((String a, String b) -> -a.length() - b.length());
 			}
 		}
+		event.setSpriteManager(mySpriteManager);
+		event.setVariableManager(myVariableManager);
 		myEvents.add(event);
 	}
 	
