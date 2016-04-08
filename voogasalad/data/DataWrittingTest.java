@@ -28,17 +28,16 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import gameengine.Sprite;
-import authoring.interfaces.Elementable;
+
 import authoring.model.VoogaButton;
 import authoring.model.VoogaText;
 import gameengine.Sprite;
+
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import player.runner.GameRunner;
 import tools.VoogaBoolean;
 
 

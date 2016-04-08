@@ -15,22 +15,26 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.interfaces.gui.Saveable;
-import events.Event;
+import authoring.interfaces.model.CompleteAuthoringModelable;
+import events.VoogaEvent;
 import gameengine.Sprite;
+import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements Saveable {
+public class ElementManager implements Saveable, CompleteAuthoringModelable{
     private List<Node> myGameElements;
-    private List<Event> myEventList;
+    private List<VoogaEvent> myEventList;
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
     private Set<String> myIds;
+    
+    private SpriteFactory spriteFactory;
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
-        myEventList = new ArrayList<Event>();
+        myEventList = new ArrayList<VoogaEvent>();
         myGlobalVariables = new HashMap<String, VoogaData>();
         myXmlDataFile = null;
         myIds = new HashSet<String>();
@@ -65,16 +69,17 @@ public class ElementManager implements Saveable {
         return myGameElements;
     }
 
-    public void addEvents (Event ... events) {
+    public void addEvents (VoogaEvent ... events) {
         myEventList.addAll(Arrays.asList(events));
     }
 
-    public void removeEvents (Event ... events) {
+    public void removeEvents (VoogaEvent ... events) {
         myEventList.removeAll(Arrays.asList(events));
     }
     
     public Node getElement(String id){
         for (Node node : myGameElements){
+            
             if (node.getId().equals(id)){
                 return node;
             }
@@ -128,6 +133,10 @@ public class ElementManager implements Saveable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    
+    public SpriteFactory getSpriteFactory(){
+        return spriteFactory;
     }
 
 }

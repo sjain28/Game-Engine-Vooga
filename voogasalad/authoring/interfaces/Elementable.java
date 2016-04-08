@@ -11,8 +11,9 @@ import tools.interfaces.VoogaData;
  * @author Aditya Srinivasan, Arjun Desai, Harry Guo, Nick Lockett
  *
  */
-public interface Elementable{
+public interface Elementable extends Updatable{
     
-    public Map<Object,Object> getVoogaProperties();
-    
+    public Map<String,VoogaData> getVoogaProperties();
+    public void addProperty(String name, VoogaData data);
+    public void removeProperty(String name);
 }

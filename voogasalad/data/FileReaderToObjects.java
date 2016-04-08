@@ -13,7 +13,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
-import events.Event;
+import events.VoogaEvent;
 import gameengine.Variable;
 import javafx.scene.Node;
 
@@ -21,7 +21,7 @@ public class FileReaderToObjects {
 
 	private DataContainerOfLists data;
 	private List<Node> nodeList;
-	private List<Event> eventList;
+	private List<VoogaEvent> eventList;
 	private List<Variable> VariableList;
 	
 	public FileReaderToObjects(String fileName){
@@ -78,7 +78,7 @@ public class FileReaderToObjects {
 		return data.getNodeList();
 	}
 	
-	public List<Event> createEventList(){
+	public List<VoogaEvent> createEventList(){
 		return data.getEventList();
 	}
 	

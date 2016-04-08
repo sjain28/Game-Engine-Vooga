@@ -1,6 +1,5 @@
 package authoring.model;
 
-
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
@@ -13,21 +12,23 @@ import javafx.scene.input.TransferMode;
 import tools.Vector;
 import tools.interfaces.VoogaData;
 
-public class GameObject extends ImageView implements Moveable, Elementable{
+
+public class GameObject extends ImageView implements Moveable, Elementable {
+
 
     private Sprite mySprite;
-
-    public GameObject (String imagePath, Object id) {
-        super(imagePath);
-        this.setId(id.toString());
-        mySprite = new Sprite(imagePath,getId());
+    
+    public GameObject(Sprite sprite){
+        mySprite = sprite;
+        this.setImage(mySprite.getImage().getImage());
+        this.setTranslateX(mySprite.getPosition().getX());
+        this.setTranslateY(mySprite.getPosition().getY());
     }
     
-    //TODO: Send back immutable sprite
-    Sprite getSprite(){
+    // TODO: Send back immutable sprite
+    Sprite getSprite () {
         return mySprite;
     }
-
 
     @Override
     public Vector getVelocity () {
@@ -35,13 +36,12 @@ public class GameObject extends ImageView implements Moveable, Elementable{
         return null;
     }
 
-
     @Override
     public void setVelocity (Vector v) {
         // TODO Auto-generated method stub
     }
-    
-    void onDrag(MouseEvent event){
+
+    void onDrag (MouseEvent event) {
         Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
         ClipboardContent content = new ClipboardContent();
         // Store node ID in order to know what is dragged.
@@ -51,7 +51,25 @@ public class GameObject extends ImageView implements Moveable, Elementable{
     }
 
     @Override
-    public Map<Object, Object> getVoogaProperties () {
+    public Map<String, VoogaData> getVoogaProperties () {
         return null;
     }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addProperty (String name, VoogaData data) {
+        mySprite.addProperty(name, data);
+
+    }
+
+    @Override
+    public void removeProperty (String name) {
+        
+    }
+    
 }
