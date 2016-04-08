@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -19,57 +20,85 @@ public class StandardDisplay implements IGameDisplay {
 	
 	private static final int PANE_SIZE = 600;
 	
+//	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
 	private BorderPane myPane;
+	private Pane myGameScreen;
 	private PromptFactory myPrompt;
 	private List<Node> myListToDisplay;
 	
+	/**
+	 * Default constructor
+	 * 
+	 */
 	public StandardDisplay() {
 		
 		myStage = new Stage();
 		myPane = new BorderPane();
+		myGameScreen = new Pane();
 		myScene = new Scene(myPane, PANE_SIZE, PANE_SIZE);
 		myPrompt = new PromptFactory();
 		
 	}
-
-//	public void read(List listToDisplay) {
+	
+//	public StandardDisplay(IGameRunner gameRunner) {
 //		
-//		//TODO: What is this reading? Format of the file being read(Sprites)?
-//		setMyListToDisplay()
+//		this();
+//		this.myGameRunner = gameRunner;
+//		
 //	}
+
+	/**
+	 * Reads in the list of Nodes to display
+	 * 
+	 */
 	public void read(List<Node> listToDisplay) {
-		// TODO Auto-generated method stub
 		myListToDisplay = listToDisplay;
-		
-	}
-
-	@Override
-	public void display() {
-
-		//Creates the main pane
-		createPane();
-		//Shows the scene
-		getStage().show();
-		
-	}
-
-	@Override
-	public void createPrompt(String message) {
-		
-		getPrompt().prompt(message);
-		
 	}
 	
+	/**
+	 * Public method defined in the interface that displays
+	 * game display
+	 * 
+	 */
+	@Override
+	public void display() {
+		//Creates the main pane
+		createPane();
+		//Creates the game screen
+		populateGameScreen();
+		//Shows the scene
+		getStage().show();
+	}
+
+	/**
+	 * Creates an interactive prompt and shows it to the user
+	 * 
+	 */
+	@Override
+	public void createPrompt(String message) {
+		getPrompt().prompt(message);
+	}
+	
+	/**
+	 * Creates the game display
+	 * 
+	 */
 	private void createPane() {
-		
 		//Adds all components into the main border pane
-		getPane().setCenter(new StackPane());//TODO:this stackpane will be created elsewhere in createGameScreen()
+		getPane().setCenter(myGameScreen);
 		getPane().setBottom(myControl.createControl());
 		getStage().setScene(getScene());
-		
-		
+	}
+	
+	/**
+	 * Populates the game screen that goes into the center
+	 * of the game display (BorderPane)
+	 * 
+	 */
+	private void populateGameScreen() {
+		getListToDisplay().forEach(n -> getGameScreen().getChildren().add(n));
 	}
 
 	/**
@@ -112,6 +141,13 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	public void setListToDisplay(List<Node> myListToDisplay) {
 		this.myListToDisplay = myListToDisplay;
+	}
+
+	/**
+	 * @return the myGameScreen
+	 */
+	public Pane getGameScreen() {
+		return myGameScreen;
 	}
 
 }
