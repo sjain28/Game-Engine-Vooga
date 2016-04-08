@@ -12,7 +12,7 @@ public class DragDropTest extends Application{
     public void start (Stage primaryStage) throws Exception {
         DesignBoard designBoard = new DesignBoard();
         Scene scene = new Scene (designBoard);
-        VoogaText vt = new VoogaText("id");
+        VoogaText vt = new VoogaText();
         vt.setMaxWidth(100);
         vt.setMaxHeight(100);
         vt.setTranslateX(100);

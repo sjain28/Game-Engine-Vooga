@@ -2,6 +2,7 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import authoring.interfaces.Elementable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,10 +17,24 @@ import tools.interfaces.VoogaData;
 public class VoogaText extends TextField implements Elementable{
     
     Map<String,VoogaData> myProperties = new HashMap<String,VoogaData>();
+    public VoogaText(){
+        init();
+    }
     
     // stroke, color, font, text, size, name/group, position (x,y,z), 
-    public VoogaText(Object id){
-        this.setId(id.toString());
+    public VoogaText(double x, double y, String text){
+        init();
+        this.setTranslateX(x);
+        this.setTranslateY(y);
+        this.setText(text);
+    }
+    
+    public VoogaText (String text) {
+       this(0, 0, text);
+    }
+
+    private void init(){
+        this.setId(UUID.randomUUID().toString());
         setBackground(Background.EMPTY);
         this.setOnDragDetected((MouseEvent e) -> onDrag(e));
     }

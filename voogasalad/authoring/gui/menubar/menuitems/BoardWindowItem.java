@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class BoardWindowItem extends MenuItemHandler {
 	
 	public BoardWindowItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override

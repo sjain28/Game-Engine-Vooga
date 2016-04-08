@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class SelectAllEditItem extends MenuItemHandler {
 	
 	public SelectAllEditItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override

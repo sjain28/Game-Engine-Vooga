@@ -13,8 +13,7 @@ public class Increment extends Effect{
 
 	@Override
 	public void execute() {
-		
-		
+		super.getEvent();
 	}
 
 }
