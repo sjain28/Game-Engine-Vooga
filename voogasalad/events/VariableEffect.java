@@ -1,8 +1,6 @@
 package events;
 
 import java.lang.reflect.*;
-
-import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
@@ -11,7 +9,8 @@ public class VariableEffect extends Effect {
 	private String myMethod;
 	private String myVariable;
 
-	public VariableEffect (String method, String variable) {
+	public VariableEffect (Event event, String method, String variable) {
+		super(event);
 		myMethod = method;
 		myVariable = variable;
 	}
@@ -24,7 +23,15 @@ public class VariableEffect extends Effect {
 		String[] methodParameters = myMethod.split(" ");
 		try{
 			Method variableMethod = getMethodfromString(methods, methodParameters[0]);
-			variableMethod.invoke(variableData, methodParameters[1]); 
+			Class[] parameterTypes = variableMethod.getParameterTypes();
+			
+			if (methodParameters.length > 1){
+				variableMethod.invoke(variableData, parameterTypes[0].cast(methodParameters[1]));
+			}
+			else {
+				variableMethod.invoke(variableData);
+			}
+			
 		}catch (Exception e){
 
 		}
@@ -37,4 +44,5 @@ public class VariableEffect extends Effect {
 		}
 		return null;
 	}
+
 }

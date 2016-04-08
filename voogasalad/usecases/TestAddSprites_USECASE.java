@@ -13,7 +13,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import gameengine.Sprite;
 
-public class TestAddSprites {
+public class TestAddSprites_USECASE {
 	
     public static void main (String[] args){
        
