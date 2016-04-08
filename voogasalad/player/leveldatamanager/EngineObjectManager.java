@@ -1,9 +1,11 @@
-package gameengine;
+package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.model.VoogaText;
+import gameengine.Sprite;
+import gameengine.SpriteFactory;
 import tools.interfaces.VoogaData;
 
 /** Manages Sprite's, Text, and GlobalVariables**/
