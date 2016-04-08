@@ -1,13 +1,13 @@
 package events;
 
 import java.util.List;
-import gameengine.SpriteManager;
+import gameengine.EngineObjectManager;
 
 public class VoogaEvent {
 
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
-	private SpriteManager mySpriteManager;
+	private EngineObjectManager myObjectManager;
 
 	public void addCauses(List<Cause> cause){
 		myCauses = cause;
@@ -17,12 +17,12 @@ public class VoogaEvent {
 		myEffects = effect;
 	}
 	
-	public void setManager(SpriteManager manager){
-		mySpriteManager = manager;
+	public void setManager(EngineObjectManager manager){
+		myObjectManager = manager;
 	}
 	
-	protected SpriteManager getManager(){
-		return mySpriteManager;
+	protected EngineObjectManager getManager(){
+		return myObjectManager;
 	}
 	
 	public void update(){
