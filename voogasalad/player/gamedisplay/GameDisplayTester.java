@@ -1,7 +1,7 @@
 /**
  * 
  */
-package player.gamedisplay;
+package Player.gamedisplay;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,16 @@
-package player.gamerunner;
+package Player.gamerunner;
+import java.util.ArrayList;
 import java.util.List;
 
 import gameengine.FileReader;
-import player.leveldatamanager.LevelHandler;
+import javafx.scene.Node;
+import javafx.scene.shape.Circle;
+import Player.gamedisplay.GameDisplayTester;
+import Player.gamedisplay.IGameDisplay;
+import Player.gamedisplay.IPromptFactory;
+import Player.gamedisplay.PromptFactory;
+import Player.gamedisplay.StandardDisplay;
+import Player.leveldatamanager.LevelHandler;
 
 /**
  * The GameRunner is charge of running the game the user has built
@@ -18,7 +26,9 @@ public class GameController {
 	private int myCurrentLevel;
 	
 	/**display objects**/
-	
+	private IGameDisplay myGameDisplay;
+	private IGameDisplay myPromptFactory;
+
 	/**
 	 * Takes in a File of urls and initializes a Queue of 
 	 * urls that each represent a level
@@ -30,6 +40,10 @@ public class GameController {
 		//parse through file and extract the game level urls here
 		myLevels = extractLevelURLS(fileName); 
 		myCurrentLevel = 0;
+		
+		//Instantiate a game display
+		IPromptFactory myPromptFactory = new PromptFactory();
+		IGameDisplay myGameDisplay = new StandardDisplay();
 	}
 	
 	public void startLevel(){
@@ -44,9 +58,20 @@ public class GameController {
 	private void step(){
 		myCurrentLevelHandler.update();
 		List<Object> updatedObjects = myCurrentLevelHandler.extractUpdatedObjects();
+		myGameDisplay.read(toNodeList(updatedObjects));
+		myGameDisplay.display();
 		//Display.renderWith(updatedObjects);
 	}
-	
+	private List<Node> toNodeList(List<Object> list){
+		List<Node> nodeList = new ArrayList<Node>();
+		
+		Node r = new Circle(50);
+		r.setLayoutX(200);
+		r.setLayoutY(200);
+
+		nodeList.add(r);
+		return null;
+	}
 	public void wonLevel(){
 		if(myCurrentLevel == myLevels.size()-1){
 			//tell the display to display whatever they display when you've won a game

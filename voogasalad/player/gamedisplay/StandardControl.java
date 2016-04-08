@@ -1,4 +1,4 @@
-package player.gamedisplay;
+package Player.gamedisplay;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;

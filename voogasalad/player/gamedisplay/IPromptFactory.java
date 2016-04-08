@@ -1,4 +1,4 @@
-package player.gamedisplay;
+package Player.gamedisplay;
 
 /**
  * PromptFactory interface that provides public methods that creates

@@ -1,4 +1,4 @@
-package player.gamerunner;
+package Player.gamerunner;
 
 import java.util.function.Consumer;
 

@@ -8,9 +8,9 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import events.VoogaEvent;
-import player.leveldatamanager.EngineObjectManager;
-import player.leveldatamanager.EventManager;
-import player.leveldatamanager.LevelHandler;
+import Player.leveldatamanager.EngineObjectManager;
+import Player.leveldatamanager.EventManager;
+import Player.leveldatamanager.LevelHandler;
 
 /**File reader uses singleton design pattern**/
 
