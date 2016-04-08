@@ -2,27 +2,27 @@ package data;
 
 import java.util.List;
 
+import authoring.interfaces.Elementable;
 import events.VoogaEvent;
 import gameengine.Variable;
-import javafx.scene.Node;
 
 public class DataContainerOfLists {
 
 	private List<VoogaEvent> eventList;
-	private List<Node> nodeList;
+	private List<Elementable> elementableList;
 	private List<Variable> variableList;
 	
 	public DataContainerOfLists(){
 	}
 	
-	public DataContainerOfLists(List<Node> nodeList, List<Variable> variableList, List<VoogaEvent> eventList){
+	public DataContainerOfLists(List<Elementable> ElementableList, List<Variable> variableList, List<VoogaEvent> eventList){
 		this.eventList = eventList;
-		this.nodeList = nodeList;
+		this.elementableList = ElementableList;
 		this.variableList = variableList;
 	}
 	
-	public List<Node> getNodeList(){
-		return nodeList;
+	public List<Elementable> getElementableList(){
+		return elementableList;
 	}
 	public List<VoogaEvent> getEventList(){
 		return eventList;

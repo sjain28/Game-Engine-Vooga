@@ -5,7 +5,7 @@ import java.util.List;
 
 import gameengine.Sprite;
 import gameengine.Variable;
-
+import authoring.interfaces.Elementable;
 import authoring.model.VoogaButton;
 import authoring.model.VoogaText;
 import events.VoogaEvent;
@@ -13,6 +13,7 @@ import javafx.application.Application;
 import javafx.scene.Node;
 
 import javafx.stage.Stage;
+import player.gamerunner.GameRunner;
 import player.leveldatamanager.LevelDataManager;
 import tools.VoogaBoolean;
 
@@ -30,21 +31,21 @@ public class DataTest extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
         Sprite sprite = new Sprite("/bricks.jpg","6");
-        Node[] vts = new Node[10];
+        Elementable[] vts = new Elementable[10];
         Variable[] variables = new Variable[10];
         VoogaEvent[] events = new VoogaEvent[10];
         for (int i =0;i<3;i++){
             VoogaText vt = new VoogaText(""+i);
             vt.setTranslateX(100);
             vt.setTranslateY(100);
-            vt.setTranslateZ(1000);
+            vt.setTranslateZ(0);
             vts[i]=vt;
         }
         for (int i =3; i<5;i++){
             VoogaButton vt = new VoogaButton();
             vt.setTranslateX(100);
             vt.setTranslateY(100);
-            vt.setTranslateZ(1000);
+            vt.setTranslateZ(0);
             vts[i]=vt;
         }
         
@@ -58,7 +59,7 @@ public class DataTest extends Application {
             events[i] = event;
          }
         
-        List<Node> nodeList = new ArrayList<Node>();
+        List<Elementable> nodeList = new ArrayList<Elementable>();
         for (int i =0; i<4;i++){
         	nodeList.add(vts[i]);
         }
@@ -80,7 +81,7 @@ public class DataTest extends Application {
         VoogaBoolean vb = new VoogaBoolean(true);
         FileWriterFromObjects fileWriter = new FileWriterFromObjects();
         fileWriter.serialize(data, fileName);
-        LevelDataManager manager = new LevelDataManager(fileName);
+        GameRunner gameRunner = new GameRunner("level_doc.txt");
      //   DataContainerOfLists deserializedList = fileReader.getDataContainer();
 //        System.out.println("DONE");
 //        System.out.println(deserializedList);
