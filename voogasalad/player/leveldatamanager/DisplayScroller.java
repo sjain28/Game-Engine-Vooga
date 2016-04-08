@@ -13,21 +13,25 @@ import javafx.scene.Node;
  */
 public class DisplayScroller {
 
-	private int myScreenSize;
-	private int myAdjustFactor;
+	private int myScreenSizeX;
+	private int myScreenSizeY;
+	private int myAdjustFactorX;
+//	private int myAdjustFactorY;
 	private int myConstantScrollCenter;
 	
 	/**
 	 * Default constructor that sets the screen size to be used
-	 * in the class and myAdjustFactor which is defined to be
+	 * in the class and myAdjustFactorX which is defined to be
 	 * half of the screen size
 	 * 
 	 * @param screensize
 	 */
-	public DisplayScroller(int screensize) {
+	public DisplayScroller(int x, int y) {
 		
-		myScreenSize = screensize;
-		myAdjustFactor = screensize / 2;
+		myScreenSizeX = x;
+		myScreenSizeY = y;
+		myAdjustFactorX = myScreenSizeX / 2;
+//		myAdjustFactorY = myScreenSizeY / 2;
 		myConstantScrollCenter = 0;
 		
 	}
@@ -80,17 +84,17 @@ public class DisplayScroller {
 		
 		//double mainCharXPos = mainCharLocation.getX();
 		List<Node> nodesToDisplay;
-		if (mainCharXPos <= myAdjustFactor) {
+		if (mainCharXPos <= myAdjustFactorX) {
 			nodesToDisplay = allNodes.stream()
 					.map(n -> (Node) n)
-					.filter(n -> n.getLayoutX() <= myScreenSize)
+					.filter(n -> n.getLayoutX() <= myScreenSizeX)
 					.collect(Collectors.toList());
 		}
 		else {
 			nodesToDisplay = allNodes.stream()
 					.map(n -> (Node) n)
-					.filter(n -> n.getLayoutX() <= mainCharXPos + myAdjustFactor)
-					.filter(n -> n.getLayoutX() >= mainCharXPos - myAdjustFactor)
+					.filter(n -> n.getLayoutX() <= mainCharXPos + myAdjustFactorX)
+					.filter(n -> n.getLayoutX() >= mainCharXPos - myAdjustFactorX)
 					.collect(Collectors.toList());
 		}
 		return nodesToDisplay;
@@ -115,19 +119,33 @@ public class DisplayScroller {
 		return nodesToDisplay;
 		
 	}
-	
+
 	/**
-	 * @return the myScreenSize
+	 * @return the myScreenSizeX
 	 */
-	public int getScreenSize() {
-		return myScreenSize;
+	public int getScreenSizeX() {
+		return myScreenSizeX;
 	}
-	
+
 	/**
-	 * @param myScreenSize the myScreenSize to set
+	 * @param myScreenSizeX the myScreenSizeX to set
 	 */
-	public void setScreenSize(int myScreenSize) {
-		this.myScreenSize = myScreenSize;
+	public void setScreenSizeX(int myScreenSizeX) {
+		this.myScreenSizeX = myScreenSizeX;
+	}
+
+	/**
+	 * @return the myScreenSizeY
+	 */
+	public int getScreenSizeY() {
+		return myScreenSizeY;
+	}
+
+	/**
+	 * @param myScreenSizeY the myScreenSizeY to set
+	 */
+	public void setScreenSizeY(int myScreenSizeY) {
+		this.myScreenSizeY = myScreenSizeY;
 	}
 	
 }
