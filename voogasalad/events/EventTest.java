@@ -14,7 +14,7 @@ public class EventTest {
 		KeyCause tester = new KeyCause("A", e);
 		causes.add(tester);
 		
-		e.addCauses(causes);
+		e.addCause(tester);
 		
 		assertEquals("Adding causes", 1, e.getCauses().size());
 	}
@@ -27,7 +27,7 @@ public class EventTest {
 		VariableEffect tester = new VariableEffect(e);
 		effects.add(tester);
 		
-		e.addEffects(effects);
+		e.addEffect(tester);
 		
 		assertEquals("Adding causes", 1, e.getEffects().size());
 	}

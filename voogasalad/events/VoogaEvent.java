@@ -1,5 +1,6 @@
 package events;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import player.leveldatamanager.EngineObjectManager;
@@ -10,12 +11,17 @@ public class VoogaEvent {
 	private List<Effect> myEffects;
 	private EngineObjectManager myObjectManager;
 
-	public void addCauses(List<Cause> cause){
-		myCauses = cause;
+	public VoogaEvent(){
+		myCauses = new ArrayList<>();
+		myEffects = new ArrayList<>();
 	}
 	
-	public void addEffects(List<Effect> effect){
-		myEffects = effect;
+	public void addCause(Cause cause){
+		myCauses.add(cause);
+	}
+	
+	public void addEffect(Effect effect){
+		myEffects.add(effect);
 	}
 	
 	public void setManager(EngineObjectManager manager){
