@@ -7,7 +7,9 @@ import authoring.interfaces.Moveable;
 import events.Effectable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import tools.Position;
 import tools.Vector;
+import tools.Velocity;
 import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable{
@@ -27,8 +29,8 @@ public class Sprite implements Moveable, Effectable{
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
-        myLoc = new Vector(0,0);
-        myVelocity = new Vector(0,0);
+        myLoc = new Position(0,0);
+        myVelocity = new Velocity(0,0);
     }
     
     /**

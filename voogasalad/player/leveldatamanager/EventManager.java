@@ -44,6 +44,7 @@ public class EventManager {
 		}
 	}
 	
+
 	public void addEvent(VoogaEvent voogaEvent){
 		for(Cause c: voogaEvent.getCauses()){
 			if(c instanceof KeyCause){

@@ -15,6 +15,7 @@ import tools.interfaces.VoogaData;
 
 public class GameObject extends ImageView implements Moveable, Elementable {
 
+
     private Sprite mySprite;
     
     public GameObject(Sprite sprite){
