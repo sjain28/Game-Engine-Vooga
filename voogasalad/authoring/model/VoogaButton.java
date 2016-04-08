@@ -2,6 +2,7 @@ package authoring.model;
 
 import java.util.Map;
 import authoring.interfaces.Elementable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 import javafx.scene.input.ClipboardContent;
@@ -45,6 +46,12 @@ public class VoogaButton extends Button implements Elementable {
 	public void removeProperty(String name) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return this;
 	}
     
     

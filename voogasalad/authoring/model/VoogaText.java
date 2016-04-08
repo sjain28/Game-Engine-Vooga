@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import authoring.interfaces.Elementable;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
@@ -77,6 +78,12 @@ public class VoogaText extends TextField implements Elementable{
 	public void removeProperty(String name) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return this;
 	}
     
     

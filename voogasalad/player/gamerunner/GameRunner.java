@@ -33,6 +33,11 @@ public class GameRunner implements IGameRunner{
 		playGame();
 	}
 	
+	public GameRunner(String fileString) throws FileNotFoundException, IOException {
+		// TODO Auto-generated constructor stub
+		this(new File(fileString));
+	}
+	
 	/**
 	 * createLevels takes in a text file and out of that file creates a Queue of levels.
 	 * @throws IOException 
@@ -61,6 +66,7 @@ public class GameRunner implements IGameRunner{
 		while(iterator.hasNext()){
 			// if (!l.isWon)
 			String nextLevel = iterator.next();
+			System.out.println(levelQueue);
 			playLevel(nextLevel);
 		}
 	}
@@ -72,7 +78,8 @@ public class GameRunner implements IGameRunner{
 	
 	public void playLevel(String s){
 		currentLevelDataManager = new LevelDataManager(s);
-		myDisplay.display();
+		myDisplay.read(currentLevelDataManager.getDisplayableObjects());
+		myDisplay.display();;
 	}
 	
 

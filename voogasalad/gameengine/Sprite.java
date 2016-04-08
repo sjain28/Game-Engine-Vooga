@@ -3,8 +3,11 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Position;
@@ -12,7 +15,7 @@ import tools.Vector;
 import tools.Velocity;
 import tools.interfaces.*;
 
-public class Sprite implements Moveable, Effectable{
+public class Sprite implements Moveable, Effectable, Elementable{
 	
     private Vector myVelocity;
     private Vector myLoc;
@@ -105,5 +108,23 @@ public class Sprite implements Moveable, Effectable{
 	}
 	public String getArchetype(){
 		return myArchetype;
+	}
+
+	@Override
+	public Map<String, VoogaData> getVoogaProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeProperty(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return getImage();
 	}
 }
