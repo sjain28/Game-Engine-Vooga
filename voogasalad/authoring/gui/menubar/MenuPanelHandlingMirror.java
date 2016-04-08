@@ -1,5 +1,6 @@
 package authoring.gui.menubar;
 
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import auxiliary.VoogaException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.MenuItem;
@@ -15,6 +16,7 @@ public class MenuPanelHandlingMirror {
 	private static final String HANDLE = "handle";
 	
     private ActionEvent e;
+    private CompleteAuthoringModelable myManager;
 
     /**
      * Instantiates the menu panel handler.
@@ -22,9 +24,9 @@ public class MenuPanelHandlingMirror {
      * @param view
      * @param graphicsWindow
      */
-    public MenuPanelHandlingMirror (ActionEvent e) {
+    public MenuPanelHandlingMirror (ActionEvent e, CompleteAuthoringModelable manager) {
         this.e = e;
-        
+        myManager = manager;
         handleEvent();
     }
 
@@ -37,9 +39,10 @@ public class MenuPanelHandlingMirror {
         Class<?> clazz;
 		try {
 			clazz = Class.forName(PACKAGE_LOCATION + menuItem.getId());
-	        menuItemHandler = (MenuItemHandler) clazz.getConstructor().newInstance();
+	        menuItemHandler = (MenuItemHandler) clazz.getConstructor(CompleteAuthoringModelable.class).newInstance(myManager);
 			menuItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(menuItemHandler);
 		} catch (Exception ee) {
+		    ee.printStackTrace();
 			throw new VoogaException(ITEM_NOT_IMPLEMENTED_ERROR);
 		}
     }

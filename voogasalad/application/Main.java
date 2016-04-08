@@ -1,8 +1,5 @@
 package application;
 
-import authoring.Tester;
-import authoring.Properties.PropertiesPane;
-import authoring.resourceutility.ResourceUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

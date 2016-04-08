@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class EventsWindowItem extends MenuItemHandler {
 	
 	public EventsWindowItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override

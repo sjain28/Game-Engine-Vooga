@@ -8,14 +8,14 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import events.VoogaEvent;
+import player.leveldatamanager.EngineObjectManager;
+import player.leveldatamanager.EventManager;
+import player.leveldatamanager.LevelHandler;
 
 /**File reader uses singleton design pattern**/
 
 public class FileReader {
     private static FileReader fileReaderInstance = null;
-	private List<Sprite> spriteList;
-	private List<VoogaEvent> eventList;
-	private List<Variable> VariableList;
 	
 	/**
      * Singleton Design Pattern Implementation
@@ -30,30 +30,28 @@ public class FileReader {
         }
         return fileReaderInstance;
     }
-    
+        
 	@SuppressWarnings("unchecked")
-	private void createObjects(String fileName){
+	public LevelHandler createLevelObjects(String fileName){
 		XStream myUnSerializer = new XStream(new StaxDriver());
 		try {
-			 spriteList  = (List<Sprite>) myUnSerializer.fromXML("sprites",new FileInputStream(new File(fileName)));
-			 eventList  = (List<VoogaEvent>) myUnSerializer.fromXML("events",new FileInputStream(new File(fileName)));
-			 VariableList  = (List<Variable>) myUnSerializer.fromXML("variables",new FileInputStream(new File(fileName)));
-	    }
+			 List<Sprite> spriteList  = (List<Sprite>) myUnSerializer.fromXML("sprites",new FileInputStream(new File(fileName)));
+			 List<VoogaEvent> eventList  = (List<VoogaEvent>) myUnSerializer.fromXML("events",new FileInputStream(new File(fileName)));
+			 List<Variable> VariableList  = (List<Variable>) myUnSerializer.fromXML("variables",new FileInputStream(new File(fileName)));
+			 //TODO: What about global variables, etc.
+			 
+			 //DETERMINE EXACTLY WHAT DATA IS BEING PASSED AND WHAT THE CONSTRUCTORS OF
+			 //ALL THESE OBJECTS SHOULD BE
+			 EngineObjectManager objectmanager = new EngineObjectManager(spriteList, null, null);
+			 EventManager eventmanager = new EventManager(objectmanager);
+			 
+			 return new LevelHandler(objectmanager,eventmanager);
+
+		}
 	    catch (FileNotFoundException e) {
 	         e.printStackTrace();
 	    }
-	}
-	
-	public List<Sprite> extractSpriteList(){
-		return spriteList;
-	}
-	
-	public List<VoogaEvent> extractEventList(){
-		return eventList;
-	}
-	
-	public List<Variable> extractVariableList(){
-		return VariableList;
+		return null;
 	}
 
 }

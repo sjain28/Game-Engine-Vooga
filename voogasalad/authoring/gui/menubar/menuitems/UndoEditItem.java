@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class UndoEditItem extends MenuItemHandler {
 	
 	public UndoEditItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override

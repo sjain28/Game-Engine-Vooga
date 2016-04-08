@@ -1,28 +1,34 @@
 package tools;
 
 /**
+ * Vector class that keeps information about (x, y) coordinates as well as
+ * previous coordinates
+ * 
+ * Whenever current coordinates are updated, previous coordinates are updated
+ * accordingly
  * 
  * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo, Hunter Lee
  *
  */
-public class Vector {
+public abstract class Vector {
 
-	private double xPrev = 0;
-	private double yPrev = 0;
-	private double x;
-	private double y;
-	private double angle = 0;;
-	
+	protected double xPrev = 0;
+	protected double yPrev = 0;
+	protected double x;
+	protected double y;
+
 	/**
-	 * Vector class that keeps information about (x, y) coordinates as well as
-	 * previous coordinates
+	 * Default constructors
 	 * 
-	 * Whenever current coordinates are updated, previous coordinates are updated
-	 * accordingly
-	 * 
+	 * @param x
+	 * @param y
 	 */
 	public Vector (double x, double y) {
 		setXY(x, y);
+	}
+
+	public Vector() {
+		setXY(0, 0);
 	}
 
 	/**
@@ -62,7 +68,7 @@ public class Vector {
 		this.yPrev = getY();
 		this.y = y;
 	}
-	
+
 	/**
 	 * Sets x, y to a new set of values
 	 * 
@@ -120,17 +126,4 @@ public class Vector {
 		return yPrev;
 	}
 
-	/**
-	 * @return the angle
-	 */
-	public double getAngle() {
-		return angle;
-	}
-
-	/**
-	 * @param angle the angle to set
-	 */
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
 }

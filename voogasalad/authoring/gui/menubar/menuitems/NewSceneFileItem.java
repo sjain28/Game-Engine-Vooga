@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class NewSceneFileItem extends MenuItemHandler {
 	
 	public NewSceneFileItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override
