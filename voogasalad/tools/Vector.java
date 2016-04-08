@@ -5,7 +5,7 @@ package tools;
  * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo, Hunter Lee
  *
  */
-public class Vector {
+public abstract class Vector {
 
 	private double xPrev = 0;
 	private double yPrev = 0;
