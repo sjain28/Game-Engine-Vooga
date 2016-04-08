@@ -9,7 +9,7 @@ public class VariableEffect extends Effect {
 	private String myMethod;
 	private String myVariable;
 
-	public VariableEffect (VoogaEvent event, String method, String variable) {
+	public VariableEffect (String method, String variable, VoogaEvent event) {
 		super(event);
 		myMethod = method;
 		myVariable = variable;
@@ -42,10 +42,10 @@ public class VariableEffect extends Effect {
 	}
 	private Method getMethodfromString(Method[] methods, String name){
 		for (int i = 0; i < methods.length; i++){
-			if(name.equals(methods[i].getName()));
-			return methods[i];
+			if(name.equals(methods[i].getName()))
+				return methods[i];
 		}
-		return null;
+		return null;	
 	}
 
 	public String getVariable(){

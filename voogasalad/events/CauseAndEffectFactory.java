@@ -70,6 +70,14 @@ public class CauseAndEffectFactory {
         cf.create("events.KeyCause", e, obj);
         System.out.println(e.getCauses().size());
         
+        Object[] params = {"one", "two"};
+        cf.create("events.VariableEffect", e, params);
+        
+        Object[] spriteParams = {"test", "tester"};
+        cf.create("events.SpriteEffect", e, spriteParams);
+        
+        System.out.println(e.getEffects().size());
+        
         
     }
 }
