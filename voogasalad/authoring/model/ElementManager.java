@@ -79,6 +79,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
     
     public Node getElement(String id){
         for (Node node : myGameElements){
+            
             if (node.getId().equals(id)){
                 return node;
             }

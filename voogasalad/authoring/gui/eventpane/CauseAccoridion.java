@@ -2,14 +2,14 @@ package authoring.gui.eventpane;
 
 import java.util.ArrayList;
 import java.util.List;
-import events.Event;
+import events.VoogaEvent;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
 
 
 public class CauseAccoridion extends Tab {
-    private Event event;
+    private VoogaEvent event;
     private Accordion accordion;
     private List<TitledPane> tiles;
 
