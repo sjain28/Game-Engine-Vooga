@@ -1,7 +1,8 @@
 package events;
 
 import java.util.List;
-import gameengine.EngineObjectManager;
+
+import player.leveldatamanager.EngineObjectManager;
 
 public class VoogaEvent {
 

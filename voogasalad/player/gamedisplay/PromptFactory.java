@@ -1,7 +1,7 @@
 /**
  * 
  */
-package player.gui;
+package player.gamedisplay;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
