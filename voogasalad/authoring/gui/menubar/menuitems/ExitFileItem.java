@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class ExitFileItem extends MenuItemHandler {
 	
 	public ExitFileItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override

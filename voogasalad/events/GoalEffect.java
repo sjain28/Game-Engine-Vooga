@@ -2,8 +2,8 @@ package events;
 
 public class GoalEffect extends Effect {
 
-    public GoalEffect (Event event) {
-        super(event);
+    public GoalEffect (VoogaEvent voogaEvent) {
+        super(voogaEvent);
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import events.Cause;
-import events.Event;
+import events.VoogaEvent;
 import events.KeyCause;
 
 //Possible Issue: If up+down is typed but not exactly simultaneously, they might get interpreted separately. 
@@ -21,23 +21,21 @@ import events.KeyCause;
 public class EventManager {
 
 	private List<Character> keyStrokes; 
-	private List<Event> myEvents;
+	private List<VoogaEvent> myEvents;
 	private List<String> keyCombos;
 	private Map<String, KeyCause> keyCauses;
-	private SpriteManager mySpriteManager;
-	private GlobalVariableManager myVariableManager;
+	private EngineManager myEngineManager;
 	
-	public EventManager(SpriteManager manager, GlobalVariableManager varManager) {
+	public EventManager(EngineManager manager) {
 		keyStrokes = new ArrayList<Character>();
-		myEvents = new ArrayList<Event>();
+		myEvents = new ArrayList<VoogaEvent>();
 		keyCauses = new TreeMap<String, KeyCause>();
-		mySpriteManager = manager;
-		myVariableManager = varManager;
+		myEngineManager = manager;
 	}
 	
 	public void update(){
 		checkKeys();
-		for(Event e: myEvents){
+		for(VoogaEvent e: myEvents){
 			e.update();
 		}
 		
@@ -46,8 +44,8 @@ public class EventManager {
 		}
 	}
 	
-	public void addEvent(Event event){
-		for(Cause c: event.getCauses()){
+	public void addEvent(VoogaEvent voogaEvent){
+		for(Cause c: voogaEvent.getCauses()){
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
 				keyCauses.put(keyc.getKeys(), keyc); 
@@ -55,9 +53,9 @@ public class EventManager {
 				keyCombos.sort((String a, String b) -> -a.length() - b.length());
 			}
 		}
-		event.setSpriteManager(mySpriteManager);
-		event.setVariableManager(myVariableManager);
-		myEvents.add(event);
+
+		voogaEvent.setManager(myEngineManager);
+		myEvents.add(voogaEvent);
 	}
 	
 	/**

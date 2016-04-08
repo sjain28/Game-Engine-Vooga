@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class RedoEditItem extends MenuItemHandler {
 	
 	public RedoEditItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override

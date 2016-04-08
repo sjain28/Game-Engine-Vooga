@@ -1,30 +1,30 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.VoogaScene;
-import authoring.gui.GameObjectMaker;
+import authoring.gui.GameObjectBuilder;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
-import authoring.model.GameObject;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class NewGameObjectFileItem extends MenuItemHandler {
-        EditElementable gameModel;
+        EditElementable myManager;
 	
 	public NewGameObjectFileItem(CompleteAuthoringModelable model) {
-		super(model);
-		gameModel = getManager();
+		super();
+		myManager = model;
 	}
 
 	@Override
 	public void handle() {
 	    Stage popup = new Stage();
-	    GameObjectMaker initializer = new GameObjectMaker();
+	    popup.setTitle("New Game Object");
+	    GameObjectBuilder initializer = new GameObjectBuilder(myManager, popup);
 	    Scene scene = new VoogaScene(initializer);
+	    popup.setScene(scene);
+	    popup.show();
 	    
-	    
-	    gameModel.addGameElements();
 	}
 
 }

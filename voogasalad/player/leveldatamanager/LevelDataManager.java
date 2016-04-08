@@ -1,8 +1,8 @@
-package player.leveldatamanager;
+package Player.leveldatamanager;
 
 import java.util.List;
 
-import events.Event;
+import events.VoogaEvent;
 import gameengine.EventManager;
 import gameengine.Sprite;
 import gameengine.SpriteManager;
@@ -19,7 +19,7 @@ public class LevelDataManager {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LevelDataManager(List<Sprite> spriteObjects, List<Event> eventObjects, List<Variable> variableObjects) {
+	public LevelDataManager(List<Sprite> spriteObjects, List<VoogaEvent> eventObjects, List<Variable> variableObjects) {
 		// TODO Auto-generated constructor stub
 		//spriteManager = new SpriteManager(spriteObjects);
 		//eventManager = new EventManager(eventObjects);

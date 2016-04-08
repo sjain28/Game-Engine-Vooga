@@ -6,7 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 public class ExplorerWindowItem extends MenuItemHandler {
 	
 	public ExplorerWindowItem(CompleteAuthoringModelable model) {
-		super(model);
+		super();
 	}
 
 	@Override

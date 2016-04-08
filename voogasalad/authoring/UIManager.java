@@ -40,7 +40,7 @@ public class UIManager extends VBox {
     private void initializeComponents () {
         this.getChildren().addAll(new MenuPanel(elementManager, e -> {
             try {
-                new MenuPanelHandlingMirror(e);
+                new MenuPanelHandlingMirror(e, elementManager);
             }
             catch (VoogaException ee) {
                 Alert exception = new Alert(AlertType.ERROR);

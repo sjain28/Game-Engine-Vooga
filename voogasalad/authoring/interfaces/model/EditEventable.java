@@ -1,9 +1,10 @@
 package authoring.interfaces.model;
 
-import events.Event;
+import events.VoogaEvent;
 
-public interface EditEventable {
-    public void addEvents (Event ... events);
-    public void removeEvents (Event ... events);
+ {
+    public void addEvents (VoogaEvent ... events);
+    public void removeEvents (VoogaEvent ... events);
+
    
 }
