@@ -1,22 +1,24 @@
-package gameengine;
+package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.model.VoogaText;
+import gameengine.Sprite;
+import gameengine.SpriteFactory;
 import tools.interfaces.VoogaData;
 
 /** Manages Sprite's, Text, and GlobalVariables**/
 //TODO: This class is very similar to the ElementManager on the front end
 //Potentially compose the ElementManager w this to reduce redundancy.
 
-public class EngineManager {
-
+public class EngineObjectManager {
+	
 	/**Sprite Info**/
 	private Map<String, List<Object>> mySpriteCategories; //Maps archetype name to Sprite IDs
 	private Map<Object,Sprite> mySprites;				  //Maps IDs to Sprite's
 	private SpriteFactory mySpriteFactory;
-
+	
 	/**Text info**/
 	private Map<Object,VoogaText> myText;				  //Maps IDs to Text
 
@@ -29,18 +31,18 @@ public class EngineManager {
 	 * @param sprites
 	 * @param factory
 	 */
-	public EngineManager(List<Sprite> sprites, List<VoogaText> text, SpriteFactory factory) {
+	public EngineObjectManager(List<Sprite> sprites, List<VoogaText> text, SpriteFactory factory) {
 		//mySprites = sprites;
-
+		
 		//TODO: Once constructor is figured out, intialize all objects here.
-
+		
 		mySpriteFactory = factory;
 		//place Sprite's by archetype and id in their correct maps
 		for(Object key : mySprites.keySet()){
 			organizeSpriteByArchetype(mySprites.get(key));
 		}
 	}
-
+	
 	/**
 	 * Returns a sprite by id
 	 * @param id
@@ -49,7 +51,7 @@ public class EngineManager {
 	public Sprite getSprite(Object id){
 		return mySprites.get(id);
 	}
-
+	
 	/**
 	 * Returns a list of sprite IDs given an archetype
 	 * @param archetype
@@ -58,7 +60,7 @@ public class EngineManager {
 	public List<Object> getSpriteIDs(String archetype){
 		return mySpriteCategories.get(archetype);
 	}
-
+	
 	/**
 	 * Adds a sprite given an archetype
 	 * @param archetype
@@ -70,7 +72,7 @@ public class EngineManager {
 		organizeSpriteByArchetype(newSprite);
 		return newSprite;
 	}
-
+	
 	/**
 	 * Removes sprite given an id
 	 * @param id
@@ -79,7 +81,7 @@ public class EngineManager {
 		mySpriteCategories.get(mySprites.get(id).getArchetype()).remove(id);
 		mySprites.remove(id);
 	}
-
+	
 	/**
 	 * organizes all the Sprite's by archetype as well
 	 * @param s
@@ -102,7 +104,7 @@ public class EngineManager {
 	public VoogaData getGlobalVar(String variable){
 		return myGlobalVariables.get(variable);
 	}
-
+	
 	/**
 	 * Returns a VoogaText by id
 	 * @param id
@@ -111,7 +113,7 @@ public class EngineManager {
 	public VoogaText getText(Object id){
 		return myText.get(id);
 	}
-
+	
 	/**
 	 * put all objects into a generic list of display-able objects
 	 * to be accessed by the GameRunner after every update cycle.
@@ -124,21 +126,21 @@ public class EngineManager {
 	 */
 	public List<Object> getAllDisplayableObjects(){
 		List<Object> displayableobjects = new ArrayList<Object>();
-
+		
 		for(Object key : mySprites.keySet()){
 			displayableobjects.add(mySprites.get(key));
 		}
-
+		
 		return null;
-
+		
 	}
 
-	public List<Sprite> getSpritesByArchetype(String Archetype){
-		List<Object> spriteIDs = mySpriteCategories.get(Archetype);
-		List<Sprite> sprites = new ArrayList<Sprite>();
-		for (Object ID : spriteIDs){
-			sprites.add(mySprites.get(ID));
-		}
-		return sprites;
+	public List<Sprite> getSpritesByArchetype(String myArchetype) {
+	List<Object> archIDs = mySpriteCategories.get(myArchetype);
+	List<Sprite> archSprites = new ArrayList<Sprite>();
+	for (Object ID : archIDs){
+		archSprites.add(mySprites.get(ID));
+	}
+		return archSprites;
 	}
 }

@@ -53,7 +53,7 @@ public class DesignBoard extends TabPane {
         if (db.hasString()) {
             String nodeId = db.getString();
             if (elementManager.hasElement(nodeId)) {
-                moveElement(nodeId, db);
+                moveElement(nodeId,event);
             }
             else {
                 addElement(db.getString());
@@ -87,11 +87,11 @@ public class DesignBoard extends TabPane {
         contentPane.getChildren().add(node);
     }
 
-    private void moveElement (String id, Dragboard db) {
+    private void moveElement (String id,DragEvent e) {
         Node element = elementManager.getElement(id);
-        System.out.println("" + db.getDragViewOffsetX() + " " + db.getDragViewOffsetY());
-        element.setTranslateX(db.getDragViewOffsetX());
-        element.setTranslateY(db.getDragViewOffsetY());
+        System.out.println("" + e.getX() + " " + e.getY());
+        element.setTranslateX(e.getX());
+        element.setTranslateY(e.getY());
 
     }
 

@@ -1,4 +1,4 @@
-package gameengine;
+package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ public class EventManager {
 	private List<VoogaEvent> myEvents;
 	private List<String> keyCombos;
 	private Map<String, KeyCause> keyCauses;
-	private EngineManager myEngineManager;
+	private EngineObjectManager myEngineManager;
 	
-	public EventManager(EngineManager manager) {
+	public EventManager(EngineObjectManager manager) {
 		keyStrokes = new ArrayList<Character>();
 		myEvents = new ArrayList<VoogaEvent>();
 		keyCauses = new TreeMap<String, KeyCause>();
@@ -44,6 +44,7 @@ public class EventManager {
 		}
 	}
 	
+
 	public void addEvent(VoogaEvent voogaEvent){
 		for(Cause c: voogaEvent.getCauses()){
 			if(c instanceof KeyCause){

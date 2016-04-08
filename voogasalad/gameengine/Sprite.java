@@ -7,15 +7,17 @@ import authoring.interfaces.Moveable;
 import events.Effectable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import tools.Position;
 import tools.Vector;
 import tools.VoogaNumber;
+import tools.Velocity;
 import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable{
 	
 	public static final String MASS = "mass";
-    private Vector myVelocity;
-    private Vector myLoc;
+    private Velocity myVelocity;
+    private Position myLoc;
     private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
@@ -31,8 +33,8 @@ public class Sprite implements Moveable, Effectable{
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
         myProperties.put(MASS, mass);
-        myLoc = new Vector(0,0);
-        myVelocity = new Vector(0,0);
+        myLoc = new Position(0,0);
+        myVelocity = new Velocity(0,0);
     }
     
     /**
@@ -57,19 +59,19 @@ public class Sprite implements Moveable, Effectable{
     }
 
     @Override
-    public void setVelocity (Vector v) {
-        myVelocity = v;
+    public void setVelocity (Velocity velocity) {
+        myVelocity = velocity;
     }
     
     public Vector getPosition(){
     	return myLoc;
     }
     
-    public void setPosition(Vector v){
-    	myLoc = v;
+    public void setPosition(Position position){
+    	myLoc = position;
     }
-    public void addProperty (String s, VoogaData v) {
-        myProperties.put(s, v);
+    public void addProperty (String property, VoogaData data) {
+        myProperties.put(property, data);
     }
 
     public VoogaData getProperty (String s) {

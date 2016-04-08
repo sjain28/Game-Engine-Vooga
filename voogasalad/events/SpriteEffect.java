@@ -4,30 +4,30 @@ import java.util.List;
 
 import gameengine.Sprite;
 
-public class SpriteEffect extends Effect{
+public class SpriteEffect extends VariableEffect{
 
 	private Boolean needsSprites;
 	private String myArchetype;
 	private List<Sprite> mySprites;
 
 	// constructor with sprites- apply to given sprites
-	public SpriteEffect(VoogaEvent event, List<Sprite> sprites) {
-		super(event);
+	public SpriteEffect(VoogaEvent event, List<Sprite> sprites, String method, String variable) {
+		super(event, method, variable);
 		mySprites = sprites;
 		needsSprites = false;
 	}
 
 	// constructor with archetype- apply to all of archetype
 	// constructor with archetype- apply to all of archetype for which event supplies
-	public SpriteEffect(VoogaEvent event, String archetype, Boolean needsSprites) {
-		super(event);
+	public SpriteEffect(VoogaEvent event, String archetype, Boolean needsSprites, String method, String variable) {
+		super(event, method, variable);
 		myArchetype = archetype;
 		this.needsSprites = needsSprites;
 	}
 
 	// constructor with nothing- apply to all for which event supplies
-	public SpriteEffect(VoogaEvent event) {
-		super(event);
+	public SpriteEffect(VoogaEvent event, String method, String variable) {
+		super(event, method, variable);
 		needsSprites = true;
 	}
 

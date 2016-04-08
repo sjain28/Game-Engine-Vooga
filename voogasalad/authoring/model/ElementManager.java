@@ -16,7 +16,6 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Event;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
@@ -80,6 +79,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
     
     public Node getElement(String id){
         for (Node node : myGameElements){
+            
             if (node.getId().equals(id)){
                 return node;
             }

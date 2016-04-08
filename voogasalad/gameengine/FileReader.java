@@ -8,6 +8,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import events.VoogaEvent;
+import player.leveldatamanager.EngineObjectManager;
+import player.leveldatamanager.EventManager;
 
 /**File reader uses singleton design pattern**/
 
@@ -39,7 +41,7 @@ public class FileReader {
 			 
 			 //DETERMINE EXACTLY WHAT DATA IS BEING PASSED AND WHAT THE CONSTRUCTORS OF
 			 //ALL THESE OBJECTS SHOULD BE
-			 EngineManager objectmanager = new EngineManager(spriteList, null, null);
+			 EngineObjectManager objectmanager = new EngineObjectManager(spriteList, null, null);
 			 EventManager eventmanager = new EventManager(objectmanager);
 			 
 			 return new LevelHandler(objectmanager,eventmanager);
