@@ -1,4 +1,4 @@
-package player.runner;
+package player.gamerunner;
 
 import javafx.animation.AnimationTimer;
 

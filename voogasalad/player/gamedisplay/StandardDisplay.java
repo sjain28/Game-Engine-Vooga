@@ -1,5 +1,8 @@
-package player.gui;
+package player.gamedisplay;
 
+import java.util.List;
+
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -20,6 +23,7 @@ public class StandardDisplay implements IGameDisplay {
 	private Scene myScene;
 	private BorderPane myPane;
 	private PromptFactory myPrompt;
+	private List<Node> myListToDisplay;
 	
 	public StandardDisplay() {
 		
@@ -30,15 +34,20 @@ public class StandardDisplay implements IGameDisplay {
 		
 	}
 
-	@Override
-	public void read() {
-		// Auto-generated method stub
-		//TODO: What is this reading? Format of the file being read(Sprites)?
+//	public void read(List listToDisplay) {
+//		
+//		//TODO: What is this reading? Format of the file being read(Sprites)?
+//		setMyListToDisplay()
+//	}
+	public void read(List<Node> listToDisplay) {
+		// TODO Auto-generated method stub
+		myListToDisplay = listToDisplay;
+		
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
+
 		//Creates the main pane
 		createPane();
 		//Shows the scene
@@ -90,4 +99,19 @@ public class StandardDisplay implements IGameDisplay {
 	public Scene getScene() {
 		return myScene;
 	}
+
+	/**
+	 * @return the myListToDisplay
+	 */
+	public List<Node> getListToDisplay() {
+		return myListToDisplay;
+	}
+
+	/**
+	 * @param myListToDisplay the myListToDisplay to set
+	 */
+	public void setListToDisplay(List<Node> myListToDisplay) {
+		this.myListToDisplay = myListToDisplay;
+	}
+
 }
