@@ -13,8 +13,8 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 	private final Consumer<Float> interpolater; 
 	private final Consumer<Integer> fps_reporter; 
 
-	private static final Integer FRAMES_PER_SECOND = 60;
-	private static final float frameTime = 1/FRAMES_PER_SECOND;
+	private int framesPerSecond = 60;
+	private float frameTime = 1/framesPerSecond;
 	private static final float NANOSECONDS_PER_SECOND = 1e9f;
 	private static final float fps_reporter_UPDATE_RATE = 1f;
 	
@@ -126,5 +126,13 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		secondsSinceLastFpsUpdate = 0f;
 		framesSinceLastFpsUpdate = 0;
 		super.stop();
+	}
+	
+	public double getFrameRate(){
+		return (double) framesPerSecond;
+	}
+	
+	public void setFrameRate(double newRate){
+		framesPerSecond = (int) newRate;
 	}
 }
