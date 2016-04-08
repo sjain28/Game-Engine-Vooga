@@ -10,6 +10,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import tools.Vector;
+import tools.Velocity;
 import tools.interfaces.VoogaData;
 
 
@@ -37,7 +38,9 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     }
 
     @Override
-    public void setVelocity (Vector v) {
+    //public void setVelocity (Vector v) {
+    // I CHANGED THIS TYPE TO VELOCITY INSTEAD OF VECTOR
+    public void setVelocity (Velocity velocity) {
         // TODO Auto-generated method stub
     }
 
