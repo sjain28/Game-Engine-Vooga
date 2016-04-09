@@ -16,6 +16,7 @@ import tools.interfaces.VoogaData;
 public class GameObject extends ImageView implements Moveable, Elementable {
 
     private Sprite mySprite;
+    private String name;
     
     public GameObject(Sprite sprite){
         mySprite = sprite;
@@ -69,6 +70,10 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     @Override
     public void removeProperty (String name) {
         
+    }
+    
+    public String getName(){
+        return name;
     }
     
 }

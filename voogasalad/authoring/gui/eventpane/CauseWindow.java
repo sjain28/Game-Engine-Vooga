@@ -9,7 +9,6 @@ public class CauseWindow extends GridPane {
     VoogaEvent event;
     Cause cause;
     ResourceBundle causes;
-    
     public CauseWindow(VoogaEvent e){
         event = e;
         causes = ResourceBundle.getBundle("/events/CauseTypes");

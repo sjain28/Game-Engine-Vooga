@@ -28,9 +28,9 @@ public class CauseAccoridion extends Tab {
     }
 
     private TitledPane createTile (String name) {
-        TitledPane tile = new TitledPane();
+        TitledPane tile = new CauseTitledPane();
         tile.setText(name);
-        tile.setContent(new CauseWindow(event));
+        
         return tile;
     }
 }
