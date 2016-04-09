@@ -3,7 +3,9 @@ package authoring.gui.eventpane;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.gui.items.NumberTextField;
+import authoring.interfaces.model.EditEventable;
 import authoring.model.ElementManager;
+import auxiliary.VoogaException;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
@@ -19,11 +21,11 @@ public class VariableCauseGUI implements EventGUI{
     private ComboBox<String> actions;
     private Node amount;
 
-    private ElementManager elementManager;
+    private EditEventable elementManager;
     private VBox node;
     private List<Node> activeNodes;
     
-    public VariableCauseGUI (ElementManager elementManager) {
+    public VariableCauseGUI (EditEventable elementManager) {
         this.elementManager = elementManager;
         node = new VBox();
         activeNodes = new ArrayList<Node>();
@@ -32,14 +34,18 @@ public class VariableCauseGUI implements EventGUI{
     }
 
     private void initialize (ComboBox ... cbs) {
-        for (ComboBox cb : cbs) {
-            cb = new ComboBox<String>();
-        }
+        level = new ComboBox<String>();
+        name = new ComboBox<String>();
+        variables = new VariableComboBox();
+        actions = new ComboBox<String>();
         level.getItems().addAll("global", "local");
+        addGUIElements(level);
+        setChangeListeners();
     }
 
     private void setChangeListeners () {
         level.setOnAction(e -> {
+            System.out.println("level activated");
             resetNode();
             addGUIElements(level);
 
@@ -54,11 +60,13 @@ public class VariableCauseGUI implements EventGUI{
         });
         
         name.setOnAction(e->{
+            System.out.println("name activated");
             removeInactiveNodes(variables,actions,amount);
             name.getItems().addAll(elementManager.getMySpriteNames());
         });
         
         variables.setOnAction(e -> {
+            System.out.println("variables activated");
             removeInactiveNodes(actions,amount);
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
@@ -107,7 +115,7 @@ public class VariableCauseGUI implements EventGUI{
     }
 
     @Override
-    public String getDetails () {
+    public String getDetails(){
         return "VariableCause "+level.getValue()+ " "+name.getValue()+" "+variables.getValue()+
                 " "+actions.getValue()+" "+amount.getAccessibleText();
     }

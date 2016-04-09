@@ -18,6 +18,5 @@
 	<classpathentry kind="lib" path="external_jars/pivot-wtk-2.0.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/pivot-wtk-terra-2.0.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/mosaic.jar"/>
-	<classpathentry kind="lib" path="external_jars/glazedlists_java15-1.9.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
