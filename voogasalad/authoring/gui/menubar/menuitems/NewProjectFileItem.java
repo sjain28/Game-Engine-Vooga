@@ -1,8 +1,10 @@
 package authoring.gui.menubar.menuitems;
 
+import application.Launcher;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.Savable;
+import javafx.stage.Stage;
 
 public class NewProjectFileItem extends MenuItemHandler {
     private Savable myManager;
@@ -14,8 +16,7 @@ public class NewProjectFileItem extends MenuItemHandler {
 
 	@Override
 	public void handle() {
-		// TODO Auto-generated method stub
-		
+		Launcher newProject = new Launcher(new Stage());
 	}
 
 }

@@ -11,27 +11,18 @@ import javafx.stage.Stage;
 import tools.Vector;
 
 public class TextObjectBuilder extends Builder{
-    private TextField myText;
-
+   
     public TextObjectBuilder (EditElementable editor, Stage popup) {
         super(editor, popup);
-        makeText();
+        makeInfo("Text");
        // makeXLocationPicker();
        // makeYLocationPicker();
         makeCreate();
     }
 
-    public void makeText(){
-        HBox text = new HBox();
-        Text label = new Text("Text");
-        label.setFill(Color.WHITE);
-        myText = new TextField();
-        text.getChildren().addAll(label, myText);
-        this.getChildren().add(text);
-    }
     @Override
     public void compile () {
-        VoogaText text = new VoogaText(myText.getText());
+        VoogaText text = new VoogaText(getInfo());
         getManager().addGameElements(text);
         quit();
     }

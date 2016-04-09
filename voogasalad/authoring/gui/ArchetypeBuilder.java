@@ -13,18 +13,10 @@ public class ArchetypeBuilder extends Builder {
 
     public ArchetypeBuilder (EditElementable editor, Stage popup) {
         super(editor, popup);
-        makeArchtype();
+        makeInfo("Archetype");
         makeCreate();
     }
 
-    private void makeArchtype () {
-        HBox text = new HBox();
-        Text label = new Text("Archetype");
-        label.setFill(Color.WHITE);
-        myText = new TextField();
-        text.getChildren().addAll(label, myText);
-        this.getChildren().add(text);
-    }
 
     @Override
     public void compile () {
