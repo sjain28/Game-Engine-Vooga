@@ -24,13 +24,13 @@ public class EventManager {
 	private List<VoogaEvent> myEvents;
 	private List<String> keyCombos;
 	private Map<String, KeyCause> keyCauses;
-	private EngineObjectManager myObjectManager;
+	private EngineObjectManager myEngineManager;
 	
 	public EventManager(EngineObjectManager manager) {
 		keyStrokes = new ArrayList<Character>();
 		myEvents = new ArrayList<VoogaEvent>();
 		keyCauses = new TreeMap<String, KeyCause>();
-		myObjectManager = manager;
+		myEngineManager = manager;
 	}
 	
 	public void update(){
@@ -44,6 +44,7 @@ public class EventManager {
 		}
 	}
 	
+
 	public void addEvent(VoogaEvent voogaEvent){
 		for(Cause c: voogaEvent.getCauses()){
 			if(c instanceof KeyCause){
@@ -53,7 +54,8 @@ public class EventManager {
 				keyCombos.sort((String a, String b) -> -a.length() - b.length());
 			}
 		}
-		voogaEvent.setManager(myObjectManager);
+
+		voogaEvent.setManager(myEngineManager);
 		myEvents.add(voogaEvent);
 	}
 	

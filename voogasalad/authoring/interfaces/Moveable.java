@@ -1,6 +1,7 @@
 package authoring.interfaces;
 
 import tools.Vector;
+import tools.Velocity;
 
 /**
  * An interface implemented by GameObject that defines how
@@ -15,5 +16,5 @@ public interface Moveable {
      */
    public Vector getVelocity();
    
-   public void setVelocity(Vector v);
+   public void setVelocity(Velocity velocity);
 }

@@ -1,6 +1,9 @@
-package player.leveldatamanager;
+package gameengine;
 
 import java.util.List;
+
+import player.leveldatamanager.EngineObjectManager;
+import player.leveldatamanager.EventManager;
 
 /**
  * The GameEngine holds all of the managers and contains the initialize and update methods for the game. The game player

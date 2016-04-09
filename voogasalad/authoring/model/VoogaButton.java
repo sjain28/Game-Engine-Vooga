@@ -3,6 +3,7 @@ package authoring.model;
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import javafx.scene.control.Button;
+
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;

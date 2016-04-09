@@ -9,7 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Position;
 import tools.Vector;
+<<<<<<< HEAD
+=======
 import tools.VoogaNumber;
+>>>>>>> master
 import tools.Velocity;
 import tools.interfaces.*;
 
@@ -31,8 +34,11 @@ public class Sprite implements Moveable, Effectable{
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
+<<<<<<< HEAD
+=======
         myProperties = properties;
         myProperties.put(MASS, mass);
+>>>>>>> master
         myLoc = new Position(0,0);
         myVelocity = new Velocity(0,0);
     }

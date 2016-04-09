@@ -11,8 +11,8 @@ import gameengine.Sprite;
 
 public class SpriteDataExample {
     public static void main (String[] args){
-        Sprite a = new Sprite("bricks.jpg","DA",null);
-        Sprite b = new Sprite("bricks.jpg","eA",null);
+        Sprite a = new Sprite("bricks.jpg","DA");
+        Sprite b = new Sprite("bricks.jpg","eA");
         
         List<Sprite> sprites = new ArrayList<Sprite>();
         sprites.add(a);
