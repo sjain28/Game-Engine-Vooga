@@ -21,7 +21,10 @@ public class PromptFactory implements IPromptFactory {
 	//    private static final int TEXT_FONTSIZE = 20;
 	//    private static final String FONT = "Georgia";
 
-
+	/**
+	 * Takes in a string and displays it as a message the user can view
+	 * 
+	 */
 	public void prompt(String message) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
