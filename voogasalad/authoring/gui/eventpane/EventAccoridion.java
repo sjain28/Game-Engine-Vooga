@@ -28,13 +28,13 @@ public class EventAccoridion extends Tab {
     
     private String name="";
     
-    public EventAccoridion (EditEventable manager,String name) {
+    public EventAccoridion (EditEventable manager,String name,Button... addedButtons) {
         this.name=name;
         this.manager=manager;
         pane = new BorderPane();
         accordion = new Accordion();
 
-        initializeButtons();
+        initializeButtons(addedButtons);
         pane.setBottom(buttons);
         pane.setCenter(accordion);
         
@@ -114,10 +114,11 @@ public class EventAccoridion extends Tab {
         return null;
     }
     
-    private void initializeButtons(){
+    private void initializeButtons(Button... addedButtons){
         buttons = new HBox();
         buttons.setPadding(new Insets(10,10,10,10));
-        buttons.getChildren().add(buttonFactory("Add "+name,e->generateTiles(1)));
+        buttons.getChildren().addAll(buttonFactory("Add "+name,e->generateTiles(1)));
+        buttons.getChildren().addAll(addedButtons);
     }
     
     private Button buttonFactory(String name,EventHandler e){
