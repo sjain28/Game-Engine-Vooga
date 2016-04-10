@@ -108,14 +108,14 @@ public class GameRunner implements IGameRunner{
 	}
 	
 	@Override
-	public void getFrameRate() {
+	public void getFrameTime() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void setFrameRate(double frameRate) {
+	public void setFrameTime(double frameRate) {
 		// TODO Auto-generated method stub
 		
 	}
