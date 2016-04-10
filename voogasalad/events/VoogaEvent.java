@@ -13,12 +13,17 @@ public class VoogaEvent {
 	private EngineObjectManager myEngineManager;
 	private List<Sprite> myCauseSprites = new ArrayList<>();
 
-	public void addCauses(List<Cause> cause){
-		myCauses = cause;
+	public VoogaEvent(){
+		myCauses = new ArrayList<>();
+		myEffects = new ArrayList<>();
 	}
 	
-	public void addEffects(List<Effect> effect){
-		myEffects = effect;
+	public void addCause(Cause cause){
+		myCauses.add(cause);
+	}
+	
+	public void addEffect(Effect effect){
+		myEffects.add(effect);
 	}
 	
 	public void setManager(EngineObjectManager manager){

@@ -8,11 +8,10 @@ import gameengine.Sprite;
 public class CollisionCause extends Cause{
 
 	private List<Sprite> groupA;
-	private List<Sprite> groupB;
-	
+	private List<Sprite> groupB;	
 	private List<Sprite> collidedSprites; 
 	
-	public CollisionCause(List<Object> groupAID, List<Object> groupBID, VoogaEvent voogaEvent){ //Given 2 lists of IDs
+	public CollisionCause(List<Object> groupAID, List<Object> groupBID, VoogaEvent voogaEvent){ 
 		super(voogaEvent);
 		init(groupAID, groupBID);
 	}
@@ -52,5 +51,7 @@ public class CollisionCause extends Cause{
 	public List<Sprite> getAllCollidedSprites(){
 		return collidedSprites;
 	}
+	
+	
 
 }
