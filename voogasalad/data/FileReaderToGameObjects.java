@@ -5,19 +5,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import events.VoogaEvent;
-import gameengine.Variable;
 import javafx.scene.Node;
+import tools.interfaces.VoogaData;
 
 public class FileReaderToGameObjects {
 
 	private DataContainerOfLists data;
 	private List<Node> nodeList;
 	private List<VoogaEvent> eventList;
-	private List<Variable> VariableList;
+	private Map<String,VoogaData> variableMap;
 	
 	private List<String> objectNames;
 	
@@ -45,8 +46,8 @@ public class FileReaderToGameObjects {
 		return data.getEventList();
 	}
 	
-	public List<Variable> createVariableList(){
-		return data.getVariableList();
+	public Map<String,VoogaData> createVariableMap(){
+		return data.getVariableMap();
 	}
 	
 	public DataContainerOfLists getDataContainer(){

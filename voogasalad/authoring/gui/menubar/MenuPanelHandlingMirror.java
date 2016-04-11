@@ -7,22 +7,25 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.InputEvent;
 
+
 /**
  * This is the class that handles reflection on menu panel actions.
  *
  */
 public class MenuPanelHandlingMirror {
 
-	private static final String ITEM_NOT_IMPLEMENTED_ERROR = "This item has not been implemented. Please do so.";
-	private static final String PACKAGE_LOCATION = "authoring.gui.menubar.menuitems.";
-	private static final String HANDLE = "handle";
-	
+    private static final String ITEM_NOT_IMPLEMENTED_ERROR =
+            "This item has not been implemented. Please do so.";
+    private static final String PACKAGE_LOCATION = "authoring.gui.menubar.menuitems.";
+    private static final String HANDLE = "handle";
+
     private ActionEvent e;
     private CompleteAuthoringModelable myManager;
     private EventHandler<InputEvent> myEvent;
 
     /**
      * Instantiates the menu panel handler.
+     * 
      * @param e
      * @param newScene 
      * @param view
@@ -38,7 +41,7 @@ public class MenuPanelHandlingMirror {
     /**
      * Handles events from the menu panel.
      */
-    private void handleEvent() {
+    private void handleEvent () {
         MenuItem menuItem = (MenuItem) e.getSource();
         MenuItemHandler menuItemHandler;
         Class<?> clazz;
@@ -50,5 +53,6 @@ public class MenuPanelHandlingMirror {
 		    ee.printStackTrace();
 			throw new VoogaException(ITEM_NOT_IMPLEMENTED_ERROR);
 		}
+
     }
 }
