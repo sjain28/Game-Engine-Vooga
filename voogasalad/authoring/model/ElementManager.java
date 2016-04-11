@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
@@ -31,6 +30,8 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
     private File myXmlDataFile;
 
     private SpriteFactory spriteFactory;
+    
+    @SpriteAnnotation
     private Set<String> myIds;
     
     public ElementManager () {
