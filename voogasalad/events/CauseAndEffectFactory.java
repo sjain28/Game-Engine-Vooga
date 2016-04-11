@@ -7,8 +7,8 @@ public class CauseAndEffectFactory {
     String causeName;
     
     @SuppressWarnings("rawtypes")
-	public void create(String name, VoogaEvent event, String[] parameters){
-        //Parse out numbers and booleans somehow
+	public void create(String name, VoogaEvent event, String inputString){
+        String[] parameters = inputString.split("\\s+");
     	Class<?> c=null;
         try {
             c = Class.forName(name); //Find Cause class using reflection
@@ -90,7 +90,7 @@ public class CauseAndEffectFactory {
         
 //    	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
         
-        String[] variableCauseParams = {"Score", "500", "greaterThan"};
+        String variableCauseParams = "Score 500 greaterThan";
         cf.create("events.VariableCause", e, variableCauseParams);
         System.out.println(e.getCauses().size());
       
