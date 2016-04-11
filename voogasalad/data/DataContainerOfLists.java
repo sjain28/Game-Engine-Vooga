@@ -17,18 +17,24 @@ public class DataContainerOfLists {
 	
 	public DataContainerOfLists(List<Elementable> ElementableList, List<Variable> variableList, List<VoogaEvent> eventList){
 		this.eventList = eventList;
+		System.out.println(this.eventList);
 		this.elementableList = ElementableList;
 		this.variableList = variableList;
 	}
 	
 	public List<Elementable> getElementableList(){
-		return elementableList;
+		
+		return this.elementableList;
 	}
 	public List<VoogaEvent> getEventList(){
-		return eventList;
+		return this.eventList;
 	}
 	public List<Variable> getVariableList(){
-		return variableList;
+		return this.variableList;
+	}
+	
+	public String toString(){
+		return "Data Container + 35";
 	}
 	
 }

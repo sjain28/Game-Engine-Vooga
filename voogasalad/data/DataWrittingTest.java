@@ -119,7 +119,7 @@ public class DataWrittingTest extends Application {
         Document doc = dBuilder.parse(new File("ece 250 notes 4-1.txt"));
    		System.out.println(doc.toString());
         
-       FileReaderToObjects fileReader = new FileReaderToObjects("yo.xml");
+       FileReaderToGameObjects fileReader = new FileReaderToGameObjects("yo.xml");
         
         System.out.println("DONE");
         

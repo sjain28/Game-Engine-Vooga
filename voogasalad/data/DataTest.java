@@ -19,15 +19,10 @@ import tools.VoogaBoolean;
 
 
 public class DataTest extends Application {
-
-	
-	
     public static void main (String[] args) {
         launch(args);
         
     }
-    
-    
     @Override
     public void start (Stage primaryStage) throws Exception {
         Sprite sprite = new Sprite("/bricks.jpg","6");
@@ -63,29 +58,32 @@ public class DataTest extends Application {
         for (int i =0; i<4;i++){
         	nodeList.add(vts[i]);
         }
-        
         List<Variable> variableArrayList = new ArrayList<Variable>();
         for (int i =0; i<4;i++){
         	variableArrayList.add(variables[i]);
         }
-        
         List<VoogaEvent> eventList = new ArrayList<VoogaEvent>();
         for (int i =0; i<4;i++){
         	eventList.add(events[i]);
         }
-        String fileName = "test_4-9";
+        String fileName = "level7";
+        String fileName2 = "level7-rewritten";
         DataContainerOfLists data = new DataContainerOfLists(nodeList,variableArrayList, eventList);
-        System.out.println(data.getVariableList());
-        System.out.println(data.getEventList());
-        System.out.println(data.getEventList());
+        System.out.println("Data type 1 is equal to " + data.getVariableList());
+        System.out.println("Data type 2 is equal to " + data.getEventList());
         VoogaBoolean vb = new VoogaBoolean(true);
         FileWriterFromObjects fileWriter = new FileWriterFromObjects();
-        fileWriter.serialize(data, fileName);
-        GameRunner gameRunner = new GameRunner("level_doc.txt");
-     //   DataContainerOfLists deserializedList = fileReader.getDataContainer();
-//        System.out.println("DONE");
-//        System.out.println(deserializedList);
-//        System.out.println(deserializedList.getEventList());
+        fileWriter.saveGameObjects(data, fileName);
+        fileWriter.saveGameObjects(data, fileName);
+        
+        FileReaderToGameObjects filereader = new FileReaderToGameObjects(fileName);
+//        GameRunner gameRunner = new GameRunner("level_doc.txt");
+        DataContainerOfLists deserializedList = filereader.getDataContainer();
+     
+        fileWriter.saveGameObjects(deserializedList, fileName2);
+        System.out.println("DONE");
+        System.out.println(deserializedList);
+        System.out.println(deserializedList.getEventList());
         
     }
     
