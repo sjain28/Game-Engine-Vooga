@@ -87,6 +87,8 @@ public class StandardDisplay implements IGameDisplay {
 		//Adds all components into the main border pane
 		getPane().setCenter(myGameScreen);
 		getPane().setBottom(myControl.createControl());
+		//Below is optional (adds HUD)
+		getPane().setRight(myHUD.createHUD());
 		getStage().setScene(getScene());
 	}
 	
