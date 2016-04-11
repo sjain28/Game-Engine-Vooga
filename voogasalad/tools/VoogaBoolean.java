@@ -5,36 +5,40 @@ import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 public class VoogaBoolean implements VoogaData{
-    private boolean value;
+    private boolean myValue;
     
     public VoogaBoolean() {
-    	this.value = true;
+    	this.myValue = true;
     }
     
     public VoogaBoolean(boolean value){
-        this.value=value;
+        this.myValue=value;
     }
     
     public void setValue(boolean value){
-        this.value=value;
+        this.myValue=value;
     }
     
     @Override
     public Object getValue () {
-        return (Boolean) value;
+        return (Boolean) myValue;
     }
     
     public Node display(){
-        SwitchButton switchButton = new SwitchButton(value);
-        switchButton.setOn(value);
+        SwitchButton switchButton = new SwitchButton(myValue);
+        switchButton.setOn(myValue);
         return switchButton;
     }
 
     @Override
     public void setValue (Object o) {
         if (!(o instanceof Boolean)) return;
-        value = (Boolean) o;
+        myValue = (Boolean) o;
         
+    }
+    
+    public boolean equals(Boolean val){
+    	return val == myValue;
     }
     
 }

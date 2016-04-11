@@ -1,18 +1,14 @@
 package events;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
-import groovyjarjarantlr.debug.Event;
 
 public class CauseAndEffectFactory {
     String causeName;
     
-    public void create(String name, VoogaEvent event, Object[] parameters){
-        
+    @SuppressWarnings("rawtypes")
+	public void create(String name, VoogaEvent event, String[] parameters){
+        //Parse out numbers and booleans somehow
     	Class<?> c=null;
         try {
             c = Class.forName(name); //Find Cause class using reflection
@@ -23,9 +19,12 @@ public class CauseAndEffectFactory {
         Class[] paramClasses = new Class[parameters.length+1];
         Object[] allParams = new Object[parameters.length+1];
         
-        for(int i = 0; i < parameters.length; i++){
-        	paramClasses[i] = parameters[i].getClass(); //Store all parameter classes
-        	allParams[i] = parameters[i];
+        for(int i = 0; i < parameters.length; i++){        	
+        	String current = parameters[i];
+        	Object parameter = parseString(current);
+        	
+        	paramClasses[i] = parameter.getClass(); //Store all parameter classes
+        	allParams[i] = parameter;
         }
         
         paramClasses[paramClasses.length-1] = VoogaEvent.class;
@@ -49,7 +48,21 @@ public class CauseAndEffectFactory {
 		}	
     }
     
-    public void addToEvent(VoogaEvent event, Object added){
+    private Object parseString(String input){
+    	if(input.equalsIgnoreCase("true"))
+    		return new Boolean(true);
+    	
+    	if(input.equalsIgnoreCase("false"))
+    		return new Boolean("false");
+    	try{
+    		return Double.parseDouble(input);
+    	}catch(Exception e){
+    		return input;
+    	}
+    	
+    }
+    
+    private void addToEvent(VoogaEvent event, Object added){
 	    try{	
     		if(added instanceof Cause){
 	    		event.addCause((Cause) added);
@@ -61,23 +74,25 @@ public class CauseAndEffectFactory {
 	    }
     } 
     
-    
     public static void main(String args[]){
         CauseAndEffectFactory cf = new CauseAndEffectFactory();
         VoogaEvent e = new VoogaEvent();
-        Object[] obj = {"Hello"};
+//        Object[] obj = {"Hello"};
 
-        cf.create("events.KeyCause", e, obj);
+//        cf.create("events.KeyCause", e, obj);
+//        System.out.println(e.getCauses().size());
+        
+//        Object[] params = {"one", "two"};
+//        cf.create("events.VariableEffect", e, params);
+//        
+//        Object[] spriteParams = {"test", "tester"};
+//        cf.create("events.SpriteEffect", e, spriteParams);
+        
+//    	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
+        
+        String[] variableCauseParams = {"Score", "500", "greaterThan"};
+        cf.create("events.VariableCause", e, variableCauseParams);
         System.out.println(e.getCauses().size());
-        
-        Object[] params = {"one", "two"};
-        cf.create("events.VariableEffect", e, params);
-        
-        Object[] spriteParams = {"test", "tester"};
-        cf.create("events.SpriteEffect", e, spriteParams);
-        
-        System.out.println(e.getEffects().size());
-        
-        
+      
     }
 }
