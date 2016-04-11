@@ -5,7 +5,7 @@ import tools.Acceleration;
 import tools.Position;
 import tools.Velocity;
 
-public class StandardPhysics implements PhysicsEngine{
+public class StandardPhysics implements IPhysicsEngine{
 	//TODO find which methods overlap in code and reduce the bulk from that
 	private double frameTime;
 	

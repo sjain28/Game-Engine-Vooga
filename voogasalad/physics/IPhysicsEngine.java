@@ -6,7 +6,7 @@ import tools.Position;
 import tools.Velocity;
 import tools.interfaces.VoogaData;
 
-public interface PhysicsEngine {
+public interface IPhysicsEngine {
 
 	// TODO decide on methods for the physics engine, here are a few ideas to
 	// start

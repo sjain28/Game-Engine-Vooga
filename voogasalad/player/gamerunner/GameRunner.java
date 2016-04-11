@@ -30,7 +30,13 @@ public class GameRunner implements IGameRunner{
 		// TODO Auto-generated constructor stub
 		myDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
+		//System.out.println(levelQueue);
 		playGame();
+	}
+	
+	public GameRunner(String fileString) throws FileNotFoundException, IOException {
+		// TODO Auto-generated constructor stub
+		this(new File(fileString));
 	}
 	
 	/**
@@ -60,6 +66,7 @@ public class GameRunner implements IGameRunner{
 		while(iterator.hasNext()){
 			// if (!l.isWon)
 			String nextLevel = iterator.next();
+			System.out.println(nextLevel);
 			playLevel(nextLevel);
 		}
 	}
@@ -71,6 +78,7 @@ public class GameRunner implements IGameRunner{
 	
 	public void playLevel(String s){
 		myCurrentLevelDataManager = new LevelDataManager(s);
+		myDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 		myDisplay.display();
 	}
 	

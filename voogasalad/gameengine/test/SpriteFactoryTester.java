@@ -20,10 +20,10 @@ public class SpriteFactoryTester {
 		SpriteFactory s = new SpriteFactory();
 		Map<String, VoogaData> newProperties = new HashMap<String, VoogaData>();
 		newProperties.put("health points",null);
-		Sprite sprite = new Sprite("","Pirate");
-		sprite.setProperties(newProperties);
-		s.setArchetype("Pirate", sprite);
-		s.createSprite("Pirate");
+//		Sprite sprite = new Sprite("","Pirate");
+//		sprite.setProperties(newProperties);
+//		s.setArchetype("Pirate", sprite);
+//		s.createSprite("Pirate");
 		assertEquals(1,s.getAllArchetypeNames().size());
 	}
 }
