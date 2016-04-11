@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="voogasalad"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="external_jars/groovy-all-2.4.6-indy.jar"/>
+	<classpathentry kind="lib" path="external_jars/groovy-all-2.4.6-indy.jar" sourcepath="external_jars/groovy-src.jar"/>
 	<classpathentry kind="lib" path="external_jars/groovy-doc.jar"/>
 	<classpathentry kind="lib" path="external_jars/groovy-src.jar"/>
 	<classpathentry kind="lib" path="external_jars/xstream-1.4.9.jar"/>
