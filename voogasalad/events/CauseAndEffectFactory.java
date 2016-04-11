@@ -2,10 +2,12 @@ package events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ResourceBundle;
 
 public class CauseAndEffectFactory {
-    String causeName;
-    
+	
+//	private ResourceBundle errorMessages = ResourceBundle.getBundle("./resources/ErrorMessages.properties");
+	
     @SuppressWarnings("rawtypes")
 	public void create(VoogaEvent event, String inputString){
         String[] parameters = inputString.split("\\s+");
