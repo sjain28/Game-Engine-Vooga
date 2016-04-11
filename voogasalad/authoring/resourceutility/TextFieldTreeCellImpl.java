@@ -1,11 +1,16 @@
 package authoring.resourceutility;
 
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeCell;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.TransferMode;
 
 /**
  * This is a custom TreeCell implementation allowing renaming (and drag-and-drop soon to come)
@@ -26,6 +31,18 @@ public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 				}
 			}
 		});
+		
+		this.setOnDragDetected(e -> {
+            if (! isEmpty()) {
+                Dragboard db = startDragAndDrop(TransferMode.COPY);
+                ClipboardContent cc = new ClipboardContent();
+                cc.putString(getItem().getPath());
+                db.setContent(cc);
+                Label label = new Label(String.format("%s", getItem().toString()));
+                new Scene(label);
+                db.setDragView(label.snapshot(null, null));
+            }
+        });
 		
 	}
 	
