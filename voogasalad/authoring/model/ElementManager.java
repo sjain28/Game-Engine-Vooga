@@ -28,10 +28,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
     private List<VoogaEvent> myEventList;
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
-
     private SpriteFactory spriteFactory;
-    
-    @SpriteAnnotation
     private Set<String> myIds;
     
     public ElementManager () {
@@ -39,6 +36,8 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
         myEventList = new ArrayList<VoogaEvent>();
         myGlobalVariables = new HashMap<String, VoogaData>();
         myXmlDataFile = null;
+        myIds = new HashSet<String>();
+        spriteFactory = new SpriteFactory();
     }
 
     public ElementManager (File xmlDataFile) {

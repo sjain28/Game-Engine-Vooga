@@ -35,7 +35,7 @@ public class SwitchButton extends Label {
                                  Boolean t1) {
                 if (t1) {
                     setText("ON");
-                    setStyle("-fx-background-color: green;-fx-text-fill:white;");
+                    setStyle("-fx-background-color: #64B5F6;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
                 }
                 else {
