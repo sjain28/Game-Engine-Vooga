@@ -11,11 +11,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import auxiliary.VoogaException;
+import data.DataContainerOfLists;
+import data.FileWriterFromObjects;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
@@ -24,13 +30,14 @@ import tools.interfaces.VoogaData;
 
 
 public class ElementManager implements Saveable, CompleteAuthoringModelable {
+ 
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
     private SpriteFactory spriteFactory;
     private Set<String> myIds;
-    
+
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
@@ -84,27 +91,30 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
      * Write Data to XML using XStream
      */
     @Override
-    public void onSave () {
+    public void onSave () throws VoogaException{
         XStream mySerializer = new XStream(new DomDriver());
         StringBuilder content = new StringBuilder();
 
-        List<Sprite> sprites = new ArrayList<Sprite>();
-        List<VoogaText> text = new ArrayList<VoogaText>();
+        List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
             if (element instanceof GameObject) {
-                sprites.add(((GameObject) element).getSprite());
+                elements.add(((GameObject) element).getSprite());
             }
 
             if (element instanceof VoogaText) {
-                text.add((VoogaText) element);
+                elements.add((VoogaText) element);
             }
         }
 
-        content.append(mySerializer.toXML(sprites) + "\n");
-        content.append(mySerializer.toXML(text) + "\n");
-        content.append(myEventList + "\n");
-        content.append(myGlobalVariables);
+        DataContainerOfLists data = new DataContainerOfLists(elements,myGlobalVariables,myEventList);
+        try {
+            FileWriterFromObjects.saveGameObjects(data,myXmlDataFile.getPath());
+        }
+        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
+            throw new VoogaException();
+        }
+        
 
         writeToFile(content.toString());
     }
@@ -134,8 +144,8 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
         }
         return mySpriteNames;
     }
-    
-    public Map<String,VoogaData> getGlobalVariables(){
+
+    public Map<String, VoogaData> getGlobalVariables () {
         return myGlobalVariables;
     }
 }
