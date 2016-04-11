@@ -6,7 +6,7 @@ import tools.Position;
 import tools.Velocity;
 import tools.interfaces.VoogaData;
 
-public interface PhysicsEngine {
+public interface IPhysicsEngine {
 
 	/**
 	 * Take in a sprite's position and add velocity per frame

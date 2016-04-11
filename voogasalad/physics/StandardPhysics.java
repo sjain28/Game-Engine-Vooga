@@ -5,7 +5,7 @@ import tools.Acceleration;
 import tools.Position;
 import tools.Velocity;
 
-public class StandardPhysics implements PhysicsEngine{
+public class StandardPhysics implements IPhysicsEngine{
 	//TODO find which methods overlap in code and reduce the bulk from that
 	private double frameTime;
 	
@@ -36,7 +36,7 @@ public class StandardPhysics implements PhysicsEngine{
 	public void accelerate(Sprite sprite, Acceleration change) {
 		double newXVel = gradualChange(sprite.getVelocity().getX(), change.getX());
 		double newYVel = gradualChange(sprite.getVelocity().getY(), change.getY());
-		//TODO sprite.setVelocity(Velocty.setXY(newXVel, newYVel));
+		//TODO sprite.setVelocity(Velocity.setXY(newXVel, newYVel));
 	}
 	
 	@Override
