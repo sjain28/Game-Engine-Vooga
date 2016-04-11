@@ -135,4 +135,13 @@ public class EngineObjectManager {
 		return displayablenodes;
 		
 	}
+
+	public List<Sprite> getSpritesByArchetype(String myArchetype) {
+	List<Object> archIDs = mySpriteCategories.get(myArchetype);
+	List<Sprite> archSprites = new ArrayList<Sprite>();
+	for (Object ID : archIDs){
+		archSprites.add(mySprites.get(ID));
+	}
+		return archSprites;
+	}
 }

@@ -1,32 +1,51 @@
 package events;
 
+import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import Player.leveldatamanager.EngineObjectManager;
+=======
+import gameengine.Sprite;
+import physics.StandardPhysics;
+import player.leveldatamanager.EngineObjectManager;
+>>>>>>> master
 
 public class VoogaEvent {
 
+	//TODO: Either make physics static, put framerate inside of physics, get using method, etc.
+
+	private double FrameRate = 1/60;
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
-	private EngineObjectManager myObjectManager;
+	private EngineObjectManager myEngineManager;
+	private List<Sprite> myCauseSprites;
+	private StandardPhysics myPhysicsEngine = new StandardPhysics(FrameRate);
 
-	public void addCauses(List<Cause> cause){
-		myCauses = cause;
+	public VoogaEvent(){
+		myCauses = new ArrayList<>();
+		myEffects = new ArrayList<>();
+		myCauseSprites = new ArrayList<>();
 	}
-	
-	public void addEffects(List<Effect> effect){
-		myEffects = effect;
+
+	public void addCause(Cause cause){
+		myCauses.add(cause);
 	}
-	
+
+	public void addEffect(Effect effect){
+		myEffects.add(effect);
+	}
+
 	public void setManager(EngineObjectManager manager){
-		myObjectManager = manager;
+		myEngineManager = manager;
 	}
-	
+
 	protected EngineObjectManager getManager(){
-		return myObjectManager;
+		return myEngineManager;
 	}
-	
+
 	public void update(){
+		myCauseSprites.clear();
 		for(Cause c: myCauses){
 			if(!c.check()){
 				return;
@@ -36,7 +55,7 @@ public class VoogaEvent {
 			e.execute();
 		}
 	}
-	
+
 	public List<Cause> getCauses(){
 		return myCauses;
 	}
@@ -45,4 +64,14 @@ public class VoogaEvent {
 		return myEffects;
 	}
 
+	public void addSpritesFromCause(List<Sprite> sprites){
+		myCauseSprites.addAll(sprites);
+	}
+
+	public List<Sprite> getSpritesFromCauses(){
+		return myCauseSprites;
+	}
+	public StandardPhysics getPhysicsEngine(){
+		return myPhysicsEngine;
+	}
 }

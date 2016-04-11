@@ -5,6 +5,8 @@ package Player.gamedisplay;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import data.FileReaderToGameObjects;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.shape.Circle;
@@ -41,15 +43,22 @@ public class GameDisplayTester extends Application {
 		nodes.add(r3);
 
 	}
-
+	
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		
 		IPromptFactory pf = new PromptFactory();
 		IGameDisplay gd = new StandardDisplay();
 //		IControl c = new StandardControl();
 
+//		FileReaderToGameObjects fileReader = new FileReaderToGameObjects("level2");
 		populate();
+		
+//		DisplayScroller scroller = new DisplayScroller(50,50);
+//		fileReader.createNodeList().toString();
+//		scroller.centerScroll(fileReader.createNodeList(), 50);
 		gd.read(nodes);
 		gd.display();
 		pf.prompt("Hi! Prompt worked!");

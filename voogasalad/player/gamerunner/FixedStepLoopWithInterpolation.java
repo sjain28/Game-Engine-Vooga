@@ -128,11 +128,11 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		super.stop();
 	}
 	
-	public double getFrameRate(){
+	public double getFrameTime(){
 		return (double) framesPerSecond;
 	}
 	
-	public void setFrameRate(double newRate){
-		framesPerSecond = (int) newRate;
+	public void setFrameTime(float newTime){
+		frameTime = (float) 1/newTime;
 	}
 }

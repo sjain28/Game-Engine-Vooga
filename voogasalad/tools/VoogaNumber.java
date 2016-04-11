@@ -5,35 +5,48 @@ import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 public class VoogaNumber implements VoogaData{
-    private double value;
+    private double myValue;
     
     public VoogaNumber(){
-    	this.value = (Double) 0.0;
+    	this.myValue = (Double) 0.0;
     }
     
     public VoogaNumber(Number number){
-        this.value = (Double) number;
+        this.myValue = (Double) number;
     }
     
     public void decreaseValue(Number dx){
-        value-=dx.doubleValue();
+        myValue-=dx.doubleValue();
     }
     
     public void increaseValue(Number dx){
-        value+=dx.doubleValue();
+        myValue+=dx.doubleValue();
     }
     
     public void setValue(Number value){
-        this.value= value.doubleValue();
+        this.myValue= value.doubleValue();
+    }
+    
+    public boolean equals(Double num){
+    	
+    	return num == myValue;
+    }
+    
+    public boolean lessThan(Double num){
+    	return num < myValue;
+    }
+    
+    public boolean greaterThan(Double num){
+    	return num > myValue;
     }
     
     @Override
     public Object getValue () {
-        if (value == ((int) value)){
-            int number = (int) value;
+        if (myValue == ((int) myValue)){
+            int number = (int) myValue;
             return number;
         }
-        return value;
+        return myValue;
     }
     
     public String toString(){
@@ -42,7 +55,7 @@ public class VoogaNumber implements VoogaData{
     
     public Node display(){
         NumberTextField numberField = new NumberTextField();
-        numberField.setText(""+value);
+        numberField.setText(""+myValue);
         
         return numberField;
     }
@@ -50,7 +63,7 @@ public class VoogaNumber implements VoogaData{
     @Override
     public void setValue (Object o) {
         if (!(o instanceof Number)) return;
-        value = (double) o; 
+        myValue = (double) o; 
     }
    
 }

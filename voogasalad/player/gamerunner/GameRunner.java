@@ -16,7 +16,7 @@ import player.leveldatamanager.LevelDataManager;
 
 public class GameRunner implements IGameRunner{
 	
-	private LevelDataManager currentLevelDataManager;
+	private LevelDataManager myCurrentLevelDataManager;
 	private IGameDisplay myDisplay;
 	private Queue<String> levelQueue;
 	private final Consumer<Float> updater = null;
@@ -30,7 +30,13 @@ public class GameRunner implements IGameRunner{
 		// TODO Auto-generated constructor stub
 		myDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
+		//System.out.println(levelQueue);
 		playGame();
+	}
+	
+	public GameRunner(String fileString) throws FileNotFoundException, IOException {
+		// TODO Auto-generated constructor stub
+		this(new File(fileString));
 	}
 	
 	/**
@@ -50,7 +56,6 @@ public class GameRunner implements IGameRunner{
 		return levelQueue;
 	 }
 	
-	
 	/**
 		playGame plays each level of the game, as long as the game has not been won yet. If the game has been won 
 		already, the next level of the game will be played. playGame iterates through the queue of levels
@@ -61,6 +66,7 @@ public class GameRunner implements IGameRunner{
 		while(iterator.hasNext()){
 			// if (!l.isWon)
 			String nextLevel = iterator.next();
+			System.out.println(nextLevel);
 			playLevel(nextLevel);
 		}
 	}
@@ -71,22 +77,30 @@ public class GameRunner implements IGameRunner{
 	 */
 	
 	public void playLevel(String s){
-		currentLevelDataManager = new LevelDataManager(s);
+		myCurrentLevelDataManager = new LevelDataManager(s);
+		myDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 		myDisplay.display();
 	}
 	
 
+	/**
+	 * Stops the AnimationTimer
+	 * 
+	 */
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		
+		getGameLoop().stop();
 	}
 
-
+	/**
+	 * Starts the AnimationTimer
+	 * 
+	 */
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		
+		getGameLoop().start();
 	}
 
 
@@ -108,15 +122,71 @@ public class GameRunner implements IGameRunner{
 	}
 	
 	@Override
-	public void getFrameRate() {
+	public void getFrameTime() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void setFrameRate(double frameRate) {
+	public void setFrameTime(double frameRate) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/**
+	 * @return the myCurrentLevelDataManager
+	 */
+	public LevelDataManager getCurrentLevelDataManager() {
+		return myCurrentLevelDataManager;
+	}
+
+	/**
+	 * @return the myDisplay
+	 */
+	public IGameDisplay getDisplay() {
+		return myDisplay;
+	}
+
+	/**
+	 * @return the levelQueue
+	 */
+	public Queue<String> getLevelQueue() {
+		return levelQueue;
+	}
+
+	/**
+	 * @return the updater
+	 */
+	public Consumer<Float> getUpdater() {
+		return updater;
+	}
+
+	/**
+	 * @return the renderer
+	 */
+	public Runnable getRenderer() {
+		return renderer;
+	}
+
+	/**
+	 * @return the interpolater
+	 */
+	public Consumer<Float> getInterpolater() {
+		return interpolater;
+	}
+
+	/**
+	 * @return the fps_reporter
+	 */
+	public Consumer<Integer> getFps_reporter() {
+		return fps_reporter;
+	}
+
+	/**
+	 * @return the myGameLoop
+	 */
+	public GameLoop getGameLoop() {
+		return myGameLoop;
 	}
 }

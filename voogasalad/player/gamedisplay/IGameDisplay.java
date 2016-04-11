@@ -1,7 +1,6 @@
 package Player.gamedisplay;
 
 import java.util.List;
-
 import javafx.scene.Node;
 
 /**
@@ -20,6 +19,8 @@ public interface IGameDisplay {
 	IControl myControl = new StandardControl();
 	
 //	IControl getControl();
+	
+	IHUD myHUD = new StandardHUD();
 	
 	void read(List<Node> listToDisplay);
 	
