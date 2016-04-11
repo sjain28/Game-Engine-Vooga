@@ -3,8 +3,11 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Position;
@@ -13,7 +16,7 @@ import tools.VoogaNumber;
 import tools.Velocity;
 import tools.interfaces.*;
 
-public class Sprite implements Moveable, Effectable{
+public class Sprite implements Moveable, Effectable, Elementable{
 	
 	public static final String MASS = "mass";
     private Velocity myVelocity;
@@ -115,4 +118,35 @@ public class Sprite implements Moveable, Effectable{
 	public Map<String, VoogaData> getParameterMap() {
 		return myProperties;
 	}
+
+	@Override
+	public Map<String, VoogaData> getVoogaProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeProperty(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return myImage;
+	}
+
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+//	@Override
+//	public void setVelocity(Vector v) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
 }

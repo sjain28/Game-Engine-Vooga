@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import authoring.interfaces.Elementable;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
@@ -19,7 +20,7 @@ public class VoogaText extends TextField implements Elementable {
 
     Map<String, VoogaData> myProperties = new HashMap<String, VoogaData>();
     String name;
-    
+
     public VoogaText () {
         init();
     }
@@ -37,7 +38,7 @@ public class VoogaText extends TextField implements Elementable {
     }
 
     private void init () {
-        name=UUID.randomUUID().toString();
+        name = UUID.randomUUID().toString();
         this.setId(name);
         setBackground(Background.EMPTY);
         this.setOnDragDetected( (MouseEvent e) -> onDrag(e));
@@ -75,10 +76,15 @@ public class VoogaText extends TextField implements Elementable {
     @Override
     public void removeProperty (String name) {
         // TODO Auto-generated method stub
-
     }
-    
-    public String getName(){
+
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return this;
+    }
+
+    public String getName () {
         return name;
     }
 

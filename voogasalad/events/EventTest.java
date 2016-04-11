@@ -24,10 +24,10 @@ public class EventTest {
 		VoogaEvent e = new VoogaEvent();
 		ArrayList<Effect> effects = new ArrayList<>();
 		
-		VariableEffect tester = new VariableEffect(e);
-		effects.add(tester);
-		
-		e.addEffect(tester);
+//		VariableEffect tester = new VariableEffect(e);
+//		effects.add(tester);
+//		
+//		e.addEffect(tester);
 		
 		assertEquals("Adding causes", 1, e.getEffects().size());
 	}

@@ -4,6 +4,7 @@ import java.util.Map;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -75,6 +76,14 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     public void removeProperty (String name) {
         
     }
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return mySprite.getImage();
+	}
+    
+    
     
     public String getName(){
         return name;
