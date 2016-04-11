@@ -1,0 +1,20 @@
+package authoring.interfaces.model;
+
+import events.VoogaEvent;
+
+<<<<<<< HEAD
+
+public interface EditEventable {
+=======
+public interface EditEventable{
+>>>>>>> master
+    public void addEvents (VoogaEvent ... events);
+
+    public void removeEvents (VoogaEvent ... events);
+
+<<<<<<< HEAD
+}
+=======
+   
+}
+>>>>>>> master

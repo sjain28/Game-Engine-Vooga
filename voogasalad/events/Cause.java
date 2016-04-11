@@ -13,6 +13,10 @@ public abstract class Cause {
 		 return myEvent;
 	 }
 	 
+	 protected void setEvent(VoogaEvent event){
+		 myEvent = event;
+	 }
+	 
 }
 
 //Every cause and effect needs to look at both Sprite Maps from SpriteManager
