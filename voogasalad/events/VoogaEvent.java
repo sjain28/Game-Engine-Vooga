@@ -11,11 +11,12 @@ public class VoogaEvent {
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
 	private EngineObjectManager myEngineManager;
-	private List<Sprite> myCauseSprites = new ArrayList<>();
+	private List<Sprite> myCauseSprites;
 
 	public VoogaEvent(){
 		myCauses = new ArrayList<>();
 		myEffects = new ArrayList<>();
+		myCauseSprites = new ArrayList<>();
 	}
 	
 	public void addCause(Cause cause){
@@ -35,6 +36,7 @@ public class VoogaEvent {
 	}
 	
 	public void update(){
+		myCauseSprites.clear();
 		for(Cause c: myCauses){
 			if(!c.check()){
 				return;
