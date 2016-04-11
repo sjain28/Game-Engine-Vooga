@@ -20,11 +20,11 @@ interface IGameRunner {
 	/**
 	 * Get framerate
 	 */
-	void getFrameRate();
+	void getFrameTime();
 	
 	/**
 	 * Modify the frame rate in play
 	 * @param frameRate
 	 */
-	void setFrameRate(double frameRate);
+	void setFrameTime(double frameRate);
 }

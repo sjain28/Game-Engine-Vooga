@@ -25,7 +25,7 @@ public class DataTest extends Application {
     }
     @Override
     public void start (Stage primaryStage) throws Exception {
-        Sprite sprite = new Sprite("/bricks.jpg","6");
+ 
         Elementable[] vts = new Elementable[10];
         Variable[] variables = new Variable[10];
         VoogaEvent[] events = new VoogaEvent[10];

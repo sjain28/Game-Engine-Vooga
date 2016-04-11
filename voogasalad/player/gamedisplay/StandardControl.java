@@ -14,7 +14,7 @@ import javafx.scene.layout.HBox;
 public class StandardControl implements IControl {
 	
 	
-	HBox myControl;
+	private HBox myControl;
 	
 	/**
 	 * Default constructor

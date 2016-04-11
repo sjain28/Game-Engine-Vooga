@@ -12,26 +12,30 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Position;
 import tools.Vector;
+import tools.VoogaNumber;
 import tools.Velocity;
 import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable, Elementable{
 	
-    private Vector myVelocity;
-    private Vector myLoc;
+	public static final String MASS = "mass";
+    private Velocity myVelocity;
+    private Position myLoc;
     private String myID;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
     private String myArchetype;
     private transient ImageView myImage;
     
-    public Sprite (String imagePath, String archetype){
+    public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties, VoogaNumber mass){
     	myID = UUID.randomUUID().toString();
     	myArchetype = archetype;
         myImagePath = imagePath;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
+        myProperties = properties;
+        myProperties.put(MASS, mass);
         myLoc = new Position(0,0);
         myVelocity = new Velocity(0,0);
     }
@@ -58,19 +62,19 @@ public class Sprite implements Moveable, Effectable, Elementable{
     }
 
     @Override
-    public void setVelocity (Vector v) {
-        myVelocity = v;
+    public void setVelocity (Velocity velocity) {
+        myVelocity = velocity;
     }
     
     public Vector getPosition(){
     	return myLoc;
     }
     
-    public void setPosition(Vector v){
-    	myLoc = v;
+    public void setPosition(Position position){
+    	myLoc = position;
     }
-    public void addProperty (String s, VoogaData v) {
-        myProperties.put(s, v);
+    public void addProperty (String property, VoogaData data) {
+        myProperties.put(property, data);
     }
 
     public VoogaData getProperty (String s) {
@@ -92,6 +96,14 @@ public class Sprite implements Moveable, Effectable, Elementable{
         return myImage;
     }
     
+    public void setArchetype(String archetype){
+    	myArchetype = archetype;
+    }
+    
+    public String getArchetype(){
+    	return myArchetype;
+    }
+    
     public void setImagePath(String path){
     	myImagePath = path;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
@@ -105,9 +117,6 @@ public class Sprite implements Moveable, Effectable, Elementable{
 	@Override
 	public Map<String, VoogaData> getParameterMap() {
 		return myProperties;
-	}
-	public String getArchetype(){
-		return myArchetype;
 	}
 
 	@Override
@@ -125,6 +134,13 @@ public class Sprite implements Moveable, Effectable, Elementable{
 	@Override
 	public Node getNodeObject() {
 		// TODO Auto-generated method stub
-		return getImage();
+		return myImage;
 	}
+
+//	@Override
+//	public void setVelocity(Vector v) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
 }

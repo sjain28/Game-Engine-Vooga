@@ -86,7 +86,6 @@ public class DataWrittingTest extends Application {
     
     @Override
     public void start (Stage primaryStage) throws Exception {
-        Sprite sprite = new Sprite("/bricks.jpg","6");
         Node[] vts = new Node[10];
         for (int i =0;i<2;i++){
             VoogaText vt = new VoogaText(""+i);

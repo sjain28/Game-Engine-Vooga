@@ -14,7 +14,7 @@ public class EventTest {
 		KeyCause tester = new KeyCause("A", e);
 		causes.add(tester);
 		
-		e.addCauses(causes);
+		e.addCause(tester);
 		
 		assertEquals("Adding causes", 1, e.getCauses().size());
 	}
@@ -24,10 +24,10 @@ public class EventTest {
 		VoogaEvent e = new VoogaEvent();
 		ArrayList<Effect> effects = new ArrayList<>();
 		
-		VariableEffect tester = new VariableEffect(e);
-		effects.add(tester);
-		
-		e.addEffects(effects);
+//		VariableEffect tester = new VariableEffect(e);
+//		effects.add(tester);
+//		
+//		e.addEffect(tester);
 		
 		assertEquals("Adding causes", 1, e.getEffects().size());
 	}

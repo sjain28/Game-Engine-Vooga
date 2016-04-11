@@ -11,8 +11,9 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import tools.interfaces.VoogaData;
+import tools.VoogaNumber;
+
 /**
  * Factor for creating Sprites from pre-formed Archetypes,
  * getting pre-formed Archetypes, and setting Archetypes.
@@ -24,8 +25,8 @@ import tools.interfaces.VoogaData;
 
 public class SpriteFactory {
 
-	private HashMap<String,Sprite> myArchetypes; 
-	
+	private Map<String,Sprite> myArchetypes; 
+
 	public SpriteFactory() {
 		myArchetypes = new HashMap<String,Sprite>();
 	}
@@ -35,12 +36,12 @@ public class SpriteFactory {
 	 * @return Sprite
 	 */
 	public Sprite createSprite(String archetype){
-		Sprite toCopy = myArchetypes.get(archetype);
-		Map<String, VoogaData> newProperties = new HashMap<String, VoogaData>(toCopy.getParameterMap());
-		Sprite newSprite = new Sprite(toCopy.getImagePath(), archetype);
-		newSprite.setProperties(newProperties);
-		return newSprite;
+		Sprite original = myArchetypes.get(archetype);
+		Sprite clone = new Sprite(original.getImagePath(), original.getArchetype(), 
+					  original.getParameterMap(), (VoogaNumber)original.getParameterMap().get(Sprite.MASS));
+		return clone;
 	}
+
 	/**
 	 * Sets or creates a new Archetype
 	 * Must specify what you want your default Sprite
@@ -49,8 +50,8 @@ public class SpriteFactory {
 	 * @param archetype
 	 * @param s
 	 */
-	public void setArchetype(String archetype, Sprite s){
-		myArchetypes.put(archetype, s);
+	public void setArchetype(String archetype, Sprite sprite){
+		myArchetypes.put(archetype, sprite);
 	}
 	
 	/**
