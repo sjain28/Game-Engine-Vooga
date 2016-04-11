@@ -2,6 +2,8 @@ package authoring.gui.eventpane;
 
 import authoring.VoogaScene;
 import authoring.interfaces.model.EditEventable;
+import auxiliary.VoogaAlert;
+import auxiliary.VoogaException;
 import events.CauseAndEffectFactory;
 import events.VoogaEvent;
 import javafx.event.EventHandler;
@@ -16,15 +18,18 @@ public class EventWindow extends Stage{
     private Scene myScene;
     private EventAccoridion causeAccoridion;
     private EventAccoridion effectAccoridion;
+    private EditEventable manager;
     
     private VoogaEvent event;
     private CauseAndEffectFactory eventFactory;
     
     public EventWindow(EditEventable manager){
+        this.manager = manager;
         
         tabPane = new TabPane();
         myScene = new VoogaScene(tabPane);
         event = new VoogaEvent();
+        eventFactory = new CauseAndEffectFactory();
         
         Button apply1 = buttonFactory("Apply",e->apply());
         Button apply2=buttonFactory("Apply",e->apply());
@@ -46,12 +51,25 @@ public class EventWindow extends Stage{
      * Use Factory to construct Event--> add event to the manager
      */
     private void apply(){
-        for (String event : causeAccoridion.getDetails()){
-            
+        for (String eventDetails : causeAccoridion.getDetails()){
+            populateEvent(eventDetails);
         }
+        
+        for (String eventDetails : effectAccoridion.getDetails()){
+            populateEvent(eventDetails);
+        }
+        
+        manager.addEvents(event);
         this.close();
     }
     
+    private void populateEvent(String eventDetails){
+        try{
+            eventFactory.create("", event, eventDetails);
+        } catch (VoogaException e){
+            new VoogaAlert(e.getMessage());
+        }
+    }
     private void cancel(){
         this.close();
     }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditEventable;
+import auxiliary.VoogaException;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
@@ -112,13 +113,13 @@ public class VariableEffectGUI implements EventGUI {
     }
 
     @Override
-    public String getDetails () {
+    public String getDetails () throws VoogaException{
         String result="";
         if (level.getValue().contains("global")){
-            result += "VariableCause ";
+            result += "VariableEffect ";
         }
         if (level.getValue().contains("global")){
-            result += "SpriteVariableCause "+name.getValue()+" ";
+            result += "SpriteEffect "+name.getValue()+" ";
         }
         return result+variables.getValue()+
                 " "+actions.getValue()+" "+amount.getAccessibleText();

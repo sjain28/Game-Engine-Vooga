@@ -77,6 +77,7 @@ public class EventTitledPane extends TitledPane{
     }
     
     public String getDetails(){
+        System.out.println(eg.getClass());
         return eg.getDetails();
     }
     
