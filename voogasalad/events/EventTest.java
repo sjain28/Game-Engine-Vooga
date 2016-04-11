@@ -24,7 +24,7 @@ public class EventTest {
 		VoogaEvent e = new VoogaEvent();
 		ArrayList<Effect> effects = new ArrayList<>();
 		
-		VariableEffect tester = new VariableEffect(e);
+		VariableEffect tester = new VariableEffect("Test", "Tester", e);
 		effects.add(tester);
 		
 		e.addEffect(tester);
