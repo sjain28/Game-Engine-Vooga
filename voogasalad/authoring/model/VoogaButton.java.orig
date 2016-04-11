@@ -53,6 +53,13 @@ public class VoogaButton extends Button implements Elementable {
         return name;
     }
 
+<<<<<<< HEAD
+=======
+	@Override
+	public void removeProperty(String name) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public Node getNodeObject() {
@@ -61,4 +68,5 @@ public class VoogaButton extends Button implements Elementable {
 	}
     
     
+>>>>>>> master
 }

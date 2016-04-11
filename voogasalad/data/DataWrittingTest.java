@@ -86,7 +86,6 @@ public class DataWrittingTest extends Application {
     
     @Override
     public void start (Stage primaryStage) throws Exception {
-        Sprite sprite = new Sprite("/bricks.jpg","6");
         Node[] vts = new Node[10];
         for (int i =0;i<2;i++){
             VoogaText vt = new VoogaText(""+i);
@@ -119,7 +118,7 @@ public class DataWrittingTest extends Application {
         Document doc = dBuilder.parse(new File("ece 250 notes 4-1.txt"));
    		System.out.println(doc.toString());
         
-       FileReaderToObjects fileReader = new FileReaderToObjects("yo.xml");
+       FileReaderToGameObjects fileReader = new FileReaderToGameObjects("yo.xml");
         
         System.out.println("DONE");
         
