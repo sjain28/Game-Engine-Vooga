@@ -37,7 +37,7 @@ public class SpriteFactoryTester {
 		
 		SpriteFactory myTesterFactory = new SpriteFactory();
 		assertEquals(0,myTesterFactory.getAllArchetypeNames().size());
-		myTesterFactory.deSerializeArchetype("archetypes_saved_here/Pirate");
+		myTesterFactory.deSerializeArchetype("archetypes_saved_here_Pirate");
 		assertEquals(1,myFactory.getAllArchetypeNames().size());
 	}
 }

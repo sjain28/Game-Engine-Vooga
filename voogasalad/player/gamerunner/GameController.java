@@ -53,14 +53,14 @@ public class GameController {
 	
 	public void runLevel(){
 		//timer in here to run steps and update both the logic and gui
+		GameLoop myGameLoop = new GameLoop()
 	}
 	
 	private void step(){
 		myCurrentLevelHandler.update();
-		List<Object> updatedObjects = myCurrentLevelHandler.extractUpdatedObjects();
-		myGameDisplay.read(toNodeList(updatedObjects));
+		List<Node> updatedNodes = myCurrentLevelHandler.extractUpdatedNodes();
+		myGameDisplay.read(updatedNodes);
 		myGameDisplay.display();
-		//Display.renderWith(updatedObjects);
 	}
 	private List<Node> toNodeList(List<Object> list){
 		List<Node> nodeList = new ArrayList<Node>();

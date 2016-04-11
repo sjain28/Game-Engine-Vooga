@@ -1,11 +1,16 @@
 package Player.leveldatamanager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import authoring.interfaces.Elementable;
 import authoring.model.VoogaText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
+import gameengine.Variable;
+import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 /** Manages Sprite's, Text, and GlobalVariables**/
@@ -14,13 +19,10 @@ import tools.interfaces.VoogaData;
 
 public class EngineObjectManager {
 	
-	/**Sprite Info**/
-	private Map<String, List<Object>> mySpriteCategories; //Maps archetype name to Sprite IDs
-	private Map<Object,Sprite> mySprites;				  //Maps IDs to Sprite's
-	private SpriteFactory mySpriteFactory;
+	/**Elements Info**/
+	private Map<String,Elementable> myElements;				  //Maps IDs to Sprite's
 	
-	/**Text info**/
-	private Map<Object,VoogaText> myText;				  //Maps IDs to Text
+	private SpriteFactory mySpriteFactory;
 
 	/**Global Variable info**/
 	private Map<String, VoogaData> myGlobalVariables;
@@ -31,17 +33,21 @@ public class EngineObjectManager {
 	 * @param sprites
 	 * @param factory
 	 */
-	public EngineObjectManager(List<Sprite> sprites, List<VoogaText> text, SpriteFactory factory) {
-		//mySprites = sprites;
-		
-		//TODO: Once constructor is figured out, intialize all objects here.
-		
-		mySpriteFactory = factory;
-		//place Sprite's by archetype and id in their correct maps
-		for(Object key : mySprites.keySet()){
-			organizeSpriteByArchetype(mySprites.get(key));
+	public EngineObjectManager(List<Elementable> elements, List<Variable> data, SpriteFactory factory) {
+		myElements = new HashMap<String,Elementable>();
+		for(Elementable el : elements){
+			myElements.put(el.getID(), el);
 		}
+		
+		myGlobalVariables = new HashMap<String, VoogaData>();
+		for(VoogaData v : data){
+			myGlobalVariables.put(v.getName(), v);
+		}
+		//TODO: Once constructor is figured out, intialize all objects here.
+		mySpriteFactory = factory;
 	}
+	
+	
 	
 	/**
 	 * Returns a sprite by id
@@ -49,7 +55,7 @@ public class EngineObjectManager {
 	 * @return
 	 */
 	public Sprite getSprite(Object id){
-		return mySprites.get(id);
+		return (Sprite) myElements.get(id);
 	}
 	
 	/**
@@ -57,8 +63,16 @@ public class EngineObjectManager {
 	 * @param archetype
 	 * @return
 	 */
-	public List<Object> getSpriteIDs(String archetype){
-		return mySpriteCategories.get(archetype);
+	public List<String> getSpriteIDs(String archetype){
+		List<String> list = new ArrayList<String>();
+		for(String id : myElements.keySet()){
+			if(myElements.get(id) instanceof Sprite){
+				if(((Sprite) myElements.get(id)).getArchetype().equals(archetype)){
+					list.add(id);
+				}
+			}
+		}
+		return list;
 	}
 	
 	/**
@@ -66,10 +80,9 @@ public class EngineObjectManager {
 	 * @param archetype
 	 * @return
 	 */
-	public Sprite addSprite(String archetype){
-		Sprite newSprite = mySpriteFactory.createSprite(archetype);
-		mySprites.put(newSprite.getID(),newSprite);
-		organizeSpriteByArchetype(newSprite);
+	public Elementable addSprite(String archetype){
+		Elementable newSprite = mySpriteFactory.createSprite(archetype);
+		myElements.put(newSprite.getID(),newSprite);
 		return newSprite;
 	}
 	
@@ -78,22 +91,9 @@ public class EngineObjectManager {
 	 * @param id
 	 */
 	public void removeSprite(Object id){
-		mySpriteCategories.get(mySprites.get(id).getArchetype()).remove(id);
-		mySprites.remove(id);
+		myElements.remove(id);
 	}
 	
-	/**
-	 * organizes all the Sprite's by archetype as well
-	 * @param s
-	 */
-	private void organizeSpriteByArchetype(Sprite s){
-		String archetype = s.getArchetype();
-		if(!mySpriteCategories.containsKey(archetype)){
-			List<Object> ids = new ArrayList<Object>();
-			mySpriteCategories.put(archetype, ids);
-		}
-		mySpriteCategories.get(archetype).add(s.getID());
-	}
 	/**
 	 * Returns a Global Variable (VoogaData) as specified
 	 * by it's variable name
@@ -111,7 +111,7 @@ public class EngineObjectManager {
 	 * @return
 	 */
 	public VoogaText getText(Object id){
-		return myText.get(id);
+		return (VoogaText) myElements.get(id);
 	}
 	
 	/**
@@ -124,14 +124,15 @@ public class EngineObjectManager {
 	 * are updated.
 	 * @return
 	 */
-	public List<Object> getAllDisplayableObjects(){
-		List<Object> displayableobjects = new ArrayList<Object>();
+	public List<Node> getAllDisplayableNodes(){
+		List<Node> displayablenodes = new ArrayList<Node>();
 		
-		for(Object key : mySprites.keySet()){
-			displayableobjects.add(mySprites.get(key));
+		for(Object key : myElements.keySet()){
+			//TODO: ADD IN .getNode when 
+			displayablenodes.add(myElements.get(key).getNode());
 		}
 		
-		return null;
+		return displayablenodes;
 		
 	}
 }

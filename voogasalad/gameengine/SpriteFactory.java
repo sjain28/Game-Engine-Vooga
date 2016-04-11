@@ -99,7 +99,7 @@ public class SpriteFactory {
 		try {
 			for(String key : myArchetypes.keySet()){
 				System.out.println(key);
-				fileWriter.serialize(myArchetypes.get(key), "archetypes"+"_"+key);
+				fileWriter.serialize(myArchetypes.get(key), fileLocation+"_"+key);
 			}
 		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
@@ -116,29 +116,9 @@ public class SpriteFactory {
 	 * @param fileLocation
 	 */
 	public void deSerializeArchetype(String fileLocation){
-		//TODO: Test to see if this actually works
-//		try {
-//			FileInputStream fileIn = new FileInputStream(fileLocation);
-//			ObjectInputStream in = new ObjectInputStream(fileIn);
-//			
-//			Sprite recoveredArchetype = (Sprite) in.readObject();
-//			myArchetypes.put(recoveredArchetype.getArchetype(),recoveredArchetype);
-//			in.close();
-//			fileIn.close();
-//		} catch (ClassNotFoundException | IOException e) {
-//			e.printStackTrace();
-//		}
 		FileReaderToObjects fileReader = new FileReaderToObjects();
-		@SuppressWarnings("unchecked")
-		Sprite newArchetype = (Sprite) fileReader.deserializeObject("archetypes_Pirate");
+		Sprite newArchetype = (Sprite) fileReader.deserializeObject(fileLocation);
 		setArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
-		
-		
-	/*Map<String,Sprite> newArchetypes = (HashMap<String,Sprite>) fileReader.deserializeObject("archetypes/Pirate");
-		for(String key: newArchetypes.keySet()){
-			setArchetype(key, newArchetypes.get(key));
-		}
-		System.out.println(newArchetypes);*/
 	}
 }
