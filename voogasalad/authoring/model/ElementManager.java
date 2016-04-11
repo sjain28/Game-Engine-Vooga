@@ -5,15 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
+import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import events.VoogaEvent;
@@ -23,21 +23,21 @@ import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements Saveable, CompleteAuthoringModelable{
+public class ElementManager implements Saveable, CompleteAuthoringModelable {
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
+    private SpriteFactory spriteFactory;
     private Set<String> myIds;
     
-    private SpriteFactory spriteFactory;
-
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
         myGlobalVariables = new HashMap<String, VoogaData>();
         myXmlDataFile = null;
         myIds = new HashSet<String>();
+        spriteFactory = new SpriteFactory();
     }
 
     public ElementManager (File xmlDataFile) {
@@ -46,22 +46,10 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
     }
 
     public void addGameElements (Node ... elements) {
-        for (Node e : elements) {
-            System.out.println(e.getId());
-            while (myIds.contains(e.getId())) {
-                e.setId(UUID.randomUUID().toString());
-            }
-            myIds.add(e.getId());
-        }
         myGameElements.addAll(Arrays.asList(elements));
     }
 
     public void removeGameElements (Node ... elements) {
-        for (Node e:elements){
-            if (myIds.contains(e.getId())){
-                myIds.remove(e.getId());
-            }
-        }
         myGameElements.removeAll(Arrays.asList(elements));
     }
 
@@ -76,22 +64,22 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
     public void removeEvents (VoogaEvent ... events) {
         myEventList.removeAll(Arrays.asList(events));
     }
-    
-    public Node getElement(String id){
-        for (Node node : myGameElements){
-            
-            if (node.getId().equals(id)){
+
+    public Node getElement (String id) {
+        for (Node node : myGameElements) {
+
+            if (node.getId().equals(id)) {
                 return node;
             }
         }
-        
+
         return null;
     }
-    
-    public boolean hasElement(String id){
+
+    public boolean hasElement (String id) {
         return myIds.contains(id);
     }
-    
+
     /**
      * Write Data to XML using XStream
      */
@@ -134,9 +122,20 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable{
             e.printStackTrace();
         }
     }
-    
-    public SpriteFactory getSpriteFactory(){
+
+    public SpriteFactory getSpriteFactory () {
         return spriteFactory;
     }
 
+    public Collection<String> getMySpriteNames () {
+        Collection<String> mySpriteNames = new HashSet<String>();
+        for (Node e : myGameElements) {
+            mySpriteNames.add(((Elementable) e).getName());
+        }
+        return mySpriteNames;
+    }
+    
+    public Map<String,VoogaData> getGlobalVariables(){
+        return myGlobalVariables;
+    }
 }

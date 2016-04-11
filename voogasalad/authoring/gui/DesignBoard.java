@@ -1,5 +1,6 @@
 package authoring.gui;
 
+import java.io.File;
 import java.util.UUID;
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
@@ -8,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -33,7 +36,6 @@ public class DesignBoard extends TabPane {
         Tab design = new Tab(DESIGN_BOARD);
         design.setContent(container);
         this.getTabs().add(design);
-        contentPane.getChildren().add(new ResizableImage(new Rectangle(200, 400, Color.CADETBLUE)));
     }
 
     public StackPane getContent () {
@@ -41,10 +43,9 @@ public class DesignBoard extends TabPane {
     }
 
     private void initializeDragAndDrop () {
-        contentPane.setOnDragOver( (DragEvent e) -> mouseDragOver(e));
-        contentPane.setOnDragDropped( (DragEvent e) -> mouseDragDropped(e));
-        contentPane.setOnDragExited( (DragEvent e) -> contentPane
-                .setStyle("-fx-border-color: #C6C6C6;"));
+        contentPane.setOnDragOver(e -> mouseDragOver(e));
+        contentPane.setOnDragDropped(e -> mouseDragDropped(e));
+        contentPane.setOnDragExited(e -> contentPane.setStyle("-fx-border-color: transparent;"));
     }
 
     private void mouseDragDropped (final DragEvent event) {
@@ -62,14 +63,13 @@ public class DesignBoard extends TabPane {
         }
 
         event.setDropCompleted(success);
-        event.consume();
     }
 
     private void mouseDragOver (final DragEvent event) {
-
         if (event.getGestureSource() != contentPane &&
             event.getDragboard().hasString()) {
-            event.acceptTransferModes(TransferMode.MOVE);
+        	contentPane.setStyle("-fx-border-color: #C6C6C6;");
+        	event.acceptTransferModes(TransferMode.ANY);
         }
         event.consume();
     }
@@ -77,7 +77,9 @@ public class DesignBoard extends TabPane {
     private void addElement (String elementPath) {
         Node node;
         if (ResourceDecipherer.isImage(elementPath)) {
-            node = new GameObject(elementManager.getSpriteFactory().createSprite(""));
+            //node = new GameObject(elementManager.getSpriteFactory().createSprite(""));
+        	System.out.println(elementPath);
+        	node = new ImageView(new Image(new File(elementPath).toURI().toString()));
             addElement(node);
         }
     }

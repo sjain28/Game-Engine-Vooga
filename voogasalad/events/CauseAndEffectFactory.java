@@ -3,9 +3,6 @@ package events;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import tools.VoogaBoolean;
-import tools.interfaces.VoogaData;
-
 public class CauseAndEffectFactory {
     String causeName;
     
