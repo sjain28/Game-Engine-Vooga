@@ -32,11 +32,10 @@ public class StandardHUD implements IHUD {
 	
 	/**
 	 * Creates a VBox that represents the HUD
+	 * VBox is chosen because it is expected that this HUD component will
+	 * be placed on the right side of the screen (right side of BorderPane)
 	 * 
 	 * @return myHUD
-	 */
-	/* (non-Javadoc)
-	 * @see player.gamedisplay.IHUD#createHUD()
 	 */
 	@Override
 	public VBox createHUD() {
