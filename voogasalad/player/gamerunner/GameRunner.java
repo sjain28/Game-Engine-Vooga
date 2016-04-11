@@ -30,6 +30,7 @@ public class GameRunner implements IGameRunner{
 		// TODO Auto-generated constructor stub
 		myDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
+		//System.out.println(levelQueue);
 		playGame();
 	}
 	
@@ -66,7 +67,7 @@ public class GameRunner implements IGameRunner{
 		while(iterator.hasNext()){
 			// if (!l.isWon)
 			String nextLevel = iterator.next();
-			System.out.println(levelQueue);
+			System.out.println(nextLevel);
 			playLevel(nextLevel);
 		}
 	}

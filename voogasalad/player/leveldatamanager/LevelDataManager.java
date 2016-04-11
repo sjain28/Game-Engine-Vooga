@@ -3,7 +3,7 @@ package player.leveldatamanager;
 import java.util.List;
 
 import authoring.interfaces.Elementable;
-import data.FileReaderToObjects;
+import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.Variable;
 import javafx.scene.Node;
@@ -35,7 +35,7 @@ public class LevelDataManager {
 	}
 	
 	private void readinObjects(String levelFileName){
-		FileReaderToObjects fileManager = new FileReaderToObjects(levelFileName);
+		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
 		List<Elementable> spriteObjects = fileManager.createNodeList();
 		System.out.println(spriteObjects);
 		List<VoogaEvent> eventObjects = fileManager.createEventList();
