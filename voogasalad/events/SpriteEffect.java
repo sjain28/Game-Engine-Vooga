@@ -11,23 +11,23 @@ public class SpriteEffect extends VariableEffect{
 	private List<Sprite> mySprites;
 
 	// constructor with sprites- apply to given sprites
-	public SpriteEffect(VoogaEvent event, List<Sprite> sprites, String method, String variable) {
-		super(event, method, variable);
+	public SpriteEffect(List<Sprite> sprites, String method, String variable, VoogaEvent event) {
+		super(method, variable, event);
 		mySprites = sprites;
 		needsSprites = false;
 	}
 
 	// constructor with archetype- apply to all of archetype
 	// constructor with archetype- apply to all of archetype for which event supplies
-	public SpriteEffect(VoogaEvent event, String archetype, Boolean needsSprites, String method, String variable) {
-		super(event, method, variable);
+	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, VoogaEvent event) {
+		super(method, variable, event);
 		myArchetype = archetype;
 		this.needsSprites = needsSprites;
 	}
 
 	// constructor with nothing- apply to all for which event supplies
-	public SpriteEffect(VoogaEvent event, String method, String variable) {
-		super(event, method, variable);
+	public SpriteEffect(String method, String variable, VoogaEvent event) {
+		super(method, variable, event);
 		needsSprites = true;
 	}
 
