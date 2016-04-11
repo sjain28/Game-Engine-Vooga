@@ -91,10 +91,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
      * Write Data to XML using XStream
      */
     @Override
-    public void onSave () throws VoogaException{
-        XStream mySerializer = new XStream(new DomDriver());
-        StringBuilder content = new StringBuilder();
-
+    public void onSave () throws VoogaException {
         List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
@@ -113,23 +110,6 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             throw new VoogaException();
-        }
-        
-
-        writeToFile(content.toString());
-    }
-
-    private void writeToFile (String content) {
-        FileWriter fileWriter;
-        try {
-            fileWriter = new FileWriter(myXmlDataFile, true);
-            fileWriter.write(content.toString());
-            fileWriter.flush();
-            fileWriter.close();
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 

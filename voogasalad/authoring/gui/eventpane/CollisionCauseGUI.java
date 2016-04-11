@@ -9,12 +9,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class CollisionCauseGUI implements EventGUI{
-    private EditEventable manager;
     private SpriteComboBox group1;
     private SpriteComboBox group2;
     
     public CollisionCauseGUI(EditEventable manager){
-        this.manager=manager;
         group1=new SpriteComboBox(manager);
         group2= new SpriteComboBox(manager);
     }
