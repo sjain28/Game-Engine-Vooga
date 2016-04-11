@@ -5,6 +5,8 @@ import application.Launcher;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.Savable;
+import javafx.event.EventHandler;
+import javafx.scene.input.InputEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -12,7 +14,7 @@ import javafx.stage.Stage;
 public class OpenProjectFileItem extends MenuItemHandler {
     private Savable myManager;
 	
-	public OpenProjectFileItem(CompleteAuthoringModelable model) {
+	public OpenProjectFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
 		super();
 		myManager = model;
 	}

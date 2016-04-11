@@ -1,7 +1,7 @@
 package authoring;
 
 import java.util.UUID;
-
+import com.sun.glass.events.MouseEvent;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
@@ -11,12 +11,15 @@ import authoring.model.ElementManager;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
 import auxiliary.VoogaException;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 
@@ -30,6 +33,7 @@ import javafx.scene.layout.VBox;
 public class UIManager extends VBox {
     private CompleteAuthoringModelable elementManager;
     private Dragboard db;
+    private UIGrid grid;
     
 
     public UIManager (CompleteAuthoringModelable model) {
@@ -40,7 +44,7 @@ public class UIManager extends VBox {
     private void initializeComponents () {
         this.getChildren().addAll(new MenuPanel(elementManager, e -> {
             try {
-                new MenuPanelHandlingMirror(e, elementManager);
+                new MenuPanelHandlingMirror(e, elementManager, newScene);
             }
             catch (VoogaException ee) {
                 Alert exception = new Alert(AlertType.ERROR);
@@ -50,6 +54,14 @@ public class UIManager extends VBox {
             }
         }), new ToolPanel(e -> {
             new ToolPanelHandlingMirror(e);
-        }), new UIGrid());
+        }), grid = new UIGrid());
     }
+    
+    EventHandler newScene = new EventHandler() {
+        Event e = new Event(Event.ANY);
+        public void handle(Event e){
+            grid.addScene();
+        }            
+    };
+    
 }
