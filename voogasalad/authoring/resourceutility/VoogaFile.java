@@ -1,5 +1,7 @@
 package authoring.resourceutility;
 
+import java.io.Serializable;
+
 import javafx.scene.layout.HBox;
 
 /**
@@ -8,8 +10,12 @@ import javafx.scene.layout.HBox;
  * @author DoovalSalad
  *
  */
-public class VoogaFile extends HBox {
+public class VoogaFile extends HBox implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2209689862407448154L;
 	/**
 	 * Private instance variables
 	 */
