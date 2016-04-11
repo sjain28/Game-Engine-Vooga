@@ -25,9 +25,7 @@ public class StandardHUD implements IHUD {
 	 * 
 	 */
 	public StandardHUD() {
-		
 		myHUD = new VBox();
-		
 	}
 	
 	/**
