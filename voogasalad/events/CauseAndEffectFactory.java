@@ -7,24 +7,24 @@ public class CauseAndEffectFactory {
     String causeName;
     
     @SuppressWarnings("rawtypes")
-	public void create(String name, VoogaEvent event, String inputString){
+	public void create(VoogaEvent event, String inputString){
         String[] parameters = inputString.split("\\s+");
     	Class<?> c=null;
         try {
-            c = Class.forName(name); //Find Cause class using reflection
+            c = Class.forName(parameters[0]); //Find Cause class using reflection
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         
-        Class[] paramClasses = new Class[parameters.length+1];
-        Object[] allParams = new Object[parameters.length+1];
+        Class[] paramClasses = new Class[parameters.length];
+        Object[] allParams = new Object[parameters.length];
         
-        for(int i = 0; i < parameters.length; i++){        	
+        for(int i = 1; i < parameters.length; i++){        	
         	String current = parameters[i];
         	Object parameter = parseString(current);
         	
-        	paramClasses[i] = parameter.getClass(); //Store all parameter classes
-        	allParams[i] = parameter;
+        	paramClasses[i-1] = parameter.getClass(); //Store all parameter classes
+        	allParams[i-1] = parameter;
         }
         
         paramClasses[paramClasses.length-1] = VoogaEvent.class;
@@ -90,8 +90,8 @@ public class CauseAndEffectFactory {
         
 //    	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
         
-        String variableCauseParams = "Score 500 greaterThan";
-        cf.create("events.VariableCause", e, variableCauseParams);
+        String variableCauseParams = "events.VariableCause Score 500 greaterThan";
+        cf.create(e, variableCauseParams);
         System.out.println(e.getCauses().size());
       
     }
