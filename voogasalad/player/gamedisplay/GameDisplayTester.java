@@ -53,15 +53,15 @@ public class GameDisplayTester extends Application {
 		IGameDisplay gd = new StandardDisplay();
 //		IControl c = new StandardControl();
 
-		FileReaderToGameObjects fileReader = new FileReaderToGameObjects("level2");
+//		FileReaderToGameObjects fileReader = new FileReaderToGameObjects("level2");
 		populate();
 		
 //		DisplayScroller scroller = new DisplayScroller(50,50);
 //		fileReader.createNodeList().toString();
 //		scroller.centerScroll(fileReader.createNodeList(), 50);
-//		gd.read(nodes);
-//		gd.display();
-//		pf.prompt("Hi! Prompt worked!");
+		gd.read(nodes);
+		gd.display();
+		pf.prompt("Hi! Prompt worked!");
 
 	}
 
