@@ -78,10 +78,10 @@ public class EventAccoridion extends Tab {
             e.printStackTrace();
         }
         try {
-            TitledPane titledPane;
+            EventTitledPane titledPane;
             try {
                 Object o = c.getConstructor(EditEventable.class).newInstance(manager);
-                titledPane = (TitledPane) o;
+                titledPane = (EventTitledPane) o;
                 System.out.println("TitledPane created in EventAccoridion.java");
                 return titledPane;
             }
@@ -126,6 +126,15 @@ public class EventAccoridion extends Tab {
         button.setOnAction(e);
         button.setAlignment(Pos.CENTER);
         return button;
+    }
+    
+    List<String> getDetails(){
+        List<String> eventList = new ArrayList<String>();
+        for (TitledPane pane : accordion.getPanes()){
+            EventTitledPane eventPane = (EventTitledPane) pane;
+            eventList.add(eventPane.getDetails());
+        }
+        return eventList;
     }
 }
 

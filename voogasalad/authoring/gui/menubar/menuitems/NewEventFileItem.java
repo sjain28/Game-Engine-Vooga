@@ -21,11 +21,8 @@ public class NewEventFileItem extends MenuItemHandler{
     
     @Override
     public void handle() {
-        Stage popup = new Stage();
-        popup.setTitle("New Event");
-        Scene scene = new VoogaScene(eventWindow);
-        popup.setScene(scene);
-        popup.show();
+        EventWindow eventWindow = new EventWindow(myManager);
+        eventWindow.show();
         
     }
 
