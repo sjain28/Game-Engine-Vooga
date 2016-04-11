@@ -113,9 +113,15 @@ public class VariableEffectGUI implements EventGUI {
 
     @Override
     public String getDetails () {
-        return "VariableCause " + level.getValue() + " " + name.getValue() + " " +
-               variables.getValue() +
-               " " + actions.getValue() + " " + amount.getAccessibleText();
+        String result="";
+        if (level.getValue().contains("global")){
+            result += "VariableCause ";
+        }
+        if (level.getValue().contains("global")){
+            result += "SpriteVariableCause "+name.getValue()+" ";
+        }
+        return result+variables.getValue()+
+                " "+actions.getValue()+" "+amount.getAccessibleText();
     }
 
 }

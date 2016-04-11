@@ -10,7 +10,7 @@ public class EventTitledPane extends TitledPane{
     private BorderPane pane;
     private EditEventable manager;
     private ComboBox<String> options;
-    
+    private EventGUI eg;
     
     public EventTitledPane(EditEventable manager){
         this.manager=manager;
@@ -36,7 +36,7 @@ public class EventTitledPane extends TitledPane{
             e.printStackTrace();
         }
         try {
-            EventGUI eg;
+            
             try {
                 Object o = c.getConstructor(EditEventable.class).newInstance(manager);
                 eg = (EventGUI) o;
@@ -74,6 +74,10 @@ public class EventTitledPane extends TitledPane{
     
     protected void addOptions(String...optionNames){
         options.getItems().addAll(optionNames);
+    }
+    
+    public String getDetails(){
+        return eg.getDetails();
     }
     
     
