@@ -8,14 +8,11 @@ import physics.StandardPhysics;
 
 public class VoogaEvent {
 
-	//TODO: Either make physics static, put framerate inside of physics, get using method, etc.
-
-	private double FrameRate = 1/60;
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
 	private EngineObjectManager myEngineManager;
 	private List<Sprite> myCauseSprites;
-	private StandardPhysics myPhysicsEngine = new StandardPhysics(FrameRate);
+	private StandardPhysics myPhysicsEngine = new StandardPhysics();
 
 	public VoogaEvent(){
 		myCauses = new ArrayList<>();

@@ -10,6 +10,16 @@ public class VariableEffect extends Effect {
 	private String[] myParameters;
 	private String myVariable;
 
+	public VariableEffect (String method, String variable, Double parameter, VoogaEvent event) {
+		super(event);
+		myMethod = method;
+		myVariable = variable;
+	}
+	public VariableEffect (String method, String variable, Boolean parameter, VoogaEvent event) {
+		super(event);
+		myMethod = method;
+		myVariable = variable;
+	}
 	public VariableEffect (String method, String variable, VoogaEvent event) {
 		super(event);
 		myMethod = method;

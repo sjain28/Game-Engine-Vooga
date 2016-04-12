@@ -21,10 +21,10 @@ public class GameRunner implements IGameRunner{
 	private LevelDataManager myCurrentLevelDataManager;
 	private IGameDisplay myDisplay;
 	private Queue<String> levelQueue;
-	private final Consumer<Float> updater = null;
-	private final Runnable renderer = null;
-	private final Consumer<Float> interpolater = null; 
-	private final Consumer<Integer> fps_reporter = null; 
+	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
+	private final Runnable renderer = null; // () -> whatever calls position updates //
+	private final Consumer<Float> interpolater = null; //alpha -> interpolatatePositions(), null for no interpolation //
+	private final Consumer<Integer> fps_reporter = null; //fps -> Text label for fps display, null for no label //
 	GameLoop myGameLoop = new FixedStepLoopWithInterpolation(updater, renderer, interpolater, fps_reporter);
 
 	
