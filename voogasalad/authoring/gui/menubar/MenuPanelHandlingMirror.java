@@ -7,17 +7,15 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.InputEvent;
 
-
 /**
  * This is the class that handles reflection on menu panel actions.
  *
  */
 public class MenuPanelHandlingMirror {
 
-    private static final String ITEM_NOT_IMPLEMENTED_ERROR =
-            "This item has not been implemented. Please do so.";
-    private static final String PACKAGE_LOCATION = "authoring.gui.menubar.menuitems.";
-    private static final String HANDLE = "handle";
+	private static final String ITEM_NOT_IMPLEMENTED_ERROR = "This item has not been implemented. Please do so.";
+	private static final String PACKAGE_LOCATION = "authoring.gui.menubar.menuitems.";
+	private static final String HANDLE = "handle";
 
     private ActionEvent e;
     private CompleteAuthoringModelable myManager;
@@ -55,4 +53,5 @@ public class MenuPanelHandlingMirror {
 		}
 
     }
+
 }

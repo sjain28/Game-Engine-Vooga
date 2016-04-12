@@ -59,4 +59,10 @@ public class VoogaButton extends Button implements Elementable {
         return this;
     }
 
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -25,25 +25,29 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class DesignBoard extends Tab{
 
-    private static final String DESIGN_BOARD = "Design Board";
-    private StackPane contentPane;
-    private ScrollPane container;
-    private ElementManager elementManager;
+public class DesignBoard extends Tab {
 
-    
-    public DesignBoard () {
-        contentPane = new StackPane();
-        contentPane.setMinSize(1000, 1000);
-        elementManager = new ElementManager();
-        container = new ScrollPane();
-        initializeDragAndDrop();
-        container.setContent(contentPane);
-        this.setContent(container);
-        this.setText(DESIGN_BOARD);
-        contentPane.getChildren().add(new ResizableImage(new Rectangle(200, 400, Color.CADETBLUE)));
-    }
+	private static final String DESIGN_BOARD = "Design Board";
+	private static final double HEIGHT = 1000;
+	private static final double WIDTH = 1000;
+	
+	private ScrollPane container;
+	private StackPane contentPane;
+	private ElementManager elementManager;
+	private double y_offset, x_offset;
+
+	public DesignBoard() {
+		contentPane = new StackPane();
+		contentPane.setMinSize(WIDTH, HEIGHT);
+		elementManager = new ElementManager();
+		container = new ScrollPane();
+		initializeDragAndDrop();
+		container.setContent(contentPane);
+		this.setContent(container);
+		y_offset = HEIGHT/2;
+		x_offset = WIDTH/2;
+	}
 
 
 	private void initializeDragAndDrop() {
@@ -60,7 +64,7 @@ public class DesignBoard extends Tab{
 			if (elementManager.hasElement(node.getPath())) {
 				moveElement(node.getPath(), event);
 			} else {
-				addElement(node.getPath());
+				addElement(node.getPath(), event);
 			}
 			success = true;
 		}
@@ -84,13 +88,16 @@ public class DesignBoard extends Tab{
 	}
 
 
-	public void addElement(String elementPath) {
+	private void addElement(String elementPath, DragEvent event) {
+
 		Node node = null;
 		if (elementPath != null) {
 			if (ResourceDecipherer.isImage(elementPath)) {
 				System.out.println("true");
 				// node = new GameObject(elementManager.getSpriteFactory().createSprite(""));
 				node = new ImageView(new Image(new File(elementPath).toURI().toString()));
+				node.setTranslateX(event.getX() - x_offset);
+				node.setTranslateY(event.getY() - y_offset);
 			} else if (ResourceDecipherer.isAudio(elementPath)) {
 				// node = new GameObject(elementManager.getSpriteFactory().createSprite(""));
 				node = new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri().toString())));

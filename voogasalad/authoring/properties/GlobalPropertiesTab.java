@@ -1,5 +1,6 @@
 package authoring.Properties;
 
+import authoring.interfaces.Elementable;
 import tools.interfaces.VoogaData;
 
 /*
@@ -8,6 +9,7 @@ import tools.interfaces.VoogaData;
 public class GlobalPropertiesTab extends AbstractPropertiesTab{
 
 	public final static String GLOBAL_PROPERTIES = "Global Properties";
+	private Elementable myElementable;
 	
 	public GlobalPropertiesTab() {
 		super();
@@ -16,19 +18,20 @@ public class GlobalPropertiesTab extends AbstractPropertiesTab{
 
 	@Override
 	public void getPropertiesMap(Object o) {
-		// TODO Auto-generated method stub
-		
+		myElementable = (Elementable) o;
+		propertiesMap = myElementable.getVoogaProperties();
+		displayProperties();
 	}
 
 	@Override
 	public void addNewProperty(String s, VoogaData vgData) {
-		propertiesMap.put(s, vgData);
+		myElementable.addProperty(s, vgData);
 		displayProperties();
 	}
 
 	@Override
 	public void removeProperty(String s) {
-		propertiesMap.remove(s);
+		myElementable.removeProperty(s);
 		displayProperties();
 		
 	}

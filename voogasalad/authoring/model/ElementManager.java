@@ -23,13 +23,12 @@ import auxiliary.VoogaException;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
 import events.VoogaEvent;
-import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements Saveable, CompleteAuthoringModelable {
+public class ElementManager implements Saveable, CompleteAuthoringModelable, Elementable{
  
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
@@ -128,7 +127,36 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
     public Map<String, VoogaData> getGlobalVariables () {
         return myGlobalVariables;
     }
-    public void addGlobalVariable(String name, VoogaData value){
-        myGlobalVariables.put(name, value);
-    }
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Map<String, VoogaData> getVoogaProperties() {
+		return myGlobalVariables;
+	}
+
+	@Override
+	public void addProperty(String name, VoogaData data) {
+		myGlobalVariables.put(name, data);
+	}
+
+	@Override
+	public void removeProperty(String name) {
+		myGlobalVariables.remove(name);
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

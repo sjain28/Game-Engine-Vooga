@@ -2,14 +2,13 @@ package authoring;
 
 import java.util.UUID;
 import com.sun.glass.events.MouseEvent;
+
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.model.ElementManager;
-import authoring.model.GameObject;
-import authoring.resourceutility.ResourceDecipherer;
+import auxiliary.VoogaAlert;
 import auxiliary.VoogaException;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -23,23 +22,23 @@ import javafx.scene.input.InputEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 
-
 /**
- * The UIManager is responsible for assembling view components, such
- * as the menubar, toolbar, and grid of windows
+ * The UIManager is responsible for assembling view components, such as the
+ * menubar, toolbar, and grid of windows
  * 
  */
-// Temporarily extending GridPane, eventually will use Mosaic to display components
+// Temporarily extending GridPane, eventually will use Mosaic to display
+// components
 public class UIManager extends VBox {
     private CompleteAuthoringModelable elementManager;
     private Dragboard db;
     private UIGrid grid;
     
 
-    public UIManager (CompleteAuthoringModelable model) {
-        elementManager = model;
-        initializeComponents();
-    }
+	public UIManager(CompleteAuthoringModelable model) {
+		elementManager = model;
+		initializeComponents();
+	}
 
     private void initializeComponents () {
         this.getChildren().addAll(new MenuPanel(elementManager, e -> {
@@ -64,4 +63,5 @@ public class UIManager extends VBox {
         }            
     };
     
+
 }
