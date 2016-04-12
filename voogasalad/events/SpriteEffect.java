@@ -47,15 +47,18 @@ public class SpriteEffect extends VariableEffect{
 		}
 		if (myArchetype != null){
 			// get sprite manager, get all sprites of archetype
-			List<Sprite> archSprites = getEvent().getManager().getSpritesByArchetype(myArchetype);
+			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(myArchetype);
 			if (mySprites.size() != 0){
 				for(Sprite causeSprite : mySprites){
-					if(!archSprites.contains(causeSprite)){
+					if(!archSpriteIDs.contains(causeSprite.getID())){
 						mySprites.remove(causeSprite);
 					}
 				}
 			}else {
-				mySprites = archSprites;
+				mySprites.clear();
+				for(String spriteid : archSpriteIDs){
+					mySprites.add(getEvent().getManager().getSprite(spriteid));
+				}
 			}
 		}
 	}

@@ -9,6 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
+import data.FileWriterFromGameObjects;
+import data.Serializer;
+import data.DeSerializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tools.interfaces.VoogaData;
@@ -85,23 +93,21 @@ public class SpriteFactory {
 	 * In the same file location by a different file name (given
 	 * by their archetype). 
 	 * 
-	 * todo: must check with front end to see if this is something
-	 * they actually need or not
-	 * 
 	 * @param fileLocation 
+	 * @throws SAXException 
+	 * @throws IOException 
+	 * @throws TransformerException 
+	 * @throws ParserConfigurationException 
 	 */
 	public void serializeArchetypes(String fileLocation){
-		//TODO: Test to see if this actually works
-		for(String archetype: myArchetypes.keySet()){
-			try {
-				FileOutputStream fileOut = new FileOutputStream(fileLocation+"/"+archetype);
-				ObjectOutputStream out = new ObjectOutputStream(fileOut);
-				out.writeObject(myArchetypes.get(archetype));
-				out.close();
-				fileOut.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+		Serializer serializer = new Serializer();
+		try {
+			for(String key : myArchetypes.keySet()){
+				System.out.println(key);
+				serializer.serialize(myArchetypes.get(key), fileLocation+"_"+key);
 			}
+		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -115,17 +121,9 @@ public class SpriteFactory {
 	 * @param fileLocation
 	 */
 	public void deSerializeArchetype(String fileLocation){
-		//TODO: Test to see if this actually works
-		try {
-			FileInputStream fileIn = new FileInputStream(fileLocation);
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			
-			Sprite recoveredArchetype = (Sprite) in.readObject();
-			myArchetypes.put(recoveredArchetype.getArchetype(),recoveredArchetype);
-			in.close();
-			fileIn.close();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
+		DeSerializer unserializer = new DeSerializer();
+		Sprite newArchetype = (Sprite) unserializer.deserialize(1,fileLocation);
+		setArchetype(newArchetype.getArchetype(), newArchetype);
+		System.out.println(newArchetype);
 	}
 }

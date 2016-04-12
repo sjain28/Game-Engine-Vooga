@@ -1,5 +1,6 @@
 package data;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -10,12 +11,23 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
-public class FileWriterFromObjects {
-
+public class FileWriterFromGameObjects {
+	
     public static void saveGameObjects (DataContainerOfLists lists,
-                                 String fileName) throws ParserConfigurationException,
-                                                  TransformerException, IOException, SAXException {
+                                        String fileName) throws ParserConfigurationException,
+                                                         TransformerException, IOException,
+                                                         SAXException {
         XStream serializer = new XStream(new DomDriver());
+        File file = new File(fileName);
+        if (!file.exists()) {
+        	 
+        	/*
+        	* createNewFile() method is used to creates a new, empty file
+        	* mentioned by given abstract pathname if and only if a file with
+        	* this name does not exist in given abstract pathname.
+        	*/
+        	file.createNewFile();
+        }
         ObjectOutputStream objectOutputStream =
                 serializer.createObjectOutputStream(new FileOutputStream(fileName));
 
@@ -24,5 +36,4 @@ public class FileWriterFromObjects {
         objectOutputStream.writeObject("Hello World");
         objectOutputStream.close();
     }
-
 }

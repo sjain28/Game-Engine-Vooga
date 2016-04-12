@@ -21,15 +21,14 @@ import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import auxiliary.VoogaException;
 import data.DataContainerOfLists;
-import data.FileWriterFromObjects;
+import data.FileWriterFromGameObjects;
 import events.VoogaEvent;
-import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements Saveable, CompleteAuthoringModelable {
+public class ElementManager implements Saveable, CompleteAuthoringModelable, Elementable{
  
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
@@ -91,10 +90,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
      * Write Data to XML using XStream
      */
     @Override
-    public void onSave () throws VoogaException{
-        XStream mySerializer = new XStream(new DomDriver());
-        StringBuilder content = new StringBuilder();
-
+    public void onSave () throws VoogaException {
         List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
@@ -109,27 +105,10 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
 
         DataContainerOfLists data = new DataContainerOfLists(elements,myGlobalVariables,myEventList);
         try {
-            FileWriterFromObjects.saveGameObjects(data,myXmlDataFile.getPath());
+            FileWriterFromGameObjects.saveGameObjects(data,myXmlDataFile.getPath());
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             throw new VoogaException();
-        }
-        
-
-        writeToFile(content.toString());
-    }
-
-    private void writeToFile (String content) {
-        FileWriter fileWriter;
-        try {
-            fileWriter = new FileWriter(myXmlDataFile, true);
-            fileWriter.write(content.toString());
-            fileWriter.flush();
-            fileWriter.close();
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 
@@ -148,4 +127,37 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
     public Map<String, VoogaData> getGlobalVariables () {
         return myGlobalVariables;
     }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Map<String, VoogaData> getVoogaProperties() {
+		return myGlobalVariables;
+	}
+
+	@Override
+	public void addProperty(String name, VoogaData data) {
+		myGlobalVariables.put(name, data);
+	}
+
+	@Override
+	public void removeProperty(String name) {
+		myGlobalVariables.remove(name);
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
