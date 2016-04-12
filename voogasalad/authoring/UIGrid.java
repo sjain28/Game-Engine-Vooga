@@ -36,9 +36,9 @@ public class UIGrid extends GridPane {
 	private CompleteAuthoringModelable myManager;
 
 	public UIGrid(CompleteAuthoringModelable elem) {
+		myManager = elem;
 		sector();
 		populate();
-		myManager = elem;
 	}
 
 	private void sector() {

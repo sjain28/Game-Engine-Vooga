@@ -44,8 +44,7 @@ public class FileImporter {
 		if (fileToImport != null) {
 			String fileName = ResourceDecipherer.getExtension(fileToImport.toString(), '\\');
 			if (!importedItems.contains(fileName)) {
-				VoogaFileType type = null;
-				ResourceDecipherer.decipherName(fileToImport.toString());
+				VoogaFileType type = ResourceDecipherer.decipherName(fileToImport.toString());
 				VoogaFile file = new VoogaFile(type, fileName);
 				file.setPath(fileToImport.getAbsolutePath());
 				rtv.addItem(file);
