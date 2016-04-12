@@ -31,6 +31,7 @@ public class EventManager {
 		myEvents = events;
 		keyCauses = new TreeMap<String, KeyCause>();
 		myEngineManager = manager;
+		keyCombos = new ArrayList<String>();
 	}
 	
 	public void update(){

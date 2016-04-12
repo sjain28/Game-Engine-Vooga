@@ -45,7 +45,15 @@ public class EngineObjectManager {
 		mySpriteFactory = factory;
 	}
 	
-	
+	/**
+	 * This method updates each sprite's Position
+	 * before Events (causes and effects) are applied
+	 * 
+	 */
+	public void update() {
+		//TODO: Update each sprite's position
+		
+	}
 	
 	/**
 	 * Returns a sprite by id

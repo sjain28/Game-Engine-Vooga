@@ -12,7 +12,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
 public class FileWriterFromGameObjects {
-	
+
     public static void saveGameObjects (DataContainerOfLists lists,
                                         String fileName) throws ParserConfigurationException,
                                                          TransformerException, IOException,
@@ -20,20 +20,19 @@ public class FileWriterFromGameObjects {
         XStream serializer = new XStream(new DomDriver());
         File file = new File(fileName);
         if (!file.exists()) {
-        	 
-        	/*
-        	* createNewFile() method is used to creates a new, empty file
-        	* mentioned by given abstract pathname if and only if a file with
-        	* this name does not exist in given abstract pathname.
-        	*/
-        	file.createNewFile();
+
+            /*
+             * createNewFile() method is used to creates a new, empty file
+             * mentioned by given abstract pathname if and only if a file with
+             * this name does not exist in given abstract pathname.
+             */
+            System.out.println("The file name here is " + fileName);
+            file.createNewFile();
         }
         ObjectOutputStream objectOutputStream =
                 serializer.createObjectOutputStream(new FileOutputStream(fileName));
 
         objectOutputStream.writeObject(lists);
-
-        objectOutputStream.writeObject("Hello World");
         objectOutputStream.close();
     }
 }
