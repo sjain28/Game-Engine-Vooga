@@ -54,10 +54,6 @@ public class DesignBoard extends Tab {
 		y_offset = HEIGHT/2;
 		x_offset = WIDTH/2;
 	}
-
-	public StackPane getContent() {
-		return this.contentPane;
-	}
 	
 	public PropertiesTabManager getPropertiesTabManager() {
 		return propertiesTabManager;
