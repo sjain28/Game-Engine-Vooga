@@ -2,10 +2,12 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import javafx.event.EventHandler;
+import javafx.scene.input.InputEvent;
 
 public class RedoEditItem extends MenuItemHandler {
 	
-	public RedoEditItem(CompleteAuthoringModelable model) {
+	public RedoEditItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
 		super();
 	}
 

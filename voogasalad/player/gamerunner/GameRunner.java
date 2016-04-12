@@ -7,10 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.function.Consumer;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.Node;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.LevelDataManager;
@@ -39,6 +41,7 @@ public class GameRunner implements IGameRunner{
 		//timer = new AnimationTimer();
 		
 		playGame();
+		//playGame();
 	}
 	
 	public GameRunner(String fileString) throws FileNotFoundException, IOException {
@@ -63,6 +66,11 @@ public class GameRunner implements IGameRunner{
 		return levelQueue;
 	 }
 	
+	 public void step(){
+		 myCurrentLevelDataManager.update();		 
+		 myDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		 myDisplay.display();
+	 }
 	/**
 		playGame plays each level of the game, as long as the game has not been won yet. If the game has been won 
 		already, the next level of the game will be played. playGame iterates through the queue of levels
@@ -83,10 +91,10 @@ public class GameRunner implements IGameRunner{
 	 * only a single level.
 	 */
 	
-	public void playLevel(String s){
-		myCurrentLevelDataManager = new LevelDataManager(s);
-		myDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-		myDisplay.display();
+	public void playLevel(String fileName){
+		myCurrentLevelDataManager = new LevelDataManager(fileName);
+		//call the time line here and pass step into time line
+		step();
 	}
 	
 
@@ -94,22 +102,24 @@ public class GameRunner implements IGameRunner{
 	 * Stops the AnimationTimer
 	 * 
 	 */
+/*
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
 		getGameLoop().stop();
 	}
-
+*/
 	/**
 	 * Starts the AnimationTimer
 	 * 
 	 */
+/*
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
 		getGameLoop().start();
 	}
-
+*/
 
 	public void wonLevel(){
 //		if(myCurrentLevel == myLevels.size()-1){
@@ -184,8 +194,9 @@ public class GameRunner implements IGameRunner{
 	/**
 	 * @return the myGameLoop
 	 */
-
+/*
 	public GameLoop getGameLoop() {
 		return myGameLoop;
 	}
+*/
 }

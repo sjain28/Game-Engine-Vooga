@@ -2,10 +2,11 @@ package authoring;
 
 import java.util.UUID;
 
+import authoring.Properties.PropertiesPane;
+import authoring.gui.DesignBoardHousing;
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
 import authoring.model.GameObject;
-import authoring.properties.PropertiesPane;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.ResourceUI;
 import authoring.resourceutility.VoogaFile;
@@ -27,7 +28,7 @@ import javafx.stage.Stage;
  */
 public class UIGrid extends GridPane {
 
-	private DesignBoard designBoard;
+	private DesignBoardHousing designBoard;
 	private ResourceUI explorer;
 
 	public UIGrid() {
@@ -53,7 +54,7 @@ public class UIGrid extends GridPane {
 	private void populate() throws VoogaException {
 		explorer = new ResourceUI();
 		this.add(explorer, 0, 0);
-		designBoard = new DesignBoard();
+		designBoard = new DesignBoardHousing();
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
 		PropertiesPane properties = new PropertiesPane();
@@ -61,5 +62,9 @@ public class UIGrid extends GridPane {
 		EventsWindow events = new EventsWindow();
 		this.add(events, 0, 2);
 	}
+
+    public void addScene () {
+        designBoard.addScene();
+    }
 
 }
