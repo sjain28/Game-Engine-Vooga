@@ -63,11 +63,8 @@ public class UIGrid extends GridPane {
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
 		propertiesPane = new PropertiesPane();
-		
 		//this looks like a bad piece of code
-		propertiesPane.setPropertiesTabManger(designBoard.getPropertiesTabManager());
-		
-		
+		propertiesPane.setPropertiesTabManger(designBoard.getDesignBoard().getPropertiesTabManager());
 		this.add(propertiesPane, 0, 1);
 		EventsWindow events = new EventsWindow();
 		this.add(events, 0, 2);
