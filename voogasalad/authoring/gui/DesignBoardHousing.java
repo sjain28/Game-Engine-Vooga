@@ -23,16 +23,8 @@ public class DesignBoardHousing extends TabPane {
         this.getTabs().add(new DesignBoard());
     }
 
-    public StackPane getContent () {
-        return this.getContent();
-    }
-
-    public void addElement (String elementPath) {
-        ((DesignBoard) this.getTabs().get(getSelectionModel().getSelectedIndex())).addElement(elementPath);
-    }
-
-    public void addElement (Node node) {
-       ((DesignBoard) this.getTabs().get(getSelectionModel().getSelectedIndex())).addElement(node);
+    public DesignBoard getDesignBoard() {
+        return ((DesignBoard) this.getTabs().get(getSelectionModel().getSelectedIndex()));
     }
 
     public void addScene () {
