@@ -1,6 +1,8 @@
 package player.gamedisplay;
 
 import java.util.List;
+
+import authoring.VoogaScene;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -35,7 +37,7 @@ public class StandardDisplay implements IGameDisplay {
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
-		myScene = new Scene(myPane, PANE_SIZE, PANE_SIZE);
+		myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
 		myPrompt = new PromptFactory();
 		
 	}
