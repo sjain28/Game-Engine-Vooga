@@ -17,7 +17,7 @@ public class Serializer {
                                                            SAXException {
         XStream serializer = new XStream(new DomDriver());
         ObjectOutputStream objectOutputStream =
-                serializer.createObjectOutputStream(new FileOutputStream(fileName));
+                serializer.createObjectOutputStream(new FileOutputStream(fileName + ".xml"));
         objectOutputStream.writeObject(object);
         objectOutputStream.close();
     }

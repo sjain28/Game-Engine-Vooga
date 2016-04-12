@@ -37,6 +37,7 @@ public class FileReaderToGameObjects {
         objectNames.add("");
 
         data = (DataContainerOfLists) DeSerializer.deserialize(1, fileName).get(0);
+
         // DataContainerOfLists data2 = (DataContainerOfLists) UnSerializer.deserialize(2,
         // fileName).get(0);
         // System.out.println("The current object being loaded is from the second container: " +

@@ -19,7 +19,7 @@ public final class DeSerializer {
         List<Object> objectsCreated = new ArrayList<Object>();
         try {
             ObjectInputStream objectInputStream =
-                    unSerializer.createObjectInputStream(new FileInputStream(fileName));
+                    unSerializer.createObjectInputStream(new FileInputStream(fileName + ".xml"));
             for (int i = 0; i < objectNum; i++) {
                 try {
                     Object object = null;
@@ -34,6 +34,7 @@ public final class DeSerializer {
         catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(objectsCreated);
         return objectsCreated;
     }
 }
