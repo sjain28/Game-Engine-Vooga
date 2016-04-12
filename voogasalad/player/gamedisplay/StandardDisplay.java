@@ -199,8 +199,7 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	@Override
 	public List<KeyEvent> getKeyEvents() {
-		// TODO Auto-generated method stub
-		return getKeyEvents();
+		return myKeyEvents;
 	}
 
 }

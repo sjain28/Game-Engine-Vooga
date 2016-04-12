@@ -19,7 +19,7 @@ import tools.interfaces.VoogaData;
 public class EngineObjectManager {
 	
 	/**Elements Info**/
-	private Map<String,Elementable> myElements;				  //Maps IDs to Sprite's
+	private Map<String,Elementable> myElements;				  //Maps IDs to Sprites
 	
 	private SpriteFactory mySpriteFactory;
 
@@ -51,8 +51,10 @@ public class EngineObjectManager {
 	 * 
 	 */
 	public void update() {
-		//TODO: Update each sprite's position
-		
+		for(String s: myElements.keySet()){
+			Elementable e = myElements.get(s);
+			e.update();
+		}
 	}
 	
 	/**

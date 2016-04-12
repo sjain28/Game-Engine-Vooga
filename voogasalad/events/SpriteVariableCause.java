@@ -12,10 +12,10 @@ public class SpriteVariableCause extends VariableCause {
 	public SpriteVariableCause(String spriteID, String varName, Double targetValue, String predicate, VoogaEvent voogaEvent) {
 		super(predicate, voogaEvent);
 		super.setTarget(targetValue);
-		//Sprite temp = getEvent().getManager().getSprite(spriteID);
+		Sprite temp = getEvent().getManager().getSprite(spriteID);
 		mySprites = new ArrayList<>();
-		//mySprites.add(temp);
-		//super.setVariable(temp.getProperty(varName));
+		mySprites.add(temp);
+		super.setVariable(temp.getProperty(varName));
 	}
 	
 	public SpriteVariableCause(String spriteID, String varName, Boolean targetValue, String predicate, VoogaEvent voogaEvent) {
