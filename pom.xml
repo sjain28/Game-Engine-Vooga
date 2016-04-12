@@ -11,6 +11,20 @@
 
     <dependencies>
         <dependency>
+          <groupId>Mosaic</groupId>
+          <artifactId>Mosaic</artifactId>
+          <version>1.0.0</version>
+          <scope>system</scope>
+          <systemPath>${java.home}/external_jars/mosaic.jar</systemPath>
+        </dependency>
+        <dependency>
+          <groupId>XStream</groupId>
+          <artifactId>XStream</artifactId>
+          <version>1.0.0</version>
+          <scope>system</scope>
+          <systemPath>${java.home}/external_jars/xstream-1.4.9.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>javafx</artifactId>
             <version>8.0.31</version>
