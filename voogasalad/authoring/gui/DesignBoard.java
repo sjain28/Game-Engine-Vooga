@@ -8,6 +8,7 @@ import authoring.model.ElementManager;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
+import authoring.resourceutility.VoogaFileFormat;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -83,7 +84,7 @@ public class DesignBoard extends Tab{
 	}
 
 
-	private void addElement(String elementPath) {
+	public void addElement(String elementPath) {
 		Node node = null;
 		if (elementPath != null) {
 			if (ResourceDecipherer.isImage(elementPath)) {

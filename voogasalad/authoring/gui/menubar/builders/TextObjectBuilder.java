@@ -1,4 +1,4 @@
-package authoring.gui;
+package authoring.gui.menubar.builders;
 
 import authoring.interfaces.model.EditElementable;
 import authoring.model.VoogaText;

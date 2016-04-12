@@ -47,7 +47,7 @@ public class MenuPanelHandlingMirror {
         Class<?> clazz;
 		try {
 			clazz = Class.forName(PACKAGE_LOCATION + menuItem.getId());
-	        menuItemHandler = (MenuItemHandler) clazz.getConstructor(CompleteAuthoringModelable.class).newInstance(myManager, myEvent);
+	        menuItemHandler = (MenuItemHandler) clazz.getConstructor(CompleteAuthoringModelable.class, EventHandler.class).newInstance(myManager, myEvent);
 			menuItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(menuItemHandler);
 		} catch (Exception ee) {
 		    ee.printStackTrace();

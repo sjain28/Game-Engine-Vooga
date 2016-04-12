@@ -1,4 +1,4 @@
-package authoring.properties;
+package authoring.Properties;
 
 import tools.interfaces.VoogaData;
 

@@ -148,4 +148,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
     public Map<String, VoogaData> getGlobalVariables () {
         return myGlobalVariables;
     }
+    public void addGlobalVariable(String name, VoogaData value){
+        myGlobalVariables.put(name, value);
+    }
 }

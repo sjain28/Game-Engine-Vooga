@@ -1,10 +1,12 @@
-package authoring.gui;
+package authoring.gui.menubar.builders;
 
 import authoring.interfaces.model.EditElementable;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -83,6 +85,13 @@ public abstract class Builder extends VBox{
 
     protected void quit () {
         myStage.close();
+    }
+    
+    protected void numberError(String s){
+        Alert number = new Alert(AlertType.ERROR);
+        number.setTitle("Error");
+        number.setContentText(s);
+        number.showAndWait();
     }
     
     public abstract void compile();

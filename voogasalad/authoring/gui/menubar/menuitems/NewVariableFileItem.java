@@ -1,9 +1,9 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.VoogaScene;
-import authoring.gui.TextObjectBuilder;
-import authoring.gui.VariableBuilder;
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.gui.menubar.builders.TextObjectBuilder;
+import authoring.gui.menubar.builders.VariableBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
 import javafx.event.EventHandler;
