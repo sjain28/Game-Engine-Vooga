@@ -22,6 +22,38 @@
 * Success Guarantees: The screen will have scrolled and the sprites (nodes) displayed in GameDisplay will be a different set of sprites.
 * Preconditions: The game must be in play. The main character is alive and playable. The main character moves.
 
+###Speed up the game
+
+* Primary Actor: GameDisplay
+* Scope: Game runner, player display.
+* Brief: If the user starts the game and decides to speed up the pace of the game, the user may click on the speed-up button to increase the framerate of the timeline.
+* Stakeholders: Player
+* Preconditions: The game is in play and playable.
+* PostCondition: GameDisplay is displaying the game at a faster speed (at a higher framerate).
+* Minimal Guarantees: Player continues to run and game is still playable.
+* Success Guarantees: Game runs at a different framerate.
+* Basic flow:
+	1. While the game is in play, the player clicks SpeedUp button
+	2. GameDisplay class calls GameRunner interface's SpeedUp method
+	3. Framerate is updated in GameRunner
+	4. AnimationTimer runs at the new framerate
+    
+###Speed down the game
+
+* Primary Actor: GameDisplay
+* Scope: Game runner, player display.
+* Brief: If the user starts the game and decides to speed up the pace of the game, the user may click on the speed-down button to decrease the framerate of the timeline.
+* Stakeholders: Player
+* Preconditions: The game is in play and playable.
+* PostCondition: GameDisplay is displaying the game at a slower speed (at a lower framerate).
+* Minimal Guarantees: Player continues to run and game is still playable.
+* Success Guarantees: Game runs at a different framerate.
+* Basic flow:
+	1. While the game is in play, the player clicks SpeedDown button
+	2. GameDisplay class calls GameRunner interface's SpeedDown method
+	3. Framerate is updated in GameRunner
+	4. AnimationTimer runs at the new framerate
+
 ### A zigzag path is followed by a sprite entering main screen
 
 * Primary Actor: Sprite in the animation
