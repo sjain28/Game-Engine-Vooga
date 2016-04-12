@@ -27,70 +27,79 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
+public class ElementManager implements Saveable, CompleteAuthoringModelable {
 
-public class ElementManager implements CompleteAuthoringModelable, Elementable {
+	private List<Node> myGameElements;
+	private List<VoogaEvent> myEventList;
+	private GlobalPropertiesManager GPM;
+	private Map<String, VoogaData> myGlobalVariables;
+	private File myXmlDataFile;
+	private String filePath = "levels/test.xml";
+	private SpriteFactory spriteFactory;
+	private Set<String> myIds;
 
-    private List<Node> myGameElements;
-    private List<VoogaEvent> myEventList;
-    private Map<String, VoogaData> myGlobalVariables;
-    private File myXmlDataFile;
-    private SpriteFactory spriteFactory;
-    private Set<String> myIds;
-    private static final String filePath = "levels/Test.xml";
+	public ElementManager() {
+		myGameElements = new ArrayList<Node>();
+		myEventList = new ArrayList<VoogaEvent>();
+		GPM = new GlobalPropertiesManager();
+		myGlobalVariables = GPM.getVoogaProperties();
+		myXmlDataFile = null;
+		myIds = new HashSet<String>();
+		spriteFactory = new SpriteFactory();
+		myXmlDataFile = new File("/levels/Test.xml");
+	}
 
-    public ElementManager () {
-        myGameElements = new ArrayList<Node>();
-        myEventList = new ArrayList<VoogaEvent>();
-        myGlobalVariables = new HashMap<String, VoogaData>();
-        myXmlDataFile = null;
-        myIds = new HashSet<String>();
-        spriteFactory = new SpriteFactory();
-        myXmlDataFile = new File(filePath);
-    }
+	public ElementManager(File xmlDataFile) {
+		this();
+		this.myXmlDataFile = xmlDataFile;
+	}
 
-    public ElementManager (File xmlDataFile) {
-        this();
-        this.myXmlDataFile = xmlDataFile;
-    }
+	public void addGameElements(Node... elements) {
+		myGameElements.addAll(Arrays.asList(elements));
+	}
 
-    public void addGameElements (Node ... elements) {
-        myGameElements.addAll(Arrays.asList(elements));
-    }
+	public void removeGameElements(Node... elements) {
+		myGameElements.removeAll(Arrays.asList(elements));
+	}
 
-    public void removeGameElements (Node ... elements) {
-        myGameElements.removeAll(Arrays.asList(elements));
-    }
+	public List<Node> getElements() {
+		return myGameElements;
+	}
 
-    public List<Node> getElements () {
-        return myGameElements;
-    }
+	public void addEvents(VoogaEvent... events) {
+		myEventList.addAll(Arrays.asList(events));
+	}
 
-    public void addEvents (VoogaEvent ... events) {
-        myEventList.addAll(Arrays.asList(events));
-    }
+	public void removeEvents(VoogaEvent... events) {
+		myEventList.removeAll(Arrays.asList(events));
+	}
 
-    public void removeEvents (VoogaEvent ... events) {
-        myEventList.removeAll(Arrays.asList(events));
-    }
+	public Node getElement(String id) {
+		for (Node node : myGameElements) {
+			
+			if (node.getId().equals(id)) {
+				return node;
+			}
+		}
 
-    public Node getElement (String id) {
-        for (Node node : myGameElements) {
+		return null;
+	}
+	
+	public Set<String> getIds() {
+		return this.myIds;
+	}
+	
+	public void addElementId(String id) {
+		myIds.add(id);
+	}
 
-            if (node.getId().equals(id)) {
-                return node;
-            }
-        }
+	public boolean hasElement(String id) {
+		return myIds.contains(id);
+	}
 
-        return null;
-    }
-
-    public boolean hasElement (String id) {
-        return myIds.contains(id);
-    }
-
-    /**
-     * Write Data to XML using XStream
-     */
+	/**
+	 * Write Data to XML using XStream
+	 */
     @Override
     public void onSave () throws VoogaException {
 
@@ -119,64 +128,35 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
         }
     }
 
-    public SpriteFactory getSpriteFactory () {
-        return spriteFactory;
-    }
+	public SpriteFactory getSpriteFactory() {
+		return spriteFactory;
+	}
 
-    public Collection<String> getMySpriteNames () {
-        Collection<String> mySpriteNames = new HashSet<String>();
-        for (Node e : myGameElements) {
-            mySpriteNames.add(((Elementable) e).getName());
-        }
-        return mySpriteNames;
-    }
+	public Collection<String> getMySpriteNames() {
+		Collection<String> mySpriteNames = new HashSet<String>();
+		for (Node e : myGameElements) {
+			mySpriteNames.add(((Elementable) e).getName());
+		}
+		return mySpriteNames;
+	}
 
-    public Map<String, VoogaData> getGlobalVariables () {
-        return myGlobalVariables;
-    }
+	public Map<String, VoogaData> getGlobalVariables() {
+		updateGlobalPropertiesMap();
+		return myGlobalVariables;
+	}
 
-    @Override
-    public void update () {
-        // TODO Auto-generated method stub
+	public void updateGlobalPropertiesMap() {
+		myGlobalVariables = GPM.getVoogaProperties();
+	}
 
-    }
+	public GlobalPropertiesManager getGlobalPropertiesManager() {
+		return GPM;
+	}
 
-    @Override
-    public Map<String, VoogaData> getVoogaProperties () {
-        return myGlobalVariables;
-    }
+	@Override
+	public void addGlobalVariable(String name, VoogaData value) {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void addProperty (String name, VoogaData data) {
-        myGlobalVariables.put(name, data);
-    }
+	}
 
-    @Override
-    public void removeProperty (String name) {
-        myGlobalVariables.remove(name);
-    }
-
-    @Override
-    public Node getNodeObject () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void addGlobalVariable(String name, VoogaData value) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public String getID () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

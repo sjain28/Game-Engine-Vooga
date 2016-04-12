@@ -53,7 +53,7 @@ public class VoogaFile extends HBox implements Serializable {
 		return this.filePath;
 	}
 
-	VoogaFileType getType() {
+	public VoogaFileType getType() {
 		return this.fileType;
 	}
 
