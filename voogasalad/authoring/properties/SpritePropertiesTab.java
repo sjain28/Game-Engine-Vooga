@@ -17,6 +17,7 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	public void getPropertiesMap(Object o) {
 		myElementable = (Elementable) o;
 		propertiesMap = myElementable.getVoogaProperties();
+		originalPropertiesMap = myElementable.getVoogaProperties();
 		displayProperties();
 	}
 

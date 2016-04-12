@@ -1,5 +1,6 @@
 package authoring;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import com.sun.glass.events.MouseEvent;
 
@@ -8,6 +9,7 @@ import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
 import auxiliary.VoogaAlert;
 import auxiliary.VoogaException;
 import javafx.event.Event;
@@ -30,38 +32,31 @@ import javafx.scene.layout.VBox;
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
 public class UIManager extends VBox {
-    private CompleteAuthoringModelable elementManager;
-    private Dragboard db;
-    private UIGrid grid;
-    
+	private ArrayList<CompleteAuthoringModelable> elementManagers;
+	private Dragboard db;
+	private UIGrid grid;
 
 	public UIManager(CompleteAuthoringModelable model) {
-		elementManager = model;
+		elementManagers = new ArrayList<CompleteAuthoringModelable>();
+		elementManagers.add(model);
 		initializeComponents();
 	}
 
-    private void initializeComponents () {
-        this.getChildren().addAll(new MenuPanel(elementManager, e -> {
-            try {
-                new MenuPanelHandlingMirror(e, elementManager, newScene);
-            }
-            catch (VoogaException ee) {
-                Alert exception = new Alert(AlertType.ERROR);
-                exception.setTitle(AlertType.ERROR.toString());
-                exception.setContentText(ee.getMessage());
-                exception.showAndWait();
-            }
-        }), new ToolPanel(e -> {
-            new ToolPanelHandlingMirror(e,elementManager);
-        }), grid = new UIGrid());
-    }
-    
-    EventHandler newScene = new EventHandler() {
-        Event e = new Event(Event.ANY);
-        public void handle(Event e){
-            grid.addScene();
-        }            
-    };
-    
+	private void initializeComponents() {
+		this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
+			try {
+				new MenuPanelHandlingMirror(e, elementManagers.get(0), newScene);
+			} catch (VoogaException ee) {
+				new VoogaAlert(ee.getMessage());
+			}
+		}), new ToolPanel(e -> {
+				new ToolPanelHandlingMirror(e, elementManagers.get(0));
+		}), grid = new UIGrid(elementManagers.get(0)));
+	}
+
+	EventHandler<InputEvent> newScene = e -> {
+			elementManagers.add(new ElementManager());
+			grid.addScene(elementManagers.get(1));
+	};
 
 }
