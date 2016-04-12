@@ -5,11 +5,15 @@ import application.Launcher;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+<<<<<<< HEAD
+=======
+import authoring.interfaces.model.Savable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+>>>>>>> master
 
 public class OpenProjectFileItem extends MenuItemHandler {
     private Saveable myManager;
