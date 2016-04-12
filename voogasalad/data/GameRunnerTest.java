@@ -18,7 +18,7 @@ import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
-public class DataTest extends Application {
+public class GameRunnerTest extends Application {
     public static void main (String[] args) {
         launch(args);
         
