@@ -35,7 +35,6 @@ public class FileReaderToGameObjects {
     private void loadGameObjects (String fileName) {
         objectNames = new ArrayList<String>();
         objectNames.add("");
-
         data = (DataContainerOfLists) DeSerializer.deserialize(1, fileName).get(0);
 
         // DataContainerOfLists data2 = (DataContainerOfLists) UnSerializer.deserialize(2,
