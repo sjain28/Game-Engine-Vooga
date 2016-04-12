@@ -5,7 +5,11 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import authoring.interfaces.model.CompleteAuthoringModelable;
+
+
 import authoring.interfaces.Elementable;
+
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
 import authoring.properties.PropertiesTabManager;
@@ -37,15 +41,18 @@ public class DesignBoard extends Tab {
 	
 	private ScrollPane container;
 	private StackPane contentPane;
-	private ElementManager elementManager;
+
+	private CompleteAuthoringModelable elementManager;
+
 	private PropertiesTabManager propertiesTabManager;
+
 	private double y_offset, x_offset;
 
-	public DesignBoard() {
+	public DesignBoard(CompleteAuthoringModelable elem) {
 		contentPane = new StackPane();
 		contentPane.setMinSize(WIDTH, HEIGHT);
+		elementManager = elem;
 		propertiesTabManager = new PropertiesTabManager();
-		elementManager = new ElementManager();
 		initGlobalProperties();
 		container = new ScrollPane();
 		initializeDragAndDrop();
@@ -54,7 +61,7 @@ public class DesignBoard extends Tab {
 		y_offset = HEIGHT/2;
 		x_offset = WIDTH/2;
 	}
-	
+
 	public PropertiesTabManager getPropertiesTabManager() {
 		return propertiesTabManager;
 	}

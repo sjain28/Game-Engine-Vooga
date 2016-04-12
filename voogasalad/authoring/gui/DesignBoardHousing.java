@@ -1,6 +1,7 @@
 package authoring.gui;
 
 import java.util.UUID;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
@@ -19,16 +20,16 @@ import javafx.scene.shape.Rectangle;
 public class DesignBoardHousing extends TabPane {
    
 
-    public DesignBoardHousing () {
-        this.getTabs().add(new DesignBoard());
+    public DesignBoardHousing (CompleteAuthoringModelable elem) {
+        this.getTabs().add(new DesignBoard(elem));
     }
 
     public DesignBoard getDesignBoard() {
         return ((DesignBoard) this.getTabs().get(getSelectionModel().getSelectedIndex()));
     }
 
-    public void addScene () {
-       DesignBoard design = new DesignBoard();
+    public void addScene (CompleteAuthoringModelable elem) {
+       DesignBoard design = new DesignBoard(elem);
        this.getTabs().add(design);
     }
 
