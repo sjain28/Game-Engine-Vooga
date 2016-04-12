@@ -38,7 +38,7 @@ public class VoogaText extends TextField implements Elementable {
     }
 
     private void init () {
-    	myID = UUID.randomUUID().toString();
+        myID = UUID.randomUUID().toString();
         this.setId(myID);
         setBackground(Background.EMPTY);
         this.setOnDragDetected( (MouseEvent e) -> onDrag(e));
@@ -88,10 +88,10 @@ public class VoogaText extends TextField implements Elementable {
         return myID;
     }
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

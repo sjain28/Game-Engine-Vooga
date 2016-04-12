@@ -16,15 +16,4 @@ interface IGameRunner {
 	 * Start the timeline
 	 */
 	void start();
-	
-	/**
-	 * Get framerate
-	 */
-	void getFrameTime();
-	
-	/**
-	 * Modify the frame rate in play
-	 * @param frameRate
-	 */
-	void setFrameTime(double frameRate);
 }

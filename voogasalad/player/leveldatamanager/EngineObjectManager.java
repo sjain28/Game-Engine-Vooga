@@ -33,18 +33,27 @@ public class EngineObjectManager {
 	 * @param factory
 	 */
 	public EngineObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
+		System.out.println("The list of elementables here is " + elements);
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
 			myElements.put(el.getID(), el);
 		}
-		
+		System.out.println("The list of myElementables here is " + myElements);
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		
 		//TODO: Once constructor is figured out, intialize all objects here.
 		mySpriteFactory = factory;
 	}
 	
-	
+	/**
+	 * This method updates each sprite's Position
+	 * before Events (causes and effects) are applied
+	 * 
+	 */
+	public void update() {
+		//TODO: Update each sprite's position
+		
+	}
 	
 	/**
 	 * Returns a sprite by id

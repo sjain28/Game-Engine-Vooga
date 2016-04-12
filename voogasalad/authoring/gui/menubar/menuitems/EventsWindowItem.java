@@ -2,10 +2,12 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import javafx.event.EventHandler;
+import javafx.scene.input.InputEvent;
 
 public class EventsWindowItem extends MenuItemHandler {
 	
-	public EventsWindowItem(CompleteAuthoringModelable model) {
+	public EventsWindowItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
 		super();
 	}
 

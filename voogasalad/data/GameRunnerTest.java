@@ -18,7 +18,7 @@ import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
-public class DataTest extends Application {
+public class GameRunnerTest extends Application {
     public static void main (String[] args) {
         launch(args);
         
@@ -70,15 +70,16 @@ public class DataTest extends Application {
 //        FileWriterFromGameObjects fileWriter = new FileWriterFromGameObjects();
 //        fileWriter.saveGameObjects(data, fileName);
 //        fileWriter.saveGameObjects(data, fileName);
-//        
+        
 //        FileReaderToGameObjects filereader = new FileReaderToGameObjects(fileName);
-        GameRunner gameRunner = new GameRunner("level_doc.txt");
+        GameRunner gameRunner = new GameRunner("levels/Test.xml");
+        gameRunner.playLevel("levels/Test.xml");
 //        DataContainerOfLists deserializedList = filereader.getDataContainer();
 //     
 //        fileWriter.saveGameObjects(deserializedList, fileName2);
-//        System.out.println("DONE");
-//        System.out.println(deserializedList);
-//        System.out.println(deserializedList.getEventList());
+////        System.out.println("DONE");
+////        System.out.println(deserializedList);
+////        System.out.println(deserializedList.getEventList());
         
     }
     

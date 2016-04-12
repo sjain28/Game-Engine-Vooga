@@ -8,15 +8,16 @@ import java.util.function.Consumer;
 
 public class FixedStepLoopWithInterpolation extends GameLoop 
 {
+	/*
 	private final Consumer<Float> updater;
 	private final Runnable renderer;
 	private final Consumer<Float> interpolater; 
 	private final Consumer<Integer> fps_reporter; 
-
-	private int framesPerSecond = 60;
-	private float frameTime = 1/framesPerSecond;
+	*/
+	public static final float FRAMES_PER_SECOND = 60;
+	public static final float FRAME_TIME = 1/FRAMES_PER_SECOND;
 	private static final float NANOSECONDS_PER_SECOND = 1e9f;
-	private static final float fps_reporter_UPDATE_RATE = 1f;
+	private static final float FPS_REPORTER_UPDATE_RATE = 1f;
 	
 	/**
 	 * Modify the animation timer to fix the frame rate as much as possible when
@@ -28,14 +29,14 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 	 * @param interpolater
 	 * @param fpsReporter
 	 */
-	public FixedStepLoopWithInterpolation(Consumer<Float> updater,
-			Runnable renderer, Consumer<Float> interpolater,
-			Consumer<Integer> fpsReporter) 
+	public FixedStepLoopWithInterpolation() 
 	{
+		/*
 		this.updater = updater;
 		this.renderer = renderer;
 		this.interpolater = interpolater;
 		this.fps_reporter = fpsReporter;
+		*/
 	}
 	
 	private float previousTime = 0;
@@ -61,13 +62,13 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		totalTime += secondsElapsedCapForFrame;
 		previousTime = currentTime;
 		
-		handleInterpolation(secondsElapsed, totalTime, frameTime);
+		//handleInterpolation(secondsElapsed, totalTime);
 		
 		secondsSinceLastFpsUpdate += secondsElapsed;
 		framesSinceLastFpsUpdate++;
 		
-		if (secondsSinceLastFpsUpdate >= fps_reporter_UPDATE_RATE)
-			updateFpsReporter(framesSinceLastFpsUpdate, secondsSinceLastFpsUpdate);
+		if (secondsSinceLastFpsUpdate >= FPS_REPORTER_UPDATE_RATE);
+			//updateFpsReporter(framesSinceLastFpsUpdate, secondsSinceLastFpsUpdate);
 	}
 	
 	/**
@@ -76,29 +77,30 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 	 * 
 	 * @param secondsElapsed
 	 * @param totalTime
-	 * @param frameTime
 	 */
-	private void handleInterpolation(float secondsElapsed, float totalTime, float frameTime)
+	/*
+	private void handleInterpolation(float secondsElapsed, float totalTime)
 	{
-		if (totalTime < frameTime){
+		if (totalTime < FRAME_TIME){
 			float timeLeftInFrame = totalTime - secondsElapsed;
-			float timeLeftFromPastInterpolation = frameTime - timeLeftInFrame;
+			float timeLeftFromPastInterpolation = FRAME_TIME - timeLeftInFrame;
 			float alphaInRemainderOfFrameTime = secondsElapsed/timeLeftFromPastInterpolation;
 			interpolater.accept(alphaInRemainderOfFrameTime);
 			return;
 		}
 		
-		while (totalTime >= (2 * frameTime)){
-			updater.accept(frameTime);
-			totalTime -= frameTime;
+		while (totalTime >= (2 * FRAME_TIME)){
+			updater.accept(FRAME_TIME);
+			totalTime -= FRAME_TIME;
 		}
 		
 		renderer.run();
-		updater.accept(frameTime);
-		totalTime -= frameTime;
-		float alpha = totalTime / frameTime;
+		updater.accept(FRAME_TIME);
+		totalTime -= FRAME_TIME;
+		float alpha = totalTime / FRAME_TIME;
 		interpolater.accept(alpha);
 	}
+	*/
 	
 	/**
 	 * Update the FPS rate which can viewed in the GUI for testing or play.
@@ -106,6 +108,7 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 	 * @param framesSinceLastFpsUpdate
 	 * @param secondsSinceLastFpsUpdate
 	 */
+	/*
 	private void updateFpsReporter(float framesSinceLastFpsUpdate, float secondsSinceLastFpsUpdate)
 	{
 		int fps = Math.round(framesSinceLastFpsUpdate / secondsSinceLastFpsUpdate);
@@ -113,6 +116,7 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		secondsSinceLastFpsUpdate = 0;
 		framesSinceLastFpsUpdate = 0;
 	}
+	*/
 	
 	/**
 	 * In addition to standard timer stop, also reset all counts to make the
@@ -126,13 +130,5 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		secondsSinceLastFpsUpdate = 0f;
 		framesSinceLastFpsUpdate = 0;
 		super.stop();
-	}
-	
-	public double getFrameTime(){
-		return (double) framesPerSecond;
-	}
-	
-	public void setFrameTime(float newTime){
-		frameTime = (float) 1/newTime;
 	}
 }
