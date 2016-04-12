@@ -146,4 +146,10 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
     	return GPM;
     }
 
+	@Override
+	public void addGlobalVariable(String name, VoogaData value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
