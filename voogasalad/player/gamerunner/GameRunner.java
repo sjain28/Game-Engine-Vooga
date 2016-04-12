@@ -40,7 +40,7 @@ public class GameRunner implements IGameRunner{
 		//TODO fix the instantiation of AnimationTimer(); 
 		//timer = new AnimationTimer();
 		
-		playGame();
+		//playGame();
 		//playGame();
 	}
 	
@@ -92,6 +92,7 @@ public class GameRunner implements IGameRunner{
 	 */
 	
 	public void playLevel(String fileName){
+        System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(fileName);
 		//call the time line here and pass step into time line
 		step();
