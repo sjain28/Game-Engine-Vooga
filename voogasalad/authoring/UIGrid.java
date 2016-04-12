@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 public class UIGrid extends GridPane {
 
 	private DesignBoard designBoard;
+	private PropertiesPane propertiesPane;
 	private ResourceUI explorer;
 
 	public UIGrid() {
@@ -56,8 +57,13 @@ public class UIGrid extends GridPane {
 		designBoard = new DesignBoard();
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
-		PropertiesPane properties = new PropertiesPane();
-		this.add(properties, 0, 1);
+		propertiesPane = new PropertiesPane();
+		
+		//this looks like a bad piece of code
+		propertiesPane.setPropertiesTabManger(designBoard.getPropertiesTabManager());
+		
+		
+		this.add(propertiesPane, 0, 1);
 		EventsWindow events = new EventsWindow();
 		this.add(events, 0, 2);
 	}

@@ -34,6 +34,7 @@ public abstract class AbstractPropertiesTab extends Tab {
 	
 	private VBox box = new VBox(SPACING);;
 	protected Map<String, VoogaData> propertiesMap;
+	protected Map<String, VoogaData> originalPropertiesMap;
 	private HBox propertiesHBox = new HBox(10);
 	protected ScrollPane myScrollPane = new ScrollPane();;
 	private Stage stage;
@@ -42,7 +43,7 @@ public abstract class AbstractPropertiesTab extends Tab {
 		
 		//THIS LIL CHUNK USED FOR TEST PURPOSES ONLY
 		propertiesMap = new HashMap<String, VoogaData>();
-		propertiesMap.put("Gravity", new VoogaBoolean());	
+			
 		
 		box.getChildren().add(myScrollPane);
 		this.setContent(box);
@@ -92,12 +93,18 @@ public abstract class AbstractPropertiesTab extends Tab {
 		
 		HBox buttonsPanel = new HBox(SPACING);
 		Button apply = new ButtonMaker().makeButton("Apply", e -> updateProperties());
-		Button cancel = new ButtonMaker().makeButton("Cancel", e -> this.stage.close());
+		Button cancel = new ButtonMaker().makeButton("Cancel", e -> cancelUpdateProperties());
 		
 		buttonsPanel.getChildren().addAll(apply, cancel);
 		this.box.getChildren().addAll(addProperty, buttonsPanel);
 	}
 	
+	private void cancelUpdateProperties() {
+		propertiesMap.clear();
+		propertiesMap.putAll(originalPropertiesMap);
+		displayProperties();
+	}
+
 	/**
 	 * Creates the Dialog Box that allows new Properties to be added
 	 */
