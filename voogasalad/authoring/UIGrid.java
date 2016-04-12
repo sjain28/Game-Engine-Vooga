@@ -2,8 +2,8 @@ package authoring;
 
 import java.util.UUID;
 
-import authoring.Properties.PropertiesPane;
 import authoring.gui.DesignBoardHousing;
+import authoring.properties.PropertiesPane;
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -30,6 +30,7 @@ import javafx.stage.Stage;
  */
 public class UIGrid extends GridPane {
 
+	private PropertiesPane propertiesPane;
 	private DesignBoardHousing designBoard;
 	private ResourceUI explorer;
 	private CompleteAuthoringModelable myManager;
@@ -61,8 +62,13 @@ public class UIGrid extends GridPane {
 		designBoard = new DesignBoardHousing(myManager);
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
-		PropertiesPane properties = new PropertiesPane();
-		this.add(properties, 0, 1);
+		propertiesPane = new PropertiesPane();
+		
+		//this looks like a bad piece of code
+		propertiesPane.setPropertiesTabManger(designBoard.getPropertiesTabManager());
+		
+		
+		this.add(propertiesPane, 0, 1);
 		EventsWindow events = new EventsWindow();
 		this.add(events, 0, 2);
 	}

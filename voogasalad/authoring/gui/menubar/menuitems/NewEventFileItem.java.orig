@@ -6,7 +6,11 @@ import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditEventable;
+<<<<<<< HEAD
+=======
+import authoring.interfaces.model.Savable;
 import javafx.event.EventHandler;
+>>>>>>> master
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
