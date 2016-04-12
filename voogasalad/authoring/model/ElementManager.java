@@ -127,7 +127,6 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
     public Map<String, VoogaData> getGlobalVariables () {
         return myGlobalVariables;
     }
-
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
@@ -160,4 +159,16 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    @Override
+    public void addGlobalVariable (String name, VoogaData value) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getID () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
