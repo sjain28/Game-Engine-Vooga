@@ -11,7 +11,7 @@ import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class LevelDataManager {
+public class LevelDataManager implements ILevelDataManager {
 
     private DisplayScroller displayScroller;
     private EngineObjectManager myObjectManager;
@@ -24,10 +24,13 @@ public class LevelDataManager {
         readinObjects(levelFileName);
     }
 
+    @Override
     public void update() {
+    	myObjectManager.update();
         myEventManager.update();
     }
 
+    @Override
     public List<Node> getDisplayableObjects () {
         return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),35);
     }
