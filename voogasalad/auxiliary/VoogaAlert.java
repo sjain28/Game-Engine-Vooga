@@ -14,7 +14,6 @@ public class VoogaAlert{
      * @param message
      */
     public void alert(String message) {
-            // TODO Auto-generated method stub
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(message);
