@@ -28,8 +28,8 @@ import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements Saveable, CompleteAuthoringModelable, Elementable{
- 
+public class ElementManager implements CompleteAuthoringModelable, Elementable {
+
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
     private Map<String, VoogaData> myGlobalVariables;
@@ -44,6 +44,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
         myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
+        myXmlDataFile = new File ("/levels/Test.xml");
     }
 
     public ElementManager (File xmlDataFile) {
@@ -91,6 +92,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
      */
     @Override
     public void onSave () throws VoogaException {
+        
         List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
@@ -103,9 +105,12 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
             }
         }
 
-        DataContainerOfLists data = new DataContainerOfLists(elements,myGlobalVariables,myEventList);
+        DataContainerOfLists data =
+                new DataContainerOfLists(elements, myGlobalVariables, myEventList);
+        System.out.println("I'm done saving in element manager");
         try {
-            FileWriterFromGameObjects.saveGameObjects(data,myXmlDataFile.getPath());
+            System.out.println(myXmlDataFile.getPath());
+            FileWriterFromGameObjects.saveGameObjects(data, myXmlDataFile.getPath());
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             throw new VoogaException();
@@ -128,36 +133,42 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
         return myGlobalVariables;
     }
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
 
-	@Override
-	public Map<String, VoogaData> getVoogaProperties() {
-		return myGlobalVariables;
-	}
+    }
 
-	@Override
-	public void addProperty(String name, VoogaData data) {
-		myGlobalVariables.put(name, data);
-	}
+    @Override
+    public Map<String, VoogaData> getVoogaProperties () {
+        return myGlobalVariables;
+    }
 
-	@Override
-	public void removeProperty(String name) {
-		myGlobalVariables.remove(name);
-	}
+    @Override
+    public void addProperty (String name, VoogaData data) {
+        myGlobalVariables.put(name, data);
+    }
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void removeProperty (String name) {
+        myGlobalVariables.remove(name);
+    }
 
-	@Override
-	public Node getNodeObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getID () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

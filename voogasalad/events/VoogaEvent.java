@@ -15,7 +15,7 @@ public class VoogaEvent {
 	private List<Effect> myEffects;
 	private EngineObjectManager myEngineManager;
 	private List<Sprite> myCauseSprites;
-	private StandardPhysics myPhysicsEngine = new StandardPhysics(FrameRate);
+	private StandardPhysics myPhysicsEngine = new StandardPhysics();
 
 	public VoogaEvent(){
 		myCauses = new ArrayList<>();

@@ -32,7 +32,7 @@ public class UIManager extends VBox {
 				new VoogaAlert(ee.getMessage());
 			}
 		}), new ToolPanel(e -> {
-			new ToolPanelHandlingMirror(e);
+			new ToolPanelHandlingMirror(e,elementManager);
 		}), new UIGrid());
 	}
 

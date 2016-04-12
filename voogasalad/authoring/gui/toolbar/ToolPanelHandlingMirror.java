@@ -1,10 +1,11 @@
 package authoring.gui.toolbar;
 
-import java.awt.Button;
+import java.lang.reflect.Method;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import auxiliary.VoogaException;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 
 
@@ -33,9 +34,11 @@ public class ToolPanelHandlingMirror {
         Class<?> clazz;
         try {
             clazz = Class.forName(PACKAGE_LOCATION + toolbarItem.getId());
+            System.out.println("Class-Tool: "+clazz);
             toolbarItemHandler =
                     (ToolbarItemHandler) clazz.getConstructor(CompleteAuthoringModelable.class)
                             .newInstance(myManager);
+            System.out.println("ToolBarItemHandler-Tool: "+toolbarItemHandler);
             toolbarItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(toolbarItemHandler);
         }
         catch (Exception ee) {

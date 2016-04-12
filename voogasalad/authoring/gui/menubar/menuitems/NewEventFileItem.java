@@ -6,7 +6,6 @@ import authoring.gui.eventpane.EventWindow;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditEventable;
-import authoring.interfaces.model.Savable;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
