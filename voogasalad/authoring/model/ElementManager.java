@@ -28,10 +28,11 @@ import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements CompleteAuthoringModelable, Elementable {
-
+public class ElementManager implements Saveable, CompleteAuthoringModelable {
+ 
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
+    private GlobalPropertiesManager GPM;
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
     private SpriteFactory spriteFactory;
@@ -40,7 +41,8 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
-        myGlobalVariables = new HashMap<String, VoogaData>();
+        GPM = new GlobalPropertiesManager();
+        myGlobalVariables = GPM.getVoogaProperties();
         myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
@@ -93,6 +95,8 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
     @Override
     public void onSave () throws VoogaException {
 
+    	updateGlobalPropertiesMap();
+    	
         List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
@@ -130,51 +134,16 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
     }
 
     public Map<String, VoogaData> getGlobalVariables () {
+    	updateGlobalPropertiesMap();
         return myGlobalVariables;
     }
-
-    @Override
-    public void update () {
-        // TODO Auto-generated method stub
-
+    
+    public void updateGlobalPropertiesMap() {
+    	myGlobalVariables = GPM.getVoogaProperties();
+    }
+    
+    public GlobalPropertiesManager getGlobalPropertiesManager() {
+    	return GPM;
     }
 
-    @Override
-    public Map<String, VoogaData> getVoogaProperties () {
-        return myGlobalVariables;
-    }
-
-    @Override
-    public void addProperty (String name, VoogaData data) {
-        myGlobalVariables.put(name, data);
-    }
-
-    @Override
-    public void removeProperty (String name) {
-        myGlobalVariables.remove(name);
-    }
-
-    @Override
-    public Node getNodeObject () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void addGlobalVariable (String name, VoogaData value) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public String getID () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

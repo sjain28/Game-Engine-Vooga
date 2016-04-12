@@ -4,8 +4,11 @@ package authoring.gui;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.UUID;
+
+import authoring.interfaces.Elementable;
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
+import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
@@ -35,12 +38,15 @@ public class DesignBoard extends Tab {
 	private ScrollPane container;
 	private StackPane contentPane;
 	private ElementManager elementManager;
+	private PropertiesTabManager propertiesTabManager;
 	private double y_offset, x_offset;
 
 	public DesignBoard() {
 		contentPane = new StackPane();
 		contentPane.setMinSize(WIDTH, HEIGHT);
+		propertiesTabManager = new PropertiesTabManager();
 		elementManager = new ElementManager();
+		initGlobalProperties();
 		container = new ScrollPane();
 		initializeDragAndDrop();
 		container.setContent(contentPane);
@@ -49,6 +55,23 @@ public class DesignBoard extends Tab {
 		x_offset = WIDTH/2;
 	}
 
+	public StackPane getContent() {
+		return this.contentPane;
+	}
+	
+	public PropertiesTabManager getPropertiesTabManager() {
+		return propertiesTabManager;
+	}
+	
+	private void initGlobalProperties() {
+		Elementable elem = elementManager.getGlobalPropertiesManager();
+		propertiesTabManager.getGlobalPropertiesTab().getPropertiesMap(elem);
+	}
+	
+	//Do something with Elementable.setOnClicked and call this method on self, or put into sprite class?
+	private void displaySpriteProperties(Elementable elem) {
+		propertiesTabManager.getSpritePropertiesTab().getPropertiesMap(elem);
+	}
 
 	private void initializeDragAndDrop() {
 		contentPane.setOnDragOver(e -> mouseDragOver(e));
