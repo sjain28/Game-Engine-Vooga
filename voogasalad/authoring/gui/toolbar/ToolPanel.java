@@ -29,6 +29,7 @@ public class ToolPanel extends ToolBar {
                                             VoogaBundles.toolbarProperties.getString(key)));
             Button btn = maker.makeButton("", toolbarEvent);
             btn.setGraphic(graphic);
+            btn.setId(key);
             this.getItems().add(btn);
         }
     }

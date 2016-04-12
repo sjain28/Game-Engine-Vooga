@@ -5,6 +5,7 @@ import java.util.Map;
 import authoring.interfaces.Elementable;
 import data.FileReaderToGameObjects;
 import events.VoogaEvent;
+import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -22,26 +23,30 @@ public class LevelDataManager {
         readinObjects(levelFileName);
     }
 
-    public void update () {
+    public void update() {
         myEventManager.update();
     }
 
-    public List<Object> extractUpdatedObjects () {
-        return myObjectManager.getAllDisplayableObjects();
-    }
-
     public List<Node> getDisplayableObjects () {
-        return displayScroller.centerScroll(myObjectManager.getAllDisplayableObjects(), 35);
+        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(), 35);
     }
 
     private void readinObjects (String levelFileName) {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
+        
         List<Elementable> spriteObjects = fileManager.createNodeList();
         System.out.println(spriteObjects);
+        
         List<VoogaEvent> eventObjects = fileManager.createEventList();
         System.out.println(eventObjects);
+        
+        SpriteFactory factory = fileManager.createSpriteFactory();
+        
         Map<String,VoogaData> variableObjects = fileManager.createVariableMap();
-        initializeManagers(spriteObjects, eventObjects, variableObjects);
+     
+        initializeManagers(spriteObjects, eventObjects, variableObjects,factory);
+        
+        
     }
 
     /**
@@ -54,10 +59,12 @@ public class LevelDataManager {
      * 
      */
 
-    private void initializeManagers (List<Elementable> spriteObjects,
+    private void initializeManagers (List<Elementable> elementObjects,
                                      List<VoogaEvent> eventObjects,
-                                     Map<String,VoogaData> variableObjects) {
-
+                                     Map<String,VoogaData> variableObjects,
+                                     SpriteFactory factory) {
+    	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, factory);
+    	myEventManager = new EventManager(myObjectManager, eventObjects);
     }
 
 }
