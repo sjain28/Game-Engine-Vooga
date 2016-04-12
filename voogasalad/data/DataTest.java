@@ -43,11 +43,6 @@ public class DataTest extends Application {
         }
         
         for (int i =0; i<10;i++){
-           VoogaNumber variable = new VoogaNumber(i);
-           variables[i] = variable;
-        }
-        
-        for (int i =0; i<10;i++){
             VoogaEvent event = new VoogaEvent();
             events[i] = event;
          }
@@ -70,7 +65,7 @@ public class DataTest extends Application {
         System.out.println("Data type 1 is equal to " + data.getVariableMap());
         System.out.println("Data type 2 is equal to " + data.getEventList());
         VoogaBoolean vb = new VoogaBoolean(true);
-        FileWriterFromObjects fileWriter = new FileWriterFromObjects();
+        FileWriterFromGameObjects fileWriter = new FileWriterFromGameObjects();
         fileWriter.saveGameObjects(data, fileName);
         fileWriter.saveGameObjects(data, fileName);
         

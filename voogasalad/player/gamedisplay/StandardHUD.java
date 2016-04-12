@@ -25,18 +25,15 @@ public class StandardHUD implements IHUD {
 	 * 
 	 */
 	public StandardHUD() {
-		
 		myHUD = new VBox();
-		
 	}
 	
 	/**
 	 * Creates a VBox that represents the HUD
+	 * VBox is chosen because it is expected that this HUD component will
+	 * be placed on the right side of the screen (right side of BorderPane)
 	 * 
 	 * @return myHUD
-	 */
-	/* (non-Javadoc)
-	 * @see player.gamedisplay.IHUD#createHUD()
 	 */
 	@Override
 	public VBox createHUD() {
@@ -47,8 +44,9 @@ public class StandardHUD implements IHUD {
 	    Label score = new Label("Current Score: ");
 //	    score.textProperty().bind(valueProperty);
 	    Label timer = new Timer();
+	    CountdownTimer cttimer = new CountdownTimer();
 	    
-	    myHUD.getChildren().addAll(score, timer);
+	    myHUD.getChildren().addAll(score, cttimer.getTimeString());
 		return myHUD;
 	}
 
