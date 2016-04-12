@@ -1,5 +1,6 @@
 package authoring.gui;
 
+
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -24,7 +25,8 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class DesignBoard extends TabPane {
+
+public class DesignBoard extends Tab {
 
 	private static final String DESIGN_BOARD = "Design Board";
 	private static final double HEIGHT = 1000;
@@ -42,16 +44,11 @@ public class DesignBoard extends TabPane {
 		container = new ScrollPane();
 		initializeDragAndDrop();
 		container.setContent(contentPane);
-		Tab design = new Tab(DESIGN_BOARD);
-		design.setContent(container);
-		this.getTabs().add(design);
+		this.setContent(container);
 		y_offset = HEIGHT/2;
 		x_offset = WIDTH/2;
 	}
 
-	public StackPane getContent() {
-		return this.contentPane;
-	}
 
 	private void initializeDragAndDrop() {
 		contentPane.setOnDragOver(e -> mouseDragOver(e));
@@ -90,7 +87,9 @@ public class DesignBoard extends TabPane {
 		event.consume();
 	}
 
+
 	private void addElement(String elementPath, DragEvent event) {
+
 		Node node = null;
 		if (elementPath != null) {
 			if (ResourceDecipherer.isImage(elementPath)) {
@@ -118,6 +117,7 @@ public class DesignBoard extends TabPane {
 		element.setTranslateX(e.getX());
 		element.setTranslateY(e.getY());
 
-	}
+
+    }
 
 }

@@ -44,7 +44,7 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
         myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
-        myXmlDataFile = new File("/levels/Test.xml");
+        myXmlDataFile = new File ("/levels/Test.xml");
     }
 
     public ElementManager (File xmlDataFile) {
@@ -92,7 +92,7 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
      */
     @Override
     public void onSave () throws VoogaException {
-
+        
         List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
@@ -132,6 +132,7 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
     public Map<String, VoogaData> getGlobalVariables () {
         return myGlobalVariables;
     }
+<<<<<<< HEAD
 
     @Override
     public void update () {
@@ -155,25 +156,58 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
     }
 
     @Override
-    public Node getNodeObject () {
+    public String getName () {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return null;
+=======
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Map<String, VoogaData> getVoogaProperties() {
+		return myGlobalVariables;
+	}
+
+	@Override
+	public void addProperty(String name, VoogaData data) {
+		myGlobalVariables.put(name, data);
+	}
+
+	@Override
+	public void removeProperty(String name) {
+		myGlobalVariables.remove(name);
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Node getNodeObject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     @Override
     public void addGlobalVariable (String name, VoogaData value) {
         // TODO Auto-generated method stub
-
+        
+>>>>>>> master
     }
 
     @Override
     public String getID () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getName () {
         // TODO Auto-generated method stub
         return null;
     }

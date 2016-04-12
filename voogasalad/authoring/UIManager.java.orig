@@ -40,6 +40,19 @@ public class UIManager extends VBox {
 		initializeComponents();
 	}
 
+<<<<<<< HEAD
+	private void initializeComponents() {
+		this.getChildren().addAll(new MenuPanel(elementManager, e -> {
+			try {
+				new MenuPanelHandlingMirror(e, elementManager);
+			} catch (VoogaException ee) {
+				new VoogaAlert(ee.getMessage());
+			}
+		}), new ToolPanel(e -> {
+			new ToolPanelHandlingMirror(e,elementManager);
+		}), new UIGrid());
+	}
+=======
     private void initializeComponents () {
         this.getChildren().addAll(new MenuPanel(elementManager, e -> {
             try {
@@ -52,7 +65,7 @@ public class UIManager extends VBox {
                 exception.showAndWait();
             }
         }), new ToolPanel(e -> {
-            new ToolPanelHandlingMirror(e,elementManager);
+            new ToolPanelHandlingMirror(e);
         }), grid = new UIGrid());
     }
     
@@ -63,5 +76,6 @@ public class UIManager extends VBox {
         }            
     };
     
+>>>>>>> master
 
 }
