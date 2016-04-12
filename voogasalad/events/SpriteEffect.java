@@ -1,5 +1,6 @@
 package events;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gameengine.Sprite;
@@ -12,9 +13,10 @@ public class SpriteEffect extends VariableEffect{
 	private List<Sprite> mySprites;
 
 	// constructor with sprites- apply to given sprites
-	public SpriteEffect(List<Sprite> sprites, String method, String variable, VoogaEvent event) {
+	public SpriteEffect(String spriteID, String method, String variable, VoogaEvent event) {
 		super(method, variable, event);
-		mySprites = sprites;
+		mySprites = new ArrayList<>();
+		mySprites.add(getEvent().getManager().getSprite(spriteID));
 		needsSprites = false;
 	}
 
