@@ -1,11 +1,17 @@
 package authoring.resourceutility;
 
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeCell;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.TransferMode;
 
 /**
  * This is a custom TreeCell implementation allowing renaming (and drag-and-drop soon to come)
@@ -16,8 +22,14 @@ import javafx.scene.input.MouseButton;
 public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 
 	private TextField textField;
+	private VoogaFile draggedItem;
+	private DataFormat voogaFormat;
+	private ResourceTreeView structure;
 	
-	public TextFieldTreeCellImpl() {
+	public TextFieldTreeCellImpl(ResourceTreeView rtv) {
+		this.structure = rtv;
+		
+		voogaFormat = VoogaFileFormat.getInstance();
 		
 		this.setOnMouseClicked(e -> {
 			if(e.getButton() == MouseButton.SECONDARY) {
@@ -26,6 +38,54 @@ public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 				}
 			}
 		});
+		
+		this.setOnDragDetected(e -> {
+            if (! isEmpty()) {
+                Dragboard db = startDragAndDrop(TransferMode.COPY);
+                ClipboardContent cc = new ClipboardContent();
+                cc.put(voogaFormat, getItem());
+                db.setContent(cc);
+                draggedItem = getItem();
+                Label label = new Label(String.format("%s", getItem().toString()));
+                new Scene(label);
+                db.setDragView(label.snapshot(null, null));
+            }
+            e.consume();
+        });
+		
+		this.setOnDragOver(e -> {
+			TextFieldTreeCellImpl cell = (TextFieldTreeCellImpl) e.getSource();
+			if(cell != null) {
+				cell.setStyle("-fx-background-color: #C6C6C6;");
+			}
+			e.acceptTransferModes(TransferMode.ANY);
+			e.consume();
+		});
+		
+		this.setOnDragExited(e -> {
+			TextFieldTreeCellImpl cell = (TextFieldTreeCellImpl) e.getSource();
+			if(cell != null) {
+				cell.setStyle("-fx-background-color: transparent;");
+			}
+			e.acceptTransferModes(TransferMode.ANY);
+			e.consume();
+		});
+		
+		
+		this.setOnDragDropped(e -> {
+			Dragboard db = e.getDragboard();
+	        boolean success = false;
+	        if(db.hasContent(VoogaFileFormat.getInstance())) {
+	        	VoogaFile file = ((TextFieldTreeCellImpl) e.getSource()).getItem();
+	        	if(file.getType() == VoogaFileType.FOLDER) {
+	        		rtv.reorder((VoogaFile) db.getContent(VoogaFileFormat.getInstance()), file);
+	        	}
+	            success = true;
+	        }
+
+	        e.setDropCompleted(success);
+		});
+		
 		
 	}
 	

@@ -30,21 +30,23 @@ public class CollisionCause extends Cause{
 		for(Object o: groupBID){
 			groupB.add(getEvent().getManager().getSprite(o));
 		}
-		collidedSprites = new ArrayList<Sprite>();
+		collidedSprites = new ArrayList<>();
 	}
 	
 	@Override
 	public boolean check() {
+		collidedSprites.clear();
 		boolean myVal = false;
 		for(Sprite a: groupA){
 			for(Sprite b: groupB){
 				if(a.getImage().getBoundsInParent().intersects(b.getImage().getBoundsInParent())){
 					myVal = true;
 					collidedSprites.add(a);
-					collidedSprites.add(b);
+					collidedSprites.add(b);					
 				}
 			}
 		}
+		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
 	}
 	

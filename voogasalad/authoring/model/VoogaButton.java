@@ -4,7 +4,6 @@ import java.util.Map;
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -16,6 +15,7 @@ public class VoogaButton extends Button implements Elementable {
 
     Map<String, VoogaData> myProperties;
     String name;
+
     void onDrag (MouseEvent event) {
         Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
         ClipboardContent content = new ClipboardContent();
@@ -53,12 +53,10 @@ public class VoogaButton extends Button implements Elementable {
         return name;
     }
 
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return this;
+    }
 
-	@Override
-	public Node getNodeObject() {
-		// TODO Auto-generated method stub
-		return this;
-	}
-    
-    
 }

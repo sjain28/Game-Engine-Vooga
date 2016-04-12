@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.interfaces.model.EditEventable;
+import auxiliary.VoogaAlert;
+import auxiliary.VoogaException;
 import events.VoogaEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -78,10 +80,10 @@ public class EventAccoridion extends Tab {
             e.printStackTrace();
         }
         try {
-            TitledPane titledPane;
+            EventTitledPane titledPane;
             try {
                 Object o = c.getConstructor(EditEventable.class).newInstance(manager);
-                titledPane = (TitledPane) o;
+                titledPane = (EventTitledPane) o;
                 System.out.println("TitledPane created in EventAccoridion.java");
                 return titledPane;
             }
@@ -126,6 +128,20 @@ public class EventAccoridion extends Tab {
         button.setOnAction(e);
         button.setAlignment(Pos.CENTER);
         return button;
+    }
+    
+    List<String> getDetails(){
+        try {
+        List<String> eventList = new ArrayList<String>();
+        for (TitledPane pane : accordion.getPanes()){
+            EventTitledPane eventPane = (EventTitledPane) pane;
+            eventList.add(eventPane.getDetails());
+        }
+        return eventList;
+        } catch (VoogaException e){
+            VoogaAlert va = new VoogaAlert(e.getMessage());
+        }
+        return null;
     }
 }
 

@@ -1,21 +1,19 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import gameengine.Sprite;
-import gameengine.Variable;
+import java.util.Map;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaButton;
 import authoring.model.VoogaText;
 import events.VoogaEvent;
 import javafx.application.Application;
-import javafx.scene.Node;
 
 import javafx.stage.Stage;
-import player.gamerunner.GameRunner;
-import player.leveldatamanager.LevelDataManager;
 import tools.VoogaBoolean;
+import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 
 public class DataTest extends Application {
@@ -27,7 +25,7 @@ public class DataTest extends Application {
     public void start (Stage primaryStage) throws Exception {
  
         Elementable[] vts = new Elementable[10];
-        Variable[] variables = new Variable[10];
+        VoogaData[] variables = new VoogaData[10];
         VoogaEvent[] events = new VoogaEvent[10];
         for (int i =0;i<3;i++){
             VoogaText vt = new VoogaText(""+i);
@@ -45,7 +43,7 @@ public class DataTest extends Application {
         }
         
         for (int i =0; i<10;i++){
-           Variable variable = new Variable();
+           VoogaNumber variable = new VoogaNumber(i);
            variables[i] = variable;
         }
         
@@ -58,9 +56,9 @@ public class DataTest extends Application {
         for (int i =0; i<4;i++){
         	nodeList.add(vts[i]);
         }
-        List<Variable> variableArrayList = new ArrayList<Variable>();
+        Map<String,VoogaData> variableArrayList = new HashMap<String,VoogaData>();
         for (int i =0; i<4;i++){
-        	variableArrayList.add(variables[i]);
+        	variableArrayList.put(""+i,variables[i]);
         }
         List<VoogaEvent> eventList = new ArrayList<VoogaEvent>();
         for (int i =0; i<4;i++){
@@ -69,10 +67,10 @@ public class DataTest extends Application {
         String fileName = "level7";
         String fileName2 = "level7-rewritten";
         DataContainerOfLists data = new DataContainerOfLists(nodeList,variableArrayList, eventList);
-        System.out.println("Data type 1 is equal to " + data.getVariableList());
+        System.out.println("Data type 1 is equal to " + data.getVariableMap());
         System.out.println("Data type 2 is equal to " + data.getEventList());
         VoogaBoolean vb = new VoogaBoolean(true);
-        FileWriterFromObjects fileWriter = new FileWriterFromObjects();
+        FileWriterFromGameObjects fileWriter = new FileWriterFromGameObjects();
         fileWriter.saveGameObjects(data, fileName);
         fileWriter.saveGameObjects(data, fileName);
         
