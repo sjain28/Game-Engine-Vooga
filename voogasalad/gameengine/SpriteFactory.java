@@ -47,10 +47,12 @@ public class SpriteFactory {
 	}
 	
 	/**
-	 * Creates a new archetype
-	 * @param archetypeName: Name of the new archetype
-	 * @param archetype: A Sprite representing the new archetype
-	 * @throws Exception: If an archetype with the same name exists
+	 * Sets or creates a new Archetype
+	 * Must specify what you want your default Sprite
+	 * for this archetype to be 
+	 * 
+	 * @param archetype
+	 * @param s
 	 */
 	public void addArchetype(String archetypeName, Sprite archetype) throws Exception{
 		if(myArchetypes.keySet().contains(archetypeName)){
@@ -61,18 +63,8 @@ public class SpriteFactory {
 		}
 	}
 
-	/**
-	 * Sets or creates a new Archetype
-	 * Must specify what you want your default Sprite
-	 * for this archetype to be 
-	 * 
-	 * @param archetype
-	 * @param s
-	 */
-	public void setArchetype(String archetype, Sprite sprite){
-		myArchetypes.put(archetype, sprite);
-	}
-	
+
+
 	/**
 	 * Returns the default Sprite for a given
 	 * Archetype
@@ -125,11 +117,12 @@ public class SpriteFactory {
 	 * todo: Check to see if this is actually what the front end needs
 	 * 
 	 * @param fileLocation
+	 * @throws Exception 
 	 */
-	public void deSerializeArchetype(String fileLocation){
+	public void deSerializeArchetype(String fileLocation) throws Exception{
 		DeSerializer unserializer = new DeSerializer();
 		Sprite newArchetype = (Sprite) unserializer.deserialize(1,fileLocation);
-		setArchetype(newArchetype.getArchetype(), newArchetype);
+		addArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}
 }
