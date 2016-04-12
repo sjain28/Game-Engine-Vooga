@@ -1,4 +1,4 @@
-package authoring.Properties;
+package authoring.properties;
 
 /**
  * Properties window to see all the current characteristics of a Sprite

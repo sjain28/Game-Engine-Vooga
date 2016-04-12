@@ -1,5 +1,7 @@
 package authoring.interfaces.model;
 
-public interface CompleteAuthoringModelable extends EditElementable, EditEventable, Savable {
+import authoring.interfaces.gui.Saveable;
+
+public interface CompleteAuthoringModelable extends EditElementable, EditEventable, Saveable {
 
 }
