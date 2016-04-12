@@ -10,10 +10,10 @@ interface IGameRunner {
 	/**
 	 * Stop the timeline
 	 */
-	//void stop();
+	void stop();
 	
 	/**
 	 * Start the timeline
 	 */
-	//void start();
+	void start();
 }
