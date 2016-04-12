@@ -19,17 +19,53 @@ public class SpriteEffect extends VariableEffect{
 		mySprites.add(getEvent().getManager().getSprite(spriteID));
 		needsSprites = false;
 	}
-
-	// constructor with archetype- apply to all of archetype
-	// constructor with archetype- apply to all of archetype for which event supplies
+	
+	public SpriteEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
+		super(method, variable, parameter, event);
+		mySprites = new ArrayList<>();
+		mySprites.add(getEvent().getManager().getSprite(spriteID));
+		needsSprites = false;
+	}
+	
+	public SpriteEffect(String spriteID, String method, String variable, Boolean parameter, VoogaEvent event) {
+		super(method, variable, parameter, event);
+		mySprites = new ArrayList<>();
+		mySprites.add(getEvent().getManager().getSprite(spriteID));
+		needsSprites = false;
+	}
+	
+	// constructor with archetype, boolean true- apply to all of archetype
+	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, VoogaEvent event) {
 		super(method, variable, event);
 		myArchetype = archetype;
 		this.needsSprites = needsSprites;
 	}
-
+	
+	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Double parameter, VoogaEvent event) {
+		super(method, variable, event);
+		myArchetype = archetype;
+		this.needsSprites = needsSprites;
+	}
+	
+	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Boolean parameter, VoogaEvent event) {
+		super(method, variable, event);
+		myArchetype = archetype;
+		this.needsSprites = needsSprites;
+	}
+	
 	// constructor with nothing- apply to all for which event supplies
 	public SpriteEffect(String method, String variable, VoogaEvent event) {
+		super(method, variable, event);
+		needsSprites = true;
+	}
+	
+	public SpriteEffect(String method, String variable, Double parameter, VoogaEvent event) {
+		super(method, variable, event);
+		needsSprites = true;
+	}
+	
+	public SpriteEffect(String method, String variable, Boolean parameter, VoogaEvent event) {
 		super(method, variable, event);
 		needsSprites = true;
 	}
