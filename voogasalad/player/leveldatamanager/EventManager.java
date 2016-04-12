@@ -26,9 +26,9 @@ public class EventManager {
 	private Map<String, KeyCause> keyCauses;
 	private EngineObjectManager myEngineManager;
 	
-	public EventManager(EngineObjectManager manager) {
+	public EventManager(EngineObjectManager manager, List<VoogaEvent> events) {
 		keyStrokes = new ArrayList<Character>();
-		myEvents = new ArrayList<VoogaEvent>();
+		myEvents = events;
 		keyCauses = new TreeMap<String, KeyCause>();
 		myEngineManager = manager;
 	}

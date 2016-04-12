@@ -1,11 +1,15 @@
 package player.leveldatamanager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import authoring.interfaces.Elementable;
 import authoring.model.VoogaText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
+import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 /** Manages Sprite's, Text, and GlobalVariables**/
@@ -14,13 +18,10 @@ import tools.interfaces.VoogaData;
 
 public class EngineObjectManager {
 	
-	/**Sprite Info**/
-	private Map<String, List<Object>> mySpriteCategories; //Maps archetype name to Sprite IDs
-	private Map<Object,Sprite> mySprites;				  //Maps IDs to Sprite's
-	private SpriteFactory mySpriteFactory;
+	/**Elements Info**/
+	private Map<String,Elementable> myElements;				  //Maps IDs to Sprite's
 	
-	/**Text info**/
-	private Map<Object,VoogaText> myText;				  //Maps IDs to Text
+	private SpriteFactory mySpriteFactory;
 
 	/**Global Variable info**/
 	private Map<String, VoogaData> myGlobalVariables;
@@ -31,25 +32,28 @@ public class EngineObjectManager {
 	 * @param sprites
 	 * @param factory
 	 */
-	public EngineObjectManager(List<Sprite> sprites, List<VoogaText> text, SpriteFactory factory) {
-		//mySprites = sprites;
+	public EngineObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
+		System.out.println("The list of elementables here is " + elements);
+		myElements = new HashMap<String,Elementable>();
+		for(Elementable el : elements){
+			myElements.put(el.getID(), el);
+		}
+		System.out.println("The list of myElementables here is " + myElements);
+		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		
 		//TODO: Once constructor is figured out, intialize all objects here.
-		
 		mySpriteFactory = factory;
-		//place Sprite's by archetype and id in their correct maps
-		for(Object key : mySprites.keySet()){
-			organizeSpriteByArchetype(mySprites.get(key));
-		}
 	}
+	
+	
 	
 	/**
 	 * Returns a sprite by id
 	 * @param id
 	 * @return
 	 */
-	public Sprite getSprite(Object id){
-		return mySprites.get(id);
+	public Sprite getSprite(String id){
+		return (Sprite) myElements.get(id);
 	}
 	
 	/**
@@ -57,8 +61,16 @@ public class EngineObjectManager {
 	 * @param archetype
 	 * @return
 	 */
-	public List<Object> getSpriteIDs(String archetype){
-		return mySpriteCategories.get(archetype);
+	public List<String> getSpriteIDs(String archetype){
+		List<String> list = new ArrayList<String>();
+		for(String id : myElements.keySet()){
+			if(myElements.get(id) instanceof Sprite){
+				if(((Sprite) myElements.get(id)).getArchetype().equals(archetype)){
+					list.add(id);
+				}
+			}
+		}
+		return list;
 	}
 	
 	/**
@@ -66,10 +78,9 @@ public class EngineObjectManager {
 	 * @param archetype
 	 * @return
 	 */
-	public Sprite addSprite(String archetype){
-		Sprite newSprite = mySpriteFactory.createSprite(archetype);
-		mySprites.put(newSprite.getID(),newSprite);
-		organizeSpriteByArchetype(newSprite);
+	public Elementable addSprite(String archetype){
+		Elementable newSprite = mySpriteFactory.createSprite(archetype);
+		myElements.put(newSprite.getID(),newSprite);
 		return newSprite;
 	}
 	
@@ -78,22 +89,9 @@ public class EngineObjectManager {
 	 * @param id
 	 */
 	public void removeSprite(Object id){
-		mySpriteCategories.get(mySprites.get(id).getArchetype()).remove(id);
-		mySprites.remove(id);
+		myElements.remove(id);
 	}
 	
-	/**
-	 * organizes all the Sprite's by archetype as well
-	 * @param s
-	 */
-	private void organizeSpriteByArchetype(Sprite s){
-		String archetype = s.getArchetype();
-		if(!mySpriteCategories.containsKey(archetype)){
-			List<Object> ids = new ArrayList<Object>();
-			mySpriteCategories.put(archetype, ids);
-		}
-		mySpriteCategories.get(archetype).add(s.getID());
-	}
 	/**
 	 * Returns a Global Variable (VoogaData) as specified
 	 * by it's variable name
@@ -111,7 +109,7 @@ public class EngineObjectManager {
 	 * @return
 	 */
 	public VoogaText getText(Object id){
-		return myText.get(id);
+		return (VoogaText) myElements.get(id);
 	}
 	
 	/**
@@ -124,23 +122,32 @@ public class EngineObjectManager {
 	 * are updated.
 	 * @return
 	 */
-	public List<Object> getAllDisplayableObjects(){
-		List<Object> displayableobjects = new ArrayList<Object>();
+	public List<Node> getAllDisplayableNodes(){
+		List<Node> displayablenodes = new ArrayList<Node>();
 		
-		for(Object key : mySprites.keySet()){
-			displayableobjects.add(mySprites.get(key));
+		for(Object key : myElements.keySet()){
+			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 		
-		return null;
+		return displayablenodes;
 		
 	}
 
-	public List<Sprite> getSpritesByArchetype(String myArchetype) {
-	List<Object> archIDs = mySpriteCategories.get(myArchetype);
-	List<Sprite> archSprites = new ArrayList<Sprite>();
-	for (Object ID : archIDs){
-		archSprites.add(mySprites.get(ID));
-	}
-		return archSprites;
-	}
+//	/**
+//	 * Allows one to get a list of Sprite's by their archetypes
+//	 * @param myArchetype
+//	 * @return
+//	 */
+//	public List<Sprite> getSpritesByArchetype(String myArchetype) {
+//		List<Sprite> archSprites = new ArrayList<Sprite>();
+//		for(String id : myElements.keySet()){
+//			Elementable el = myElements.get(id);
+//			if(el instanceof Sprite){
+//				if(((Sprite) el).getArchetype().equals(myArchetype)){
+//					archSprites.add((Sprite) el);
+//				}
+//			}
+//		}
+//		return archSprites;
+//	}
 }

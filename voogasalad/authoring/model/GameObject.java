@@ -90,4 +90,10 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         
     }
 
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

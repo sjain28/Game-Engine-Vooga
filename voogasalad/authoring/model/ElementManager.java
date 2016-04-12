@@ -23,7 +23,6 @@ import auxiliary.VoogaException;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
 import events.VoogaEvent;
-import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;

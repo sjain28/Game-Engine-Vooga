@@ -13,6 +13,9 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 import authoring.interfaces.Elementable;
 import authoring.model.ElementManager;
+import events.Cause;
+import events.KeyCause;
+import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
@@ -47,7 +50,10 @@ public class DataWritingTest {
     private List<VoogaEvent> generateEvents(){
         List<VoogaEvent> elements = new ArrayList<VoogaEvent>();
         for (int i =0;i<10;i++){
-            elements.add(new VoogaEvent());
+        	VoogaEvent testEvent = new VoogaEvent();
+        	testEvent.addCause(new KeyCause("k", testEvent));
+        	testEvent.addEffect(new VariableEffect("GameWon", "toggle", testEvent));
+            elements.add(testEvent);
         }
         return elements;
     }

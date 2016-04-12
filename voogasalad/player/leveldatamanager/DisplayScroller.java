@@ -83,6 +83,7 @@ public class DisplayScroller {
 	public <E> List<Node> centerScroll(List<E> allNodes, double mainCharXPos) {
 		
 		//double mainCharXPos = mainCharLocation.getX();
+		System.out.println(allNodes);
 		List<Node> nodesToDisplay;
 		if (mainCharXPos <= myAdjustFactorX) {
 			nodesToDisplay = allNodes.stream()

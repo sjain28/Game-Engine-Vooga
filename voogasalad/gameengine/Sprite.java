@@ -36,6 +36,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
         myImagePath = imagePath;
+        System.out.println(myImagePath);
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
@@ -63,7 +64,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     @Override
-    public Vector getVelocity () {
+    public Velocity getVelocity () {
         return myVelocity;
     }
 
@@ -72,7 +73,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myVelocity = velocity;
     }
 
-    public Vector getPosition () {
+    public Position getPosition () {
         return myLoc;
     }
 
@@ -96,7 +97,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         return (HashMap<String, VoogaData>) myProperties;
     }
 
-    public Object getID () {
+    public String getID () {
         return myID;
     }
 

@@ -3,8 +3,10 @@ package player.leveldatamanager;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
+import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import events.VoogaEvent;
+import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -22,26 +24,33 @@ public class LevelDataManager {
         readinObjects(levelFileName);
     }
 
-    public void update () {
+    public void update() {
         myEventManager.update();
     }
 
-    public List<Object> extractUpdatedObjects () {
-        return myObjectManager.getAllDisplayableObjects();
-    }
-
     public List<Node> getDisplayableObjects () {
-        return displayScroller.centerScroll(myObjectManager.getAllDisplayableObjects(), 35);
+        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),35);
     }
 
     private void readinObjects (String levelFileName) {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
-        List<Elementable> spriteObjects = fileManager.createNodeList();
-        System.out.println(spriteObjects);
-        List<VoogaEvent> eventObjects = fileManager.createEventList();
-        System.out.println(eventObjects);
-        Map<String,VoogaData> variableObjects = fileManager.createVariableMap();
-        initializeManagers(spriteObjects, eventObjects, variableObjects);
+        DataContainerOfLists data = fileManager.getDataContainer();
+        
+        List<Elementable> spriteObjects = data.getElementableList();
+        System.out.println("All the sprites here are" + spriteObjects);
+        
+        List<VoogaEvent> eventObjects = data.getEventList();
+        System.out.println("All the events here are" + eventObjects);
+        
+        SpriteFactory factory = data.getSpriteFactory();
+        System.out.println("The spriteFactory here is" + factory);
+        
+        Map<String,VoogaData> variableObjects = data.getVariableMap();
+        System.out.println("All the variables here are" + variableObjects);
+        
+        initializeManagers(spriteObjects, eventObjects, variableObjects,factory);
+        
+        
     }
 
     /**
@@ -54,10 +63,12 @@ public class LevelDataManager {
      * 
      */
 
-    private void initializeManagers (List<Elementable> spriteObjects,
+    private void initializeManagers (List<Elementable> elementObjects,
                                      List<VoogaEvent> eventObjects,
-                                     Map<String,VoogaData> variableObjects) {
-
+                                     Map<String,VoogaData> variableObjects,
+                                     SpriteFactory factory) {
+    	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, factory);
+    	myEventManager = new EventManager(myObjectManager, eventObjects);
     }
 
 }

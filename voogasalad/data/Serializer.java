@@ -12,10 +12,6 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Serializer {
 
-    private Serializer () {
-
-    }
-
     public static void serialize (Object object, String fileName) throws ParserConfigurationException,
                                                            TransformerException, IOException,
                                                            SAXException {

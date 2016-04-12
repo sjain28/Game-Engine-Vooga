@@ -19,7 +19,7 @@ import tools.interfaces.VoogaData;
 public class VoogaText extends TextField implements Elementable {
 
     Map<String, VoogaData> myProperties = new HashMap<String, VoogaData>();
-    String name;
+    String myID;
 
     public VoogaText () {
         init();
@@ -38,8 +38,8 @@ public class VoogaText extends TextField implements Elementable {
     }
 
     private void init () {
-        name = UUID.randomUUID().toString();
-        this.setId(name);
+    	myID = UUID.randomUUID().toString();
+        this.setId(myID);
         setBackground(Background.EMPTY);
         this.setOnDragDetected( (MouseEvent e) -> onDrag(e));
     }
@@ -84,8 +84,14 @@ public class VoogaText extends TextField implements Elementable {
         return this;
     }
 
-    public String getName () {
-        return name;
+    public String getID () {
+        return myID;
     }
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

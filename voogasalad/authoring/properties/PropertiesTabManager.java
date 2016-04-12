@@ -1,4 +1,4 @@
-package authoring.properties;
+package authoring.Properties;
 
 /**
  * Tab Manager class to handle all the tabs in the properties TabPane

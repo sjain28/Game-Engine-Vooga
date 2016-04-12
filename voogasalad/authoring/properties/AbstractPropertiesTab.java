@@ -1,5 +1,4 @@
-package authoring.properties;
-
+package authoring.Properties;
 import java.util.HashMap;
 import java.util.Map;
 

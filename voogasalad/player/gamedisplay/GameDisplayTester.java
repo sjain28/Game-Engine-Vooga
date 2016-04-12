@@ -9,6 +9,7 @@ import java.util.List;
 import data.FileReaderToGameObjects;
 import javafx.application.Application;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -26,15 +27,15 @@ public class GameDisplayTester extends Application {
 
 	private static void populate() {
 
-		Node r = new Rectangle(30, 30);
+		Node r = new Rectangle(30, 30, Color.WHEAT);
 		r.setLayoutX(10);
 		r.setLayoutY(10);
 
-		Node r2 = new Rectangle(30, 30);
+		Node r2 = new Rectangle(30, 30, Color.AQUAMARINE);
 		r2.setLayoutX(100);
 		r2.setLayoutY(100);
 
-		Node r3 = new Circle(50);
+		Node r3 = new Circle(50, Color.CORAL);
 		r3.setLayoutX(200);
 		r3.setLayoutY(200);
 
@@ -65,7 +66,7 @@ public class GameDisplayTester extends Application {
 
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 }
