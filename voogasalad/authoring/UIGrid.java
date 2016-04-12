@@ -9,6 +9,7 @@ import authoring.properties.PropertiesPane;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.ResourceUI;
 import authoring.resourceutility.VoogaFile;
+import auxiliary.VoogaException;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.ClipboardContent;
@@ -28,7 +29,7 @@ public class UIGrid extends GridPane {
 
 	private DesignBoard designBoard;
 	private ResourceUI explorer;
-	
+
 	public UIGrid() {
 		sector();
 		populate();
@@ -49,7 +50,7 @@ public class UIGrid extends GridPane {
 		this.getRowConstraints().addAll(topRow, middleRow, bottomRow);
 	}
 
-	private void populate() {
+	private void populate() throws VoogaException {
 		explorer = new ResourceUI();
 		this.add(explorer, 0, 0);
 		designBoard = new DesignBoard();

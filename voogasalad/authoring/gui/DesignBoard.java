@@ -27,13 +27,17 @@ import javafx.scene.shape.Rectangle;
 public class DesignBoard extends TabPane {
 
 	private static final String DESIGN_BOARD = "Design Board";
+	private static final double HEIGHT = 1000;
+	private static final double WIDTH = 1000;
+	
 	private ScrollPane container;
 	private StackPane contentPane;
 	private ElementManager elementManager;
+	private double y_offset, x_offset;
 
 	public DesignBoard() {
 		contentPane = new StackPane();
-		contentPane.setMinSize(1000, 1000);
+		contentPane.setMinSize(WIDTH, HEIGHT);
 		elementManager = new ElementManager();
 		container = new ScrollPane();
 		initializeDragAndDrop();
@@ -41,6 +45,8 @@ public class DesignBoard extends TabPane {
 		Tab design = new Tab(DESIGN_BOARD);
 		design.setContent(container);
 		this.getTabs().add(design);
+		y_offset = HEIGHT/2;
+		x_offset = WIDTH/2;
 	}
 
 	public StackPane getContent() {
@@ -61,7 +67,7 @@ public class DesignBoard extends TabPane {
 			if (elementManager.hasElement(node.getPath())) {
 				moveElement(node.getPath(), event);
 			} else {
-				addElement(node.getPath());
+				addElement(node.getPath(), event);
 			}
 			success = true;
 		}
@@ -84,13 +90,15 @@ public class DesignBoard extends TabPane {
 		event.consume();
 	}
 
-	private void addElement(String elementPath) {
+	private void addElement(String elementPath, DragEvent event) {
 		Node node = null;
 		if (elementPath != null) {
 			if (ResourceDecipherer.isImage(elementPath)) {
 				System.out.println("true");
 				// node = new GameObject(elementManager.getSpriteFactory().createSprite(""));
 				node = new ImageView(new Image(new File(elementPath).toURI().toString()));
+				node.setTranslateX(event.getX() - x_offset);
+				node.setTranslateY(event.getY() - y_offset);
 			} else if (ResourceDecipherer.isAudio(elementPath)) {
 				// node = new GameObject(elementManager.getSpriteFactory().createSprite(""));
 				node = new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri().toString())));
