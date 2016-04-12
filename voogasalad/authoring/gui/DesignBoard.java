@@ -53,7 +53,7 @@ public class DesignBoard extends Tab {
 		contentPane.setMinSize(WIDTH, HEIGHT);
 		elementManager = elem;
 		propertiesTabManager = new PropertiesTabManager();
-		initGlobalProperties();
+		//initGlobalProperties();
 		container = new ScrollPane();
 		initializeDragAndDrop();
 		container.setContent(contentPane);
@@ -66,9 +66,12 @@ public class DesignBoard extends Tab {
 		return propertiesTabManager;
 	}
 	
+	//this method needs to be fixed, doesn't quite work with the interface we have right now
 	private void initGlobalProperties() {
-		Elementable elem = elementManager.getGlobalPropertiesManager();
-		propertiesTabManager.getGlobalPropertiesTab().getPropertiesMap(elem);
+		elementManager.getGlobalVariables();
+		ElementManager elemMan = (ElementManager) elementManager;
+		//Elementable elem = elemMan.getGlobalPropertiesManager();
+		//propertiesTabManager.getGlobalPropertiesTab().getPropertiesMap(elem);
 	}
 	
 	//Do something with Elementable.setOnClicked and call this method on self, or put into sprite class?
