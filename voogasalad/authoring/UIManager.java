@@ -32,41 +32,31 @@ import javafx.scene.layout.VBox;
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
 public class UIManager extends VBox {
-    private ArrayList<CompleteAuthoringModelable> elementManagers;
-    private Dragboard db;
-    private UIGrid grid;
-    
+	private ArrayList<CompleteAuthoringModelable> elementManagers;
+	private Dragboard db;
+	private UIGrid grid;
 
 	public UIManager(CompleteAuthoringModelable model) {
 		elementManagers = new ArrayList<CompleteAuthoringModelable>();
-		        elementManagers.add(model);
+		elementManagers.add(model);
 		initializeComponents();
 	}
 
-    private void initializeComponents () {
-        this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
-            try {
-                new MenuPanelHandlingMirror(e, elementManagers.get(0), newScene);
-            }
-            catch (VoogaException ee) {
-                Alert exception = new Alert(AlertType.ERROR);
-                exception.setTitle(AlertType.ERROR.toString());
-                exception.setContentText(ee.getMessage());
-                exception.showAndWait();
-            }
-        }), new ToolPanel(e -> {
+	private void initializeComponents() {
+		this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
+			try {
+				new MenuPanelHandlingMirror(e, elementManagers.get(0), newScene);
+			} catch (VoogaException ee) {
+				new VoogaAlert(ee.getMessage());
+			}
+		}), new ToolPanel(e -> {
+				new ToolPanelHandlingMirror(e, elementManagers.get(0));
+		}), grid = new UIGrid(elementManagers.get(0)));
+	}
 
-            new ToolPanelHandlingMirror(e,elementManagers.get(0));
-        }), grid = new UIGrid(elementManagers.get(0)));
-    }
-    
-    EventHandler newScene = new EventHandler() {
-        Event e = new Event(Event.ANY);
-        public void handle(Event e){
-            elementManagers.add(new ElementManager());
-            grid.addScene(elementManagers.get(1));
-        }            
-    };
-    
+	EventHandler<InputEvent> newScene = e -> {
+			elementManagers.add(new ElementManager());
+			grid.addScene(elementManagers.get(1));
+	};
 
 }

@@ -6,6 +6,7 @@ package player.gamedisplay;
 import java.util.ArrayList;
 import java.util.List;
 
+import auxiliary.VoogaException;
 import data.FileReaderToGameObjects;
 import javafx.application.Application;
 import javafx.scene.Node;
@@ -22,6 +23,14 @@ import javafx.stage.Stage;
  *
  */
 public class GameDisplayTester extends Application {	
+	
+	public GameDisplayTester() {
+		try {
+			start(new Stage());
+		} catch (Exception e) {
+			throw new VoogaException();
+		}
+	}
 
 	static List<Node> nodes = new ArrayList<>();
 
