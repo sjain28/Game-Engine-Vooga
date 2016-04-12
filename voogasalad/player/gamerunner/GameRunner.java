@@ -86,6 +86,7 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName){
 		myCurrentLevelDataManager = new LevelDataManager(fileName);
 		//call the time line here and pass step into time line
+		
 		step();
 	}
 	
