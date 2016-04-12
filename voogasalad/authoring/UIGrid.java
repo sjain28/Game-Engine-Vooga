@@ -6,6 +6,8 @@ import authoring.Properties.PropertiesPane;
 import authoring.gui.DesignBoardHousing;
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
+import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.ResourceUI;
@@ -30,10 +32,12 @@ public class UIGrid extends GridPane {
 
 	private DesignBoardHousing designBoard;
 	private ResourceUI explorer;
+	private CompleteAuthoringModelable myManager;
 
-	public UIGrid() {
+	public UIGrid(CompleteAuthoringModelable elem) {
 		sector();
 		populate();
+		myManager = elem;
 	}
 
 	private void sector() {
@@ -54,7 +58,7 @@ public class UIGrid extends GridPane {
 	private void populate() throws VoogaException {
 		explorer = new ResourceUI();
 		this.add(explorer, 0, 0);
-		designBoard = new DesignBoardHousing();
+		designBoard = new DesignBoardHousing(myManager);
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
 		PropertiesPane properties = new PropertiesPane();
@@ -63,8 +67,8 @@ public class UIGrid extends GridPane {
 		this.add(events, 0, 2);
 	}
 
-    public void addScene () {
-        designBoard.addScene();
+    public void addScene (CompleteAuthoringModelable elem) {
+        designBoard.addScene(elem);
     }
 
 }

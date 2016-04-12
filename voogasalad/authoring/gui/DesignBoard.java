@@ -4,6 +4,7 @@ package authoring.gui;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.UUID;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
 import authoring.resourceutility.ResourceDecipherer;
@@ -34,13 +35,13 @@ public class DesignBoard extends Tab {
 	
 	private ScrollPane container;
 	private StackPane contentPane;
-	private ElementManager elementManager;
+	private CompleteAuthoringModelable elementManager;
 	private double y_offset, x_offset;
 
-	public DesignBoard() {
+	public DesignBoard(CompleteAuthoringModelable elem) {
 		contentPane = new StackPane();
 		contentPane.setMinSize(WIDTH, HEIGHT);
-		elementManager = new ElementManager();
+		elementManager = elem;
 		container = new ScrollPane();
 		initializeDragAndDrop();
 		container.setContent(contentPane);
