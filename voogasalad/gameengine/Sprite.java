@@ -14,11 +14,13 @@ import tools.Position;
 import tools.Vector;
 import tools.VoogaNumber;
 import tools.Velocity;
+import tools.VoogaBoolean;
 import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable, Elementable{
 	
-	public static final String MASS = "mass";
+	protected static final String MASS = "mass";
+	protected static final String ALIVE = "alive";
     private Velocity myVelocity;
     private Position myLoc;
     private String myID;
@@ -36,6 +38,7 @@ public class Sprite implements Moveable, Effectable, Elementable{
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
         myProperties.put(MASS, mass);
+        myProperties.put(ALIVE, new VoogaBoolean(true));
         myLoc = new Position(0,0);
         myVelocity = new Velocity(0,0);
     }
