@@ -10,7 +10,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
-public class FileWriterFromObjects {
+public class FileWriterFromGameObjects {
     public static void saveGameObjects (DataContainerOfLists lists,
                                  String fileName) throws ParserConfigurationException,
                                                   TransformerException, IOException, SAXException {

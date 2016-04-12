@@ -1,3 +1,4 @@
+
 package data;
 
 import java.util.ArrayList;
@@ -11,10 +12,6 @@ import events.VoogaEvent;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
-<<<<<<< HEAD
-import Player.leveldatamanager.LevelDataManager;
-=======
->>>>>>> master
 import tools.VoogaBoolean;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -47,11 +44,6 @@ public class DataTest extends Application {
         }
         
         for (int i =0; i<10;i++){
-           VoogaNumber variable = new VoogaNumber(i);
-           variables[i] = variable;
-        }
-        
-        for (int i =0; i<10;i++){
             VoogaEvent event = new VoogaEvent();
             events[i] = event;
          }
@@ -74,20 +66,7 @@ public class DataTest extends Application {
         System.out.println("Data type 1 is equal to " + data.getVariableMap());
         System.out.println("Data type 2 is equal to " + data.getEventList());
         VoogaBoolean vb = new VoogaBoolean(true);
-        FileWriterFromObjects fileWriter = new FileWriterFromObjects();
-<<<<<<< HEAD
-        fileWriter.serialize(data, fileName);
-        //LevelDataManager manager = new LevelDataManager(fileName);
-        
-        FileReaderToObjects fileReader = new FileReaderToObjects();
-        DataContainerOfLists dataDeserialized = (DataContainerOfLists) fileReader.deserializeObject(fileName);
-        System.out.println("Node list: "+dataDeserialized.getNodeList());
-        //System.out.println("Node list: "+fileReader.createNodeList());
-//        DataContainerOfLists deserializedList = fileReader.getDataContainer();
-//        System.out.println("DONE");
-//        System.out.println(deserializedList);
-//        System.out.println(deserializedList.getEventList());
-=======
+        FileWriterFromGameObjects fileWriter = new FileWriterFromGameObjects();
         fileWriter.saveGameObjects(data, fileName);
         fileWriter.saveGameObjects(data, fileName);
         
@@ -99,7 +78,6 @@ public class DataTest extends Application {
         System.out.println("DONE");
         System.out.println(deserializedList);
         System.out.println(deserializedList.getEventList());
->>>>>>> master
         
     }
     

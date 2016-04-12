@@ -14,7 +14,7 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import data.FileWriterFromObjects;
+import data.FileWriterFromGameObjects;
 import data.Serializer;
 import data.DeSerializer;
 import javafx.collections.FXCollections;
