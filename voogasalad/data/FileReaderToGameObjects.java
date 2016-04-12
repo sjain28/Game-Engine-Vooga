@@ -11,6 +11,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import events.VoogaEvent;
+import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -21,7 +22,8 @@ public class FileReaderToGameObjects {
     private List<Node> nodeList;
     private List<VoogaEvent> eventList;
     private Map<String, VoogaData> variableMap;
-
+    private SpriteFactory spriteFactory;
+    
     private List<String> objectNames;
 
     public FileReaderToGameObjects (String fileName) {
@@ -53,6 +55,10 @@ public class FileReaderToGameObjects {
 
     public Map<String, VoogaData> createVariableMap () {
         return data.getVariableMap();
+    }
+    
+    public SpriteFactory createSpriteFactory () {
+        return data.getSpriteFactory();
     }
 
     public DataContainerOfLists getDataContainer () {
