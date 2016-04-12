@@ -18,7 +18,7 @@ public class DragDropTest extends Application{
         vt.setMaxHeight(100);
         vt.setTranslateX(100);
         vt.setTranslateY(100);
-        designBoard.getDesignBoard().addElement(vt);
+//        designBoard.getDesignBoard().addElement(vt);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
