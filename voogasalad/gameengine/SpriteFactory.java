@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import auxiliary.VoogaException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tools.interfaces.VoogaData;
@@ -40,6 +41,21 @@ public class SpriteFactory {
 		Sprite clone = new Sprite(original.getImagePath(), original.getArchetype(), 
 					  original.getParameterMap(), (VoogaNumber)original.getParameterMap().get(Sprite.MASS));
 		return clone;
+	}
+	
+	/**
+	 * Creates a new archetype
+	 * @param archetypeName: Name of the new archetype
+	 * @param archetype: A Sprite representing the new archetype
+	 * @throws Exception: If an archetype with the same name exists
+	 */
+	public void addArchetype(String archetypeName, Sprite archetype) throws Exception{
+		if(myArchetypes.keySet().contains(archetypeName)){
+			throw new VoogaException();
+		}
+		else{
+			myArchetypes.put(archetypeName, archetype);
+		}
 	}
 
 	/**

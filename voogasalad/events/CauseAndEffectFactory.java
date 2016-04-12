@@ -2,8 +2,14 @@ package events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import auxiliary.VoogaException;
+import gameengine.Sprite;
+import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 public class CauseAndEffectFactory {
 //	private ResourceBundle errorMessages = ResourceBundle.getBundle("./resources/ErrorMessages.properties");
@@ -105,9 +111,25 @@ public class CauseAndEffectFactory {
         // VoogaEvent voogaEvent) {
         
 //    	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
+//        String variableCauseParams = "events.VariableCause Score 500 greaterThan";
+//        cf.create(e, variableCauseParams);
+       
+        Map<String, VoogaData> params = new HashMap<>();
+        params.put("Health", new VoogaNumber(100.0));
+        params.put("Score", new VoogaNumber(500.0));
         
-        String variableCauseParams = "events.VariableCause Score 500 greaterThan";
-        cf.create(e, variableCauseParams);
+        Sprite tester = new Sprite("dummypath", "Character", params, new VoogaNumber(50.0));
+        String ID = tester.getID();
+        VoogaEvent event = new VoogaEvent();
+        String cause = "events.SpriteVariableCause ID Health 25 greaterThan";
+        
+        cf.create(e, cause);
+        
+        //String effect = "events.SpriteEffect, increaseValue"
+        //	public SpriteVariableCause(String spriteID, String varName, Double targetValue, String predicate, VoogaEvent voogaEvent) {
+        //	public SpriteEffect(String spriteID, String method, String variable, VoogaEvent event) {
+
+
 
         System.out.println(e.getCauses().size());
 
