@@ -15,6 +15,7 @@ public final class DeSerializer {
     private final static String COMMAND_PATH = "data";
 
     public static List<Object> deserialize (int objectNum, String fileName) {
+    	System.out.println("What is the fileName" + fileName);
         XStream unSerializer = new XStream(new DomDriver());
         List<Object> objectsCreated = new ArrayList<Object>();
         try {
