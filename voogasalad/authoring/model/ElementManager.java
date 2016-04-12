@@ -38,6 +38,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private File myXmlDataFile;
     private SpriteFactory spriteFactory;
     private Set<String> myIds;
+    private String filePath="levels/Test.xml";
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
@@ -127,7 +128,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         System.out.println("I'm done saving in element manager");
         try {
             System.out.println(myXmlDataFile.getPath());
-            FileWriterFromGameObjects.saveGameObjects(data, myXmlDataFile.getPath());
+            FileWriterFromGameObjects.saveGameObjects(data, filePath);
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             throw new VoogaException();

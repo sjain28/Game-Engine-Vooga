@@ -25,10 +25,17 @@
           <systemPath>${project.basedir}/external_jars/xstream-1.4.9.jar</systemPath>
         </dependency>
         <dependency>
+          <groupId>JUnit</groupId>
+          <artifactId>JUnit</artifactId>
+          <version>1.0.0</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/external_jars/junit-4.11.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>javafx</artifactId>
             <version>8.0.31</version>
-            <systemPath>${project.basedir}/lib/ext/jfxrt.jar</systemPath>
+            <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
             <scope>system</scope>
         </dependency>
     </dependencies>
