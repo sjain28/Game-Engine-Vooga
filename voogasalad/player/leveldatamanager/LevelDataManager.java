@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import data.FileReaderToGameObjects;
-import data.DeSerializer;
 import events.VoogaEvent;
+import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -40,9 +40,13 @@ public class LevelDataManager {
         List<VoogaEvent> eventObjects = fileManager.createEventList();
         System.out.println(eventObjects);
         
+        SpriteFactory factory = fileManager.createSpriteFactory();
+        
         Map<String,VoogaData> variableObjects = fileManager.createVariableMap();
      
-        initializeManagers(spriteObjects, eventObjects, variableObjects);
+        initializeManagers(spriteObjects, eventObjects, variableObjects,factory);
+        
+        
     }
 
     /**
@@ -57,9 +61,10 @@ public class LevelDataManager {
 
     private void initializeManagers (List<Elementable> elementObjects,
                                      List<VoogaEvent> eventObjects,
-                                     Map<String,VoogaData> variableObjects) {
-    	//TODO: pass it a sprite factory
-    	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, null);
+                                     Map<String,VoogaData> variableObjects,
+                                     SpriteFactory factory) {
+    	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, factory);
+    	myEventManager = new EventManager(myObjectManager, eventObjects);
     }
 
 }
