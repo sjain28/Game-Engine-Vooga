@@ -17,6 +17,15 @@ public class FileWriterFromGameObjects {
                                                          TransformerException, IOException,
                                                          SAXException {
         XStream serializer = new XStream(new DomDriver());
+//        if (!file.exists()) {
+//        	 
+//        	/*
+//        	* createNewFile() method is used to creates a new, empty file
+//        	* mentioned by given abstract pathname if and only if a file with
+//        	* this name does not exist in given abstract pathname.
+//        	*/
+//        	b = file.createNewFile();
+//        }
         ObjectOutputStream objectOutputStream =
                 serializer.createObjectOutputStream(new FileOutputStream(fileName));
 

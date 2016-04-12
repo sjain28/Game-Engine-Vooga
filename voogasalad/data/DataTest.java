@@ -43,11 +43,6 @@ public class DataTest extends Application {
         }
         
         for (int i =0; i<10;i++){
-           VoogaNumber variable = new VoogaNumber(i);
-           variables[i] = variable;
-        }
-        
-        for (int i =0; i<10;i++){
             VoogaEvent event = new VoogaEvent();
             events[i] = event;
          }
