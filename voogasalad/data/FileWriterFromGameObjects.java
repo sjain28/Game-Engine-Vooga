@@ -10,11 +10,12 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
-public class FileWriterFromObjects {
+public class FileWriterFromGameObjects {
 
     public static void saveGameObjects (DataContainerOfLists lists,
-                                 String fileName) throws ParserConfigurationException,
-                                                  TransformerException, IOException, SAXException {
+                                        String fileName) throws ParserConfigurationException,
+                                                         TransformerException, IOException,
+                                                         SAXException {
         XStream serializer = new XStream(new DomDriver());
         ObjectOutputStream objectOutputStream =
                 serializer.createObjectOutputStream(new FileOutputStream(fileName));

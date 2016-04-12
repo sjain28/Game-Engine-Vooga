@@ -21,7 +21,7 @@ import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import auxiliary.VoogaException;
 import data.DataContainerOfLists;
-import data.FileWriterFromObjects;
+import data.FileWriterFromGameObjects;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
@@ -106,7 +106,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
 
         DataContainerOfLists data = new DataContainerOfLists(elements,myGlobalVariables,myEventList);
         try {
-            FileWriterFromObjects.saveGameObjects(data,myXmlDataFile.getPath());
+            FileWriterFromGameObjects.saveGameObjects(data,myXmlDataFile.getPath());
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             throw new VoogaException();
