@@ -3,6 +3,7 @@ package player.leveldatamanager;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
+import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
@@ -28,22 +29,25 @@ public class LevelDataManager {
     }
 
     public List<Node> getDisplayableObjects () {
-        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(), 35);
+        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),35);
     }
 
     private void readinObjects (String levelFileName) {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
+        DataContainerOfLists data = fileManager.getDataContainer();
         
-        List<Elementable> spriteObjects = fileManager.createNodeList();
-        System.out.println(spriteObjects);
+        List<Elementable> spriteObjects = data.getElementableList();
+        System.out.println("All the sprites here are" + spriteObjects);
         
-        List<VoogaEvent> eventObjects = fileManager.createEventList();
-        System.out.println(eventObjects);
+        List<VoogaEvent> eventObjects = data.getEventList();
+        System.out.println("All the events here are" + eventObjects);
         
-        SpriteFactory factory = fileManager.createSpriteFactory();
+        SpriteFactory factory = data.getSpriteFactory();
+        System.out.println("The spriteFactory here is" + factory);
         
-        Map<String,VoogaData> variableObjects = fileManager.createVariableMap();
-     
+        Map<String,VoogaData> variableObjects = data.getVariableMap();
+        System.out.println("All the variables here are" + variableObjects);
+        
         initializeManagers(spriteObjects, eventObjects, variableObjects,factory);
         
         

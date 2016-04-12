@@ -33,10 +33,15 @@ import tools.VoogaNumber;
 
 public class SpriteFactory {
 
+	private static final String DEFAULT_IMAGE = "/bricks.jpg";
+	private static final String DEFAULT_ARCH = "default";
+	public static final Sprite DEFAULT_SPRITE = 
+			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(0));
 	private Map<String,Sprite> myArchetypes; 
 
 	public SpriteFactory() {
 		myArchetypes = new HashMap<String,Sprite>();
+		myArchetypes.put(DEFAULT_SPRITE.getArchetype(), DEFAULT_SPRITE);
 	}
 	/**
 	 * Create a completely new Sprite of a given archetype
