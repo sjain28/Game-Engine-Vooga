@@ -141,7 +141,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     @Override
     public Node getNodeObject () {
-        // TODO Auto-generated method stub
         return myImage;
     }
 

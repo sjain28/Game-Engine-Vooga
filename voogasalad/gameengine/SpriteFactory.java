@@ -1,25 +1,13 @@
 package gameengine;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
 import org.xml.sax.SAXException;
-
-import data.FileWriterFromGameObjects;
 import data.Serializer;
 import data.DeSerializer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import tools.interfaces.VoogaData;
 import tools.VoogaNumber;
 
 /**
@@ -38,6 +26,7 @@ public class SpriteFactory {
 	public SpriteFactory() {
 		myArchetypes = new HashMap<String,Sprite>();
 	}
+	
 	/**
 	 * Create a completely new Sprite of a given archetype
 	 * @param archetype
