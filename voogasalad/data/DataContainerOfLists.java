@@ -12,7 +12,7 @@ public class DataContainerOfLists {
     private List<VoogaEvent> eventList;
     private List<Elementable> elementableList;
     private Map<String, VoogaData> variableMap;
-
+    
     public DataContainerOfLists () {
     }
 
