@@ -28,7 +28,7 @@
             <groupId>com.oracle</groupId>
             <artifactId>javafx</artifactId>
             <version>8.0.31</version>
-            <systemPath>${project.basedir}/lib/ext/jfxrt.jar</systemPath>
+            <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
             <scope>system</scope>
         </dependency>
     </dependencies>
