@@ -36,7 +36,7 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
     private File myXmlDataFile;
     private SpriteFactory spriteFactory;
     private Set<String> myIds;
-    private static final String filePath = "/levels/Test.xml";
+    private static final String filePath = "levels/Test.xml";
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
@@ -108,9 +108,9 @@ public class ElementManager implements CompleteAuthoringModelable, Elementable {
 
         DataContainerOfLists data =
                 new DataContainerOfLists(elements, myGlobalVariables, myEventList);
+    	System.out.println("my data here is" + data.getElementableList());
         System.out.println("I'm done saving in element manager");
         try {
-        	System.out.println("my data here is" + data);
             System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data, filePath);
         }
