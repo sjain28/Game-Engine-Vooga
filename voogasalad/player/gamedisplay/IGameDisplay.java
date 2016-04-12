@@ -2,6 +2,7 @@ package player.gamedisplay;
 
 import java.util.List;
 import javafx.scene.Node;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Interface for GameDisplay
@@ -23,5 +24,7 @@ public interface IGameDisplay {
 	void display();
 	
 	void createPrompt(String message);
+	
+	List<KeyEvent> getKeyEvents();
 	
 }
