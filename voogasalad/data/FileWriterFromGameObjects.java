@@ -29,10 +29,6 @@ public class FileWriterFromGameObjects {
         	System.out.println("The file name here is " + fileName);
         	file.createNewFile();
         }
-        ObjectOutputStream objectOutputStream =
-                serializer.createObjectOutputStream(new FileOutputStream(fileName));
-
-        objectOutputStream.writeObject(lists);
-        objectOutputStream.close();
+       Serializer.serialize(lists, fileName);
     }
 }
