@@ -1,18 +1,20 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.VoogaScene;
-import authoring.gui.ArchetypeBuilder;
-import authoring.gui.GameObjectBuilder;
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.gui.menubar.builders.ArchetypeBuilder;
+import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 
 public class NewArchetypeFileItem extends MenuItemHandler{
     EditElementable myManager;
     
-    public NewArchetypeFileItem(CompleteAuthoringModelable model) {
+    public NewArchetypeFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
             super();
             myManager = model;
     }

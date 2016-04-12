@@ -27,7 +27,7 @@ public class SpriteFactory {
 	private static final String DEFAULT_IMAGE = "/bricks.jpg";
 	private static final String DEFAULT_ARCH = "default";
 	public static final Sprite DEFAULT_SPRITE = 
-			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(0));
+			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(0.0));
 	private Map<String,Sprite> myArchetypes; 
 
 	public SpriteFactory() {

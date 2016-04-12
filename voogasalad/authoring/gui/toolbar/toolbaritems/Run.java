@@ -7,7 +7,6 @@ import player.gamedisplay.GameDisplayTester;
 public class Run extends ToolbarItemHandler {
 
 	public Run(CompleteAuthoringModelable model) {
-		
 	}
 	
 	@Override

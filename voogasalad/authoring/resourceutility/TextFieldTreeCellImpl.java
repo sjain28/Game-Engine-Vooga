@@ -1,5 +1,8 @@
 package authoring.resourceutility;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -25,6 +28,7 @@ public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 	private VoogaFile draggedItem;
 	private DataFormat voogaFormat;
 	private ResourceTreeView structure;
+	private boolean valid;
 	
 	public TextFieldTreeCellImpl(ResourceTreeView rtv) {
 		this.structure = rtv;
@@ -158,8 +162,15 @@ public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 	 */
 	private void createTextField() {
 		textField = new TextField(getString());
+		valid = true;
+		textField.textProperty().addListener((obs, old, newVal) -> {
+			if(structure.getFileNamesOfType(VoogaFileType.FOLDER).contains(newVal)) {
+				textField.setStyle("-fx-border-color: red");
+				valid = false;
+			}
+		});
 		textField.setOnKeyReleased(e -> {
-			if (e.getCode() == KeyCode.ENTER) {
+			if (e.getCode() == KeyCode.ENTER && valid) {
 				VoogaFile file = getTreeItem().getValue();
 				file.setName(textField.getText());
 				commitEdit(file);

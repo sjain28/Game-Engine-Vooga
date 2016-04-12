@@ -2,10 +2,13 @@ package authoring;
 
 import java.util.UUID;
 
+import authoring.gui.DesignBoardHousing;
+import authoring.properties.PropertiesPane;
 import authoring.gui.DesignBoard;
 import authoring.gui.EventsWindow;
+import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
 import authoring.model.GameObject;
-import authoring.properties.PropertiesPane;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.ResourceUI;
 import authoring.resourceutility.VoogaFile;
@@ -27,10 +30,13 @@ import javafx.stage.Stage;
  */
 public class UIGrid extends GridPane {
 
-	private DesignBoard designBoard;
+	private PropertiesPane propertiesPane;
+	private DesignBoardHousing designBoard;
 	private ResourceUI explorer;
+	private CompleteAuthoringModelable myManager;
 
-	public UIGrid() {
+	public UIGrid(CompleteAuthoringModelable elem) {
+		myManager = elem;
 		sector();
 		populate();
 	}
@@ -53,13 +59,19 @@ public class UIGrid extends GridPane {
 	private void populate() throws VoogaException {
 		explorer = new ResourceUI();
 		this.add(explorer, 0, 0);
-		designBoard = new DesignBoard();
+		designBoard = new DesignBoardHousing(myManager);
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
-		PropertiesPane properties = new PropertiesPane();
-		this.add(properties, 0, 1);
+		propertiesPane = new PropertiesPane();
+		//this looks like a bad piece of code
+		propertiesPane.setPropertiesTabManger(designBoard.getDesignBoard().getPropertiesTabManager());
+		this.add(propertiesPane, 0, 1);
 		EventsWindow events = new EventsWindow();
 		this.add(events, 0, 2);
 	}
+
+    public void addScene (CompleteAuthoringModelable elem) {
+        designBoard.addScene(elem);
+    }
 
 }
