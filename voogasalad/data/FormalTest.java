@@ -35,9 +35,11 @@ public class FormalTest extends Application {
         DataWritingTest dataTest= new DataWritingTest();
         dataTest.setup();
         DataContainerOfLists manager = dataTest.getData();
+        System.out.println(System.getProperty("java.class.path"));
         try {
-            FileWriterFromGameObjects.saveGameObjects(manager, "TestWriting");
+            FileWriterFromGameObjects.saveGameObjects(manager, "/levels/TestWriting.xml");
         }
+     
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
