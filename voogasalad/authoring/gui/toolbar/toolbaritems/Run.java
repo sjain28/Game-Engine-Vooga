@@ -2,6 +2,7 @@ package authoring.gui.toolbar.toolbaritems;
 
 import authoring.gui.toolbar.ToolbarItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import player.gamedisplay.GameDisplayTester;
 
 public class Run extends ToolbarItemHandler {
 
@@ -11,7 +12,7 @@ public class Run extends ToolbarItemHandler {
 	
 	@Override
 	public void handle() {
-		System.out.println(this.getClass());
+		new GameDisplayTester();
 	}
 
 }
