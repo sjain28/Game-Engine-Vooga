@@ -1,8 +1,12 @@
 package player.gamedisplay;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.VoogaScene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -27,6 +31,8 @@ public class StandardDisplay implements IGameDisplay {
 	private Pane myGameScreen;
 	private PromptFactory myPrompt;
 	private List<Node> myListToDisplay;
+//	private EventHandler<KeyEvent> myKeyListener;
+	private List<KeyEvent> myKeyEvents;
 	
 	/**
 	 * Default constructor
@@ -39,8 +45,35 @@ public class StandardDisplay implements IGameDisplay {
 		myGameScreen = new Pane();
 		myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
 		myPrompt = new PromptFactory();
+		myKeyEvents = new ArrayList<>();
 		
 	}
+	
+	/**
+	 * Creates a keyListener for listening in on key inputs
+	 * Adds each event to the list
+	 * 
+	 */
+	private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
+	    @Override
+	    public void handle(KeyEvent event) {
+	    	
+	    	myKeyEvents.add(event);
+	    	
+//	    	myKeyEvents.forEach(e -> System.out.println(e));
+	    	
+//	        if(event.getCode() == KeyCode.ENTER); {
+//	            startLogin();
+//	            getContext();
+//	            try {
+//	                checkUserLevel();
+//	            } catch (Exception e) {
+//	                actionTarget.setText("Unable to authenticate user\n" + userTextField.getText());
+//	            }
+//	            event.consume();
+//	        } 
+	    }
+	};
 	
 //	public StandardDisplay(IGameRunner gameRunner) {
 //		
@@ -70,6 +103,15 @@ public class StandardDisplay implements IGameDisplay {
 		populateGameScreen();
 		//Shows the scene
 		getStage().show();
+		
+		//Adds keyinput listener
+		getScene().addEventHandler(KeyEvent.ANY, keyListener);
+
+//		getScene().addEventHandler(KeyEvent.ANY, new EventHandler<KeyEvent>() {
+//            public void handle(KeyEvent event) {
+//            	
+//            };
+//        });
 	}
 
 	/**
@@ -150,6 +192,15 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	public Pane getGameScreen() {
 		return myGameScreen;
+	}
+
+	/**
+	 * @return the myKeyEvents
+	 */
+	@Override
+	public List<KeyEvent> getKeyEvents() {
+		// TODO Auto-generated method stub
+		return getKeyEvents();
 	}
 
 }

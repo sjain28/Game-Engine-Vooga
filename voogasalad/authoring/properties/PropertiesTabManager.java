@@ -12,6 +12,8 @@ import javafx.scene.control.Tab;
 public class PropertiesTabManager {
 	
 	private ArrayList<Tab> myPropertyTabs = new ArrayList<Tab>();
+	private SpritePropertiesTab SPT = new SpritePropertiesTab();
+	private GlobalPropertiesTab GPT = new GlobalPropertiesTab();
 
 	public PropertiesTabManager() {
 		populateTabList();
@@ -22,8 +24,16 @@ public class PropertiesTabManager {
 	}
 	
 	private void populateTabList() {
-		myPropertyTabs.add(new SpritePropertiesTab());
-		myPropertyTabs.add(new GlobalPropertiesTab());
+		myPropertyTabs.add(SPT);
+		myPropertyTabs.add(GPT);
+	}
+	
+	public SpritePropertiesTab getSpritePropertiesTab() {
+		return SPT;
+	}
+	
+	public GlobalPropertiesTab getGlobalPropertiesTab() {
+		return GPT;
 	}
 
 }

@@ -1,21 +1,24 @@
 package authoring.gui.menubar.menuitems;
 
+import application.Launcher;
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Savable;
+import javafx.event.EventHandler;
+import javafx.scene.input.InputEvent;
+import javafx.stage.Stage;
 
 public class NewProjectFileItem extends MenuItemHandler {
-    private Savable myManager;
+    private Saveable myManager;
 	
-	public NewProjectFileItem(CompleteAuthoringModelable model) {
+	public NewProjectFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
 		super();
 		myManager = model;
 	}
 
 	@Override
 	public void handle() {
-		// TODO Auto-generated method stub
-		
+		Launcher newProject = new Launcher(new Stage());
 	}
 
 }

@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 import data.Serializer;
 import data.DeSerializer;
 import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 /**
  * Factor for creating Sprites from pre-formed Archetypes,
@@ -24,7 +25,7 @@ public class SpriteFactory {
 	private static final String DEFAULT_IMAGE = "/bricks.jpg";
 	private static final String DEFAULT_ARCH = "default";
 	public static final Sprite DEFAULT_SPRITE = 
-			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(0));
+			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(1.0));
 	private Map<String,Sprite> myArchetypes; 
 
 	public SpriteFactory() {
@@ -110,8 +111,8 @@ public class SpriteFactory {
 	 * @param fileLocation
 	 */
 	public void deSerializeArchetype(String fileLocation){
-		DeSerializer unserializer = new DeSerializer();
-		Sprite newArchetype = (Sprite) unserializer.deserialize(1,fileLocation);
+		DeSerializer deserializer = new DeSerializer();
+		Sprite newArchetype = (Sprite) deserializer.deserialize(1,fileLocation);
 		setArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}
