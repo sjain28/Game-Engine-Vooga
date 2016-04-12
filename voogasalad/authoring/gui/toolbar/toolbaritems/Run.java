@@ -8,7 +8,7 @@ public class Run extends ToolbarItemHandler {
 
 	public Run(CompleteAuthoringModelable model) {
 	}
-	
+
 	@Override
 	public void handle() {
 		new GameDisplayTester();

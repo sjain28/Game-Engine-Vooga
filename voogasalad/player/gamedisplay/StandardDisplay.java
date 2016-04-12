@@ -1,5 +1,6 @@
 package player.gamedisplay;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -21,66 +24,73 @@ import javafx.stage.Stage;
  *
  */
 public class StandardDisplay implements IGameDisplay {
-	
+
 	private static final int PANE_SIZE = 600;
-	
-//	private IGameRunner myGameRunner;
+	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+
+	//	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
 	private BorderPane myPane;
 	private Pane myGameScreen;
 	private PromptFactory myPrompt;
 	private List<Node> myListToDisplay;
-//	private EventHandler<KeyEvent> myKeyListener;
+	//	private EventHandler<KeyEvent> myKeyListener;
 	private List<KeyEvent> myKeyEvents;
-	
+
+	// BGM
+	private Media myBGM;
+	private MediaPlayer myMediaPlayer;
+
 	/**
 	 * Default constructor
 	 * 
 	 */
 	public StandardDisplay() {
-		
+
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
 		myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
-		
+		myBGM = new Media(new File(BGM_PATH).toURI().toString());
+		myMediaPlayer = new MediaPlayer(myBGM);
+
 	}
-	
+
 	/**
 	 * Creates a keyListener for listening in on key inputs
 	 * Adds each event to the list
 	 * 
 	 */
 	private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
-	    @Override
-	    public void handle(KeyEvent event) {
-	    	
-	    	myKeyEvents.add(event);
-	    	
-//	    	myKeyEvents.forEach(e -> System.out.println(e));
-	    	
-//	        if(event.getCode() == KeyCode.ENTER); {
-//	            startLogin();
-//	            getContext();
-//	            try {
-//	                checkUserLevel();
-//	            } catch (Exception e) {
-//	                actionTarget.setText("Unable to authenticate user\n" + userTextField.getText());
-//	            }
-//	            event.consume();
-//	        } 
-	    }
+		@Override
+		public void handle(KeyEvent event) {
+
+			myKeyEvents.add(event);
+
+			//	    	myKeyEvents.forEach(e -> System.out.println(e));
+
+			//	        if(event.getCode() == KeyCode.ENTER); {
+			//	            startLogin();
+			//	            getContext();
+			//	            try {
+			//	                checkUserLevel();
+			//	            } catch (Exception e) {
+			//	                actionTarget.setText("Unable to authenticate user\n" + userTextField.getText());
+			//	            }
+			//	            event.consume();
+			//	        } 
+		}
 	};
-	
-//	public StandardDisplay(IGameRunner gameRunner) {
-//		
-//		this();
-//		this.myGameRunner = gameRunner;
-//		
-//	}
+
+	//	public StandardDisplay(IGameRunner gameRunner) {
+	//		
+	//		this();
+	//		this.myGameRunner = gameRunner;
+	//		
+	//	}
 
 	/**
 	 * Reads in the list of Nodes to display
@@ -89,7 +99,7 @@ public class StandardDisplay implements IGameDisplay {
 	public void read(List<Node> listToDisplay) {
 		myListToDisplay = listToDisplay;
 	}
-	
+
 	/**
 	 * Public method defined in the interface that displays
 	 * game display
@@ -103,15 +113,18 @@ public class StandardDisplay implements IGameDisplay {
 		populateGameScreen();
 		//Shows the scene
 		getStage().show();
-		
+
 		//Adds keyinput listener
 		getScene().addEventHandler(KeyEvent.ANY, keyListener);
 
-//		getScene().addEventHandler(KeyEvent.ANY, new EventHandler<KeyEvent>() {
-//            public void handle(KeyEvent event) {
-//            	
-//            };
-//        });
+		//		getScene().addEventHandler(KeyEvent.ANY, new EventHandler<KeyEvent>() {
+		//            public void handle(KeyEvent event) {
+		//            	
+		//            };
+		//        });
+
+		//Plays BGM music
+		playMusic();
 	}
 
 	/**
@@ -122,7 +135,7 @@ public class StandardDisplay implements IGameDisplay {
 	public void createPrompt(String message) {
 		getPrompt().prompt(message);
 	}
-	
+
 	/**
 	 * Creates the game display
 	 * 
@@ -135,7 +148,17 @@ public class StandardDisplay implements IGameDisplay {
 		getPane().setRight(myHUD.createHUD());
 		getStage().setScene(getScene());
 	}
-	
+
+	/**
+	 * Plays the given BGM using MediaPlayer and appends a close-stage action
+	 * to make the music stop when the stage is exited
+	 * 
+	 */
+	private void playMusic() {
+		getMediaPlayer().play();
+		getStage().setOnCloseRequest(e -> getMediaPlayer().stop());
+	}
+
 	/**
 	 * Populates the game screen that goes into the center
 	 * of the game display (BorderPane)
@@ -201,6 +224,27 @@ public class StandardDisplay implements IGameDisplay {
 	public List<KeyEvent> getKeyEvents() {
 		// TODO Auto-generated method stub
 		return getKeyEvents();
+	}
+
+	/**
+	 * @return the myBGM
+	 */
+	public Media getBGM() {
+		return myBGM;
+	}
+
+	/**
+	 * @param myBGM the myBGM to set
+	 */
+	public void setBGM(Media myBGM) {
+		this.myBGM = myBGM;
+	}
+
+	/**
+	 * @return the myMediaPlayer
+	 */
+	public MediaPlayer getMediaPlayer() {
+		return myMediaPlayer;
 	}
 
 }
