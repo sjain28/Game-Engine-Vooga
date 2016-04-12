@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.function.Consumer;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
@@ -21,18 +22,25 @@ public class GameRunner implements IGameRunner{
 	private LevelDataManager myCurrentLevelDataManager;
 	private IGameDisplay myDisplay;
 	private Queue<String> levelQueue;
+	/*
 	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
 	private final Runnable renderer = null; // () -> whatever calls position updates //
 	private final Consumer<Float> interpolater = null; //alpha -> interpolatatePositions(), null for no interpolation //
 	private final Consumer<Integer> fps_reporter = null; //fps -> Text label for fps display, null for no label //
-	GameLoop myGameLoop = new FixedStepLoopWithInterpolation(updater, renderer, interpolater, fps_reporter);
-
+	*/
+	//GameLoop myGameLoop = new FixedStepLoopWithInterpolation();
+	private AnimationTimer timer;
 	
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
 		// TODO Auto-generated constructor stub
 		myDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
 		//System.out.println(levelQueue);
+		
+		//TODO fix the instantiation of AnimationTimer(); 
+		//timer = new AnimationTimer();
+		
+		playGame();
 		//playGame();
 	}
 	
@@ -94,22 +102,24 @@ public class GameRunner implements IGameRunner{
 	 * Stops the AnimationTimer
 	 * 
 	 */
+/*
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
 		getGameLoop().stop();
 	}
-
+*/
 	/**
 	 * Starts the AnimationTimer
 	 * 
 	 */
+/*
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
 		getGameLoop().start();
 	}
-
+*/
 
 	public void wonLevel(){
 //		if(myCurrentLevel == myLevels.size()-1){
@@ -152,35 +162,41 @@ public class GameRunner implements IGameRunner{
 	/**
 	 * @return the updater
 	 */
+/*
 	public Consumer<Float> getUpdater() {
 		return updater;
 	}
-
+*/
 	/**
 	 * @return the renderer
 	 */
+/*
 	public Runnable getRenderer() {
 		return renderer;
 	}
-
+*/
 	/**
 	 * @return the interpolater
 	 */
+/*
 	public Consumer<Float> getInterpolater() {
 		return interpolater;
 	}
-
+*/
 	/**
 	 * @return the fps_reporter
 	 */
+/*
 	public Consumer<Integer> getFps_reporter() {
 		return fps_reporter;
 	}
-
+*/
 	/**
 	 * @return the myGameLoop
 	 */
+/*
 	public GameLoop getGameLoop() {
 		return myGameLoop;
 	}
+*/
 }
