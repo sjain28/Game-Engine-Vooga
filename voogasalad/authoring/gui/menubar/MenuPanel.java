@@ -18,28 +18,29 @@ import javafx.scene.control.MenuItem;
 import resources.VoogaBundles;
 
 public class MenuPanel extends MenuBar implements Windowable {
-	
+
 	private OrderedProperties menubarProperties;
 	private static final String MENU_KEY = "Menu";
 	private static final String ITEM_KEY = "Item";
-	
-	public MenuPanel (CompleteAuthoringModelable elementManager, EventHandler<ActionEvent> menuItemEvent) {
-	    menubarProperties = VoogaBundles.menubarProperties;
-            makeMenus(menuMap(menuItemEvent));
+
+	public MenuPanel(CompleteAuthoringModelable elementManager, EventHandler<ActionEvent> menuItemEvent) {
+		menubarProperties = VoogaBundles.menubarProperties;
+		makeMenus(menuMap(menuItemEvent));
 	}
 
-    /**
+	/**
 	 * Returns a map of menu names to menu items.
+	 * 
 	 * @param menuItemEvent
 	 * @return
 	 */
 	private Map<String, List<MenuItem>> menuMap(EventHandler<ActionEvent> menuItemEvent) {
 		Map<String, List<MenuItem>> menus = new LinkedHashMap<String, List<MenuItem>>();
-		for(Enumeration<?> enumer = menubarProperties.propertyNames(); enumer.hasMoreElements();) {
+		for (Enumeration<?> enumer = menubarProperties.propertyNames(); enumer.hasMoreElements();) {
 			String key = (String) enumer.nextElement();
-			if(key.endsWith(MENU_KEY)) {
+			if (key.endsWith(MENU_KEY)) {
 				menus.put(menubarProperties.getProperty(key), new ArrayList<MenuItem>());
-			} else if(key.endsWith(ITEM_KEY)) {
+			} else if (key.endsWith(ITEM_KEY)) {
 				String menuBelonging = findMenu(key.replace(ITEM_KEY, ""));
 				List<MenuItem> items = menus.get(menuBelonging);
 				MenuItem item = new MenuItem(menubarProperties.getProperty(key));
@@ -51,44 +52,46 @@ public class MenuPanel extends MenuBar implements Windowable {
 		}
 		return menus;
 	}
-	
+
 	/**
 	 * Makes the menus given a menu map.
+	 * 
 	 * @param menuMap
 	 */
 	private void makeMenus(Map<String, List<MenuItem>> menuMap) {
-		for(String menuName : menuMap.keySet()) {
+		for (String menuName : menuMap.keySet()) {
 			Menu menu = new Menu(menuName);
 			menu.getItems().addAll(menuMap.get(menuName));
 			this.getMenus().add(menu);
 		}
 	}
-	
+
 	/**
 	 * Finds the menu that a menu item string corresponds to.
+	 * 
 	 * @param str
 	 * @return
 	 */
-	private String findMenu(String str) {    
+	private String findMenu(String str) {
 		int start = 0;
-	    for(int i=str.length()-1; i>=0; i--) {
-	        if(Character.isUpperCase(str.charAt(i))) {
-	            start = i;
-	            break;
-	        }
-	    }
-	    String menu = str.substring(start);
-	    for(Enumeration<?> enumer = menubarProperties.propertyNames(); enumer.hasMoreElements();) {
-	    	String key = (String) enumer.nextElement();
-	    	if(key.startsWith(menu)) {
-	    		return menubarProperties.getProperty(key);
-	    	}
-	    }
-	    return null;
+		for (int i = str.length() - 1; i >= 0; i--) {
+			if (Character.isUpperCase(str.charAt(i))) {
+				start = i;
+				break;
+			}
+		}
+		String menu = str.substring(start);
+		for (Enumeration<?> enumer = menubarProperties.propertyNames(); enumer.hasMoreElements();) {
+			String key = (String) enumer.nextElement();
+			if (key.startsWith(menu)) {
+				return menubarProperties.getProperty(key);
+			}
+		}
+		return null;
 	}
 
-    public Node getWindow () {
-        return this;
-    }
-    
+	public Node getWindow() {
+		return this;
+	}
+
 }

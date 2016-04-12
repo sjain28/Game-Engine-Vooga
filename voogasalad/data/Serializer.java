@@ -12,16 +12,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Serializer {
 
-    private Serializer () {
-
-    }
-
     public static void serialize (Object object, String fileName) throws ParserConfigurationException,
                                                            TransformerException, IOException,
                                                            SAXException {
         XStream serializer = new XStream(new DomDriver());
         ObjectOutputStream objectOutputStream =
-                serializer.createObjectOutputStream(new FileOutputStream(fileName));
+                serializer.createObjectOutputStream(new FileOutputStream(fileName + ".xml"));
         objectOutputStream.writeObject(object);
         objectOutputStream.close();
     }

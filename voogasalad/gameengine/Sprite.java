@@ -96,7 +96,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         return (HashMap<String, VoogaData>) myProperties;
     }
 
-    public Object getID () {
+    public String getID () {
         return myID;
     }
 
