@@ -1,6 +1,6 @@
 package data;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +23,10 @@ import tools.interfaces.VoogaData;
 public class DataWritingTest {
     private DataContainerOfLists manager;
     
+    public DataWritingTest(){
+    	
+    }
+    
     @Before
     public void setup(){
         manager = new DataContainerOfLists(generateSprites(),generateGlobalVariables(),generateEvents());
@@ -32,8 +36,8 @@ public class DataWritingTest {
         List<Elementable> elements = new ArrayList<Elementable>();
         for (int i=0;i<10;i++){
             Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
-            properties.put("health", new VoogaNumber(10));
-            Sprite sprite = new Sprite("/image.jpeg","healthy",properties,new VoogaNumber(8));
+            properties.put("health", new VoogaNumber(10d));
+            Sprite sprite = new Sprite("/image.jpeg","healthy",properties,new VoogaNumber(8d));
             sprite.setPosition(new Position(i*7,i*2));
             elements.add(sprite);
         }
@@ -51,7 +55,7 @@ public class DataWritingTest {
     private Map<String,VoogaData> generateGlobalVariables(){
         Map<String,VoogaData> map = new HashMap<String,VoogaData>();
         for (int i=0;i<10;i++){
-            map.put(""+i, new VoogaNumber(i));
+            map.put(""+i, new VoogaNumber((double) i));
         }
         return map;
     }
@@ -70,6 +74,11 @@ public class DataWritingTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+    }
+    
+    public DataContainerOfLists getData() {
+        return manager;
     }
 
 }
