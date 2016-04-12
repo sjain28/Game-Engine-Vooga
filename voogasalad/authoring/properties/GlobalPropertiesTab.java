@@ -25,13 +25,13 @@ public class GlobalPropertiesTab extends AbstractPropertiesTab{
 
 	@Override
 	public void addNewProperty(String s, VoogaData vgData) {
-		propertiesMap.put(s, vgData);
+		myElementable.addProperty(s, vgData);
 		displayProperties();
 	}
 
 	@Override
 	public void removeProperty(String s) {
-		propertiesMap.remove(s);
+		myElementable.removeProperty(s);
 		displayProperties();
 		
 	}
