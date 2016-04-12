@@ -63,7 +63,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     @Override
-    public Vector getVelocity () {
+    public Velocity getVelocity () {
         return myVelocity;
     }
 
@@ -72,7 +72,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myVelocity = velocity;
     }
 
-    public Vector getPosition () {
+    public Position getPosition () {
         return myLoc;
     }
 
