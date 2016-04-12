@@ -1,5 +1,6 @@
 package physics;
 
+import player.gamerunner.FixedStepLoopWithInterpolation;
 import gameengine.Sprite;
 import tools.Acceleration;
 import tools.Position;
@@ -9,8 +10,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	//TODO find which methods overlap in code and reduce the bulk from that
 	private double frameTime;
 	
-	public StandardPhysics(){
-		this.frameTime = (float) frameTime;
+	public StandardPhysics(){	
+		this.frameTime = (float) FixedStepLoopWithInterpolation.FRAME_TIME;
 	}
 	
 	@Override

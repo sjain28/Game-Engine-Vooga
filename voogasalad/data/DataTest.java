@@ -73,6 +73,7 @@ public class DataTest extends Application {
 //        
 //        FileReaderToGameObjects filereader = new FileReaderToGameObjects(fileName);
         GameRunner gameRunner = new GameRunner("level_doc.txt");
+        gameRunner.playGame();
 //        DataContainerOfLists deserializedList = filereader.getDataContainer();
 //     
 //        fileWriter.saveGameObjects(deserializedList, fileName2);
