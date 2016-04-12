@@ -14,8 +14,9 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import data.FileReaderToObjects;
 import data.FileWriterFromObjects;
+import data.Serializer;
+import data.DeSerializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tools.interfaces.VoogaData;
@@ -57,15 +58,8 @@ public class SpriteFactory {
 	 * @param archetype
 	 * @param s
 	 */
-<<<<<<< HEAD
-	public void setArchetype(String archetype, Sprite s){
-		System.out.println(myArchetypes.size());
-		myArchetypes.put(archetype, s);
-		System.out.println(myArchetypes.size());
-=======
 	public void setArchetype(String archetype, Sprite sprite){
 		myArchetypes.put(archetype, sprite);
->>>>>>> master
 	}
 	
 	/**
@@ -101,11 +95,11 @@ public class SpriteFactory {
 	 * @throws ParserConfigurationException 
 	 */
 	public void serializeArchetypes(String fileLocation){
-		FileWriterFromObjects fileWriter = new FileWriterFromObjects();
+		Serializer serializer = new Serializer();
 		try {
 			for(String key : myArchetypes.keySet()){
 				System.out.println(key);
-				fileWriter.serialize(myArchetypes.get(key), fileLocation+"_"+key);
+				serializer.serialize(myArchetypes.get(key), fileLocation+"_"+key);
 			}
 		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
@@ -122,8 +116,8 @@ public class SpriteFactory {
 	 * @param fileLocation
 	 */
 	public void deSerializeArchetype(String fileLocation){
-		FileReaderToObjects fileReader = new FileReaderToObjects();
-		Sprite newArchetype = (Sprite) fileReader.deserializeObject(fileLocation);
+		DeSerializer unserializer = new DeSerializer();
+		Sprite newArchetype = (Sprite) unserializer.deserialize(1,fileLocation);
 		setArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}

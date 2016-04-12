@@ -13,11 +13,9 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import tools.interfaces.VoogaData;
 
-public final class UnSerializer {
+public final class DeSerializer {
 	private final static String COMMAND_PATH = "data";	
-	private UnSerializer(){
 
-	}
 	public static List<Object> deserialize(int objectNum,String fileName) {
 		XStream unSerializer = new XStream(new DomDriver());
 		List<Object> objectsCreated = new ArrayList<Object>();

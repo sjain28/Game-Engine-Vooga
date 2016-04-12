@@ -26,7 +26,4 @@ public class LevelHandler {
 			myEventManager.update();
 		}
 		
-		public List<Object> extractUpdatedObjects(){
-			return myObjectManager.getAllDisplayableObjects();
-		}
 }

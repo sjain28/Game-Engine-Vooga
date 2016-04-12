@@ -1,4 +1,4 @@
-package Player.gamedisplay;
+package player.gamedisplay;
 
 import javafx.scene.layout.HBox;
 

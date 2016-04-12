@@ -1,9 +1,10 @@
-package Player.leveldatamanager;
+package player.leveldatamanager;
 
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import data.FileReaderToGameObjects;
+import data.DeSerializer;
 import events.VoogaEvent;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
@@ -22,61 +23,25 @@ public class LevelDataManager {
         readinObjects(levelFileName);
     }
 
-    public void update () {
+    public void update() {
         myEventManager.update();
     }
 
-    public List<Object> extractUpdatedObjects () {
-        return myObjectManager.getAllDisplayableObjects();
-    }
-
     public List<Node> getDisplayableObjects () {
-        return displayScroller.centerScroll(myObjectManager.getAllDisplayableObjects(), 35);
+        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(), 35);
     }
-<<<<<<< HEAD
-	
-	public void update(){
-		myEventManager.update();
-	}
-	
-	public List<Object> extractUpdatedObjects(){
-		return myObjectManager.getAllDisplayableObjects();
-	}
-	
-	private void readinObjects(String levelFileName){
-		FileReaderToObjects fileManager = new FileReaderToObjects(levelFileName);
-		List<Node> displayableObjects = fileManager.createNodeList();
-		System.out.println(displayableObjects);
-		List<VoogaEvent> eventObjects = fileManager.createEventList();
-		System.out.println(eventObjects);
-		List<Variable> variableObjects = fileManager.createVariableList();
-		initializeManagers(displayableObjects,eventObjects,variableObjects);
-	}
-	/**
-	 * Creates the Sprites, Events, and Variables which will be loaded into the managers, which include
-	 * the sprite, event, and variable managers
-	 * 
-	 * @return- A LevelManager with all the objects it needs to contain (sprites, events, variables).
-	 * 
-	 */
-	
-	private void initializeManagers(List<Node> spriteObjects, List<VoogaEvent> eventObjects, List<Variable>variableObjects){
-		myObjectManager = new EngineObjectManager(displayableObjects, variableObjects);
-	}
-
-	
-}
-	
-=======
->>>>>>> master
 
     private void readinObjects (String levelFileName) {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
+        
         List<Elementable> spriteObjects = fileManager.createNodeList();
         System.out.println(spriteObjects);
+        
         List<VoogaEvent> eventObjects = fileManager.createEventList();
         System.out.println(eventObjects);
+        
         Map<String,VoogaData> variableObjects = fileManager.createVariableMap();
+     
         initializeManagers(spriteObjects, eventObjects, variableObjects);
     }
 
@@ -90,10 +55,11 @@ public class LevelDataManager {
      * 
      */
 
-    private void initializeManagers (List<Elementable> spriteObjects,
+    private void initializeManagers (List<Elementable> elementObjects,
                                      List<VoogaEvent> eventObjects,
                                      Map<String,VoogaData> variableObjects) {
-
+    	//TODO: pass it a sprite factory
+    	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, null);
     }
 
 }

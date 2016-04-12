@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
+import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 public class SpriteFactoryTester {
@@ -22,8 +23,7 @@ public class SpriteFactoryTester {
 		//create sprite to add as default for archetype
 		Map<String, VoogaData> newProperties = new HashMap<String, VoogaData>();
 		newProperties.put("health points",null);
-<<<<<<< HEAD
-		Sprite sprite = new Sprite("/bricks.jpg","Pirate");
+		Sprite sprite = new Sprite("/bricks.jpg","Pirate",newProperties, new VoogaNumber(50));
 		sprite.setProperties(newProperties);
 		
 		//add archetype to list
@@ -40,12 +40,10 @@ public class SpriteFactoryTester {
 		assertEquals(0,myTesterFactory.getAllArchetypeNames().size());
 		myTesterFactory.deSerializeArchetype("archetypes_saved_here_Pirate");
 		assertEquals(1,myFactory.getAllArchetypeNames().size());
-=======
 //		Sprite sprite = new Sprite("","Pirate");
 //		sprite.setProperties(newProperties);
 //		s.setArchetype("Pirate", sprite);
 //		s.createSprite("Pirate");
-		assertEquals(1,s.getAllArchetypeNames().size());
->>>>>>> master
+		assertEquals(1,myFactory.getAllArchetypeNames().size());
 	}
 }

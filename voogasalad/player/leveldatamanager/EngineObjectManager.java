@@ -1,4 +1,4 @@
-package Player.leveldatamanager;
+package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,6 @@ import authoring.interfaces.Elementable;
 import authoring.model.VoogaText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
-import gameengine.Variable;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -33,16 +32,14 @@ public class EngineObjectManager {
 	 * @param sprites
 	 * @param factory
 	 */
-	public EngineObjectManager(List<Elementable> elements, List<Variable> data, SpriteFactory factory) {
+	public EngineObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
 			myElements.put(el.getID(), el);
 		}
 		
-		myGlobalVariables = new HashMap<String, VoogaData>();
-		for(VoogaData v : data){
-			myGlobalVariables.put(v.getName(), v);
-		}
+		myGlobalVariables = new HashMap<String, VoogaData>(data);
+		
 		//TODO: Once constructor is figured out, intialize all objects here.
 		mySpriteFactory = factory;
 	}
@@ -54,7 +51,7 @@ public class EngineObjectManager {
 	 * @param id
 	 * @return
 	 */
-	public Sprite getSprite(Object id){
+	public Sprite getSprite(String id){
 		return (Sprite) myElements.get(id);
 	}
 	
@@ -128,20 +125,28 @@ public class EngineObjectManager {
 		List<Node> displayablenodes = new ArrayList<Node>();
 		
 		for(Object key : myElements.keySet()){
-			//TODO: ADD IN .getNode when 
-			displayablenodes.add(myElements.get(key).getNode());
+			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 		
 		return displayablenodes;
 		
 	}
 
-	public List<Sprite> getSpritesByArchetype(String myArchetype) {
-	List<Object> archIDs = mySpriteCategories.get(myArchetype);
-	List<Sprite> archSprites = new ArrayList<Sprite>();
-	for (Object ID : archIDs){
-		archSprites.add(mySprites.get(ID));
-	}
-		return archSprites;
-	}
+//	/**
+//	 * Allows one to get a list of Sprite's by their archetypes
+//	 * @param myArchetype
+//	 * @return
+//	 */
+//	public List<Sprite> getSpritesByArchetype(String myArchetype) {
+//		List<Sprite> archSprites = new ArrayList<Sprite>();
+//		for(String id : myElements.keySet()){
+//			Elementable el = myElements.get(id);
+//			if(el instanceof Sprite){
+//				if(((Sprite) el).getArchetype().equals(myArchetype)){
+//					archSprites.add((Sprite) el);
+//				}
+//			}
+//		}
+//		return archSprites;
+//	}
 }

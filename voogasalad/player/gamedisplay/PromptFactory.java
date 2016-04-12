@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Player.gamedisplay;
+package player.gamedisplay;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -36,9 +36,9 @@ public class PromptFactory implements IPromptFactory {
 	}
 
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		//The following doesn't work but will under Application
 		PromptFactory p = new PromptFactory();
 		p.prompt("Hello?!");
-	}
+	}*/
 }

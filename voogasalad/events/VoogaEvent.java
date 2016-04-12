@@ -2,14 +2,9 @@ package events;
 
 import java.util.ArrayList;
 import java.util.List;
-
-<<<<<<< HEAD
-import Player.leveldatamanager.EngineObjectManager;
-=======
+import player.leveldatamanager.EngineObjectManager;
 import gameengine.Sprite;
 import physics.StandardPhysics;
-import player.leveldatamanager.EngineObjectManager;
->>>>>>> master
 
 public class VoogaEvent {
 

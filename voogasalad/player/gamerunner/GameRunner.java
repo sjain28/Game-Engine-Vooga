@@ -1,4 +1,4 @@
-package Player.gamerunner;
+package player.gamerunner;
 
 import java.io.BufferedReader;
 import java.io.File;

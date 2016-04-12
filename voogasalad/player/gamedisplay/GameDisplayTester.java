@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Player.gamedisplay;
+package player.gamedisplay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class GameDisplayTester extends Application {
 
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 }

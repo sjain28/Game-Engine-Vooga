@@ -1,4 +1,4 @@
-package Player.leveldatamanager;
+package player.leveldatamanager;
 
 import java.util.List;
 

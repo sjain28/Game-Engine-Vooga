@@ -1,4 +1,4 @@
-package Player.gamedisplay;
+package player.gamedisplay;
 
 import java.util.List;
 import javafx.scene.Node;
