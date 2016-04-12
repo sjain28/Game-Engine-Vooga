@@ -19,8 +19,8 @@ public class VoogaNumber implements VoogaData{
         myValue-=dx.doubleValue();
     }
     
-    public void increaseValue(Number dx){
-        myValue+=dx.doubleValue();
+    public void increaseValue(Double dx){
+        myValue+=dx;
     }
     
     public void setValue(Number value){
@@ -33,11 +33,11 @@ public class VoogaNumber implements VoogaData{
     }
     
     public boolean lessThan(Double num){
-    	return num < myValue;
+    	return myValue < num;
     }
     
     public boolean greaterThan(Double num){
-    	return num > myValue;
+    	return myValue > num;
     }
     
     @Override

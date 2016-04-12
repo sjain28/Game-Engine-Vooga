@@ -7,18 +7,20 @@ import tools.interfaces.VoogaData;
 public class VariableEffect extends Effect {
 
 	private String myMethod;
-	private String[] myParameters;
+	private Object myParameter;
 	private String myVariable;
 
 	public VariableEffect (String method, String variable, Double parameter, VoogaEvent event) {
 		super(event);
 		myMethod = method;
 		myVariable = variable;
+		myParameter = parameter;
 	}
 	public VariableEffect (String method, String variable, Boolean parameter, VoogaEvent event) {
 		super(event);
 		myMethod = method;
 		myVariable = variable;
+		myParameter = parameter;
 	}
 	public VariableEffect (String method, String variable, VoogaEvent event) {
 		super(event);
@@ -35,13 +37,12 @@ public class VariableEffect extends Effect {
 	protected void callEffectMethod(VoogaData variable){
 		Class dataType = variable.getClass();
 		Method[] methods = dataType.getMethods();
-		String[] methodParameters = myMethod.split(" ");
 		try{
 			Method variableMethod = getMethodfromString(methods, myMethod);
 			Class[] parameterTypes = variableMethod.getParameterTypes();
 			
-			if (methodParameters.length > 1){
-				variableMethod.invoke(variable, parameterTypes[0].cast(methodParameters[1]));
+			if (myParameter != null){
+				variableMethod.invoke(variable, parameterTypes[0].cast(myParameter));
 			}
 			else {
 				variableMethod.invoke(variable);
@@ -65,7 +66,7 @@ public class VariableEffect extends Effect {
 	public String getMethodString(){
 		return myMethod;
 	}
-	public String[] getParameters(){
-		return myParameters;
+	public Object getParameters(){
+		return myParameter;
 	}
 }

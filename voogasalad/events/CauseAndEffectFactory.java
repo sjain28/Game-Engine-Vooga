@@ -121,17 +121,23 @@ public class CauseAndEffectFactory {
         Sprite tester = new Sprite("dummypath", "Character", params, new VoogaNumber(50.0));
         String ID = tester.getID();
         VoogaEvent event = new VoogaEvent();
-        String cause = "events.SpriteVariableCause ID Health 25 greaterThan";
         
-        cf.create(e, cause);
+        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", 50.0, "greaterThan", event);
+        SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
         
-        //String effect = "events.SpriteEffect, increaseValue"
+        event.update();
+        //	public SpriteVariableCause(Sprite sprite, String varName, Double targetValue, String predicate, VoogaEvent event){
+
+        
+//        String cause = "events.SpriteVariableCause ID Health 25.0 greaterThan";
+//        
+//        cf.create(e, cause);
+//        
+//        String effect = "events.SpriteEffect ID increaseValue Health 50.0";
+//        cf.create(e, effect);
         //	public SpriteVariableCause(String spriteID, String varName, Double targetValue, String predicate, VoogaEvent voogaEvent) {
-        //	public SpriteEffect(String spriteID, String method, String variable, VoogaEvent event) {
+//    	public SpriteEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
 
-
-
-        System.out.println(e.getCauses().size());
 
     }
 }
