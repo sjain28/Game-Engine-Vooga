@@ -216,7 +216,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>41edc8ba-7a01-452e-8599-4b38ffe24296</myID>
+        <myID>38dbac84-8f27-41c9-b37d-392716ed7819</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -253,7 +253,7 @@
           <x>7.0</x>
           <y>2.0</y>
         </myLoc>
-        <myID>43ae0def-892b-4ccd-b5c6-aaa0440607b4</myID>
+        <myID>2615e8f0-5171-46ef-904e-143f2622a843</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -290,7 +290,7 @@
           <x>14.0</x>
           <y>4.0</y>
         </myLoc>
-        <myID>6190e57c-a672-491a-923f-3541dc87c86d</myID>
+        <myID>1a5fcfaf-0f5c-4a99-b5a9-e4b99264a4a9</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -327,7 +327,7 @@
           <x>21.0</x>
           <y>6.0</y>
         </myLoc>
-        <myID>03efdff8-4661-4bb2-9741-0feb08437c87</myID>
+        <myID>14c41c4a-edaa-4547-a7c5-8fd6b708856e</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -364,7 +364,7 @@
           <x>28.0</x>
           <y>8.0</y>
         </myLoc>
-        <myID>bd818d19-7572-411c-9d3b-3f1c9568cff9</myID>
+        <myID>3afb2414-c401-4032-bedb-d902ab173a4d</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -401,7 +401,7 @@
           <x>35.0</x>
           <y>10.0</y>
         </myLoc>
-        <myID>8a8f73f2-6643-470c-aa4a-66b8ceb89219</myID>
+        <myID>215828ab-0e48-4581-b19f-139f31516c0f</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -438,7 +438,7 @@
           <x>42.0</x>
           <y>12.0</y>
         </myLoc>
-        <myID>68de885b-d2b2-4c76-aa8e-dc2408fa0c25</myID>
+        <myID>302494a1-2444-4465-8b94-e8bb88796e90</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -475,7 +475,7 @@
           <x>49.0</x>
           <y>14.0</y>
         </myLoc>
-        <myID>df7bfdef-84b9-42be-8ca4-9fd6d39f625c</myID>
+        <myID>75d36a02-d17a-4052-bcfc-32cfef60fb1e</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -512,7 +512,7 @@
           <x>56.0</x>
           <y>16.0</y>
         </myLoc>
-        <myID>57033278-6e9f-40ce-be3d-462ac5c90037</myID>
+        <myID>d800a2c6-eda6-4188-a82a-85f780153889</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -549,7 +549,7 @@
           <x>63.0</x>
           <y>18.0</y>
         </myLoc>
-        <myID>189f9e5a-000e-4250-b61d-33af2bafdd4a</myID>
+        <myID>e1615720-07cc-4a3c-aec1-91edef9a07ee</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -637,5 +637,4 @@
       </entry>
     </variableMap>
   </data.DataContainerOfLists>
-  <string>Hello World</string>
 </object-stream>
