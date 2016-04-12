@@ -3,6 +3,7 @@ package events;
 import java.util.List;
 
 import gameengine.Sprite;
+import tools.interfaces.VoogaData;
 
 public class SpriteEffect extends VariableEffect{
 
@@ -35,11 +36,12 @@ public class SpriteEffect extends VariableEffect{
 	public void execute() {
 		setSprites();
 		for (Sprite sprite : mySprites){
-			sprite.getParameterMap().get(getVariable());
+			VoogaData variable = sprite.getParameterMap().get(getVariable());
+			callEffectMethod(variable);
 		}
 
 	}
-	public void setSprites(){
+	protected void setSprites(){
 		if (needsSprites){
 			mySprites = getEvent().getSpritesFromCauses();
 		}
@@ -56,5 +58,8 @@ public class SpriteEffect extends VariableEffect{
 				mySprites = archSprites;
 			}
 		}
+	}
+	protected List<Sprite> getSprites(){
+		return mySprites;
 	}
 }

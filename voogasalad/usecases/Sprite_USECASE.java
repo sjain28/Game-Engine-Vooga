@@ -36,11 +36,6 @@ public class Sprite_USECASE extends ImageView implements Moveable {
 		return myVelocity;
 	}
 
-//	@Override
-//	public void setVelocity(Vector v) {
-//		myVelocity = v;
-//	}
-
 	public void addProperty(String s, VoogaData v){
 		myProperties.put(s, v);
 	}

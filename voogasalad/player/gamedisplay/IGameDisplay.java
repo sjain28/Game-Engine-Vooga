@@ -20,6 +20,8 @@ public interface IGameDisplay {
 	
 //	IControl getControl();
 	
+	IHUD myHUD = new StandardHUD();
+	
 	void read(List<Node> listToDisplay);
 	
 	void display();

@@ -34,7 +34,7 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 		this.setRoot(root);
 		
 		this.setCellFactory(callback -> {
-			return new TextFieldTreeCellImpl();
+			return new TextFieldTreeCellImpl(this);
 		});
 		
 	}
@@ -58,6 +58,30 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 			return;
 		}		
 		root.getChildren().add(childItem);
+	}
+	
+	
+	TreeItem<VoogaFile> findTreeItemFromFileByRoot(VoogaFile file, TreeItem<VoogaFile> root) {
+		TreeIterator<VoogaFile> iterator = new TreeIterator<VoogaFile>(root);
+		TreeItem<VoogaFile> fileItem = null;
+		while(iterator.hasNext()) {
+		    TreeItem<VoogaFile> iterItem = iterator.next();
+		    VoogaFile iterFile = iterItem.getValue();
+		    if(iterFile.toString().equals(file.toString())) {
+		    	fileItem = iterItem;
+		    	break;
+		    }
+		}
+		return fileItem;
+	}
+	
+	void reorder(VoogaFile child, VoogaFile newParent) {
+		TreeItem<VoogaFile> childItem = findTreeItemFromFileByRoot(child, root);
+		TreeItem<VoogaFile> newParentItem = findTreeItemFromFileByRoot(newParent, root);
+		if(findTreeItemFromFileByRoot(newParent, childItem) == null) {
+			childItem.getParent().getChildren().remove(childItem);
+			newParentItem.getChildren().add(childItem);
+		}
 	}
 	
 	/**

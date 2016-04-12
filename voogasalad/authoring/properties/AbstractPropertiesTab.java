@@ -1,4 +1,4 @@
-package authoring.Properties;
+package authoring.properties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,6 @@ import tools.interfaces.VoogaData;
 public abstract class AbstractPropertiesTab extends Tab {
 	
 	private static final double SPACING = 10;
-	private static final double FONT_SIZE = 23;
 	
 	private VBox box = new VBox(SPACING);;
 	protected Map<String, VoogaData> propertiesMap;
@@ -63,7 +62,6 @@ public abstract class AbstractPropertiesTab extends Tab {
 		for(String property: propertiesMap.keySet()) {
 			
 			name = new CustomText(property);
-			name.setFont(new Font(FONT_SIZE));
 			
 			ContextMenu menu = new ContextMenu();
 			MenuItem delete = new MenuItem("Delete");

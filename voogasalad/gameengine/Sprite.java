@@ -137,6 +137,12 @@ public class Sprite implements Moveable, Effectable, Elementable{
 		return myImage;
 	}
 
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 //	@Override
 //	public void setVelocity(Vector v) {
 //		// TODO Auto-generated method stub
