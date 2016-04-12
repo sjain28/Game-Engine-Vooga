@@ -6,6 +6,7 @@ import authoring.interfaces.Moveable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Vector;
+import tools.Velocity;
 import tools.interfaces.*;
 
 //Remove all the Map double instances. I added them just so I could compile. sorry!
@@ -35,10 +36,10 @@ public class Sprite_USECASE extends ImageView implements Moveable {
 		return myVelocity;
 	}
 
-	@Override
-	public void setVelocity(Vector v) {
-		myVelocity = v;
-	}
+//	@Override
+//	public void setVelocity(Vector v) {
+//		myVelocity = v;
+//	}
 
 	public void addProperty(String s, VoogaData v){
 		myProperties.put(s, v);
@@ -61,6 +62,11 @@ public class Sprite_USECASE extends ImageView implements Moveable {
 
 	public String getID(){
 		return myID;
+	}
+	@Override
+	public void setVelocity(Velocity velocity) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
