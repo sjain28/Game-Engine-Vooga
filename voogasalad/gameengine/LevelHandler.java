@@ -25,5 +25,4 @@ public class LevelHandler {
 		public void update(){
 			myEventManager.update();
 		}
-		
 }
