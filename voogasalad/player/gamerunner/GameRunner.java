@@ -127,19 +127,6 @@ public class GameRunner implements IGameRunner{
 		
 //		myCurrentLevel = 1;
 	}
-	
-	@Override
-	public void getFrameTime() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void setFrameTime(double frameRate) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
 	 * @return the myCurrentLevelDataManager
