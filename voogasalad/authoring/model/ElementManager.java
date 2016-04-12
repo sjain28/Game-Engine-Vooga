@@ -34,6 +34,7 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
 	private GlobalPropertiesManager GPM;
 	private Map<String, VoogaData> myGlobalVariables;
 	private File myXmlDataFile;
+	private String filePath = "levels/test.xml";
 	private SpriteFactory spriteFactory;
 	private Set<String> myIds;
 
@@ -99,32 +100,33 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable {
 	/**
 	 * Write Data to XML using XStream
 	 */
-	@Override
-	public void onSave() throws VoogaException {
+    @Override
+    public void onSave () throws VoogaException {
 
-		updateGlobalPropertiesMap();
+        List<Elementable> elements = new ArrayList<Elementable>();
 
-		List<Elementable> elements = new ArrayList<Elementable>();
+        for (Node element : myGameElements) {
+            if (element instanceof GameObject) {
+                elements.add(((GameObject) element).getSprite());
+            }
 
-		for (Node element : myGameElements) {
-			if (element instanceof GameObject) {
-				elements.add(((GameObject) element).getSprite());
-			}
+            if (element instanceof VoogaText) {
+                elements.add((VoogaText) element);
+            }
+        }
 
-			if (element instanceof VoogaText) {
-				elements.add((VoogaText) element);
-			}
-		}
-
-		DataContainerOfLists data = new DataContainerOfLists(elements, myGlobalVariables, myEventList);
-		System.out.println("I'm done saving in element manager");
-		try {
-			System.out.println(myXmlDataFile.getPath());
-			FileWriterFromGameObjects.saveGameObjects(data, myXmlDataFile.getPath());
-		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-			throw new VoogaException();
-		}
-	}
+        DataContainerOfLists data =
+                new DataContainerOfLists(elements, myGlobalVariables, myEventList);
+    	System.out.println("my data here is" + data.getElementableList());
+        System.out.println("I'm done saving in element manager");
+        try {
+            System.out.println(myXmlDataFile.getPath());
+            FileWriterFromGameObjects.saveGameObjects(data, filePath);
+        }
+        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
+            throw new VoogaException();
+        }
+    }
 
 	public SpriteFactory getSpriteFactory() {
 		return spriteFactory;

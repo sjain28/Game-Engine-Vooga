@@ -1,5 +1,6 @@
 package data;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,9 +36,14 @@ public class FormalTest extends Application {
         DataWritingTest dataTest= new DataWritingTest();
         dataTest.setup();
         DataContainerOfLists manager = dataTest.getData();
+        System.out.println(System.getProperty("java.class.path"));
+        File file = new File("levels/levels_5.xml");
+        System.out.println("Does the file here exist?" + file.exists());
+        System.out.println("The file location here is " + file.getCanonicalPath());
         try {
-            FileWriterFromGameObjects.saveGameObjects(manager, "TestWriting");
+            FileWriterFromGameObjects.saveGameObjects(manager, "levels/levels_5.xml");
         }
+     
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

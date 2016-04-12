@@ -74,7 +74,7 @@ public class DataWritingTest {
     @Test
     public void testWriting () {
         try {
-            FileWriterFromGameObjects.saveGameObjects(manager, "TestWriting.xml");
+            FileWriterFromGameObjects.saveGameObjects(manager, "/levels/TestWriting.xml");
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             // TODO Auto-generated catch block
