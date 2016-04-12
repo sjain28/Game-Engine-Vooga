@@ -32,7 +32,7 @@ public class StandardControl implements IControl {
 	 * @return myControl
 	 */
 	public HBox createControl() {
-	    // myControlox
+	    // myControlBox
 	    myControl.setPadding(new Insets(15, 12, 15, 12)); //TODO: Magic number
 	    myControl.setSpacing(10); //TODO: Magic number
 
@@ -45,15 +45,6 @@ public class StandardControl implements IControl {
 //	    speedDown.setOnMouseClicked(value);
 	    
 	    myControl.getChildren().addAll(speedUp, speedDown);
-
-	    
-//	    Button btn3 = new Button();
-//	    btn3.setText("Button3");
-//	    myControl.getChildren().add(btn3);
-//
-//	    Button btn4 = new Button();
-//	    btn4.setText("Button4");
-//	    myControl.getChildren().add(btn4);
 	    
 		return myControl;
 	}

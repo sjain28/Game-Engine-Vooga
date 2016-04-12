@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import events.VoogaEvent;
+import gameengine.SpriteFactory;
 import tools.interfaces.VoogaData;
 
 
@@ -12,7 +13,8 @@ public class DataContainerOfLists {
     private List<VoogaEvent> eventList;
     private List<Elementable> elementableList;
     private Map<String, VoogaData> variableMap;
-
+    private SpriteFactory spriteFactory;
+    
     public DataContainerOfLists () {
     }
 
@@ -23,6 +25,7 @@ public class DataContainerOfLists {
         System.out.println(this.eventList);
         this.elementableList = ElementableList;
         this.variableMap = variableMap;
+        this.spriteFactory = spriteFactory;
     }
 
     public List<Elementable> getElementableList () {
@@ -34,12 +37,16 @@ public class DataContainerOfLists {
         return this.eventList;
     }
 
+    public SpriteFactory getSpriteFactory () {
+        return this.spriteFactory;
+    }
+
     public Map<String, VoogaData> getVariableMap () {
         return this.variableMap;
     }
-
+    
     public String toString () {
-        return "Data Container + 35";
+        return "Data Container";
     }
 
 }
