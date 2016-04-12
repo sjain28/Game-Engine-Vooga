@@ -2,7 +2,7 @@ package authoring.properties;
 
 /**
  * Properties window to see all the current characteristics of a Sprite
- * @author Harry Guo, Arjun Desai, Aditya Srininvasan, Nick Lockett
+ * @author Harry Guo, Arjun Desai, Aditya Srinivasan, Nick Lockett
  * 
  */
 
