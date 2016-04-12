@@ -2,21 +2,17 @@ package events;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import player.leveldatamanager.EngineObjectManager;
 import gameengine.Sprite;
 import physics.StandardPhysics;
-import player.leveldatamanager.EngineObjectManager;
 
 public class VoogaEvent {
 
-	//TODO: Either make physics static, put framerate inside of physics, get using method, etc.
-
-	private double FrameRate = 1/60;
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
 	private EngineObjectManager myEngineManager;
 	private List<Sprite> myCauseSprites;
-	private StandardPhysics myPhysicsEngine = new StandardPhysics(FrameRate);
+	private StandardPhysics myPhysicsEngine = new StandardPhysics();
 
 	public VoogaEvent(){
 		myCauses = new ArrayList<>();

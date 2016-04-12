@@ -19,17 +19,53 @@ public class SpriteEffect extends VariableEffect{
 		mySprites.add(getEvent().getManager().getSprite(spriteID));
 		needsSprites = false;
 	}
-
-	// constructor with archetype- apply to all of archetype
-	// constructor with archetype- apply to all of archetype for which event supplies
+	
+	public SpriteEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
+		super(method, variable, parameter, event);
+		mySprites = new ArrayList<>();
+		mySprites.add(getEvent().getManager().getSprite(spriteID));
+		needsSprites = false;
+	}
+	
+	public SpriteEffect(String spriteID, String method, String variable, Boolean parameter, VoogaEvent event) {
+		super(method, variable, parameter, event);
+		mySprites = new ArrayList<>();
+		mySprites.add(getEvent().getManager().getSprite(spriteID));
+		needsSprites = false;
+	}
+	
+	// constructor with archetype, boolean true- apply to all of archetype
+	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, VoogaEvent event) {
 		super(method, variable, event);
 		myArchetype = archetype;
 		this.needsSprites = needsSprites;
 	}
-
+	
+	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Double parameter, VoogaEvent event) {
+		super(method, variable, event);
+		myArchetype = archetype;
+		this.needsSprites = needsSprites;
+	}
+	
+	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Boolean parameter, VoogaEvent event) {
+		super(method, variable, event);
+		myArchetype = archetype;
+		this.needsSprites = needsSprites;
+	}
+	
 	// constructor with nothing- apply to all for which event supplies
 	public SpriteEffect(String method, String variable, VoogaEvent event) {
+		super(method, variable, event);
+		needsSprites = true;
+	}
+	
+	public SpriteEffect(String method, String variable, Double parameter, VoogaEvent event) {
+		super(method, variable, event);
+		needsSprites = true;
+	}
+	
+	public SpriteEffect(String method, String variable, Boolean parameter, VoogaEvent event) {
 		super(method, variable, event);
 		needsSprites = true;
 	}
@@ -49,15 +85,18 @@ public class SpriteEffect extends VariableEffect{
 		}
 		if (myArchetype != null){
 			// get sprite manager, get all sprites of archetype
-			List<Sprite> archSprites = getEvent().getManager().getSpritesByArchetype(myArchetype);
+			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(myArchetype);
 			if (mySprites.size() != 0){
 				for(Sprite causeSprite : mySprites){
-					if(!archSprites.contains(causeSprite)){
+					if(!archSpriteIDs.contains(causeSprite.getID())){
 						mySprites.remove(causeSprite);
 					}
 				}
 			}else {
-				mySprites = archSprites;
+				mySprites.clear();
+				for(String spriteid : archSpriteIDs){
+					mySprites.add(getEvent().getManager().getSprite(spriteid));
+				}
 			}
 		}
 	}
