@@ -23,8 +23,11 @@ import javafx.stage.Stage;
  *
  */
 public class GameDisplayTester extends Application {	
-	
+	static List<Node> nodes = new ArrayList<>();
+
 	public GameDisplayTester() {
+		
+		
 		try {
 			start(new Stage());
 		} catch (Exception e) {
@@ -32,7 +35,6 @@ public class GameDisplayTester extends Application {
 		}
 	}
 
-	static List<Node> nodes = new ArrayList<>();
 
 	private static void populate() {
 
