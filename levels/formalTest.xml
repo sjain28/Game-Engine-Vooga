@@ -1,0 +1,4004 @@
+<object-stream>
+  <data.DataContainerOfLists>
+    <eventList>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys>k</myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>GameWon</myMethod>
+            <myVariable>toggle</myVariable>
+          </events.VariableEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.01666666753590107</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+    </eventList>
+    <elementableList>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myLoc>
+        <myID>06dc50ec-c015-483c-b86d-2e99e61bb867</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>7.0</x>
+          <y>2.0</y>
+        </myLoc>
+        <myID>78457d95-6735-4f8f-96e0-ad0e7637cf4b</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>14.0</x>
+          <y>4.0</y>
+        </myLoc>
+        <myID>d7db5d80-f932-4a9f-aff8-7a663e4d324d</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>21.0</x>
+          <y>6.0</y>
+        </myLoc>
+        <myID>821d32aa-379d-42ba-b3f2-f8d570bf4cb1</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>28.0</x>
+          <y>8.0</y>
+        </myLoc>
+        <myID>632fad49-17a3-4d55-912c-d74cdc30df77</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>35.0</x>
+          <y>10.0</y>
+        </myLoc>
+        <myID>ef3a7754-e1b9-4c3c-bd09-d9e47b2ae1a4</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>42.0</x>
+          <y>12.0</y>
+        </myLoc>
+        <myID>7f6b7966-10dd-42e5-8516-4e12a353c989</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>49.0</x>
+          <y>14.0</y>
+        </myLoc>
+        <myID>a7e450ed-3628-4ce7-a093-d289ff07b3fa</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>56.0</x>
+          <y>16.0</y>
+        </myLoc>
+        <myID>fe123ae6-053f-466d-a9eb-20f8b263eb57</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>63.0</x>
+          <y>18.0</y>
+        </myLoc>
+        <myID>8cb87c22-8ad4-4e27-bfff-8475659d9513</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/image.jpeg</myImagePath>
+        <myArchetype>healthy</myArchetype>
+      </gameengine.Sprite>
+      <authoring.model.DumbVoogaText>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </scene>
+        <id class="javafx.scene.Node$2">
+          <value>aabf2214-9d25-43b6-84a6-93cda4dc9832</value>
+          <valid>false</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </id>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>text-input</string>
+            <string>text-field</string>
+          </backingList>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <eventHandlerProperties>
+          <eventDispatcher>
+            <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler">
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager" reference="../.."/>
+              <eventSource class="authoring.model.DumbVoogaText" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </previousDispatcher>
+            <eventHandlerMap>
+              <entry>
+                <javafx.event.EventType resolves-to="javafx.event.EventType$EventTypeSerialization">
+                  <path>
+                    <string>INPUT</string>
+                    <string>MOUSE</string>
+                    <string>DRAG_DETECTED</string>
+                  </path>
+                </javafx.event.EventType>
+                <com.sun.javafx.event.CompositeEventHandler>
+                  <eventHandler class="null"/>
+                </com.sun.javafx.event.CompositeEventHandler>
+              </entry>
+              <entry>
+                <javafx.event.EventType resolves-to="javafx.event.EventType$EventTypeSerialization">
+                  <path>
+                    <string>INPUT</string>
+                    <string>CONTEXTMENUREQUESTED</string>
+                  </path>
+                </javafx.event.EventType>
+                <com.sun.javafx.event.CompositeEventHandler>
+                  <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                    <eventHandler class="null"/>
+                  </firstRecord>
+                  <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                </com.sun.javafx.event.CompositeEventHandler>
+              </entry>
+            </eventHandlerMap>
+            <eventSource class="authoring.model.DumbVoogaText" reference="../../.."/>
+          </eventDispatcher>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <onDragDetected>
+            <value class="null" reference="../../eventDispatcher/eventHandlerMap/entry/com.sun.javafx.event.CompositeEventHandler/eventHandler"/>
+            <valid>true</valid>
+            <bean class="authoring.model.DumbVoogaText" reference="../../.."/>
+            <name>onDragDetected</name>
+            <eventType reference="../../eventDispatcher/eventHandlerMap/entry/javafx.event.EventType"/>
+            <outer-class reference="../.."/>
+          </onDragDetected>
+        </eventHandlerProperties>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focused>
+          <helper class="com.sun.javafx.binding.ExpressionHelper$SingleChange">
+            <observable class="javafx.scene.Node$FocusedProperty" reference="../.."/>
+            <listener class="null"/>
+            <currentValue class="boolean">false</currentValue>
+          </helper>
+          <value>false</value>
+          <valid>true</valid>
+          <needsChangeEvent>false</needsChangeEvent>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </focused>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler reference="../../../eventHandlerProperties/eventDispatcher/previousDispatcher"/>
+            <eventHandlerManager reference="../../../eventHandlerProperties/eventDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">TEXT_FIELD</value>
+          <valid>false</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="authoring.model.DumbVoogaText" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null">
+                  <lock/>
+                  <queueLength>0</queueLength>
+                </queue>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets">
+            <top>0.0</top>
+            <right>0.0</right>
+            <bottom>0.0</bottom>
+            <left>0.0</left>
+            <hash>0</hash>
+          </value>
+          <valid>true</valid>
+          <lastValidValue reference="../value"/>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <value class="javafx.scene.layout.Background">
+            <fills class="empty-list"/>
+            <images class="empty-list"/>
+            <outsets>
+              <top>0.0</top>
+              <right>0.0</right>
+              <bottom>0.0</bottom>
+              <left>0.0</left>
+              <hash>0</hash>
+            </outsets>
+            <hasOpaqueFill>false</hasOpaqueFill>
+            <opaqueFillTop>NaN</opaqueFillTop>
+            <opaqueFillRight>NaN</opaqueFillRight>
+            <opaqueFillBottom>NaN</opaqueFillBottom>
+            <opaqueFillLeft>NaN</opaqueFillLeft>
+            <hasPercentageBasedOpaqueFills>false</hasPercentageBasedOpaqueFills>
+            <hasPercentageBasedFills>false</hasPercentageBasedFills>
+            <hash>32</hash>
+          </value>
+          <valid>true</valid>
+          <origin>USER</origin>
+          <old reference="../value"/>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </contextMenu>
+        <promptText class="javafx.scene.control.TextInputControl$4">
+          <value></value>
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>promptText</name>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </promptText>
+        <textFormatter class="javafx.scene.control.TextInputControl$5">
+          <valid>true</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </textFormatter>
+        <content class="javafx.scene.control.TextField$TextFieldContent">
+          <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+            <observable class="javafx.scene.control.TextField$TextFieldContent" reference="../.."/>
+            <listener class="null"/>
+          </helper>
+          <characters>DASFASFAF</characters>
+        </content>
+        <text>
+          <helper class="com.sun.javafx.binding.ExpressionHelper$Generic">
+            <observable class="javafx.scene.control.TextInputControl$TextProperty" reference="../.."/>
+            <invalidationListeners>
+              <com.sun.javafx.binding.BindingHelperObserver>
+                <ref>
+                  <referent class="javafx.scene.control.TextInputControl$1">
+                    <value>9</value>
+                    <valid>false</valid>
+                    <observer reference="../../.."/>
+                    <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+                      <observable class="javafx.scene.control.TextInputControl$1" reference="../.."/>
+                      <listener class="javafx.beans.property.IntegerPropertyBase$Listener">
+                        <wref>
+                          <referent class="javafx.beans.property.ReadOnlyIntegerWrapper">
+                            <value>0</value>
+                            <observable class="javafx.scene.control.TextInputControl$1" reference="../../../../.."/>
+                            <listener class="javafx.beans.property.IntegerPropertyBase$Listener" reference="../../.."/>
+                            <valid>false</valid>
+                            <bean class="authoring.model.DumbVoogaText" reference="../../../../../../../../../../.."/>
+                            <name>length</name>
+                          </referent>
+                          <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../../../../children/helper/listener/ref/queue"/>
+                        </wref>
+                      </listener>
+                    </helper>
+                    <outer-class class="authoring.model.DumbVoogaText" reference="../../../../../../.."/>
+                  </referent>
+                  <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../children/helper/listener/ref/queue"/>
+                </ref>
+              </com.sun.javafx.binding.BindingHelperObserver>
+              <com.sun.javafx.binding.BindingHelperObserver>
+                <ref>
+                  <referent class="javafx.scene.control.TextInputControl$2">
+                    <value></value>
+                    <valid>false</valid>
+                    <observer reference="../../.."/>
+                    <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+                      <observable class="javafx.scene.control.TextInputControl$2" reference="../.."/>
+                      <listener class="javafx.beans.property.StringPropertyBase$Listener">
+                        <wref>
+                          <referent class="javafx.beans.property.ReadOnlyStringWrapper">
+                            <observable class="javafx.scene.control.TextInputControl$2" reference="../../../../.."/>
+                            <listener class="javafx.beans.property.StringPropertyBase$Listener" reference="../../.."/>
+                            <valid>false</valid>
+                            <bean class="authoring.model.DumbVoogaText" reference="../../../../../../../../../../.."/>
+                            <name>selectedText</name>
+                          </referent>
+                          <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../../../../children/helper/listener/ref/queue"/>
+                        </wref>
+                      </listener>
+                    </helper>
+                    <outer-class class="authoring.model.DumbVoogaText" reference="../../../../../../.."/>
+                  </referent>
+                  <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../children/helper/listener/ref/queue"/>
+                </ref>
+              </com.sun.javafx.binding.BindingHelperObserver>
+            </invalidationListeners>
+            <invalidationSize>2</invalidationSize>
+            <changeSize>0</changeSize>
+            <locked>false</locked>
+          </helper>
+          <textIsNull>false</textIsNull>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </text>
+        <length reference="../text/helper/invalidationListeners/com.sun.javafx.binding.BindingHelperObserver/ref/referent/helper/listener/wref/referent"/>
+        <editable class="javafx.scene.control.TextInputControl$6">
+          <value>true</value>
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>editable</name>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </editable>
+        <selection>
+          <value class="javafx.scene.control.IndexRange">
+            <start>0</start>
+            <end>0</end>
+          </value>
+          <valid>false</valid>
+          <helper class="com.sun.javafx.binding.ExpressionHelper$SingleInvalidation">
+            <observable class="javafx.beans.property.ReadOnlyObjectWrapper" reference="../.."/>
+            <listener class="com.sun.javafx.binding.BindingHelperObserver" reference="../../../text/helper/invalidationListeners/com.sun.javafx.binding.BindingHelperObserver[2]"/>
+          </helper>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>selection</name>
+        </selection>
+        <selectedText reference="../text/helper/invalidationListeners/com.sun.javafx.binding.BindingHelperObserver[2]/ref/referent/helper/listener/wref/referent"/>
+        <anchor>
+          <value>0</value>
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>anchor</name>
+        </anchor>
+        <caretPosition>
+          <value>0</value>
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>caretPosition</name>
+        </caretPosition>
+        <undoChangeHead>
+          <start>0</start>
+        </undoChangeHead>
+        <undoChange reference="../undoChangeHead"/>
+        <createNewUndoRecord>false</createNewUndoRecord>
+        <undoable>
+          <value>false</value>
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>undoable</name>
+        </undoable>
+        <redoable>
+          <value>false</value>
+          <valid>true</valid>
+          <bean class="authoring.model.DumbVoogaText" reference="../.."/>
+          <name>redoable</name>
+        </redoable>
+        <prefColumnCount class="javafx.scene.control.TextField$1">
+          <value>12</value>
+          <valid>true</valid>
+          <oldValue>12</oldValue>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </prefColumnCount>
+        <onAction class="javafx.scene.control.TextField$2">
+          <valid>true</valid>
+          <outer-class class="authoring.model.DumbVoogaText" reference="../.."/>
+        </onAction>
+        <myProperties/>
+        <myID>aabf2214-9d25-43b6-84a6-93cda4dc9832</myID>
+      </authoring.model.DumbVoogaText>
+      <authoring.model.VoogaButton>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="authoring.model.VoogaButton" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="authoring.model.VoogaButton" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="authoring.model.VoogaButton" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="authoring.model.VoogaButton" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="authoring.model.VoogaButton" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="authoring.model.VoogaButton" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="authoring.model.VoogaButton" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </contextMenu>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="authoring.model.VoogaButton" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="authoring.model.VoogaButton" reference="../.."/>
+        </onAction>
+      </authoring.model.VoogaButton>
+    </elementableList>
+    <variableMap>
+      <entry>
+        <string>0</string>
+        <tools.VoogaNumber>
+          <myValue>0.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>1</string>
+        <tools.VoogaNumber>
+          <myValue>1.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>2</string>
+        <tools.VoogaNumber>
+          <myValue>2.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>3</string>
+        <tools.VoogaNumber>
+          <myValue>3.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>4</string>
+        <tools.VoogaNumber>
+          <myValue>4.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>5</string>
+        <tools.VoogaNumber>
+          <myValue>5.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>6</string>
+        <tools.VoogaNumber>
+          <myValue>6.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>7</string>
+        <tools.VoogaNumber>
+          <myValue>7.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>8</string>
+        <tools.VoogaNumber>
+          <myValue>8.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>9</string>
+        <tools.VoogaNumber>
+          <myValue>9.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+    </variableMap>
+    <ButtonList>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+      <javafx.scene.control.Button>
+        <dirtyBits>-1</dirtyBits>
+        <__geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__geomBounds>
+        <__txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </__txBounds>
+        <pendingUpdateBounds>false</pendingUpdateBounds>
+        <parentDisabledChangedListener class="null"/>
+        <parentTreeVisibleChangedListener class="null"/>
+        <scene>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </scene>
+        <styleClass class="javafx.scene.Node$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Node$3" reference="../.."/>
+            <changeLock>0</changeLock>
+            <addRemoveChanges/>
+          </changeBuilder>
+          <backingList>
+            <string>button</string>
+          </backingList>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </styleClass>
+        <derivedDepthTest>true</derivedDepthTest>
+        <pickOnBounds class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>pickOnBounds</name>
+        </pickOnBounds>
+        <layoutBounds class="javafx.scene.Node$12">
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </layoutBounds>
+        <localToParentTx class="com.sun.javafx.geom.transform.Identity" reference="../../../elementableList/authoring.model.DumbVoogaText/localToParentTx"/>
+        <transformDirty>true</transformDirty>
+        <txBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </txBounds>
+        <geomBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </geomBounds>
+        <boundsChanged>false</boundsChanged>
+        <geomBoundsInvalid>true</geomBoundsInvalid>
+        <localBoundsInvalid>true</localBoundsInvalid>
+        <txBoundsInvalid>true</txBoundsInvalid>
+        <resolvedNodeOrientation>0</resolvedNodeOrientation>
+        <focusTraversable class="javafx.scene.Node$16">
+          <value>true</value>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </focusTraversable>
+        <treeVisible>true</treeVisible>
+        <treeVisibleRO>
+          <valid>false</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </treeVisibleRO>
+        <canReceiveFocus>false</canReceiveFocus>
+        <eventDispatcher class="javafx.beans.property.SimpleObjectProperty">
+          <value class="com.sun.javafx.scene.NodeEventDispatcher">
+            <enteredExitedHandler>
+              <nextDispatcher class="com.sun.javafx.event.EventHandlerManager">
+                <previousDispatcher class="com.sun.javafx.scene.EnteredExitedHandler" reference="../.."/>
+                <eventHandlerMap>
+                  <entry>
+                    <javafx.event.EventType reference="../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/javafx.event.EventType"/>
+                    <com.sun.javafx.event.CompositeEventHandler>
+                      <firstRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord">
+                        <eventHandler class="null" reference="../../../../../../../../../../../elementableList/authoring.model.DumbVoogaText/eventHandlerProperties/eventDispatcher/eventHandlerMap/entry[2]/com.sun.javafx.event.CompositeEventHandler/firstRecord/eventHandler"/>
+                      </firstRecord>
+                      <lastRecord class="com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord" reference="../firstRecord"/>
+                    </com.sun.javafx.event.CompositeEventHandler>
+                  </entry>
+                </eventHandlerMap>
+                <eventSource class="javafx.scene.control.Button" reference="../../../../.."/>
+              </nextDispatcher>
+              <eventSource class="javafx.scene.control.Button" reference="../../../.."/>
+              <eventTypeModified>false</eventTypeModified>
+            </enteredExitedHandler>
+            <eventHandlerManager reference="../enteredExitedHandler/nextDispatcher"/>
+          </value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>eventDispatcher</name>
+        </eventDispatcher>
+        <internalEventDispatcher reference="../eventDispatcher/value"/>
+        <cssFlag>CLEAN</cssFlag>
+        <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
+          <bits reference="../../../../elementableList/authoring.model.DumbVoogaText/pseudoClassStates/bits"/>
+        </pseudoClassStates>
+        <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+          <value class="javafx.scene.AccessibleRole">BUTTON</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>accessibleRole</name>
+        </accessibleRole>
+        <removedChildrenOptimizationDisabled>false</removedChildrenOptimizationDisabled>
+        <childSet/>
+        <startIdx>0</startIdx>
+        <pgChildrenSize>0</pgChildrenSize>
+        <childrenTriggerPermutation>false</childrenTriggerPermutation>
+        <geomChanged>false</geomChanged>
+        <childSetModified>false</childSetModified>
+        <children class="javafx.scene.Parent$2">
+          <list class="javafx.scene.Parent$1">
+            <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$Generic">
+              <changeListeners>
+                <null/>
+                <null/>
+              </changeListeners>
+              <invalidationSize>0</invalidationSize>
+              <changeSize>2</changeSize>
+              <locked>false</locked>
+            </listenerHelper>
+            <changeBuilder>
+              <list class="javafx.scene.Parent$1" reference="../.."/>
+              <changeLock>0</changeLock>
+            </changeBuilder>
+            <backingList/>
+            <outer-class class="javafx.scene.control.Button" reference="../../.."/>
+          </list>
+          <modCount>0</modCount>
+          <helper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="javafx.collections.WeakListChangeListener">
+              <ref>
+                <referent class="null"/>
+                <queue class="java.lang.ref.ReferenceQueue$Null" reference="../../../../../../../elementableList/authoring.model.DumbVoogaText/children/helper/listener/ref/queue"/>
+              </ref>
+            </listener>
+          </helper>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </children>
+        <unmodifiableChildren class="javafx.collections.FXCollections$UnmodifiableObservableListImpl">
+          <changeBuilder>
+            <list class="javafx.collections.FXCollections$UnmodifiableObservableListImpl" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList class="javafx.scene.Parent$2" reference="../../children"/>
+          <listener class="null" reference="../../children/helper/listener/ref/referent"/>
+        </unmodifiableChildren>
+        <layoutFlag>NEEDS_LAYOUT</layoutFlag>
+        <performingLayout>false</performingLayout>
+        <sizeCacheClear>true</sizeCacheClear>
+        <prefWidthCache>-1.0</prefWidthCache>
+        <prefHeightCache>-1.0</prefHeightCache>
+        <minWidthCache>-1.0</minWidthCache>
+        <minHeightCache>-1.0</minHeightCache>
+        <sceneRoot>false</sceneRoot>
+        <layoutRoot>false</layoutRoot>
+        <stylesheets class="javafx.scene.Parent$3">
+          <listenerHelper class="com.sun.javafx.collections.ListListenerHelper$SingleChange">
+            <listener class="null"/>
+          </listenerHelper>
+          <changeBuilder>
+            <list class="javafx.scene.Parent$3" reference="../.."/>
+            <changeLock>0</changeLock>
+          </changeBuilder>
+          <backingList/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </stylesheets>
+        <tmp class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </tmp>
+        <cachedBounds class="com.sun.javafx.geom.RectBounds">
+          <minX>0.0</minX>
+          <maxX>-1.0</maxX>
+          <minY>0.0</minY>
+          <maxY>-1.0</maxY>
+        </cachedBounds>
+        <cachedBoundsInvalid>false</cachedBoundsInvalid>
+        <dirtyChildrenCount>0</dirtyChildrenCount>
+        <LEFT__INVALID>1</LEFT__INVALID>
+        <TOP__INVALID>2</TOP__INVALID>
+        <NEAR__INVALID>4</NEAR__INVALID>
+        <RIGHT__INVALID>8</RIGHT__INVALID>
+        <BOTTOM__INVALID>16</BOTTOM__INVALID>
+        <FAR__INVALID>32</FAR__INVALID>
+        <imageChangeListener class="null"/>
+        <__snapToPixel>true</__snapToPixel>
+        <padding class="javafx.scene.layout.Region$2">
+          <value class="javafx.geometry.Insets" reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <valid>true</valid>
+          <lastValidValue reference="../../../../elementableList/authoring.model.DumbVoogaText/padding/value"/>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </padding>
+        <background class="javafx.scene.layout.Region$3">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </background>
+        <border class="javafx.scene.layout.Region$4">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </border>
+        <insets>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </insets>
+        <snappedTopInset>0.0</snappedTopInset>
+        <snappedRightInset>0.0</snappedRightInset>
+        <snappedBottomInset>0.0</snappedBottomInset>
+        <snappedLeftInset>0.0</snappedLeftInset>
+        <__width>0.0</__width>
+        <__height>0.0</__height>
+        <__minWidth>-1.0</__minWidth>
+        <__minHeight>-1.0</__minHeight>
+        <__prefWidth>-1.0</__prefWidth>
+        <__prefHeight>-1.0</__prefHeight>
+        <__maxWidth>-1.0</__maxWidth>
+        <__maxHeight>-1.0</__maxHeight>
+        <cornersValid>false</cornersValid>
+        <skin class="javafx.scene.control.Control$1">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </skin>
+        <contextMenu class="javafx.scene.control.Control$3">
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>contextMenu</name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </contextMenu>
+        <text class="javafx.beans.property.SimpleStringProperty">
+          <value>hi</value>
+          <valid>true</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>text</name>
+        </text>
+        <mnemonicParsing class="javafx.beans.property.SimpleBooleanProperty">
+          <value>true</value>
+          <valid>false</valid>
+          <bean class="javafx.scene.control.Button" reference="../.."/>
+          <name>mnemonicParsing</name>
+        </mnemonicParsing>
+        <armed class="javafx.scene.control.ButtonBase$1">
+          <value>false</value>
+          <valid>true</valid>
+          <name></name>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </armed>
+        <onAction class="javafx.scene.control.ButtonBase$2">
+          <valid>true</valid>
+          <outer-class class="javafx.scene.control.Button" reference="../.."/>
+        </onAction>
+      </javafx.scene.control.Button>
+    </ButtonList>
+  </data.DataContainerOfLists>
+</object-stream>

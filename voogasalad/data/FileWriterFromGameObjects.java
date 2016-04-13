@@ -17,7 +17,6 @@ public class FileWriterFromGameObjects {
                                         String fileName) throws ParserConfigurationException,
                                                          TransformerException, IOException,
                                                          SAXException {
-        XStream serializer = new XStream(new DomDriver());
         File file = new File(fileName);
         if (!file.exists()) {
 
