@@ -1,26 +1,17 @@
 package gameengine;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
 import org.xml.sax.SAXException;
-
-import data.FileWriterFromGameObjects;
-import data.Serializer;
+import auxiliary.VoogaException;
 import data.DeSerializer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import tools.interfaces.VoogaData;
+import data.Serializer;
 import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 /**
  * Factor for creating Sprites from pre-formed Archetypes,
@@ -54,7 +45,7 @@ public class SpriteFactory {
 					  original.getParameterMap(), (VoogaNumber)original.getParameterMap().get(Sprite.MASS));
 		return clone;
 	}
-
+	
 	/**
 	 * Sets or creates a new Archetype
 	 * Must specify what you want your default Sprite
@@ -63,10 +54,17 @@ public class SpriteFactory {
 	 * @param archetype
 	 * @param s
 	 */
-	public void setArchetype(String archetype, Sprite sprite){
-		myArchetypes.put(archetype, sprite);
+	public void addArchetype(String archetypeName, Sprite archetype) throws Exception{
+		if(myArchetypes.keySet().contains(archetypeName)){
+			throw new VoogaException();
+		}
+		else{
+			myArchetypes.put(archetypeName, archetype);
+		}
 	}
-	
+
+
+
 	/**
 	 * Returns the default Sprite for a given
 	 * Archetype
@@ -119,11 +117,12 @@ public class SpriteFactory {
 	 * todo: Check to see if this is actually what the front end needs
 	 * 
 	 * @param fileLocation
+	 * @throws Exception 
 	 */
-	public void deSerializeArchetype(String fileLocation){
+	public void deSerializeArchetype(String fileLocation) throws Exception{
 		DeSerializer unserializer = new DeSerializer();
 		Sprite newArchetype = (Sprite) unserializer.deserialize(1,fileLocation);
-		setArchetype(newArchetype.getArchetype(), newArchetype);
+		addArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}
 }
