@@ -30,8 +30,8 @@ import player.leveldatamanager.LevelDataManager;
  */
 public class GameRunner implements IGameRunner{
 
-	private ILevelDataManager myCurrentLevelDataManager;
-	private IGameDisplay myGameDisplay;
+	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
 	
 	private AnimationTimer myTimeline;
