@@ -18,9 +18,9 @@ public class DecreaseHealthExample_USECASE {
 
     public static void main (String[] args){
         Sprite_USECASE a = new Sprite_USECASE("bricks.jpg","GoodGuy");
-        a.addProperty("Health", new VoogaNumber(5));
+        a.addProperty("Health", new VoogaNumber(5.0));
         Sprite_USECASE b = new Sprite_USECASE("bricks.jpg","BadGuy");
-        a.addProperty("HealthTakeAway", new VoogaNumber(3));
+        a.addProperty("HealthTakeAway", new VoogaNumber(3.0));
 
         //System Fails to detect collision
         

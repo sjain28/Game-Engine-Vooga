@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import javafx.animation.AnimationTimer;
 import player.gamedisplay.IGameDisplay;
@@ -16,35 +15,54 @@ import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelDataManager;
 
+/**
+ * GameRunner class that runs the game player
+ * Uses composition to contain interface instances of LevelDataManager
+ * and GameDisplay
+ * 
+ * Runs the Timeline and manages levels and determines which level should 
+ * be played in the game player and displayed in GameDisplay
+ * 
+ * @author Hunter, Michael, Josh
+ *
+ */
 public class GameRunner implements IGameRunner{
 
-	private ILevelDataManager myCurrentLevelDataManager;
-	private IGameDisplay myGameDisplay;
+	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
-	/*
-	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
-	private final Runnable renderer = null; // () -> whatever calls position updates //
-	private final Consumer<Float> interpolater = null; //alpha -> interpolatatePositions(), null for no interpolation //
-	private final Consumer<Integer> fps_reporter = null; //fps -> Text label for fps display, null for no label //
-	 */
-	//GameLoop myGameLoop = new FixedStepLoopWithInterpolation();
+	
 	private AnimationTimer myTimeline;
 
+	
+//	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
+//	private final Runnable renderer = null; // () -> whatever calls position updates //
+//	private final Consumer<Float> interpolater = null; //alpha -> interpolatatePositions(), null for no interpolation //
+//	private final Consumer<Integer> fps_reporter = null; //fps -> Text label for fps display, null for no label //
+//  GameLoop myGameLoop = new FixedStepLoopWithInterpolation();
+	
+
+	/**
+	 * Default constructor
+	 * 
+	 * @param xmlList
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
-		// TODO Auto-generated constructor stub
 		myGameDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
-		//System.out.println(levelQueue);
-
-		//TODO fix the instantiation of AnimationTimer(); 
-		//timer = new AnimationTimer();
-
-		//playGame();
 		//playGame();
 	}
 
+	/**
+	 * Overloaded constructor with String parameter
+	 * 
+	 * @param fileString
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public GameRunner(String fileString) throws FileNotFoundException, IOException {
-		// TODO Auto-generated constructor stub
 		this(new File(fileString));
 	}
 
@@ -58,7 +76,7 @@ public class GameRunner implements IGameRunner{
 		try (BufferedReader br = new BufferedReader(new FileReader(xmlList))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				// process the line.
+				//TODO: process the line.
 				levelQueue.add(line);
 			}
 		}
@@ -115,34 +133,15 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName){
 		System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(fileName);
-		//call the time line here and pass step into time line
+		//TODO: call the time line here and pass step into time line
 		step();
 	}
 
-
 	/**
-	 * Stops the AnimationTimer
+	 * Checks if the current level has been won
+	 * If the level has been won, advance to the next level
 	 * 
 	 */
-	/*
-	@Override
-	public void stop() {
-		// TODO Auto-generated method stub
-		getGameLoop().stop();
-	}
-	 */
-	/**
-	 * Starts the AnimationTimer
-	 * 
-	 */
-	/*
-	@Override
-	public void start() {
-		// TODO Auto-generated method stub
-		getGameLoop().start();
-	}
-	 */
-
 	public void wonLevel(){
 		//		if(myCurrentLevel == myLevels.size()-1){
 		//			//tell the display to display whatever they display when you've won a game
@@ -154,6 +153,11 @@ public class GameRunner implements IGameRunner{
 		//		}
 	}
 
+	/**
+	 * Checks if the current level has been lost
+	 * If the level has been lost, go to the gameover screen
+	 * 
+	 */
 	public void lostLevel(){
 		//tell the display to display restart game button and a you lost the game sign
 
@@ -194,7 +198,6 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
 		getTimeline().stop();
 	}
 
@@ -204,7 +207,6 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
 		getTimeline().start();
 	}
 	
@@ -215,54 +217,37 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public IGameRunner getSelf() {
-		// TODO Auto-generated method stub
 		return this;
 	}
 
+	/**
+	 * Returns KeyEvents to be passed into LevelDataManager
+	 * 
+	 * KeyEvents (Collections--List<KeyEvent>) are passed to LevelDataManager
+	 * through GameRunner
+	 * 
+	 */
 	@Override
 	public Collections getKeyEvents() {
-		// TODO Auto-generated method stub
 		return (Collections) getGameDisplay().getKeyEvents();
 	}
 
-	/**
-	 * @return the updater
-	 */
-	/*
-	public Consumer<Float> getUpdater() {
-		return updater;
+	@Override
+	public void speedUp() {
+		// TODO Auto-generated method stub
+		
 	}
-	 */
-	/**
-	 * @return the renderer
-	 */
-	/*
-	public Runnable getRenderer() {
-		return renderer;
+
+	@Override
+	public void speedDown() {
+		// TODO Auto-generated method stub
+		
 	}
-	 */
-	/**
-	 * @return the interpolater
-	 */
-	/*
-	public Consumer<Float> getInterpolater() {
-		return interpolater;
+
+	@Override
+	public void mute() {
+		// TODO Auto-generated method stub
+		
 	}
-	 */
-	/**
-	 * @return the fps_reporter
-	 */
-	/*
-	public Consumer<Integer> getFps_reporter() {
-		return fps_reporter;
-	}
-	 */
-	/**
-	 * @return the myGameLoop
-	 */
-	/*
-	public GameLoop getGameLoop() {
-		return myGameLoop;
-	}
-	 */
+
 }

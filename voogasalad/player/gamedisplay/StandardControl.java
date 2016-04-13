@@ -3,6 +3,7 @@ package player.gamedisplay;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import player.gamerunner.IGameRunner;
 
 /**
  * Class that generates a set of controls that becomes a component of StandardDisplay
@@ -12,8 +13,8 @@ import javafx.scene.layout.HBox;
  *
  */
 public class StandardControl implements IControl {
-	
-	
+
+	private IGameRunner myGameRunner;
 	private HBox myControl;
 	
 	/**
@@ -21,9 +22,17 @@ public class StandardControl implements IControl {
 	 * 
 	 */
 	public StandardControl() {
-		
 		myControl = new HBox();
-		
+	}
+	
+	/**
+	 * Overloaded constructor that takes in a reference to GameRunner
+	 * to enable StandardControl to adjust framerate
+	 * 
+	 */
+	public StandardControl(IGameRunner gamerunner) {
+		this();
+		this.myGameRunner = gamerunner;
 	}
 	
 	/**
@@ -41,8 +50,8 @@ public class StandardControl implements IControl {
 	    Button speedDown = createButton("Speed Down");
 	    
 	    // TODO: Assign click actions
-//	    speedUp.setOnMouseClicked(value);
-//	    speedDown.setOnMouseClicked(value);
+	    speedUp.setOnMouseClicked(e -> getGameRunner().speedUp());
+	    speedDown.setOnMouseClicked(e -> getGameRunner().speedDown());
 	    
 	    myControl.getChildren().addAll(speedUp, speedDown);
 	    
@@ -59,6 +68,13 @@ public class StandardControl implements IControl {
 		Button button = new Button();
 		button.setText(name);
 		return button;
+	}
+
+	/**
+	 * @return the myGameRunner
+	 */
+	public IGameRunner getGameRunner() {
+		return myGameRunner;
 	}
 	
 }

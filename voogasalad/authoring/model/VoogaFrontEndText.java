@@ -16,24 +16,24 @@ import tools.VoogaDataText;
 import tools.interfaces.VoogaData;
 
 
-public class VoogaText extends TextField implements Elementable {
+public class VoogaFrontEndText extends TextField implements Elementable {
 
     Map<String, VoogaData> myProperties = new HashMap<String, VoogaData>();
     String myID;
 
-    public VoogaText () {
+    public VoogaFrontEndText () {
         init();
     }
 
     // stroke, color, font, text, size, name/group, position (x,y,z),
-    public VoogaText (double x, double y, String text) {
+    public VoogaFrontEndText (double x, double y, String text) {
         init();
         this.setTranslateX(x);
         this.setTranslateY(y);
         this.setText(text);
     }
 
-    public VoogaText (String text) {
+    public VoogaFrontEndText (String text) {
         this(0, 0, text);
     }
 

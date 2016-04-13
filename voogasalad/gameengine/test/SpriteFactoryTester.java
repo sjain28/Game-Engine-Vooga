@@ -17,22 +17,22 @@ public class SpriteFactoryTester {
 	private SpriteFactory myFactory;
 	//check if Archetypes are being added upon setArchetype
 	@Test
-	public void addArchetypeToListListIncrements() {
+	public void addArchetypeToListListIncrements() throws Exception {
 		myFactory = new SpriteFactory();
 		
 		//create sprite to add as default for archetype
 		Map<String, VoogaData> newProperties = new HashMap<String, VoogaData>();
 		newProperties.put("health points",null);
-		Sprite sprite = new Sprite("/bricks.jpg","Pirate",newProperties, new VoogaNumber(50));
+		Sprite sprite = new Sprite("/bricks.jpg","Pirate",newProperties, new VoogaNumber(50.0));
 		sprite.setProperties(newProperties);
 		
 		//add archetype to list
-		myFactory.setArchetype("Pirate", sprite);
+		myFactory.addArchetype("Pirate", sprite);
 		assertEquals(1,myFactory.getAllArchetypeNames().size());
 	}
 	
 	@Test
-	public void serializeAndDeserializeAListOfSprites(){
+	public void serializeAndDeserializeAListOfSprites() throws Exception{
 		addArchetypeToListListIncrements();
 		myFactory.serializeArchetypes("archetypes_saved_here");
 		
