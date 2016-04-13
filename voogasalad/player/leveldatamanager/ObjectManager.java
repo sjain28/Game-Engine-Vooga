@@ -32,15 +32,15 @@ public class ObjectManager {
 	 * @param factory
 	 */
 	public ObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
-		System.out.println("The list of elementables here is " + elements);
+		//System.out.println("The list of elementables here is " + elements);
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
 			myElements.put(el.getID(), el);
 		}
-		System.out.println("The list of myElementables here is " + myElements);
+		//System.out.println("The list of myElementables here is " + myElements);
 
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
-
+		keyEvents = new ArrayList<KeyEvent>();
 		//TODO: Once constructor is figured out, intialize all objects here.
 		mySpriteFactory = factory;
 	}
@@ -63,6 +63,7 @@ public class ObjectManager {
 	 * @return
 	 */
 	public Sprite getSprite(String id){
+		//System.out.println(myElements.get(id));
 		return (Sprite) myElements.get(id);
 	}
 
@@ -172,10 +173,12 @@ public class ObjectManager {
 	//		return archSprites;
 	//	}
 	public void setKeyEvents(List<KeyEvent> myKeyEvents){
+		//System.out.println("setting key events from object manager: "+myKeyEvents.size());
 		keyEvents = myKeyEvents;
 	}
 
 	public List<KeyEvent> getKeyEvents(){
+		//System.out.println("length of key events from object manager: "+keyEvents.size());
 		return keyEvents;
 	}
 }
