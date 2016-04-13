@@ -38,5 +38,11 @@ public class GlobalPropertiesTab extends AbstractPropertiesTab {
 		displayProperties();
 		
 	}
+	
+	public void setPropertiesMap(Map<String, VoogaData> map) {
+		propertiesMap.clear();
+		propertiesMap.putAll(map);
+		displayProperties();
+	}
 
 }
