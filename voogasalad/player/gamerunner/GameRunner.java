@@ -11,11 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import javafx.animation.AnimationTimer;
-<<<<<<< HEAD
-import javafx.scene.input.KeyEvent;
-=======
 import javafx.scene.Node;
->>>>>>> master
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.ILevelDataManager;
