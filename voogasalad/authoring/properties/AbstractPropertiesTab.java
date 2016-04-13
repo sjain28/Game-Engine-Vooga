@@ -1,4 +1,10 @@
 package authoring.properties;
+
+/**
+ * Abstract Properties Tab that includes shared characteristics between tabs.
+ * 
+ * @author Harry Guo, Nick Lockett, Arjun Desai, Aditya Srinivasan
+ */
 import java.util.HashMap;
 import java.util.Map;
 
