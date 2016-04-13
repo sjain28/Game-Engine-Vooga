@@ -33,16 +33,16 @@ public class GameRunner implements IGameRunner{
 	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
-	
+
 	private AnimationTimer myTimeline;
 
-	
-//	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
-//	private final Runnable renderer = null; // () -> whatever calls position updates //
-//	private final Consumer<Float> interpolater = null; //alpha -> interpolatatePositions(), null for no interpolation //
-//	private final Consumer<Integer> fps_reporter = null; //fps -> Text label for fps display, null for no label //
-//  GameLoop myGameLoop = new FixedStepLoopWithInterpolation();
-	
+
+	//	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
+	//	private final Runnable renderer = null; // () -> whatever calls position updates //
+	//	private final Consumer<Float> interpolater = null; //alpha -> interpolatatePositions(), null for no interpolation //
+	//	private final Consumer<Integer> fps_reporter = null; //fps -> Text label for fps display, null for no label //
+	//  GameLoop myGameLoop = new FixedStepLoopWithInterpolation();
+
 
 	/**
 	 * Default constructor
@@ -92,12 +92,12 @@ public class GameRunner implements IGameRunner{
 	 */
 	public void run() {
 		myTimeline = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                step();
-            }
-        };
-        myTimeline.start();
+			@Override
+			public void handle(long l) {
+				step();
+			}
+		};
+		myTimeline.start();
 	}
 
 	/**
@@ -110,11 +110,11 @@ public class GameRunner implements IGameRunner{
 	private void step() {
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-		
+
 		myGameDisplay.populateGameScreen();
-//		myGameDisplay.display();
+		//		myGameDisplay.display();
 	}
-	
+
 	/**
 	 * This makes GameDisplay read in Nodes to display on its screen
 	 * nodesToDisplay a list of Nodes filtered by DisplayScroller and
@@ -126,7 +126,7 @@ public class GameRunner implements IGameRunner{
 	public void read(Collections nodesToDisplay) {
 		getGameDisplay().read((List<Node>) nodesToDisplay);
 	}
-	
+
 	/**
 		playGame plays each level of the game, as long as the game has not been won yet. If the game has been won 
 		already, the next level of the game will be played. playGame iterates through the queue of levels
@@ -153,7 +153,7 @@ public class GameRunner implements IGameRunner{
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 		myGameDisplay.display();
-		
+
 
 		run();
 	}
@@ -230,7 +230,7 @@ public class GameRunner implements IGameRunner{
 	public void start() {
 		getTimeline().start();
 	}
-	
+
 	/**
 	 * Returns an interface of this class
 	 * Java's covariant return types
@@ -260,25 +260,25 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void clearKeyEvents() {
-		
+
 	}
-	
+
 	@Override
 	public void speedUp() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void speedDown() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mute() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
