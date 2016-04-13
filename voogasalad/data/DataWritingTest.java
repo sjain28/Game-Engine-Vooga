@@ -15,7 +15,6 @@ import authoring.interfaces.Elementable;
 import authoring.model.DumbVoogaText;
 import authoring.model.ElementManager;
 import authoring.model.VoogaButton;
-import authoring.model.VoogaText;
 import events.Cause;
 import events.KeyCause;
 import events.VariableEffect;
