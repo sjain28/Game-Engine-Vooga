@@ -8,25 +8,28 @@ import java.util.Collections;
  * @author mykuryshev, Hunter
  */
 public interface IGameRunner {
-	
+
 	void stop();
-	
+
 	void start();
-	
+
 	void speedUp();
-	
+
 	void speedDown();
-	
+
 	void mute();
-	
+
 	IGameRunner getSelf();
-	
+
+	void playLevel(String teststring);
+
 	// Methods below only called by LevelDataManager
 	Collections getKeyEvents();
-	
+
 	void clearKeyEvents();
-	
+
 	@Deprecated
 	void read(Collections nodesToDisplay);
-	
+
+
 }
