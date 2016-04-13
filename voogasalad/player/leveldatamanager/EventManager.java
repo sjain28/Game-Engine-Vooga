@@ -40,9 +40,7 @@ public class EventManager {
 		for(KeyEvent k: (List<KeyEvent>) myEngineManager.getKeyEvents()){
 			keyStrokes.add(k.toString());
 		}
-		
-		//myEngineManager.getKeyEvents()keyCauses.forEach(action);
-		
+				
 		checkKeys();
 		for(VoogaEvent e: myEvents){
 			e.update();
