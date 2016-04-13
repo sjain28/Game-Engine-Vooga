@@ -70,40 +70,26 @@ public class EventManager {
 	/**
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
-	public void checkKeys(){
-		for (List<String> keyCombo : keyCombos){
-			if(keyStrokes.size() < keyCombo.size()){
+	private void checkKeys(){
+		for (List<String> eventCombo : keyCombos){ //Check all tuples
+			if(keyStrokes.size() < eventCombo.size()){
 				continue;
 			}
-			for(int i = 0; i < keyStrokes.size()-1; i++){ //Loop over all tuples in keystrokes
+			for(int i = 0; i < keyStrokes.size()-1; i++){ //Checking for a tuple in a list: Need a nested for loop :(
 				boolean match = true;
-				for(int j = 0; j < keyCombo.size(); j++){ //Compare the tuple to the keycombo
-					if(!keyCombo.get(j).equals(keyStrokes.get(j+i))){
+				for(int j = 0; j < eventCombo.size(); j++){ //Compare the tuple to the keycombo
+					if(!eventCombo.get(j).equals(keyStrokes.get(j+i))){
 						match = false;
 					}
 				}
 				if(match){
-					keyCauses.get(keyCombo).setValue(true);
+					keyCauses.get(eventCombo).setValue(true);
+					clearStrokes(i, i+eventCombo.size()-1);
 					break;
 				}
 			}
 		}
 	}	
-	
-	/**
-	 * Tests if String a is a rearranged version of String b
-	 * Precondition: Strings must be same length
-	 * Precondition: Strings must NOT have repeated characters
-	 */
-	public boolean checkEquivalent(String a, String b){
-
-		for(int i = 0; i < a.length(); i++){
-			if(!b.contains(a.substring(i,i+1))){
-				return false;
-			}
-		}
-		return true;
-	}
 	
 	/**
 	 * Removes keystrokes from the list once they're used for an event
