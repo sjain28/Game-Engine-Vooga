@@ -46,6 +46,9 @@ public class StandardDisplay implements IGameDisplay {
 	 * Default constructor
 	 * 
 	 */
+	
+	//extend Pane
+	
 	public StandardDisplay() {
 		myStage = new Stage();
 		myPane = new BorderPane();
@@ -96,8 +99,10 @@ public class StandardDisplay implements IGameDisplay {
 	public void display() {
 		//Creates the main pane
 		createPane();
+		
 		//Creates the game screen
-		populateGameScreen();
+//		populateGameScreen();
+		
 		//Shows the scene
 		getStage().show();
 		//Adds keyinput listener
@@ -143,7 +148,9 @@ public class StandardDisplay implements IGameDisplay {
 	 * of the game display (BorderPane)
 	 * 
 	 */
-	private void populateGameScreen() {
+	@Override
+	public void populateGameScreen() {
+		getGameScreen().getChildren().clear();
 		getListToDisplay().forEach(n -> getGameScreen().getChildren().add(n));
 	}
 
