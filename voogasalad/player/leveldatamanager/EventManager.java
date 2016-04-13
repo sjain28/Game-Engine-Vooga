@@ -55,6 +55,7 @@ public class EventManager {
 
 	public void addEvent(VoogaEvent voogaEvent){
 		for(Cause c: voogaEvent.getCauses()){
+			c.init();
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
 				keyCauses.put(keyc.getKeys(), keyc); 
