@@ -30,12 +30,15 @@ public class GameObjectBuilder extends Builder{
     
     public void compile () {
         try{
+            System.out.println("New Archetype: "+myArchtype);
             Sprite sprite = getSpriteMaker().createSprite(myArchtype);
+            System.out.println("Sprite:"+sprite);
             getManager().addGameElements(new GameObject(sprite));
             getManager().addElementId(myArchtype);
             quit();
         }
-        catch(Exception NullPointerException){
+        catch(Exception e){
+            e.printStackTrace();
            numberError("Please select an Archtype");
         }
     }
