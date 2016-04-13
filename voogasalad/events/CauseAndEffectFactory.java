@@ -71,7 +71,8 @@ public class CauseAndEffectFactory {
         if (input.equalsIgnoreCase("false"))
             return new Boolean("false");
         try {
-            return Double.parseDouble(input);
+        	Double d = Double.parseDouble(input);
+            return d;
         }
         catch (Exception e) {
             return input;
@@ -122,7 +123,7 @@ public class CauseAndEffectFactory {
         String ID = tester.getID();
         VoogaEvent event = new VoogaEvent();
         
-        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", 50.0, "greaterThan", event);
+        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", "greaterThan", 50.0, event);
         SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
         
         event.update();
