@@ -11,9 +11,9 @@ import javafx.scene.Node;
  *
  */
 public interface ILevelDataManager {
-	
+
 	List<Node> getDisplayableObjects(); 
-	
+
 	void update();
-	
+
 }
