@@ -26,7 +26,8 @@ import javafx.stage.Stage;
 public class StandardDisplay implements IGameDisplay {
 
 	private static final int PANE_SIZE = 600;
-	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+//	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+	private static final String BGM_PATH = "resources/sound/hypnotize.mp3";
 
 	//	private IGameRunner myGameRunner;
 	private Stage myStage;
