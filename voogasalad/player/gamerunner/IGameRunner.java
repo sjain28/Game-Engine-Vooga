@@ -1,6 +1,7 @@
 package player.gamerunner;
 
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Main control interface for player runner
@@ -24,7 +25,7 @@ public interface IGameRunner {
 	void playLevel(String teststring);
 
 	// Methods below only called by LevelDataManager
-	Collections getKeyEvents();
+	List<?> getKeyEvents();
 
 	void clearKeyEvents();
 
