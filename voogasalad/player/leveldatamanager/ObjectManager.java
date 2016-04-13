@@ -37,6 +37,7 @@ public class ObjectManager {
 			myElements.put(el.getID(), el);
 		}
 		System.out.println("The list of myElementables here is " + myElements);
+		
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		
 		//TODO: Once constructor is figured out, intialize all objects here.
