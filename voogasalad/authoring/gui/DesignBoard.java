@@ -27,7 +27,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
-
+/**
+ * This class handles the display of all objects on the Authoring Environment GUI.
+ * This is the board on which the author can build the game.
+ * 
+ * @author Aditya Srinivasan, Nick Lockett, Harry Guo, Arjun Desai
+ *
+ */
 public class DesignBoard extends Tab implements Observer{
 
     private static final String DESIGN_BOARD = "Design Board";
@@ -43,7 +49,11 @@ public class DesignBoard extends Tab implements Observer{
     private PropertiesTabManager propertiesTabManager;
 
     private double y_offset, x_offset;
-
+    
+    /**
+     * Constructs DesignBoard with object that has the functionality described by CompleteAuthoringModelable interface
+     * @param elem: functionality described by CompleteAuthoringModelable interface
+     */
     public DesignBoard (CompleteAuthoringModelable elem) {
         this.setText(DESIGN_BOARD);
         contentPane = new StackPane();
@@ -59,7 +69,7 @@ public class DesignBoard extends Tab implements Observer{
         y_offset = HEIGHT / 2;
         x_offset = WIDTH / 2;
     }
-
+    
     public PropertiesTabManager getPropertiesTabManager () {
         return propertiesTabManager;
     }
@@ -150,11 +160,14 @@ public class DesignBoard extends Tab implements Observer{
             addElement(node, elementPath);
         }
 
-    }
+        System.out.println(elementManager.getIds());
 
-    public void addElement (Node node, String id) {
+    }
+    
+    private void addElement (Node node, String id) {
         elementManager.addGameElements(node);
         elementManager.addElementId(id);
+        contentPane.getChildren().add(node);
     }
 
     private void moveElement (String id, DragEvent e) {
