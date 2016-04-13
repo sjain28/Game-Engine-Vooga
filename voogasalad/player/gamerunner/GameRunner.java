@@ -45,7 +45,6 @@ public class GameRunner implements IGameRunner{
 	}
 
 	public GameRunner(String fileString) throws FileNotFoundException, IOException {
-		// TODO Auto-generated constructor stub
 		this(new File(fileString));
 	}
 
