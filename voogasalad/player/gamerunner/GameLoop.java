@@ -9,6 +9,7 @@ import javafx.animation.AnimationTimer;
  * 
  * @author mykuryshev
  */
+@Deprecated
 public abstract class GameLoop extends AnimationTimer{
 	private float maximumStep = Float.MAX_VALUE;
 	private float maximumTime = Float.MAX_VALUE;
