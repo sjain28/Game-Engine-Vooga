@@ -146,6 +146,11 @@ public class ObjectManager {
 
 	}
 
+	/**
+	 * Returns X coordinate of the main character
+	 * 
+	 * @return
+	 */
 	public double getMainCharXPos() {
 		//HARD CODED TO JUST RETURN THE XPOS OF THE FIRST SPRITE
 		//TODO: CHANGE THIS SOON
@@ -172,11 +177,21 @@ public class ObjectManager {
 	//		}
 	//		return archSprites;
 	//	}
+	/**
+	 * Sets KeyEvents
+	 * 
+	 * @param myKeyEvents
+	 */
 	public void setKeyEvents(List<KeyEvent> myKeyEvents){
 		//System.out.println("setting key events from object manager: "+myKeyEvents.size());
 		keyEvents = myKeyEvents;
 	}
 
+	/**
+	 * Returns KeyEvents
+	 * 
+	 * @return
+	 */
 	public List<KeyEvent> getKeyEvents(){
 		//System.out.println("length of key events from object manager: "+keyEvents.size());
 		return keyEvents;

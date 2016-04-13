@@ -22,6 +22,7 @@ public class EventWindow extends Stage{
     
     private VoogaEvent event;
     private CauseAndEffectFactory eventFactory;
+    private boolean ready;
     
     public EventWindow(EditEventable manager){
         this.manager = manager;
@@ -51,24 +52,31 @@ public class EventWindow extends Stage{
      * Use Factory to construct Event--> add event to the manager
      */
     private void apply(){
-        for (String eventDetails : causeAccoridion.getDetails()){
-            populateEvent(eventDetails);
+        try{
+            for (String eventDetails : causeAccoridion.getDetails()){
+                populateEvent(eventDetails);
+            }
+        
+            for (String eventDetails : effectAccoridion.getDetails()){
+                populateEvent(eventDetails);
+            }
+            manager.addEvents(event);
+            this.close();
+            
+        } catch (Exception e){
+            ready=false;
+            new VoogaAlert(e.getMessage());
         }
         
-        for (String eventDetails : effectAccoridion.getDetails()){
-            populateEvent(eventDetails);
-        }
         
-        manager.addEvents(event);
-        this.close();
     }
     
-    private void populateEvent(String eventDetails){
+    private void populateEvent(String eventDetails) throws Exception{
         try{
             System.out.println("EventDetails-EventWindow: "+eventDetails);
             eventFactory.create(event, eventDetails);
-        } catch (VoogaException e){
-            new VoogaAlert(e.getMessage());
+        } catch (Exception e){
+            throw e;
         }
     }
     private void cancel(){

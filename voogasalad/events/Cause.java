@@ -18,6 +18,7 @@ public abstract class Cause {
 		 myEvent = event;
 	 }
 	 
+	 public abstract void init();
 }
 
 //Every cause and effect needs to look at both Sprite Maps from SpriteManager

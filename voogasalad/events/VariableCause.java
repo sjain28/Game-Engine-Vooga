@@ -2,7 +2,6 @@ package events;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
 import tools.interfaces.VoogaData;
 
 public class VariableCause extends Cause{
@@ -10,26 +9,27 @@ public class VariableCause extends Cause{
 	private Object myTarget;
 	private String myOperation;
 	private VoogaData myVariable;
+	private String myVarName;
 	
-	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
+	public VariableCause(String variableName, String predicate, Double targetValue, VoogaEvent voogaEvent) {		
 		super(voogaEvent);
 		myTarget = targetValue;
 		myOperation = predicate;
-		myVariable = super.getEvent().getManager().getGlobalVar(variableName);
+		myVarName = variableName;
 	}
 	
-	public VariableCause(String variableName, Boolean targetValue, String predicate, VoogaEvent voogaEvent) {		
+	public VariableCause(String variableName, String predicate, Boolean targetValue, VoogaEvent voogaEvent) {		
 		super(voogaEvent);
 		myTarget = targetValue;
 		myOperation = predicate;
-		myVariable = super.getEvent().getManager().getGlobalVar(variableName);
+		myVarName = variableName;
 	}
 	
 	public VariableCause(String predicate, VoogaEvent event){
 		super(event);
 		myOperation = predicate;
 	}
-
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean check() {
@@ -63,6 +63,12 @@ public class VariableCause extends Cause{
 	
 	protected void setPredicate(String pred){
 		myOperation = pred;
+	}
+
+	@Override
+	public void init() {
+		myVariable = super.getEvent().getManager().getGlobalVar(myVarName);
+		
 	}
 
 }
