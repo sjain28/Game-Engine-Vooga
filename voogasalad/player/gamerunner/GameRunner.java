@@ -110,7 +110,9 @@ public class GameRunner implements IGameRunner{
 	private void step() {
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-		//myGameDisplay.display();
+		
+		myGameDisplay.populateGameScreen();
+//		myGameDisplay.display();
 	}
 	
 	/**
@@ -150,6 +152,7 @@ public class GameRunner implements IGameRunner{
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 		myGameDisplay.display();
+		
 
 		run();
 	}
