@@ -10,5 +10,5 @@ package player.gamedisplay;
 public interface IPromptFactory {
 
 	void prompt(String message);
-	
+
 }

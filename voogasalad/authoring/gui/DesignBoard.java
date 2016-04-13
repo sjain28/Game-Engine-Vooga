@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.GameObject;
 import authoring.interfaces.Elementable;
 import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
@@ -91,7 +92,9 @@ public class DesignBoard extends Tab implements Observer{
             }
         }
         if(db.hasString()) {
-        	System.out.println(db.getString());
+        	GameObject object = (GameObject) elementManager.getElement(db.getString());
+        	object.setTranslateX(event.getX() - x_offset);
+        	object.setTranslateY(event.getY() - y_offset);
         }
 
         event.setDropCompleted(success);

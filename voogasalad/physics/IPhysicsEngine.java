@@ -4,7 +4,6 @@ import gameengine.Sprite;
 import tools.Acceleration;
 import tools.Position;
 import tools.Velocity;
-import tools.interfaces.VoogaData;
 
 public interface IPhysicsEngine {
 
@@ -15,7 +14,7 @@ public interface IPhysicsEngine {
 	 * @param change
 	 */
 	void translate(Sprite sprite, Velocity change);
-	
+
 	/**
 	 * Set a sprite's position to a new vector
 	 * 
@@ -23,7 +22,7 @@ public interface IPhysicsEngine {
 	 * @param newPosition
 	 */
 	void setPosition(Sprite sprite, Position newPosition);
-	
+
 	/**
 	 * Take in a sprite's position and add a position vector directly to it
 	 * 
@@ -31,7 +30,7 @@ public interface IPhysicsEngine {
 	 * @param addedPosition
 	 */
 	void addPosition(Sprite sprite, Position addedPosition);
-	
+
 	/**
 	 * Set a sprite's velocity to a new vector
 	 * 
@@ -39,7 +38,7 @@ public interface IPhysicsEngine {
 	 * @param newVelocity
 	 */
 	void setVelocity(Sprite sprite, Velocity newVelocity);
-	
+
 	/**
 	 * Take in a sprite's position and add velocity vector directly to it
 	 * 
@@ -47,7 +46,7 @@ public interface IPhysicsEngine {
 	 * @param addedVelocity
 	 */
 	void addVelocity(Sprite sprite, Velocity addedVelocity);
-	
+
 	/**
 	 * Take in a sprite's velocity and add acceleration per frame
 	 * 
@@ -55,7 +54,7 @@ public interface IPhysicsEngine {
 	 * @param change
 	 */
 	void accelerate(Sprite sprite, Acceleration change);
-	
+
 	/**
 	 * Given a velocity modifying coefficient, reflect a sprite's velocity
 	 * direction and set the magnitude to change by a factor of bounceCoefficient
@@ -64,7 +63,7 @@ public interface IPhysicsEngine {
 	 * @param bounceCoefficient
 	 */
 	void bounce(Sprite sprite, double bounceCoefficient);
-	
+
 	/**
 	 * Produce an acceleration vector in the same direction per sprite motion
 	 * and call accelerate() to modify its velocity per the coefficient's factor.
@@ -73,7 +72,7 @@ public interface IPhysicsEngine {
 	 * @param frictionCoefficeint
 	 */
 	void friction(Sprite sprite, double frictionCoefficeint);
-	
+
 	/**
 	 * Produce an upwards velocity to set the sprite to increase by
 	 * 
@@ -81,7 +80,7 @@ public interface IPhysicsEngine {
 	 * @param jumpMagnitude
 	 */
 	void jump(Sprite sprite, double jumpMagnitude);
-	
+
 	/**
 	 * Given a gravitational source (ground), produce an acceleration vector
 	 * in the direction of the source to which the sprite can accelerate()
@@ -91,7 +90,7 @@ public interface IPhysicsEngine {
 	 * @param gravityAcceleration
 	 */
 	void gravity(Sprite sprite, double gravityAcceleration);
-	
+
 	/**
 	 * Given enough time in the frame for physics operations, look at the next frame 
 	 * and prepare for operations
