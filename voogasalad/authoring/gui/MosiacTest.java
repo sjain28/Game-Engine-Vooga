@@ -18,7 +18,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * This class was used as an example for the potential Pane implementation of Mosaic, a dynamic resizing environment. Not actually
+ * written by Nick, instead copies from the github mosaic page.
+ * 
+ * @author Nick
+ *
+ */
 public class MosiacTest extends Application {
         /** Mapping of element id's to labels for later reference when serializing */
         private java.util.Map<String, Label> clientMap = new java.util.HashMap<>();
