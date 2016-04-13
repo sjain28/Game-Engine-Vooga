@@ -159,7 +159,7 @@ public class GameRunner implements IGameRunner{
 		myGameDisplay.populateGameScreen();
 		//		myGameDisplay.display();
 		
-		System.out.println("HIHIH This is RATE!!!" + getTimeline().getRate());
+//		System.out.println("HIHIH This is RATE!!!" + getTimeline().getRate());
 
 	}
 
@@ -185,7 +185,7 @@ public class GameRunner implements IGameRunner{
 		while(iterator.hasNext()){
 			// if (!l.isWon)
 			String nextLevel = iterator.next();
-			System.out.println(nextLevel);
+//			System.out.println(nextLevel);
 			playLevel(nextLevel);
 		}
 	}
@@ -196,7 +196,7 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName){
-		System.out.println("What is the file name in this play Level Method?" + fileName);
+//		System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
