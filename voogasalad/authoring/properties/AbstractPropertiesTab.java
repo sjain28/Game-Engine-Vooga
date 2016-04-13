@@ -54,14 +54,11 @@ public abstract class AbstractPropertiesTab extends Tab {
 	public void displayProperties() {
 		propertiesHBox.getChildren().clear();
 		
-		VBox keyCol = new VBox(SPACING);
-		VBox valCol = new VBox(SPACING);
+		VBox properties = new VBox(SPACING);
 		
 		Text name = null; Node data = null;
 		
 		for(String property: propertiesMap.keySet()) {
-			
-			System.out.println(property);
 			
 			name = new CustomText(property);
 			
@@ -78,11 +75,10 @@ public abstract class AbstractPropertiesTab extends Tab {
 			
 			data = propertiesMap.get(property).display();
 			
-			keyCol.getChildren().add(name);
-			valCol.getChildren().add(data);
+			properties.getChildren().add(new Property(name, data));
 		}
 		
-		propertiesHBox.getChildren().addAll(keyCol, valCol);
+		propertiesHBox.getChildren().addAll(properties);
 		myScrollPane.setContent(propertiesHBox);
 	}
 	
