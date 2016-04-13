@@ -5,22 +5,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.function.Consumer;
-
 import javafx.animation.AnimationTimer;
-import javafx.scene.Node;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
+import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelDataManager;
 
 public class GameRunner implements IGameRunner{
 
-	private LevelDataManager myCurrentLevelDataManager;
-	private IGameDisplay myDisplay;
+	private ILevelDataManager myCurrentLevelDataManager;
+	private IGameDisplay myGameDisplay;
 	private Queue<String> levelQueue;
 	/*
 	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
@@ -33,7 +32,7 @@ public class GameRunner implements IGameRunner{
 
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
 		// TODO Auto-generated constructor stub
-		myDisplay = new StandardDisplay();
+		myGameDisplay = new StandardDisplay();
 		levelQueue = createLevels(xmlList);
 		//System.out.println(levelQueue);
 
@@ -90,8 +89,8 @@ public class GameRunner implements IGameRunner{
 	 */
 	private void step() {
 		myCurrentLevelDataManager.update();		 
-		myDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-		myDisplay.display();
+		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		myGameDisplay.display();
 	}
 	/**
 		playGame plays each level of the game, as long as the game has not been won yet. If the game has been won 
@@ -164,15 +163,15 @@ public class GameRunner implements IGameRunner{
 	/**
 	 * @return the myCurrentLevelDataManager
 	 */
-	public LevelDataManager getCurrentLevelDataManager() {
+	public ILevelDataManager getCurrentLevelDataManager() {
 		return myCurrentLevelDataManager;
 	}
 
 	/**
-	 * @return the myDisplay
+	 * @return the myGameDisplay
 	 */
-	public IGameDisplay getDisplay() {
-		return myDisplay;
+	public IGameDisplay getGameDisplay() {
+		return myGameDisplay;
 	}
 
 	/**
@@ -207,6 +206,30 @@ public class GameRunner implements IGameRunner{
 	public void start() {
 		// TODO Auto-generated method stub
 		getTimeline().start();
+	}
+	
+	/**
+	 * Returns an interface of this class
+	 * Java's covariant return types
+	 * 
+	 */
+	@Override
+	public IGameRunner getSelf() {
+		// TODO Auto-generated method stub
+		return this;
+	}
+
+	/**
+	 * Returns KeyEvents to be passed into LevelDataManager
+	 * 
+	 * KeyEvents (Collections--List<KeyEvent>) are passed to LevelDataManager
+	 * through GameRunner
+	 * 
+	 */
+	@Override
+	public Collections getKeyEvents() {
+		// TODO Auto-generated method stub
+		return (Collections) getGameDisplay().getKeyEvents();
 	}
 
 	/**

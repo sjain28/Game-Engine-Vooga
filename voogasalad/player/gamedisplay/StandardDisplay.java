@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import player.gamerunner.IGameRunner;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -26,9 +27,10 @@ import javafx.stage.Stage;
 public class StandardDisplay implements IGameDisplay {
 
 	private static final int PANE_SIZE = 600;
-	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+//	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+	private static final String BGM_PATH = "resources/sound/hypnotize.mp3";
 
-	//	private IGameRunner myGameRunner;
+	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
 	private BorderPane myPane;
@@ -57,6 +59,15 @@ public class StandardDisplay implements IGameDisplay {
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
 		myMediaPlayer = new MediaPlayer(myBGM);
 
+	}
+	
+	/**
+	 * Constructor that takes in a reference to GameRunner
+	 * 
+	 */
+	public StandardDisplay(IGameRunner gamerunner) {
+		this();
+		this.myGameRunner = gamerunner;
 	}
 
 	/**
@@ -245,6 +256,13 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	public MediaPlayer getMediaPlayer() {
 		return myMediaPlayer;
+	}
+
+	/**
+	 * @return the myGameRunner
+	 */
+	public IGameRunner getGameRunner() {
+		return myGameRunner;
 	}
 
 }
