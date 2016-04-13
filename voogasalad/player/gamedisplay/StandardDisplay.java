@@ -143,6 +143,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * 
 	 */
 	private void populateGameScreen() {
+		//getGameScreen().getChildren().clear();
 		getListToDisplay().forEach(n -> getGameScreen().getChildren().add(n));
 	}
 
