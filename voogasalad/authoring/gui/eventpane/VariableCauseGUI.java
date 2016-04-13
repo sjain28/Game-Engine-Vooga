@@ -72,13 +72,13 @@ public class VariableCauseGUI implements EventGUI{
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
             if (vd instanceof VoogaNumber) {
-                actions.getItems().addAll("set","decrease","increase");
+                actions.getItems().addAll("equals");
                 NumberTextField numField = new NumberTextField();
                 amount = numField;
                 addGUIElements(actions, amount);
             }
             if (vd instanceof VoogaBoolean) {
-                actions.getItems().addAll(("set"));
+                actions.getItems().addAll(("equals"));
                 ComboBox<String> cb = new ComboBox<String>();
                 cb.getItems().addAll("true", "false");
                 amount = cb;
