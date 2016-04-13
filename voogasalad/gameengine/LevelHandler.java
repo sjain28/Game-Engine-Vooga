@@ -2,7 +2,7 @@ package gameengine;
 
 import java.util.List;
 
-import player.leveldatamanager.EngineObjectManager;
+import player.leveldatamanager.ObjectManager;
 import player.leveldatamanager.EventManager;
 
 /**
@@ -14,10 +14,10 @@ import player.leveldatamanager.EventManager;
  */
 public class LevelHandler {
 	
-		private EngineObjectManager myObjectManager;
+		private ObjectManager myObjectManager;
 		private EventManager myEventManager;
 		
-        public LevelHandler(EngineObjectManager objectmanager, EventManager eventmanager) {
+        public LevelHandler(ObjectManager objectmanager, EventManager eventmanager) {
         	myObjectManager = objectmanager;
         	myEventManager = eventmanager;
         }
