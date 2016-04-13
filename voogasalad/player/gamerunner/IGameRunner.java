@@ -26,6 +26,7 @@ public interface IGameRunner {
 	
 	void clearKeyEvents();
 	
+	@Deprecated
 	void read(Collections nodesToDisplay);
 	
 }

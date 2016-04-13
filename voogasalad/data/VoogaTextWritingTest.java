@@ -1,5 +1,6 @@
 package data;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import javafx.application.Application;
+import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import tools.Position;
 import tools.VoogaNumber;
@@ -18,10 +21,13 @@ import tools.interfaces.VoogaData;
 
 public class VoogaTextWritingTest extends Application {
 
+	private static final String testString= "levels/VoogaTextWriting.xml";
+	
     @Override
     public void start (Stage primaryStage) throws Exception {
         DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),generateGlobalVariables(),generateEvents());
         
+
         Serializer.serialize(manager, "levels/Test.xml");
         Object o = DeSerializer.deserialize(1, "levels/Test.xml").get(0);
         DataContainerOfLists vt2 = (DataContainerOfLists) o;
