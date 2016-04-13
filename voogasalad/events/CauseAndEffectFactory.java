@@ -12,9 +12,17 @@ import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 public class CauseAndEffectFactory {
+
 //	private ResourceBundle errorMessages = ResourceBundle.getBundle("./resources/ErrorMessages.properties");
 
     @SuppressWarnings("rawtypes")
+/**
+ * Takes in a string stating what kind of cause/effect is being made as well as all of its parameters. Also takes in the
+ * event to which the cause/effect is being added. Parses the string to get the information for the cause/effect and uses
+ * reflection to instantiate the correct constructor, filling it with the needed parameters.
+ * @param event
+ * @param inputString
+ */
     public void create (VoogaEvent event, String inputString) {
        
     	String[] parameters = inputString.split("\\s+");
@@ -44,8 +52,6 @@ public class CauseAndEffectFactory {
         try {
             Constructor<?> causeConstructor = c.getConstructor(paramClasses);
             Object result = causeConstructor.newInstance(allParams);
-            addToEvent(event, result);
-
         }
         catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -63,7 +69,12 @@ public class CauseAndEffectFactory {
             e.printStackTrace();
         }
     }
-
+/**
+ * Parses the input string from the user stating conditions for cause/effect in order to use as separate constructor
+ * type/parameters
+ * @param input
+ * @return
+ */
     private Object parseString (String input) {
         if (input.equalsIgnoreCase("true"))
             return new Boolean(true);
@@ -79,21 +90,10 @@ public class CauseAndEffectFactory {
         }
 
     }
-
-    private void addToEvent (VoogaEvent event, Object added) {
-        try {
-            if (added instanceof Cause) {
-                event.addCause((Cause) added);
-            }
-            else {
-                event.addEffect((Effect) added);
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Incorrect object!");
-        }
-    }
-
+    /**
+	 * Main method was used for testing purposes
+	 * @param args
+	 */
     public static void main (String args[]) {
         CauseAndEffectFactory cf = new CauseAndEffectFactory();
         VoogaEvent e = new VoogaEvent();
