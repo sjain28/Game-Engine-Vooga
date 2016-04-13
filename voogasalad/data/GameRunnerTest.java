@@ -20,6 +20,8 @@ import tools.interfaces.VoogaData;
 
 
 public class GameRunnerTest extends Application {
+	
+	private static final String testString = "levels/Test.xml";
     public static void main (String[] args) {
         launch(args);
         
@@ -74,8 +76,8 @@ public class GameRunnerTest extends Application {
         
 //        FileReaderToGameObjects filereader = new FileReaderToGameObjects(fileName);
 
-    	GameRunner gameRunner = new GameRunner("levels/Test.xml");
-        gameRunner.playLevel("levels/Test.xml");
+        GameRunner gameRunner = new GameRunner(testString);
+        gameRunner.playLevel(testString);
 //        DataContainerOfLists deserializedList = filereader.getDataContainer();
 //     
 //        fileWriter.saveGameObjects(deserializedList, fileName2);
