@@ -5,6 +5,7 @@ import java.util.Map;
 import authoring.interfaces.Elementable;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
+import javafx.scene.control.Button;
 import tools.interfaces.VoogaData;
 
 
@@ -14,6 +15,7 @@ public class DataContainerOfLists {
     private List<Elementable> elementableList;
     private Map<String, VoogaData> variableMap;
     private SpriteFactory spriteFactory;
+    private List<Button> ButtonList; 
     
     public DataContainerOfLists () {
     }
@@ -26,6 +28,15 @@ public class DataContainerOfLists {
         this.elementableList = ElementableList;
         this.variableMap = variableMap;
         this.spriteFactory = spriteFactory;
+    }
+    
+    public void addButton(List<Button> ButtonList){
+    	this.ButtonList = ButtonList;
+    }
+    
+    public List<Button> getButtonList () {
+
+        return this.ButtonList;
     }
 
     public List<Elementable> getElementableList () {

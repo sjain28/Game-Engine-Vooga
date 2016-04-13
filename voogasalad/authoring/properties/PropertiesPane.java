@@ -7,13 +7,18 @@ package authoring.properties;
  */
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
+import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Windowable;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import tools.interfaces.VoogaData;
 
-public class PropertiesPane extends TabPane implements Windowable {
+public class PropertiesPane extends TabPane implements Windowable, Observer {
 	
 	private PropertiesTabManager ptm;
 
@@ -21,9 +26,9 @@ public class PropertiesPane extends TabPane implements Windowable {
 	 * Constructor to instantiate the properties Pane
 	 */	
 	public PropertiesPane() {
-		// used for testing purposes, going to just create an instance of PropertiesTabManager and set it to 
-		//ptm = new PropertiesTabManager();
-		//populateTabPane();
+		//used for testing purposes, going to just create an instance of PropertiesTabManager and set it to 
+		ptm = new PropertiesTabManager();
+		populateTabPane();
 	}
 	
 	/**
@@ -51,6 +56,12 @@ public class PropertiesPane extends TabPane implements Windowable {
 	@Override
 	public Node getWindow() {
 		return this;
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		Map<String, VoogaData> global = (Map<String, VoogaData>) arg;
+		ptm.getGlobalPropertiesTab().getPropertiesMap(global);
 	}
 
 }

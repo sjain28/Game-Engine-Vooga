@@ -11,7 +11,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import javafx.animation.AnimationTimer;
+<<<<<<< HEAD
 import javafx.scene.input.KeyEvent;
+=======
+import javafx.scene.Node;
+>>>>>>> master
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.ILevelDataManager;
@@ -109,8 +113,23 @@ public class GameRunner implements IGameRunner{
 	private void step() {
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-		myGameDisplay.display();
+		
+		myGameDisplay.populateGameScreen();
+//		myGameDisplay.display();
 	}
+	
+	/**
+	 * This makes GameDisplay read in Nodes to display on its screen
+	 * nodesToDisplay a list of Nodes filtered by DisplayScroller and
+	 * is typed: List<Node>
+	 * 
+	 */
+	@Deprecated
+	@Override
+	public void read(Collections nodesToDisplay) {
+		getGameDisplay().read((List<Node>) nodesToDisplay);
+	}
+	
 	/**
 		playGame plays each level of the game, as long as the game has not been won yet. If the game has been won 
 		already, the next level of the game will be played. playGame iterates through the queue of levels
@@ -134,8 +153,12 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName){
 		System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(fileName);
-		//TODO: call the time line here and pass step into time line
-		step();
+		myCurrentLevelDataManager.update();		 
+		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		myGameDisplay.display();
+		
+
+		run();
 	}
 
 	/**
@@ -233,6 +256,16 @@ public class GameRunner implements IGameRunner{
 		return (Collections) getGameDisplay().getKeyEvents();
 	}
 
+	/**
+	 * Clears KeyEvents collections after applying events
+	 * (cause and effects) to sprites
+	 * 
+	 */
+	@Override
+	public void clearKeyEvents() {
+		
+	}
+	
 	@Override
 	public void speedUp() {
 		// TODO Auto-generated method stub
@@ -250,5 +283,7 @@ public class GameRunner implements IGameRunner{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }
