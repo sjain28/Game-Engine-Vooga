@@ -5,7 +5,12 @@ import authoring.UILauncher;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import javafx.stage.Stage;
-
+/**
+ * Class to launch the Program 
+ * Initializes both the UIComponents through UILauncher and the Model, or "Backend" of the project
+ * @author Nick
+ *
+ */
 public class Launcher {
 	
 	public Launcher(Stage primaryStage) {
