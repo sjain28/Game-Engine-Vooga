@@ -2,6 +2,7 @@ package authoring.gui.menubar.builders;
 
 import java.util.HashMap;
 import java.util.Map;
+import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditElementable;
 import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.VoogaFile;
@@ -45,7 +46,7 @@ public class ArchetypeBuilder extends Builder {
         TextField nameVal = new TextField();
         Text value = new Text("Value: ");
         value.setFill(Color.WHITE);
-        TextField valueVal = new TextField();
+        NumberTextField valueVal = new NumberTextField();
         Button set = new Button("add");
         set.setOnAction(e-> {
             VoogaData val = new VoogaNumber();
