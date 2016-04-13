@@ -32,10 +32,11 @@ public class GameObjectBuilder extends Builder{
         try{
             Sprite sprite = getSpriteMaker().createSprite(myArchtype);
             getManager().addGameElements(new GameObject(sprite));
+            getManager().addElementId(myArchtype);
             quit();
         }
         catch(Exception NullPointerException){
-           numberError("Please Select an Archtype");
+           numberError("Please select an Archtype");
         }
     }
 

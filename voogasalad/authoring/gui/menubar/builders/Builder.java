@@ -1,6 +1,7 @@
 package authoring.gui.menubar.builders;
 
 import authoring.interfaces.model.EditElementable;
+import authoring.resourceutility.ButtonMaker;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -56,10 +57,8 @@ public abstract class Builder extends VBox{
     
     protected void makeCreate () {
         HBox buttons = new HBox();
-        Button create = new Button("Create");
-        Button cancel = new Button("Cancel");
-        create.setOnAction(e -> compile());
-        cancel.setOnAction(e -> quit());
+        Button create = new ButtonMaker().makeButton("Create", e -> compile());
+        Button cancel = new ButtonMaker().makeButton("Cancel", e -> quit());
         buttons.getChildren().addAll(create, cancel);
         this.getChildren().add(buttons);
     }
