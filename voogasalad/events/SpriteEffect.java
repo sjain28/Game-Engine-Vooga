@@ -23,7 +23,7 @@ public class SpriteEffect extends VariableEffect{
 	public SpriteEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
 		super(method, variable, parameter, event);
 		mySprites = new ArrayList<>();
-		mySprites.add(getEvent().getManager().getSprite(spriteID));
+		//mySprites.add(getEvent().getManager().getSprite(spriteID));
 		needsSprites = false;
 	}
 	
@@ -43,13 +43,13 @@ public class SpriteEffect extends VariableEffect{
 	}
 	
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Double parameter, VoogaEvent event) {
-		super(method, variable, event);
+		super(method, variable, parameter, event);
 		myArchetype = archetype;
 		this.needsSprites = needsSprites;
 	}
 	
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Boolean parameter, VoogaEvent event) {
-		super(method, variable, event);
+		super(method, variable, parameter, event);
 		myArchetype = archetype;
 		this.needsSprites = needsSprites;
 	}
@@ -61,12 +61,12 @@ public class SpriteEffect extends VariableEffect{
 	}
 	
 	public SpriteEffect(String method, String variable, Double parameter, VoogaEvent event) {
-		super(method, variable, event);
+		super(method, variable, parameter, event);
 		needsSprites = true;
 	}
 	
 	public SpriteEffect(String method, String variable, Boolean parameter, VoogaEvent event) {
-		super(method, variable, event);
+		super(method, variable, parameter, event);
 		needsSprites = true;
 	}
 
