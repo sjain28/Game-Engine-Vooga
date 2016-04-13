@@ -22,7 +22,7 @@ import tools.interfaces.VoogaData;
 
 public class SpriteFactory {
 
-	private static final String DEFAULT_IMAGE = "/bricks.jpg";
+	private static final String DEFAULT_IMAGE = "/smile.jpg";
 	private static final String DEFAULT_ARCH = "default";
 	public static final Sprite DEFAULT_SPRITE = 
 			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(1.0));
