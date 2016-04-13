@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import authoring.interfaces.Elementable;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
@@ -116,8 +116,8 @@ public class ObjectManager {
 	 * @param id
 	 * @return
 	 */
-	public VoogaText getText(Object id){
-		return (VoogaText) myElements.get(id);
+	public VoogaFrontEndText getText(Object id){
+		return (VoogaFrontEndText) myElements.get(id);
 	}
 	
 	/**

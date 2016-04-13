@@ -6,7 +6,7 @@ package player.leveldatamanager;
 import java.util.List;
 
 import authoring.interfaces.Elementable;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import gameengine.Sprite;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
