@@ -6,16 +6,23 @@ package authoring.properties;
  */
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
+import authoring.interfaces.Elementable;
+import authoring.model.ElementSelectionModel;
 import javafx.scene.control.Tab;
 
-public class PropertiesTabManager {
+public class PropertiesTabManager implements Observer {
 	
 	private ArrayList<Tab> myPropertyTabs = new ArrayList<Tab>();
 	private SpritePropertiesTab SPT = new SpritePropertiesTab();
 	private GlobalPropertiesTab GPT = new GlobalPropertiesTab();
+	private ElementSelectionModel selector;
 
 	public PropertiesTabManager() {
+		selector = ElementSelectionModel.getInstance();
+		selector.addObserver(this);
 		populateTabList();
 	}
 	
@@ -34,6 +41,12 @@ public class PropertiesTabManager {
 	
 	public GlobalPropertiesTab getGlobalPropertiesTab() {
 		return GPT;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		Elementable e = (Elementable) arg;
+		SPT.getPropertiesMap(e);
 	}
 
 }
