@@ -1,5 +1,5 @@
 
-package data;
+package player.gamerunner;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import events.VoogaEvent;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
-import player.gamerunner.GameRunner;
 import tools.VoogaBoolean;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
