@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaButton;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import events.VoogaEvent;
 import javafx.application.Application;
 

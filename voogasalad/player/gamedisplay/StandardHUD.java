@@ -4,9 +4,7 @@
 package player.gamedisplay;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -37,13 +35,12 @@ public class StandardHUD implements IHUD {
 	 */
 	@Override
 	public VBox createHUD() {
-		// TODO Auto-generated method stub
 	    myHUD.setPadding(new Insets(15, 12, 15, 12)); //TODO: Magic number
 	    myHUD.setSpacing(10); //TODO: Magic number
 	    
 	    Label score = new Label("Current Score: ");
 //	    score.textProperty().bind(valueProperty);
-	    Label timer = new Timer();
+//	    Label timer = new Timer();
 	    CountdownTimer cttimer = new CountdownTimer();
 	    
 	    myHUD.getChildren().addAll(score, cttimer.getTimeString());

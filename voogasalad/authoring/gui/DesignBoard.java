@@ -97,13 +97,16 @@ public class DesignBoard extends Tab implements Observer{
                 success = true;
             }
         }
+        if(db.hasString()) {
+        	System.out.println(db.getString());
+        }
 
         event.setDropCompleted(success);
     }
 
     private void mouseDragOver (final DragEvent event) {
         if (event.getGestureSource() != contentPane &&
-            event.getDragboard().hasContent(VoogaFileFormat.getInstance())) {
+            (event.getDragboard().hasContent(VoogaFileFormat.getInstance()))) {
             VoogaFile content =
                     (VoogaFile) event.getDragboard().getContent(VoogaFileFormat.getInstance());
             String color = "";
@@ -115,7 +118,10 @@ public class DesignBoard extends Tab implements Observer{
             }
             contentPane.setStyle(String.format("-fx-border-color: %s", color));
             event.acceptTransferModes(TransferMode.ANY);
+        } else if (event.getDragboard().hasString()) {
+        	event.acceptTransferModes(TransferMode.ANY);
         }
+        
         event.consume();
     }
 
@@ -150,14 +156,11 @@ public class DesignBoard extends Tab implements Observer{
             addElement(node, elementPath);
         }
 
-        System.out.println(elementManager.getIds());
-
     }
 
     public void addElement (Node node, String id) {
         elementManager.addGameElements(node);
         elementManager.addElementId(id);
-        contentPane.getChildren().add(node);
     }
 
     private void moveElement (String id, DragEvent e) {

@@ -3,7 +3,7 @@ package authoring.gui.menubar.builders;
 import java.util.HashMap;
 import java.util.Map;
 import authoring.interfaces.model.EditElementable;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
 import gameengine.Sprite;
@@ -70,21 +70,18 @@ public class ArchetypeBuilder extends Builder {
       Text label = new Text("Image");
       label.setFill(Color.WHITE);
       Button image = new Button("Choose Image");
-      image.setOnAction( new EventHandler<ActionEvent>(){
-          
-          @Override
-          public void handle(ActionEvent t) {
+      image.setOnAction(e -> {
               FileChooser fileChooser = new FileChooser();
                
               //Set extension filter
               FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
               FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
               fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-                
+              
               //Show open file dialog
               java.io.File file = fileChooser.showOpenDialog(null);
               myImagePath = file.getPath();
-          }
+              System.out.println(myImagePath);
       });
       complete.getChildren().addAll(label, image);
       this.getChildren().add(complete);
@@ -96,7 +93,7 @@ public class ArchetypeBuilder extends Builder {
         try {
             mass.setValue(Integer.parseInt(getInfo(MASS_INDEX)));
             getSpriteMaker().setArchetype(getInfo(),
-                                          new Sprite(myImagePath, getInfo(), myProperties, mass));
+                                          new Sprite("file:///" + myImagePath, getInfo(), myProperties, mass));
             quit();
         }
         catch (Exception e) {
