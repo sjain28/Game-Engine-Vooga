@@ -1,6 +1,7 @@
 
 package data;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,7 +73,8 @@ public class GameRunnerTest extends Application {
 //        fileWriter.saveGameObjects(data, fileName);
         
 //        FileReaderToGameObjects filereader = new FileReaderToGameObjects(fileName);
-        GameRunner gameRunner = new GameRunner("levels/Test.xml");
+
+    	GameRunner gameRunner = new GameRunner("levels/Test.xml");
         gameRunner.playLevel("levels/Test.xml");
 //        DataContainerOfLists deserializedList = filereader.getDataContainer();
 //     

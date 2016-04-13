@@ -32,12 +32,22 @@ public class LevelDataManager implements ILevelDataManager {
 
     @Override
     public List<Node> getDisplayableObjects () {
-        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),35);
+        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),myObjectManager.getMainCharXPos());
     }
+    
 
     private void readinObjects (String levelFileName) {
+    	DataContainerOfLists data = new DataContainerOfLists();
+    	try{
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
-        DataContainerOfLists data = fileManager.getDataContainer();
+        data = fileManager.getDataContainer();
+
+    	}
+    	catch(RuntimeException e){
+    		System.out.println("Making the game objects did not work properly");
+    		e.printStackTrace();
+    	}        
+        System.out.println("Here is my data object:" + data);
         
         List<Elementable> spriteObjects = data.getElementableList();
         System.out.println("All the sprites here are" + spriteObjects);

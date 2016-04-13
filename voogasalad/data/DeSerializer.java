@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import com.thoughtworks.xstream.XStream;
@@ -32,9 +33,16 @@ public final class DeSerializer {
                 }
             }
         }
-        catch (IOException e) {
+        catch (RuntimeException e) {
+        	System.out.println("IO exception from deserializer");
             e.printStackTrace();
-        }
+        } catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         System.out.println(objectsCreated);
         return objectsCreated;
     }
