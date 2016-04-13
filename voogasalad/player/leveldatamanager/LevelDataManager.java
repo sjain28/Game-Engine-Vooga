@@ -16,21 +16,21 @@ import tools.interfaces.VoogaData;
 
 public class LevelDataManager implements ILevelDataManager {
 
+	private static final int SCREENSIZE_DIM1 = 3;
+	private static final int SCREENSIZE_DIM2 = 35;
+
 	private IGameRunner myGameRunner;
 	private DisplayScroller displayScroller;
 	private ObjectManager myObjectManager;
 	private EventManager myEventManager;
-	private int screenSizeDim_1 = 3;
-	private int screenSizeDim_2 = 35;
 	private List<KeyEvent> myKeyEvents;
-
 	/**
 	 * Default constructor
 	 * 
 	 * @param levelFileName
 	 */
 	public LevelDataManager(String levelFileName) {
-		displayScroller = new DisplayScroller(screenSizeDim_1, screenSizeDim_2);
+		displayScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
 		myKeyEvents = new ArrayList<>();
 		readinObjects(levelFileName);
 		bindImagesofSprites();
@@ -95,9 +95,6 @@ public class LevelDataManager implements ILevelDataManager {
 
 	}
 
-	/**
-=======
-	}
 
 	/**
 	 * A stub method called at every iteration to receive KeyEvents from
@@ -132,7 +129,6 @@ public class LevelDataManager implements ILevelDataManager {
 	 *          variables).
 	 * 
 	 */
-
 	private void initializeManagers (List<Elementable> elementObjects,
 			List<VoogaEvent> eventObjects,
 			Map<String,VoogaData> variableObjects,

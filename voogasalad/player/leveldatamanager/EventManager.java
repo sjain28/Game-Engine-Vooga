@@ -73,6 +73,7 @@ public class EventManager {
 	public void addEvent(VoogaEvent voogaEvent){
 		//System.out.println("in add event");
 		for(Cause c: voogaEvent.getCauses()){
+			c.init();
 			if(c instanceof KeyCause){
 				//System.out.println("Cause 1: "+c);
 				KeyCause keyc = (KeyCause) c;
