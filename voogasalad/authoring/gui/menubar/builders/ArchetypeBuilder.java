@@ -81,6 +81,7 @@ public class ArchetypeBuilder extends Builder {
               //Show open file dialog
               java.io.File file = fileChooser.showOpenDialog(null);
               myImagePath = file.getPath();
+              System.out.println(myImagePath);
       });
       complete.getChildren().addAll(label, image);
       this.getChildren().add(complete);
@@ -92,7 +93,7 @@ public class ArchetypeBuilder extends Builder {
         try {
             mass.setValue(Integer.parseInt(getInfo(MASS_INDEX)));
             getSpriteMaker().setArchetype(getInfo(),
-                                          new Sprite(myImagePath, getInfo(), myProperties, mass));
+                                          new Sprite("file:///" + myImagePath, getInfo(), myProperties, mass));
             quit();
         }
         catch (Exception e) {
