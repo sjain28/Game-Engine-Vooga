@@ -145,6 +145,11 @@ public class ObjectManager {
 
 	}
 
+	/**
+	 * Returns X coordinate of the main character
+	 * 
+	 * @return
+	 */
 	public double getMainCharXPos() {
 		//HARD CODED TO JUST RETURN THE XPOS OF THE FIRST SPRITE
 		//TODO: CHANGE THIS SOON
@@ -154,32 +159,21 @@ public class ObjectManager {
 		return 1.0;
 	}
 
-	//	/**
-	//	 * Allows one to get a list of Sprite's by their archetypes
-	//	 * @param myArchetype
-	//	 * @return
-	//	 */
-	//	public List<Sprite> getSpritesByArchetype(String myArchetype) {
-	//		List<Sprite> archSprites = new ArrayList<Sprite>();
-	//		for(String id : myElements.keySet()){
-	//			Elementable el = myElements.get(id);
-	//			if(el instanceof Sprite){
-	//				if(((Sprite) el).getArchetype().equals(myArchetype)){
-	//					archSprites.add((Sprite) el);
-	//				}
-	//			}
-	//		}
-	//		return archSprites;
-	//	}
-<<<<<<< HEAD
-=======
-
+	/**
+	 * Sets KeyEvents
+	 * 
+	 * @param myKeyEvents
+	 */
 	public void setKeyEvents(List<KeyEvent> myKeyEvents){
 		keyEvents = myKeyEvents;
 	}
 
+	/**
+	 * Returns KeyEvents
+	 * 
+	 * @return
+	 */
 	public List<KeyEvent> getKeyEvents(){
 		return keyEvents;
 	}
->>>>>>> master
 }

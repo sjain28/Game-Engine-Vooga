@@ -25,11 +25,7 @@ public interface IGameRunner {
 	void playLevel(String teststring);
 
 	// Methods below only called by LevelDataManager
-<<<<<<< HEAD
-	Collections getKeyEvents();
-=======
 	List<?> getKeyEvents();
->>>>>>> master
 
 	void clearKeyEvents();
 

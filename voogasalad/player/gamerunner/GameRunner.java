@@ -33,10 +33,6 @@ public class GameRunner implements IGameRunner{
 	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 	private AnimationTimer myTimeline;
 
 
@@ -283,7 +279,4 @@ public class GameRunner implements IGameRunner{
 		// TODO Auto-generated method stub
 
 	}
-
-
-
 }
