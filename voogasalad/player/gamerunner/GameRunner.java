@@ -43,6 +43,7 @@ public class GameRunner implements IGameRunner{
 	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
+	//private AnimationTimer myTimeline;
 //	private AnimationTimer myTimeline;
 ////	private AnimationTimerExt myTimeline;
 	private Timeline myTimeline;
@@ -152,15 +153,20 @@ public class GameRunner implements IGameRunner{
 	 * Update sprites, get the list of Nodes, and displays
 	 * 
 	 */
-	private void step() {
+	private void step() {		
+		//take care of setting and resetting key events
+		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
+		myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
+		myGameDisplay.clearKeyEvents();
+		
+		//update all logic in the backend, updating game objects w/ Causes and Events
 		myCurrentLevelDataManager.update();		 
+		
+		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 
+		//repopulate the game screen
 		myGameDisplay.populateGameScreen();
-		//		myGameDisplay.display();
-		
-//		System.out.println("HIHIH This is RATE!!!" + getTimeline().getRate());
-
 	}
 
 	/**
@@ -185,7 +191,7 @@ public class GameRunner implements IGameRunner{
 		while(iterator.hasNext()){
 			// if (!l.isWon)
 			String nextLevel = iterator.next();
-//			System.out.println(nextLevel);
+
 			playLevel(nextLevel);
 		}
 	}
@@ -196,7 +202,6 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName){
-//		System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
@@ -295,10 +300,11 @@ public class GameRunner implements IGameRunner{
 	 * through GameRunner
 	 * 
 	 */
-	@Override
-	public List<?> getKeyEvents() {
-		return getGameDisplay().getKeyEvents();
-	}
+//	@Override
+//	public List<?> getKeyEvents() {
+//		System.out.println("Getting key events from GameDisplay in GameRunner: "+getGameDisplay().getKeyEvents().size());
+//		return getGameDisplay().getKeyEvents();
+//	}
 
 	/**
 	 * Clears KeyEvents collections after applying events

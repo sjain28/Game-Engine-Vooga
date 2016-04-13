@@ -46,13 +46,20 @@ public class VoogaEvent {
 	 * events according to their execute method.
 	 */
 	public void update(){
+
+		System.out.print(myCauses.get(0));
+		System.out.print(myCauses.get(0).check());
 		myCauseSprites.clear();
 		for(Cause c: myCauses){
+			System.out.print(c);
+			System.out.print(c.check());
 			if(!c.check()){
+				System.out.println("NOT EXECUTING");
 				return;
 			}
 		}
 		for(Effect e: myEffects){
+			System.out.println("EXECUTING!"+e.getClass());
 			e.execute();
 		}
 	}

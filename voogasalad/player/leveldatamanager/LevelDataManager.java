@@ -24,8 +24,6 @@ public class LevelDataManager implements ILevelDataManager {
 	private ObjectManager myObjectManager;
 	private EventManager myEventManager;
 	private List<KeyEvent> myKeyEvents;
-
-
 	/**
 	 * Default constructor
 	 * 
@@ -59,28 +57,7 @@ public class LevelDataManager implements ILevelDataManager {
 		this.myGameRunner = gamerunner;
 	}
 
-	/**
-	 * A stub method called at every iteration to receive KeyEvents from
-	 * GameDisplay and updates Objects (Sprites) and applies Events
-	 * (cause and effects)
-	 * 
-	 */
-	@Override
-	public void update() {
-		setKeyEvents(getGameRunner().getKeyEvents());
-		myObjectManager.update();
-		myEventManager.update();
-		//Need to clear list of keyevents
-	}
 
-	/**
-	 * Returns all displayable objects in Node(s)
-	 * 
-	 */
-	@Override
-	public List<Node> getDisplayableObjects () {
-		return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),myObjectManager.getMainCharXPos());
-	}
 
 	/**
 	 * Read in the file to reconstruct objects created in the authoring
@@ -118,7 +95,32 @@ public class LevelDataManager implements ILevelDataManager {
 
 	}
 
+
 	/**
+	 * A stub method called at every iteration to receive KeyEvents from
+	 * GameDisplay and updates Objects (Sprites) and applies Events
+	 * (cause and effects)
+	 * 
+	 */
+	@Override
+	public void update() {
+		//setKeyEvents(getGameRunner().getKeyEvents());
+		myObjectManager.update();
+		myEventManager.update();
+		//Need to clear list of keyevents
+	}
+
+	/**
+	 * Returns all displayable objects in Node(s)
+	 * 
+	 */
+	@Override
+	public List<Node> getDisplayableObjects () {
+		return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),myObjectManager.getMainCharXPos());
+	}
+
+	/**
+>>>>>>> master
 	 * Creates the Sprites, Events, and Variables which will be loaded into the managers, which
 	 * include
 	 * the sprite, event, and variable managers
@@ -146,15 +148,20 @@ public class LevelDataManager implements ILevelDataManager {
 	/**
 	 * @return the myKeyEvents
 	 */
-	public List<?> getKeyEvents() {
-		return myKeyEvents;
-	}
+//	public List<?> getKeyEvents() {
+//		return myKeyEvents;
+//	}
 
 	/**
 	 * @param myKeyEvents the myKeyEvents to set
 	 */
 	public void setKeyEvents(List<?> myKeyEvents) {
-		this.myKeyEvents = (List<KeyEvent>) myKeyEvents;
+		myEventManager.setKeyStrokes(myKeyEvents);
 	}
+
+//	@Override
+//	public void resetKeyEvents(List<KeyEvent> keyEvents) {
+//		myEventManager.
+//	}
 
 }

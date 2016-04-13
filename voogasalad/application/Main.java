@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * This class is the entrypoint to start the program.
+ * This class is the entry-point to start the program.
  * It is purely boiler-plate code delegating responsibility
  * of launching to other classes.
  *
