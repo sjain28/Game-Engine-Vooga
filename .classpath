@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="voogasalad"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="external_jars/groovy-all-2.4.6-indy.jar" sourcepath="external_jars/groovy-src.jar"/>
 	<classpathentry kind="lib" path="external_jars/groovy-doc.jar"/>
 	<classpathentry kind="lib" path="external_jars/groovy-src.jar"/>
@@ -13,7 +14,6 @@
 	<classpathentry kind="lib" path="external_jars/jackson-annotations-2.4.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/jackson-core-2.4.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/jackson-databind-2.4.4.jar"/>
-	<classpathentry kind="lib" path="external_jars/junit-4.11.jar"/>
 	<classpathentry kind="lib" path="external_jars/pivot-core-2.0.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/pivot-wtk-2.0.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/pivot-wtk-terra-2.0.4.jar"/>
