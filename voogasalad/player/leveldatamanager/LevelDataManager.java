@@ -52,7 +52,7 @@ public class LevelDataManager implements ILevelDataManager {
     @Override
     public void update() {
     	// Get KeyEvents from GameDisplay and stores it in myKetEvents
-    	setKeyEvents((List<KeyEvent>) getGameRunner().getKeyEvents());
+    	//setKeyEvents((List<KeyEvent>) getGameRunner().getKeyEvents());
     	
     	myObjectManager.update();
         myEventManager.update();
