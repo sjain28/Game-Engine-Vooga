@@ -33,7 +33,6 @@ import javafx.scene.layout.VBox;
 // components
 public class UIManager extends VBox {
 	private ArrayList<CompleteAuthoringModelable> elementManagers;
-	private Dragboard db;
 	private UIGrid grid;
 
 	public UIManager(CompleteAuthoringModelable model) {

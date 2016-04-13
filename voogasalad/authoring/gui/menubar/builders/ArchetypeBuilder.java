@@ -70,21 +70,17 @@ public class ArchetypeBuilder extends Builder {
       Text label = new Text("Image");
       label.setFill(Color.WHITE);
       Button image = new Button("Choose Image");
-      image.setOnAction( new EventHandler<ActionEvent>(){
-          
-          @Override
-          public void handle(ActionEvent t) {
+      image.setOnAction(e -> {
               FileChooser fileChooser = new FileChooser();
                
               //Set extension filter
               FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
               FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
               fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-                
+              
               //Show open file dialog
               java.io.File file = fileChooser.showOpenDialog(null);
               myImagePath = file.getPath();
-          }
       });
       complete.getChildren().addAll(label, image);
       this.getChildren().add(complete);

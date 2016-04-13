@@ -13,7 +13,7 @@ public class ExitFileItem extends MenuItemHandler {
 
 	@Override
 	public void handle() {
-		
+		System.exit(0);
 	}
 
 }
