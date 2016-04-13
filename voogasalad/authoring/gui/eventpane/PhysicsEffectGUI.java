@@ -64,7 +64,7 @@ public class PhysicsEffectGUI implements EventGUI{
 
     @Override
     public String getDetails () throws VoogaException{
-        String result = "PhysicsEffect ";
+        String result = "events.PhysicsEffect ";
         if (name.getValue()!=null){
             result+=name.getValue()+ " ";
         }
