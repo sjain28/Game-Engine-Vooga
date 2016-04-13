@@ -24,6 +24,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private Velocity myVelocity;
     private Position myLoc;
     private String myID;
+    private String myName;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
     private String myArchetype;
@@ -66,7 +67,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
     }
-
+    public void setName(String name){
+    	myName = name;
+    }
     @Override
     public Velocity getVelocity () {
         return myVelocity;
@@ -134,32 +137,26 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
-        // TODO Auto-generated method stub
-        return null;
+        return myProperties;
     }
 
     @Override
     public void removeProperty (String name) {
-        // TODO Auto-generated method stub
-
+        myProperties.remove(name);
     }
 
     @Override
     public Node getNodeObject () {
-        // TODO Auto-generated method stub
+    	if(myImage == null){
+            myImage = new ImageView(getImagePath());
+    	}
+    	System.out.println("My sprite image is: "+myImage);
         return myImage;
     }
 
     @Override
     public String getName () {
-        // TODO Auto-generated method stub
-        return null;
+        return myName;
     }
-
-    // @Override
-    // public void setVelocity(Vector v) {
-    // // TODO Auto-generated method stub
-    //
-    // }
 
 }

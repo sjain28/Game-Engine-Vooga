@@ -40,7 +40,7 @@ public class PropertiesTabManager implements Observer {
 	}
 	
 	public GlobalPropertiesTab getGlobalPropertiesTab() {
-		return GPT;
+		 return GPT;
 	}
 
 	@Override

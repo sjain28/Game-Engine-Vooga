@@ -23,6 +23,8 @@ public interface IGameDisplay {
 	
 	void display();
 	
+	void populateGameScreen();
+	
 	void createPrompt(String message);
 	
 	List<KeyEvent> getKeyEvents();

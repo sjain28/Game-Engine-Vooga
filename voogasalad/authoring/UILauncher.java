@@ -12,7 +12,11 @@ import javafx.util.Duration;
 public class UILauncher {
 	
 	static final Duration SPLASH_DURATION = Duration.millis(7000);
-	
+	/**
+	 * Initializes and Launches the UI components, can be adjusted to implement a splash screen or other UI Features
+	 * @param primaryStage to house the UI
+	 * @param model interface to mediate interaction with backend
+	 */
 	// Lines under the comments "***" enable splash screen
 	public UILauncher(Stage primaryStage, CompleteAuthoringModelable model) {
 		

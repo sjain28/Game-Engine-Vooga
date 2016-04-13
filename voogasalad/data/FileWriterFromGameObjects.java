@@ -17,7 +17,6 @@ public class FileWriterFromGameObjects {
                                         String fileName) throws ParserConfigurationException,
                                                          TransformerException, IOException,
                                                          SAXException {
-        XStream serializer = new XStream(new DomDriver());
         File file = new File(fileName);
         if (!file.exists()) {
 
@@ -29,10 +28,6 @@ public class FileWriterFromGameObjects {
             System.out.println("The file name here is " + fileName);
             file.createNewFile();
         }
-        ObjectOutputStream objectOutputStream =
-                serializer.createObjectOutputStream(new FileOutputStream(fileName));
-
-        objectOutputStream.writeObject(lists);
-        objectOutputStream.close();
+       Serializer.serialize(lists, fileName);
     }
 }
