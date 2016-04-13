@@ -58,35 +58,35 @@ public class VariableCauseGUI implements EventGUI{
                 addGUIElements(name);
             }
         });
-        
-        name.setOnAction(e->{
+
+        name.setOnAction(e -> {
             System.out.println("name activated");
-            removeInactiveNodes(variables,actions,amount);
-            name.getItems().addAll(elementManager.getMySpriteNames());
+            removeInactiveNodes(variables, actions, amount);
+            variables.onParentChanged(elementManager.getVoogaElement(name.getValue()).getVoogaProperties());
+            addGUIElements(variables);
         });
-        
+
         variables.setOnAction(e -> {
             System.out.println("variables activated");
-            removeInactiveNodes(actions,amount);
+            removeInactiveNodes(actions, amount);
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
             if (vd instanceof VoogaNumber) {
                 actions.getItems().addAll("equals");
                 NumberTextField numField = new NumberTextField();
                 amount = numField;
-                addGUIElements(actions,amount);
+                addGUIElements(actions, amount);
             }
             if (vd instanceof VoogaBoolean) {
                 actions.getItems().addAll(("equals"));
                 ComboBox<String> cb = new ComboBox<String>();
-                cb.getItems().addAll("true","false");
+                cb.getItems().addAll("true", "false");
                 amount = cb;
-                addGUIElements(actions,amount);
+                addGUIElements(actions, amount);
             }
 
             actions.getItems().addAll();
         });
-        
         
     }
 
@@ -118,13 +118,20 @@ public class VariableCauseGUI implements EventGUI{
     public String getDetails(){
         String result="";
         if (level.getValue().contains("global")){
-            result += "VariableCause ";
+            result += "events.VariableCause ";
         }
-        if (level.getValue().contains("global")){
-            result += "SpriteVariableCause "+name.getValue()+" ";
+        if (level.getValue().contains("local")){
+            result += "events.SpriteVariableCause "+name.getValue()+" ";
         }
-        return result+variables.getValue()+
-                " "+actions.getValue()+" "+amount.getAccessibleText();
+        result+=variables.getValue()+
+                " "+actions.getValue()+" ";
+        
+        if (amount instanceof NumberTextField){
+            result+=((NumberTextField) amount).getText();
+        } else {
+            result += ((ComboBox) amount).getValue();
+        }
+        return result;
     }
 
 }
