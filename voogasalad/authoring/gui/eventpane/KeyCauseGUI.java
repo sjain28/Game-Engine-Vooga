@@ -10,8 +10,9 @@ import javafx.scene.layout.HBox;
 
 public class KeyCauseGUI implements EventGUI{
 	
-	private HBox holder;
+    private HBox holder;
     private TextField textField;
+    private KeyCode clicked;
     
     public KeyCauseGUI(EditEventable manager){
     	holder = new HBox();
@@ -22,6 +23,7 @@ public class KeyCauseGUI implements EventGUI{
         textField.setPrefWidth(30);
         textField.setOnKeyPressed(e -> {
         	iv.setImage(new Image(this.getClass().getResourceAsStream("/" + e.getCode().toString() + ".png")));
+        	clicked = e.getCode();
         });
         textField.textProperty().addListener((obs, old, newVal) -> {
         	if(!newVal.isEmpty()) {
@@ -37,7 +39,7 @@ public class KeyCauseGUI implements EventGUI{
 
     @Override
     public String getDetails () {
-        return "KeyCause "+textField.getText();
+        return "events.KeyCause "+clicked.toString();
     }
     
 }
