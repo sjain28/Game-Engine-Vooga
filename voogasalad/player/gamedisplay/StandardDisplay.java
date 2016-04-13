@@ -28,6 +28,9 @@ public class StandardDisplay implements IGameDisplay {
 	//	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
 	private static final String BGM_PATH = "resources/sound/hypnotize.mp3";
 
+	private IPromptFactory myPromptFactory;
+	private IControl myControl;
+	private IHUD myHUD;
 	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
@@ -46,10 +49,27 @@ public class StandardDisplay implements IGameDisplay {
 	 * Default constructor
 	 * 
 	 */
-
-	//extend Pane
-
 	public StandardDisplay() {
+		initialize();
+	}
+	
+	/**
+	 * Overloaded constructor to set the reference to GameRunner
+	 * 
+	 */
+	public StandardDisplay(IGameRunner gamerunner) {
+		myGameRunner = gamerunner;
+		initialize();
+	}
+
+	/**
+	 * Method that contains a series of initialize statements
+	 * 
+	 */
+	private void initialize() {
+		myPromptFactory = new PromptFactory();
+		myControl = new StandardControl(getGameRunner());
+		myHUD = new StandardHUD(getGameRunner());
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
@@ -59,16 +79,7 @@ public class StandardDisplay implements IGameDisplay {
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
 		myMediaPlayer = new MediaPlayer(myBGM);
 	}
-
-	/**
-	 * Constructor that takes in a reference to GameRunner
-	 * 
-	 */
-	public StandardDisplay(IGameRunner gamerunner) {
-		this();
-		this.myGameRunner = gamerunner;
-	}
-
+	
 	/**
 	 * Creates a keyListener for listening in on key inputs
 	 * Adds each event to the list
@@ -245,6 +256,27 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	public IGameRunner getGameRunner() {
 		return myGameRunner;
+	}
+
+	/**
+	 * @return the myPromptFactory
+	 */
+	public IPromptFactory getPromptFactory() {
+		return myPromptFactory;
+	}
+
+	/**
+	 * @return the myControl
+	 */
+	public IControl getControl() {
+		return myControl;
+	}
+
+	/**
+	 * @return the myHUD
+	 */
+	public IHUD getHUD() {
+		return myHUD;
 	}
 
 
