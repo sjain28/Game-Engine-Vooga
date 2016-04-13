@@ -1,5 +1,6 @@
 package player.leveldatamanager;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
@@ -8,7 +9,6 @@ import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
-import javafx.scene.input.KeyEvent;
 import player.gamerunner.IGameRunner;
 import tools.interfaces.VoogaData;
 
@@ -27,7 +27,7 @@ public class LevelDataManager implements ILevelDataManager {
     private DisplayScroller myScroller;
     private ObjectManager myObjectManager;
     private EventManager myEventManager;
-    private List<KeyEvent> myKeyEvents;
+    private Collections myKeyEvents;
 
     /**
      * Default constructor
@@ -55,13 +55,13 @@ public class LevelDataManager implements ILevelDataManager {
      * (cause and effects)
      * 
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void update() {
-    	// Get KeyEvents from GameDisplay and stores it in myKetEvents
-    	setKeyEvents((List<KeyEvent>) getGameRunner().getKeyEvents());
-    	
+    	setKeyEvents(getGameRunner().getKeyEvents());
     	myObjectManager.update();
         myEventManager.update();
+        //Need to clear list of keyevents
     }
 
     /**
@@ -111,6 +111,7 @@ public class LevelDataManager implements ILevelDataManager {
                                      Map<String,VoogaData> variableObjects,
                                      SpriteFactory factory) {
     	myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
+    	myObjectManager.setKeyEvents(myKeyEvents);
     	myEventManager = new EventManager(myObjectManager, eventObjects);
     }
 
@@ -124,14 +125,14 @@ public class LevelDataManager implements ILevelDataManager {
 	/**
 	 * @return the myKeyEvents
 	 */
-	public List<KeyEvent> getKeyEvents() {
+	public Collections getKeyEvents() {
 		return myKeyEvents;
 	}
 
 	/**
 	 * @param myKeyEvents the myKeyEvents to set
 	 */
-	public void setKeyEvents(List<KeyEvent> myKeyEvents) {
+	public void setKeyEvents(Collections myKeyEvents) {
 		this.myKeyEvents = myKeyEvents;
 	}
 

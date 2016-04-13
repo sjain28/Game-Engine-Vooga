@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import javafx.animation.AnimationTimer;
+import javafx.scene.input.KeyEvent;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.ILevelDataManager;
@@ -31,7 +33,6 @@ public class GameRunner implements IGameRunner{
 	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
-	
 	private AnimationTimer myTimeline;
 
 	
