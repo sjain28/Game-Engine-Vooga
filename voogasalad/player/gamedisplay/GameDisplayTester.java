@@ -3,17 +3,22 @@
  */
 package player.gamedisplay;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import auxiliary.VoogaException;
 import data.FileReaderToGameObjects;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * GameDisplayTester method that tests and demonstrates
@@ -23,8 +28,10 @@ import javafx.stage.Stage;
  *
  */
 public class GameDisplayTester extends Application {	
-	
+	static List<Node> nodes = new ArrayList<>();
+
 	public GameDisplayTester() {
+		
 		try {
 			start(new Stage());
 		} catch (Exception e) {
@@ -32,7 +39,6 @@ public class GameDisplayTester extends Application {
 		}
 	}
 
-	static List<Node> nodes = new ArrayList<>();
 
 	private static void populate() {
 
@@ -58,6 +64,17 @@ public class GameDisplayTester extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+//		String musicFile = "resources/sound/zelda_theme.mp3";     // For example
+//
+//		Media sound = new Media(new File(musicFile).toURI().toString());
+//		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//		mediaPlayer.play();
+//		
+//		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//		      public void handle(WindowEvent we) {
+//		          mediaPlayer.stop();
+//		      }
+//		  }); 
 		
 		IPromptFactory pf = new PromptFactory();
 		IGameDisplay gd = new StandardDisplay();

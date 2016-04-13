@@ -61,6 +61,8 @@ public abstract class AbstractPropertiesTab extends Tab {
 		
 		for(String property: propertiesMap.keySet()) {
 			
+			System.out.println(property);
+			
 			name = new CustomText(property);
 			
 			ContextMenu menu = new ContextMenu();
