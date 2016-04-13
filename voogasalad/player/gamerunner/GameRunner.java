@@ -119,6 +119,7 @@ public class GameRunner implements IGameRunner{
 	 * is typed: List<Node>
 	 * 
 	 */
+	@Deprecated
 	@Override
 	public void read(Collections nodesToDisplay) {
 		getGameDisplay().read((List<Node>) nodesToDisplay);
