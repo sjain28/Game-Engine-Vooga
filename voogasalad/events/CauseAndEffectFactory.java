@@ -12,18 +12,27 @@ import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 public class CauseAndEffectFactory {
+
 //	private ResourceBundle errorMessages = ResourceBundle.getBundle("./resources/ErrorMessages.properties");
 
     @SuppressWarnings("rawtypes")
-    public void create (VoogaEvent event, String inputString) {
+/**
+ * Takes in a string stating what kind of cause/effect is being made as well as all of its parameters. Also takes in the
+ * event to which the cause/effect is being added. Parses the string to get the information for the cause/effect and uses
+ * reflection to instantiate the correct constructor, filling it with the needed parameters.
+ * @param event
+ * @param inputString
+ */
+    public void create (VoogaEvent event, String inputString) throws VoogaException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException  {
        
     	String[] parameters = inputString.split("\\s+");
         Class<?> c = null;
         
         try {
             c = Class.forName(parameters[0]); //Find Cause class using reflection
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        }catch (ClassNotFoundException ee) {
+            ee.printStackTrace();
+            throw ee;
         }
         
         Class[] paramClasses = new Class[parameters.length];
@@ -44,26 +53,34 @@ public class CauseAndEffectFactory {
         try {
             Constructor<?> causeConstructor = c.getConstructor(paramClasses);
             Object result = causeConstructor.newInstance(allParams);
-            addToEvent(event, result);
-
         }
-        catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        catch (NoSuchMethodException ee) {
+            ee.printStackTrace();
+            throw ee;
         }
         catch (InstantiationException e) {
             e.printStackTrace();
+            throw e;
         }
         catch (IllegalAccessException e) {
             e.printStackTrace();
+            throw e;
         }
         catch (IllegalArgumentException e) {
             e.printStackTrace();
+            throw e;
         }
         catch (InvocationTargetException e) {
             e.printStackTrace();
+            throw e;
         }
     }
-
+/**
+ * Parses the input string from the user stating conditions for cause/effect in order to use as separate constructor
+ * type/parameters
+ * @param input
+ * @return
+ */
     private Object parseString (String input) {
         if (input.equalsIgnoreCase("true"))
             return new Boolean(true);
@@ -71,28 +88,18 @@ public class CauseAndEffectFactory {
         if (input.equalsIgnoreCase("false"))
             return new Boolean("false");
         try {
-            return Double.parseDouble(input);
+        	Double d = Double.parseDouble(input);
+            return d;
         }
         catch (Exception e) {
             return input;
         }
 
     }
-
-    private void addToEvent (VoogaEvent event, Object added) {
-        try {
-            if (added instanceof Cause) {
-                event.addCause((Cause) added);
-            }
-            else {
-                event.addEffect((Effect) added);
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Incorrect object!");
-        }
-    }
-
+    /**
+	 * Main method was used for testing purposes
+	 * @param args
+	 */
     public static void main (String args[]) {
         CauseAndEffectFactory cf = new CauseAndEffectFactory();
         VoogaEvent e = new VoogaEvent();
@@ -122,7 +129,7 @@ public class CauseAndEffectFactory {
         String ID = tester.getID();
         VoogaEvent event = new VoogaEvent();
         
-        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", 50.0, "greaterThan", event);
+        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", "greaterThan", 50.0, event);
         SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
         
         event.update();
