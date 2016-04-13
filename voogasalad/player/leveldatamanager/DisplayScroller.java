@@ -16,9 +16,9 @@ public class DisplayScroller {
 	private int myScreenSizeX;
 	private int myScreenSizeY;
 	private int myAdjustFactorX;
-//	private int myAdjustFactorY;
+	//	private int myAdjustFactorY;
 	private int myConstantScrollCenter;
-	
+
 	/**
 	 * Default constructor that sets the screen size to be used
 	 * in the class and myAdjustFactorX which is defined to be
@@ -27,16 +27,16 @@ public class DisplayScroller {
 	 * @param screensize
 	 */
 	public DisplayScroller(int x, int y) {
-		
+
 		myScreenSizeX = x;
 		myScreenSizeY = y;
 		myAdjustFactorX = myScreenSizeX / 2;
-//		myAdjustFactorY = myScreenSizeY / 2;
+		//		myAdjustFactorY = myScreenSizeY / 2;
 		myConstantScrollCenter = 0;
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Takes in the raw list of all Nodes in the game and mainCharLocation
 	 * returns a new list of Nodes to be displayed in GameDisplay
@@ -47,29 +47,29 @@ public class DisplayScroller {
 	 */
 	@Deprecated
 	public <E> List<Node> scroll(List<E> allNodes, int mainCharLocation) {
-		
-//		BoundingBox myBoundingBox = new 
-//		List<Node> nodesToDisplay = allNodes.stream()
-//											.map(n -> (Node) n)
-//											.filter(n -> n.getL)
-//		
-//		
-//		
-//		allNodes.forEach(Node node -> {
-//			if ())
-//		});
-//		
-//		
-//		List<Entry> updatedEntries = 
-//			    entryList.stream()
-//			             .peek(e -> e.setTempId(tempId))
-//			             .collect (Collectors.toList());
-//		
-//		return nodesToDisplay;
+
+		//		BoundingBox myBoundingBox = new 
+		//		List<Node> nodesToDisplay = allNodes.stream()
+		//											.map(n -> (Node) n)
+		//											.filter(n -> n.getL)
+		//		
+		//		
+		//		
+		//		allNodes.forEach(Node node -> {
+		//			if ())
+		//		});
+		//		
+		//		
+		//		List<Entry> updatedEntries = 
+		//			    entryList.stream()
+		//			             .peek(e -> e.setTempId(tempId))
+		//			             .collect (Collectors.toList());
+		//		
+		//		return nodesToDisplay;
 		return null;
-		
+
 	}
-	
+
 	/**
 	 * Takes in the raw list of all Nodes in the game and Vector
 	 * returns a new list of Nodes to be displayed in GameDisplay
@@ -99,9 +99,9 @@ public class DisplayScroller {
 					.collect(Collectors.toList());
 		}
 		return nodesToDisplay;
-		
+
 	}
-	
+
 	/**
 	 * Takes in the raw list of all Nodes in the game and Vector
 	 * returns a new list of Nodes to be displayed in GameDisplay
@@ -113,12 +113,12 @@ public class DisplayScroller {
 	 * @return
 	 */
 	public <E> List<Node> constantScroll(List<E> allNodes, int speed) {
-		
+
 		List<Node> nodesToDisplay;
 		nodesToDisplay = centerScroll(allNodes, myConstantScrollCenter);
 		myConstantScrollCenter+=speed;
 		return nodesToDisplay;
-		
+
 	}
 
 	/**
@@ -148,5 +148,5 @@ public class DisplayScroller {
 	public void setScreenSizeY(int myScreenSizeY) {
 		this.myScreenSizeY = myScreenSizeY;
 	}
-	
+
 }
