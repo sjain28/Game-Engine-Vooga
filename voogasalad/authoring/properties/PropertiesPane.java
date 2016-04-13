@@ -21,9 +21,9 @@ public class PropertiesPane extends TabPane implements Windowable {
 	 * Constructor to instantiate the properties Pane
 	 */	
 	public PropertiesPane() {
-		// used for testing purposes, going to just create an instance of PropertiesTabManager and set it to 
-		//ptm = new PropertiesTabManager();
-		//populateTabPane();
+		//used for testing purposes, going to just create an instance of PropertiesTabManager and set it to 
+		ptm = new PropertiesTabManager();
+		populateTabPane();
 	}
 	
 	/**

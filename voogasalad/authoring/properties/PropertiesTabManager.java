@@ -7,6 +7,7 @@ package authoring.properties;
 
 import java.util.ArrayList;
 
+import authoring.interfaces.Elementable;
 import javafx.scene.control.Tab;
 
 public class PropertiesTabManager {
@@ -28,12 +29,12 @@ public class PropertiesTabManager {
 		myPropertyTabs.add(GPT);
 	}
 	
-	public SpritePropertiesTab getSpritePropertiesTab() {
-		return SPT;
+	public void getSpritePropertiesTab(Elementable elem) {
+		SPT.getPropertiesMap(elem);
 	}
 	
-	public GlobalPropertiesTab getGlobalPropertiesTab() {
-		return GPT;
+	public void getGlobalPropertiesTab(Elementable elem) {
+		GPT.getPropertiesMap(elem);
 	}
 
 }
