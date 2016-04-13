@@ -11,20 +11,20 @@ public class VoogaNumber implements VoogaData{
     	this.myValue = (Double) 0.0;
     }
     
-    public VoogaNumber(Number number){
-        this.myValue = (Double) number;
+    public VoogaNumber(Double number){
+        this.myValue = number;
     }
     
-    public void decreaseValue(Number dx){
-        myValue-=dx.doubleValue();
+    public void decreaseValue(Double dx){
+        myValue -= dx;
     }
     
     public void increaseValue(Double dx){
-        myValue+=dx;
+        myValue += dx;
     }
     
-    public void setValue(Number value){
-        this.myValue= value.doubleValue();
+    public void setValue(Double value){
+        this.myValue = value;
     }
     
     public boolean equals(Double num){
