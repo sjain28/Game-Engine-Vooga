@@ -27,19 +27,11 @@ public class VoogaTextWritingTest extends Application {
     public void start (Stage primaryStage) throws Exception {
         DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),generateGlobalVariables(),generateEvents());
         
-<<<<<<< HEAD
-        Rectangle vb = new Rectangle(3,4);
 
-        Serializer.serialize(vb, testString);
-        Object o = DeSerializer.deserialize(1, "levels/VoogaTextWriting.xml").get(0);
-        Rectangle vt2 = (Rectangle) o;
-        System.out.println("VoogaText");
-=======
         Serializer.serialize(manager, "levels/Test.xml");
         Object o = DeSerializer.deserialize(1, "levels/Test.xml").get(0);
         DataContainerOfLists vt2 = (DataContainerOfLists) o;
         System.out.println("Unserialized");
->>>>>>> master
         System.out.println(vt2);
     }
     
