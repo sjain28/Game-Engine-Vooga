@@ -75,6 +75,7 @@ public class StandardDisplay implements IGameDisplay {
 		@Override
 		public void handle(KeyEvent event) {
 			myKeyEvents.add(event);
+			myKeyEvents.forEach(e -> System.out.println(e));
 		}
 	};
 
