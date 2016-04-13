@@ -8,33 +8,77 @@ import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.input.KeyEvent;
+import player.gamerunner.IGameRunner;
 import tools.interfaces.VoogaData;
 
-
+/**
+ * LevelDataManager that comprises GameRunner
+ * Reads in data and reconstructs sprite objects and maintains sprites
+ * Also converts sprites into displayable Nodes using DisplayScroller
+ *
+ */
 public class LevelDataManager implements ILevelDataManager {
-
-    private DisplayScroller displayScroller;
-    private EngineObjectManager myObjectManager;
+	
+    private static final int SCREENSIZE_DIM1 = 3;
+    private static final int SCREENSIZE_DIM2 = 35;
+	
+	private IGameRunner myGameRunner;
+    private DisplayScroller myScroller;
+    private ObjectManager myObjectManager;
     private EventManager myEventManager;
-    private int screenSizeDim_1 = 3;
-    private int screenSizeDim_2 = 35;
+    private List<KeyEvent> myKeyEvents;
 
-    public LevelDataManager (String levelFileName) {
-        displayScroller = new DisplayScroller(screenSizeDim_1, screenSizeDim_2);
+    /**
+     * Default constructor
+     * 
+     * @param levelFileName
+     */
+    public LevelDataManager(String levelFileName) {
+        myScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
         readinObjects(levelFileName);
     }
+    
+    /**
+     * Constructor that takes in a reference to GameRunner LevelDataManager
+     * belongs to (composition)
+     * 
+     */
+    public LevelDataManager(IGameRunner gamerunner, String levelFileName) {
+    	this(levelFileName);
+    	this.myGameRunner = gamerunner;
+    }
 
+    /**
+     * A stub method called at every iteration to receive KeyEvents from
+     * GameDisplay and updates Objects (Sprites) and applies Events
+     * (cause and effects)
+     * 
+     */
     @Override
     public void update() {
+    	// Get KeyEvents from GameDisplay and stores it in myKetEvents
+    	setKeyEvents((List<KeyEvent>) getGameRunner().getKeyEvents());
+    	
     	myObjectManager.update();
         myEventManager.update();
     }
 
+    /**
+     * Returns all displayable objects in Node(s)
+     * 
+     */
     @Override
     public List<Node> getDisplayableObjects () {
-        return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),35);
+        return getScroller().centerScroll(myObjectManager.getAllDisplayableNodes(),35);
     }
 
+    /**
+     * Read in the file to reconstruct objects created in the authoring
+     * environment
+     * 
+     * @param levelFileName
+     */
     private void readinObjects (String levelFileName) {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
         DataContainerOfLists data = fileManager.getDataContainer();
@@ -52,26 +96,50 @@ public class LevelDataManager implements ILevelDataManager {
         System.out.println("All the variables here are" + variableObjects);
         
         initializeManagers(spriteObjects, eventObjects, variableObjects,factory);
-        
-        
     }
 
     /**
-     * Creates the Sprites, Events, and Variables which will be loaded into the managers, which
-     * include
-     * the sprite, event, and variable managers
+     * Creates the Sprites, Events, and Variables which will be loaded into 
+     * the managers, which include the sprite, event, and variable managers
      * 
-     * @return- A LevelManager with all the objects it needs to contain (sprites, events,
+     * @return A LevelManager with all the objects it needs to contain (sprites, events,
      *          variables).
-     * 
      */
 
     private void initializeManagers (List<Elementable> elementObjects,
                                      List<VoogaEvent> eventObjects,
                                      Map<String,VoogaData> variableObjects,
                                      SpriteFactory factory) {
-    	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, factory);
+    	myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
     	myEventManager = new EventManager(myObjectManager, eventObjects);
     }
+
+	/**
+	 * @return the myGameRunner
+	 */
+	public IGameRunner getGameRunner() {
+		return myGameRunner;
+	}
+
+	/**
+	 * @return the myKeyEvents
+	 */
+	public List<KeyEvent> getKeyEvents() {
+		return myKeyEvents;
+	}
+
+	/**
+	 * @param myKeyEvents the myKeyEvents to set
+	 */
+	public void setKeyEvents(List<KeyEvent> myKeyEvents) {
+		this.myKeyEvents = myKeyEvents;
+	}
+
+	/**
+	 * @return the myScroller
+	 */
+	public DisplayScroller getScroller() {
+		return myScroller;
+	}
 
 }

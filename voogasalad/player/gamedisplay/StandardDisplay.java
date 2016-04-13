@@ -3,9 +3,7 @@ package player.gamedisplay;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.VoogaScene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -15,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import player.gamerunner.IGameRunner;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -26,9 +25,10 @@ import javafx.stage.Stage;
 public class StandardDisplay implements IGameDisplay {
 
 	private static final int PANE_SIZE = 600;
-	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+	//	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+	private static final String BGM_PATH = "resources/sound/hypnotize.mp3";
 
-	//	private IGameRunner myGameRunner;
+	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
 	private BorderPane myPane;
@@ -47,7 +47,6 @@ public class StandardDisplay implements IGameDisplay {
 	 * 
 	 */
 	public StandardDisplay() {
-
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
@@ -56,7 +55,15 @@ public class StandardDisplay implements IGameDisplay {
 		myKeyEvents = new ArrayList<>();
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
 		myMediaPlayer = new MediaPlayer(myBGM);
+	}
 
+	/**
+	 * Constructor that takes in a reference to GameRunner
+	 * 
+	 */
+	public StandardDisplay(IGameRunner gamerunner) {
+		this();
+		this.myGameRunner = gamerunner;
 	}
 
 	/**
@@ -67,30 +74,9 @@ public class StandardDisplay implements IGameDisplay {
 	private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
 		@Override
 		public void handle(KeyEvent event) {
-
 			myKeyEvents.add(event);
-
-			//	    	myKeyEvents.forEach(e -> System.out.println(e));
-
-			//	        if(event.getCode() == KeyCode.ENTER); {
-			//	            startLogin();
-			//	            getContext();
-			//	            try {
-			//	                checkUserLevel();
-			//	            } catch (Exception e) {
-			//	                actionTarget.setText("Unable to authenticate user\n" + userTextField.getText());
-			//	            }
-			//	            event.consume();
-			//	        } 
 		}
 	};
-
-	//	public StandardDisplay(IGameRunner gameRunner) {
-	//		
-	//		this();
-	//		this.myGameRunner = gameRunner;
-	//		
-	//	}
 
 	/**
 	 * Reads in the list of Nodes to display
@@ -113,16 +99,8 @@ public class StandardDisplay implements IGameDisplay {
 		populateGameScreen();
 		//Shows the scene
 		getStage().show();
-
 		//Adds keyinput listener
 		getScene().addEventHandler(KeyEvent.ANY, keyListener);
-
-		//		getScene().addEventHandler(KeyEvent.ANY, new EventHandler<KeyEvent>() {
-		//            public void handle(KeyEvent event) {
-		//            	
-		//            };
-		//        });
-
 		//Plays BGM music
 		playMusic();
 	}
@@ -222,7 +200,6 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	@Override
 	public List<KeyEvent> getKeyEvents() {
-		// TODO Auto-generated method stub
 		return getKeyEvents();
 	}
 
@@ -245,6 +222,13 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	public MediaPlayer getMediaPlayer() {
 		return myMediaPlayer;
+	}
+
+	/**
+	 * @return the myGameRunner
+	 */
+	public IGameRunner getGameRunner() {
+		return myGameRunner;
 	}
 
 }
