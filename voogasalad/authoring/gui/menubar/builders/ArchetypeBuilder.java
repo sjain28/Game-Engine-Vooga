@@ -92,7 +92,7 @@ public class ArchetypeBuilder extends Builder {
     public void compile () {
         VoogaNumber mass = new VoogaNumber();
         try {
-            mass.setValue(Integer.parseInt(getInfo(MASS_INDEX)));
+            mass.setValue(Double.parseDouble(getInfo(MASS_INDEX)));
 
             getSpriteMaker().addArchetype(getInfo(),
                                           new Sprite("file:///" + myImagePath, getInfo(), myProperties, mass));
