@@ -50,30 +50,12 @@ public class DesignBoard extends Tab implements Observer{
         contentPane.setMinSize(WIDTH, HEIGHT);
         elementManager = elem;
         elementManager.addObserver(this);
-        propertiesTabManager = new PropertiesTabManager();
-        initGlobalProperties();
         container = new ScrollPane();
         initializeDragAndDrop();
         container.setContent(contentPane);
         this.setContent(container);
         y_offset = HEIGHT / 2;
         x_offset = WIDTH / 2;
-    }
-
-    public PropertiesTabManager getPropertiesTabManager () {
-        return propertiesTabManager;
-    }
-
-    private void initGlobalProperties () {
-        // Elementable elem = elementManager.getGlobalPropertiesManager();
-        // propertiesTabManager.getGlobalPropertiesTab().getPropertiesMap(elem);
-    }
-
-    // Do something with Elementable.setOnClicked and call this method on self,
-    // or put into sprite class?
-    
-    private void displaySpriteProperties (Elementable elem) {
-        propertiesTabManager.getSpritePropertiesTab().getPropertiesMap(elem);
     }
 
     private void initializeDragAndDrop () {
