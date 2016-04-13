@@ -22,12 +22,12 @@ public class DataContainerOfLists {
 
     public DataContainerOfLists (List<Elementable> ElementableList,
                                  Map<String, VoogaData> variableMap,
-                                 List<VoogaEvent> eventList) {
+                                 List<VoogaEvent> eventList,SpriteFactory factory) {
         this.eventList = eventList;
         System.out.println(this.eventList);
         this.elementableList = ElementableList;
         this.variableMap = variableMap;
-        this.spriteFactory = spriteFactory;
+        this.spriteFactory = factory;
     }
     
     public void addButton(List<Button> ButtonList){
