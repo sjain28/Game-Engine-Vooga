@@ -110,7 +110,9 @@ public class GameRunner implements IGameRunner{
 	private void step() {
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-		myGameDisplay.display();
+		
+		myGameDisplay.populateGameScreen();
+//		myGameDisplay.display();
 	}
 	
 	/**
@@ -148,8 +150,12 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName){
 		System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(fileName);
-		//TODO: call the time line here and pass step into time line
-		step();
+		myCurrentLevelDataManager.update();		 
+		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		myGameDisplay.display();
+		
+
+		run();
 	}
 
 	/**

@@ -138,8 +138,19 @@ public class ObjectManager {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 		
+		System.out.println("my displayable nodes from get all displayable nodes: "+displayablenodes.get(0));
+		
 		return displayablenodes;
 		
+	}
+
+	public double getMainCharXPos() {
+		//HARD CODED TO JUST RETURN THE XPOS OF THE FIRST SPRITE
+		//TODO: CHANGE THIS SOON
+		for(String el : myElements.keySet()){
+			return getSprite(el).getPosition().getX();
+		}
+		return 1.0;
 	}
 
 //	/**
