@@ -2,7 +2,7 @@ package authoring.model.tests;
 
 import authoring.gui.DesignBoardHousing;
 import authoring.model.ElementManager;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,7 +13,7 @@ public class DragDropTest extends Application{
     public void start (Stage primaryStage) throws Exception {
         DesignBoardHousing designBoard = new DesignBoardHousing(new ElementManager());
         Scene scene = new Scene (designBoard);
-        VoogaText vt = new VoogaText();
+        VoogaFrontEndText vt = new VoogaFrontEndText();
         vt.setMaxWidth(100);
         vt.setMaxHeight(100);
         vt.setTranslateX(100);

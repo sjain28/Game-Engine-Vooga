@@ -17,6 +17,7 @@ public class NewSceneFileItem extends MenuItemHandler {
 
 	@Override
 	public void handle() {
+		
 	}
 
 }
