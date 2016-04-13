@@ -13,10 +13,10 @@ import javafx.scene.Node;
  */
 public class LevelHandler {
 	
-		private EngineObjectManager myObjectManager;
+		private ObjectManager myObjectManager;
 		private EventManager myEventManager;
 		
-        public LevelHandler(EngineObjectManager objectmanager, EventManager eventmanager) {
+        public LevelHandler(ObjectManager objectmanager, EventManager eventmanager) {
         	myObjectManager = objectmanager;
         	myEventManager = eventmanager;
         }

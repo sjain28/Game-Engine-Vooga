@@ -219,6 +219,13 @@ public class GameRunner implements IGameRunner{
 		return this;
 	}
 
+	/**
+	 * Returns KeyEvents to be passed into LevelDataManager
+	 * 
+	 * KeyEvents (Collections--List<KeyEvent>) are passed to LevelDataManager
+	 * through GameRunner
+	 * 
+	 */
 	@Override
 	public Collections getKeyEvents() {
 		// TODO Auto-generated method stub

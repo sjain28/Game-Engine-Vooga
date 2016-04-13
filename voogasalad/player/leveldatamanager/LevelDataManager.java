@@ -17,7 +17,7 @@ public class LevelDataManager implements ILevelDataManager {
 
 	private IGameRunner myGameRunner;
     private DisplayScroller displayScroller;
-    private EngineObjectManager myObjectManager;
+    private ObjectManager myObjectManager;
     private EventManager myEventManager;
     private int screenSizeDim_1 = 3;
     private int screenSizeDim_2 = 35;
@@ -43,6 +43,12 @@ public class LevelDataManager implements ILevelDataManager {
     	this.myGameRunner = gamerunner;
     }
 
+    /**
+     * A stub method called at every iteration to receive KeyEvents from
+     * GameDisplay and updates Objects (Sprites) and applies Events
+     * (cause and effects)
+     * 
+     */
     @Override
     public void update() {
     	// Get KeyEvents from GameDisplay and stores it in myKetEvents
@@ -52,11 +58,21 @@ public class LevelDataManager implements ILevelDataManager {
         myEventManager.update();
     }
 
+    /**
+     * Returns all displayable objects in Node(s)
+     * 
+     */
     @Override
     public List<Node> getDisplayableObjects () {
         return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),35);
     }
 
+    /**
+     * Read in the file to reconstruct objects created in the authoring
+     * environment
+     * 
+     * @param levelFileName
+     */
     private void readinObjects (String levelFileName) {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
         DataContainerOfLists data = fileManager.getDataContainer();
@@ -92,7 +108,7 @@ public class LevelDataManager implements ILevelDataManager {
                                      List<VoogaEvent> eventObjects,
                                      Map<String,VoogaData> variableObjects,
                                      SpriteFactory factory) {
-    	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, factory);
+    	myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
     	myEventManager = new EventManager(myObjectManager, eventObjects);
     }
 
