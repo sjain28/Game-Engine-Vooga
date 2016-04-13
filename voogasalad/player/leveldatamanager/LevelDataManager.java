@@ -8,24 +8,46 @@ import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.input.KeyEvent;
+import player.gamerunner.IGameRunner;
 import tools.interfaces.VoogaData;
 
 
 public class LevelDataManager implements ILevelDataManager {
 
+	private IGameRunner myGameRunner;
     private DisplayScroller displayScroller;
     private EngineObjectManager myObjectManager;
     private EventManager myEventManager;
     private int screenSizeDim_1 = 3;
     private int screenSizeDim_2 = 35;
+    private List<KeyEvent> myKeyEvents;
 
-    public LevelDataManager (String levelFileName) {
+    /**
+     * Default constructor
+     * 
+     * @param levelFileName
+     */
+    public LevelDataManager(String levelFileName) {
         displayScroller = new DisplayScroller(screenSizeDim_1, screenSizeDim_2);
         readinObjects(levelFileName);
+    }
+    
+    /**
+     * Constructor that takes in a reference to GameRunner LevelDataManager
+     * belongs to (composition)
+     * 
+     */
+    public LevelDataManager(IGameRunner gamerunner, String levelFileName) {
+    	this(levelFileName);
+    	this.myGameRunner = gamerunner;
     }
 
     @Override
     public void update() {
+    	// Get KeyEvents from GameDisplay and stores it in myKetEvents
+    	setKeyEvents((List<KeyEvent>) getGameRunner().getKeyEvents());
+    	
     	myObjectManager.update();
         myEventManager.update();
     }
@@ -73,5 +95,26 @@ public class LevelDataManager implements ILevelDataManager {
     	myObjectManager = new EngineObjectManager(elementObjects, variableObjects, factory);
     	myEventManager = new EventManager(myObjectManager, eventObjects);
     }
+
+	/**
+	 * @return the myGameRunner
+	 */
+	public IGameRunner getGameRunner() {
+		return myGameRunner;
+	}
+
+	/**
+	 * @return the myKeyEvents
+	 */
+	public List<KeyEvent> getKeyEvents() {
+		return myKeyEvents;
+	}
+
+	/**
+	 * @param myKeyEvents the myKeyEvents to set
+	 */
+	public void setKeyEvents(List<KeyEvent> myKeyEvents) {
+		this.myKeyEvents = myKeyEvents;
+	}
 
 }
