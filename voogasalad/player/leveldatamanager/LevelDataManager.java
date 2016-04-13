@@ -1,6 +1,6 @@
 package player.leveldatamanager;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
@@ -9,6 +9,7 @@ import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.input.KeyEvent;
 import player.gamerunner.IGameRunner;
 import tools.interfaces.VoogaData;
 
@@ -19,7 +20,7 @@ public class LevelDataManager implements ILevelDataManager {
 	private DisplayScroller displayScroller;
 	private ObjectManager myObjectManager;
 	private EventManager myEventManager;
-	private Collections myKeyEvents;
+	private List<KeyEvent> myKeyEvents;
 	private int screenSizeDim_1 = 3;
 	private int screenSizeDim_2 = 35;
 
@@ -31,6 +32,7 @@ public class LevelDataManager implements ILevelDataManager {
 	 */
 	public LevelDataManager(String levelFileName) {
 		displayScroller = new DisplayScroller(screenSizeDim_1, screenSizeDim_2);
+		myKeyEvents = new ArrayList<>();
 		readinObjects(levelFileName);
 		bindImagesofSprites();
 	}
@@ -62,7 +64,6 @@ public class LevelDataManager implements ILevelDataManager {
 	 * (cause and effects)
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void update() {
 		setKeyEvents(getGameRunner().getKeyEvents());
@@ -145,15 +146,15 @@ public class LevelDataManager implements ILevelDataManager {
 	/**
 	 * @return the myKeyEvents
 	 */
-	public Collections getKeyEvents() {
+	public List<?> getKeyEvents() {
 		return myKeyEvents;
 	}
 
 	/**
 	 * @param myKeyEvents the myKeyEvents to set
 	 */
-	public void setKeyEvents(Collections myKeyEvents) {
-		this.myKeyEvents = myKeyEvents;
+	public void setKeyEvents(List<?> myKeyEvents) {
+		this.myKeyEvents = (List<KeyEvent>) myKeyEvents;
 	}
 
 }
