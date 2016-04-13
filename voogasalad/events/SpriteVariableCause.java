@@ -9,7 +9,7 @@ public class SpriteVariableCause extends VariableCause {
 	
 	private List<Sprite> mySprites;
 	
-	public SpriteVariableCause(String spriteID, String varName, Double targetValue, String predicate, VoogaEvent voogaEvent) {
+	public SpriteVariableCause(String spriteID, String varName, String predicate, Double targetValue, VoogaEvent voogaEvent) {
 		super(predicate, voogaEvent);
 		super.setTarget(targetValue);
 		Sprite temp = getEvent().getManager().getSprite(spriteID);
@@ -18,7 +18,7 @@ public class SpriteVariableCause extends VariableCause {
 		super.setVariable(temp.getProperty(varName));
 	}
 	
-	public SpriteVariableCause(String spriteID, String varName, Boolean targetValue, String predicate, VoogaEvent voogaEvent) {
+	public SpriteVariableCause(String spriteID, String varName, String predicate, Boolean targetValue, VoogaEvent voogaEvent) {
 		super(predicate, voogaEvent);
 		super.setTarget(targetValue);
 		Sprite temp = getEvent().getManager().getSprite(spriteID);
@@ -33,7 +33,7 @@ public class SpriteVariableCause extends VariableCause {
 		return false;
 	}
 	
-	public SpriteVariableCause(Sprite sprite, String varName, Double targetValue, String predicate, VoogaEvent event){
+	public SpriteVariableCause(Sprite sprite, String varName, String predicate, Double targetValue, VoogaEvent event){
 		super(predicate, event);
 		super.setTarget(targetValue);
 		super.setVariable(sprite.getProperty(varName));

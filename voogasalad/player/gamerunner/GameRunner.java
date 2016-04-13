@@ -279,7 +279,4 @@ public class GameRunner implements IGameRunner{
 		// TODO Auto-generated method stub
 
 	}
-
-
-
 }
