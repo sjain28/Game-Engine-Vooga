@@ -15,7 +15,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>fa773b82-0a7f-483e-ad81-c2789e5a0803</myID>
+        <myID>873be5df-a55d-4649-98c3-75edc9ceadad</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -30,24 +30,6 @@
             </tools.VoogaNumber>
           </entry>
         </myProperties>
-        <myImagePath>/smile.jpg</myImagePath>
-        <myArchetype>default</myArchetype>
-      </gameengine.Sprite>
-      <gameengine.Sprite>
-        <myVelocity>
-          <xPrev>0.0</xPrev>
-          <yPrev>0.0</yPrev>
-          <x>0.0</x>
-          <y>0.0</y>
-        </myVelocity>
-        <myLoc>
-          <xPrev>0.0</xPrev>
-          <yPrev>0.0</yPrev>
-          <x>0.0</x>
-          <y>0.0</y>
-        </myLoc>
-        <myID>697aa400-fd61-4fd6-b903-d99e99449264</myID>
-        <myProperties reference="../../gameengine.Sprite/myProperties"/>
         <myImagePath>/smile.jpg</myImagePath>
         <myArchetype>default</myArchetype>
       </gameengine.Sprite>

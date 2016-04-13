@@ -28,6 +28,11 @@ public class VoogaEvent {
 		myEffects.add(effect);
 	}
 
+	/**
+	 * Tells the event which manager it should get information for causes/updates (for sprite information, global variable
+	 * information, etc.)
+	 * @param manager
+	 */
 	public void setManager(ObjectManager manager){
 		myEngineManager = manager;
 	}
@@ -36,6 +41,10 @@ public class VoogaEvent {
 		return myEngineManager;
 	}
 
+	/**
+	 * Runs through all of the causes held in the event and checks them. If the causes evaluate to true, executes all of the
+	 * events according to their execute method.
+	 */
 	public void update(){
 		myCauseSprites.clear();
 		for(Cause c: myCauses){

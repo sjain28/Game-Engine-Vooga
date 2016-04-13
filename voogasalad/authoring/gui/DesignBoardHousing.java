@@ -19,15 +19,27 @@ import javafx.scene.shape.Rectangle;
 
 public class DesignBoardHousing extends TabPane {
    
-
+/**
+ * Initializes the housing for the Design Board. This contains functionality to create new Scenes of the Design Board
+ * 
+ * @param elem: Interface for Manager to Update Backend 
+ */
     public DesignBoardHousing (CompleteAuthoringModelable elem) {
         this.getTabs().add(new DesignBoard(elem));
     }
 
+    /**
+     * allows for access to the Design board currently displayed.
+     * @return The currently Displayed Design Board.
+     */
     public DesignBoard getDesignBoard() {
         return ((DesignBoard) this.getTabs().get(getSelectionModel().getSelectedIndex()));
     }
 
+    /**
+     * Adds a new Scene and it's associated design board. 
+     * @param elem: Interface for Manager to update Backend 
+     */
     public void addScene (CompleteAuthoringModelable elem) {
        DesignBoard design = new DesignBoard(elem);
        this.getTabs().add(design);
