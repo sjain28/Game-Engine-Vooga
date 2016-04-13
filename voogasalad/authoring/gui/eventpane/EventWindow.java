@@ -65,6 +65,7 @@ public class EventWindow extends Stage{
     
     private void populateEvent(String eventDetails){
         try{
+            System.out.println("EventDetails-EventWindow: "+eventDetails);
             eventFactory.create(event, eventDetails);
         } catch (VoogaException e){
             new VoogaAlert(e.getMessage());

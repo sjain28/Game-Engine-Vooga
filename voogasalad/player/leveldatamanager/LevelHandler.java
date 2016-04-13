@@ -13,20 +13,20 @@ import javafx.scene.Node;
  */
 @Deprecated
 public class LevelHandler {
-	
-		private ObjectManager myObjectManager;
-		private EventManager myEventManager;
-		
-        public LevelHandler(ObjectManager objectmanager, EventManager eventmanager) {
-        	myObjectManager = objectmanager;
-        	myEventManager = eventmanager;
-        }
-		
-		public void update(){
-			myEventManager.update();
-		}
-		
-		public List<Node> extractUpdatedNodes(){
-			return myObjectManager.getAllDisplayableNodes();
-		}
+
+	private ObjectManager myObjectManager;
+	private EventManager myEventManager;
+
+	public LevelHandler(ObjectManager objectmanager, EventManager eventmanager) {
+		myObjectManager = objectmanager;
+		myEventManager = eventmanager;
+	}
+
+	public void update(){
+		myEventManager.update();
+	}
+
+	public List<Node> extractUpdatedNodes(){
+		return myObjectManager.getAllDisplayableNodes();
+	}
 }

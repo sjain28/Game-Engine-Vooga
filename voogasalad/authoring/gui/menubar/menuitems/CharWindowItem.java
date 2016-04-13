@@ -5,12 +5,25 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 
+/**
+ * MenuItem to select the Characteristics Pane
+ * @author Nick
+ *
+ */
 public class CharWindowItem extends MenuItemHandler {
-	
+    /**
+     * Initializes the MenuItem
+     * 
+     * @param model to interface backend interactions with the model
+     * @param event: Unused vestige of previous poor programming. Should soon be phased out.
+     */
 	public CharWindowItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
 		super();
 	}
-
+	
+	/**
+         * Action to be taken on the selection of this menuItem
+         */
 	@Override
 	public void handle() {
 		// TODO Auto-generated method stub

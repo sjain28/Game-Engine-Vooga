@@ -54,6 +54,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         ClipboardContent content = new ClipboardContent();
         content.putString(getId());
         db.setContent(content);
+        db.setDragView(this.getImage());
         event.consume();
     }
 
