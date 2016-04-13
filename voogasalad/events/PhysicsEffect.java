@@ -42,7 +42,9 @@ public class PhysicsEffect extends SpriteEffect {
 	@Override
 	public void execute(){
 		setSprites();
+		System.out.println("my sprite lenght in effects: " +getSprites().size());
 		for (Sprite sprite: getSprites()){
+			System.out.println("Sprite that the effect is checking now: "+sprite);
 			callEffectMethod(sprite);
 		}
 	}
@@ -51,8 +53,15 @@ public class PhysicsEffect extends SpriteEffect {
 		Class physicsClass = getEvent().getPhysicsEngine().getClass();
 		Method[] methods = physicsClass.getMethods();
 		try{
+			System.out.println("calling "+getMethodString()+" method effect");
+			//TODO: physicsMethod is returning null
+			System.out.println("Sprite id: "+getSprites().get(0).getID());
 			Method physicsMethod = getMethodfromString(methods, getMethodString());
+			System.out.println("HEREEE"+physicsMethod);
+
 			Class[] parameterType = physicsMethod.getParameterTypes();
+			System.out.println("param types: "+parameterType);
+			physicsMethod.invoke(sprite, getParameters());
 			//physicsMethod.invoke(sprite, getParameters()[0]);
 		}catch (Exception e){
 			//throw new VoogaException(String.format(format, args));

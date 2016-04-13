@@ -26,7 +26,7 @@ public interface IGameRunner {
 
 	// Methods below only called by LevelDataManager
 
-	List<?> getKeyEvents();
+	//List<?> getKeyEvents();
 
 	void clearKeyEvents();
 

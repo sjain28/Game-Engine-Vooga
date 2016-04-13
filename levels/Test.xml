@@ -1,6 +1,34 @@
 <object-stream>
   <data.DataContainerOfLists>
-    <eventList/>
+    <eventList>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>DOWN</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.PhysicsEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>29a0f8af-3a10-4393-a313-f6987866001d</myMethod>
+            <myParameter class="double">70.0</myParameter>
+            <myVariable>jump</myVariable>
+            <needsSprites>true</needsSprites>
+            <mySprites/>
+          </events.PhysicsEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.0</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+    </eventList>
     <elementableList>
       <gameengine.Sprite>
         <myVelocity>
@@ -15,7 +43,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>873be5df-a55d-4649-98c3-75edc9ceadad</myID>
+        <myID>29a0f8af-3a10-4393-a313-f6987866001d</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -42,5 +70,30 @@
         </tools.VoogaBoolean>
       </entry>
     </variableMap>
+    <spriteFactory>
+      <myArchetypes>
+        <entry>
+          <string>default</string>
+          <gameengine.Sprite>
+            <myVelocity>
+              <xPrev>0.0</xPrev>
+              <yPrev>0.0</yPrev>
+              <x>0.0</x>
+              <y>0.0</y>
+            </myVelocity>
+            <myLoc>
+              <xPrev>0.0</xPrev>
+              <yPrev>0.0</yPrev>
+              <x>0.0</x>
+              <y>0.0</y>
+            </myLoc>
+            <myID>b5e91649-ecce-41eb-b4b4-0693b7acd54c</myID>
+            <myProperties reference="../../../../../elementableList/gameengine.Sprite/myProperties"/>
+            <myImagePath>/smile.jpg</myImagePath>
+            <myArchetype>default</myArchetype>
+          </gameengine.Sprite>
+        </entry>
+      </myArchetypes>
+    </spriteFactory>
   </data.DataContainerOfLists>
 </object-stream>

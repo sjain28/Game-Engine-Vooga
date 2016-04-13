@@ -107,7 +107,7 @@ public class LevelDataManager implements ILevelDataManager {
 	 */
 	@Override
 	public void update() {
-		setKeyEvents(getGameRunner().getKeyEvents());
+		//setKeyEvents(getGameRunner().getKeyEvents());
 		myObjectManager.update();
 		myEventManager.update();
 		//Need to clear list of keyevents
@@ -152,15 +152,20 @@ public class LevelDataManager implements ILevelDataManager {
 	/**
 	 * @return the myKeyEvents
 	 */
-	public List<?> getKeyEvents() {
-		return myKeyEvents;
-	}
+//	public List<?> getKeyEvents() {
+//		return myKeyEvents;
+//	}
 
 	/**
 	 * @param myKeyEvents the myKeyEvents to set
 	 */
 	public void setKeyEvents(List<?> myKeyEvents) {
-		this.myKeyEvents = (List<KeyEvent>) myKeyEvents;
+		myEventManager.setKeyStrokes(myKeyEvents);
 	}
+
+//	@Override
+//	public void resetKeyEvents(List<KeyEvent> keyEvents) {
+//		myEventManager.
+//	}
 
 }
