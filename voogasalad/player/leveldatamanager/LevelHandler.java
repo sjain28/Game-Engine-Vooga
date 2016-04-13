@@ -11,6 +11,7 @@ import javafx.scene.Node;
  * POTENTIALLY DELETE THIS CLASS CAUSE IT'S NOT REALLY DOING MUCH AND COULD BE HANDLED BY GAMECONTROLLER
  * REALLY JUST SERVING AS INTERMEDIARY
  */
+@Deprecated
 public class LevelHandler {
 	
 		private ObjectManager myObjectManager;
