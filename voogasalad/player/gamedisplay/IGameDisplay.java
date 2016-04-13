@@ -27,4 +27,6 @@ public interface IGameDisplay {
 	
 	List<KeyEvent> getKeyEvents();
 	
+	void clearKeyEvents();
+	
 }
