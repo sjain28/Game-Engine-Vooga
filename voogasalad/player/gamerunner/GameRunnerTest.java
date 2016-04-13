@@ -1,23 +1,14 @@
 
 package player.gamerunner;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import authoring.interfaces.Elementable;
-import authoring.model.VoogaButton;
-import authoring.model.VoogaFrontEndText;
-import events.VoogaEvent;
 import javafx.application.Application;
-
 import javafx.stage.Stage;
-import tools.VoogaBoolean;
-import tools.VoogaNumber;
-import tools.interfaces.VoogaData;
 
-
+/**
+ * GameRunnerTest tests reading .xml, creating sprites and displaying
+ * them 
+ *
+ */
 public class GameRunnerTest extends Application {
 	
 	private static final String testString = "levels/Test.xml";
@@ -75,7 +66,7 @@ public class GameRunnerTest extends Application {
         
 //        FileReaderToGameObjects filereader = new FileReaderToGameObjects(fileName);
 
-        GameRunner gameRunner = new GameRunner(testString);
+        IGameRunner gameRunner = new GameRunner(testString);
         gameRunner.playLevel(testString);
 //        DataContainerOfLists deserializedList = filereader.getDataContainer();
 //     
