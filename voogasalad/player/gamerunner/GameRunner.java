@@ -133,13 +133,7 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName){
 		System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(fileName);
-<<<<<<< HEAD
-		//call the time line here and pass step into time line
-		
-=======
-		//TODO: call the time line here and pass step into time line
->>>>>>> master
-		step();
+		run();
 	}
 
 	/**
