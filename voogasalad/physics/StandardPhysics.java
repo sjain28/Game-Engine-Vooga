@@ -1,6 +1,5 @@
 package physics;
 
-import player.gamerunner.FixedStepLoopWithInterpolation;
 import gameengine.Sprite;
 import tools.Acceleration;
 import tools.Position;
@@ -9,11 +8,11 @@ import tools.Velocity;
 public class StandardPhysics implements IPhysicsEngine{
 	//TODO find which methods overlap in code and reduce the bulk from that
 	private double frameTime;
-	
+
 	public StandardPhysics(){	
-		this.frameTime = (float) FixedStepLoopWithInterpolation.FRAME_TIME;
+//		this.frameTime = (float) FixedStepLoopWithInterpolation.FRAME_TIME;
 	}
-	
+
 	@Override
 	public void translate(Sprite sprite, Velocity change) {
 		double newX = gradualChange(sprite.getPosition().getX(), change.getX());
@@ -42,7 +41,7 @@ public class StandardPhysics implements IPhysicsEngine{
 		Velocity velocity = new Velocity(newXVel, newYVel);
 		sprite.setVelocity(velocity);
 	}
-	
+
 	@Override
 	public void setVelocity(Sprite sprite, Velocity newVelocity) {
 		sprite.setVelocity(newVelocity);
@@ -82,16 +81,16 @@ public class StandardPhysics implements IPhysicsEngine{
 		Acceleration gravityAcceleration = new Acceleration(0, -gravityMagnitude);
 		accelerate(sprite, gravityAcceleration);
 	}
-	
+
 	@Override
 	public void interpolatePositions(float alpha) {
 		// TODO for extension, infer future positions by priority of operations
 	}
-	
+
 	private double gradualChange(double curr, double change){
 		return curr + change*frameTime;
 	}
-	
+
 	private double immediateChange(double curr, double change){
 		return curr + change;
 	}
