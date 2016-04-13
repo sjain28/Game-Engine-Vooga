@@ -21,6 +21,8 @@ public interface IGameRunner {
 	
 	IGameRunner getSelf();
 	
+	void playLevel(String teststring);
+	
 	// Methods below only called by LevelDataManager
 	Collections getKeyEvents();
 	
@@ -28,5 +30,6 @@ public interface IGameRunner {
 	
 	@Deprecated
 	void read(Collections nodesToDisplay);
+
 	
 }
