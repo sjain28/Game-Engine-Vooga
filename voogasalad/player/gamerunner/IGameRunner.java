@@ -21,6 +21,11 @@ public interface IGameRunner {
 	
 	IGameRunner getSelf();
 	
+	// Methods below only called by LevelDataManager
 	Collections getKeyEvents();
+	
+	void clearKeyEvents();
+	
+	void read(Collections nodesToDisplay);
 	
 }
