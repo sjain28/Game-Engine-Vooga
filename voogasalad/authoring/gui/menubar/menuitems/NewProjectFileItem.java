@@ -18,7 +18,7 @@ public class NewProjectFileItem extends MenuItemHandler {
 
 	@Override
 	public void handle() {
-		Launcher newProject = new Launcher(new Stage());
+		new Launcher(new Stage());
 	}
 
 }
