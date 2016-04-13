@@ -26,7 +26,7 @@ public class EventManager {
 	private List<List<String>> keyCombos; //List of keycombos that are bound to events, sorted by length
 	private Map<List<String>, KeyCause> keyCauses; //Maps Strings 
 	private ObjectManager myEngineManager;
-	
+
 	public EventManager(ObjectManager manager, List<VoogaEvent> events) {
 		keyStrokes = new ArrayList<>();
 		myEvents = events;
@@ -34,22 +34,22 @@ public class EventManager {
 		myEngineManager = manager;
 		keyCombos = new ArrayList<List<String>>();
 	}
-	
+
 	public void update(){
-		
+
 		for(KeyEvent k: (List<KeyEvent>) myEngineManager.getKeyEvents()){
 			keyStrokes.add(k.toString());
 		}
-				
+
 		checkKeys();
 		for(VoogaEvent e: myEvents){
 			e.update();
 		}
-		
+
 		for(List<String> cause: keyCauses.keySet()){
 			keyCauses.get(cause).setValue(false);
 		}
-		
+
 		keyStrokes.clear();
 	}
 
@@ -67,7 +67,7 @@ public class EventManager {
 		voogaEvent.setManager(myEngineManager);
 		myEvents.add(voogaEvent);
 	}
-	
+
 	/**
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
@@ -91,7 +91,7 @@ public class EventManager {
 			}
 		}
 	}	
-	
+
 	/**
 	 * Removes keystrokes from the list once they're used for an event
 	 */

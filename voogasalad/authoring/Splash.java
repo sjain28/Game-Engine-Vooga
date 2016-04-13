@@ -20,7 +20,10 @@ import javafx.util.Duration;
 public class Splash extends Pane {
 
 	private EventHandler<MouseEvent> e;
-	
+	/**
+	 * Initialized the splash screen, 
+	 * @param e MouseEvent to signify when to close the screen
+	 */
 	public Splash(EventHandler<MouseEvent> e) {
 		this.e = e;
 		Image image = new Image(this.getClass().getResourceAsStream("/resources/images/splash.gif"));

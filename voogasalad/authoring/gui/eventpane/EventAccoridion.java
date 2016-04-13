@@ -21,29 +21,30 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import resources.VoogaBundles;
 
+
 public class EventAccoridion extends Tab {
     private List<TitledPane> tiles;
     private EditEventable manager;
-    
+
     private BorderPane pane;
     private Accordion accordion;
     private HBox buttons;
-    
-    private String name="";
-    
-    public EventAccoridion (EditEventable manager,String name,Button... addedButtons) {
-        this.name=name;
-        this.manager=manager;
+
+    private String name = "";
+
+    public EventAccoridion (EditEventable manager, String name, Button ... addedButtons) {
+        this.name = name;
+        this.manager = manager;
         pane = new BorderPane();
         accordion = new Accordion();
 
         initializeButtons(addedButtons);
         pane.setBottom(buttons);
         pane.setCenter(accordion);
-        
+
         tiles = new ArrayList<TitledPane>();
         generateTiles(1);
-        
+
         this.setText(name);
         this.setContent(pane);
         this.setClosable(false);
@@ -51,15 +52,15 @@ public class EventAccoridion extends Tab {
 
     private void generateTiles (int count) {
         for (int i = 0; i < count; i++) {
-            tiles.add(populateTiles(name+" " + (tiles.size() + 1)));
+            tiles.add(populateTiles(name + " " + (tiles.size() + 1)));
         }
     }
-    
+
     private TitledPane populateTiles (String name) {
         TitledPane tile = createTile();
         tile.setText(name);
-        tile.setOnMouseClicked((MouseEvent e)->{
-            if (e.getButton() == MouseButton.SECONDARY){
+        tile.setOnMouseClicked( (MouseEvent e) -> {
+            if (e.getButton() == MouseButton.SECONDARY) {
                 tiles.remove(tile);
                 accordion.getPanes().remove(tile);
             }
@@ -67,9 +68,10 @@ public class EventAccoridion extends Tab {
         accordion.getPanes().add(tile);
         return tile;
     }
-    
-    private TitledPane createTile(){
-        if (name == null) return null;
+
+    private TitledPane createTile () {
+        if (name == null)
+            return null;
         String className = VoogaBundles.backendToGUIProperties.getString(name);
         System.out.println(className);
         Class<?> c = null;
@@ -77,7 +79,7 @@ public class EventAccoridion extends Tab {
             c = Class.forName(className);
         }
         catch (Exception e) {
-        	throw new VoogaException(e.getMessage());
+            throw new VoogaException(e.getMessage());
         }
         try {
             EventTitledPane titledPane;
@@ -86,36 +88,39 @@ public class EventAccoridion extends Tab {
                 titledPane = (EventTitledPane) o;
                 System.out.println("TitledPane created in EventAccoridion.java");
                 return titledPane;
-            } catch(Exception e) {
-            	throw new VoogaException(e.getMessage());
             }
-            
-        } catch(Exception e) {
-        	
-        	throw new VoogaException(e.getMessage());
-        	
+            catch (Exception e) {
+                throw new VoogaException(e.getMessage());
+            }
+
+        }
+        catch (Exception e) {
+
+            throw new VoogaException(e.getMessage());
+
         }
     }
-    
-    private void initializeButtons(Button... addedButtons){
+
+    private void initializeButtons (Button ... addedButtons) {
         buttons = new HBox();
-        buttons.setPadding(new Insets(10,10,10,10));
-        buttons.getChildren().addAll(new ButtonMaker().makeButton("Add "+ name, e -> generateTiles(1)));
+        buttons.setPadding(new Insets(10, 10, 10, 10));
+        buttons.getChildren()
+                .addAll(new ButtonMaker().makeButton("Add " + name, e -> generateTiles(1)));
         buttons.getChildren().addAll(addedButtons);
     }
-    
-    List<String> getDetails(){
+
+    List<String> getDetails () {
         try {
-        List<String> eventList = new ArrayList<String>();
-        for (TitledPane pane : accordion.getPanes()){
-            EventTitledPane eventPane = (EventTitledPane) pane;
-            eventList.add(eventPane.getDetails());
+            List<String> eventList = new ArrayList<String>();
+            for (TitledPane pane : accordion.getPanes()) {
+                EventTitledPane eventPane = (EventTitledPane) pane;
+                eventList.add(eventPane.getDetails());
+            }
+            return eventList;
         }
-        return eventList;
-        } catch (VoogaException e){
+        catch (VoogaException e) {
             VoogaAlert va = new VoogaAlert(e.getMessage());
         }
         return null;
     }
 }
-
