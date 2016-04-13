@@ -1,5 +1,5 @@
 #Team DoovalSalad: Extra use cases
-(14 so far)
+
 ###Game screen scrolls centered on the main character
 
 * Primary Actor: Main character (sprite)
