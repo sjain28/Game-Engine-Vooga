@@ -39,7 +39,7 @@ public class VariableCause extends Cause{
 		
 		try {
 			Method testMethod = variableClass.getMethod(myOperation, paramClass);
-			Boolean value = (Boolean) testMethod.invoke(myVariable);
+			Boolean value = (Boolean) testMethod.invoke(myVariable, myTarget);
 			return value;
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();

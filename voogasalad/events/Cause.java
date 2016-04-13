@@ -7,6 +7,7 @@ public abstract class Cause {
 	 
 	 public Cause(VoogaEvent voogaEvent){
 		 myEvent = voogaEvent;
+		 myEvent.addCause(this);
 	 }
 	 
 	 public VoogaEvent getEvent(){

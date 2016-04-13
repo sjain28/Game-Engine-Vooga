@@ -30,8 +30,8 @@ import player.leveldatamanager.LevelDataManager;
  */
 public class GameRunner implements IGameRunner{
 
-	private ILevelDataManager myCurrentLevelDataManager;
-	private IGameDisplay myGameDisplay;
+	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
 	
 	private AnimationTimer myTimeline;
@@ -121,6 +121,7 @@ public class GameRunner implements IGameRunner{
 	 * is typed: List<Node>
 	 * 
 	 */
+	@Deprecated
 	@Override
 	public void read(Collections nodesToDisplay) {
 		getGameDisplay().read((List<Node>) nodesToDisplay);

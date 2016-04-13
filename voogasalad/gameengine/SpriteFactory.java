@@ -8,6 +8,9 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import data.Serializer;
 import data.DeSerializer;
+import auxiliary.VoogaException;
+import data.DeSerializer;
+import data.Serializer;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
@@ -44,7 +47,7 @@ public class SpriteFactory {
 					  original.getParameterMap(), (VoogaNumber)original.getParameterMap().get(Sprite.MASS));
 		return clone;
 	}
-
+	
 	/**
 	 * Sets or creates a new Archetype
 	 * Must specify what you want your default Sprite
@@ -53,10 +56,17 @@ public class SpriteFactory {
 	 * @param archetype
 	 * @param s
 	 */
-	public void setArchetype(String archetype, Sprite sprite){
-		myArchetypes.put(archetype, sprite);
+	public void addArchetype(String archetypeName, Sprite archetype) throws Exception{
+		if(myArchetypes.keySet().contains(archetypeName)){
+			throw new VoogaException();
+		}
+		else{
+			myArchetypes.put(archetypeName, archetype);
+		}
 	}
-	
+
+
+
 	/**
 	 * Returns the default Sprite for a given
 	 * Archetype
@@ -109,11 +119,12 @@ public class SpriteFactory {
 	 * todo: Check to see if this is actually what the front end needs
 	 * 
 	 * @param fileLocation
+	 * @throws Exception 
 	 */
-	public void deSerializeArchetype(String fileLocation){
+	public void deSerializeArchetype(String fileLocation) throws Exception{
 		DeSerializer deserializer = new DeSerializer();
 		Sprite newArchetype = (Sprite) deserializer.deserialize(1,fileLocation);
-		setArchetype(newArchetype.getArchetype(), newArchetype);
+		addArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}
 }
