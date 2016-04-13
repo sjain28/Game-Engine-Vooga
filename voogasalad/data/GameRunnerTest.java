@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaButton;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import events.VoogaEvent;
 import javafx.application.Application;
 

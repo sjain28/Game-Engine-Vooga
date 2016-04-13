@@ -1,11 +1,9 @@
 package player.gamerunner;
 
-import java.util.function.Consumer;
-
 /**
  * @author Michael Kuryshev
  */
-
+@Deprecated
 public class FixedStepLoopWithInterpolation extends GameLoop 
 {
 	/*

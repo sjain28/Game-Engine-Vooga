@@ -118,8 +118,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                 elements.add(((GameObject) element).getSprite());
             }
 
-            if (element instanceof VoogaText) {
-                elements.add((VoogaText) element);
+            if (element instanceof VoogaFrontEndText) {
+                elements.add((VoogaFrontEndText) element);
             }
         }
 
