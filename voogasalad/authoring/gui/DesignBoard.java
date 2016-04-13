@@ -68,6 +68,7 @@ public class DesignBoard extends Tab implements Observer{
         y_offset = HEIGHT / 2;
         x_offset = WIDTH / 2;
     }
+    
 
     private void initializeDragAndDrop () {
         contentPane.setOnDragOver(e -> mouseDragOver(e));
@@ -176,6 +177,12 @@ public class DesignBoard extends Tab implements Observer{
             }
         }
     }
+    
+    
+    
+    /**
+     * Updates changes to the class based on the observation from the Model, Specifically the ElementManager
+     */
     @Override
     public void update (Observable o, Object arg) {
         if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)){
