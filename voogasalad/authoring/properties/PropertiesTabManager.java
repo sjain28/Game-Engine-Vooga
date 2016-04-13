@@ -35,12 +35,12 @@ public class PropertiesTabManager implements Observer {
 		myPropertyTabs.add(GPT);
 	}
 	
-	public SpritePropertiesTab getSpritePropertiesTab() {
-		return SPT;
+	public void getSpritePropertiesTab(Elementable elem) {
+		SPT.getPropertiesMap(elem);
 	}
 	
-	public GlobalPropertiesTab getGlobalPropertiesTab() {
-		return GPT;
+	public void getGlobalPropertiesTab(Elementable elem) {
+		GPT.getPropertiesMap(elem);
 	}
 
 	@Override
