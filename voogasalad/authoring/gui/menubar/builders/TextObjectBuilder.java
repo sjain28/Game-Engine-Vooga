@@ -1,7 +1,7 @@
 package authoring.gui.menubar.builders;
 
 import authoring.interfaces.model.EditElementable;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import gameengine.Sprite;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -22,7 +22,7 @@ public class TextObjectBuilder extends Builder{
 
     @Override
     public void compile () {
-        VoogaText text = new VoogaText(getInfo());
+        VoogaFrontEndText text = new VoogaFrontEndText(getInfo());
         getManager().addGameElements(text);
         quit();
     }

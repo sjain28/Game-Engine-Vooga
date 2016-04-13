@@ -1,21 +1,71 @@
 package data;
 
-import authoring.model.VoogaText;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import authoring.interfaces.Elementable;
+import authoring.model.VoogaFrontEndText;
+import events.KeyCause;
+import events.VariableEffect;
+import events.VoogaEvent;
+import gameengine.Sprite;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import tools.Position;
+import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 public class VoogaTextWritingTest extends Application {
 
     @Override
     public void start (Stage primaryStage) throws Exception {
-        VoogaText vt = new VoogaText();
-        vt.setText("DASFASFAF");
+        DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),generateGlobalVariables(),generateEvents());
         
-        Serializer.serialize(vt, "levels/Test.xml");
+        Serializer.serialize(manager, "levels/Test.xml");
         Object o = DeSerializer.deserialize(1, "levels/Test.xml").get(0);
-        VoogaText vt2 = (VoogaText) o;
-        System.out.println("VoogaText");
+        DataContainerOfLists vt2 = (DataContainerOfLists) o;
+        System.out.println("Unserialized");
         System.out.println(vt2);
+    }
+    
+    private List<Elementable> generateSprites(){
+        List<Elementable> elements = new ArrayList<Elementable>();
+        for (int i=0;i<10;i++){
+            Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
+            properties.put("health", new VoogaNumber(10d));
+            Sprite sprite = new Sprite("/image.jpeg","healthy",properties,new VoogaNumber(8d));
+            sprite.setPosition(new Position(i*7,i*2));
+            elements.add(sprite);
+        }
+        
+//        for (int i =0;i<10;i++){
+//            VoogaText vt = new VoogaText();
+//            vt.setText("DASFASAA");
+//            vt.setId("ADSFASDFASF");
+//            elements.add(vt);
+//        }
+//        
+        return elements;
+    }
+    
+    private List<VoogaEvent> generateEvents(){
+        List<VoogaEvent> elements = new ArrayList<VoogaEvent>();
+        for (int i =0;i<10;i++){
+                VoogaEvent testEvent = new VoogaEvent();
+                testEvent.addCause(new KeyCause("k", testEvent));
+                testEvent.addEffect(new VariableEffect("GameWon", "toggle", testEvent));
+            elements.add(testEvent);
+        }
+        return elements;
+    }
+    
+    private Map<String,VoogaData> generateGlobalVariables(){
+        Map<String,VoogaData> map = new HashMap<String,VoogaData>();
+        for (int i=0;i<10;i++){
+            map.put(""+i, new VoogaNumber((double) i));
+        }
+        return map;
     }
     
     public static void main (String[] args){
