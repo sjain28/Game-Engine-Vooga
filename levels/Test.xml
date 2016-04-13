@@ -1,0 +1,14 @@
+<object-stream>
+  <data.DataContainerOfLists>
+    <eventList/>
+    <elementableList/>
+    <variableMap>
+      <entry>
+        <string>Raggity Rick</string>
+        <tools.VoogaBoolean>
+          <myValue>true</myValue>
+        </tools.VoogaBoolean>
+      </entry>
+    </variableMap>
+  </data.DataContainerOfLists>
+</object-stream>

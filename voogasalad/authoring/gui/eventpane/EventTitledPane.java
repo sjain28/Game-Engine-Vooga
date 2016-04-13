@@ -1,11 +1,16 @@
 package authoring.gui.eventpane;
 
 import java.lang.reflect.InvocationTargetException;
+
+import authoring.CustomText;
 import authoring.interfaces.model.EditEventable;
 import auxiliary.VoogaException;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 
 public class EventTitledPane extends TitledPane {
@@ -44,8 +49,8 @@ public class EventTitledPane extends TitledPane {
             try {
                 Object o = c.getConstructor(EditEventable.class).newInstance(manager);
                 eg = (EventGUI) o;
-                System.out.println("Event GUI created");
-                pane.setCenter(eg.display());
+                Node display = eg.display();
+                pane.setCenter(display);
             }
             catch (IllegalArgumentException e) {
                 // TODO Auto-generated catch block
