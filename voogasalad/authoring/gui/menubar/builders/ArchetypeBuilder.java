@@ -3,7 +3,7 @@ package authoring.gui.menubar.builders;
 import java.util.HashMap;
 import java.util.Map;
 import authoring.interfaces.model.EditElementable;
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
 import gameengine.Sprite;
