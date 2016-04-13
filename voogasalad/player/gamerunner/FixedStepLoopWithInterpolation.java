@@ -1,18 +1,17 @@
 package player.gamerunner;
 
-import java.util.function.Consumer;
-
 /**
  * @author Michael Kuryshev
  */
-
+@Deprecated
 public class FixedStepLoopWithInterpolation extends GameLoop 
 {
+	/*
 	private final Consumer<Float> updater;
 	private final Runnable renderer;
 	private final Consumer<Float> interpolater; 
 	private final Consumer<Integer> fps_reporter; 
-	
+	*/
 	public static final float FRAMES_PER_SECOND = 60;
 	public static final float FRAME_TIME = 1/FRAMES_PER_SECOND;
 	private static final float NANOSECONDS_PER_SECOND = 1e9f;
@@ -28,14 +27,14 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 	 * @param interpolater
 	 * @param fpsReporter
 	 */
-	public FixedStepLoopWithInterpolation(Consumer<Float> updater,
-			Runnable renderer, Consumer<Float> interpolater,
-			Consumer<Integer> fpsReporter) 
+	public FixedStepLoopWithInterpolation() 
 	{
+		/*
 		this.updater = updater;
 		this.renderer = renderer;
 		this.interpolater = interpolater;
 		this.fps_reporter = fpsReporter;
+		*/
 	}
 	
 	private float previousTime = 0;
@@ -61,13 +60,13 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		totalTime += secondsElapsedCapForFrame;
 		previousTime = currentTime;
 		
-		handleInterpolation(secondsElapsed, totalTime);
+		//handleInterpolation(secondsElapsed, totalTime);
 		
 		secondsSinceLastFpsUpdate += secondsElapsed;
 		framesSinceLastFpsUpdate++;
 		
-		if (secondsSinceLastFpsUpdate >= FPS_REPORTER_UPDATE_RATE)
-			updateFpsReporter(framesSinceLastFpsUpdate, secondsSinceLastFpsUpdate);
+		if (secondsSinceLastFpsUpdate >= FPS_REPORTER_UPDATE_RATE);
+			//updateFpsReporter(framesSinceLastFpsUpdate, secondsSinceLastFpsUpdate);
 	}
 	
 	/**
@@ -77,6 +76,7 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 	 * @param secondsElapsed
 	 * @param totalTime
 	 */
+	/*
 	private void handleInterpolation(float secondsElapsed, float totalTime)
 	{
 		if (totalTime < FRAME_TIME){
@@ -98,6 +98,7 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		float alpha = totalTime / FRAME_TIME;
 		interpolater.accept(alpha);
 	}
+	*/
 	
 	/**
 	 * Update the FPS rate which can viewed in the GUI for testing or play.
@@ -105,6 +106,7 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 	 * @param framesSinceLastFpsUpdate
 	 * @param secondsSinceLastFpsUpdate
 	 */
+	/*
 	private void updateFpsReporter(float framesSinceLastFpsUpdate, float secondsSinceLastFpsUpdate)
 	{
 		int fps = Math.round(framesSinceLastFpsUpdate / secondsSinceLastFpsUpdate);
@@ -112,6 +114,7 @@ public class FixedStepLoopWithInterpolation extends GameLoop
 		secondsSinceLastFpsUpdate = 0;
 		framesSinceLastFpsUpdate = 0;
 	}
+	*/
 	
 	/**
 	 * In addition to standard timer stop, also reset all counts to make the

@@ -26,4 +26,5 @@ public interface IDisplayScroller {
 	void setScreenSizeX();
 	
 	void setScreenSizeY();
+	
 }

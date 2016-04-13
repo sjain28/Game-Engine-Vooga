@@ -24,9 +24,12 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     public GameObject (Sprite sprite) {
         mySprite = sprite;
+        this.setId(mySprite.getID());
         this.setImage(mySprite.getImage().getImage());
         this.setTranslateX(mySprite.getPosition().getX());
         this.setTranslateY(mySprite.getPosition().getY());
+        this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
+        this.setOnDragDetected(e -> onDrag(e));
     }
 
     // TODO: Send back immutable sprite
@@ -46,9 +49,8 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     }
 
     void onDrag (MouseEvent event) {
-        Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
+        Dragboard db = this.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
-        // Store node ID in order to know what is dragged.
         content.putString(getId());
         db.setContent(content);
         event.consume();
@@ -93,7 +95,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 	@Override
 	public String getID() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.mySprite.getID();
 	}
 
 }
