@@ -36,7 +36,12 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
         myImagePath = imagePath;
-        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        Image image = null;
+        if(myImagePath.contains("file:")) {
+        	image = new Image(myImagePath);
+        } else {
+        	image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        }
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -28,22 +29,26 @@ import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
-public class ElementManager implements Saveable, CompleteAuthoringModelable, Elementable{
- 
+public class ElementManager extends Observable implements Saveable, CompleteAuthoringModelable {
+
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
+    private GlobalPropertiesManager GPM;
     private Map<String, VoogaData> myGlobalVariables;
     private File myXmlDataFile;
     private SpriteFactory spriteFactory;
     private Set<String> myIds;
+    private String filePath="levels/Test.xml";
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
-        myGlobalVariables = new HashMap<String, VoogaData>();
+        GPM = new GlobalPropertiesManager();
+        myGlobalVariables = GPM.getVoogaProperties();
         myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
+        myXmlDataFile = new File("/levels/Test.xml");
     }
 
     public ElementManager (File xmlDataFile) {
@@ -53,10 +58,14 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
 
     public void addGameElements (Node ... elements) {
         myGameElements.addAll(Arrays.asList(elements));
+        setChanged();
+        notifyObservers(myGameElements);
     }
 
     public void removeGameElements (Node ... elements) {
         myGameElements.removeAll(Arrays.asList(elements));
+        setChanged();
+        notifyObservers(myGameElements);
     }
 
     public List<Node> getElements () {
@@ -82,6 +91,14 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
         return null;
     }
 
+    public Set<String> getIds () {
+        return this.myIds;
+    }
+
+    public void addElementId (String id) {
+        myIds.add(id);
+    }
+
     public boolean hasElement (String id) {
         return myIds.contains(id);
     }
@@ -91,6 +108,9 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
      */
     @Override
     public void onSave () throws VoogaException {
+
+        updateGlobalPropertiesMap();
+
         List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
@@ -98,14 +118,17 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
                 elements.add(((GameObject) element).getSprite());
             }
 
-            if (element instanceof VoogaText) {
-                elements.add((VoogaText) element);
+            if (element instanceof VoogaFrontEndText) {
+                elements.add((VoogaFrontEndText) element);
             }
         }
 
-        DataContainerOfLists data = new DataContainerOfLists(elements,myGlobalVariables,myEventList);
+        DataContainerOfLists data =
+                new DataContainerOfLists(elements, myGlobalVariables, myEventList);
+        System.out.println("I'm done saving in element manager");
         try {
-            FileWriterFromGameObjects.saveGameObjects(data,myXmlDataFile.getPath());
+            System.out.println(myXmlDataFile.getPath());
+            FileWriterFromGameObjects.saveGameObjects(data, filePath);
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             throw new VoogaException();
@@ -125,39 +148,21 @@ public class ElementManager implements Saveable, CompleteAuthoringModelable, Ele
     }
 
     public Map<String, VoogaData> getGlobalVariables () {
+        updateGlobalPropertiesMap();
         return myGlobalVariables;
     }
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void updateGlobalPropertiesMap () {
+        myGlobalVariables = GPM.getVoogaProperties();
+    }
 
-	@Override
-	public Map<String, VoogaData> getVoogaProperties() {
-		return myGlobalVariables;
-	}
+    public GlobalPropertiesManager getGlobalPropertiesManager () {
+        return GPM;
+    }
 
-	@Override
-	public void addProperty(String name, VoogaData data) {
-		myGlobalVariables.put(name, data);
-	}
+    @Override
+    public void addGlobalVariable (String name, VoogaData value) {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void removeProperty(String name) {
-		myGlobalVariables.remove(name);
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Node getNodeObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

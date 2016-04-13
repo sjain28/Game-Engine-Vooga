@@ -11,12 +11,13 @@ import javafx.scene.Node;
  * POTENTIALLY DELETE THIS CLASS CAUSE IT'S NOT REALLY DOING MUCH AND COULD BE HANDLED BY GAMECONTROLLER
  * REALLY JUST SERVING AS INTERMEDIARY
  */
+@Deprecated
 public class LevelHandler {
 	
-		private EngineObjectManager myObjectManager;
+		private ObjectManager myObjectManager;
 		private EventManager myEventManager;
 		
-        public LevelHandler(EngineObjectManager objectmanager, EventManager eventmanager) {
+        public LevelHandler(ObjectManager objectmanager, EventManager eventmanager) {
         	myObjectManager = objectmanager;
         	myEventManager = eventmanager;
         }

@@ -1,6 +1,6 @@
 package authoring.model.tests;
 
-import authoring.model.VoogaText;
+import authoring.model.VoogaFrontEndText;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -21,7 +21,7 @@ public class BuildVoogaText extends Application{
         circle.setCenterY(100.0f);
         circle.setRadius(100);
         circle.setFill(Color.RED);
-        group.getChildren().addAll(circle,new VoogaText());
+        group.getChildren().addAll(circle,new VoogaFrontEndText());
         
         Scene scene = new Scene(pane);
         scene.getStylesheets().add("text.css");

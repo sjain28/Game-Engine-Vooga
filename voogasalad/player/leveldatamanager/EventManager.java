@@ -24,13 +24,14 @@ public class EventManager {
 	private List<VoogaEvent> myEvents;
 	private List<String> keyCombos;
 	private Map<String, KeyCause> keyCauses;
-	private EngineObjectManager myEngineManager;
+	private ObjectManager myEngineManager;
 	
-	public EventManager(EngineObjectManager manager, List<VoogaEvent> events) {
+	public EventManager(ObjectManager manager, List<VoogaEvent> events) {
 		keyStrokes = new ArrayList<Character>();
 		myEvents = events;
 		keyCauses = new TreeMap<String, KeyCause>();
 		myEngineManager = manager;
+		keyCombos = new ArrayList<String>();
 	}
 	
 	public void update(){
