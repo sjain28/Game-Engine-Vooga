@@ -2,14 +2,8 @@ package events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+
 import auxiliary.VoogaException;
-import gameengine.Sprite;
-import tools.VoogaNumber;
-import tools.interfaces.VoogaData;
 
 public class CauseAndEffectFactory {
 
@@ -94,7 +88,6 @@ public class CauseAndEffectFactory {
         catch (Exception e) {
             return input;
         }
-
     }
     /**
 	 * Main method was used for testing purposes
@@ -103,40 +96,25 @@ public class CauseAndEffectFactory {
     public static void main (String args[]) {
         CauseAndEffectFactory cf = new CauseAndEffectFactory();
         VoogaEvent e = new VoogaEvent();
-        // Object[] obj = {"Hello"};
 
-        // cf.create("events.KeyCause", e, obj);
-        // System.out.println(e.getCauses().size());
-
-        // Object[] params = {"one", "two"};
-        // cf.create("events.VariableEffect", e, params);
-        //
-        // Object[] spriteParams = {"test", "tester"};
-        // cf.create("events.SpriteEffect", e, spriteParams);
-
-        // public VariableCause(String variableName, Double targetValue, String predicate,
-        // VoogaEvent voogaEvent) {
-        
 //    	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
 //        String variableCauseParams = "events.VariableCause Score 500 greaterThan";
 //        cf.create(e, variableCauseParams);
        
-        Map<String, VoogaData> params = new HashMap<>();
-        params.put("Health", new VoogaNumber(100.0));
-        params.put("Score", new VoogaNumber(500.0));
-        
-        Sprite tester = new Sprite("dummypath", "Character", params, new VoogaNumber(50.0));
-        String ID = tester.getID();
-        VoogaEvent event = new VoogaEvent();
-        
-        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", "greaterThan", 50.0, event);
-        SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
-        
-        event.update();
-        //	public SpriteVariableCause(Sprite sprite, String varName, Double targetValue, String predicate, VoogaEvent event){
-
-        
 //        String cause = "events.SpriteVariableCause ID Health 25.0 greaterThan";
+//        Map<String, VoogaData> params = new HashMap<>();
+//        params.put("Health", new VoogaNumber(100.0));
+//        params.put("Score", new VoogaNumber(500.0));
+//        
+//        Sprite tester = new Sprite("dummypath", "Character", params, new VoogaNumber(50.0));
+//        String ID = tester.getID();
+//        VoogaEvent event = new VoogaEvent();
+//        
+//        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", "greaterThan", 50.0, event);
+//        SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
+//        
+//        event.update();
+//        //	public SpriteVariableCause(Sprite sprite, String varName, Double targetValue, String predicate, VoogaEvent event){
 //        
 //        cf.create(e, cause);
 //        
@@ -145,6 +123,20 @@ public class CauseAndEffectFactory {
         //	public SpriteVariableCause(String spriteID, String varName, Double targetValue, String predicate, VoogaEvent voogaEvent) {
 //    	public SpriteEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
 
+        
+//		  TESTING CAUSES AND EFFECTS, NO FACTORY STUFF HERE        
+//        Map<String, VoogaData> params = new HashMap<>();
+//        params.put("Health", new VoogaNumber(100.0));
+//        params.put("Score", new VoogaNumber(500.0));
+//        
+//        Sprite tester = new Sprite("dummypath", "Character", params, new VoogaNumber(50.0));
+//        String ID = tester.getID();
+//        VoogaEvent event = new VoogaEvent();
+//        
+//        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", 50.0, "greaterThan", event);
+//        SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
+//        
+//        event.update();
 
     }
 }
