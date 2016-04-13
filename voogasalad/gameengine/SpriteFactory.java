@@ -1,5 +1,4 @@
 package gameengine;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +6,8 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
+import data.Serializer;
+import data.DeSerializer;
 import auxiliary.VoogaException;
 import data.DeSerializer;
 import data.Serializer;
@@ -24,16 +25,17 @@ import tools.interfaces.VoogaData;
 
 public class SpriteFactory {
 
-	private static final String DEFAULT_IMAGE = "/bricks.jpg";
+	private static final String DEFAULT_IMAGE = "/smile.jpg";
 	private static final String DEFAULT_ARCH = "default";
 	public static final Sprite DEFAULT_SPRITE = 
-			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(0.0));
+			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(1.0));
 	private Map<String,Sprite> myArchetypes; 
 
 	public SpriteFactory() {
 		myArchetypes = new HashMap<String,Sprite>();
 		myArchetypes.put(DEFAULT_SPRITE.getArchetype(), DEFAULT_SPRITE);
 	}
+	
 	/**
 	 * Create a completely new Sprite of a given archetype
 	 * @param archetype
@@ -120,8 +122,8 @@ public class SpriteFactory {
 	 * @throws Exception 
 	 */
 	public void deSerializeArchetype(String fileLocation) throws Exception{
-		DeSerializer unserializer = new DeSerializer();
-		Sprite newArchetype = (Sprite) unserializer.deserialize(1,fileLocation);
+		DeSerializer deserializer = new DeSerializer();
+		Sprite newArchetype = (Sprite) deserializer.deserialize(1,fileLocation);
 		addArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}

@@ -39,6 +39,7 @@ public class ObjectManager {
 			myElements.put(el.getID(), el);
 		}
 		System.out.println("The list of myElementables here is " + myElements);
+		
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		
 		//TODO: Once constructor is figured out, intialize all objects here.
@@ -139,8 +140,19 @@ public class ObjectManager {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 		
+		System.out.println("my displayable nodes from get all displayable nodes: "+displayablenodes.get(0));
+		
 		return displayablenodes;
 		
+	}
+
+	public double getMainCharXPos() {
+		//HARD CODED TO JUST RETURN THE XPOS OF THE FIRST SPRITE
+		//TODO: CHANGE THIS SOON
+		for(String el : myElements.keySet()){
+			return getSprite(el).getPosition().getX();
+		}
+		return 1.0;
 	}
 
 //	/**

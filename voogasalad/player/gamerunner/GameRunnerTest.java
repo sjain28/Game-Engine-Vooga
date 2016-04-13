@@ -1,6 +1,7 @@
 
-package data;
+package player.gamerunner;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,13 +13,14 @@ import events.VoogaEvent;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
-import player.gamerunner.GameRunner;
 import tools.VoogaBoolean;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
 public class GameRunnerTest extends Application {
+	
+	private static final String testString = "levels/Test.xml";
     public static void main (String[] args) {
         launch(args);
         
@@ -72,8 +74,9 @@ public class GameRunnerTest extends Application {
 //        fileWriter.saveGameObjects(data, fileName);
         
 //        FileReaderToGameObjects filereader = new FileReaderToGameObjects(fileName);
-        GameRunner gameRunner = new GameRunner("levels/Test.xml");
-        gameRunner.playLevel("levels/Test.xml");
+
+        GameRunner gameRunner = new GameRunner(testString);
+        gameRunner.playLevel(testString);
 //        DataContainerOfLists deserializedList = filereader.getDataContainer();
 //     
 //        fileWriter.saveGameObjects(deserializedList, fileName2);

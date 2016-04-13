@@ -25,9 +25,11 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     public GameObject (Sprite sprite) {
         mySprite = sprite;
         this.setId(mySprite.getID());
+        this.name = mySprite.getID();
         this.setImage(mySprite.getImage().getImage());
         this.setTranslateX(mySprite.getPosition().getX());
         this.setTranslateY(mySprite.getPosition().getY());
+        this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
         this.setOnDragDetected(e -> onDrag(e));
     }
 
