@@ -16,7 +16,7 @@ import tools.interfaces.VoogaData;
 //TODO: This class is very similar to the ElementManager on the front end
 //Potentially compose the ElementManager w this to reduce redundancy.
 
-public class EngineObjectManager {
+public class ObjectManager {
 	
 	/**Elements Info**/
 	private Map<String,Elementable> myElements;				  //Maps IDs to Sprite's
@@ -32,7 +32,7 @@ public class EngineObjectManager {
 	 * @param sprites
 	 * @param factory
 	 */
-	public EngineObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
+	public ObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
 		System.out.println("The list of elementables here is " + elements);
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
