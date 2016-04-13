@@ -171,9 +171,6 @@ public class ObjectManager {
 	//		}
 	//		return archSprites;
 	//	}
-<<<<<<< HEAD
-=======
-
 	public void setKeyEvents(List<KeyEvent> myKeyEvents){
 		keyEvents = myKeyEvents;
 	}
@@ -181,5 +178,4 @@ public class ObjectManager {
 	public List<KeyEvent> getKeyEvents(){
 		return keyEvents;
 	}
->>>>>>> master
 }
