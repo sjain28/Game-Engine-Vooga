@@ -6,6 +6,7 @@ package player.gamedisplay;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import player.gamerunner.IGameRunner;
 
 /**
  * StandardHUD class that creates a standard HUD component to be included 
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
  */
 public class StandardHUD implements IHUD {
 
+	private IGameRunner myGameRunner;
 	private VBox myHUD;
 
 	/**
@@ -26,6 +28,15 @@ public class StandardHUD implements IHUD {
 		myHUD = new VBox();
 	}
 
+	/**
+	 * Overloaded constructor with a reference to GameRunner
+	 * for receiving global data and variable
+	 * 
+	 */
+	public StandardHUD(IGameRunner gamerunner) {
+		this();
+		this.myGameRunner = gamerunner;
+	}
 	/**
 	 * Creates a VBox that represents the HUD
 	 * VBox is chosen because it is expected that this HUD component will
@@ -45,6 +56,13 @@ public class StandardHUD implements IHUD {
 
 		myHUD.getChildren().addAll(score, cttimer.getTimeString());
 		return myHUD;
+	}
+
+	/**
+	 * @return the myGameRunner
+	 */
+	public IGameRunner getGameRunner() {
+		return myGameRunner;
 	}
 
 }

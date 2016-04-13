@@ -46,14 +46,18 @@ public class StandardControl implements IControl {
 		myControl.setSpacing(10); //TODO: Magic number
 
 		// Buttons
+		Button pause = createButton("Pause");
+		Button start = createButton("Start");
 		Button speedUp = createButton("Speed Up"); //TODO: ResourceBundle
 		Button speedDown = createButton("Speed Down");
 
 		// TODO: Assign click actions
+		pause.setOnAction(e -> getGameRunner().stop());
+		start.setOnAction(e -> getGameRunner().start());
 		speedUp.setOnMouseClicked(e -> getGameRunner().speedUp());
 		speedDown.setOnMouseClicked(e -> getGameRunner().speedDown());
 
-		myControl.getChildren().addAll(speedUp, speedDown);
+		myControl.getChildren().addAll(start, pause, speedUp, speedDown);
 
 		return myControl;
 	}
