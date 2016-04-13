@@ -1,5 +1,5 @@
 #Team DoovalSalad: Extra use cases
-
+(14 so far)
 ###Game screen scrolls centered on the main character
 
 * Primary Actor: Main character (sprite)
@@ -123,3 +123,103 @@
 	2. In player UI, level is played and completion cause confirmed
 	3. player is prompted to save their performance
 	4. temporary video file is saved for the users viewing pleasure.
+
+### Let user switch standard physics to planetary physics
+
+* Primary Actor: Authoring Environment
+* Scope: Authoring, game Engine, player
+* Brief: If a player chooses to switch from the standard 'Mario' physics engine to one with sprites to gravitate towards, they should be able to switch to and fro and create a new game.
+* Stakeholders: authoring, player, events
+* Preconditions: authoring environment is open 
+* PostCondition: authoring serializes a different physics module tag for the player 
+* Minimal Guarantees: different physics module tag passed to game Engine for event calling (on authoring saved)
+* Success Guarantees: player runs a game with an entirely different physics module
+* Basic flow:
+	1. User requests to change physics module in authoring
+	2. authoring switches module tag for serialization and player adds any additional information per sprite (such as center of gravity or gravity strength)
+	3. data serializes the new game
+	4. game engine and player receive the new data in sprite and event managers 
+	5. event manager now references the planetaryPhysics engine for events during running of player
+
+### Sound implementation in game 
+
+* Primary Actor: Player Display
+* Scope: Authoring, game runner, player display, events
+* Brief: Sound will be saveable and playable for specific inputs and in general play of the game.
+* Stakeholders: player, fileManager
+* Preconditions: user chooses to save an audio clip for an event in authoring
+* PostCondition: player can play the audio clip when appropriate
+* Minimal Guarantees: audio clip is playable
+* Success Guarantees: dynamic sound is played when event is triggered
+* Basic flow:
+	1. As audio is not serializable, user directly saves audio files to a sound hub location when authoring specific events
+	2. Player UI begins in game
+	3. Sound triggering cause returns true
+	4. Effect triggers sound to play
+	5. playerDisplay (standardDisplay) loads audio file and plays sound in UI
+
+### Producing overlayed sounds or pausing sounds for another
+
+* Primary Actor: Player Display
+* Scope: Game runner, player display, events
+* Brief: For various sounds (weapon firing), the sound should simply overlay the main soundtrack, but for certain events (such as boss fight start), events should trigger all sounds to stop for another
+* Stakeholders: player, fileManager
+* Preconditions: user authored sounds to trigger overlay or stop other sound sequences
+* PostCondition: player creates/pauses/deletes audio managers during user play
+* Minimal Guarantees: player accesses audio files
+* Success Guarantees: player handles audio like a real game
+* Basic flow:
+	1. game begins in player runner and displayed
+	2. stacking/deleting audio cause detected
+	3. new audio manager created or previous manager paused in manager list per event call
+	4. player display creates the correct audio response beginning in the following frame
+
+### Flip physics directions per key mid game
+
+* Primary Actor: Player 
+* Scope: game engine, events
+* Brief: If a certain level or item features reversed physics, then the user should not have to recreate all of that in authoring, rather, some simple flip in the engine should be able to handle the change to cause left to be right, up to be down, etc. 
+* Stakeholders: player, authoring
+* Preconditions: user reaches point in run display UI to flip physics
+* PostCondition: physics are flipped in game 
+* Minimal Guarantees: physics flipping cause and event are created
+* Success Guarantees: physics module can be inverted per mid player run 
+* Basic flow:
+	1. player runs a game with physics flipping set in authoring to occur for some event effect
+	2. cause triggered in game to flip physics
+	3. impacting velocity vectors coordinates flipped in sprite 
+	4. for all physics method calls, results are the same but velocity changes experienced are all opposite to the expected
+	5. player plays with the flipped sprite velocities
+
+
+### Change volume of sound in game
+
+* Primary Actor: GameDisplay
+* Scope: Game runner, player display
+* Brief: If the user is running the game, then he/she can change the volume or even mute the game sound (seperate music for fx as well)
+* Stakeholders: Player
+* Preconditions: Game is playing
+* PostCondition: Game volume changed
+* Minimal Guarantees: Player runs game at lower volume
+* Success Guarantees: Volume transitions by the next frame
+* Basic flow:
+	1. Player runs, user clicks volume button
+	2. User slides sliders to new volume levels for music and/or fx
+	3. audio managers in playerDisplay modify output volume in gameLoop to new values
+	4. play resumes in frame with the new volume
+
+### User hits play for a file (updated)
+
+* Primary Actor: Data
+* Scope: data, authoring, playerRunner, gameEngine
+* Brief: When the player feels ready to play their game from authoring, they can play and begin playing the game.
+* Stakeholders: Player, data, gameEngine
+* Preconditions: Authoring is available
+* PostCondition: player Display begins running
+* Minimal Guarantees: game play file deserialized to managers
+* Success Guarantees: game play begins
+* Basic flow:
+	1. User clicks play from authoring
+	2. Authoring calls to deserialize data and run the main method for the player display and runner
+	3. data managers all load in nodes to display 
+	4. player runs and runs the gameLoop in runner to handle events and general play of the game.
