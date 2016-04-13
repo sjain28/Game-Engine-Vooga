@@ -1,7 +1,57 @@
 <object-stream>
   <data.DataContainerOfLists>
     <eventList/>
-    <elementableList/>
+    <elementableList>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myLoc>
+        <myID>fa773b82-0a7f-483e-ad81-c2789e5a0803</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>1.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/smile.jpg</myImagePath>
+        <myArchetype>default</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myLoc>
+        <myID>697aa400-fd61-4fd6-b903-d99e99449264</myID>
+        <myProperties reference="../../gameengine.Sprite/myProperties"/>
+        <myImagePath>/smile.jpg</myImagePath>
+        <myArchetype>default</myArchetype>
+      </gameengine.Sprite>
+    </elementableList>
     <variableMap>
       <entry>
         <string>Raggity Rick</string>

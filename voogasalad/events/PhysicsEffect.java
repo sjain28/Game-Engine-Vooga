@@ -53,7 +53,7 @@ public class PhysicsEffect extends SpriteEffect {
 		try{
 			Method physicsMethod = getMethodfromString(methods, getMethodString());
 			Class[] parameterType = physicsMethod.getParameterTypes();
-			physicsMethod.invoke(sprite, getParameters()[0]);
+			//physicsMethod.invoke(sprite, getParameters()[0]);
 		}catch (Exception e){
 			//throw new VoogaException(String.format(format, args));
 		}

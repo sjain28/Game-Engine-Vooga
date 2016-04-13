@@ -162,7 +162,22 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     @Override
     public void addGlobalVariable (String name, VoogaData value) {
-        // TODO Auto-generated method stub
+    	myGlobalVariables.put(name, value);
+    	setChanged();
+    	notifyObservers(myGlobalVariables);
+    }
+
+    @Override
+    public Elementable getVoogaElement (String id) {
+        for (Node node :myGameElements){
+            if (node instanceof Elementable){
+                Elementable e = (Elementable) node;
+                if (e.getID().equals(id)){
+                    return e;
+                }
+            }
+        }
+        return null;
     }
 
 }

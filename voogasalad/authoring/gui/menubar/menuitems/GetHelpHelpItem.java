@@ -7,15 +7,27 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import auxiliary.VoogaException;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
-
+/**
+ * MenuItem to open up a help page.
+ * 
+ * @author Nick
+ *
+ */
 public class GetHelpHelpItem extends MenuItemHandler {
 	
 	private static final String HELP_URL = "https://www.google.com/search?q=how+to+use+voogasalad&oq=how+to+use+voogasalad&aqs=chrome..69i57j69i60j69i65j69i60l3.2085j0j1&sourceid=chrome&ie=UTF-8";
-	
+	 /**
+	     * Initializes the MenuItem
+	     * 
+	     * @param model to interface backend interactions with the model
+	     * @param event: Unused vestige of previous poor programming. Should soon be phased out.
+	     */
 	public GetHelpHelpItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
 		super();
 	}
-
+	/**
+         * Action to be taken on the selection of this menuItem
+         */
 	@Override
 	public void handle() {
 		// TODO Auto-generated method stub

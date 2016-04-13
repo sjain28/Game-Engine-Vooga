@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.GameObject;
 import authoring.interfaces.Elementable;
 import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
@@ -27,7 +28,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
-
+/**
+ * This class handles the display of all objects on the Authoring Environment GUI.
+ * This is the board on which the author can build the game.
+ * 
+ * @author Aditya Srinivasan, Nick Lockett, Harry Guo, Arjun Desai
+ *
+ */
 public class DesignBoard extends Tab implements Observer{
 
     private static final String DESIGN_BOARD = "Design Board";
@@ -43,15 +50,17 @@ public class DesignBoard extends Tab implements Observer{
     private PropertiesTabManager propertiesTabManager;
 
     private double y_offset, x_offset;
-
+    
+    /**
+     * Constructs DesignBoard with object that has the functionality described by CompleteAuthoringModelable interface
+     * @param elem: functionality described by CompleteAuthoringModelable interface
+     */
     public DesignBoard (CompleteAuthoringModelable elem) {
         this.setText(DESIGN_BOARD);
         contentPane = new StackPane();
         contentPane.setMinSize(WIDTH, HEIGHT);
         elementManager = elem;
         elementManager.addObserver(this);
-        propertiesTabManager = new PropertiesTabManager();
-        initGlobalProperties();
         container = new ScrollPane();
         initializeDragAndDrop();
         container.setContent(contentPane);
@@ -59,22 +68,7 @@ public class DesignBoard extends Tab implements Observer{
         y_offset = HEIGHT / 2;
         x_offset = WIDTH / 2;
     }
-
-    public PropertiesTabManager getPropertiesTabManager () {
-        return propertiesTabManager;
-    }
-
-    private void initGlobalProperties () {
-        // Elementable elem = elementManager.getGlobalPropertiesManager();
-        // propertiesTabManager.getGlobalPropertiesTab().getPropertiesMap(elem);
-    }
-
-    // Do something with Elementable.setOnClicked and call this method on self,
-    // or put into sprite class?
     
-    private void displaySpriteProperties (Elementable elem) {
-        propertiesTabManager.getSpritePropertiesTab().getPropertiesMap(elem);
-    }
 
     private void initializeDragAndDrop () {
         contentPane.setOnDragOver(e -> mouseDragOver(e));
@@ -98,7 +92,9 @@ public class DesignBoard extends Tab implements Observer{
             }
         }
         if(db.hasString()) {
-        	System.out.println(db.getString());
+        	GameObject object = (GameObject) elementManager.getElement(db.getString());
+        	object.setTranslateX(event.getX() - x_offset);
+        	object.setTranslateY(event.getY() - y_offset);
         }
 
         event.setDropCompleted(success);
@@ -156,11 +152,14 @@ public class DesignBoard extends Tab implements Observer{
             addElement(node, elementPath);
         }
 
-    }
+        System.out.println(elementManager.getIds());
 
-    public void addElement (Node node, String id) {
+    }
+    
+    private void addElement (Node node, String id) {
         elementManager.addGameElements(node);
         elementManager.addElementId(id);
+        contentPane.getChildren().add(node);
     }
 
     private void moveElement (String id, DragEvent e) {
@@ -178,6 +177,12 @@ public class DesignBoard extends Tab implements Observer{
             }
         }
     }
+    
+    
+    
+    /**
+     * Updates changes to the class based on the observation from the Model, Specifically the ElementManager
+     */
     @Override
     public void update (Observable o, Object arg) {
         if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)){

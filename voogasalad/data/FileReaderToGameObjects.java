@@ -1,28 +1,17 @@
 package data;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
-import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 
 public class FileReaderToGameObjects {
 	
     private DataContainerOfLists data;
-    private List<Node> nodeList;
-    private List<VoogaEvent> eventList;
-    private Map<String, VoogaData> variableMap;
-    private SpriteFactory spriteFactory;
     
     private List<String> objectNames;
 
@@ -31,12 +20,17 @@ public class FileReaderToGameObjects {
         loadGameObjects(fileName);
     }
 
-    @SuppressWarnings("unchecked")
     private void loadGameObjects (String fileName) {
         objectNames = new ArrayList<String>();
         objectNames.add("");
         System.out.println("The  file checked here is" + fileName);
+        try{
         data = (DataContainerOfLists) DeSerializer.deserialize(1, fileName).get(0);
+        }
+        catch(RuntimeException e){
+        	System.out.println("error came from the filereadertogameobjects");
+        	e.printStackTrace();
+        }
         System.out.println("What is the data here" + data);
         // DataContainerOfLists data2 = (DataContainerOfLists) UnSerializer.deserialize(2,
         // fileName).get(0);

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import events.Cause;
 import events.VoogaEvent;
+import javafx.scene.input.KeyEvent;
 import events.KeyCause;
 
 //Possible Issue: If up+down is typed but not exactly simultaneously, they might get interpreted separately. 
@@ -20,31 +21,37 @@ import events.KeyCause;
  */
 public class EventManager {
 
-	private List<Character> keyStrokes; 
+	private List<String> keyStrokes; //List of all key things that have happened
 	private List<VoogaEvent> myEvents;
-	private List<String> keyCombos;
-	private Map<String, KeyCause> keyCauses;
+	private List<List<String>> keyCombos; //List of keycombos that are bound to events, sorted by length
+	private Map<List<String>, KeyCause> keyCauses; //Maps Strings 
 	private ObjectManager myEngineManager;
-	
+
 	public EventManager(ObjectManager manager, List<VoogaEvent> events) {
-		keyStrokes = new ArrayList<Character>();
+		keyStrokes = new ArrayList<>();
 		myEvents = events;
-		keyCauses = new TreeMap<String, KeyCause>();
+		keyCauses = new TreeMap<List<String>, KeyCause>();
 		myEngineManager = manager;
-		keyCombos = new ArrayList<String>();
+		keyCombos = new ArrayList<List<String>>();
 	}
-	
+
 	public void update(){
+
+		for(KeyEvent k: (List<KeyEvent>) myEngineManager.getKeyEvents()){
+			keyStrokes.add(k.toString());
+		}
+
 		checkKeys();
 		for(VoogaEvent e: myEvents){
 			e.update();
 		}
-		
-		for(String cause: keyCauses.keySet()){
+
+		for(List<String> cause: keyCauses.keySet()){
 			keyCauses.get(cause).setValue(false);
 		}
+
+		keyStrokes.clear();
 	}
-	
 
 	public void addEvent(VoogaEvent voogaEvent){
 		for(Cause c: voogaEvent.getCauses()){
@@ -52,44 +59,38 @@ public class EventManager {
 				KeyCause keyc = (KeyCause) c;
 				keyCauses.put(keyc.getKeys(), keyc); 
 				keyCombos.add(keyc.getKeys()); 
-				keyCombos.sort((String a, String b) -> -a.length() - b.length());
+				keyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
 			}
 		}
 
 		voogaEvent.setManager(myEngineManager);
 		myEvents.add(voogaEvent);
 	}
-	
+
 	/**
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
-	public void checkKeys(){
-		for (String keyCombo : keyCombos){
-			for(int i = 0; i < keyStrokes.size() - keyCombo.length(); i++){
-				String temp = keyCombo.substring(i, i+keyCombo.length());
-				if(checkEquivalent(temp, keyCombo)){
-					clearStrokes(i, i+keyCombo.length());
-					keyCauses.get(keyCombo).setValue(true);
+	private void checkKeys(){
+		for (List<String> eventCombo : keyCombos){ //Check all tuples
+			if(keyStrokes.size() < eventCombo.size()){
+				continue;
+			}
+			for(int i = 0; i < keyStrokes.size()-1; i++){ //Checking for a tuple in a list: Need a nested for loop :(
+				boolean match = true;
+				for(int j = 0; j < eventCombo.size(); j++){ //Compare the tuple to the keycombo
+					if(!eventCombo.get(j).equals(keyStrokes.get(j+i))){
+						match = false;
+					}
+				}
+				if(match){
+					keyCauses.get(eventCombo).setValue(true);
+					clearStrokes(i, i+eventCombo.size()-1);
+					break;
 				}
 			}
 		}
 	}	
-	
-	/**
-	 * Tests if String a is a rearranged version of String b
-	 * Precondition: Strings must be same length
-	 * Precondition: Strings must NOT have repeated characters
-	 */
-	public boolean checkEquivalent(String a, String b){
 
-		for(int i = 0; i < a.length(); i++){
-			if(!b.contains(a.substring(i,i+1))){
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	/**
 	 * Removes keystrokes from the list once they're used for an event
 	 */
@@ -98,4 +99,5 @@ public class EventManager {
 			keyStrokes.remove(i);
 		}
 	}
+
 }

@@ -1,26 +1,18 @@
 package gameengine;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
 import org.xml.sax.SAXException;
-
-import data.FileWriterFromGameObjects;
 import data.Serializer;
 import data.DeSerializer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import tools.interfaces.VoogaData;
+import auxiliary.VoogaException;
+import data.DeSerializer;
+import data.Serializer;
 import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 /**
  * Factor for creating Sprites from pre-formed Archetypes,
@@ -33,16 +25,17 @@ import tools.VoogaNumber;
 
 public class SpriteFactory {
 
-	private static final String DEFAULT_IMAGE = "/bricks.jpg";
+	private static final String DEFAULT_IMAGE = "/smile.jpg";
 	private static final String DEFAULT_ARCH = "default";
 	public static final Sprite DEFAULT_SPRITE = 
-			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(0.0));
+			new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new VoogaNumber(1.0));
 	private Map<String,Sprite> myArchetypes; 
 
 	public SpriteFactory() {
 		myArchetypes = new HashMap<String,Sprite>();
 		myArchetypes.put(DEFAULT_SPRITE.getArchetype(), DEFAULT_SPRITE);
 	}
+	
 	/**
 	 * Create a completely new Sprite of a given archetype
 	 * @param archetype
@@ -54,7 +47,7 @@ public class SpriteFactory {
 					  original.getParameterMap(), (VoogaNumber)original.getParameterMap().get(Sprite.MASS));
 		return clone;
 	}
-
+	
 	/**
 	 * Sets or creates a new Archetype
 	 * Must specify what you want your default Sprite
@@ -63,10 +56,17 @@ public class SpriteFactory {
 	 * @param archetype
 	 * @param s
 	 */
-	public void setArchetype(String archetype, Sprite sprite){
-		myArchetypes.put(archetype, sprite);
+	public void addArchetype(String archetypeName, Sprite archetype) throws Exception{
+		if(myArchetypes.keySet().contains(archetypeName)){
+			throw new VoogaException();
+		}
+		else{
+			myArchetypes.put(archetypeName, archetype);
+		}
 	}
-	
+
+
+
 	/**
 	 * Returns the default Sprite for a given
 	 * Archetype
@@ -119,11 +119,12 @@ public class SpriteFactory {
 	 * todo: Check to see if this is actually what the front end needs
 	 * 
 	 * @param fileLocation
+	 * @throws Exception 
 	 */
-	public void deSerializeArchetype(String fileLocation){
-		DeSerializer unserializer = new DeSerializer();
-		Sprite newArchetype = (Sprite) unserializer.deserialize(1,fileLocation);
-		setArchetype(newArchetype.getArchetype(), newArchetype);
+	public void deSerializeArchetype(String fileLocation) throws Exception{
+		DeSerializer deserializer = new DeSerializer();
+		Sprite newArchetype = (Sprite) deserializer.deserialize(1,fileLocation);
+		addArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}
 }

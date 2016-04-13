@@ -5,7 +5,7 @@ import java.util.Map;
 import events.VoogaEvent;
 import tools.interfaces.VoogaData;
 
-public interface EditEventable extends EditSpritable{
+public interface EditEventable extends EditSpritable,EditElementable{
     public void addEvents (VoogaEvent ... events);
 
     public void removeEvents (VoogaEvent ... events);

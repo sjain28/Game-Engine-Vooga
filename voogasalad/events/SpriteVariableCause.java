@@ -33,6 +33,14 @@ public class SpriteVariableCause extends VariableCause {
 		return false;
 	}
 	
+	public SpriteVariableCause(Sprite sprite, String varName, Double targetValue, String predicate, VoogaEvent event){
+		super(predicate, event);
+		super.setTarget(targetValue);
+		super.setVariable(sprite.getProperty(varName));
+		mySprites = new ArrayList<>();
+		mySprites.add(sprite);
+	}
+	
 	
 
 }
