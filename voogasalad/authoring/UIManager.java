@@ -34,13 +34,18 @@ import javafx.scene.layout.VBox;
 public class UIManager extends VBox {
 	private ArrayList<CompleteAuthoringModelable> elementManagers;
 	private UIGrid grid;
-
+/**
+ * Initializes the UI Manager
+ * @param model Interface to mediate interactions with backend
+ */
 	public UIManager(CompleteAuthoringModelable model) {
 		elementManagers = new ArrayList<CompleteAuthoringModelable>();
 		elementManagers.add(model);
 		initializeComponents();
 	}
-
+/**
+ * Initializes all the pieces of the authoring environment
+ */
 	private void initializeComponents() {
 		this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
 			try {
