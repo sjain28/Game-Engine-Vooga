@@ -7,11 +7,7 @@
             <myEvent reference="../../.."/>
             <myKeys class="java.util.Arrays$ArrayList">
               <a class="string-array">
-<<<<<<< HEAD
                 <string>DOWN</string>
-=======
-                <string>RIGHT</string>
->>>>>>> master
               </a>
             </myKeys>
             <myValue>false</myValue>
@@ -20,18 +16,11 @@
         <myEffects>
           <events.PhysicsEffect>
             <myEvent reference="../../.."/>
-<<<<<<< HEAD
-            <myMethod>29a0f8af-3a10-4393-a313-f6987866001d</myMethod>
-            <myParameter class="double">70.0</myParameter>
+            <myMethod>28311a6b-c903-43f2-ba19-cd731457d1a7</myMethod>
+            <myParameter class="double">60.0</myParameter>
             <myVariable>jump</myVariable>
             <needsSprites>true</needsSprites>
             <mySprites/>
-=======
-            <myMethod>f835f529-8988-4612-9826-509c7e08dcc1</myMethod>
-            <myParameter class="double">8.0</myParameter>
-            <myVariable>jump</myVariable>
-            <needsSprites>true</needsSprites>
->>>>>>> master
           </events.PhysicsEffect>
         </myEffects>
         <myCauseSprites/>
@@ -54,11 +43,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-<<<<<<< HEAD
-        <myID>29a0f8af-3a10-4393-a313-f6987866001d</myID>
-=======
-        <myID>f835f529-8988-4612-9826-509c7e08dcc1</myID>
->>>>>>> master
+        <myID>28311a6b-c903-43f2-ba19-cd731457d1a7</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -76,28 +61,10 @@
         <myImagePath>/smile.jpg</myImagePath>
         <myArchetype>default</myArchetype>
       </gameengine.Sprite>
-      <gameengine.Sprite>
-        <myVelocity>
-          <xPrev>0.0</xPrev>
-          <yPrev>0.0</yPrev>
-          <x>0.0</x>
-          <y>0.0</y>
-        </myVelocity>
-        <myLoc>
-          <xPrev>0.0</xPrev>
-          <yPrev>0.0</yPrev>
-          <x>0.0</x>
-          <y>0.0</y>
-        </myLoc>
-        <myID>ddd6853b-9f40-4074-94f8-f95ff38391c6</myID>
-        <myProperties reference="../../gameengine.Sprite/myProperties"/>
-        <myImagePath>/smile.jpg</myImagePath>
-        <myArchetype>default</myArchetype>
-      </gameengine.Sprite>
     </elementableList>
     <variableMap>
       <entry>
-        <string>Raggity Rick</string>
+        <string>RaggityRick</string>
         <tools.VoogaBoolean>
           <myValue>true</myValue>
         </tools.VoogaBoolean>
@@ -120,11 +87,7 @@
               <x>0.0</x>
               <y>0.0</y>
             </myLoc>
-<<<<<<< HEAD
-            <myID>b5e91649-ecce-41eb-b4b4-0693b7acd54c</myID>
-=======
-            <myID>abc4a4ef-5f65-49fb-963b-024208a6c474</myID>
->>>>>>> master
+            <myID>de4dd470-3ca8-4379-b049-0f1a83657e1f</myID>
             <myProperties reference="../../../../../elementableList/gameengine.Sprite/myProperties"/>
             <myImagePath>/smile.jpg</myImagePath>
             <myArchetype>default</myArchetype>
