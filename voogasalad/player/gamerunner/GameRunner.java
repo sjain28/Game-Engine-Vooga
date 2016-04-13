@@ -51,7 +51,7 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException
 	 */
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
-		myGameDisplay = new StandardDisplay();
+		myGameDisplay = new StandardDisplay(getSelf());
 		levelQueue = createLevels(xmlList);
 		//playGame();
 	}
@@ -148,7 +148,7 @@ public class GameRunner implements IGameRunner{
 	@Override
 	public void playLevel(String fileName){
 		System.out.println("What is the file name in this play Level Method?" + fileName);
-		myCurrentLevelDataManager = new LevelDataManager(fileName);
+		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 		myGameDisplay.display();
@@ -248,8 +248,8 @@ public class GameRunner implements IGameRunner{
 	 * 
 	 */
 	@Override
-	public Collections getKeyEvents() {
-		return (Collections) getGameDisplay().getKeyEvents();
+	public List<?> getKeyEvents() {
+		return getGameDisplay().getKeyEvents();
 	}
 
 	/**
