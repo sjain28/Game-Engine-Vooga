@@ -16,20 +16,15 @@ import tools.interfaces.VoogaData;
 
 public class LevelDataManager implements ILevelDataManager {
 
+	private static final int SCREENSIZE_DIM1 = 3;
+	private static final int SCREENSIZE_DIM2 = 35;
+
 	private IGameRunner myGameRunner;
 	private DisplayScroller displayScroller;
 	private ObjectManager myObjectManager;
 	private EventManager myEventManager;
-<<<<<<< HEAD
-	private int screenSizeDim_1 = 3;
-	private int screenSizeDim_2 = 35;
 	private List<KeyEvent> myKeyEvents;
-=======
-	private List<KeyEvent> myKeyEvents;
-	private int screenSizeDim_1 = 3;
-	private int screenSizeDim_2 = 35;
 
->>>>>>> master
 
 	/**
 	 * Default constructor
@@ -37,11 +32,8 @@ public class LevelDataManager implements ILevelDataManager {
 	 * @param levelFileName
 	 */
 	public LevelDataManager(String levelFileName) {
-		displayScroller = new DisplayScroller(screenSizeDim_1, screenSizeDim_2);
-<<<<<<< HEAD
-=======
+		displayScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
 		myKeyEvents = new ArrayList<>();
->>>>>>> master
 		readinObjects(levelFileName);
 		bindImagesofSprites();
 	}
@@ -65,72 +57,6 @@ public class LevelDataManager implements ILevelDataManager {
 	public LevelDataManager(IGameRunner gamerunner, String levelFileName) {
 		this(levelFileName);
 		this.myGameRunner = gamerunner;
-<<<<<<< HEAD
-	}
-
-	/**
-	 * A stub method called at every iteration to receive KeyEvents from
-	 * GameDisplay and updates Objects (Sprites) and applies Events
-	 * (cause and effects)
-	 * 
-	 */
-	@Override
-	public void update() {
-		// Get KeyEvents from GameDisplay and stores it in myKetEvents
-		//setKeyEvents((List<KeyEvent>) getGameRunner().getKeyEvents());
-
-		myObjectManager.update();
-		myEventManager.update();
-	}
-
-	/**
-	 * Returns all displayable objects in Node(s)
-	 * 
-	 */
-	@Override
-	public List<Node> getDisplayableObjects () {
-		return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),myObjectManager.getMainCharXPos());
-	}
-
-
-	/**
-	 * Read in the file to reconstruct objects created in the authoring
-	 * environment
-	 * 
-	 * @param levelFileName
-	 */
-	private void readinObjects (String levelFileName) {
-		DataContainerOfLists data = new DataContainerOfLists();
-		try{
-			FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
-			data = fileManager.getDataContainer();
-
-		}
-		catch(RuntimeException e){
-			System.out.println("Making the game objects did not work properly");
-			e.printStackTrace();
-		}        
-		System.out.println("Here is my data object:" + data);
-
-		List<Elementable> spriteObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + spriteObjects);
-
-		List<VoogaEvent> eventObjects = data.getEventList();
-		System.out.println("All the events here are" + eventObjects);
-
-		SpriteFactory factory = data.getSpriteFactory();
-		System.out.println("The spriteFactory here is" + factory);
-
-		Map<String,VoogaData> variableObjects = data.getVariableMap();
-		System.out.println("All the variables here are" + variableObjects);
-
-		initializeManagers(spriteObjects, eventObjects, variableObjects,factory);
-
-
-	}
-
-	/**
-=======
 	}
 
 	/**
@@ -193,7 +119,6 @@ public class LevelDataManager implements ILevelDataManager {
 	}
 
 	/**
->>>>>>> master
 	 * Creates the Sprites, Events, and Variables which will be loaded into the managers, which
 	 * include
 	 * the sprite, event, and variable managers
@@ -202,16 +127,12 @@ public class LevelDataManager implements ILevelDataManager {
 	 *          variables).
 	 * 
 	 */
-
 	private void initializeManagers (List<Elementable> elementObjects,
 			List<VoogaEvent> eventObjects,
 			Map<String,VoogaData> variableObjects,
 			SpriteFactory factory) {
 		myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
-<<<<<<< HEAD
-=======
 		myObjectManager.setKeyEvents(myKeyEvents);
->>>>>>> master
 		myEventManager = new EventManager(myObjectManager, eventObjects);
 	}
 
