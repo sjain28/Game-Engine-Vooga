@@ -1,7 +1,6 @@
 package player.leveldatamanager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +18,12 @@ import tools.interfaces.VoogaData;
  *
  */
 public class ObjectManager {
-	
+
 	// Maps IDs to Sprites (Elementables)
 	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
 	private Map<String, VoogaData> myGlobalVariables;
-	private Collections keyEvents;
+	private List<KeyEvent> keyEvents;
 
 	/**
 	 * Takes in a map of Id's to sprite's and a sprite factory
@@ -39,13 +38,13 @@ public class ObjectManager {
 			myElements.put(el.getID(), el);
 		}
 		System.out.println("The list of myElementables here is " + myElements);
-		
+
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
-		
+
 		//TODO: Once constructor is figured out, intialize all objects here.
 		mySpriteFactory = factory;
 	}
-	
+
 	/**
 	 * This method updates each sprite's Position
 	 * before Events (causes and effects) are applied
@@ -57,7 +56,7 @@ public class ObjectManager {
 			e.update();
 		}
 	}
-	
+
 	/**
 	 * Returns a sprite by id
 	 * @param id
@@ -66,7 +65,7 @@ public class ObjectManager {
 	public Sprite getSprite(String id){
 		return (Sprite) myElements.get(id);
 	}
-	
+
 	/**
 	 * Returns a list of sprite IDs given an archetype
 	 * @param archetype
@@ -83,7 +82,7 @@ public class ObjectManager {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Adds a sprite given an archetype
 	 * @param archetype
@@ -94,7 +93,7 @@ public class ObjectManager {
 		myElements.put(newSprite.getID(),newSprite);
 		return newSprite;
 	}
-	
+
 	/**
 	 * Removes sprite given an id
 	 * @param id
@@ -102,7 +101,7 @@ public class ObjectManager {
 	public void removeSprite(Object id){
 		myElements.remove(id);
 	}
-	
+
 	/**
 	 * Returns a Global Variable (VoogaData) as specified
 	 * by it's variable name
@@ -113,7 +112,7 @@ public class ObjectManager {
 	public VoogaData getGlobalVar(String variable){
 		return myGlobalVariables.get(variable);
 	}
-	
+
 	/**
 	 * Returns a VoogaText by id
 	 * @param id
@@ -122,7 +121,7 @@ public class ObjectManager {
 	public VoogaFrontEndText getText(Object id){
 		return (VoogaFrontEndText) myElements.get(id);
 	}
-	
+
 	/**
 	 * put all objects into a generic list of display-able objects
 	 * to be accessed by the GameRunner after every update cycle.
@@ -135,17 +134,22 @@ public class ObjectManager {
 	 */
 	public List<Node> getAllDisplayableNodes(){
 		List<Node> displayablenodes = new ArrayList<Node>();
-		
+
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
-		
+
 		System.out.println("my displayable nodes from get all displayable nodes: "+displayablenodes.get(0));
-		
+
 		return displayablenodes;
-		
+
 	}
 
+	/**
+	 * Returns X coordinate of the main character
+	 * 
+	 * @return
+	 */
 	public double getMainCharXPos() {
 		//HARD CODED TO JUST RETURN THE XPOS OF THE FIRST SPRITE
 		//TODO: CHANGE THIS SOON
@@ -155,29 +159,21 @@ public class ObjectManager {
 		return 1.0;
 	}
 
-//	/**
-//	 * Allows one to get a list of Sprite's by their archetypes
-//	 * @param myArchetype
-//	 * @return
-//	 */
-//	public List<Sprite> getSpritesByArchetype(String myArchetype) {
-//		List<Sprite> archSprites = new ArrayList<Sprite>();
-//		for(String id : myElements.keySet()){
-//			Elementable el = myElements.get(id);
-//			if(el instanceof Sprite){
-//				if(((Sprite) el).getArchetype().equals(myArchetype)){
-//					archSprites.add((Sprite) el);
-//				}
-//			}
-//		}
-//		return archSprites;
-//	}
-	
-	public void setKeyEvents(Collections myKeyEvents){
+	/**
+	 * Sets KeyEvents
+	 * 
+	 * @param myKeyEvents
+	 */
+	public void setKeyEvents(List<KeyEvent> myKeyEvents){
 		keyEvents = myKeyEvents;
 	}
-	
-	public Collections getKeyEvents(){
+
+	/**
+	 * Returns KeyEvents
+	 * 
+	 * @return
+	 */
+	public List<KeyEvent> getKeyEvents(){
 		return keyEvents;
 	}
 }

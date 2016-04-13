@@ -11,6 +11,11 @@ public class EventsWindow extends TabPane {
 	private static final String CAUSES = "Causes";
 	private static final String EFFECTS = "Effects";
 	
+	/**
+	 * Initialized the Events Window, responsible for displaying all the currently initialized Causes and Events and their links.
+	 * 
+	 * TODO: actually implement
+	 */
     public EventsWindow(){
     	
         Tab cause = new Tab();

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.GameObject;
 import authoring.interfaces.Elementable;
 import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
@@ -67,6 +68,7 @@ public class DesignBoard extends Tab implements Observer{
         y_offset = HEIGHT / 2;
         x_offset = WIDTH / 2;
     }
+    
 
     private void initializeDragAndDrop () {
         contentPane.setOnDragOver(e -> mouseDragOver(e));
@@ -90,7 +92,9 @@ public class DesignBoard extends Tab implements Observer{
             }
         }
         if(db.hasString()) {
-        	System.out.println(db.getString());
+        	GameObject object = (GameObject) elementManager.getElement(db.getString());
+        	object.setTranslateX(event.getX() - x_offset);
+        	object.setTranslateY(event.getY() - y_offset);
         }
 
         event.setDropCompleted(success);
@@ -173,6 +177,12 @@ public class DesignBoard extends Tab implements Observer{
             }
         }
     }
+    
+    
+    
+    /**
+     * Updates changes to the class based on the observation from the Model, Specifically the ElementManager
+     */
     @Override
     public void update (Observable o, Object arg) {
         if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)){

@@ -79,6 +79,10 @@ public class SpriteEffect extends VariableEffect{
 		}
 
 	}
+	/**
+	 * Determines which sprites need to be set for this effect depending on the constructor that was used, as well as the
+	 * sprite outputs of the cause within the same event.
+	 */
 	protected void setSprites(){
 		if (needsSprites){
 			mySprites = getEvent().getSpritesFromCauses();
