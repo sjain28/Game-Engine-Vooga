@@ -32,9 +32,21 @@ public class LevelDataManager implements ILevelDataManager {
     public LevelDataManager(String levelFileName) {
         displayScroller = new DisplayScroller(screenSizeDim_1, screenSizeDim_2);
         readinObjects(levelFileName);
+        bindImagesofSprites();
     }
     
     /**
+     * Binds images to sprites at initialization
+     * Necessary because Images are passed as transients
+     * 
+     * TODO: Refactor this
+     * 
+     */
+    private void bindImagesofSprites() {
+    	myObjectManager.getAllDisplayableNodes();
+	}
+
+	/**
      * Constructor that takes in a reference to GameRunner LevelDataManager
      * belongs to (composition)
      * 
