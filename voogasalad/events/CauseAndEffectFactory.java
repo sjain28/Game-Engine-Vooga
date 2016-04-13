@@ -23,15 +23,16 @@ public class CauseAndEffectFactory {
  * @param event
  * @param inputString
  */
-    public void create (VoogaEvent event, String inputString) {
+    public void create (VoogaEvent event, String inputString) throws VoogaException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException  {
        
     	String[] parameters = inputString.split("\\s+");
         Class<?> c = null;
         
         try {
             c = Class.forName(parameters[0]); //Find Cause class using reflection
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        }catch (ClassNotFoundException ee) {
+            ee.printStackTrace();
+            throw ee;
         }
         
         Class[] paramClasses = new Class[parameters.length];
@@ -53,20 +54,25 @@ public class CauseAndEffectFactory {
             Constructor<?> causeConstructor = c.getConstructor(paramClasses);
             Object result = causeConstructor.newInstance(allParams);
         }
-        catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        catch (NoSuchMethodException ee) {
+            ee.printStackTrace();
+            throw ee;
         }
         catch (InstantiationException e) {
             e.printStackTrace();
+            throw e;
         }
         catch (IllegalAccessException e) {
             e.printStackTrace();
+            throw e;
         }
         catch (IllegalArgumentException e) {
             e.printStackTrace();
+            throw e;
         }
         catch (InvocationTargetException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 /**
