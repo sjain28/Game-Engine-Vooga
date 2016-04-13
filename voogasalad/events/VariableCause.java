@@ -12,14 +12,14 @@ public class VariableCause extends Cause{
 	private VoogaData myVariable;
 	private String myVarName;
 	
-	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
+	public VariableCause(String variableName, String predicate, Double targetValue, VoogaEvent voogaEvent) {		
 		super(voogaEvent);
 		myTarget = targetValue;
 		myOperation = predicate;
 		myVarName = variableName;
 	}
 	
-	public VariableCause(String variableName, Boolean targetValue, String predicate, VoogaEvent voogaEvent) {		
+	public VariableCause(String variableName, String predicate, Boolean targetValue, VoogaEvent voogaEvent) {		
 		super(voogaEvent);
 		myTarget = targetValue;
 		myOperation = predicate;
