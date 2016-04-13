@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.interfaces.model.EditEventable;
+import authoring.resourceutility.ButtonMaker;
 import auxiliary.VoogaAlert;
 import auxiliary.VoogaException;
 import events.VoogaEvent;
@@ -75,9 +76,8 @@ public class EventAccoridion extends Tab {
         try {
             c = Class.forName(className);
         }
-        catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        catch (Exception e) {
+        	throw new VoogaException(e.getMessage());
         }
         try {
             EventTitledPane titledPane;
@@ -86,48 +86,22 @@ public class EventAccoridion extends Tab {
                 titledPane = (EventTitledPane) o;
                 System.out.println("TitledPane created in EventAccoridion.java");
                 return titledPane;
-            }
-            catch (IllegalArgumentException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            catch (InvocationTargetException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            catch (NoSuchMethodException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            catch (SecurityException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            } catch(Exception e) {
+            	throw new VoogaException(e.getMessage());
             }
             
+        } catch(Exception e) {
+        	
+        	throw new VoogaException(e.getMessage());
+        	
         }
-        catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
     }
     
     private void initializeButtons(Button... addedButtons){
         buttons = new HBox();
         buttons.setPadding(new Insets(10,10,10,10));
-        buttons.getChildren().addAll(buttonFactory("Add "+name,e->generateTiles(1)));
+        buttons.getChildren().addAll(new ButtonMaker().makeButton("Add "+ name, e -> generateTiles(1)));
         buttons.getChildren().addAll(addedButtons);
-    }
-    
-    private Button buttonFactory(String name,EventHandler e){
-        Button button = new Button(name);
-        button.setOnAction(e);
-        button.setAlignment(Pos.CENTER);
-        return button;
     }
     
     List<String> getDetails(){
