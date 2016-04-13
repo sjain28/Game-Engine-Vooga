@@ -8,6 +8,7 @@ public abstract class Effect {
 	
      public Effect(VoogaEvent voogaEvent){
     	 myEvent = voogaEvent;
+    	 myEvent.addEffect(this);
      }
      
 	 public void setEvent(VoogaEvent e){

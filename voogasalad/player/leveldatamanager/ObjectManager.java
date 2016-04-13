@@ -12,7 +12,6 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
-
 /**
  * ObjectManager belongs to LevelDataManager as a component
  * Manages sprites, texts, and global variables
@@ -50,8 +49,10 @@ public class ObjectManager {
 	 * 
 	 */
 	public void update() {
-		//TODO: Update each sprite's position
-		
+		for(String s: myElements.keySet()){
+			Elementable e = myElements.get(s);
+			e.update();
+		}
 	}
 	
 	/**
