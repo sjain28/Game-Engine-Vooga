@@ -1,5 +1,7 @@
 package authoring.properties;
 
+import java.util.Map;
+
 import authoring.interfaces.Elementable;
 import authoring.model.GlobalPropertiesManager;
 import tools.interfaces.VoogaData;
@@ -20,6 +22,7 @@ public class GlobalPropertiesTab extends AbstractPropertiesTab {
 	//Pass in 
 	@Override
 	public void getPropertiesMap(Object o) {
+		propertiesMap = (Map<String, VoogaData>) o;
 		displayProperties();
 	}
 
