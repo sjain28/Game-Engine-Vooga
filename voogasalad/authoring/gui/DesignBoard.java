@@ -150,14 +150,11 @@ public class DesignBoard extends Tab implements Observer{
             addElement(node, elementPath);
         }
 
-        System.out.println(elementManager.getIds());
-
     }
 
     public void addElement (Node node, String id) {
         elementManager.addGameElements(node);
         elementManager.addElementId(id);
-        contentPane.getChildren().add(node);
     }
 
     private void moveElement (String id, DragEvent e) {

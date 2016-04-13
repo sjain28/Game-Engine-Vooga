@@ -59,10 +59,11 @@ public class Splash extends Pane {
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.show();
 		
-		pane.setOnMouseClicked(e);
+		scene.setOnMouseClicked(e);
 		pane.setOnMouseClicked(event -> {
 			stage.close();
 		});
+		
 	}
 	
 }
