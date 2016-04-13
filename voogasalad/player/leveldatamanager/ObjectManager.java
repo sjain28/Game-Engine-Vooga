@@ -12,18 +12,17 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
-/** Manages Sprite's, Text, and GlobalVariables**/
-//TODO: This class is very similar to the ElementManager on the front end
-//Potentially compose the ElementManager w this to reduce redundancy.
 
+/**
+ * ObjectManager belongs to LevelDataManager as a component
+ * Manages sprites, texts, and global variables
+ *
+ */
 public class ObjectManager {
 	
-	/**Elements Info**/
-	private Map<String,Elementable> myElements;				  //Maps IDs to Sprite's
-	
+	// Maps IDs to Sprites (Elementables)
+	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
-
-	/**Global Variable info**/
 	private Map<String, VoogaData> myGlobalVariables;
 
 	/**
