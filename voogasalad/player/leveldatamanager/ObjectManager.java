@@ -1,15 +1,16 @@
 package player.leveldatamanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.input.KeyEvent;
 import tools.interfaces.VoogaData;
 
 /**
@@ -23,6 +24,7 @@ public class ObjectManager {
 	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
 	private Map<String, VoogaData> myGlobalVariables;
+	private Collections keyEvents;
 
 	/**
 	 * Takes in a map of Id's to sprite's and a sprite factory
@@ -170,4 +172,12 @@ public class ObjectManager {
 //		}
 //		return archSprites;
 //	}
+	
+	public void setKeyEvents(Collections myKeyEvents){
+		keyEvents = myKeyEvents;
+	}
+	
+	public Collections getKeyEvents(){
+		return keyEvents;
+	}
 }
