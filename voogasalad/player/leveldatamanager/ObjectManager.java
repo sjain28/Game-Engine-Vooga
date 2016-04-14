@@ -32,12 +32,10 @@ public class ObjectManager {
 	 * @param factory
 	 */
 	public ObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
-		//System.out.println("The list of elementables here is " + elements);
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
 			myElements.put(el.getID(), el);
 		}
-		//System.out.println("The list of myElementables here is " + myElements);
 
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		keyEvents = new ArrayList<KeyEvent>();
@@ -63,7 +61,6 @@ public class ObjectManager {
 	 * @return
 	 */
 	public Sprite getSprite(String id){
-		//System.out.println(myElements.get(id));
 		return (Sprite) myElements.get(id);
 	}
 
@@ -140,8 +137,6 @@ public class ObjectManager {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 
-		System.out.println("my displayable nodes from get all displayable nodes: "+displayablenodes.get(0));
-
 		return displayablenodes;
 
 	}
@@ -183,7 +178,6 @@ public class ObjectManager {
 	 * @param myKeyEvents
 	 */
 	public void setKeyEvents(List<KeyEvent> myKeyEvents){
-		//System.out.println("setting key events from object manager: "+myKeyEvents.size());
 		keyEvents = myKeyEvents;
 	}
 
@@ -193,7 +187,6 @@ public class ObjectManager {
 	 * @return
 	 */
 	public List<KeyEvent> getKeyEvents(){
-		//System.out.println("length of key events from object manager: "+keyEvents.size());
 		return keyEvents;
 	}
 }

@@ -17,21 +17,21 @@ public class SpriteEffect extends VariableEffect{
 		super(method, variable, event);
 		mySprites = new ArrayList<>();
 		mySprites.add(getEvent().getManager().getSprite(spriteID));
-		needsSprites = false;
+		setNeedsSprites(false);
 	}
 	
 	public SpriteEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
 		super(method, variable, parameter, event);
 		mySprites = new ArrayList<>();
 		mySprites.add(getEvent().getManager().getSprite(spriteID));
-		needsSprites = false;
+		setNeedsSprites(false);
 	}
 	
 	public SpriteEffect(String spriteID, String method, String variable, Boolean parameter, VoogaEvent event) {
 		super(method, variable, parameter, event);
 		mySprites = new ArrayList<>();
 		mySprites.add(getEvent().getManager().getSprite(spriteID));
-		needsSprites = false;
+		setNeedsSprites(false);
 	}
 	
 	// constructor with archetype, boolean true- apply to all of archetype
@@ -41,7 +41,7 @@ public class SpriteEffect extends VariableEffect{
 		mySprites = new ArrayList<>();
 
 		myArchetype = archetype;
-		this.needsSprites = needsSprites;
+		this.setNeedsSprites(needsSprites);
 	}
 	
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Double parameter, VoogaEvent event) {
@@ -49,7 +49,7 @@ public class SpriteEffect extends VariableEffect{
 		mySprites = new ArrayList<>();
 
 		myArchetype = archetype;
-		this.needsSprites = needsSprites;
+		this.setNeedsSprites(needsSprites);
 	}
 	
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Boolean parameter, VoogaEvent event) {
@@ -57,7 +57,7 @@ public class SpriteEffect extends VariableEffect{
 		mySprites = new ArrayList<>();
 
 		myArchetype = archetype;
-		this.needsSprites = needsSprites;
+		this.setNeedsSprites(needsSprites);
 	}
 	
 	// constructor with nothing- apply to all for which event supplies
@@ -65,21 +65,21 @@ public class SpriteEffect extends VariableEffect{
 		super(method, variable, event);
 		mySprites = new ArrayList<>();
 
-		needsSprites = true;
+		setNeedsSprites(true);
 	}
 	
 	public SpriteEffect(String method, String variable, Double parameter, VoogaEvent event) {
 		super(method, variable, parameter, event);
 		mySprites = new ArrayList<>();
 
-		needsSprites = true;
+		setNeedsSprites(true);
 	}
 	
 	public SpriteEffect(String method, String variable, Boolean parameter, VoogaEvent event) {
 		super(method, variable, parameter, event);
 		mySprites = new ArrayList<>();
 
-		needsSprites = true;
+		setNeedsSprites(true);
 	}
 
 	@Override
@@ -89,6 +89,7 @@ public class SpriteEffect extends VariableEffect{
 			VoogaData variable = sprite.getParameterMap().get(getVariable());
 			callEffectMethod(variable);
 		}
+		mySprites.clear();
 
 	}
 	/**
@@ -96,20 +97,12 @@ public class SpriteEffect extends VariableEffect{
 	 * sprite outputs of the cause within the same event.
 	 */
 	protected void setSprites(){
-		//mySprites = new ArrayList<Sprite>();
 
-		if (needsSprites){
-			System.out.println("mySprites: "+mySprites);
-			System.out.println("my Sprite to add : "+getEvent().getManager().getSprite(getEvent().getManager().getSpriteIDs("default").get(0)));
-
+		if (getNeedsSprites()){
 			mySprites.add(getEvent().getManager().getSprite(getEvent().getManager().getSpriteIDs("default").get(0)));
-			System.out.println("my sprites length as printed from setSprites: "+mySprites.size());
 			//mySprites = getEvent().getSpritesFromCauses();
-			System.out.println("needs sprites");
 		}
 		if (myArchetype != null){
-			System.out.println("archetype for effect specified");
-
 			// get sprite manager, get all sprites of archetype
 			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(myArchetype);
 			if (mySprites.size() != 0){
@@ -153,5 +146,13 @@ public class SpriteEffect extends VariableEffect{
 	}
 	protected List<Sprite> getSprites(){
 		return mySprites;
+	}
+
+	public Boolean getNeedsSprites() {
+		return needsSprites;
+	}
+
+	public void setNeedsSprites(Boolean needsSprites) {
+		this.needsSprites = needsSprites;
 	}
 }
