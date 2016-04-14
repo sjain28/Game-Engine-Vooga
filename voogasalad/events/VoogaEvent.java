@@ -47,6 +47,7 @@ public class VoogaEvent {
 	 */
 	public void update(){
 		myCauseSprites.clear();
+		
 		for(Cause c: myCauses){
 			if(!c.check()){
 				return;

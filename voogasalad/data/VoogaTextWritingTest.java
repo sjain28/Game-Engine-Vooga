@@ -1,19 +1,16 @@
 package data;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
-import authoring.model.VoogaFrontEndText;
 import events.KeyCause;
 import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
+import gameengine.SpriteFactory;
 import javafx.application.Application;
-import javafx.scene.control.Button;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import tools.Position;
 import tools.VoogaNumber;
@@ -21,11 +18,12 @@ import tools.interfaces.VoogaData;
 
 public class VoogaTextWritingTest extends Application {
 
-	private static final String testString= "levels/VoogaTextWriting.xml";
+	private static final String TEST_STRING= "levels/VoogaTextWriting.xml";
 	
     @Override
     public void start (Stage primaryStage) throws Exception {
-        DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),generateGlobalVariables(),generateEvents());
+        DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),
+        			generateGlobalVariables(),generateEvents(), new SpriteFactory());
         
 
         Serializer.serialize(manager, "levels/Test.xml");

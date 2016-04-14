@@ -15,7 +15,6 @@ public class KeyCause extends Cause {
 	public KeyCause(String allKeyInputs, VoogaEvent voogaEvent) {
 		super(voogaEvent);
 		myKeys = Arrays.asList(allKeyInputs.split("\\s+"));
-		
 	}
 
 	@Override
@@ -29,5 +28,10 @@ public class KeyCause extends Cause {
 
 	public void setValue(boolean val){
 		myValue = val;
+	}
+
+	@Override
+	public void init() {
+		return;
 	}
 }
