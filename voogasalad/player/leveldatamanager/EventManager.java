@@ -76,7 +76,7 @@ public class EventManager {
 			if(keyStrokes.size() < eventCombo.size()){
 				continue;
 			}
-			for(int i = 0; i < keyStrokes.size()-1; i++){ //Checking for a tuple in a list: Need a nested for loop :(
+			for(int i = 0; i < keyStrokes.size(); i++){ //Checking for a tuple in a list: Need a nested for loop :(
 				boolean match = true;
 				for(int j = 0; j < eventCombo.size(); j++){ //Compare the tuple to the keycombo
 					if(!eventCombo.get(j).equals(keyStrokes.get(j+i))){
