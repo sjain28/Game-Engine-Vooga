@@ -163,8 +163,6 @@ public class StandardDisplay implements IGameDisplay {
 		getGameScreen().getChildren().clear();
 		getListToDisplay().forEach(n -> {
 			getGameScreen().getChildren().add(n);
-			n.setLayoutX(200);
-			n.setLayoutY(200);
 		});
 	}
 
