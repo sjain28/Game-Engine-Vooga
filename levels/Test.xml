@@ -7,7 +7,7 @@
             <myEvent reference="../../.."/>
             <myKeys class="java.util.Arrays$ArrayList">
               <a class="string-array">
-                <string>DOWN</string>
+                <string>RIGHT</string>
               </a>
             </myKeys>
             <myValue>false</myValue>
@@ -16,8 +16,8 @@
         <myEffects>
           <events.PhysicsEffect>
             <myEvent reference="../../.."/>
-            <myMethod>28311a6b-c903-43f2-ba19-cd731457d1a7</myMethod>
-            <myParameter class="double">60.0</myParameter>
+            <myMethod>01aa578d-7789-4c35-b591-debc59491b6f</myMethod>
+            <myParameter class="double">10.0</myParameter>
             <myVariable>jump</myVariable>
             <needsSprites>true</needsSprites>
             <mySprites/>
@@ -43,7 +43,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>28311a6b-c903-43f2-ba19-cd731457d1a7</myID>
+        <myID>01aa578d-7789-4c35-b591-debc59491b6f</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -87,7 +87,7 @@
               <x>0.0</x>
               <y>0.0</y>
             </myLoc>
-            <myID>de4dd470-3ca8-4379-b049-0f1a83657e1f</myID>
+            <myID>1e47fc28-1e4b-4aee-a4d2-d405c97182c9</myID>
             <myProperties reference="../../../../../elementableList/gameengine.Sprite/myProperties"/>
             <myImagePath>/smile.jpg</myImagePath>
             <myArchetype>default</myArchetype>
