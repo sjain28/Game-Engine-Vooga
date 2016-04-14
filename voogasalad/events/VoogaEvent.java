@@ -46,7 +46,6 @@ public class VoogaEvent {
 	 * events according to their execute method.
 	 */
 	public void update(){
-
 		myCauseSprites.clear();
 		
 		for(Cause c: myCauses){
@@ -55,7 +54,6 @@ public class VoogaEvent {
 			}
 		}
 		for(Effect e: myEffects){
-			System.out.println("EXECUTING!"+e.getClass());
 			e.execute();
 		}
 	}
