@@ -35,6 +35,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    String archetype,
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
+        myLoc = new Position(0, 0);
+        myVelocity = new Velocity(0, 0);
+        
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
         myImagePath = imagePath;
@@ -53,8 +56,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
 
-        myLoc = new Position(0, 0);
-        myVelocity = new Velocity(0, 0);
+        
     }
 
     /**
@@ -62,16 +64,25 @@ public class Sprite implements Moveable, Effectable, Elementable {
      * Need to call this before using the Sprite in the game engine!
      */
     public void init () {
+        System.out.println("Dope- init is being called");
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
+        myImage.setLayoutX(myLoc.getX());
+        myImage.setLayoutY(myLoc.getY());
     }
 
     public void update () {
         // Still needed: Apply physics to myVelocity
+        System.out.println("");
+        System.out.println("VelocityY-Sprite.java: "+"Archetype: "+myArchetype+" "+myVelocity.getY());
         myLoc.addX(myVelocity.getX());
-        myLoc.addY(-myVelocity.getY());
+        myLoc.addY(myVelocity.getY());
+        
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
+        
+        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
+        
     }
 
     public void setName (String name) {
@@ -132,6 +143,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImagePath = path;
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
+        myImage.setLayoutX(myLoc.getX());
+        myImage.setLayoutY(myLoc.getY());
     }
 
     public String getImagePath () {

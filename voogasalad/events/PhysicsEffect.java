@@ -33,6 +33,8 @@ public class PhysicsEffect extends SpriteEffect {
 			System.out.println("in sprite loop");
 			callEffectMethod(sprite);
 		}
+		System.out.println("BOUNCING LEGGO");
+		System.out.println(getSprites().size());
 	}
 
 	private void callEffectMethod(Sprite sprite){

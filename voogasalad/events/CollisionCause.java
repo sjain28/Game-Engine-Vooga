@@ -20,7 +20,9 @@ public class CollisionCause extends Cause{
 	}
 	
 	public void init(){
-		if(archA.contains("-") && archB.contains("-")){			
+	        groupA = new ArrayList<>();
+	        groupB = new ArrayList<>();
+		if(archA.contains("-") && archB.contains("-")){		
 			groupA.add(getEvent().getManager().getSprite(archA)); //If contains dash, it's a Sprite ID
 			groupB.add(getEvent().getManager().getSprite(archB));
 		}
