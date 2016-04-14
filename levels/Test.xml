@@ -7,7 +7,7 @@
             <myEvent reference="../../.."/>
             <myKeys class="java.util.Arrays$ArrayList">
               <a class="string-array">
-                <string>RIGHT</string>
+                <string>DOWN</string>
               </a>
             </myKeys>
             <myValue>false</myValue>
@@ -16,10 +16,11 @@
         <myEffects>
           <events.PhysicsEffect>
             <myEvent reference="../../.."/>
-            <myMethod>01c0c281-0602-42ac-a3b1-fbebad6caf85</myMethod>
-            <myParameter class="double">3.0</myParameter>
-            <myVariable>friction</myVariable>
+            <myMethod>28311a6b-c903-43f2-ba19-cd731457d1a7</myMethod>
+            <myParameter class="double">60.0</myParameter>
+            <myVariable>jump</myVariable>
             <needsSprites>true</needsSprites>
+            <mySprites/>
           </events.PhysicsEffect>
         </myEffects>
         <myCauseSprites/>
@@ -42,7 +43,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>01c0c281-0602-42ac-a3b1-fbebad6caf85</myID>
+        <myID>28311a6b-c903-43f2-ba19-cd731457d1a7</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -63,7 +64,7 @@
     </elementableList>
     <variableMap>
       <entry>
-        <string>Raggity Rick</string>
+        <string>RaggityRick</string>
         <tools.VoogaBoolean>
           <myValue>true</myValue>
         </tools.VoogaBoolean>
@@ -86,7 +87,7 @@
               <x>0.0</x>
               <y>0.0</y>
             </myLoc>
-            <myID>c8a6cdd8-0485-4f01-b32e-fadcf7d51093</myID>
+            <myID>de4dd470-3ca8-4379-b049-0f1a83657e1f</myID>
             <myProperties reference="../../../../../elementableList/gameengine.Sprite/myProperties"/>
             <myImagePath>/smile.jpg</myImagePath>
             <myArchetype>default</myArchetype>

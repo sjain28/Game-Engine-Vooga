@@ -14,7 +14,7 @@ public class GlobalPropertiesManager implements Elementable {
 	
 	public GlobalPropertiesManager() {
 		//used for testing
-		globalPropertiesMap.put("Raggity Rick", new VoogaBoolean());
+		globalPropertiesMap.put("RaggityRick", new VoogaBoolean());
 	}
 
 	@Override

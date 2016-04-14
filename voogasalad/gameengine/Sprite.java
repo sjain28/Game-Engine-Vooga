@@ -63,7 +63,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
 	public void update () {
 		// Still needed: Apply physics to myVelocity
-		myLoc.addVector(myVelocity);
+		myLoc.addX(myVelocity.getX());
+		myLoc.addY(-myVelocity.getY());
 		myImage.setLayoutX(myLoc.getX());
 		myImage.setLayoutY(myLoc.getY());
 	}
@@ -150,7 +151,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		if(myImage == null){
 			myImage = new ImageView(getImagePath());
 		}
-		System.out.println("My sprite image is: "+myImage);
 		return myImage;
 	}
 

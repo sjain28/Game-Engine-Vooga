@@ -1,9 +1,9 @@
 package player.leveldatamanager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import events.Cause;
 import events.VoogaEvent;
 import javafx.scene.input.KeyEvent;
@@ -21,27 +21,37 @@ import events.KeyCause;
  */
 public class EventManager {
 
-	private List<String> keyStrokes; //List of all key things that have happened
+	//private List<String> keyStrokes; //List of all key things that have happened
+	private List<KeyEvent> myKeyEvents; //List of all key things that have happened
+
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> keyCombos; //List of keycombos that are bound to events, sorted by length
 	private Map<List<String>, KeyCause> keyCauses; //Maps Strings 
 	private ObjectManager myEngineManager;
 
 	public EventManager(ObjectManager manager, List<VoogaEvent> events) {
-		keyStrokes = new ArrayList<>();
-		myEvents = events;
-		keyCauses = new TreeMap<List<String>, KeyCause>();
+		myKeyEvents = new ArrayList<KeyEvent>();
+		myEvents = new ArrayList<VoogaEvent>();
+		keyCauses = new HashMap<List<String>, KeyCause>();
 		myEngineManager = manager;
 		keyCombos = new ArrayList<List<String>>();
+		
+		//add events
+		for(VoogaEvent e : events){
+			addEvent(e);
+		}
 	}
 
 	public void update(){
 
-		for(KeyEvent k: (List<KeyEvent>) myEngineManager.getKeyEvents()){
-			keyStrokes.add(k.toString());
-		}
-
+//		for(KeyEvent k: (List<KeyEvent>) myEngineManager.getKeyEvents()){
+//			if(!keyStrokes.contains(k.toString())){
+//				keyStrokes.add(k.toString());
+//			}
+//		}
+				
 		checkKeys();
+		
 		for(VoogaEvent e: myEvents){
 			e.update();
 		}
@@ -50,7 +60,7 @@ public class EventManager {
 			keyCauses.get(cause).setValue(false);
 		}
 
-		keyStrokes.clear();
+		//keyStrokes.clear();
 	}
 
 	public void addEvent(VoogaEvent voogaEvent){
@@ -58,6 +68,7 @@ public class EventManager {
 			c.init();
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
+	
 				keyCauses.put(keyc.getKeys(), keyc); 
 				keyCombos.add(keyc.getKeys()); 
 				keyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
@@ -72,18 +83,20 @@ public class EventManager {
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
 	private void checkKeys(){
+
 		for (List<String> eventCombo : keyCombos){ //Check all tuples
-			if(keyStrokes.size() < eventCombo.size()){
+			if(myKeyEvents.size() < eventCombo.size()){
 				continue;
 			}
-			for(int i = 0; i < keyStrokes.size(); i++){ //Checking for a tuple in a list: Need a nested for loop :(
+
+			for(int i = 0; i < myKeyEvents.size(); i++){ //Checking for a tuple in a list: Need a nested for loop :(
 				boolean match = true;
-				for(int j = 0; j < eventCombo.size(); j++){ //Compare the tuple to the keycombo
-					if(!eventCombo.get(j).equals(keyStrokes.get(j+i))){
+				for(int j = 0; j < eventCombo.size(); j++){ //Compare the tuple to the keycombo			
+					if(!((myKeyEvents.get(j+i).getCode().toString()).compareTo(eventCombo.get(j))==0)){
 						match = false;
 					}
 				}
-				if(match){
+				if(match){					
 					keyCauses.get(eventCombo).setValue(true);
 					clearStrokes(i, i+eventCombo.size()-1);
 					break;
@@ -96,9 +109,14 @@ public class EventManager {
 	 * Removes keystrokes from the list once they're used for an event
 	 */
 	public void clearStrokes(int a, int b){
-		for(int i = b; i <= a; i--){
-			keyStrokes.remove(i);
+		for(int i = b; i >= a; i--){
+			myKeyEvents.remove(i);
 		}
+	}
+	
+	public void setKeyStrokes(List<?> keyevents){
+		List<KeyEvent> tempevents = (List<KeyEvent>) keyevents;
+		myKeyEvents = new ArrayList<KeyEvent>(tempevents);
 	}
 
 }
