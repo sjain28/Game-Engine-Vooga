@@ -108,6 +108,8 @@ public class DesignBoard extends Tab implements Observer{
         	GameObject object = (GameObject) elementManager.getElement(db.getString());
         	object.setTranslateX(event.getX() - x_offset);
         	object.setTranslateY(event.getY() - y_offset);
+        	object.getSprite().setX(event.getX());
+        	object.getSprite().setY(event.getY());
         }
 
         event.setDropCompleted(success);

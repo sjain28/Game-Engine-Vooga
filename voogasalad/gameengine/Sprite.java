@@ -70,6 +70,14 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
     }
+    
+    public void setX(double x) {
+    	this.myLoc.setX(x);
+    }
+    
+    public void setY(double y) {
+    	this.myLoc.setY(y);
+    }
 
     public void update () {
         // Still needed: Apply physics to myVelocity
