@@ -38,19 +38,19 @@ public class SpriteEffect extends VariableEffect{
 	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, VoogaEvent event) {
 		super(method, variable, event);
-		myArchetype = archetype;
+		setMyArchetype(archetype);
 		this.needsSprites = needsSprites;
 	}
 	
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Double parameter, VoogaEvent event) {
 		super(method, variable, parameter, event);
-		myArchetype = archetype;
+		setMyArchetype(archetype);
 		this.needsSprites = needsSprites;
 	}
 	
 	public SpriteEffect(String archetype, Boolean needsSprites, String method, String variable, Boolean parameter, VoogaEvent event) {
 		super(method, variable, parameter, event);
-		myArchetype = archetype;
+		setMyArchetype(archetype);
 		this.needsSprites = needsSprites;
 	}
 	
@@ -70,6 +70,9 @@ public class SpriteEffect extends VariableEffect{
 		needsSprites = true;
 	}
 
+	public SpriteEffect(String method, Double parameter, VoogaEvent event){
+		super(method, parameter, event);
+	}
 	@Override
 	public void execute() {
 		setSprites();
@@ -87,9 +90,9 @@ public class SpriteEffect extends VariableEffect{
 		if (needsSprites){
 			mySprites = getEvent().getSpritesFromCauses();
 		}
-		if (myArchetype != null){
+		if (getMyArchetype() != null){
 			// get sprite manager, get all sprites of archetype
-			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(myArchetype);
+			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(getMyArchetype());
 			if (mySprites.size() != 0){
 				for(Sprite causeSprite : mySprites){
 					if(!archSpriteIDs.contains(causeSprite.getID())){
@@ -105,6 +108,20 @@ public class SpriteEffect extends VariableEffect{
 		}
 	}
 	protected List<Sprite> getSprites(){
+		return mySprites;
+	}
+
+	public String getMyArchetype() {
+		return myArchetype;
+	}
+
+	public void setMyArchetype(String archetype) {
+		myArchetype = archetype;
+	}
+	public void setNeedsSprites(Boolean needsSprites){
+		this.needsSprites = needsSprites;
+	}
+	public List<Sprite> getMySprites(){
 		return mySprites;
 	}
 }

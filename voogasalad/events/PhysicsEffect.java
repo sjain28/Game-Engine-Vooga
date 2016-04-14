@@ -9,35 +9,21 @@ import tools.interfaces.VoogaData;
 
 public class PhysicsEffect extends SpriteEffect {
 
-	public PhysicsEffect(String spriteID, String method, String variable, VoogaEvent event) {
-		super(spriteID, method, variable, event);
-	}
-	public PhysicsEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
-		super(spriteID, method, variable, parameter, event);
-	}
-	public PhysicsEffect(String spriteID, String method, String variable, Boolean parameter, VoogaEvent event) {
-		super(spriteID, method, variable, parameter, event);
+	public PhysicsEffect(String spriteID, String method, Double parameter, VoogaEvent event) {
+		super(method, parameter, event);
+		getMySprites().add(getEvent().getManager().getSprite(spriteID));
 	}
 
-	public PhysicsEffect(String archetype, Boolean needsSprites, String method, String variable, VoogaEvent event) {
-		super(archetype, needsSprites, method, variable, event);
-	}
-	public PhysicsEffect(String archetype, Boolean needsSprites, String method, String variable, Double parameter, VoogaEvent event) {
-		super(archetype, needsSprites, method, variable, parameter, event);
-	}
-	public PhysicsEffect(String archetype, Boolean needsSprites, String method, String variable, Boolean parameter, VoogaEvent event) {
-		super(archetype, needsSprites, method, variable, parameter, event);
+	public PhysicsEffect(String archetype, Boolean needsSprites, String method, Double parameter, VoogaEvent event) {
+		super(method, parameter, event);
+		setMyArchetype(archetype);
+		setNeedsSprites(needsSprites);
 	}
 
-	public PhysicsEffect(String method, String variable, VoogaEvent event) {
-		super(method, variable, event);
+	public PhysicsEffect(String method, Double parameter, VoogaEvent event) {
+		super(method, parameter, event);
 	}
-	public PhysicsEffect(String method, String variable, Double parameter, VoogaEvent event) {
-		super(method, variable, parameter, event);
-	}
-	public PhysicsEffect(String method, String variable, Boolean parameter, VoogaEvent event) {
-		super(method, variable, parameter, event);
-	}
+
 	
 	@Override
 	public void execute(){
