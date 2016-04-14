@@ -21,6 +21,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
 	protected static final String MASS = "mass";
 	protected static final String ALIVE = "alive";
+	protected static final String GRAVITY="gravity";
 	private Velocity myVelocity;
 	private Position myLoc;
 	private String myID;
@@ -46,8 +47,11 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		myImage = new ImageView(image);
 		myProperties = new HashMap<String, VoogaData>();
 		myProperties = properties;
+		
 		myProperties.put(MASS, mass);
 		myProperties.put(ALIVE, new VoogaBoolean(true));
+		myProperties.put(GRAVITY, new VoogaNumber(0.0));
+		
 		myLoc = new Position(0, 0);
 		myVelocity = new Velocity(0, 0);
 	}
