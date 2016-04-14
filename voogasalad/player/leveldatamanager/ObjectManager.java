@@ -65,7 +65,9 @@ public class ObjectManager {
 	 */
 	private void applyGravity(Elementable e) {
 		if (e instanceof Sprite) {
-			getPhysics().gravity((Sprite) e, (double) ((Sprite) e).getProperty("gravity").getValue());
+		    double gravityMagnitude = (double) ((Sprite) e).getProperty("gravity").getValue();
+		    
+			getPhysics().gravity((Sprite) e, gravityMagnitude);
 		}
 	}
 

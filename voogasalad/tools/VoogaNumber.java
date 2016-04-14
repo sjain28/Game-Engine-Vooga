@@ -42,8 +42,8 @@ public class VoogaNumber implements VoogaData{
     
     @Override
     public Object getValue () {
-        if (myValue == ((int) myValue)){
-            int number = (int) myValue;
+        if (myValue == ((double) myValue)){
+            double number = (double) myValue;
             return number;
         }
         return myValue;
