@@ -24,6 +24,7 @@ public abstract class Builder extends VBox{
         mySpriteFactory = editor.getSpriteFactory();
         myManager = editor;
         myStage = popup;
+        this.setSpacing(10);
     }
     
     protected EditElementable getManager(){
