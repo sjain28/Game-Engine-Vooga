@@ -15,6 +15,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -27,6 +29,8 @@ public class ArchetypeBuilder extends Builder {
     private final int MASS_INDEX = 1;
     private String myImagePath;
     private Map<String, VoogaData> myProperties;
+    private Button image;
+    private ImageView iv;
 
     public ArchetypeBuilder (EditElementable editor, Stage popup) {
         super(editor, popup);
@@ -70,7 +74,8 @@ public class ArchetypeBuilder extends Builder {
       HBox complete = new HBox();
       Text label = new Text("Image");
       label.setFill(Color.WHITE);
-      Button image = new Button("Choose Image");
+      image = new Button("Choose Image");
+      iv = new ImageView();
       image.setOnAction(e -> {
               FileChooser fileChooser = new FileChooser();
                
@@ -82,11 +87,22 @@ public class ArchetypeBuilder extends Builder {
               //Show open file dialog
               java.io.File file = fileChooser.showOpenDialog(null);
               myImagePath = file.getPath();
+              iv.setImage(new Image("file:///" + myImagePath));
+              iv.setPreserveRatio(true);
+              iv.setFitWidth(80);
               System.out.println(myImagePath);
       });
-      complete.getChildren().addAll(label, image);
+      complete.getChildren().addAll(label, image, iv);
       this.getChildren().add(complete);
   }
+    
+    public void setImagePath(String path) {
+    	this.myImagePath = path;
+    	this.iv.setImage(new Image("file:///" + myImagePath));
+    	this.iv.setPreserveRatio(true);
+    	this.iv.setFitWidth(80);
+    	this.image.setDisable(true);
+    }
 
     @Override
     public void compile () {
