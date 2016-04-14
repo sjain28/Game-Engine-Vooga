@@ -35,6 +35,8 @@ public class SpriteVariableCause extends VariableCause {
 	
 	@Override
 	public void init(){
+		System.out.println("EVENT: "+getEvent());
+		System.out.println("MANAGER: "+getEvent().getManager());
 		Sprite temp = getEvent().getManager().getSprite(mySpriteID);
 		mySprites = new ArrayList<>();
 		mySprites.add(temp);
