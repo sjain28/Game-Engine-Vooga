@@ -56,14 +56,14 @@ public class StandardPhysics implements IPhysicsEngine{
 	}
 
 	@Override
-	public void bounce(Sprite sprite, double bounceCoefficient) {
+	public void bounce(Sprite sprite, Double bounceCoefficient) {
 		Velocity curr = sprite.getVelocity();
 		curr.setX(-1*curr.getX()*bounceCoefficient);
 		curr.setX(-1*curr.getY()*bounceCoefficient);
 	}
 
 	@Override
-	public void friction(Sprite sprite, double frictionCoefficient) {
+	public void friction(Sprite sprite, Double frictionCoefficient) {
 		Acceleration curr = new Acceleration(sprite.getVelocity().getX(), sprite.getVelocity().getY());
 		curr.setX(curr.getX()*frictionCoefficient);
 		curr.setY(curr.getY()*frictionCoefficient);
@@ -71,13 +71,13 @@ public class StandardPhysics implements IPhysicsEngine{
 	}
 
 	@Override
-	public void jump(Sprite sprite, double jumpMagnitude) {
+	public void jump(Sprite sprite, Double jumpMagnitude) {
 		Velocity jumpVelocity = new Velocity(0, jumpMagnitude);
 		setVelocity(sprite, jumpVelocity);
 	}
 
 	@Override 
-	public void gravity(Sprite sprite, double gravityMagnitude) {
+	public void gravity(Sprite sprite, Double gravityMagnitude) {
 		Acceleration gravityAcceleration = new Acceleration(0, -gravityMagnitude);
 		accelerate(sprite, gravityAcceleration);
 	}

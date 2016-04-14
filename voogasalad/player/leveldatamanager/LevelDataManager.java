@@ -16,22 +16,21 @@ import tools.interfaces.VoogaData;
 
 public class LevelDataManager implements ILevelDataManager {
 
+	private static final int SCREENSIZE_DIM1 = 3;
+	private static final int SCREENSIZE_DIM2 = 35;
+
 	private IGameRunner myGameRunner;
 	private DisplayScroller displayScroller;
 	private ObjectManager myObjectManager;
 	private EventManager myEventManager;
 	private List<KeyEvent> myKeyEvents;
-	private int screenSizeDim_1 = 3;
-	private int screenSizeDim_2 = 35;
-
-
 	/**
 	 * Default constructor
 	 * 
 	 * @param levelFileName
 	 */
 	public LevelDataManager(String levelFileName) {
-		displayScroller = new DisplayScroller(screenSizeDim_1, screenSizeDim_2);
+		displayScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
 		myKeyEvents = new ArrayList<>();
 		readinObjects(levelFileName);
 		bindImagesofSprites();
@@ -58,28 +57,7 @@ public class LevelDataManager implements ILevelDataManager {
 		this.myGameRunner = gamerunner;
 	}
 
-	/**
-	 * A stub method called at every iteration to receive KeyEvents from
-	 * GameDisplay and updates Objects (Sprites) and applies Events
-	 * (cause and effects)
-	 * 
-	 */
-	@Override
-	public void update() {
-		setKeyEvents(getGameRunner().getKeyEvents());
-		myObjectManager.update();
-		myEventManager.update();
-		//Need to clear list of keyevents
-	}
 
-	/**
-	 * Returns all displayable objects in Node(s)
-	 * 
-	 */
-	@Override
-	public List<Node> getDisplayableObjects () {
-		return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),myObjectManager.getMainCharXPos());
-	}
 
 	/**
 	 * Read in the file to reconstruct objects created in the authoring
@@ -117,7 +95,32 @@ public class LevelDataManager implements ILevelDataManager {
 
 	}
 
+
 	/**
+	 * A stub method called at every iteration to receive KeyEvents from
+	 * GameDisplay and updates Objects (Sprites) and applies Events
+	 * (cause and effects)
+	 * 
+	 */
+	@Override
+	public void update() {
+		//setKeyEvents(getGameRunner().getKeyEvents());
+		myObjectManager.update();
+		myEventManager.update();
+		//Need to clear list of keyevents
+	}
+
+	/**
+	 * Returns all displayable objects in Node(s)
+	 * 
+	 */
+	@Override
+	public List<Node> getDisplayableObjects () {
+		return displayScroller.centerScroll(myObjectManager.getAllDisplayableNodes(),myObjectManager.getMainCharXPos());
+	}
+
+	/**
+>>>>>>> master
 	 * Creates the Sprites, Events, and Variables which will be loaded into the managers, which
 	 * include
 	 * the sprite, event, and variable managers
@@ -126,7 +129,6 @@ public class LevelDataManager implements ILevelDataManager {
 	 *          variables).
 	 * 
 	 */
-
 	private void initializeManagers (List<Elementable> elementObjects,
 			List<VoogaEvent> eventObjects,
 			Map<String,VoogaData> variableObjects,
@@ -146,15 +148,20 @@ public class LevelDataManager implements ILevelDataManager {
 	/**
 	 * @return the myKeyEvents
 	 */
-	public List<?> getKeyEvents() {
-		return myKeyEvents;
-	}
+//	public List<?> getKeyEvents() {
+//		return myKeyEvents;
+//	}
 
 	/**
 	 * @param myKeyEvents the myKeyEvents to set
 	 */
 	public void setKeyEvents(List<?> myKeyEvents) {
-		this.myKeyEvents = (List<KeyEvent>) myKeyEvents;
+		myEventManager.setKeyStrokes(myKeyEvents);
 	}
+
+//	@Override
+//	public void resetKeyEvents(List<KeyEvent> keyEvents) {
+//		myEventManager.
+//	}
 
 }

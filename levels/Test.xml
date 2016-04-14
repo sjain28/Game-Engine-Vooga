@@ -1,6 +1,34 @@
 <object-stream>
   <data.DataContainerOfLists>
-    <eventList/>
+    <eventList>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>DOWN</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+        </myCauses>
+        <myEffects>
+          <events.PhysicsEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>28311a6b-c903-43f2-ba19-cd731457d1a7</myMethod>
+            <myParameter class="double">60.0</myParameter>
+            <myVariable>jump</myVariable>
+            <needsSprites>true</needsSprites>
+            <mySprites/>
+          </events.PhysicsEffect>
+        </myEffects>
+        <myCauseSprites/>
+        <myPhysicsEngine>
+          <frameTime>0.0</frameTime>
+        </myPhysicsEngine>
+      </events.VoogaEvent>
+    </eventList>
     <elementableList>
       <gameengine.Sprite>
         <myVelocity>
@@ -15,7 +43,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>fa773b82-0a7f-483e-ad81-c2789e5a0803</myID>
+        <myID>28311a6b-c903-43f2-ba19-cd731457d1a7</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -33,32 +61,39 @@
         <myImagePath>/smile.jpg</myImagePath>
         <myArchetype>default</myArchetype>
       </gameengine.Sprite>
-      <gameengine.Sprite>
-        <myVelocity>
-          <xPrev>0.0</xPrev>
-          <yPrev>0.0</yPrev>
-          <x>0.0</x>
-          <y>0.0</y>
-        </myVelocity>
-        <myLoc>
-          <xPrev>0.0</xPrev>
-          <yPrev>0.0</yPrev>
-          <x>0.0</x>
-          <y>0.0</y>
-        </myLoc>
-        <myID>697aa400-fd61-4fd6-b903-d99e99449264</myID>
-        <myProperties reference="../../gameengine.Sprite/myProperties"/>
-        <myImagePath>/smile.jpg</myImagePath>
-        <myArchetype>default</myArchetype>
-      </gameengine.Sprite>
     </elementableList>
     <variableMap>
       <entry>
-        <string>Raggity Rick</string>
+        <string>RaggityRick</string>
         <tools.VoogaBoolean>
           <myValue>true</myValue>
         </tools.VoogaBoolean>
       </entry>
     </variableMap>
+    <spriteFactory>
+      <myArchetypes>
+        <entry>
+          <string>default</string>
+          <gameengine.Sprite>
+            <myVelocity>
+              <xPrev>0.0</xPrev>
+              <yPrev>0.0</yPrev>
+              <x>0.0</x>
+              <y>0.0</y>
+            </myVelocity>
+            <myLoc>
+              <xPrev>0.0</xPrev>
+              <yPrev>0.0</yPrev>
+              <x>0.0</x>
+              <y>0.0</y>
+            </myLoc>
+            <myID>de4dd470-3ca8-4379-b049-0f1a83657e1f</myID>
+            <myProperties reference="../../../../../elementableList/gameengine.Sprite/myProperties"/>
+            <myImagePath>/smile.jpg</myImagePath>
+            <myArchetype>default</myArchetype>
+          </gameengine.Sprite>
+        </entry>
+      </myArchetypes>
+    </spriteFactory>
   </data.DataContainerOfLists>
 </object-stream>

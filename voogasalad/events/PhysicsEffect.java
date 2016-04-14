@@ -11,7 +11,8 @@ public class PhysicsEffect extends SpriteEffect {
 
 	public PhysicsEffect(String spriteID, String method, Double parameter, VoogaEvent event) {
 		super(method, parameter, event);
-		getMySprites().add(getEvent().getManager().getSprite(spriteID));
+		setSpriteID(spriteID);
+		setNeedsSprites(false);
 	}
 
 	public PhysicsEffect(String archetype, Boolean needsSprites, String method, Double parameter, VoogaEvent event) {
@@ -22,25 +23,28 @@ public class PhysicsEffect extends SpriteEffect {
 
 	public PhysicsEffect(String method, Double parameter, VoogaEvent event) {
 		super(method, parameter, event);
+		setNeedsSprites(true);
 	}
 
-	
 	@Override
 	public void execute(){
 		setSprites();
 		for (Sprite sprite: getSprites()){
+			System.out.println("in sprite loop");
 			callEffectMethod(sprite);
 		}
 	}
 
 	private void callEffectMethod(Sprite sprite){
-		Class physicsClass = getEvent().getPhysicsEngine().getClass();
-		Method[] methods = physicsClass.getMethods();
 		try{
-			Method physicsMethod = getMethodfromString(methods, getMethodString());
-			Class[] parameterType = physicsMethod.getParameterTypes();
-			//physicsMethod.invoke(sprite, getParameters()[0]);
+			Method physicsMethod = getEvent().getPhysicsEngine().getClass()
+					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameters().getClass()});
+			
+			System.out.println("METHOD NAME: "+getMethodString());
+			
+			physicsMethod.invoke(getEvent().getPhysicsEngine(), sprite, getParameters());
 		}catch (Exception e){
+			e.printStackTrace();
 			//throw new VoogaException(String.format(format, args));
 		}
 	}

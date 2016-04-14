@@ -33,8 +33,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     private List<Node> myGameElements;
     private List<VoogaEvent> myEventList;
+    
     private GlobalPropertiesManager GPM;
     private Map<String, VoogaData> myGlobalVariables;
+    
     private File myXmlDataFile;
     private SpriteFactory spriteFactory;
     private Set<String> myIds;
@@ -124,7 +126,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         }
 
         DataContainerOfLists data =
-                new DataContainerOfLists(elements, myGlobalVariables, myEventList);
+                new DataContainerOfLists(elements, myGlobalVariables, myEventList,spriteFactory);
         System.out.println("I'm done saving in element manager");
         try {
             System.out.println(myXmlDataFile.getPath());
