@@ -88,6 +88,7 @@ public class StandardPhysics implements IPhysicsEngine {
     public void jump (Sprite sprite, Double jumpMagnitude) {
         Velocity jumpVelocity = new Velocity(0, jumpMagnitude);
         setVelocity(sprite, jumpVelocity);
+        System.out.println("JUMPING");
     }
 
     @Override
