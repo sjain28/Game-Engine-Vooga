@@ -10,6 +10,8 @@ import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
+import physics.IPhysicsEngine;
+import physics.StandardPhysics;
 import tools.interfaces.VoogaData;
 
 /**
@@ -24,6 +26,7 @@ public class ObjectManager {
 	private SpriteFactory mySpriteFactory;
 	private Map<String, VoogaData> myGlobalVariables;
 	private List<KeyEvent> keyEvents;
+	private IPhysicsEngine myPhysics = new StandardPhysics();
 
 	/**
 	 * Takes in a map of Id's to sprite's and a sprite factory
@@ -51,7 +54,18 @@ public class ObjectManager {
 	public void update() {
 		for(String s: myElements.keySet()){
 			Elementable e = myElements.get(s);
+			applyGravity(e);
 			e.update();
+		}
+	}
+	
+	/**
+	 * Using gravity field of each sprite, updates sprites' velocity
+	 * 
+	 */
+	private void applyGravity(Elementable e) {
+		if (e instanceof Sprite) {
+			getPhysics().gravity((Sprite) e, (double) ((Sprite) e).getProperty("gravity").getValue());
 		}
 	}
 
@@ -188,5 +202,12 @@ public class ObjectManager {
 	 */
 	public List<KeyEvent> getKeyEvents(){
 		return keyEvents;
+	}
+
+	/**
+	 * @return the myPhysics
+	 */
+	public IPhysicsEngine getPhysics() {
+		return myPhysics;
 	}
 }
