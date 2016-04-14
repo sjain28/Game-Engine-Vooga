@@ -3,22 +3,18 @@
     <eventList>
       <events.VoogaEvent>
         <myCauses>
-          <events.KeyCause>
+          <events.CollisionCause>
             <myEvent reference="../../.."/>
-            <myKeys class="java.util.Arrays$ArrayList">
-              <a class="string-array">
-                <string>RIGHT</string>
-              </a>
-            </myKeys>
-            <myValue>false</myValue>
-          </events.KeyCause>
+            <archA>7f551547-f744-4315-9916-044b1ea54514</archA>
+            <archB>cb69e99d-df73-4165-8b9d-139d75d3badf</archB>
+          </events.CollisionCause>
         </myCauses>
         <myEffects>
           <events.PhysicsEffect>
             <myEvent reference="../../.."/>
-            <myMethod>01aa578d-7789-4c35-b591-debc59491b6f</myMethod>
-            <myParameter class="double">10.0</myParameter>
-            <myVariable>jump</myVariable>
+            <myMethod>7f551547-f744-4315-9916-044b1ea54514</myMethod>
+            <myParameter class="double">1.0</myParameter>
+            <myVariable>bounce</myVariable>
             <needsSprites>true</needsSprites>
             <mySprites/>
           </events.PhysicsEffect>
@@ -43,13 +39,19 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>01aa578d-7789-4c35-b591-debc59491b6f</myID>
+        <myID>cb69e99d-df73-4165-8b9d-139d75d3badf</myID>
         <myProperties>
           <entry>
             <string>alive</string>
             <tools.VoogaBoolean>
               <myValue>true</myValue>
             </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>gravity</string>
+            <tools.VoogaNumber>
+              <myValue>9.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>mass</string>
@@ -60,6 +62,43 @@
         </myProperties>
         <myImagePath>/smile.jpg</myImagePath>
         <myArchetype>default</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myLoc>
+        <myID>7f551547-f744-4315-9916-044b1ea54514</myID>
+        <myProperties>
+          <entry>
+            <string>alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>mass</string>
+            <tools.VoogaNumber>
+              <myValue>100000.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>file:////Users/arjunaashna/Documents/workspace/voogasalad_DoovalSalad/images/bricks.jpg</myImagePath>
+        <myArchetype>platform</myArchetype>
       </gameengine.Sprite>
     </elementableList>
     <variableMap>
@@ -87,10 +126,46 @@
               <x>0.0</x>
               <y>0.0</y>
             </myLoc>
-            <myID>1e47fc28-1e4b-4aee-a4d2-d405c97182c9</myID>
-            <myProperties reference="../../../../../elementableList/gameengine.Sprite/myProperties"/>
+            <myID>321bcb88-45db-428f-9f71-f88a95c89a47</myID>
+            <myProperties>
+              <entry>
+                <string>alive</string>
+                <tools.VoogaBoolean reference="../../../../../../../elementableList/gameengine.Sprite/myProperties/entry/tools.VoogaBoolean"/>
+              </entry>
+              <entry>
+                <string>gravity</string>
+                <tools.VoogaNumber>
+                  <myValue>0.0</myValue>
+                </tools.VoogaNumber>
+              </entry>
+              <entry>
+                <string>mass</string>
+                <tools.VoogaNumber reference="../../../../../../../elementableList/gameengine.Sprite/myProperties/entry[3]/tools.VoogaNumber"/>
+              </entry>
+            </myProperties>
             <myImagePath>/smile.jpg</myImagePath>
             <myArchetype>default</myArchetype>
+          </gameengine.Sprite>
+        </entry>
+        <entry>
+          <string>platform</string>
+          <gameengine.Sprite>
+            <myVelocity>
+              <xPrev>0.0</xPrev>
+              <yPrev>0.0</yPrev>
+              <x>0.0</x>
+              <y>0.0</y>
+            </myVelocity>
+            <myLoc>
+              <xPrev>0.0</xPrev>
+              <yPrev>0.0</yPrev>
+              <x>0.0</x>
+              <y>0.0</y>
+            </myLoc>
+            <myID>099a4f67-8ba0-4888-94f4-ae5f0dd575a6</myID>
+            <myProperties reference="../../../../../elementableList/gameengine.Sprite[2]/myProperties"/>
+            <myImagePath>file:////Users/arjunaashna/Documents/workspace/voogasalad_DoovalSalad/images/bricks.jpg</myImagePath>
+            <myArchetype>platform</myArchetype>
           </gameengine.Sprite>
         </entry>
       </myArchetypes>

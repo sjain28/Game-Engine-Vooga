@@ -50,7 +50,7 @@ public class VoogaNumber implements VoogaData{
     }
     
     public String toString(){
-        return "";
+        return ""+myValue;
     }
     
     public Node display(){
@@ -65,5 +65,7 @@ public class VoogaNumber implements VoogaData{
         if (!(o instanceof Number)) return;
         myValue = (double) o; 
     }
+    
+
    
 }
