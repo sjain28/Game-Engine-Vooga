@@ -21,6 +21,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
 	protected static final String MASS = "mass";
 	protected static final String ALIVE = "alive";
+	protected static final String GRAVITY = "gravity";
 	private Velocity myVelocity;
 	private Position myLoc;
 	private String myID;
@@ -30,10 +31,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 	private String myArchetype;
 	private transient ImageView myImage;
 
-	public Sprite (String imagePath,
-			String archetype,
-			Map<String, VoogaData> properties,
-			VoogaNumber mass) {
+	public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties, VoogaNumber mass) {
 		myID = UUID.randomUUID().toString();
 		myArchetype = archetype;
 		myImagePath = imagePath;
@@ -47,6 +45,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		myProperties = new HashMap<String, VoogaData>();
 		myProperties = properties;
 		myProperties.put(MASS, mass);
+		myProperties.put(GRAVITY, new VoogaNumber(0.0));
 		myProperties.put(ALIVE, new VoogaBoolean(true));
 		myLoc = new Position(0, 0);
 		myVelocity = new Velocity(0, 0);

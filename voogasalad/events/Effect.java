@@ -18,5 +18,7 @@ public abstract class Effect {
 	 public VoogaEvent getEvent(){
 		 return myEvent;
 	 }
+	 
+	 public abstract void init();
 
 }

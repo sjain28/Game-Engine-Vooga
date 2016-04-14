@@ -62,7 +62,7 @@ public interface IPhysicsEngine {
 	 * @param sprite
 	 * @param bounceCoefficient
 	 */
-	void bounce(Sprite sprite, double bounceCoefficient);
+	void bounce(Sprite sprite, Double bounceCoefficient);
 
 	/**
 	 * Produce an acceleration vector in the same direction per sprite motion
@@ -71,7 +71,7 @@ public interface IPhysicsEngine {
 	 * @param sprite
 	 * @param frictionCoefficeint
 	 */
-	void friction(Sprite sprite, double frictionCoefficeint);
+	void friction(Sprite sprite, Double frictionCoefficeint);
 
 	/**
 	 * Produce an upwards velocity to set the sprite to increase by
@@ -79,7 +79,7 @@ public interface IPhysicsEngine {
 	 * @param sprite
 	 * @param jumpMagnitude
 	 */
-	void jump(Sprite sprite, double jumpMagnitude);
+	void jump(Sprite sprite, Double jumpMagnitude);
 
 	/**
 	 * Given a gravitational source (ground), produce an acceleration vector
@@ -89,7 +89,7 @@ public interface IPhysicsEngine {
 	 * @param sprite
 	 * @param gravityAcceleration
 	 */
-	void gravity(Sprite sprite, double gravityAcceleration);
+	void gravity(Sprite sprite, Double gravityAcceleration);
 
 	/**
 	 * Given enough time in the frame for physics operations, look at the next frame 
