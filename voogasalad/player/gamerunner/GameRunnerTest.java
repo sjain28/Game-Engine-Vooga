@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class GameRunnerTest extends Application {
 
-    private static final String testString = "levels/Test.xml";
+    private static final String TESTXML_PATH = "levels/Test.xml";
 
     public static void main (String[] args) {
         launch(args);
@@ -22,8 +22,8 @@ public class GameRunnerTest extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
 
-        IGameRunner gameRunner = new GameRunner(testString);
-        gameRunner.playLevel(testString);
+        IGameRunner gameRunner = new GameRunner(TESTXML_PATH);
+        gameRunner.playLevel(TESTXML_PATH);
         
         // Elementable[] vts = new Elementable[10];
         // VoogaData[] variables = new VoogaData[10];

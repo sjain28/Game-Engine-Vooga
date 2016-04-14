@@ -5,25 +5,17 @@
         <myCauses>
           <events.CollisionCause>
             <myEvent reference="../../.."/>
-            <archA>2ec98a66-3b3c-4885-8675-dec5732e1b9d</archA>
-            <archB>d96f4f9b-d337-4991-9230-23dab74d7c69</archB>
+            <archA>473e3486-a04f-4767-a31f-b183f68810f1</archA>
+            <archB>c2a9e1b5-3df4-4c5a-b413-c455f8210919</archB>
           </events.CollisionCause>
         </myCauses>
         <myEffects>
           <events.PhysicsEffect>
             <myEvent reference="../../.."/>
             <myMethod>bounce</myMethod>
-            <myParameter class="double">1.0</myParameter>
+            <myParameter class="double">0.9</myParameter>
             <needsSprites>false</needsSprites>
-            <mySpriteID>2ec98a66-3b3c-4885-8675-dec5732e1b9d</mySpriteID>
-            <mySprites/>
-          </events.PhysicsEffect>
-          <events.PhysicsEffect>
-            <myEvent reference="../../.."/>
-            <myMethod>bounce</myMethod>
-            <myParameter class="double">1.0</myParameter>
-            <needsSprites>false</needsSprites>
-            <mySpriteID>d96f4f9b-d337-4991-9230-23dab74d7c69</mySpriteID>
+            <mySpriteID>473e3486-a04f-4767-a31f-b183f68810f1</mySpriteID>
             <mySprites/>
           </events.PhysicsEffect>
         </myEffects>
@@ -47,7 +39,7 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>d96f4f9b-d337-4991-9230-23dab74d7c69</myID>
+        <myID>473e3486-a04f-4767-a31f-b183f68810f1</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -84,7 +76,7 @@
           <x>0.0</x>
           <y>300.0</y>
         </myLoc>
-        <myID>2ec98a66-3b3c-4885-8675-dec5732e1b9d</myID>
+        <myID>c2a9e1b5-3df4-4c5a-b413-c455f8210919</myID>
         <myProperties>
           <entry>
             <string>alive</string>
@@ -101,12 +93,12 @@
           <entry>
             <string>mass</string>
             <tools.VoogaNumber>
-              <myValue>1.0E7</myValue>
+              <myValue>100000.0</myValue>
             </tools.VoogaNumber>
           </entry>
         </myProperties>
-        <myImagePath>file:////Users/arjunaashna/Documents/workspace/voogasalad_DoovalSalad/images/bricks.jpg</myImagePath>
-        <myArchetype>platform</myArchetype>
+        <myImagePath>file:///C:\Users\Heeb\Documents\GitHub\voogasalad_DoovalSalad\images\bricks.jpg</myImagePath>
+        <myArchetype>plat</myArchetype>
       </gameengine.Sprite>
     </elementableList>
     <variableMap>
@@ -134,7 +126,7 @@
               <x>0.0</x>
               <y>0.0</y>
             </myLoc>
-            <myID>3fe99316-2576-4bfe-8281-4ca16e223d98</myID>
+            <myID>f1bb1ecb-e0a3-4827-b03b-8d0d7920b8b1</myID>
             <myProperties>
               <entry>
                 <string>alive</string>
@@ -156,7 +148,7 @@
           </gameengine.Sprite>
         </entry>
         <entry>
-          <string>platform</string>
+          <string>plat</string>
           <gameengine.Sprite>
             <myVelocity>
               <xPrev>0.0</xPrev>
@@ -170,10 +162,10 @@
               <x>0.0</x>
               <y>0.0</y>
             </myLoc>
-            <myID>ed26024c-2692-44c5-84dd-88abfbbb1c80</myID>
+            <myID>ee11edb8-a4ee-4a48-bd1e-a9b50ad0fcce</myID>
             <myProperties reference="../../../../../elementableList/gameengine.Sprite[2]/myProperties"/>
-            <myImagePath>file:////Users/arjunaashna/Documents/workspace/voogasalad_DoovalSalad/images/bricks.jpg</myImagePath>
-            <myArchetype>platform</myArchetype>
+            <myImagePath>file:///C:\Users\Heeb\Documents\GitHub\voogasalad_DoovalSalad\images\bricks.jpg</myImagePath>
+            <myArchetype>plat</myArchetype>
           </gameengine.Sprite>
         </entry>
       </myArchetypes>
