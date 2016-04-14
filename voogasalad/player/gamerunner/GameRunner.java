@@ -10,8 +10,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
+import javafx.util.Duration;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.ILevelDataManager;
@@ -30,10 +35,19 @@ import player.leveldatamanager.LevelDataManager;
  */
 public class GameRunner implements IGameRunner{
 
+    private static final int FRAMES_PER_SECOND = 1;
+    private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+    private static final int SPEEDCONTROL = 10;
+    private static final int INIT_SPEED = 61;
+    
 	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
-	private AnimationTimer myTimeline;
+	//private AnimationTimer myTimeline;
+//	private AnimationTimer myTimeline;
+////	private AnimationTimerExt myTimeline;
+	private Timeline myTimeline;
+//	private long myDelay;
 
 
 	//	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
@@ -53,6 +67,11 @@ public class GameRunner implements IGameRunner{
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
 		myGameDisplay = new StandardDisplay(getSelf());
 		levelQueue = createLevels(xmlList);
+		myTimeline = new Timeline();
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+				e -> step());
+		myTimeline.setCycleCount(Animation.INDEFINITE);
+		myTimeline.getKeyFrames().add(frame);
 		//playGame();
 	}
 
@@ -84,19 +103,47 @@ public class GameRunner implements IGameRunner{
 		return levelQueue;
 	}
 
+//	/**
+//	 * Public method in the IGameRunner interface that runs the game
+//	 * in the AnimationTimer timeline
+//	 * 
+//	 */
+//	public void run() {
+//		myTimeline = new AnimationTimerExt(myDelay) {
+//
+//			@Override
+//			public void handle() {
+//				// TODO Auto-generated method stub
+//				step();
+//				System.out.println(myDelay);
+//			}
+//		};
+//		myTimeline.start();
+//	}
+	
 	/**
 	 * Public method in the IGameRunner interface that runs the game
 	 * in the AnimationTimer timeline
 	 * 
 	 */
 	public void run() {
-		myTimeline = new AnimationTimer() {
-			@Override
-			public void handle(long l) {
-				step();
-			}
-		};
-		myTimeline.start();
+//		myTimeline = new AnimationTimer() {
+//			@Override
+//			public void handle(long myDelay) {
+//				step();
+//				try {
+//					Thread.sleep(myDelay);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				System.out.println(myDelay);
+//			}
+//		};
+//		myTimeline.start();
+		getTimeline().setRate(INIT_SPEED);
+		getTimeline().play();
+		
 	}
 
 	/**
@@ -106,12 +153,20 @@ public class GameRunner implements IGameRunner{
 	 * Update sprites, get the list of Nodes, and displays
 	 * 
 	 */
-	private void step() {
+	private void step() {		
+		//take care of setting and resetting key events
+		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
+		myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
+		myGameDisplay.clearKeyEvents();
+		
+		//update all logic in the backend, updating game objects w/ Causes and Events
 		myCurrentLevelDataManager.update();		 
+		
+		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 
+		//repopulate the game screen
 		myGameDisplay.populateGameScreen();
-		//		myGameDisplay.display();
 	}
 
 	/**
@@ -136,7 +191,7 @@ public class GameRunner implements IGameRunner{
 		while(iterator.hasNext()){
 			// if (!l.isWon)
 			String nextLevel = iterator.next();
-			System.out.println(nextLevel);
+
 			playLevel(nextLevel);
 		}
 	}
@@ -147,13 +202,10 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName){
-		System.out.println("What is the file name in this play Level Method?" + fileName);
 		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
 		myCurrentLevelDataManager.update();		 
 		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 		myGameDisplay.display();
-
-
 		run();
 	}
 
@@ -208,7 +260,7 @@ public class GameRunner implements IGameRunner{
 	/**
 	 * @return the myTimeline
 	 */
-	public AnimationTimer getTimeline() {
+	public Timeline getTimeline() {
 		return myTimeline;
 	}
 
@@ -227,7 +279,8 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void start() {
-		getTimeline().start();
+//		getTimeline().start();
+		getTimeline().play();
 	}
 
 	/**
@@ -247,10 +300,11 @@ public class GameRunner implements IGameRunner{
 	 * through GameRunner
 	 * 
 	 */
-	@Override
-	public List<?> getKeyEvents() {
-		return getGameDisplay().getKeyEvents();
-	}
+//	@Override
+//	public List<?> getKeyEvents() {
+//		System.out.println("Getting key events from GameDisplay in GameRunner: "+getGameDisplay().getKeyEvents().size());
+//		return getGameDisplay().getKeyEvents();
+//	}
 
 	/**
 	 * Clears KeyEvents collections after applying events
@@ -265,13 +319,30 @@ public class GameRunner implements IGameRunner{
 	@Override
 	public void speedUp() {
 		// TODO Auto-generated method stub
+//		if (myDelay >= 0) {
+//			myDelay = myDelay - 100;
+//			if (myDelay < 0) {
+//				myDelay = 1;
+//			}
+//		}
+		
+        getTimeline().stop();
+        getTimeline().setRate(getTimeline().getRate() + SPEEDCONTROL);
+        getTimeline().play();
 
 	}
 
 	@Override
 	public void speedDown() {
-		// TODO Auto-generated method stub
-
+//		// TODO Auto-generated method stub
+//		myDelay = myDelay - 100;
+		
+        getTimeline().stop();
+        double newRate = getTimeline().getRate() - SPEEDCONTROL;
+        if (newRate > 0) {
+            getTimeline().setRate(newRate);
+        }
+        getTimeline().play();
 	}
 
 	@Override

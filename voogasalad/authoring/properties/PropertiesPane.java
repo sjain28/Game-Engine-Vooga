@@ -44,24 +44,42 @@ public class PropertiesPane extends TabPane implements Windowable, Observer {
         tabList.stream().forEach(tab -> addTab(tab));
     }
 
+    /**
+     * Adds a new tab to properties pane.
+     * @param tab
+     */
     private void addTab (Tab tab) {
         this.getTabs().add(tab);
     }
-
+    
+    /**
+     * Properties Pane getter
+     * @return
+     */
     public PropertiesTabManager getPropertiesTabManager () {
         return ptm;
     }
 
+    /**
+     * Properties Pane setter
+     * @param ptm
+     */
     public void setPropertiesTabManger (PropertiesTabManager ptm) {
         this.ptm = ptm;
         populateTabPane();
     }
 
+    /**
+     * Node in which to return the pane to display on UI grid.
+     */
     @Override
     public Node getWindow () {
         return this;
     }
 
+    /**
+     * Observer interface method to keep track of global variables.
+     */
     @Override
     public void update (Observable o, Object arg) {
         if ((o instanceof CompleteAuthoringModelable) && (arg instanceof Map)) {

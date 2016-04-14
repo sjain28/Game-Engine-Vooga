@@ -32,15 +32,13 @@ public class ObjectManager {
 	 * @param factory
 	 */
 	public ObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
-		System.out.println("The list of elementables here is " + elements);
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
 			myElements.put(el.getID(), el);
 		}
-		System.out.println("The list of myElementables here is " + myElements);
 
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
-
+		keyEvents = new ArrayList<KeyEvent>();
 		//TODO: Once constructor is figured out, intialize all objects here.
 		mySpriteFactory = factory;
 	}
@@ -139,8 +137,6 @@ public class ObjectManager {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 
-		System.out.println("my displayable nodes from get all displayable nodes: "+displayablenodes.get(0));
-
 		return displayablenodes;
 
 	}
@@ -159,6 +155,23 @@ public class ObjectManager {
 		return 1.0;
 	}
 
+	//	/**
+	//	 * Allows one to get a list of Sprite's by their archetypes
+	//	 * @param myArchetype
+	//	 * @return
+	//	 */
+	//	public List<Sprite> getSpritesByArchetype(String myArchetype) {
+	//		List<Sprite> archSprites = new ArrayList<Sprite>();
+	//		for(String id : myElements.keySet()){
+	//			Elementable el = myElements.get(id);
+	//			if(el instanceof Sprite){
+	//				if(((Sprite) el).getArchetype().equals(myArchetype)){
+	//					archSprites.add((Sprite) el);
+	//				}
+	//			}
+	//		}
+	//		return archSprites;
+	//	}
 	/**
 	 * Sets KeyEvents
 	 * 

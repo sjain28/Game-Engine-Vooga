@@ -13,12 +13,6 @@ import javafx.scene.input.KeyEvent;
  */
 public interface IGameDisplay {
 	
-	IPromptFactory myPromptFactory = new PromptFactory();
-		
-	IControl myControl = new StandardControl();
-		
-	IHUD myHUD = new StandardHUD();
-	
 	void read(List<Node> listToDisplay);
 	
 	void display();
