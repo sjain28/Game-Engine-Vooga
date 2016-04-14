@@ -28,6 +28,11 @@ public class VariableEffect extends Effect {
 		myVariable = variable;
 	}
 
+	public VariableEffect (String method, Double parameter, VoogaEvent event){
+		super(event);
+		myMethod = method;
+		myParameter = parameter;
+	}
 	@Override
 	public void execute () {
 		VoogaData variableData = getEvent().getManager().getGlobalVar(myVariable);
