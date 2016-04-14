@@ -1,5 +1,7 @@
 package authoring.properties;
 
+import java.util.HashMap;
+
 /**
  * Tab to represent sprite properties/variables.
  * 
@@ -8,6 +10,7 @@ package authoring.properties;
  */
 
 import authoring.interfaces.Elementable;
+import authoring.model.GameObject;
 import tools.interfaces.VoogaData;
 
 public class SpritePropertiesTab extends AbstractPropertiesTab {
@@ -33,7 +36,7 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	public void getPropertiesMap(Object o) {
 		myElementable = (Elementable) o;
 		propertiesMap = myElementable.getVoogaProperties();
-		originalPropertiesMap = myElementable.getVoogaProperties();
+		originalPropertiesMap = new HashMap<String,VoogaData>(myElementable.getVoogaProperties());
 		displayProperties();
 	}
 
@@ -53,6 +56,16 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	public void removeProperty(String s) {
 		myElementable.removeProperty(s);
 		displayProperties();
+	}
+	
+	@Override
+	public void updateProperties(){
+	    System.out.println("Updating properties");
+	    GameObject object = (GameObject) myElementable; 
+	    for (String property:propertiesMap.keySet()){
+	        System.out.println(property+" "+propertiesMap.get(property));
+	    }
+	    object.setProperties(propertiesMap);
 	}
 
 }
