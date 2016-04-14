@@ -10,6 +10,8 @@ import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
+import physics.IPhysicsEngine;
+import physics.StandardPhysics;
 import tools.interfaces.VoogaData;
 
 /**
@@ -24,6 +26,7 @@ public class ObjectManager {
 	private SpriteFactory mySpriteFactory;
 	private Map<String, VoogaData> myGlobalVariables;
 	private List<KeyEvent> keyEvents;
+	private IPhysicsEngine myPhysics = new StandardPhysics();
 
 	/**
 	 * Takes in a map of Id's to sprite's and a sprite factory
@@ -32,12 +35,10 @@ public class ObjectManager {
 	 * @param factory
 	 */
 	public ObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
-		//System.out.println("The list of elementables here is " + elements);
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
 			myElements.put(el.getID(), el);
 		}
-		//System.out.println("The list of myElementables here is " + myElements);
 
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		keyEvents = new ArrayList<KeyEvent>();
@@ -53,7 +54,20 @@ public class ObjectManager {
 	public void update() {
 		for(String s: myElements.keySet()){
 			Elementable e = myElements.get(s);
+			applyGravity(e);
 			e.update();
+		}
+	}
+	
+	/**
+	 * Using gravity field of each sprite, updates sprites' velocity
+	 * 
+	 */
+	private void applyGravity(Elementable e) {
+		if (e instanceof Sprite) {
+		    double gravityMagnitude = (double) ((Sprite) e).getProperty("gravity").getValue();
+		    
+			getPhysics().gravity((Sprite) e, gravityMagnitude);
 		}
 	}
 
@@ -63,7 +77,6 @@ public class ObjectManager {
 	 * @return
 	 */
 	public Sprite getSprite(String id){
-		//System.out.println(myElements.get(id));
 		return (Sprite) myElements.get(id);
 	}
 
@@ -140,8 +153,6 @@ public class ObjectManager {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 
-		System.out.println("my displayable nodes from get all displayable nodes: "+displayablenodes.get(0));
-
 		return displayablenodes;
 
 	}
@@ -183,7 +194,6 @@ public class ObjectManager {
 	 * @param myKeyEvents
 	 */
 	public void setKeyEvents(List<KeyEvent> myKeyEvents){
-		//System.out.println("setting key events from object manager: "+myKeyEvents.size());
 		keyEvents = myKeyEvents;
 	}
 
@@ -193,7 +203,13 @@ public class ObjectManager {
 	 * @return
 	 */
 	public List<KeyEvent> getKeyEvents(){
-		//System.out.println("length of key events from object manager: "+keyEvents.size());
 		return keyEvents;
+	}
+
+	/**
+	 * @return the myPhysics
+	 */
+	public IPhysicsEngine getPhysics() {
+		return myPhysics;
 	}
 }

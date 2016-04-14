@@ -16,20 +16,17 @@ import tools.Velocity;
 import tools.VoogaBoolean;
 import tools.interfaces.*;
 
-<<<<<<< HEAD
 
 public class Sprite implements Moveable, Effectable, Elementable {
 
-    public static final String MASS = "mass";
-=======
-public class Sprite implements Moveable, Effectable, Elementable{
-	
-	protected static final String MASS = "mass";
-	protected static final String ALIVE = "alive";
->>>>>>> master
+<<<<<<< HEAD
+    protected static final String MASS = "mass";
+    protected static final String ALIVE = "alive";
+    protected static final String GRAVITY = "gravity";
     private Velocity myVelocity;
     private Position myLoc;
     private String myID;
+    private String myName;
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
     private String myArchetype;
@@ -42,19 +39,23 @@ public class Sprite implements Moveable, Effectable, Elementable{
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
         myImagePath = imagePath;
-        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        Image image = null;
+        if (myImagePath.contains("file:")) {
+            image = new Image(myImagePath);
+        }
+        else {
+            image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        }
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
+
         myProperties.put(MASS, mass);
-<<<<<<< HEAD
+        myProperties.put(ALIVE, new VoogaBoolean(true));
+        myProperties.put(GRAVITY, new VoogaNumber(0.0));
+
         myLoc = new Position(0, 0);
         myVelocity = new Velocity(0, 0);
-=======
-        myProperties.put(ALIVE, new VoogaBoolean(true));
-        myLoc = new Position(0,0);
-        myVelocity = new Velocity(0,0);
->>>>>>> master
     }
 
     /**
@@ -68,13 +69,18 @@ public class Sprite implements Moveable, Effectable, Elementable{
 
     public void update () {
         // Still needed: Apply physics to myVelocity
-        myLoc.addVector(myVelocity);
+        myLoc.addX(myVelocity.getX());
+        myLoc.addY(-myVelocity.getY());
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
     }
 
+    public void setName (String name) {
+        myName = name;
+    }
+
     @Override
-    public Vector getVelocity () {
+    public Velocity getVelocity () {
         return myVelocity;
     }
 
@@ -83,7 +89,7 @@ public class Sprite implements Moveable, Effectable, Elementable{
         myVelocity = velocity;
     }
 
-    public Vector getPosition () {
+    public Position getPosition () {
         return myLoc;
     }
 
@@ -100,14 +106,14 @@ public class Sprite implements Moveable, Effectable, Elementable{
     }
 
     public void setProperties (Map<String, VoogaData> properties) {
-        myProperties = properties;
+        myProperties = new HashMap<String,VoogaData>(properties);
     }
 
     public HashMap<String, VoogaData> getPropertiesMap () {
         return (HashMap<String, VoogaData>) myProperties;
     }
 
-    public Object getID () {
+    public String getID () {
         return myID;
     }
 
@@ -140,32 +146,165 @@ public class Sprite implements Moveable, Effectable, Elementable{
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
-        // TODO Auto-generated method stub
-        return null;
+        return myProperties;
     }
 
     @Override
     public void removeProperty (String name) {
-        // TODO Auto-generated method stub
-
+        myProperties.remove(name);
     }
 
     @Override
     public Node getNodeObject () {
-        // TODO Auto-generated method stub
+        if (myImage == null) {
+            myImage = new ImageView(getImagePath());
+        }
         return myImage;
     }
 
     @Override
     public String getName () {
-        // TODO Auto-generated method stub
-        return null;
+        return myName;
     }
+=======
+	protected static final String MASS = "mass";
+	protected static final String ALIVE = "alive";
+	protected static final String GRAVITY = "gravity";
+	private Velocity myVelocity;
+	private Position myLoc;
+	private String myID;
+	private String myName;
+	private Map<String, VoogaData> myProperties;
+	private String myImagePath;
+	private String myArchetype;
+	private transient ImageView myImage;
 
-    // @Override
-    // public void setVelocity(Vector v) {
-    // // TODO Auto-generated method stub
-    //
-    // }
+	public Sprite (String imagePath, String archetype, Map<String, VoogaData> properties, VoogaNumber mass) {
+		myID = UUID.randomUUID().toString();
+		myArchetype = archetype;
+		myImagePath = imagePath;
+		Image image = null;
+		if(myImagePath.contains("file:")) {
+			image = new Image(myImagePath);
+		} else {
+			image = new Image(this.getClass().getResourceAsStream(myImagePath));
+		}
+		myImage = new ImageView(image);
+		myProperties = new HashMap<String, VoogaData>();
+		myProperties = properties;
+		myProperties.put(MASS, mass);
+		myProperties.put(GRAVITY, new VoogaNumber(0.0));
+		myProperties.put(ALIVE, new VoogaBoolean(true));
+		myLoc = new Position(0, 0);
+		myVelocity = new Velocity(0, 0);
+	}
+
+	/**
+	 * Initializes JavaFX objects that can't be serialized
+	 * Need to call this before using the Sprite in the game engine!
+	 */
+	public void init () {
+		Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+		myImage = new ImageView(image);
+	}
+
+	public void update () {
+		// Still needed: Apply physics to myVelocity
+		myLoc.addX(myVelocity.getX());
+		myLoc.addY(-myVelocity.getY());
+		myImage.setLayoutX(myLoc.getX());
+		myImage.setLayoutY(myLoc.getY());
+	}
+	public void setName(String name){
+		myName = name;
+	}
+	@Override
+	public Velocity getVelocity () {
+		return myVelocity;
+	}
+
+	@Override
+	public void setVelocity (Velocity velocity) {
+		myVelocity = velocity;
+	}
+
+	public Position getPosition () {
+		return myLoc;
+	}
+
+	public void setPosition (Position position) {
+		myLoc = position;
+	}
+
+	public void addProperty (String property, VoogaData data) {
+		myProperties.put(property, data);
+	}
+
+	public VoogaData getProperty (String s) {
+		return myProperties.get(s);
+	}
+
+	public void setProperties (Map<String, VoogaData> properties) {
+		myProperties = properties;
+	}
+
+	public HashMap<String, VoogaData> getPropertiesMap () {
+		return (HashMap<String, VoogaData>) myProperties;
+	}
+
+	public String getID () {
+		return myID;
+	}
+
+	public ImageView getImage () {
+		return myImage;
+	}
+
+	public void setArchetype (String archetype) {
+		myArchetype = archetype;
+	}
+
+	public String getArchetype () {
+		return myArchetype;
+	}
+
+	public void setImagePath (String path) {
+		myImagePath = path;
+		Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+		myImage = new ImageView(image);
+	}
+
+	public String getImagePath () {
+		return myImagePath;
+	}
+
+	@Override
+	public Map<String, VoogaData> getParameterMap () {
+		return myProperties;
+	}
+
+	@Override
+	public Map<String, VoogaData> getVoogaProperties () {
+		return myProperties;
+	}
+
+	@Override
+	public void removeProperty (String name) {
+		myProperties.remove(name);
+	}
+
+	@Override
+	public Node getNodeObject () {
+		if(myImage == null){
+			myImage = new ImageView(getImagePath());
+		}
+		return myImage;
+	}
+
+	@Override
+	public String getName () {
+		return myName;
+	}
+>>>>>>> master
 
 }
