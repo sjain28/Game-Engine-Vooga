@@ -59,8 +59,7 @@ public class GameDisplayTester extends Application {
 		nodes.add(r3);
 
 	}
-	
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
