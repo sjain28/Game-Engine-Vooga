@@ -1,6 +1,6 @@
 package auxiliary;
 
-public class VoogaException extends RuntimeException {
+public class VoogaException extends Exception {
 
 	/**
 	 * 
