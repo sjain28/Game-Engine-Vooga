@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 
@@ -93,7 +94,7 @@ public class StandardDisplay implements IGameDisplay {
 //                BackgroundSize.DEFAULT)));
 		
 		myGameScreen = new Pane();
-		myGameScreen.setPrefSize(400, 400);
+		myGameScreen.setPrefSize(280, 370);
 //		myGameScreen.setLayoutX(400);
 //		myGameScreen.setLayoutY(200);
 		myScene = new VoogaScene(myPane, PANE_WIDTH, PANE_HEIGHT, CSS_PATH);
@@ -156,14 +157,20 @@ public class StandardDisplay implements IGameDisplay {
 	private void createPane() {
 		VBox HUD = myHUD.createHUD();
 		Parent control = myControl.createControl();
-		myGameScreen.setPrefSize(350, 300);
+
 		getPane().getChildren().addAll(myGameScreen, HUD, control);
-		getPane().setTopAnchor(myGameScreen, 200.0);
+		getPane().setTopAnchor(myGameScreen, 190.0);
 		getPane().setLeftAnchor(myGameScreen, 380.0);
 		getPane().setTopAnchor(HUD, 0.0);
 		getPane().setRightAnchor(HUD, 0.0);
 		getPane().setBottomAnchor(control, 0.0);
 		getPane().setRightAnchor(control, 350.0);
+		
+	    Rectangle clip = new Rectangle(435, 345);
+	    clip.setLayoutX(0);
+	    clip.setLayoutY(0);
+	    myGameScreen.setClip(clip);
+		
 //		anchor.setTopAnchor(r2, 0.0);
 //		anchor.setRightAnchor(r2, 0.0);
 		
@@ -202,6 +209,7 @@ public class StandardDisplay implements IGameDisplay {
 		getGameScreen().getChildren().clear();
 		getListToDisplay().forEach(n -> {
 			getGameScreen().getChildren().add(n);
+//			getGameScreen().setClip(n);
 //			n.setLayoutX(n.getLayoutX() + 400);
 //			n.setLayoutY(n.getLayoutY() + 200);
 		});
