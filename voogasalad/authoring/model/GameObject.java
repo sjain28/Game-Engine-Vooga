@@ -34,7 +34,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     }
 
     // TODO: Send back immutable sprite
-    Sprite getSprite () {
+    public Sprite getSprite () {
         return mySprite;
     }
 
