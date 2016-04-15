@@ -94,7 +94,7 @@ public class StandardDisplay implements IGameDisplay {
 //                BackgroundSize.DEFAULT)));
 		
 		myGameScreen = new Pane();
-		myGameScreen.setPrefSize(280, 370);
+		//myGameScreen.setPrefSize(280, 370);
 //		myGameScreen.setLayoutX(400);
 //		myGameScreen.setLayoutY(200);
 		myScene = new VoogaScene(myPane, PANE_WIDTH, PANE_HEIGHT, CSS_PATH);
