@@ -3,7 +3,6 @@ package authoring;
 import java.util.ArrayList;
 import java.util.UUID;
 import com.sun.glass.events.MouseEvent;
-
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
@@ -24,6 +23,7 @@ import javafx.scene.input.InputEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 
+
 /**
  * The UIManager is responsible for assembling view components, such as the
  * menubar, toolbar, and grid of windows
@@ -32,35 +32,34 @@ import javafx.scene.layout.VBox;
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
 public class UIManager extends VBox {
-	private ArrayList<CompleteAuthoringModelable> elementManagers;
-	private UIGrid grid;
-/**
- * Initializes the UI Manager
- * @param model Interface to mediate interactions with backend
- */
-	public UIManager(CompleteAuthoringModelable model) {
-		elementManagers = new ArrayList<CompleteAuthoringModelable>();
-		elementManagers.add(model);
-		initializeComponents();
-	}
-/**
- * Initializes all the pieces of the authoring environment
- */
-	private void initializeComponents() {
-		this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
-			try {
-				new MenuPanelHandlingMirror(e, elementManagers.get(0), newScene);
-			} catch (VoogaException ee) {
-				new VoogaAlert(ee.getMessage());
-			}
-		}), new ToolPanel(e -> {
-				new ToolPanelHandlingMirror(e, elementManagers.get(0));
-		}), grid = new UIGrid(elementManagers.get(0)));
-	}
+    private ArrayList<CompleteAuthoringModelable> elementManagers;
+    private UIGrid grid;
 
-	EventHandler<InputEvent> newScene = e -> {
-			elementManagers.add(new ElementManager());
-			grid.addScene(elementManagers.get(1));
-	};
+    /**
+     * Initializes the UI Manager
+     * 
+     * @param model Interface to mediate interactions with backend
+     */
+    public UIManager (CompleteAuthoringModelable model) {
+        elementManagers = new ArrayList<CompleteAuthoringModelable>();
+        elementManagers.add(model);
+        initializeComponents();
+    }
+
+    /**
+     * Initializes all the pieces of the authoring environment
+     */
+    private void initializeComponents () {
+        this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
+            new MenuPanelHandlingMirror(e, elementManagers.get(0), newScene);
+        }), new ToolPanel(e -> {
+            new ToolPanelHandlingMirror(e, elementManagers.get(0));
+        }), grid = new UIGrid(elementManagers.get(0)));
+    }
+
+    EventHandler<InputEvent> newScene = e -> {
+        elementManagers.add(new ElementManager());
+        grid.addScene(elementManagers.get(1));
+    };
 
 }
