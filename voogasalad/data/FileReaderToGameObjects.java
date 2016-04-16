@@ -1,18 +1,21 @@
 package data;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
+import auxiliary.VoogaAlert;
+import auxiliary.VoogaException;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import tools.interfaces.VoogaData;
 
 
 public class FileReaderToGameObjects {
-	
+
     private DataContainerOfLists data;
-    
+
     private List<String> objectNames;
 
     public FileReaderToGameObjects (String fileName) {
@@ -24,12 +27,15 @@ public class FileReaderToGameObjects {
         objectNames = new ArrayList<String>();
         objectNames.add("");
         System.out.println("The  file checked here is" + fileName);
-        try{
-        data = (DataContainerOfLists) DeSerializer.deserialize(1, fileName).get(0);
+        try {
+            data = (DataContainerOfLists) DeSerializer.deserialize(1, fileName).get(0);
         }
-        catch(RuntimeException e){
-        	System.out.println("error came from the filereadertogameobjects");
-        	e.printStackTrace();
+        catch (RuntimeException e) {
+            System.out.println("error came from the filereadertogameobjects");
+            e.printStackTrace();
+        }
+        catch (VoogaException e) {
+            new VoogaAlert(e.getMessage());
         }
         System.out.println("What is the data here" + data);
         // DataContainerOfLists data2 = (DataContainerOfLists) UnSerializer.deserialize(2,
@@ -51,7 +57,7 @@ public class FileReaderToGameObjects {
     public Map<String, VoogaData> createVariableMap () {
         return data.getVariableMap();
     }
-    
+
     public SpriteFactory createSpriteFactory () {
         return data.getSpriteFactory();
     }
