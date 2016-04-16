@@ -1,6 +1,7 @@
 package authoring.gui.menubar;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import auxiliary.VoogaAlert;
 import auxiliary.VoogaException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,13 +34,19 @@ public class MenuPanelHandlingMirror {
         this.e = e;
         myManager = manager;
         myEvent = newScene;
-        handleEvent();
+        try {
+            handleEvent();
+        }
+        catch (VoogaException e1) {
+            new VoogaAlert(e1.getMessage());
+        }
     }
 
     /**
      * Handles events from the menu panel.
+     * @throws VoogaException 
      */
-    private void handleEvent () {
+    private void handleEvent () throws VoogaException {
         MenuItem menuItem = (MenuItem) e.getSource();
         MenuItemHandler menuItemHandler;
         Class<?> clazz;

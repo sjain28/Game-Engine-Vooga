@@ -38,7 +38,10 @@ public class NumberTextField extends TextField {
      * @return true if character is a digit or period
      */
     private boolean validate (String text) {
-        return text.matches("[0-9]*");
+        return text.matches("[-0-9.]*");
     }
+
+    
+    
 
 }
