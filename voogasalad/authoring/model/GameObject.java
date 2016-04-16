@@ -1,7 +1,15 @@
 package authoring.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
@@ -13,12 +21,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import tools.Vector;
 import tools.Velocity;
-import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
 public class GameObject extends ImageView implements Moveable, Elementable {
 
+	private ScriptEngine engine;
     private Sprite mySprite;
     private String name;
 
@@ -31,6 +39,11 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         this.setTranslateY(mySprite.getPosition().getY());
         this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
         this.setOnDragDetected(e -> onDrag(e));
+        // setup Groovy and make it aware of Java objects
+        // make a separate engine each time to avoid accumulating values
+        engine = new ScriptEngineManager().getEngineByName("groovy");
+        engine.put("sprite", mySprite);
+        mySprite.passEngine(engine);
     }
 
     // TODO: Send back immutable sprite
@@ -74,6 +87,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     @Override
     public void addProperty (String name, VoogaData data) {
         mySprite.addProperty(name, data);
+        
     }
 
     @Override
