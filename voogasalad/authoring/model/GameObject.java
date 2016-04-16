@@ -34,7 +34,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     }
 
     // TODO: Send back immutable sprite
-    Sprite getSprite () {
+    public Sprite getSprite () {
         return mySprite;
     }
 
@@ -60,13 +60,14 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
-        Map<String,VoogaData> propertiesMap = new HashMap<String,VoogaData>();
+        Map<String, VoogaData> propertiesMap = new HashMap<String, VoogaData>();
         propertiesMap.putAll(mySprite.getParameterMap());
-        propertiesMap.put("width", new VoogaNumber(this.getFitWidth()));
-        propertiesMap.put("height", new VoogaNumber(this.getFitHeight()));
-        propertiesMap.put("positionX", new VoogaNumber(mySprite.getPosition().getX()));
-        propertiesMap.put("positionY", new VoogaNumber(mySprite.getPosition().getX()));
         
+//        propertiesMap.put("width", new VoogaNumber(this.getFitWidth()));
+//        propertiesMap.put("height", new VoogaNumber(this.getFitHeight()));
+//        propertiesMap.put("positionX", new VoogaNumber(mySprite.getPosition().getX()));
+//        propertiesMap.put("positionY", new VoogaNumber(mySprite.getPosition().getX()));
+
         return propertiesMap;
     }
 
@@ -91,13 +92,17 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     @Override
     public void update () {
-        
+
     }
 
-	@Override
-	public String getID() {
-		// TODO Auto-generated method stub
-		return this.mySprite.getID();
-	}
+    @Override
+    public String getID () {
+        // TODO Auto-generated method stub
+        return this.mySprite.getID();
+    }
+    
+    public void setProperties (Map<String,VoogaData> map){
+        mySprite.setProperties(map);
+    }
 
 }

@@ -24,60 +24,6 @@
           <frameTime>0.0</frameTime>
         </myPhysicsEngine>
       </events.VoogaEvent>
-      <events.VoogaEvent>
-        <myCauses>
-          <events.KeyCause>
-            <myEvent reference="../../.."/>
-            <myKeys class="java.util.Arrays$ArrayList">
-              <a class="string-array">
-                <string>UP</string>
-              </a>
-            </myKeys>
-            <myValue>false</myValue>
-          </events.KeyCause>
-        </myCauses>
-        <myEffects>
-          <events.PhysicsEffect>
-            <myEvent reference="../../.."/>
-            <myMethod>jump</myMethod>
-            <myParameter class="double">5.0</myParameter>
-            <needsSprites>false</needsSprites>
-            <mySpriteID>d96f4f9b-d337-4991-9230-23dab74d7c69</mySpriteID>
-            <mySprites/>
-          </events.PhysicsEffect>
-        </myEffects>
-        <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.01639344262295082</frameTime>
-        </myPhysicsEngine>
-      </events.VoogaEvent>
-      <events.VoogaEvent>
-        <myCauses>
-          <events.KeyCause>
-            <myEvent reference="../../.."/>
-            <myKeys class="java.util.Arrays$ArrayList">
-              <a class="string-array">
-                <string>UP</string>
-              </a>
-            </myKeys>
-            <myValue>false</myValue>
-          </events.KeyCause>
-        </myCauses>
-        <myEffects>
-          <events.PhysicsEffect>
-            <myEvent reference="../../.."/>
-            <myMethod>jump</myMethod>
-            <myParameter class="double">5.0</myParameter>
-            <needsSprites>false</needsSprites>
-            <mySpriteID>2ec98a66-3b3c-4885-8675-dec5732e1b9d</mySpriteID>
-            <mySprites/>
-          </events.PhysicsEffect>
-        </myEffects>
-        <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.01639344262295082</frameTime>
-        </myPhysicsEngine>
-      </events.VoogaEvent>
     </eventList>
     <elementableList>
       <gameengine.Sprite>
@@ -90,8 +36,8 @@
         <myLoc>
           <xPrev>496.0</xPrev>
           <yPrev>220.0</yPrev>
-          <x>380.0</x>
-          <y>290.0</y>
+          <x>17.0</x>
+          <y>30.0</y>
         </myLoc>
         <myID>af20b36c-b410-4f43-9ade-8abf91c97aaa</myID>
         <myProperties>
@@ -127,8 +73,8 @@
         <myLoc>
           <xPrev>248.0</xPrev>
           <yPrev>330.0</yPrev>
-          <x>0.0</x>
-          <y>300</y>
+          <x>245.0</x>
+          <y>421.0</y>
         </myLoc>
         <myID>6dda24c7-c12e-400b-b66a-c42280980a92</myID>
         <myProperties>

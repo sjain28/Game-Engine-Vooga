@@ -18,7 +18,7 @@ public class CauseAndEffectFactory {
  * @param inputString
  */
     public void create (VoogaEvent event, String inputString) throws VoogaException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException  {
-       
+       System.out.println("Input to Factory: " + inputString);
     	String[] parameters = inputString.split("\\s+");
         Class<?> c = null;
         

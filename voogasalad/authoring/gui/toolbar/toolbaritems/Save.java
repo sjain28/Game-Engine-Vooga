@@ -3,6 +3,7 @@ package authoring.gui.toolbar.toolbaritems;
 import authoring.gui.toolbar.ToolbarItemHandler;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import auxiliary.VoogaException;
 
 
 public class Save extends ToolbarItemHandler {
@@ -16,7 +17,13 @@ public class Save extends ToolbarItemHandler {
     @Override
     public void handle () {
         System.out.println("Saving");
-        manager.onSave();
+        try {
+            manager.onSave();
+        }
+        catch (VoogaException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }

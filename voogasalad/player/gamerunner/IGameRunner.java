@@ -1,7 +1,6 @@
 package player.gamerunner;
 
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Main control interface for player runner

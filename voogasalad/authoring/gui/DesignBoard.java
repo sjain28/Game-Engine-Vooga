@@ -8,13 +8,18 @@ import java.util.Observable;
 import java.util.Observer;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
+import authoring.VoogaScene;
+import authoring.gui.menubar.builders.ArchetypeBuilder;
 import authoring.interfaces.Elementable;
 import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
 import authoring.resourceutility.VoogaFileType;
+import auxiliary.VoogaAlert;
+import auxiliary.VoogaException;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
@@ -22,11 +27,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 
 /**
  * This class handles the display of all objects on the Authoring Environment GUI.
@@ -59,6 +66,7 @@ public class DesignBoard extends Tab implements Observer{
         this.setText(DESIGN_BOARD);
         contentPane = new StackPane();
         contentPane.setMinSize(WIDTH, HEIGHT);
+        contentPane.setOnMouseClicked(e -> { if(e.getButton() == MouseButton.SECONDARY) { new ResizePrompt(e); }});
         elementManager = elem;
         elementManager.addObserver(this);
         container = new ScrollPane();
@@ -86,7 +94,14 @@ public class DesignBoard extends Tab implements Observer{
                     moveElement(node.getPath(), event);
                 }
                 else {
-                    addElement(node, event);
+                	Stage popup = new Stage();
+                    popup.setTitle("New Archetype");
+                    ArchetypeBuilder initializer = new ArchetypeBuilder(elementManager, popup);
+                    Scene scene = new VoogaScene(initializer);
+                    popup.setScene(scene);
+                    initializer.setImagePath(node.getPath());
+                    popup.showAndWait();
+                    addElement(node, event, initializer.getInfo());
                 }
                 success = true;
             }
@@ -95,6 +110,8 @@ public class DesignBoard extends Tab implements Observer{
         	GameObject object = (GameObject) elementManager.getElement(db.getString());
         	object.setTranslateX(event.getX() - x_offset);
         	object.setTranslateY(event.getY() - y_offset);
+        	object.getSprite().setX(event.getX());
+        	object.getSprite().setY(event.getY());
         }
 
         event.setDropCompleted(success);
@@ -121,33 +138,26 @@ public class DesignBoard extends Tab implements Observer{
         event.consume();
     }
 
-    private void addElement (VoogaFile file, DragEvent event) {
+    private void addElement (VoogaFile file, DragEvent event, String archetype) {
         node = null;
         String elementPath = file.getPath();
         if (elementPath != null) {
-            if (ResourceDecipherer.isImage(elementPath)) {
-                // node = new
-                // GameObject(elementManager.getSpriteFactory().createSprite(""));
-                node = new ImageView(new Image(new File(elementPath).toURI().toString()));
-                node.setId(elementPath);
-                node.setTranslateX(event.getX() - x_offset);
-                node.setTranslateY(event.getY() - y_offset);
-                node.setOnDragDetected(e -> {
-                    if (node != null) {
-                        Dragboard db = node.startDragAndDrop(TransferMode.MOVE);
-                        ClipboardContent cc = new ClipboardContent();
-                        cc.put(VoogaFileFormat.getInstance(), file);
-                        db.setContent(cc);
-                    }
-                    e.consume();
-                });
+            try {
+                if (ResourceDecipherer.isImage(elementPath)) {
+                    node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
+                    node.setTranslateX(event.getX() - x_offset);
+                    node.setTranslateY(event.getY() - y_offset);
+                }
+                else if (ResourceDecipherer.isAudio(elementPath)) {
+                    // node = new
+                    // GameObject(elementManager.getSpriteFactory().createSprite(""));
+                    node =
+                            new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
+                                    .toString())));
+                }
             }
-            else if (ResourceDecipherer.isAudio(elementPath)) {
-                // node = new
-                // GameObject(elementManager.getSpriteFactory().createSprite(""));
-                node =
-                        new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
-                                .toString())));
+            catch (VoogaException e) {
+                new VoogaAlert(e.getMessage());
             }
             addElement(node, elementPath);
         }
@@ -159,7 +169,6 @@ public class DesignBoard extends Tab implements Observer{
     private void addElement (Node node, String id) {
         elementManager.addGameElements(node);
         elementManager.addElementId(id);
-        contentPane.getChildren().add(node);
     }
 
     private void moveElement (String id, DragEvent e) {

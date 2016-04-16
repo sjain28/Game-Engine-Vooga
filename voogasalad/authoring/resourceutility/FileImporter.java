@@ -24,8 +24,9 @@ public class FileImporter {
 	 * upon choosing a file.
 	 * 
 	 * @param ui
+	 * @throws VoogaException 
 	 */
-	public FileImporter(ResourceTreeView rtv) {
+	public FileImporter(ResourceTreeView rtv) throws VoogaException {
 		this.rtv = rtv;
 
 		FileChooser chooser = new FileChooser();
