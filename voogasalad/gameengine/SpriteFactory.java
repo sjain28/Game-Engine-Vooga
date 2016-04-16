@@ -7,9 +7,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import data.Serializer;
-import data.DeSerializer;
+import data.Deserializer;
 import auxiliary.VoogaException;
-import data.DeSerializer;
+import data.Deserializer;
 import data.Serializer;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -122,9 +122,16 @@ public class SpriteFactory {
 	 * @throws Exception 
 	 */
 	public void deSerializeArchetype(String fileLocation) throws Exception{
-		DeSerializer deserializer = new DeSerializer();
+		Deserializer deserializer = new Deserializer();
 		Sprite newArchetype = (Sprite) deserializer.deserialize(1,fileLocation);
 		addArchetype(newArchetype.getArchetype(), newArchetype);
 		System.out.println(newArchetype);
 	}
+	
+//	public void deSerializeArchetype(){
+//		
+//	}
+//	
+	
+	
 }

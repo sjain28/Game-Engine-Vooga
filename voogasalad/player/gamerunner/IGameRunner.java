@@ -22,6 +22,12 @@ public interface IGameRunner {
 	IGameRunner getSelf();
 
 	void playLevel(String teststring);
+	
+	void replayLevel();
+	
+	void advanceToNextLevel();
+	
+	void replayGame();
 
 	// Methods below only called by LevelDataManager
 

@@ -12,7 +12,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import tools.interfaces.VoogaData;
 
-public final class DeSerializer {
+/* DeSerializer is a general tool that can be utilized by any class. It is a tool that can be used to generate 
+ * a list of objects from an xml file. For now, it has a single method: deserialize.
+ */
+
+public final class Deserializer {
     private final static String COMMAND_PATH = "data";
 
     public static List<Object> deserialize (int objectNum, String fileName) {

@@ -13,11 +13,14 @@ public class CollisionCause extends Cause{
 	private String archA;
 	private String archB;
 	
+	
+	
 	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Given 2 archetype names
 		super(voogaEvent);
 		archA = archetypeA;
 		archB = archetypeB;
 	}
+	
 	
 	public void init(){
 	        groupA = new ArrayList<>();

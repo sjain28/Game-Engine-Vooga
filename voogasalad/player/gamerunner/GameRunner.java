@@ -303,4 +303,22 @@ public class GameRunner implements IGameRunner{
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void replayLevel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void advanceToNextLevel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void replayGame() {
+		// TODO Auto-generated method stub
+		
+	}
 }
