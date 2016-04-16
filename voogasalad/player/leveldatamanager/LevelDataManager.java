@@ -18,7 +18,7 @@ public class LevelDataManager implements ILevelDataManager {
 
 	private static final int SCREENSIZE_DIM1 = 3;
 	private static final int SCREENSIZE_DIM2 = 35;
-
+	private int nextLevel = -1;
 	private IGameRunner myGameRunner;
 	private DisplayScroller displayScroller;
 	private ObjectManager myObjectManager;
@@ -173,4 +173,12 @@ public class LevelDataManager implements ILevelDataManager {
 //		myEventManager.
 //	}
 
+	/**
+	 * @return the next level to be played.
+	 */
+	public int getNextLevel() {
+		return nextLevel;
+	}
+
+	
 }
