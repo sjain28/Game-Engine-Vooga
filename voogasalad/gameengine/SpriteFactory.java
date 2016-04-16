@@ -13,11 +13,10 @@ import resources.VoogaBundles;
 import data.DeSerializer;
 import auxiliary.VoogaException;
 import tools.VoogaNumber;
-import tools.interfaces.VoogaData;
 
 
 /**
- * Factor for creating Sprites from pre-formed Archetypes,
+ * Factory for creating Sprites from pre-formed Archetypes,
  * getting pre-formed Archetypes, and setting Archetypes.
  * Used by both front end and backend.
  * 
@@ -91,6 +90,7 @@ public class SpriteFactory {
      * 
      * @return Set<String>
      */
+    
     public Set<String> getAllArchetypeNames () {
         return myArchetypes.keySet();
     }

@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 import authoring.interfaces.Elementable;
-import authoring.model.DumbVoogaText;
 import authoring.model.ElementManager;
 import authoring.model.VoogaButton;
 import events.Cause;
@@ -51,11 +50,7 @@ public class DataWritingTest {
 			sprite.setPosition(new Position(i*7,i*2));
 			elements.add(sprite);
 		}
-		DumbVoogaText vt = new DumbVoogaText();
-		vt.setText("DASFASFAF");
-		VoogaButton vb = new VoogaButton();
-		elements.add(vt);
-		elements.add(vb);
+		
 		return elements;
 	}
 
