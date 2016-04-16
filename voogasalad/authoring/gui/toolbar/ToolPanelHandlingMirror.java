@@ -3,6 +3,7 @@ package authoring.gui.toolbar;
 import java.lang.reflect.Method;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import auxiliary.VoogaAlert;
 import auxiliary.VoogaException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -21,14 +22,21 @@ public class ToolPanelHandlingMirror {
     public ToolPanelHandlingMirror (ActionEvent toolbarEvent, CompleteAuthoringModelable manager) {
         this.e = toolbarEvent;
         this.myManager = manager;
-        handleEvent();
+        try {
+            handleEvent();
+        }
+        catch (VoogaException e1) {
+            // TODO Auto-generated catch block
+            new VoogaAlert(e1.getMessage());
+        }
         System.out.println(toolbarEvent.getSource());
     }
 
     /**
      * Handles events from the menu panel.
+     * @throws VoogaException 
      */
-    private void handleEvent () {
+    private void handleEvent () throws VoogaException {
         Button toolbarItem = (Button) e.getSource();
         ToolbarItemHandler toolbarItemHandler;
         Class<?> clazz;

@@ -16,6 +16,8 @@ import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
 import authoring.resourceutility.VoogaFileType;
+import auxiliary.VoogaAlert;
+import auxiliary.VoogaException;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -140,17 +142,22 @@ public class DesignBoard extends Tab implements Observer{
         node = null;
         String elementPath = file.getPath();
         if (elementPath != null) {
-            if (ResourceDecipherer.isImage(elementPath)) {
-                node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
-                node.setTranslateX(event.getX() - x_offset);
-                node.setTranslateY(event.getY() - y_offset);
+            try {
+                if (ResourceDecipherer.isImage(elementPath)) {
+                    node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
+                    node.setTranslateX(event.getX() - x_offset);
+                    node.setTranslateY(event.getY() - y_offset);
+                }
+                else if (ResourceDecipherer.isAudio(elementPath)) {
+                    // node = new
+                    // GameObject(elementManager.getSpriteFactory().createSprite(""));
+                    node =
+                            new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
+                                    .toString())));
+                }
             }
-            else if (ResourceDecipherer.isAudio(elementPath)) {
-                // node = new
-                // GameObject(elementManager.getSpriteFactory().createSprite(""));
-                node =
-                        new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
-                                .toString())));
+            catch (VoogaException e) {
+                new VoogaAlert(e.getMessage());
             }
             addElement(node, elementPath);
         }
