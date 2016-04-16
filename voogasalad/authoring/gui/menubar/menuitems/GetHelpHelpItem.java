@@ -27,9 +27,10 @@ public class GetHelpHelpItem extends MenuItemHandler {
 	}
 	/**
          * Action to be taken on the selection of this menuItem
+	 * @throws VoogaException 
          */
 	@Override
-	public void handle() {
+	public void handle() throws VoogaException {
 		// TODO Auto-generated method stub
 		if(Desktop.isDesktopSupported()) {
 			try {
