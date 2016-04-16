@@ -30,7 +30,7 @@ public class DisplayScroller {
 
 		myScreenSizeX = x;
 		myScreenSizeY = y;
-		myAdjustFactorX = myScreenSizeX / 2;
+		myAdjustFactorX = myScreenSizeX / 2; // Magic value?
 		//		myAdjustFactorY = myScreenSizeY / 2;
 		myConstantScrollCenter = 0;
 

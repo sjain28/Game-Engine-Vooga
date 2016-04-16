@@ -79,16 +79,16 @@ public class LevelDataManager implements ILevelDataManager {
 		System.out.println("Here is my data object:" + data);
 
 		List<Elementable> spriteObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + spriteObjects);
+//		System.out.println("All the sprites here are" + spriteObjects);
 
 		List<VoogaEvent> eventObjects = data.getEventList();
-		System.out.println("All the events here are" + eventObjects);
+//		System.out.println("All the events here are" + eventObjects);
 
 		SpriteFactory factory = data.getSpriteFactory();
-		System.out.println("The spriteFactory here is" + factory);
+//		System.out.println("The spriteFactory here is" + factory);
 
 		Map<String,VoogaData> variableObjects = data.getVariableMap();
-		System.out.println("All the variables here are" + variableObjects);
+//		System.out.println("All the variables here are" + variableObjects);
 
 		initializeManagers(spriteObjects, eventObjects, variableObjects,factory);
 
