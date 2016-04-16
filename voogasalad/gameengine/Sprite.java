@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Position;
-import tools.Vector;
 import tools.VoogaNumber;
 import tools.Velocity;
 import tools.VoogaBoolean;
@@ -22,6 +21,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String MASS = "mass";
     protected static final String ALIVE = "alive";
     protected static final String GRAVITY = "gravity";
+    private boolean isMainCharacter;
     private Velocity myVelocity;
     private Position myLoc;
     private String myID;
@@ -186,5 +186,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
     public String getName () {
         return myName;
     }
+
+	public boolean isMainCharacter() {
+		return isMainCharacter;
+	}
+
+	public void setMainCharacter(boolean isMainCharacter) {
+		this.isMainCharacter = isMainCharacter;
+	}
 
 }
