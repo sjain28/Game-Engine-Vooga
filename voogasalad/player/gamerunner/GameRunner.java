@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -39,9 +40,11 @@ public class GameRunner implements IGameRunner{
     private static final int SPEEDCONTROL = 10;
     private static final int INIT_SPEED = 61;
     
-	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+    private String gameLocation = "games/";
+	private ILevelDataManager myLevelDataManager; //This has EventManager
 	private IGameDisplay myGameDisplay; //This HAS key events
-	private Queue<String> levelQueue;
+	private List<String> levelList;
+//	private Queue<String> levelQueue;
 	private Timeline myTimeline;
 
 	/**
@@ -53,7 +56,7 @@ public class GameRunner implements IGameRunner{
 	 */
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
 		myGameDisplay = new StandardDisplay(getSelf());
-		levelQueue = createLevels(xmlList);
+		levelList = createLevelList(xmlList);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> step());
@@ -72,21 +75,58 @@ public class GameRunner implements IGameRunner{
 		this(new File(fileString));
 	}
 
+	
+	/**
+	 * Specify a GameName for which the folder will contain the file with the list of levels.
+	 * 
+	 * @param fileString
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	
+//	public GameRunner(String gameFolderString) throws FileNotFoundException, IOException {
+//		String myGameLocation = gameFolderString + "/";
+//		File myFile = new File(gameLocation + myGameLocation + gameFolderString );
+//		levelList = createLevelList(xmlList);
+//		myTimeline = new Timeline();
+//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+//			e -> step());
+//		myTimeline.setCycleCount(Animation.INDEFINITE);
+//		myTimeline.getKeyFrames().add(frame);
+//	}
+	
 	/**
 	 * createLevels takes in a text file and out of that file creates a Queue of levels.
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 */
-	private Queue<String> createLevels(File xmlList) throws FileNotFoundException, IOException{
-		Queue<String> levelQueue = new LinkedList<String>();
+//	private Queue<String> createLevels(File xmlList) throws FileNotFoundException, IOException{
+//		Queue<String> levelQueue = new LinkedList<String>();
+//		try (BufferedReader br = new BufferedReader(new FileReader(xmlList))) {
+//			String line;
+//			while ((line = br.readLine()) != null) {
+//				//TODO: process the line.
+//				levelQueue.add(line);
+//			}
+//		}
+//		return levelQueue;
+//	}
+	
+	/**
+	 * createLevels takes in a text file and out of that file creates a Queue of levels.
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 */
+	private List<String> createLevelList(File xmlList) throws FileNotFoundException, IOException{
+		List <String> levelList = new ArrayList<String>();
 		try (BufferedReader br = new BufferedReader(new FileReader(xmlList))) {
 			String line;
 			while ((line = br.readLine()) != null) {
 				//TODO: process the line.
-				levelQueue.add(line);
+				levelList.add(line);
 			}
 		}
-		return levelQueue;
+		return levelList;
 	}
 	
 	/**
@@ -109,14 +149,14 @@ public class GameRunner implements IGameRunner{
 	private void step() {		
 		//take care of setting and resetting key events
 		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
-		myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
+		myLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
 		myGameDisplay.clearKeyEvents();
 		
 		//update all logic in the backend, updating game objects w/ Causes and Events
-		myCurrentLevelDataManager.update();		 
+		myLevelDataManager.update();		 
 		
 		//send these updated Nodes to the GameDisplay
-		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		myGameDisplay.read(myLevelDataManager.getDisplayableObjects());
 
 		//repopulate the game screen
 		myGameDisplay.populateGameScreen();
@@ -140,12 +180,12 @@ public class GameRunner implements IGameRunner{
 		that is created when the GameController is initialized
 	 */
 	public void playGame(){
-		Iterator<String> iterator = levelQueue.iterator();
+		Iterator<String> iterator = levelList.iterator();
 		while(iterator.hasNext()){
-			// if (!l.isWon)
+			// if (myLevelDataManager.nextLevel > 0)
 			String nextLevel = iterator.next();
-
 			playLevel(nextLevel);
+			// playLevel(level.nextLevel);
 		}
 	}
 
@@ -155,9 +195,9 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName){
-		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
-		myCurrentLevelDataManager.update();		 
-		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		myLevelDataManager = new LevelDataManager(getSelf(), fileName);
+		myLevelDataManager.update();		 
+		myGameDisplay.read(myLevelDataManager.getDisplayableObjects());
 		myGameDisplay.display();
 		run();
 	}
@@ -193,7 +233,7 @@ public class GameRunner implements IGameRunner{
 	 * @return the myCurrentLevelDataManager
 	 */
 	public ILevelDataManager getCurrentLevelDataManager() {
-		return myCurrentLevelDataManager;
+		return myLevelDataManager;
 	}
 
 	/**
@@ -206,8 +246,15 @@ public class GameRunner implements IGameRunner{
 	/**
 	 * @return the levelQueue
 	 */
-	public Queue<String> getLevelQueue() {
-		return levelQueue;
+//	public Queue<String> getLevelQueue() {
+//		return levelQueue;
+//	}
+	
+	/**
+	 * @return the List of levels to be played.
+	 */
+	public List<String> getLevelList() {
+		return levelList;
 	}
 
 	/**
