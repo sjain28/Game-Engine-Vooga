@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import tools.interfaces.VoogaData;
 
 
-public class LevelDataContainer {
+public class DataContainerOfLists {
 
     private List<VoogaEvent> eventList;
     private List<Elementable> elementableList;
@@ -17,10 +17,10 @@ public class LevelDataContainer {
     private SpriteFactory spriteFactory;
     private List<Button> ButtonList; 
     
-    public LevelDataContainer () {
+    public DataContainerOfLists () {
     }
 
-    public LevelDataContainer (List<Elementable> ElementableList,
+    public DataContainerOfLists (List<Elementable> ElementableList,
                                  Map<String, VoogaData> variableMap,
                                  List<VoogaEvent> eventList,SpriteFactory factory) {
         this.eventList = eventList;

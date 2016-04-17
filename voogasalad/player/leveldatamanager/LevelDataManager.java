@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
-import data.LevelDataContainer;
+import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
@@ -19,8 +19,8 @@ public class LevelDataManager implements ILevelDataManager {
 	private static final int SCREENSIZE_DIM2 = 35;
 
 	private DisplayScroller displayScroller;
-	private ObjectManager myObjectManager;
-	private EventManager myEventManager;
+	private OUTDATEDObjectManager myObjectManager;
+	private OUTDATEDEventManager myEventManager;
 	private GlobalVariableManager myGlobalVariableManager;
 	private List<KeyEvent> myKeyEvents;
 	
@@ -55,7 +55,7 @@ public class LevelDataManager implements ILevelDataManager {
 	 * @param levelFileName
 	 */
 	private void readinObjects (String levelFileName) {
-		LevelDataContainer data = new LevelDataContainer();
+		DataContainerOfLists data = new DataContainerOfLists();
 		try{
 			FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
 			data = fileManager.getDataContainer();
@@ -120,9 +120,9 @@ public class LevelDataManager implements ILevelDataManager {
 			List<VoogaEvent> eventObjects,
 			Map<String,VoogaData> variableObjects,
 			SpriteFactory factory) {
-		myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
+		myObjectManager = new OUTDATEDObjectManager(elementObjects, variableObjects, factory);
 		myObjectManager.setKeyEvents(myKeyEvents);
-		myEventManager = new EventManager(myObjectManager, eventObjects);
+		myEventManager = new OUTDATEDEventManager(myObjectManager, eventObjects);
 		myGlobalVariableManager = new GlobalVariableManager(myObjectManager, variableObjects);
 	}
 

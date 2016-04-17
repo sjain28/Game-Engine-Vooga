@@ -22,13 +22,13 @@ public class VoogaTextWritingTest extends Application {
 	
     @Override
     public void start (Stage primaryStage) throws Exception {
-        LevelDataContainer manager = new LevelDataContainer(generateSprites(),
+        DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),
         			generateGlobalVariables(),generateEvents(), new SpriteFactory());
         
 
         Serializer.serialize(manager, "levels/Test.xml");
         Object o = DeSerializer.deserialize(1, "levels/Test.xml").get(0);
-        LevelDataContainer vt2 = (LevelDataContainer) o;
+        DataContainerOfLists vt2 = (DataContainerOfLists) o;
         System.out.println("Unserialized");
         System.out.println(vt2);
     }

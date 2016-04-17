@@ -18,8 +18,11 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
+import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelDataManager;
+import player.leveldatamanager.LevelData;
 import player.leveldatamanager.LevelDataManager;
+import player.leveldatamanager.SpriteManager;
 
 /**
  * GameRunner class that runs the game player
@@ -29,7 +32,7 @@ import player.leveldatamanager.LevelDataManager;
  * Runs the Timeline and manages levels and determines which level should 
  * be played in the game player and displayed in GameDisplay
  * 
- * @author Hunter, Michael, Josh
+ * @author Hunter, Michael, Josh, Krista
  *
  */
 public class GameRunner implements IGameRunner{
@@ -39,7 +42,11 @@ public class GameRunner implements IGameRunner{
     private static final int SPEEDCONTROL = 10;
     private static final int INIT_SPEED = 61;
     
-	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+	//private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+    
+    private LevelData myLevelData;
+    private SpriteManager mySpriteManager;
+    private EventManager myEventManager;
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
 	private Timeline myTimeline;
@@ -63,6 +70,8 @@ public class GameRunner implements IGameRunner{
 
 	/**
 	 * Overloaded constructor with String parameter
+	 * for testing purposes
+	 * TODO: delete when this is no longer needed
 	 * 
 	 * @param fileString
 	 * @throws FileNotFoundException
@@ -109,17 +118,24 @@ public class GameRunner implements IGameRunner{
 	private void step() {		
 		//take care of setting and resetting key events
 		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
-		myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
-		myGameDisplay.clearKeyEvents();
+		//TODO: PASS IN KEY EVENTS AND EVENTS TO 
+		//myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
+				
+		//update all Sprites with physics engine 
+		mySpriteManager.update(myLevelData.getAllSprites());
 		
-		//update all logic in the backend, updating game objects w/ Causes and Events
-		myCurrentLevelDataManager.update();		 
+		//update all Sprites with Cause and Effect logic
+		myEventManager.update(myLevelData, myGameDisplay.getKeyClicks());
 		
 		//send these updated Nodes to the GameDisplay
-		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		myGameDisplay.read(myLevelData.getDisplayableNodes());
 
 		//repopulate the game screen
 		myGameDisplay.populateGameScreen();
+		
+		//clear key events from myGameDisplay.
+		myGameDisplay.clearKeyClicks();
+
 	}
 
 	/**
@@ -155,10 +171,11 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName){
-		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
-		myCurrentLevelDataManager.update();		 
-		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-		myGameDisplay.display();
+		myLevelData.refreshLevelData(fileName);
+		//myCurrentLevelDataManager = new LevelDataManager(fileName);
+		//myCurrentLevelDataManager.update();		 
+		//myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		//myGameDisplay.display();
 		run();
 	}
 
@@ -189,12 +206,12 @@ public class GameRunner implements IGameRunner{
 		//		myCurrentLevel = 1;
 	}
 
-	/**
-	 * @return the myCurrentLevelDataManager
-	 */
-	public ILevelDataManager getCurrentLevelDataManager() {
-		return myCurrentLevelDataManager;
-	}
+//	/**
+//	 * @return the myCurrentLevelDataManager
+//	 */
+//	public ILevelDataManager getCurrentLevelDataManager() {
+//		return myCurrentLevelDataManager;
+//	}
 
 	/**
 	 * @return the myGameDisplay
@@ -232,7 +249,6 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void start() {
-//		getTimeline().start();
 		getTimeline().play();
 	}
 
@@ -244,29 +260,6 @@ public class GameRunner implements IGameRunner{
 	@Override
 	public IGameRunner getSelf() {
 		return this;
-	}
-
-	/**
-	 * Returns KeyEvents to be passed into LevelDataManager
-	 * 
-	 * KeyEvents (Collections--List<KeyEvent>) are passed to LevelDataManager
-	 * through GameRunner
-	 * 
-	 */
-//	@Override
-//	public List<?> getKeyEvents() {
-//		System.out.println("Getting key events from GameDisplay in GameRunner: "+getGameDisplay().getKeyEvents().size());
-//		return getGameDisplay().getKeyEvents();
-//	}
-
-	/**
-	 * Clears KeyEvents collections after applying events
-	 * (cause and effects) to sprites
-	 * 
-	 */
-	@Override
-	public void clearKeyEvents() {
-
 	}
 
 	@Override

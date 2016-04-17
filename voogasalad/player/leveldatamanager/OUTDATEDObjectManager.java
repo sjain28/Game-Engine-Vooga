@@ -19,7 +19,7 @@ import tools.interfaces.VoogaData;
  * Manages sprites, texts, and global variables
  *
  */
-public class ObjectManager {
+public class OUTDATEDObjectManager {
 
 	// Maps IDs to Sprites (Elementables)
 	private Map<String,Elementable> myElements;
@@ -34,7 +34,7 @@ public class ObjectManager {
 	 * @param sprites
 	 * @param factory
 	 */
-	public ObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
+	public OUTDATEDObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
 			myElements.put(el.getID(), el);
@@ -140,10 +140,6 @@ public class ObjectManager {
 	 * put all objects into a generic list of display-able objects
 	 * to be accessed by the GameRunner after every update cycle.
 	 * 
-	 * TODO: Make VoogaText and Sprite extend the same thing so they can 
-	 * be stored in the same map in the future and so that they 
-	 * don't need to be transfered to the same list every time they 
-	 * are updated.
 	 * @return
 	 */
 	public List<Node> getAllDisplayableNodes(){

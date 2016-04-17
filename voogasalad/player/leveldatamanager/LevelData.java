@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import authoring.interfaces.Elementable;
-import data.LevelDataContainer;
+import authoring.model.VoogaFrontEndText;
+import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import events.KeyCause;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
+import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
 import tools.interfaces.VoogaData;
 
@@ -39,10 +41,27 @@ public class LevelData {
 	/**
 	 * Returns a sprite by id
 	 * @param id
-	 * @return
+	 * @return Sprite
 	 */
 	public Sprite getSprite(String id){
 		return (Sprite) myElements.get(id);
+	}
+	/**
+	 * Returns Main Character Sprite
+	 * @param id
+	 * @return Sprite
+	 */
+	public Sprite getMainCharacter(){
+		return (Sprite) myElements.get(myMainCharacterID);
+	}
+	public List<Sprite> getAllSprites(){
+		List<Sprite> sprites = new ArrayList<Sprite>();
+		for(String id : myElements.keySet()){
+			if(myElements.get(id) instanceof Sprite){
+				sprites.add((Sprite) myElements.get(id));
+			}
+		}
+		return sprites;
 	}
 	/**
 	 * Returns a list of sprite IDs given an archetype
@@ -71,13 +90,58 @@ public class LevelData {
 		return (Sprite) newSprite;
 	}
 	/**
+	 * Removes sprite given an id
+	 * @param id
+	 */
+	public void removeSprite(Object id){
+		myElements.remove(id);
+	}
+
+	/**
+	 * Returns a Global Variable (VoogaData) as specified
+	 * by it's variable name
+	 * 
+	 * @param variable
+	 * @return
+	 */
+	public VoogaData getGlobalVar(String variable){
+		return myGlobalVariables.get(variable);
+	}
+
+	/**
+	 * Returns a VoogaText by id
+	 * @param id
+	 * @return
+	 */
+	public VoogaFrontEndText getText(Object id){
+		return (VoogaFrontEndText) myElements.get(id);
+	}
+
+	/**
+	 * put all objects into a generic list of display-able objects
+	 * to be accessed by the GameRunner after every update cycle.
+	 * 
+	 * @return
+	 */
+	public List<Node> getDisplayableNodes(){
+		List<Node> displayablenodes = new ArrayList<Node>();
+
+		for(Object key : myElements.keySet()){
+			displayablenodes.add(myElements.get(key).getNodeObject());
+		}
+
+		return displayablenodes;
+
+	}
+	/**
 	 * Populates the LevelData with the Data from a level specified by filename
 	 * TODO: Handle continuity here
+	 * TODO: Make sure to bind all Sprite images here when they are sent over
 	 * 
 	 * @param filename
 	 */
 	public void refreshLevelData(String levelfilename){
-		LevelDataContainer data = new LevelDataContainer();
+		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
       

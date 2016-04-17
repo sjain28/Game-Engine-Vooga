@@ -16,10 +16,10 @@ import tools.interfaces.VoogaData;
  */
 public class GlobalVariableManager {
 
-	private ObjectManager myObjectManager;
+	private OUTDATEDObjectManager myObjectManager;
 	private Map<String, VoogaData> myGlobalVariables;
 	
-	public GlobalVariableManager(ObjectManager myObjectManager, 
+	public GlobalVariableManager(OUTDATEDObjectManager myObjectManager, 
 			Map<String, VoogaData> variableObjects) {
 		// TODO Auto-generated constructor stub
 		this.myObjectManager = myObjectManager;
@@ -29,7 +29,7 @@ public class GlobalVariableManager {
 	/**
 	 * @return the myObjectManager
 	 */
-	public ObjectManager getObjectManager() {
+	public OUTDATEDObjectManager getObjectManager() {
 		return myObjectManager;
 	}
 

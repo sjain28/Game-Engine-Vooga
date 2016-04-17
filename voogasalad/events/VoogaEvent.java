@@ -2,7 +2,7 @@ package events;
 
 import java.util.ArrayList;
 import java.util.List;
-import player.leveldatamanager.ObjectManager;
+import player.leveldatamanager.OUTDATEDObjectManager;
 import gameengine.Sprite;
 import physics.StandardPhysics;
 
@@ -10,7 +10,7 @@ public class VoogaEvent {
 
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
-	private ObjectManager myEngineManager;
+	private OUTDATEDObjectManager myEngineManager;
 	private List<Sprite> myCauseSprites;
 	private StandardPhysics myPhysicsEngine = new StandardPhysics();
 
@@ -33,11 +33,11 @@ public class VoogaEvent {
 	 * information, etc.)
 	 * @param manager
 	 */
-	public void setManager(ObjectManager manager){
+	public void setManager(OUTDATEDObjectManager manager){
 		myEngineManager = manager;
 	}
 
-	protected ObjectManager getManager(){
+	protected OUTDATEDObjectManager getManager(){
 		return myEngineManager;
 	}
 

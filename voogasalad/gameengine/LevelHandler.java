@@ -2,8 +2,8 @@ package gameengine;
 
 import java.util.List;
 
-import player.leveldatamanager.ObjectManager;
-import player.leveldatamanager.EventManager;
+import player.leveldatamanager.OUTDATEDObjectManager;
+import player.leveldatamanager.OUTDATEDEventManager;
 
 /**
  * The GameEngine holds all of the managers and contains the initialize and update methods for the game. The game player
@@ -14,10 +14,10 @@ import player.leveldatamanager.EventManager;
  */
 public class LevelHandler {
 	
-		private ObjectManager myObjectManager;
-		private EventManager myEventManager;
+		private OUTDATEDObjectManager myObjectManager;
+		private OUTDATEDEventManager myEventManager;
 		
-        public LevelHandler(ObjectManager objectmanager, EventManager eventmanager) {
+        public LevelHandler(OUTDATEDObjectManager objectmanager, OUTDATEDEventManager eventmanager) {
         	myObjectManager = objectmanager;
         	myEventManager = eventmanager;
         }

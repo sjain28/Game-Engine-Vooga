@@ -14,10 +14,10 @@ import javafx.scene.Node;
 @Deprecated
 public class LevelHandler {
 
-	private ObjectManager myObjectManager;
-	private EventManager myEventManager;
+	private OUTDATEDObjectManager myObjectManager;
+	private OUTDATEDEventManager myEventManager;
 
-	public LevelHandler(ObjectManager objectmanager, EventManager eventmanager) {
+	public LevelHandler(OUTDATEDObjectManager objectmanager, OUTDATEDEventManager eventmanager) {
 		myObjectManager = objectmanager;
 		myEventManager = eventmanager;
 	}

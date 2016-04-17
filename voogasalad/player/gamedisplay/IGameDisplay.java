@@ -21,8 +21,8 @@ public interface IGameDisplay {
 	
 	void createPrompt(String message);
 	
-	List<KeyEvent> getKeyEvents();
+	List<KeyEvent> getKeyClicks();
 	
-	void clearKeyEvents();
+	void clearKeyClicks();
 	
 }
