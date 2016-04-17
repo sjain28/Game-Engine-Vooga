@@ -16,11 +16,17 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.util.Duration;
+import physics.IPhysicsEngine;
+import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.gamedisplay.GameboyDisplay;
+import player.leveldatamanager.EventManager;
+import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.ILevelDataManager;
+import player.leveldatamanager.LevelData;
 import player.leveldatamanager.LevelDataManager;
+import player.leveldatamanager.SpriteManager;
 
 /**
  * GameRunner class that runs the game player
@@ -39,12 +45,26 @@ public class GameRunner implements IGameRunner{
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final int SPEEDCONTROL = 10;
     private static final int INIT_SPEED = 61;
+//    
+//    private ILevelData myLevelData;
+////	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+//	private IGameDisplay myGameDisplay; //This HAS key events
+//	private Queue<String> levelQueue;
+//	private Timeline myTimeline;
+
+	//private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+    private IPhysicsEngine myPhysicsEngine;
+    private LevelData myLevelData;
+    private SpriteManager mySpriteManager;
+    private EventManager myEventManager;
     
-	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
+    //private Level
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
 	private Timeline myTimeline;
-
+    
+    
+    
 	/**
 	 * Default constructor
 	 * 
@@ -53,7 +73,13 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException
 	 */
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
+		myLevelData = new LevelData();
 		myGameDisplay = new StandardDisplay(getSelf());
+		
+		mySpriteManager = new SpriteManager();
+		myEventManager = new EventManager();
+		myPhysicsEngine = new StandardPhysics();
+		
 		levelQueue = createLevels(xmlList);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -108,19 +134,42 @@ public class GameRunner implements IGameRunner{
 	 * 
 	 */
 	private void step() {		
+		
 		//take care of setting and resetting key events
 		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
-		myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
-		myGameDisplay.clearKeyEvents();
+		//TODO: PASS IN KEY EVENTS AND EVENTS TO 
+		//myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
+				
+		//update all Sprite's with physics engine 
+		mySpriteManager.update(myLevelData.getAllSprites(),myPhysicsEngine);
 		
-		//update all logic in the backend, updating game objects w/ Causes and Events
-		myCurrentLevelDataManager.update();		 
+		//update all Sprite's with Cause and Effect logic
+		myEventManager.update(myLevelData, myGameDisplay.getKeyEvents());
 		
 		//send these updated Nodes to the GameDisplay
-		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+		myGameDisplay.read(myLevelData.getDisplayableNodes());
 
-		//repopulate the game screen
+		//re-populate the game screen
 		myGameDisplay.populateGameScreen();
+		
+		//clear key events from myGameDisplay.
+		myGameDisplay.clearKeyEvents();
+		
+		
+		
+//		//take care of setting and resetting key events
+//		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
+//		myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
+//		myGameDisplay.clearKeyEvents();
+//		
+//		//update all logic in the backend, updating game objects w/ Causes and Events
+//		myCurrentLevelDataManager.update();		 
+//		
+//		//send these updated Nodes to the GameDisplay
+//		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+//
+//		//repopulate the game screen
+//		myGameDisplay.populateGameScreen();
 	}
 
 	/**
@@ -156,11 +205,20 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName){
-		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
-		myCurrentLevelDataManager.update();		 
-		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+
+		myLevelData.refreshLevelData(fileName);
+		
+		myGameDisplay.read(myLevelData.getDisplayableObjects());
 		myGameDisplay.display();
 		run();
+		
+		
+		
+//		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
+//		myCurrentLevelDataManager.update();		 
+//		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
+//		myGameDisplay.display();
+//		run();
 	}
 
 	/**
@@ -190,12 +248,12 @@ public class GameRunner implements IGameRunner{
 		//		myCurrentLevel = 1;
 	}
 
-	/**
-	 * @return the myCurrentLevelDataManager
-	 */
-	public ILevelDataManager getCurrentLevelDataManager() {
-		return myCurrentLevelDataManager;
-	}
+//	/**
+//	 * @return the myCurrentLevelDataManager
+//	 */
+//	public ILevelDataManager getCurrentLevelDataManager() {
+//		return myCurrentLevelDataManager;
+//	}
 
 	/**
 	 * @return the myGameDisplay
@@ -303,5 +361,11 @@ public class GameRunner implements IGameRunner{
 	public void mute() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int changeLevel() {
+		
+		// TODO Auto-generated method stub
 	}
 }
