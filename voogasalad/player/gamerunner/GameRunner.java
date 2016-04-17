@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
+import player.gamedisplay.GameboyDisplay;
 import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelDataManager;
 

@@ -1,9 +1,11 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.gui.menubar.PlayerMenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
+import player.gamedisplay.Menuable;
 
 
 /**
@@ -12,14 +14,16 @@ import javafx.scene.input.InputEvent;
  * @author Nick
  *
  */
-public class BoardWindowItem extends MenuItemHandler {
+public class FullScreenWindowItem extends PlayerMenuItemHandler {
+	
 	/**
 	 * Initializes the MenuItem
 	 * 
 	 * @param model to interface backend interactions with the model
 	 * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	 */
-	public BoardWindowItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
+	public FullScreenWindowItem(Menuable model, EventHandler<InputEvent> event) {
+		
 	}
 	
 	/**

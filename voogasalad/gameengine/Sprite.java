@@ -3,6 +3,10 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
@@ -30,6 +34,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myImagePath;
     private String myArchetype;
     private transient ImageView myImage;
+    private ScriptEngine engine;
 
     public Sprite (String imagePath,
                    String archetype,
@@ -55,7 +60,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
-
         
     }
 
@@ -69,6 +73,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage = new ImageView(image);
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
+        
     }
     
     public void setX(double x) {
@@ -193,6 +198,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
 	public void setMainCharacter(boolean isMainCharacter) {
 		this.isMainCharacter = isMainCharacter;
+	}
+
+	public void passEngine(ScriptEngine engine) {
+		this.engine = engine;
 	}
 
 }

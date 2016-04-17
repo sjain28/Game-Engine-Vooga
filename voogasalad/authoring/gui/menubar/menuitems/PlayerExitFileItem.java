@@ -1,32 +1,38 @@
 package authoring.gui.menubar.menuitems;
 
-import application.Launcher;
 import authoring.gui.menubar.MenuItemHandler;
-import authoring.interfaces.gui.Saveable;
+import authoring.gui.menubar.PlayerMenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
-import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
-
-public class NewProjectFileItem extends MenuItemHandler {
-    private Saveable myManager;
+import player.gamerunner.GameRunner;
+/**
+ * MenuItem that defines functionality to exit out of the program
+ * 
+ * @author Nick
+ *
+ */
+public class PlayerExitFileItem extends PlayerMenuItemHandler {
+	
+	private GameRunner myRunner;
+	
     /**
      * Initializes the MenuItem
      * 
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public NewProjectFileItem(Menuable model, EventHandler<InputEvent> event) {
+	public PlayerExitFileItem(Menuable model, EventHandler<InputEvent> event) {
 		super();
-		myManager = (Saveable) model;
+		this.myRunner = (GameRunner) model;
 	}
 	/**
          * Action to be taken on the selection of this menuItem
          */
 	@Override
 	public void handle() {
-		new Launcher(new Stage());
+		this.myRunner.getGameDisplay().getStage().close();
 	}
 
 }

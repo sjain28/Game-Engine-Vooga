@@ -1,13 +1,15 @@
 package authoring.gui.menubar;
 
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import tools.VoogaException;
-import javafx.event.ActionEvent;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
+import player.gamerunner.GameRunner;
+import tools.VoogaException;
 
-public abstract class MenuItemHandler {
+public abstract class PlayerMenuItemHandler extends MenuItemHandler {
 	
+	@Override
 	public abstract void handle() throws VoogaException;
+
 }

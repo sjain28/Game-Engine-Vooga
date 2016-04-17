@@ -4,19 +4,26 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.VoogaScene;
-import authoring.gui.menubar.MenuPanel;
-import authoring.gui.menubar.MenuPanelHandlingMirror;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
-import resources.VoogaBundles;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -25,11 +32,12 @@ import resources.VoogaBundles;
  * @author Hunter Lee
  *
  */
-public class StandardDisplay implements IGameDisplay {
+public class GameboyDisplay implements IGameDisplay {
 
-	private static final int PANE_SIZE = 600;
-	//	private static final String BGM_PATH = "resources/sound/zelda_theme.mp3";
+	private static final int PANE_WIDTH = 1200;
+	private static final int PANE_HEIGHT = 800;
 	private static final String BGM_PATH = "resources/sound/hypnotize.mp3";
+	private static final String CSS_PATH = "/player/gamedisplay/style.css";
 
 	private IPromptFactory myPromptFactory;
 	private IControl myControl;
@@ -37,13 +45,12 @@ public class StandardDisplay implements IGameDisplay {
 	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
-	private BorderPane myPane;
+	private AnchorPane myPane;
 	private Pane myGameScreen;
 	private PromptFactory myPrompt;
 	private List<Node> myListToDisplay;
-	//	private EventHandler<KeyEvent> myKeyListener;
 	private List<KeyEvent> myKeyEvents;
-
+	
 	// BGM
 	private Media myBGM;
 	private MediaPlayer myMediaPlayer;
@@ -52,7 +59,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * Default constructor
 	 * 
 	 */
-	public StandardDisplay() {
+	public GameboyDisplay() {
 		initialize();
 	}
 	
@@ -60,7 +67,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * Overloaded constructor to set the reference to GameRunner
 	 * 
 	 */
-	public StandardDisplay(IGameRunner gamerunner) {
+	public GameboyDisplay(IGameRunner gamerunner) {
 		myGameRunner = gamerunner;
 		initialize();
 	}
@@ -74,9 +81,22 @@ public class StandardDisplay implements IGameDisplay {
 		myControl = new StandardControl(getGameRunner());
 		myHUD = new StandardHUD(getGameRunner());
 		myStage = new Stage();
-		myPane = new BorderPane();
+	//	myPane = new BorderPane();
+		myPane = new AnchorPane();
+
+		myPane.setId("bp");
+		
+//		image = new Image ("http://wall.rimbuz.com/wp-content/uploads/Black-Texture-Wallpaper-High-Definition.jpg");
+//        myPane.setBackground(new Background(new BackgroundImage(image,BackgroundRepeat.REPEAT,
+//                BackgroundRepeat.REPEAT,
+//                BackgroundPosition.DEFAULT,
+//                BackgroundSize.DEFAULT)));
+		
 		myGameScreen = new Pane();
-		myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
+		//myGameScreen.setPrefSize(280, 370);
+//		myGameScreen.setLayoutX(400);
+//		myGameScreen.setLayoutY(200);
+		myScene = new VoogaScene(myPane, PANE_WIDTH, PANE_HEIGHT, CSS_PATH);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
@@ -112,10 +132,6 @@ public class StandardDisplay implements IGameDisplay {
 	public void display() {
 		//Creates the main pane
 		createPane();
-
-		//Creates the game screen
-		//		populateGameScreen();
-
 		//Shows the scene
 		getStage().show();
 		//Adds keyinput listener
@@ -138,15 +154,40 @@ public class StandardDisplay implements IGameDisplay {
 	 * 
 	 */
 	private void createPane() {
-		//Adds all components into the main border pane
-		getPane().setCenter(myGameScreen);
-		System.out.println(myGameRunner);
-		getPane().setTop(new MenuPanel(myGameRunner, e -> {
-			new MenuPanelHandlingMirror(e, myGameRunner);
-		}, VoogaBundles.playerMenubarProperties));
-		getPane().setBottom(myControl.createControl());
-		//Below is optional (adds HUD)
-		getPane().setRight(myHUD.createHUD());
+		VBox HUD = myHUD.createHUD();
+		Parent control = myControl.createControl();
+
+		getPane().getChildren().addAll(myGameScreen, HUD, control);
+		AnchorPane.setTopAnchor(myGameScreen, 190.0);
+		AnchorPane.setLeftAnchor(myGameScreen, 380.0);
+		AnchorPane.setTopAnchor(HUD, 0.0);
+		AnchorPane.setRightAnchor(HUD, 0.0);
+		AnchorPane.setBottomAnchor(control, 0.0);
+		AnchorPane.setRightAnchor(control, 350.0);
+		//fitWidthProperty().bind(center.widthProperty());
+	    Rectangle clip = new Rectangle(435, 345);
+	    clip.setLayoutX(0);
+	    clip.setLayoutY(0);
+//	    clip.autosize();
+	    myGameScreen.setClip(clip);
+	    //clip.widthProperty().bind(clip.widthProperty()*myGameScreen.widthProperty()/PANE_WIDTH);
+	    //clip.heightProperty().bind(myGameScreen.heightProperty());
+		
+//		anchor.setTopAnchor(r2, 0.0);
+//		anchor.setRightAnchor(r2, 0.0);
+		
+//		
+//		//Adds all components into the main border pane
+//		getPane().setCenter(myGameScreen);
+//		getPane().setBottom(myControl.createControl());
+//		//Below is optional (adds HUD)
+//		getPane().setRight(myHUD.createHUD());
+//		
+//		
+//		Pane l = new Pane(); l.setId("left"); getPane().setLeft(l);
+//		Pane t = new Pane(); t.setId("top"); getPane().setTop(t);
+//
+//		
 		getStage().setScene(getScene());
 	}
 
@@ -170,13 +211,16 @@ public class StandardDisplay implements IGameDisplay {
 		getGameScreen().getChildren().clear();
 		getListToDisplay().forEach(n -> {
 			getGameScreen().getChildren().add(n);
+//			getGameScreen().setClip(n);
+//			n.setLayoutX(n.getLayoutX() + 400);
+//			n.setLayoutY(n.getLayoutY() + 200);
 		});
 	}
 
 	/**
 	 * @return the pane
 	 */
-	public BorderPane getPane() {
+	public AnchorPane getPane() {
 		return myPane;
 	}
 
@@ -190,7 +234,6 @@ public class StandardDisplay implements IGameDisplay {
 	/**
 	 * @return the myStage
 	 */
-	@Override
 	public Stage getStage() {
 		return myStage;
 	}
