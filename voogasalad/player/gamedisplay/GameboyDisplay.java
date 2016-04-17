@@ -32,7 +32,7 @@ import player.gamerunner.IGameRunner;
  * @author Hunter Lee
  *
  */
-public class StandardDisplay implements IGameDisplay {
+public class GameboyDisplay implements IGameDisplay {
 
 	private static final int PANE_WIDTH = 1200;
 	private static final int PANE_HEIGHT = 800;
@@ -50,8 +50,7 @@ public class StandardDisplay implements IGameDisplay {
 	private PromptFactory myPrompt;
 	private List<Node> myListToDisplay;
 	private List<KeyEvent> myKeyEvents;
-	private Image image;
-
+	
 	// BGM
 	private Media myBGM;
 	private MediaPlayer myMediaPlayer;
@@ -60,7 +59,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * Default constructor
 	 * 
 	 */
-	public StandardDisplay() {
+	public GameboyDisplay() {
 		initialize();
 	}
 	
@@ -68,7 +67,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * Overloaded constructor to set the reference to GameRunner
 	 * 
 	 */
-	public StandardDisplay(IGameRunner gamerunner) {
+	public GameboyDisplay(IGameRunner gamerunner) {
 		myGameRunner = gamerunner;
 		initialize();
 	}
@@ -159,17 +158,20 @@ public class StandardDisplay implements IGameDisplay {
 		Parent control = myControl.createControl();
 
 		getPane().getChildren().addAll(myGameScreen, HUD, control);
-		getPane().setTopAnchor(myGameScreen, 190.0);
-		getPane().setLeftAnchor(myGameScreen, 380.0);
-		getPane().setTopAnchor(HUD, 0.0);
-		getPane().setRightAnchor(HUD, 0.0);
-		getPane().setBottomAnchor(control, 0.0);
-		getPane().setRightAnchor(control, 350.0);
-		
+		AnchorPane.setTopAnchor(myGameScreen, 190.0);
+		AnchorPane.setLeftAnchor(myGameScreen, 380.0);
+		AnchorPane.setTopAnchor(HUD, 0.0);
+		AnchorPane.setRightAnchor(HUD, 0.0);
+		AnchorPane.setBottomAnchor(control, 0.0);
+		AnchorPane.setRightAnchor(control, 350.0);
+		//fitWidthProperty().bind(center.widthProperty());
 	    Rectangle clip = new Rectangle(435, 345);
 	    clip.setLayoutX(0);
 	    clip.setLayoutY(0);
+//	    clip.autosize();
 	    myGameScreen.setClip(clip);
+	    //clip.widthProperty().bind(clip.widthProperty()*myGameScreen.widthProperty()/PANE_WIDTH);
+	    //clip.heightProperty().bind(myGameScreen.heightProperty());
 		
 //		anchor.setTopAnchor(r2, 0.0);
 //		anchor.setRightAnchor(r2, 0.0);
