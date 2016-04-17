@@ -1,9 +1,14 @@
 package gameengine;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -11,7 +16,7 @@ import org.xml.sax.SAXException;
 import data.Serializer;
 import resources.VoogaBundles;
 import data.DeSerializer;
-import auxiliary.VoogaException;
+import tools.VoogaException;
 import tools.VoogaNumber;
 
 
@@ -35,7 +40,7 @@ public class SpriteFactory {
     private Map<String, Sprite> myArchetypes;
 
     // Path for folder where all archetypes ever saved are stored
-    private static final String ARCHETYPE_RESOURCE_PATH = "file:resources/saved_archetypes/";
+    private static final String ARCHETYPE_RESOURCE_PATH = "resources/saved_archetypes/";
 
     public SpriteFactory () {
         myArchetypes = new HashMap<String, Sprite>();
@@ -90,22 +95,12 @@ public class SpriteFactory {
      * 
      * @return Set<String>
      */
-    
+
     public Set<String> getAllArchetypeNames () {
         return myArchetypes.keySet();
     }
 
-    /**
-     * Serializes all Default Sprites for each created archetype
-     * In the same file location by a different file name (given
-     * by their archetype).
-     * 
-     * @param fileLocation
-     * @throws SAXException
-     * @throws IOException
-     * @throws TransformerException
-     * @throws ParserConfigurationException
-     */
+    @Deprecated
     public void serializeArchetypes (String fileLocation) {
         Serializer serializer = new Serializer();
         try {
@@ -119,23 +114,15 @@ public class SpriteFactory {
         }
     }
 
-    /**
-     * DeSerializes the DefaultSprite specified by the fileLocation.
-     * Puts it in the map along with the other archetypes.
-     * This could be used to load archetypes over from other games.
-     * 
-     * TODO: Check to see if this is actually what the front end needs
-     * 
-     * @param fileLocation
-     * @throws Exception
-     */
+    @Deprecated
     public void deSerializeArchetype (String fileLocation) throws VoogaException {
         DeSerializer deserializer = new DeSerializer();
         Sprite newArchetype = (Sprite) deserializer.deserialize(1, fileLocation);
         addArchetype(newArchetype.getArchetype(), newArchetype);
         System.out.println(newArchetype);
     }
-
+    
+    
     public void importArchetype (String ... archetypeNames) throws VoogaException {
         for (String name : archetypeNames) {
             loadArchetype(name);
@@ -149,17 +136,15 @@ public class SpriteFactory {
     }
 
     private void loadArchetype (String archetypeName) throws VoogaException {
-        Sprite newSpriteOfArchetype =
-                (Sprite) DeSerializer
-                        .deserialize(1, ARCHETYPE_RESOURCE_PATH +
-                                        VoogaBundles.archetypeProperties.getString(archetypeName));
+        Sprite newSpriteOfArchetype = (Sprite) DeSerializer.deserialize(1, ARCHETYPE_RESOURCE_PATH +
+                                                                           VoogaBundles.archetypeProperties
+                                                                                   .getString(archetypeName)).get(0);
         addArchetype(archetypeName, newSpriteOfArchetype);
 
     }
 
     private void writeArchetype (String archetypeName) throws VoogaException {
-        File dir = new File(ARCHETYPE_RESOURCE_PATH);
-        File archetypeFile = new File(dir, archetypeName + ".xml");
+        File archetypeFile = new File(ARCHETYPE_RESOURCE_PATH + archetypeName + ".xml");
         if (!archetypeFile.exists()) {
             try {
                 archetypeFile.createNewFile();
@@ -169,12 +154,13 @@ public class SpriteFactory {
                 }
                 catch (ParserConfigurationException | TransformerException | IOException
                         | SAXException e) {
-                    throw new VoogaException(e.getMessage());
+                    throw new VoogaException("Could not save archetype");
                 }
             }
             catch (IOException e) {
-                throw new VoogaException("Could not create file");
+                throw new VoogaException("Could not save archetype");
             }
         }
     }
+
 }

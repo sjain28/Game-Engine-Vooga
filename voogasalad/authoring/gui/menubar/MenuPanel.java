@@ -8,7 +8,6 @@ import java.util.Map;
 
 import authoring.interfaces.gui.Windowable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.OrderedProperties;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -16,6 +15,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import resources.VoogaBundles;
+import tools.OrderedProperties;
 
 public class MenuPanel extends MenuBar implements Windowable {
 

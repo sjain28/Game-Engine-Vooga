@@ -6,8 +6,6 @@ package player.gamedisplay;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import data.FileReaderToGameObjects;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -19,6 +17,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 
 /**

@@ -10,7 +10,7 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
-import auxiliary.VoogaException;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
