@@ -23,6 +23,8 @@ public interface IGameRunner {
 
 	void playLevel(String teststring);
 	
+	void playGame();
+	
 	void replayLevel();
 	
 	void advanceToNextLevel();

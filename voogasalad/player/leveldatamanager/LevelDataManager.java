@@ -18,7 +18,7 @@ public class LevelDataManager implements ILevelDataManager {
 
 	private static final int SCREENSIZE_DIM1 = 3;
 	private static final int SCREENSIZE_DIM2 = 35;
-	private int nextLevel = -1;
+	private int nextLevel;
 	private IGameRunner myGameRunner;
 	private DisplayScroller displayScroller;
 	private ObjectManager myObjectManager;
@@ -26,16 +26,29 @@ public class LevelDataManager implements ILevelDataManager {
 	private GlobalVariableManager myGlobalVariableManager;
 	private List<KeyEvent> myKeyEvents;
 	
+	
+	public LevelDataManager() {
+		nextLevel = -1;
+		displayScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
+		myKeyEvents = new ArrayList<>();
+		// Got rid of these methods because we want to deprecate this constructor;
+//		readinObjects(levelFileName);
+//		bindImagesofSprites();
+	}
+	
 	/**
 	 * Default constructor
 	 * 
 	 * @param levelFileName
 	 */
+	@Deprecated
 	public LevelDataManager(String levelFileName) {
+		nextLevel = -1;
 		displayScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
 		myKeyEvents = new ArrayList<>();
-		readinObjects(levelFileName);
-		bindImagesofSprites();
+		// Got rid of these methods because we want to deprecate this constructor;
+//		readinObjects(levelFileName);
+//		bindImagesofSprites();
 	}
 
 	/**
@@ -54,12 +67,23 @@ public class LevelDataManager implements ILevelDataManager {
 	 * belongs to (composition)
 	 * 
 	 */
+	@Deprecated
 	public LevelDataManager(IGameRunner gamerunner, String levelFileName) {
 		this(levelFileName);
 		this.myGameRunner = gamerunner;
 	}
 
+	public LevelDataManager(IGameRunner gamerunner) {
+		this();
+		this.myGameRunner = gamerunner;
+	}
+	
+	public void initialize(String levelFileName) {
+		readinObjects(levelFileName);
+		bindImagesofSprites();
+	}
 
+	
 
 	/**
 	 * Read in the file to reconstruct objects created in the authoring
@@ -174,10 +198,23 @@ public class LevelDataManager implements ILevelDataManager {
 //	}
 
 	/**
+	 * @return the current level being played.
+	 */
+//	public int getCurrentLevel() {
+//		return nextLevel;
+//	}
+	
+	/**
 	 * @return the next level to be played.
 	 */
 	public int getNextLevel() {
 		return nextLevel;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

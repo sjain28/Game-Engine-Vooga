@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import data.Deserializer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -55,6 +56,7 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException
 	 */
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
+		myLevelDataManager = new LevelDataManager(getSelf());
 		myGameDisplay = new StandardDisplay(getSelf());
 		levelList = createLevelList(xmlList);
 		myTimeline = new Timeline();
@@ -73,6 +75,22 @@ public class GameRunner implements IGameRunner{
 	 */
 	public GameRunner(String fileString) throws FileNotFoundException, IOException {
 		this(new File(fileString));
+	}
+	
+	/**
+	 * Creating a game from a VoogaGame
+	 * 
+	 * @param Voogagame
+	 */
+	public GameRunner(VoogaGame game){
+		myLevelDataManager = new LevelDataManager();
+		myGameDisplay = new StandardDisplay(getSelf());
+		levelList = game.getGameLevels();
+		myTimeline = new Timeline();
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+				e -> step());
+		myTimeline.setCycleCount(Animation.INDEFINITE);
+		myTimeline.getKeyFrames().add(frame);
 	}
 
 	
@@ -180,12 +198,19 @@ public class GameRunner implements IGameRunner{
 		that is created when the GameController is initialized
 	 */
 	public void playGame(){
+		System.out.println(levelList);
+		
 		Iterator<String> iterator = levelList.iterator();
+		
+		playLevel("levels/" + levelList.get(0));
 		while(iterator.hasNext()){
-			// if (myLevelDataManager.nextLevel > 0)
+			System.out.println(levelList);
+		//	System.out.println("Did i get here");
+			 if (myLevelDataManager.getNextLevel() > 0){
 			String nextLevel = iterator.next();
-			playLevel(nextLevel);
-			// playLevel(level.nextLevel);
+			playLevel("levels/" +nextLevel);
+			System.out.println("Did I advance");
+			 }
 		}
 	}
 
@@ -195,11 +220,11 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName){
-		myLevelDataManager = new LevelDataManager(getSelf(), fileName);
+		myLevelDataManager.initialize(fileName);
+	//eventually move away from this	myLevelDataManager = new LevelDataManager(getSelf(), fileName);
 		myLevelDataManager.update();		 
 		myGameDisplay.read(myLevelDataManager.getDisplayableObjects());
 		myGameDisplay.display();
-		run();
 	}
 
 	/**

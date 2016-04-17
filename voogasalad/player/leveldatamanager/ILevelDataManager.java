@@ -19,4 +19,10 @@ public interface ILevelDataManager {
 	
 	void setKeyEvents(List<?> myKeyEvents);
 	
+	int getNextLevel();
+	
+	public void initialize(String levelFileName);
+
+	void clear();
+
 }
