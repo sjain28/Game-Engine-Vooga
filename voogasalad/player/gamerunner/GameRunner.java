@@ -17,7 +17,7 @@ import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import player.gamedisplay.IGameDisplay;
-import player.gamedisplay.StandardDisplay;
+import player.gamedisplay.GameboyDisplay;
 import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelDataManager;
 
@@ -52,7 +52,7 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException
 	 */
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
-		myGameDisplay = new StandardDisplay(getSelf());
+		myGameDisplay = new GameboyDisplay(getSelf());
 		levelQueue = createLevels(xmlList);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),

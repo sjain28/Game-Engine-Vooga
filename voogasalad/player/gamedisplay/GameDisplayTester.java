@@ -77,7 +77,7 @@ public class GameDisplayTester extends Application {
         // });
 
         IPromptFactory pf = new PromptFactory();
-        IGameDisplay gd = new StandardDisplay();
+        IGameDisplay gd = new GameboyDisplay();
         // IControl c = new StandardControl();
 
         // FileReaderToGameObjects fileReader = new FileReaderToGameObjects("level2");
