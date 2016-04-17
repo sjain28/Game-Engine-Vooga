@@ -1,7 +1,7 @@
 package authoring.gui.menubar;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.VoogaException;
+import tools.VoogaException;
 
 public abstract class MenuItemHandler {
  

@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import authoring.gui.toolbar.ToolbarItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.VoogaAlert;
 import player.gamerunner.GameRunner;
+import tools.VoogaAlert;
 
 
 public class Run extends ToolbarItemHandler {

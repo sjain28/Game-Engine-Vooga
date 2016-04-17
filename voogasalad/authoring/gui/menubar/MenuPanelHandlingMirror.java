@@ -1,12 +1,12 @@
 package authoring.gui.menubar;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.InputEvent;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 /**
  * This is the class that handles reflection on menu panel actions.

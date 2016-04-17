@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
+import tools.VoogaAlert;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
