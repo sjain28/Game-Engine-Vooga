@@ -21,6 +21,7 @@ import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
+import player.gamedisplay.GameboyDisplay;
 import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelData;
 import player.leveldatamanager.LevelDataManager;

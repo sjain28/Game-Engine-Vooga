@@ -1,4 +1,4 @@
-package auxiliary;
+package tools;
 
 public class VoogaException extends Exception {
 

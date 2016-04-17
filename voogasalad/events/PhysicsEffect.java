@@ -2,11 +2,10 @@ package events;
 
 import java.lang.reflect.Method;
 import java.util.List;
-
-import auxiliary.VoogaException;
 import gameengine.Sprite;
 import physics.StandardPhysics;
 import player.leveldatamanager.LevelData;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 public class PhysicsEffect extends SpriteEffect {

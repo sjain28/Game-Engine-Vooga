@@ -3,11 +3,11 @@ package authoring.gui.toolbar;
 import java.lang.reflect.Method;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 
 public class ToolPanelHandlingMirror {
