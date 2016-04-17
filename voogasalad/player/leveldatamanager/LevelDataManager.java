@@ -10,7 +10,6 @@ import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
-import player.gamerunner.IGameRunner;
 import tools.interfaces.VoogaData;
 
 
@@ -19,10 +18,9 @@ public class LevelDataManager implements ILevelDataManager {
 	private static final int SCREENSIZE_DIM1 = 3;
 	private static final int SCREENSIZE_DIM2 = 35;
 
-	private IGameRunner myGameRunner;
 	private DisplayScroller displayScroller;
-	private ObjectManager myObjectManager;
-	private EventManager myEventManager;
+	private OUTDATEDObjectManager myObjectManager;
+	private OUTDATEDEventManager myEventManager;
 	private GlobalVariableManager myGlobalVariableManager;
 	private List<KeyEvent> myKeyEvents;
 	
@@ -48,17 +46,6 @@ public class LevelDataManager implements ILevelDataManager {
 	private void bindImagesofSprites() {
 		myObjectManager.getAllDisplayableNodes();
 	}
-
-	/**
-	 * Constructor that takes in a reference to GameRunner LevelDataManager
-	 * belongs to (composition)
-	 * 
-	 */
-	public LevelDataManager(IGameRunner gamerunner, String levelFileName) {
-		this(levelFileName);
-		this.myGameRunner = gamerunner;
-	}
-
 
 
 	/**
@@ -106,7 +93,6 @@ public class LevelDataManager implements ILevelDataManager {
 	 */
 	@Override
 	public void update() {
-		//setKeyEvents(getGameRunner().getKeyEvents());
 		myObjectManager.update();
 		myEventManager.update();
 		//Need to clear list of keyevents
@@ -134,17 +120,10 @@ public class LevelDataManager implements ILevelDataManager {
 			List<VoogaEvent> eventObjects,
 			Map<String,VoogaData> variableObjects,
 			SpriteFactory factory) {
-		myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
+		myObjectManager = new OUTDATEDObjectManager(elementObjects, variableObjects, factory);
 		myObjectManager.setKeyEvents(myKeyEvents);
-		myEventManager = new EventManager(myObjectManager, eventObjects);
+		myEventManager = new OUTDATEDEventManager(myObjectManager, eventObjects);
 		myGlobalVariableManager = new GlobalVariableManager(myObjectManager, variableObjects);
-	}
-
-	/**
-	 * @return the myGameRunner
-	 */
-	public IGameRunner getGameRunner() {
-		return myGameRunner;
 	}
 
 	/**
