@@ -190,6 +190,11 @@ public class GameRunner implements IGameRunner{
 		that is created when the GameController is initialized
 	 */
 	public void playGame(){
+		int nextLevelIndex = 0;
+		if (myLevelData.getLevelNumber() != 0){
+			nextLevelIndex = myLevelData.getLevelNumber();
+		}
+		
 		Iterator<String> iterator = levelQueue.iterator();
 		while(iterator.hasNext()){
 			// if (!l.isWon)
@@ -207,12 +212,9 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName){
 
 		myLevelData.refreshLevelData(fileName);
-		
-		myGameDisplay.read(myLevelData.getDisplayableObjects());
+		myGameDisplay.read(myLevelData.getDisplayableNodes());
 		myGameDisplay.display();
 		run();
-		
-		
 		
 //		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
 //		myCurrentLevelDataManager.update();		 
@@ -365,7 +367,7 @@ public class GameRunner implements IGameRunner{
 
 	@Override
 	public int changeLevel() {
-		
+
 		// TODO Auto-generated method stub
 	}
 }
