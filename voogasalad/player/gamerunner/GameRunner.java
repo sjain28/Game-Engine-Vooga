@@ -49,6 +49,8 @@ public class GameRunner implements IGameRunner{
     private LevelData myLevelData;
     private SpriteManager mySpriteManager;
     private EventManager myEventManager;
+    
+    //private Level
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
 	private Timeline myTimeline;
