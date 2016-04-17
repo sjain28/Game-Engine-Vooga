@@ -10,6 +10,7 @@ import javafx.scene.input.InputEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import player.gamedisplay.Menuable;
 
 public class OpenProjectFileItem extends MenuItemHandler {
     private Saveable myManager;
@@ -19,9 +20,9 @@ public class OpenProjectFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public OpenProjectFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
+	public OpenProjectFileItem(Menuable model, EventHandler<InputEvent> event) {
 		super();
-		myManager = model;
+		myManager = (Saveable) model;
 	}
 	/**
          * Action to be taken on the selection of this menuItem

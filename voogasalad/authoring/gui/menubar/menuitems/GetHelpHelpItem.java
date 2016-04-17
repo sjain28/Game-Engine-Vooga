@@ -23,7 +23,7 @@ public class GetHelpHelpItem extends MenuItemHandler {
 	     * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	     */
 	public GetHelpHelpItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
-		super();
+		
 	}
 	/**
          * Action to be taken on the selection of this menuItem

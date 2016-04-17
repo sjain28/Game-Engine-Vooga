@@ -4,6 +4,7 @@ import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
+import player.gamedisplay.Menuable;
 /**
  * MenuItem that defines functionality to exit out of the program
  * 
@@ -17,8 +18,8 @@ public class ExitFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public ExitFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
-		super();
+	public ExitFileItem(Menuable model, EventHandler<InputEvent> event) {
+		
 	}
 	/**
          * Action to be taken on the selection of this menuItem
