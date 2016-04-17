@@ -137,8 +137,7 @@ public class SpriteFactory {
 
     private void loadArchetype (String archetypeName) throws VoogaException {
         Sprite newSpriteOfArchetype = (Sprite) DeSerializer.deserialize(1, ARCHETYPE_RESOURCE_PATH +
-                                                                           VoogaBundles.archetypeProperties
-                                                                                   .getString(archetypeName)).get(0);
+                                                                           archetypeName + ".xml").get(0);
         addArchetype(archetypeName, newSpriteOfArchetype);
 
     }

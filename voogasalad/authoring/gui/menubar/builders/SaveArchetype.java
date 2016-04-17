@@ -1,6 +1,12 @@
 package authoring.gui.menubar.builders;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import authoring.interfaces.model.EditSpritable;
+import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -20,6 +26,6 @@ public class SaveArchetype extends ImportArchetype{
         }
         catch (VoogaException e) {
             new VoogaAlert(e.getMessage());
-        }
+		}
     }
 }
