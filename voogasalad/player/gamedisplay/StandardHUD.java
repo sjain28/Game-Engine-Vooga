@@ -19,6 +19,8 @@ public class StandardHUD implements IHUD {
 
 	private IGameRunner myGameRunner;
 	private VBox myHUD;
+	private static final int SPACING = 10;
+	private static final String SCORE_LABEL = "Current Score: ";
 
 	/**
 	 * Default constructor
@@ -46,10 +48,10 @@ public class StandardHUD implements IHUD {
 	 */
 	@Override
 	public VBox createHUD() {
-		myHUD.setPadding(new Insets(15, 12, 15, 12)); //TODO: Magic number
-		myHUD.setSpacing(10); //TODO: Magic number
+		myHUD.setPadding(new Insets(SPACING)); //TODO: Magic number
+		myHUD.setSpacing(SPACING); //TODO: Magic number
 
-		Label score = new Label("Current Score: ");
+		Label score = new Label(SCORE_LABEL);
 		//	    score.textProperty().bind(valueProperty);
 		//	    Label timer = new Timer();
 		CountdownTimer cttimer = new CountdownTimer();

@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import player.gamedisplay.Menuable;
 
 public class NewGameObjectFileItem extends MenuItemHandler {
         EditElementable myManager;
@@ -18,9 +19,9 @@ public class NewGameObjectFileItem extends MenuItemHandler {
          * @param model to interface backend interactions with the model
          * @param event: Unused vestige of previous poor programming. Should soon be phased out.
          */
-	public NewGameObjectFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
+	public NewGameObjectFileItem(Menuable model, EventHandler<InputEvent> event) {
 		super();
-		myManager = model;
+		myManager = (EditElementable) model;
 	}
 	/**
          * Action to be taken on the selection of this menuItem
