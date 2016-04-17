@@ -4,9 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditSpritable;
+import authoring.resourceutility.ButtonMaker;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -32,14 +35,15 @@ public class ImportArchetype extends Stage {
     private HBox hbox;
     
     public ImportArchetype(){
+    	ButtonMaker maker = new ButtonMaker();
         root = new BorderPane();
         scene = new VoogaScene(root);
         setSelectedArchetypes(new ArrayList<String>());
         vbox = new VBox();
         hbox = new HBox();
         
-        Button apply = buttonFactory("Apply",e->apply());
-        Button cancel = buttonFactory("Cancel",e->this.close());
+        Button apply = maker.makeButton("Apply",e->apply());
+        Button cancel = maker.makeButton("Cancel",e->this.close());
         hbox.getChildren().addAll(apply,cancel);
         
         root.setBottom(hbox);
@@ -69,6 +73,9 @@ public class ImportArchetype extends Stage {
     }
     
     protected void addArchetypeNames (Collection<String> archetypeNames) {
+    	if(archetypeNames.size() == 0) {
+    		vbox.getChildren().add(new CustomText("No archetypes available."));
+    	}
         for (String name : archetypeNames) {
             addArchetypeName(name);
         }
@@ -89,14 +96,6 @@ public class ImportArchetype extends Stage {
                 getSelectedArchetypes().remove(checkbox.getText());
             }
         }
-    }
-
-    protected Button buttonFactory (String name, EventHandler e) {
-        Button button = new Button(name);
-        button.setOnAction(e);
-        button.setAlignment(Pos.CENTER);
-        button.setPadding(new Insets(10,10,10,10));
-        return button;
     }
     
     protected void apply(){
