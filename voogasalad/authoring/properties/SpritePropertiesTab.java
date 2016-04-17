@@ -46,6 +46,7 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	@Override
 	public void addNewProperty(String s, VoogaData vgData) {
 		myElementable.addProperty(s, vgData);
+		propertiesMap.put(s, vgData);
 		displayProperties();
 	}
 
