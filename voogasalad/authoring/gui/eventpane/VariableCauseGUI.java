@@ -5,11 +5,11 @@ import java.util.List;
 import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditEventable;
 import authoring.model.ElementManager;
-import auxiliary.VoogaException;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import tools.VoogaBoolean;
+import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 

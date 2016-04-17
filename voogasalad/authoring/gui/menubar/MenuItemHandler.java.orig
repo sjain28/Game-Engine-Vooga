@@ -1,11 +1,15 @@
 package authoring.gui.menubar;
 
+<<<<<<< HEAD
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import tools.VoogaException;
+=======
+import auxiliary.VoogaException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
+>>>>>>> master
 
 public abstract class MenuItemHandler {
 	

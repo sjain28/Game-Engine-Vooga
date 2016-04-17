@@ -2,10 +2,9 @@ package authoring.resourceutility;
 
 import java.io.File;
 import java.util.List;
-
-import auxiliary.VoogaException;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import tools.VoogaException;
 
 /**
  * This class prompts the user to choose a file to import. The accepted

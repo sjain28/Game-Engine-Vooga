@@ -5,11 +5,11 @@ import authoring.properties.PropertiesPane;
 import authoring.gui.EventsWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.resourceutility.ResourceUI;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 
 /**

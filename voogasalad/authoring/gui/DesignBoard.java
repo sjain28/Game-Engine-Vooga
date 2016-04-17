@@ -16,8 +16,6 @@ import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
 import authoring.resourceutility.VoogaFileType;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -34,6 +32,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 /**
  * This class handles the display of all objects on the Authoring Environment GUI.

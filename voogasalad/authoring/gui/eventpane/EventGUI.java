@@ -1,7 +1,7 @@
 package authoring.gui.eventpane;
 
-import auxiliary.VoogaException;
 import javafx.scene.Node;
+import tools.VoogaException;
 
 public interface EventGUI {
     public Node display();

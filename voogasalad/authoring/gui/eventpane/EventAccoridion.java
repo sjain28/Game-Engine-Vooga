@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import events.VoogaEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import resources.VoogaBundles;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 
 public class EventAccoridion extends Tab {
