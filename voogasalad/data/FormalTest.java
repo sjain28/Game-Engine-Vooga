@@ -36,7 +36,7 @@ public class FormalTest extends Application {
  
         DataWritingTest dataTest= new DataWritingTest();
         dataTest.setup();
-        DataContainerOfLists manager = dataTest.getData();
+        LevelDataContainer manager = dataTest.getData();
         System.out.println(System.getProperty("java.class.path"));
         File file = new File(testString);
         System.out.println("Does the file here exist?" + file.exists());

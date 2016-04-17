@@ -11,7 +11,7 @@ import tools.interfaces.VoogaData;
 
 public class FileReaderToGameObjects {
 	
-    private DataContainerOfLists data;
+    private LevelDataContainer data;
     
     private List<String> objectNames;
 
@@ -25,7 +25,7 @@ public class FileReaderToGameObjects {
         objectNames.add("");
         System.out.println("The  file checked here is" + fileName);
         try{
-        data = (DataContainerOfLists) DeSerializer.deserialize(1, fileName).get(0);
+        data = (LevelDataContainer) DeSerializer.deserialize(1, fileName).get(0);
         }
         catch(RuntimeException e){
         	System.out.println("error came from the filereadertogameobjects");
@@ -56,7 +56,7 @@ public class FileReaderToGameObjects {
         return data.getSpriteFactory();
     }
 
-    public DataContainerOfLists getDataContainer () {
+    public LevelDataContainer getDataContainer () {
         return data;
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
-import data.DataContainerOfLists;
+import data.LevelDataContainer;
 import data.FileReaderToGameObjects;
 import events.VoogaEvent;
 import gameengine.SpriteFactory;
@@ -55,7 +55,7 @@ public class LevelDataManager implements ILevelDataManager {
 	 * @param levelFileName
 	 */
 	private void readinObjects (String levelFileName) {
-		DataContainerOfLists data = new DataContainerOfLists();
+		LevelDataContainer data = new LevelDataContainer();
 		try{
 			FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelFileName);
 			data = fileManager.getDataContainer();

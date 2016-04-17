@@ -21,7 +21,7 @@ import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import auxiliary.VoogaException;
-import data.DataContainerOfLists;
+import data.LevelDataContainer;
 import data.FileWriterFromGameObjects;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -127,8 +127,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             }
         }
 
-        DataContainerOfLists data =
-                new DataContainerOfLists(elements, myGlobalVariables, myEventList,spriteFactory);
+        LevelDataContainer data =
+                new LevelDataContainer(elements, myGlobalVariables, myEventList,spriteFactory);
         System.out.println("I'm done saving in element manager");
         try {
             System.out.println(myXmlDataFile.getPath());

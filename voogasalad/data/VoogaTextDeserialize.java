@@ -8,7 +8,7 @@ public class VoogaTextDeserialize extends Application{
     @Override
     public void start (Stage primaryStage) throws Exception {
         Object o = DeSerializer.deserialize(1, "levels/Test.xml").get(0);
-        DataContainerOfLists vt2 = (DataContainerOfLists) o;
+        LevelDataContainer vt2 = (LevelDataContainer) o;
         System.out.println("Unserialized");
         System.out.println(vt2);
         

@@ -28,7 +28,7 @@ import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 public class DataWritingTest {
-	private DataContainerOfLists manager;
+	private LevelDataContainer manager;
 
 	public DataWritingTest(){
 
@@ -36,7 +36,7 @@ public class DataWritingTest {
 
 	@Before
 	public void setup(){
-		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),
+		manager = new LevelDataContainer(generateSprites(), generateGlobalVariables(),
 				generateEvents(), new SpriteFactory());
 		manager.addButton(generateButtons());
 		System.out.println("My Button list here is " + manager.getButtonList());
@@ -104,7 +104,7 @@ public class DataWritingTest {
 	//        
 	//    }
 
-	public DataContainerOfLists getData() {
+	public LevelDataContainer getData() {
 		return manager;
 	}
 
