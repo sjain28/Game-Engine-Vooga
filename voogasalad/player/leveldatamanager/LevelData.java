@@ -1,6 +1,7 @@
 package player.leveldatamanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
+import events.Cause;
+import events.Effect;
 import events.KeyCause;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -35,7 +38,8 @@ public class LevelData {
 	
 	/** Event Information**/
 	private List<VoogaEvent> myEvents;
-	
+	private List<List<String>> myKeyCombos;
+	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
 	
 	/**
@@ -134,6 +138,52 @@ public class LevelData {
 
 	}
 	/**
+	 * Returns unmodifiable list of key combos
+	 * 
+	 * @return
+	 */
+	public List<List<String>> getKeyCombos(){
+		return Collections.unmodifiableList(myKeyCombos);
+	}
+	/**
+	 * Returns unmodifiable map of key causes
+	 * 
+	 * @return
+	 */
+	public Map<List<String>, KeyCause> getKeyCauses(){
+		return Collections.unmodifiableMap(myKeyCauses);
+	}
+	/**
+	 * Returns unmodifiable list of key events
+	 * 
+	 * @return
+	 */
+	public List<VoogaEvent> getEvents(){
+		return Collections.unmodifiableList(myEvents);
+	}
+	/**
+	 * 
+	 * @param voogaEvent
+	 */
+	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
+        myEvents.add(voogaEvent);
+		for(Cause c: voogaEvent.getCauses()){
+			c.init();
+			if(c instanceof KeyCause){
+				KeyCause keyc = (KeyCause) c;
+	
+				myKeyCauses.put(keyc.getKeys(), keyc); 
+				myKeyCombos.add(keyc.getKeys()); 
+				myKeyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
+			}
+		}
+		for(Effect e: voogaEvent.getEffects()){
+		    e.init();
+		}
+
+		
+	}
+	/**
 	 * Populates the LevelData with the Data from a level specified by filename
 	 * TODO: Handle continuity here
 	 * TODO: Make sure to bind all Sprite images here when they are sent over
@@ -151,6 +201,10 @@ public class LevelData {
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);
 
+		for(VoogaEvent e : eventObjects){
+			addEventAndPopulateKeyCombos(e);
+		}
+		
 		SpriteFactory factory = data.getSpriteFactory();
 		System.out.println("The spriteFactory here is" + factory);
 

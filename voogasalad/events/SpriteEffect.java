@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameengine.Sprite;
+import player.leveldatamanager.LevelData;
 import tools.interfaces.VoogaData;
 
 public class SpriteEffect extends VariableEffect{
@@ -11,7 +12,7 @@ public class SpriteEffect extends VariableEffect{
 	private Boolean needsSprites;
 	private String mySpriteID;
 	private String myArchetype;
-	private List<Sprite> mySprites = new ArrayList<>();
+	//private List<Sprite> mySprites = new ArrayList<>();
 
 	// constructor with sprites- apply to given sprites
 	public SpriteEffect(String spriteID, String variable, String method, VoogaEvent event) {
@@ -83,9 +84,9 @@ public class SpriteEffect extends VariableEffect{
 	}
 	
 	@Override
-	public void execute() {
-		setSprites();
-		for (Sprite sprite : mySprites){
+	public void execute(LevelData data) {
+		List<Sprite> sprites = getSpritesToBeEffected(data);
+		for (Sprite sprite : sprites){
 			VoogaData variable = sprite.getParameterMap().get(getVariable());
 			callEffectMethod(variable);
 		}
@@ -94,25 +95,30 @@ public class SpriteEffect extends VariableEffect{
 	 * Determines which sprites need to be set for this effect depending on the constructor that was used, as well as the
 	 * sprite outputs of the cause within the same event.
 	 */
-	protected void setSprites(){
+	protected List<Sprite> getSpritesToBeEffected(LevelData data){
+		List<Sprite> sprites = new ArrayList<Sprite>();
 		if (needsSprites){
-			mySprites = getEvent().getSpritesFromCauses();
+			sprites = getEvent().getSpritesFromCauses();
 		}
 		if (getMyArchetype() != null){
 			// get sprite manager, get all sprites of archetype
-			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(getMyArchetype());
-			if (mySprites.size() != 0){
-				for(Sprite causeSprite : mySprites){
-					if(!archSpriteIDs.contains(causeSprite.getID())){
-						mySprites.remove(causeSprite);
+			List<String> archSpriteIDs = data.getSpriteIDs(getMyArchetype());
+			
+			//TODO: why is this removal function necessary?? why would any sprites be there that shouldn't be
+			if (sprites.size() != 0){
+				for(Sprite sprite : sprites){
+					if(!archSpriteIDs.contains(sprite.getID())){
+						sprites.remove(sprite);
 					}
 				}
-			}else {
+			}
+			else {
 				for(String spriteID : archSpriteIDs){
-					mySprites.add(getEvent().getManager().getSprite(spriteID));
+					sprites.add(data.getSprite(spriteID));
 				}
 			}
 		}
+		return sprites;
 	}
 	
 	protected List<Sprite> getSprites(){

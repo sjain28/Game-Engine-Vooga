@@ -32,7 +32,7 @@ public class VariableCause extends Cause{
 	
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean check() {
+	public boolean check(LevelData data) {
 		
 		Class<?> variableClass = myVariable.getClass();
 		Class[] paramClass = {myTarget.getClass()};

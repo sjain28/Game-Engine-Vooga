@@ -1,9 +1,11 @@
 package events;
 
+import player.leveldatamanager.LevelData;
+
 public abstract class Cause {
 	
 	 private VoogaEvent myEvent;	
-	 public abstract boolean check();
+	 public abstract boolean check(LevelData data);
 	 
 	 public Cause(VoogaEvent voogaEvent){
 		 myEvent = voogaEvent;

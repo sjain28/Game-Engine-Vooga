@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameengine.Sprite;
+import player.leveldatamanager.LevelData;
 
 public class CollisionCause extends Cause{
 
@@ -19,6 +20,9 @@ public class CollisionCause extends Cause{
 		archB = archetypeB;
 	}
 	
+	//TODO: Needs to be refactored so that it is called each time the cause is called. 
+	//This is valid in the case that a new id is added and it applies to that archetype, or if one is killed
+	//off from a certain group
 	public void init(){
 	        groupA = new ArrayList<>();
 	        groupB = new ArrayList<>();
@@ -45,7 +49,8 @@ public class CollisionCause extends Cause{
 	}
 	
 	@Override
-	public boolean check() {
+	public boolean check(LevelData data) {
+		refreshSpriteGroups();
 		collidedSprites.clear();
 		boolean myVal = false;
 		for(Sprite a: groupA){
@@ -60,7 +65,9 @@ public class CollisionCause extends Cause{
 		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
 	}
-	
+	public void refreshSpriteGroups(){
+		
+	} 
 	public List<Sprite> getAllCollidedSprites(){
 		return collidedSprites;
 	}

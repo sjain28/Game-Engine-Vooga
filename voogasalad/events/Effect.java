@@ -1,10 +1,12 @@
 package events;
 
+import player.leveldatamanager.LevelData;
+
 public abstract class Effect {
 	
 	private VoogaEvent myEvent;	
 
-	public abstract void execute();
+	public abstract void execute(LevelData data);
 	
      public Effect(VoogaEvent voogaEvent){
     	 myEvent = voogaEvent;
