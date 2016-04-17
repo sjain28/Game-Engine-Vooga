@@ -64,6 +64,9 @@ public class EventManager {
 	}
 
 	public void addEvent(VoogaEvent voogaEvent){
+		voogaEvent.setManager(myEngineManager);
+		myEvents.add(voogaEvent);
+		
 		for(Cause c: voogaEvent.getCauses()){
 			c.init();
 			if(c instanceof KeyCause){
@@ -74,9 +77,6 @@ public class EventManager {
 				keyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
 			}
 		}
-
-		voogaEvent.setManager(myEngineManager);
-		myEvents.add(voogaEvent);
 	}
 
 	/**
