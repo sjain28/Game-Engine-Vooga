@@ -24,7 +24,7 @@ public class CollisionCause extends Cause{
 	//This is valid in the case that a new id is added and it applies to that archetype, or if one is killed
 	//off from a certain group
 	public void init(){
-	        groupA = new ArrayList<>();
+	        /*groupA = new ArrayList<>();
 	        groupB = new ArrayList<>();
 		if(archA.contains("-") && archB.contains("-")){		
 			groupA.add(getEvent().getManager().getSprite(archA)); //If contains dash, it's a Sprite ID
@@ -41,17 +41,13 @@ public class CollisionCause extends Cause{
 				groupB.add(getEvent().getManager().getSprite(o));
 			}
 		}
-		
-
-		
-
-		collidedSprites = new ArrayList<>();
+		collidedSprites = new ArrayList<>();*/
 	}
 	
 	@Override
 	public boolean check(LevelData data) {
-		refreshSpriteGroups();
-		collidedSprites.clear();
+		refreshSpriteGroups(data);
+		//collidedSprites.clear();
 		boolean myVal = false;
 		for(Sprite a: groupA){
 			for(Sprite b: groupB){
@@ -65,8 +61,28 @@ public class CollisionCause extends Cause{
 		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
 	}
-	public void refreshSpriteGroups(){
+	//TODO: could refactor so that it only adds or substract new ones but might be too much work tbh
+	public void refreshSpriteGroups(LevelData data){
+		groupA = new ArrayList<>();
+        groupB = new ArrayList<>();
+        groupA.clear();
+        groupB.clear();
+        collidedSprites.clear();
+        if(archA.contains("-") && archB.contains("-")){		
+        	groupA.add(data.getSprite(archA)); //If contains dash, it's a Sprite ID
+        	groupB.add(data.getSprite(archB));
+        }
+        else{
+        	List<String> IdA = data.getSpriteIDs(archA);//Else, it's an arch name
+        	List<String> IdB = data.getSpriteIDs(archB);
 		
+        	for(String o: IdA){	
+        		groupA.add(data.getSprite(o));
+        	}
+        	for(String o: IdB){
+        		groupB.add(data.getSprite(o));
+        	}
+        }
 	} 
 	public List<Sprite> getAllCollidedSprites(){
 		return collidedSprites;

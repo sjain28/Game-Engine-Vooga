@@ -16,7 +16,6 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
-import javafx.scene.input.KeyEvent;
 import tools.interfaces.VoogaData;
 
 /**
@@ -58,6 +57,11 @@ public class LevelData {
 	public Sprite getMainCharacter(){
 		return (Sprite) myElements.get(myMainCharacterID);
 	}
+	/**
+	 * returns all Sprite's 
+	 * 
+	 * @return
+	 */
 	public List<Sprite> getAllSprites(){
 		List<Sprite> sprites = new ArrayList<Sprite>();
 		for(String id : myElements.keySet()){
@@ -95,12 +99,12 @@ public class LevelData {
 	}
 	/**
 	 * Removes sprite given an id
+	 * 
 	 * @param id
 	 */
 	public void removeSprite(Object id){
 		myElements.remove(id);
 	}
-
 	/**
 	 * Returns a Global Variable (VoogaData) as specified
 	 * by it's variable name
@@ -111,7 +115,6 @@ public class LevelData {
 	public VoogaData getGlobalVar(String variable){
 		return myGlobalVariables.get(variable);
 	}
-
 	/**
 	 * Returns a VoogaText by id
 	 * @param id
@@ -120,7 +123,6 @@ public class LevelData {
 	public VoogaFrontEndText getText(Object id){
 		return (VoogaFrontEndText) myElements.get(id);
 	}
-
 	/**
 	 * put all objects into a generic list of display-able objects
 	 * to be accessed by the GameRunner after every update cycle.
@@ -168,20 +170,17 @@ public class LevelData {
 	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
         myEvents.add(voogaEvent);
 		for(Cause c: voogaEvent.getCauses()){
-			c.init();
+			c.init(this);
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
-	
 				myKeyCauses.put(keyc.getKeys(), keyc); 
 				myKeyCombos.add(keyc.getKeys()); 
 				myKeyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
 			}
 		}
 		for(Effect e: voogaEvent.getEffects()){
-		    e.init();
+		    e.init(this);
 		}
-
-		
 	}
 	/**
 	 * Populates the LevelData with the Data from a level specified by filename

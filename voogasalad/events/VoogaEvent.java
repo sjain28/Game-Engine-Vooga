@@ -15,7 +15,7 @@ public class VoogaEvent {
 	//private OUTDATEDObjectManager myEngineManager;
 	//private LevelData myData;
 	private List<Sprite> myCauseSprites;
-	private StandardPhysics myPhysicsEngine = new StandardPhysics();
+	//private StandardPhysics myPhysicsEngine = new StandardPhysics();
 
 	public VoogaEvent(){
 		myCauses = new ArrayList<>();
@@ -77,7 +77,7 @@ public class VoogaEvent {
 	public List<Sprite> getSpritesFromCauses(){
 		return myCauseSprites;
 	}
-	public StandardPhysics getPhysicsEngine(){
-		return myPhysicsEngine;
-	}
+//	public StandardPhysics getPhysicsEngine(){
+//		return myPhysicsEngine;
+//	}
 }

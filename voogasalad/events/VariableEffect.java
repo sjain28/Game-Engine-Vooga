@@ -1,6 +1,8 @@
 package events;
 
 import java.lang.reflect.*;
+
+import player.leveldatamanager.LevelData;
 import tools.interfaces.VoogaData;
 
 
@@ -34,9 +36,9 @@ public class VariableEffect extends Effect {
 		myParameter = parameter;
 	}
 	@Override
-	public void execute () {
+	public void execute (LevelData data) {
 		//Class varClass = getEvent().getManager().getGlobalVar(myVariable).getClass();
-		VoogaData variableData = getEvent().getManager().getGlobalVar(myVariable);
+		VoogaData variableData = data.getGlobalVar(myVariable);
 		callEffectMethod(variableData);
 	}
 	

@@ -75,12 +75,14 @@ public class SpriteEffect extends VariableEffect{
 	
 	@Override
 	public void init(){
-	    System.out.println("Initializing srite effect");
+	   //why is this part needed if setSprites is already a method we have?
+		//sprite could be deleted
+	   /* System.out.println("Initializing srite effect");
 		if(mySpriteID != null){
 			System.out.println("Initializing the Sprite now");
 			mySprites.add(getEvent().getManager().getSprite(mySpriteID));
 			System.out.println(mySprites.size());
-		}
+		}*/
 	}
 	
 	@Override
@@ -94,36 +96,54 @@ public class SpriteEffect extends VariableEffect{
 	/**
 	 * Determines which sprites need to be set for this effect depending on the constructor that was used, as well as the
 	 * sprite outputs of the cause within the same event.
+	 * 
+	 * TODO: CONSIDER THE CASE OF IF A SINGLE SPRITE ID IS SET TO BE EFFECTED AND THAT SPRITE DIES
+	 * NEED TO CHECK 
 	 */
 	protected List<Sprite> getSpritesToBeEffected(LevelData data){
 		List<Sprite> sprites = new ArrayList<Sprite>();
+		// if this is some sort of collision effect that needs to know what sprite's were involved in the cause
 		if (needsSprites){
 			sprites = getEvent().getSpritesFromCauses();
-		}
-		if (getMyArchetype() != null){
-			// get sprite manager, get all sprites of archetype
-			List<String> archSpriteIDs = data.getSpriteIDs(getMyArchetype());
 			
-			//TODO: why is this removal function necessary?? why would any sprites be there that shouldn't be
-			if (sprites.size() != 0){
+			//remove all sprites that are not of specified archetype if archetype was specified as well
+			if(myArchetype!=null){
+				List<String> archSpriteIDs = data.getSpriteIDs(getMyArchetype());
 				for(Sprite sprite : sprites){
 					if(!archSpriteIDs.contains(sprite.getID())){
 						sprites.remove(sprite);
 					}
 				}
 			}
-			else {
-				for(String spriteID : archSpriteIDs){
-					sprites.add(data.getSprite(spriteID));
+			
+			//remove all sprite's that are not of specified id if that id was specified
+			if(mySpriteID!=null){
+				for(int i = 0; i<sprites.size(); i++){
+					if(sprites.get(i).getID()!=mySpriteID){
+						sprites.remove(i);
+					}
 				}
 			}
+		}
+		// otherwise should affect all sprite's of a given archetype 
+		else if (myArchetype != null){
+			//get all sprite's of archetype
+			for(String spriteID : data.getSpriteIDs(getMyArchetype())){
+				sprites.add(data.getSprite(spriteID));
+			}
+			
+		}
+		// or a single sprite that was specified 
+		//ADDED IN CASE HERE FOR IF ITS NOT AN ARCHETYPE OR A LIST OF SPRITES FROM CAUSES
+		else if(mySpriteID!=null){
+			sprites.add(data.getSprite(mySpriteID));
 		}
 		return sprites;
 	}
 	
-	protected List<Sprite> getSprites(){
+	/*protected List<Sprite> getSprites(){
 		return mySprites;
-	}
+	}*/
 
 	public String getMyArchetype() {
 		return myArchetype;
@@ -134,9 +154,6 @@ public class SpriteEffect extends VariableEffect{
 	}
 	public void setNeedsSprites(Boolean needsSprites){
 		this.needsSprites = needsSprites;
-	}
-	public List<Sprite> getMySprites(){
-		return mySprites;
 	}
 	public void setSpriteID(String spriteID){
 		mySpriteID = spriteID;

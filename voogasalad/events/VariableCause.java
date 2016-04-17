@@ -2,38 +2,37 @@ package events;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import player.leveldatamanager.LevelData;
 import tools.interfaces.VoogaData;
 
-public class VariableCause extends Cause{
+public abstract class VariableCause extends Cause{
 
 	private Object myTarget;
 	private String myOperation;
 	private VoogaData myVariable;
-	private String myVarName;
-	
-	public VariableCause(String variableName, String predicate, Double targetValue, VoogaEvent voogaEvent) {		
+	//private String myVarName;
+	public VariableCause(VoogaEvent voogaEvent){
+		super(voogaEvent);
+	}
+	/*public VariableCause(String predicate, Double targetValue, VoogaEvent voogaEvent) {		
 		super(voogaEvent);
 		myTarget = targetValue;
 		myOperation = predicate;
-		myVarName = variableName;
+		//myVarName = variableName;
 	}
 	
-	public VariableCause(String variableName, String predicate, Boolean targetValue, VoogaEvent voogaEvent) {		
+	public VariableCause(String predicate, VoogaEvent voogaEvent){
 		super(voogaEvent);
-		myTarget = targetValue;
 		myOperation = predicate;
-		myVarName = variableName;
-	}
-	
-	public VariableCause(String predicate, VoogaEvent event){
-		super(event);
-		myOperation = predicate;
-	}
+	}*/
 	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean check(LevelData data) {
-		
+		//added in this first line to replace need for init 
+		//because for many of the effects and causes it doesn't seem necessary
+		//myVariable = data.getGlobalVar(myVarName);
 		Class<?> variableClass = myVariable.getClass();
 		Class[] paramClass = {myTarget.getClass()};
 		
@@ -53,6 +52,7 @@ public class VariableCause extends Cause{
 		return false;
 	}
 	
+	//TODO: WHERE IS THIS USED?
 	protected void setVariable(VoogaData data){
 		myVariable = data;
 	}
@@ -67,8 +67,7 @@ public class VariableCause extends Cause{
 
 	@Override
 	public void init() {
-		myVariable = super.getEvent().getManager().getGlobalVar(myVarName);
+		//myVariable = super.getEvent().getManager().getGlobalVar(myVarName);
 		
 	}
-
 }

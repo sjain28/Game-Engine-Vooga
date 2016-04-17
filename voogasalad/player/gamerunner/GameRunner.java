@@ -16,6 +16,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.util.Duration;
+import physics.IPhysicsEngine;
+import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
@@ -43,7 +45,7 @@ public class GameRunner implements IGameRunner{
     private static final int INIT_SPEED = 61;
     
 	//private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
-    
+    private IPhysicsEngine myPhysicsEngine;
     private LevelData myLevelData;
     private SpriteManager mySpriteManager;
     private EventManager myEventManager;
@@ -59,6 +61,7 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException
 	 */
 	public GameRunner(File xmlList) throws FileNotFoundException, IOException {
+		myPhysicsEngine = new StandardPhysics();
 		myGameDisplay = new StandardDisplay(getSelf());
 		levelQueue = createLevels(xmlList);
 		myTimeline = new Timeline();
@@ -121,16 +124,16 @@ public class GameRunner implements IGameRunner{
 		//TODO: PASS IN KEY EVENTS AND EVENTS TO 
 		//myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
 				
-		//update all Sprites with physics engine 
-		mySpriteManager.update(myLevelData.getAllSprites());
+		//update all Sprite's with physics engine 
+		mySpriteManager.update(myLevelData.getAllSprites(),myPhysicsEngine);
 		
-		//update all Sprites with Cause and Effect logic
+		//update all Sprite's with Cause and Effect logic
 		myEventManager.update(myLevelData, myGameDisplay.getKeyClicks());
 		
 		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
 
-		//repopulate the game screen
+		//re-populate the game screen
 		myGameDisplay.populateGameScreen();
 		
 		//clear key events from myGameDisplay.
