@@ -1,10 +1,11 @@
 package authoring.gui.menubar;
 
-import auxiliary.VoogaException;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 import player.gamerunner.GameRunner;
+import tools.VoogaException;
 
 public abstract class PlayerMenuItemHandler extends MenuItemHandler {
 	

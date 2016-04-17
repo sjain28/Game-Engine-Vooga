@@ -4,9 +4,9 @@ import java.awt.Desktop;
 import java.net.URI;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.VoogaException;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
+import tools.VoogaException;
 /**
  * MenuItem to open up a help page.
  * 

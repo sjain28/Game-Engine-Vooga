@@ -9,8 +9,6 @@ import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -22,6 +20,8 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import tools.VoogaAlert;
+import tools.VoogaException;
 import resources.VoogaBundles;
 
 /**
