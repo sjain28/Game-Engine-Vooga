@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 
 public class MenuPanel extends MenuBar implements Windowable {
@@ -23,8 +24,14 @@ public class MenuPanel extends MenuBar implements Windowable {
 	private static final String MENU_KEY = "Menu";
 	private static final String ITEM_KEY = "Item";
 
+	@Deprecated
 	public MenuPanel(CompleteAuthoringModelable elementManager, EventHandler<ActionEvent> menuItemEvent) {
 		menubarProperties = VoogaBundles.menubarProperties;
+		makeMenus(menuMap(menuItemEvent));
+	}
+	
+	public MenuPanel(Menuable elementManager, EventHandler<ActionEvent> menuItemEvent, OrderedProperties properties) {
+		menubarProperties = properties;
 		makeMenus(menuMap(menuItemEvent));
 	}
 

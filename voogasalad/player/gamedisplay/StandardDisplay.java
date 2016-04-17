@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.VoogaScene;
+import authoring.gui.menubar.MenuPanel;
+import authoring.gui.menubar.MenuPanelHandlingMirror;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -14,6 +16,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
+import resources.VoogaBundles;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -137,6 +140,10 @@ public class StandardDisplay implements IGameDisplay {
 	private void createPane() {
 		//Adds all components into the main border pane
 		getPane().setCenter(myGameScreen);
+		System.out.println(myGameRunner);
+		getPane().setTop(new MenuPanel(myGameRunner, e -> {
+			new MenuPanelHandlingMirror(e, myGameRunner);
+		}, VoogaBundles.playerMenubarProperties));
 		getPane().setBottom(myControl.createControl());
 		//Below is optional (adds HUD)
 		getPane().setRight(myHUD.createHUD());
@@ -183,6 +190,7 @@ public class StandardDisplay implements IGameDisplay {
 	/**
 	 * @return the myStage
 	 */
+	@Override
 	public Stage getStage() {
 		return myStage;
 	}
