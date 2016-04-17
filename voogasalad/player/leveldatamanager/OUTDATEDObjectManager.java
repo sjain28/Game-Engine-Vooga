@@ -19,6 +19,7 @@ import tools.interfaces.VoogaData;
  * Manages sprites, texts, and global variables
  *
  */
+@Deprecated
 public class OUTDATEDObjectManager {
 
 	// Maps IDs to Sprites (Elementables)

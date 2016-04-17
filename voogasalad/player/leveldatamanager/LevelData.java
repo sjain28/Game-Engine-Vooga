@@ -16,6 +16,7 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 /**
@@ -26,7 +27,7 @@ import tools.interfaces.VoogaData;
  * @author Krista
  *
  */
-public class LevelData {
+public class LevelData implements ILevelData {
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
 	private Map<String,Elementable> myElements;
@@ -40,6 +41,12 @@ public class LevelData {
 	private List<List<String>> myKeyCombos;
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
+	
+	
+//	public LevelData() {
+//		
+//	}
+	
 	
 	/**
 	 * Returns a sprite by id
@@ -209,6 +216,10 @@ public class LevelData {
 
 		Map<String,VoogaData> variableObjects = data.getVariableMap();
 		System.out.println("All the variables here are" + variableObjects);
+	}
+	
+	public int getLevelNumber() {
+		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 	
 }

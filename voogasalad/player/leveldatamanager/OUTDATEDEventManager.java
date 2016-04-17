@@ -20,6 +20,7 @@ import events.KeyCause;
 /*
  * This class will hold all of the game events and handle updating the game accordingly.
  */
+@Deprecated
 public class OUTDATEDEventManager {
 
 	//private List<String> keyStrokes; //List of all key things that have happened
@@ -65,7 +66,7 @@ public class OUTDATEDEventManager {
 	}
 
 	public void addEvent(VoogaEvent voogaEvent){
-	    voogaEvent.setManager(myEngineManager);
+	//    voogaEvent.setManager(myEngineManager);
             myEvents.add(voogaEvent);
 		for(Cause c: voogaEvent.getCauses()){
 			c.init();
