@@ -12,8 +12,7 @@ import tools.OrderedProperties;
  */
 public class VoogaBundles {
     
-        public final static String archetypePropertiesPath = "archetypes.properties";
-    
+    public final static String archetypePropertiesPath = "archetypes.properties";
 	public final static ResourceBundle extensionProperties = ResourceBundle.getBundle("resources/extensions");
 	public final static OrderedProperties menubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/menunames.properties"));
 	public final static OrderedProperties playerMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playermenunames.properties"));
