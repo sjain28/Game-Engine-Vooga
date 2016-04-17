@@ -5,6 +5,17 @@ import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.ImportArchetype;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
+<<<<<<< HEAD
+import player.gamedisplay.Menuable;
+import tools.VoogaException;
+
+public class NewImportArchetypeFileItem extends MenuItemHandler{
+    private CompleteAuthoringModelable manager;
+    private EventHandler event;
+    public NewImportArchetypeFileItem(Menuable model, EventHandler event){
+        this.setManager((CompleteAuthoringModelable) model);
+        this.event=event;
+=======
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 import tools.VoogaException;
@@ -14,10 +25,11 @@ public class NewImportArchetypeFileItem extends AuthoringMenuItemHandler {
     
     public NewImportArchetypeFileItem(Menuable model, EventHandler<InputEvent> event){
         this.manager = (CompleteAuthoringModelable) model;
+>>>>>>> master
     }
     @Override
     public void handle () throws VoogaException {
-        ImportArchetype importArchetype = new ImportArchetype(manager);
+        ImportArchetype importArchetype = new ImportArchetype(getManager());
         importArchetype.show();
         
     }
