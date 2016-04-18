@@ -19,7 +19,6 @@ public class NewImportArchetypeFileItem extends AuthoringMenuItemHandler {
     public void handle () throws VoogaException {
         ImportArchetype importArchetype = new ImportArchetype(manager);
         importArchetype.show();
-        
     }
     /**
      * @return the manager
