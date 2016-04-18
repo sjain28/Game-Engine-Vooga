@@ -151,7 +151,6 @@ public class DesignBoard extends Tab implements Observer {
 		if (elementPath != null) {
 			try {
 				if (ResourceDecipherer.isImage(elementPath)) {
-					System.out.print(archetype);
 					node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
 					node.setTranslateX(event.getX() - x_offset);
 					node.setTranslateY(event.getY() - y_offset);

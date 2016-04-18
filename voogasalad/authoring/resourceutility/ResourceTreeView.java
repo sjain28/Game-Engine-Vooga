@@ -28,7 +28,7 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	 * @param projectRoot
 	 */
 	public ResourceTreeView(VoogaFile projectRoot) {		
-		root = new TreeItem<VoogaFile>(projectRoot, makeImage(projectRoot.getType()));
+		root = new TreeItem<VoogaFile>(projectRoot, makeImage(projectRoot));
 		root.setExpanded(true);
 		this.setEditable(true);
 		this.setRoot(root);
@@ -55,7 +55,7 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	}
 	
 	private void add(VoogaFile child, TreeItem<VoogaFile> parentDirectory) {
-		TreeItem<VoogaFile> childItem = new TreeItem<VoogaFile>(child, makeImage(child.getType()));
+		TreeItem<VoogaFile> childItem = new TreeItem<VoogaFile>(child, makeImage(child));
 		if(parentDirectory != null) {
 			VoogaFile parent = parentDirectory.getValue();
 			if(parent.getType() == VoogaFileType.FOLDER) {
@@ -99,8 +99,8 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	 * @param type
 	 * @return
 	 */
-	private ImageView makeImage(VoogaFileType type) {
-		return new ImageView(new Image(LOCATION	 + type.name() + EXTENSION));
+	private ImageView makeImage(VoogaFile file) {
+		return new ImageView(new Image(LOCATION	 + file.getType().name() + EXTENSION));
 	}
 
 	/**
