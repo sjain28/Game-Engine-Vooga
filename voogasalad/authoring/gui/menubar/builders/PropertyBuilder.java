@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
+
 public class PropertyBuilder extends Builder {
    
 	private VBox container;
@@ -58,20 +59,20 @@ public class PropertyBuilder extends Builder {
     public String getName() {
     	return this.variableName.getText();
     }
-    
-    public String getValue() {
-    	return this.variableValue.getText();
+
+    public String getValue () {
+        return this.variableValue.getText();
     }
 
-	@Override
+    @Override
     public void compile () {
-        try{
-        	
+        try {
+
         }
-       catch(Exception e) {
-           numberError("Please input a valid number");
-       }
-       quit();
+        catch (Exception e) {
+            numberError("Please input a valid number");
+        }
+        quit();
     }
 
 }
