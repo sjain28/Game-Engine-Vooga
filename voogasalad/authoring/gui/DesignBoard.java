@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
+import com.sun.prism.paint.Color;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
 import authoring.VoogaScene;
@@ -27,10 +30,13 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -66,7 +72,11 @@ public class DesignBoard extends Tab implements Observer{
         this.setText(DESIGN_BOARD);
         contentPane = new StackPane();
         contentPane.setMinSize(WIDTH, HEIGHT);
-        contentPane.setOnMouseClicked(e -> { if(e.getButton() == MouseButton.SECONDARY) { new ResizePrompt(e); }});
+        Pane pane = new Pane();
+        Rectangle rect = new Rectangle(400, 400);
+        rect.setFill(Paint.valueOf("red"));
+        pane.getChildren().add(rect);
+        contentPane.getChildren().add(pane);
         elementManager = elem;
         elementManager.addObserver(this);
         container = new ScrollPane();
