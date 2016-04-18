@@ -40,7 +40,7 @@
         </tools.VoogaNumber>
       </entry>
     </myProperties>
-    <myImagePath>file:////Users/adityasrinivasan/Documents/GitHub/voogasalad_DoovalSalad/images/mario.png</myImagePath>
+    <myImagePath>/mario.png</myImagePath>
     <myArchetype>Player</myArchetype>
   </gameengine.Sprite>
 </object-stream>
