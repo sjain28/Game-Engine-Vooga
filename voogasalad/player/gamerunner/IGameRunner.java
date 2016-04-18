@@ -29,8 +29,6 @@ public interface IGameRunner extends Menuable {
 	
 	void replayLevel();
 	
-	void advanceToNextLevel();
-	
 	void replayGame();
 
 	// Methods below only called by LevelDataManager
@@ -43,7 +41,5 @@ public interface IGameRunner extends Menuable {
 	void read(Collections nodesToDisplay);
 
 	int changeLevel();
-	
-	void playGame();
 
 }

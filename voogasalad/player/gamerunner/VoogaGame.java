@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 
 import data.Deserializer;
 import data.Serializer;
+import tools.VoogaException;
 
 public class VoogaGame {
 
@@ -20,7 +21,12 @@ public class VoogaGame {
 	private Map<String, String> userProgress;
 	
 	public VoogaGame(String xmlFileName){
+		try{
 		levelOrder = (List<String>) Deserializer.deserialize(1, xmlFileName).get(0);
+		}
+		catch(VoogaException e){
+			e.printStackTrace();
+		}
 //		userProgress = (Map<String,String>) Deserializer.deserialize(2, xmlFileName).get(1);
 		System.out.println(levelOrder);
 	}
