@@ -22,7 +22,7 @@ public class UIGrid extends GridPane {
 
     private PropertiesPane propertiesPane;
     private DesignBoardHousing designBoard;
-    private ResourceUI explorer;
+    private Explorer explorer;
     private CompleteAuthoringModelable myManager;
 
     /**
@@ -59,7 +59,7 @@ public class UIGrid extends GridPane {
     }
 
     private void populate () throws VoogaException {
-        explorer = new ResourceUI();
+        explorer = new Explorer();
         this.add(explorer, 0, 0);
         designBoard = new DesignBoardHousing(myManager);
         this.add(designBoard, 1, 0);
