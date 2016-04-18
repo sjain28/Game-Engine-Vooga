@@ -109,7 +109,6 @@ public class ArchetypeBuilder extends Builder {
 		iv = new ImageView();
 		image = new ButtonMaker().makeButton("Choose Image", e -> {
 			FileChooser fileChooser = new FileChooser();
-
 			java.io.File file = fileChooser.showOpenDialog(null);
 			loadImage(file.getPath());
 		});
