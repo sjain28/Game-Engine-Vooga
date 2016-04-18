@@ -20,7 +20,7 @@ public class TextObjectBuilder extends Builder {
 		super(editor);
 		this.text = new TextField();
 		populate();
-		show(this.container);
+		load(this.container);
 	}
 
 	private void populate() {

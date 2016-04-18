@@ -62,7 +62,7 @@ public class ArchetypeBuilder extends Builder {
 		this.archetypeName = new TextField();
 		this.mass = new TextField();
 		populate();
-		show(this.tabpane);
+		load(this.tabpane);
 		// makeInfo();
 		// makeProperty();
 		// makeImagePicker();
