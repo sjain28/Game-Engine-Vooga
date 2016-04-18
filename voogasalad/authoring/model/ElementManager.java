@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -29,159 +30,165 @@ import javafx.scene.Node;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
+public class ElementManager extends Observable implements Saveable, CompleteAuthoringModelable, Observer {
 
-public class ElementManager extends Observable implements Saveable, CompleteAuthoringModelable {
+	private List<Node> myGameElements;
+	private List<VoogaEvent> myEventList;
 
-    private List<Node> myGameElements;
-    private List<VoogaEvent> myEventList;
-    
-    private GlobalPropertiesManager GPM;
-    private Map<String, VoogaData> myGlobalVariables;
-    
-    private File myXmlDataFile;
-    private SpriteFactory spriteFactory;
-    private Set<String> myIds;
-    private String filePath="levels/Test.xml";
+	private GlobalPropertiesManager GPM;
+	private Map<String, VoogaData> myGlobalVariables;
 
-    public ElementManager () {
-        myGameElements = new ArrayList<Node>();
-        myEventList = new ArrayList<VoogaEvent>();
-        GPM = new GlobalPropertiesManager();
-        myGlobalVariables = GPM.getVoogaProperties();
-        myXmlDataFile = null;
-        myIds = new HashSet<String>();
-        spriteFactory = new SpriteFactory();
-        myXmlDataFile = new File("/levels/Test.xml");
-    }
+	private File myXmlDataFile;
+	private SpriteFactory spriteFactory;
+	private Set<String> myIds;
+	private String filePath = "levels/Test.xml";
 
-    public ElementManager (File xmlDataFile) {
-        this();
-        this.myXmlDataFile = xmlDataFile;
-    }
+	public ElementManager() {
+		myGameElements = new ArrayList<Node>();
+		myEventList = new ArrayList<VoogaEvent>();
+		GPM = new GlobalPropertiesManager();
+		myGlobalVariables = GPM.getVoogaProperties();
+		myXmlDataFile = null;
+		myIds = new HashSet<String>();
+		spriteFactory = new SpriteFactory();
+		myXmlDataFile = new File("/levels/Test.xml");
+		spriteFactory.addObserver(this);
+	}
 
-    public void addGameElements (Node ... elements) {
-        myGameElements.addAll(Arrays.asList(elements));
-        setChanged();
-        notifyObservers(myGameElements);
-    }
+	public ElementManager(File xmlDataFile) {
+		this();
+		this.myXmlDataFile = xmlDataFile;
+	}
 
-    public void removeGameElements (Node ... elements) {
-        myGameElements.removeAll(Arrays.asList(elements));
-        setChanged();
-        notifyObservers(myGameElements);
-    }
+	public void addGameElements(Node... elements) {
+		myGameElements.addAll(Arrays.asList(elements));
+		setChanged();
+		notifyObservers(myGameElements);
+	}
 
-    public List<Node> getElements () {
-        return myGameElements;
-    }
+	public void removeGameElements(Node... elements) {
+		myGameElements.removeAll(Arrays.asList(elements));
+		setChanged();
+		notifyObservers(myGameElements);
+	}
 
-    public void addEvents (VoogaEvent ... events) {
-        myEventList.addAll(Arrays.asList(events));
-    }
+	public List<Node> getElements() {
+		return myGameElements;
+	}
 
-    public void removeEvents (VoogaEvent ... events) {
-        myEventList.removeAll(Arrays.asList(events));
-    }
+	public void addEvents(VoogaEvent... events) {
+		myEventList.addAll(Arrays.asList(events));
+	}
 
-    public Node getElement (String id) {
-        for (Node node : myGameElements) {
+	public void removeEvents(VoogaEvent... events) {
+		myEventList.removeAll(Arrays.asList(events));
+	}
 
-            if (node.getId().equals(id)) {
-                return node;
-            }
-        }
+	public Node getElement(String id) {
+		for (Node node : myGameElements) {
 
-        return null;
-    }
+			if (node.getId().equals(id)) {
+				return node;
+			}
+		}
 
-    public Set<String> getIds () {
-        return this.myIds;
-    }
+		return null;
+	}
 
-    public void addElementId (String id) {
-        myIds.add(id);
-    }
+	public Set<String> getIds() {
+		return this.myIds;
+	}
 
-    public boolean hasElement (String id) {
-        return myIds.contains(id);
-    }
+	public void addElementId(String id) {
+		myIds.add(id);
+	}
 
-    /**
-     * Write Data to XML using XStream
-     */
-    @Override
-    public void onSave () throws VoogaException {
+	public boolean hasElement(String id) {
+		return myIds.contains(id);
+	}
 
-        updateGlobalPropertiesMap();
+	/**
+	 * Write Data to XML using XStream
+	 */
+	@Override
+	public void onSave() throws VoogaException {
 
-        List<Elementable> elements = new ArrayList<Elementable>();
+		updateGlobalPropertiesMap();
 
-        for (Node element : myGameElements) {
-            if (element instanceof GameObject) {
-            	Sprite sprite = ((GameObject) element).getSprite();
-                elements.add(sprite);
-            }
+		List<Elementable> elements = new ArrayList<Elementable>();
 
-            if (element instanceof VoogaFrontEndText) {
-                elements.add((VoogaFrontEndText) element);
-            }
-        }
+		for (Node element : myGameElements) {
+			if (element instanceof GameObject) {
+				Sprite sprite = ((GameObject) element).getSprite();
+				elements.add(sprite);
+			}
 
-        DataContainerOfLists data =
-                new DataContainerOfLists(elements, myGlobalVariables, myEventList,spriteFactory);
-        System.out.println("I'm done saving in element manager");
-        try {
-            System.out.println(myXmlDataFile.getPath());
-            FileWriterFromGameObjects.saveGameObjects(data, filePath);
-        }
-        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-            throw new VoogaException();
-        }
-    }
+			if (element instanceof VoogaFrontEndText) {
+				elements.add((VoogaFrontEndText) element);
+			}
+		}
 
-    public SpriteFactory getSpriteFactory () {
-        return spriteFactory;
-    }
+		DataContainerOfLists data = new DataContainerOfLists(elements, myGlobalVariables, myEventList, spriteFactory);
+		System.out.println("I'm done saving in element manager");
+		try {
+			System.out.println(myXmlDataFile.getPath());
+			FileWriterFromGameObjects.saveGameObjects(data, filePath);
+		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
+			throw new VoogaException();
+		}
+	}
 
-    public Collection<String> getMySpriteNames () {
-        Collection<String> mySpriteNames = new HashSet<String>();
-        for (Node e : myGameElements) {
-            mySpriteNames.add(((Elementable) e).getName());
-        }
-        return mySpriteNames;
-    }
+	public SpriteFactory getSpriteFactory() {
+		return spriteFactory;
+	}
 
-    public Map<String, VoogaData> getGlobalVariables () {
-        updateGlobalPropertiesMap();
-        return myGlobalVariables;
-    }
+	public Collection<String> getMySpriteNames() {
+		Collection<String> mySpriteNames = new HashSet<String>();
+		for (Node e : myGameElements) {
+			mySpriteNames.add(((Elementable) e).getName());
+		}
+		return mySpriteNames;
+	}
 
-    public void updateGlobalPropertiesMap () {
-        myGlobalVariables = GPM.getVoogaProperties();
-    }
+	public Map<String, VoogaData> getGlobalVariables() {
+		updateGlobalPropertiesMap();
+		return myGlobalVariables;
+	}
 
-    public GlobalPropertiesManager getGlobalPropertiesManager () {
-        return GPM;
-    }
+	public void updateGlobalPropertiesMap() {
+		myGlobalVariables = GPM.getVoogaProperties();
+	}
 
-    @Override
-    public void addGlobalVariable (String name, VoogaData value) {
-    	myGlobalVariables.put(name, value);
-    	setChanged();
-    	notifyObservers(myGlobalVariables);
-    }
+	public GlobalPropertiesManager getGlobalPropertiesManager() {
+		return GPM;
+	}
 
-    @Override
-    public Elementable getVoogaElement (String id) {
-        for (Node node :myGameElements){
-            if (node instanceof Elementable){
-                Elementable e = (Elementable) node;
-                if (e.getID().equals(id)){
-                    return e;
-                }
-            }
-        }
-        return null;
-    }
+	@Override
+	public void addGlobalVariable(String name, VoogaData value) {
+		myGlobalVariables.put(name, value);
+		setChanged();
+		notifyObservers(myGlobalVariables);
+	}
+
+	@Override
+	public Elementable getVoogaElement(String id) {
+		for (Node node : myGameElements) {
+			if (node instanceof Elementable) {
+				Elementable e = (Elementable) node;
+				if (e.getID().equals(id)) {
+					return e;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void update(Observable o, Object obj) {
+		if (o instanceof SpriteFactory) {
+			setChanged();
+			notifyObservers(obj);
+		}
+	}
 
 }
