@@ -27,7 +27,6 @@ import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelData;
-import player.leveldatamanager.LevelDataManager;
 import player.leveldatamanager.SpriteManager;
 
 /**
@@ -157,7 +156,6 @@ public class GameRunner implements IGameRunner{
 				//TODO: process the line.
 				levelList.add(line);
 			}
-		}
 		return levelList;
 	}
 	
@@ -414,17 +412,11 @@ public class GameRunner implements IGameRunner{
 
 	}
 
-	@Override
-	public void replayLevel() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void advanceToNextLevel() {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public int replayLevel() {
+//		// TODO Auto-generated method stub
+//		return changeLevel();
+//	}
 
 	@Override
 	public void replayGame() {}
@@ -433,5 +425,11 @@ public class GameRunner implements IGameRunner{
 	public int changeLevel() {
 		return 5;
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void replayLevel() {
+		// TODO Auto-generated method stub
+		
 	}
 }
