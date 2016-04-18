@@ -1,17 +1,19 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.gui.menubar.AuthoringMenuItemHandler;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.ImportArchetype;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
+import javafx.scene.input.InputEvent;
+import player.gamedisplay.Menuable;
 import tools.VoogaException;
 
-public class NewImportArchetypeFileItem extends MenuItemHandler{
+public class NewImportArchetypeFileItem extends AuthoringMenuItemHandler {
     CompleteAuthoringModelable manager;
-    EventHandler event;
-    public NewImportArchetypeFileItem(CompleteAuthoringModelable model, EventHandler event){
-        this.manager=model;
-        this.event=event;
+    
+    public NewImportArchetypeFileItem(Menuable model, EventHandler<InputEvent> event){
+        this.manager = (CompleteAuthoringModelable) model;
     }
     @Override
     public void handle () throws VoogaException {

@@ -13,7 +13,7 @@
       <x>0.0</x>
       <y>0.0</y>
     </myLoc>
-    <myID>a533b5c2-6cbb-4b7c-8b0c-0f92eee7de7b</myID>
+    <myID>000d7fec-921f-490b-973c-13731927c890</myID>
     <myProperties>
       <entry>
         <string>alive</string>
@@ -30,17 +30,17 @@
       <entry>
         <string>mass</string>
         <tools.VoogaNumber>
-          <myValue>1000.0</myValue>
+          <myValue>15.0</myValue>
         </tools.VoogaNumber>
       </entry>
       <entry>
-        <string>asdfas</string>
+        <string>health</string>
         <tools.VoogaNumber>
-          <myValue>1.0</myValue>
+          <myValue>100.0</myValue>
         </tools.VoogaNumber>
       </entry>
     </myProperties>
-    <myImagePath>file:////Users/arjunaashna/Documents/workspace/voogasalad_DoovalSalad/images/bricks.jpg</myImagePath>
-    <myArchetype>asdfasfas</myArchetype>
+    <myImagePath>file:////Users/adityasrinivasan/Documents/GitHub/voogasalad_DoovalSalad/images/smile.jpg</myImagePath>
+    <myArchetype>Smiley</myArchetype>
   </gameengine.Sprite>
 </object-stream>
