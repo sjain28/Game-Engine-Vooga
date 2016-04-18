@@ -38,6 +38,7 @@ import tools.interfaces.VoogaData;
 
 
 public class ArchetypeBuilder extends Builder {
+	
     private static final double WIDTH = 400;
     private static final double HEIGHT = 250;
     private String myImagePath;
@@ -66,11 +67,6 @@ public class ArchetypeBuilder extends Builder {
         this.mass = new TextField();
         populate();
         load(this.tabpane);
-        // makeInfo();
-        // makeProperty();
-        // makeImagePicker();
-        // makeInfo("Mass", MASS_INDEX);
-        // makeCreate();
     }
 
     private void populate () {
@@ -85,44 +81,13 @@ public class ArchetypeBuilder extends Builder {
         propertiesTab.setContent(pt);
     }
 
-    private void makeProperty () {
-        HBox complete = new HBox();
-
-        Text name = new Text("Property Name: ");
-        name.setFill(Color.WHITE);
-        TextField nameVal = new TextField();
-        Text value = new Text("Value: ");
-        value.setFill(Color.WHITE);
-        NumberTextField valueVal = new NumberTextField();
-        Button set = new Button("Add");
-        set.setOnAction(e -> {
-            VoogaData val = new VoogaNumber();
-            try {
-                val.setValue(Double.parseDouble(valueVal.getText()));
-                myProperties.put(nameVal.getText(), val);
-            }
-            catch (Exception NumberFormatException) {
-                numberError("Property Value");
-            }
-
-            nameVal.clear();
-            valueVal.clear();
-        });
-        complete.getChildren().addAll(name, nameVal, value, valueVal, set);
-    }
-
     private HBox makeImagePicker () {
         iv = new ImageView();
         image = new ButtonMaker().makeButton("Choose Image", e -> {
             VoogaFileChooser fileChooser = new VoogaFileChooser();
-            ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG (.png)", "*.png");
-            ExtensionFilter jpgFilter = new ExtensionFilter("JPG (.jpg)", "*.jpg");
-            ExtensionFilter jpegFilter = new ExtensionFilter("JPEG (.jpeg)", "*.jpeg");
-            fileChooser.addFilters(pngFilter, jpgFilter, jpegFilter);
             String path;
             try {
                 path = fileChooser.launch();
-                System.out.println("path: "+path);
                 loadImage(path);
             }
             catch (Exception e1) {
@@ -155,7 +120,7 @@ public class ArchetypeBuilder extends Builder {
 
     private void loadImage (String path) {
         this.myImagePath = path;
-        this.iv.setImage(new Image("file:///" + myImagePath));
+        this.iv.setImage(new Image("file:" + myImagePath));
         this.iv.setPreserveRatio(true);
         this.iv.setFitWidth(50);
     }
