@@ -176,7 +176,7 @@ public class ArchetypeBuilder extends Builder {
             }
             
             mySpriteFactory.addArchetype(archetypeName.getText(),
-                                         new Sprite("file:///" + myImagePath,
+                                         new Sprite("file:"+myImagePath,
                                                     archetypeName.getText(), myProperties, mass));
             quit();
         }
