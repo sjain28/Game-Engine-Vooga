@@ -76,7 +76,8 @@ public class ArchetypeBuilder extends Builder {
 		creation.setPadding(new Insets(SPACING));
 		creation.getChildren().addAll(makeInfo("Archetype:", "Enter an archetype...", archetypeName), makeImagePicker(),
 				makeMassPicker(), makeButtons());
-		propertiesTab.setContent(new PropertiesTable());
+		PropertiesTab pt = new PropertiesTab(myProperties);
+		propertiesTab.setContent(pt);
 	}
 
 	private void makeProperty() {
