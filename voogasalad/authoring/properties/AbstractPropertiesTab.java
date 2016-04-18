@@ -49,7 +49,7 @@ public abstract class AbstractPropertiesTab extends Tab {
 
     public AbstractPropertiesTab () {
         propertiesMap = new HashMap<String, VoogaData>();
-
+        this.setClosable(false);
         box.getChildren().add(myScrollPane);
         this.setContent(box);
         displayProperties();

@@ -70,12 +70,9 @@ public class DesignBoard extends Tab implements Observer{
      */
     public DesignBoard (CompleteAuthoringModelable elem) {
         this.setText(DESIGN_BOARD);
+        this.setClosable(false);
         contentPane = new StackPane();
         contentPane.setMinSize(WIDTH, HEIGHT);
-        Pane pane = new Pane();
-        Rectangle rect = new Rectangle(400, 400);
-        rect.setFill(Paint.valueOf("red"));
-        pane.getChildren().add(rect);
         contentPane.getChildren().add(pane);
         elementManager = elem;
         elementManager.addObserver(this);
