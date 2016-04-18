@@ -20,7 +20,7 @@ public class VoogaGame {
 	private Map<String, String> userProgress;
 	
 	public VoogaGame(String xmlFileName){
-		levelOrder = (List<String>) Deserializer.deserialize(1, xmlFileName).get(0);
+//		levelOrder = (List<String>) Deserializer.deserialize(1, xmlFileName).get(0);
 //		userProgress = (Map<String,String>) Deserializer.deserialize(2, xmlFileName).get(1);
 		System.out.println(levelOrder);
 	}

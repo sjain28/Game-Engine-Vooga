@@ -2,7 +2,6 @@ package player.gamedisplay;
 
 import java.util.ResourceBundle;
 
-import auxiliary.OrderedProperties;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;

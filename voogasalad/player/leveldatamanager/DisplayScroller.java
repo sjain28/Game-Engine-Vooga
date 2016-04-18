@@ -11,7 +11,7 @@ import javafx.scene.Node;
  * @author Hunter Lee
  *
  */
-public class DisplayScroller {
+public class DisplayScroller implements IDisplayScroller {
 
 	private int myScreenSizeX;
 	private int myScreenSizeY;
@@ -145,6 +145,20 @@ public class DisplayScroller {
 	 */
 	public void setScreenSizeY(int myScreenSizeY) {
 		this.myScreenSizeY = myScreenSizeY;
+	}
+
+
+	@Override
+	public void setScreenSizeX() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setScreenSizeY() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
