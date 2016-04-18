@@ -28,4 +28,5 @@ public interface ILevelData {
 
 	int getLevelNumber();
 
+	void setLevelNumber(int levelNumber);
 }

@@ -22,8 +22,8 @@ public class GameRunnerTest extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
 
-        IGameRunner gameRunner = new GameRunner(TESTXML_PATH);
-        gameRunner.playLevel(TESTXML_PATH);
+        IGameRunner gameRunner = new GameRunner();
+        gameRunner.playLevel(TESTXML_PATH, true);
         
         // Elementable[] vts = new Elementable[10];
         // VoogaData[] variables = new VoogaData[10];

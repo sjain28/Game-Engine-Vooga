@@ -10,6 +10,7 @@ import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
+import player.gamerunner.IGameRunner;
 import tools.interfaces.VoogaData;
 
 @Deprecated
@@ -17,12 +18,9 @@ public class DEPRECATEDLevelDataManager implements ILevelDataManager {
 
 	private static final int SCREENSIZE_DIM1 = 3;
 	private static final int SCREENSIZE_DIM2 = 35;
-<<<<<<< HEAD
 	private int nextLevel;
 	private IGameRunner myGameRunner;
-=======
 
->>>>>>> josh_hunter_continuity
 	private DisplayScroller displayScroller;
 	private OUTDATEDObjectManager myObjectManager;
 	private OUTDATEDEventManager myEventManager;
@@ -65,7 +63,6 @@ public class DEPRECATEDLevelDataManager implements ILevelDataManager {
 		myObjectManager.getAllDisplayableNodes();
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Constructor that takes in a reference to GameRunner LevelDataManager
 	 * belongs to (composition)
@@ -87,9 +84,7 @@ public class DEPRECATEDLevelDataManager implements ILevelDataManager {
 		bindImagesofSprites();
 	}
 
-	
-=======
->>>>>>> josh_hunter_continuity
+
 
 	/**
 	 * Read in the file to reconstruct objects created in the authoring
