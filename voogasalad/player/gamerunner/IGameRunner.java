@@ -1,5 +1,6 @@
 package player.gamerunner;
 
+import java.io.File;
 import java.util.Collections;
 
 import player.gamedisplay.Menuable;
@@ -23,11 +24,9 @@ public interface IGameRunner extends Menuable {
 
 	IGameRunner getSelf();
 
-	void playLevel(String teststring);
+	void playLevel(String teststring, boolean debugMode);
 	
-	void playGame();
-	
-	void replayLevel();
+	void playGame(File xmlList);
 	
 	void replayGame();
 
@@ -39,7 +38,5 @@ public interface IGameRunner extends Menuable {
 
 	@Deprecated
 	void read(Collections nodesToDisplay);
-
-	int changeLevel();
 
 }

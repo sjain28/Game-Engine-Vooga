@@ -44,8 +44,8 @@ public class LevelSaveTest extends Application{
 		levelMap.put("Player4", "Trythislevel.xml");
 		VoogaGame game = new VoogaGame(stringofLevels,levelMap);
 		Serializer.serialize(game, fileName);
-		IGameRunner gameRunner = new GameRunner(game);
-		gameRunner.playGame();
+//		IGameRunner gameRunner = new GameRunner(game);
+//		gameRunner.playGame();
 	}
 
 }
