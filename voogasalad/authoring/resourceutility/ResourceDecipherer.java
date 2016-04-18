@@ -2,9 +2,8 @@ package authoring.resourceutility;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import auxiliary.VoogaException;
 import resources.VoogaBundles;
+import tools.VoogaException;
 
 /**
  * A decrypter of file paths, in order to determine what kind of file a user is

@@ -10,24 +10,27 @@ import events.VoogaEvent;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
-import player.gamerunner.IGameRunner;
 import tools.interfaces.VoogaData;
 
-
-public class LevelDataManager implements ILevelDataManager {
+@Deprecated
+public class DEPRECATEDLevelDataManager implements ILevelDataManager {
 
 	private static final int SCREENSIZE_DIM1 = 3;
 	private static final int SCREENSIZE_DIM2 = 35;
+<<<<<<< HEAD
 	private int nextLevel;
 	private IGameRunner myGameRunner;
+=======
+
+>>>>>>> josh_hunter_continuity
 	private DisplayScroller displayScroller;
-	private ObjectManager myObjectManager;
-	private EventManager myEventManager;
+	private OUTDATEDObjectManager myObjectManager;
+	private OUTDATEDEventManager myEventManager;
 	private GlobalVariableManager myGlobalVariableManager;
 	private List<KeyEvent> myKeyEvents;
 	
 	
-	public LevelDataManager() {
+	public DEPRECATEDLevelDataManager() {
 		nextLevel = -1;
 		displayScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
 		myKeyEvents = new ArrayList<>();
@@ -42,7 +45,7 @@ public class LevelDataManager implements ILevelDataManager {
 	 * @param levelFileName
 	 */
 	@Deprecated
-	public LevelDataManager(String levelFileName) {
+	public DEPRECATEDLevelDataManager(String levelFileName) {
 		nextLevel = -1;
 		displayScroller = new DisplayScroller(SCREENSIZE_DIM1, SCREENSIZE_DIM2);
 		myKeyEvents = new ArrayList<>();
@@ -62,18 +65,19 @@ public class LevelDataManager implements ILevelDataManager {
 		myObjectManager.getAllDisplayableNodes();
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Constructor that takes in a reference to GameRunner LevelDataManager
 	 * belongs to (composition)
 	 * 
 	 */
 	@Deprecated
-	public LevelDataManager(IGameRunner gamerunner, String levelFileName) {
+	public DEPRECATEDLevelDataManager(IGameRunner gamerunner, String levelFileName) {
 		this(levelFileName);
 		this.myGameRunner = gamerunner;
 	}
 
-	public LevelDataManager(IGameRunner gamerunner) {
+	public DEPRECATEDLevelDataManager(IGameRunner gamerunner) {
 		this();
 		this.myGameRunner = gamerunner;
 	}
@@ -84,6 +88,8 @@ public class LevelDataManager implements ILevelDataManager {
 	}
 
 	
+=======
+>>>>>>> josh_hunter_continuity
 
 	/**
 	 * Read in the file to reconstruct objects created in the authoring
@@ -130,7 +136,6 @@ public class LevelDataManager implements ILevelDataManager {
 	 */
 	@Override
 	public void update() {
-		//setKeyEvents(getGameRunner().getKeyEvents());
 		myObjectManager.update();
 		myEventManager.update();
 		//Need to clear list of keyevents
@@ -158,17 +163,10 @@ public class LevelDataManager implements ILevelDataManager {
 			List<VoogaEvent> eventObjects,
 			Map<String,VoogaData> variableObjects,
 			SpriteFactory factory) {
-		myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
+		myObjectManager = new OUTDATEDObjectManager(elementObjects, variableObjects, factory);
 		myObjectManager.setKeyEvents(myKeyEvents);
-		myEventManager = new EventManager(myObjectManager, eventObjects);
+		myEventManager = new OUTDATEDEventManager(myObjectManager, eventObjects);
 		myGlobalVariableManager = new GlobalVariableManager(myObjectManager, variableObjects);
-	}
-
-	/**
-	 * @return the myGameRunner
-	 */
-	public IGameRunner getGameRunner() {
-		return myGameRunner;
 	}
 
 	/**

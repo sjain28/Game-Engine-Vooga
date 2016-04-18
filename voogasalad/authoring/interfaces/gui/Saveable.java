@@ -1,6 +1,6 @@
 package authoring.interfaces.gui;
 
-import auxiliary.VoogaException;
+import tools.VoogaException;
 
 /**
  * This interface applies to anything that can be saveable or that does save, 

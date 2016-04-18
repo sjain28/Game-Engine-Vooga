@@ -2,8 +2,7 @@ package events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import auxiliary.VoogaException;
+import tools.VoogaException;
 
 public class CauseAndEffectFactory {
 

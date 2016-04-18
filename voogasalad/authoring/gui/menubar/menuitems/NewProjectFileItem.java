@@ -7,6 +7,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import player.gamedisplay.Menuable;
 
 public class NewProjectFileItem extends MenuItemHandler {
     private Saveable myManager;
@@ -16,9 +17,9 @@ public class NewProjectFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public NewProjectFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
+	public NewProjectFileItem(Menuable model, EventHandler<InputEvent> event) {
 		super();
-		myManager = model;
+		myManager = (Saveable) model;
 	}
 	/**
          * Action to be taken on the selection of this menuItem

@@ -4,9 +4,9 @@ import java.awt.Desktop;
 import java.net.URI;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.VoogaException;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
+import tools.VoogaException;
 /**
  * MenuItem to open up a help page.
  * 
@@ -23,7 +23,7 @@ public class GetHelpHelpItem extends MenuItemHandler {
 	     * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	     */
 	public GetHelpHelpItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
-		super();
+		
 	}
 	/**
          * Action to be taken on the selection of this menuItem

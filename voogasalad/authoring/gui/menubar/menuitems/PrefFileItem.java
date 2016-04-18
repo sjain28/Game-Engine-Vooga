@@ -4,6 +4,7 @@ import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
+import player.gamedisplay.Menuable;
 
 public class PrefFileItem extends MenuItemHandler { 
     /**
@@ -12,7 +13,7 @@ public class PrefFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public PrefFileItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
+	public PrefFileItem(Menuable model, EventHandler<InputEvent> event) {
 		super();
 	}
 	/**
