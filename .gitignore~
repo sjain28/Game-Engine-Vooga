@@ -83,6 +83,7 @@ DerivedData
 
 #Eclipse gitignore
 Test.xml
+*.xml
 *.pydevproject
 .metadata
 .gradle
