@@ -13,29 +13,29 @@ import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
 public class NewVariableFileItem extends MenuItemHandler {
-        private EditElementable myManager;
-        /**
-         * Initializes the MenuItem
-         * 
-         * @param model to interface backend interactions with the model
-         * @param event: Unused vestige of previous poor programming. Should soon be phased out.
-         */
+	private EditElementable myManager;
+
+	/**
+	 * Initializes the MenuItem
+	 * 
+	 * @param model
+	 *            to interface backend interactions with the model
+	 * @param event:
+	 *            Unused vestige of previous poor programming. Should soon be
+	 *            phased out.
+	 */
 	public NewVariableFileItem(Menuable model, EventHandler<InputEvent> event) {
 		super();
 		myManager = (EditElementable) model;
 	}
+
 	/**
-         * Action to be taken on the selection of this menuItem
-         */
+	 * Action to be taken on the selection of this menuItem
+	 */
 	@Override
 	public void handle() {
-	    Stage popup = new Stage();
-            popup.setTitle("New Variable");
-            VariableBuilder initializer = new VariableBuilder(myManager, popup);
-            Scene scene = new VoogaScene(initializer);
-            popup.setScene(scene);
-            popup.show();
-            
+		VariableBuilder initializer = new VariableBuilder(myManager);
+		initializer.setTitle("New Variable");
 	}
 
 }

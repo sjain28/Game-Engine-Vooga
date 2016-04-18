@@ -15,23 +15,11 @@ import tools.OrderedProperties;
  */
 public class VoogaBundles {
     
-    public final static String archetypePropertiesPath = "archetypes.properties";
 	public final static ResourceBundle extensionProperties = ResourceBundle.getBundle("resources/extensions");
 	public final static OrderedProperties menubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/menunames.properties"));
 	public final static OrderedProperties playerMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playermenunames.properties"));
 	public final static ResourceBundle toolbarProperties = ResourceBundle.getBundle("resources/toolbarbuttons");
 	public final static ResourceBundle backendToGUIProperties = ResourceBundle.getBundle("resources/GUIClassMap");
-	public final static Properties archetypeProperties = archetypes();
-	
-	private static Properties archetypes() {
-		Properties props = new Properties();
-		try {
-			props.load(new FileInputStream("archetypes.properties"));
-			return props;
-		} catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+
 	
 }
