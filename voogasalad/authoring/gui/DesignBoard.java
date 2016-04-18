@@ -35,7 +35,6 @@ import javafx.stage.Stage;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
-
 /**
  * This class handles the display of all objects on the Authoring Environment GUI.
  * This is the board on which the author can build the game.
@@ -43,7 +42,7 @@ import tools.VoogaException;
  * @author Aditya Srinivasan, Nick Lockett, Harry Guo, Arjun Desai
  *
  */
-public class DesignBoard extends Tab implements Observer {
+public class DesignBoard extends Tab implements Observer{
 
     private static final String DESIGN_BOARD = "Design Board";
     private static final double HEIGHT = 1000;
@@ -58,22 +57,16 @@ public class DesignBoard extends Tab implements Observer {
     private PropertiesTabManager propertiesTabManager;
 
     private double y_offset, x_offset;
-
+    
     /**
-     * Constructs DesignBoard with object that has the functionality described by
-     * CompleteAuthoringModelable interface
-     * 
+     * Constructs DesignBoard with object that has the functionality described by CompleteAuthoringModelable interface
      * @param elem: functionality described by CompleteAuthoringModelable interface
      */
     public DesignBoard (CompleteAuthoringModelable elem) {
         this.setText(DESIGN_BOARD);
         contentPane = new StackPane();
         contentPane.setMinSize(WIDTH, HEIGHT);
-        contentPane.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.SECONDARY) {
-                new ResizePrompt(e);
-            }
-        });
+        contentPane.setOnMouseClicked(e -> { if(e.getButton() == MouseButton.SECONDARY) { new ResizePrompt(e); }});
         elementManager = elem;
         elementManager.addObserver(this);
         container = new ScrollPane();
@@ -83,6 +76,7 @@ public class DesignBoard extends Tab implements Observer {
         y_offset = HEIGHT / 2;
         x_offset = WIDTH / 2;
     }
+    
 
     private void initializeDragAndDrop () {
         contentPane.setOnDragOver(e -> mouseDragOver(e));
@@ -100,24 +94,21 @@ public class DesignBoard extends Tab implements Observer {
                     moveElement(node.getPath(), event);
                 }
                 else {
-                    Stage popup = new Stage();
-                    popup.setTitle("New Archetype");
-                    ArchetypeBuilder initializer = new ArchetypeBuilder(elementManager, popup);
-                    Scene scene = new VoogaScene(initializer);
-                    popup.setScene(scene);
+                    ArchetypeBuilder initializer = new ArchetypeBuilder(elementManager);
+                    initializer.setTitle("New Archetype");
+                    
+                    //TODO: MAKE SURE IT IS INITALIZED
                     initializer.setImagePath(node.getPath());
-                    popup.showAndWait();
-                    addElement(node, event, initializer.getInfo());
+                    initializer.showAndWait();
+                    addElement(node, event, initializer.getArchetypeName());
                 }
                 success = true;
             }
         }
-        if (db.hasString()) {
-            GameObject object = (GameObject) elementManager.getElement(db.getString());
-            object.setTranslateX(event.getX() - x_offset);
-            object.setTranslateY(event.getY() - y_offset);
-            object.getSprite().setX(event.getX());
-            object.getSprite().setY(event.getY());
+        if(db.hasString()) {
+        	GameObject object = (GameObject) elementManager.getElement(db.getString());
+        	object.setTranslateX(event.getX() - x_offset);
+        	object.setTranslateY(event.getY() - y_offset);
         }
 
         event.setDropCompleted(success);
@@ -137,11 +128,10 @@ public class DesignBoard extends Tab implements Observer {
             }
             contentPane.setStyle(String.format("-fx-border-color: %s", color));
             event.acceptTransferModes(TransferMode.ANY);
+        } else if (event.getDragboard().hasString()) {
+        	event.acceptTransferModes(TransferMode.ANY);
         }
-        else if (event.getDragboard().hasString()) {
-            event.acceptTransferModes(TransferMode.ANY);
-        }
-
+        
         event.consume();
     }
 
@@ -151,9 +141,7 @@ public class DesignBoard extends Tab implements Observer {
         if (elementPath != null) {
             try {
                 if (ResourceDecipherer.isImage(elementPath)) {
-                    node =
-                            new GameObject(elementManager.getSpriteFactory()
-                                    .createSprite(archetype));
+                    node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
                     node.setTranslateX(event.getX() - x_offset);
                     node.setTranslateY(event.getY() - y_offset);
                 }
@@ -174,7 +162,7 @@ public class DesignBoard extends Tab implements Observer {
         System.out.println(elementManager.getIds());
 
     }
-
+    
     private void addElement (Node node, String id) {
         elementManager.addGameElements(node);
         elementManager.addElementId(id);
@@ -187,22 +175,23 @@ public class DesignBoard extends Tab implements Observer {
         element.setTranslateY(e.getY() - y_offset);
 
     }
-
-    private void displayElements (Collection<Node> nodeList) {
-        for (Node node : nodeList) {
-            if (!contentPane.getChildren().contains(node)) {
+    
+    private void displayElements(Collection<Node> nodeList){
+        for (Node node : nodeList){
+            if (!contentPane.getChildren().contains(node)){
                 contentPane.getChildren().add(node);
             }
         }
     }
-
+    
+    
+    
     /**
-     * Updates changes to the class based on the observation from the Model, Specifically the
-     * ElementManager
+     * Updates changes to the class based on the observation from the Model, Specifically the ElementManager
      */
     @Override
     public void update (Observable o, Object arg) {
-        if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)) {
+        if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)){
             displayElements(((CompleteAuthoringModelable) o).getElements());
         }
     }
