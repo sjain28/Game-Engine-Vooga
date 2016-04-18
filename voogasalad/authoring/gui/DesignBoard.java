@@ -94,14 +94,10 @@ public class DesignBoard extends Tab implements Observer{
                     moveElement(node.getPath(), event);
                 }
                 else {
-                	Stage popup = new Stage();
-                    popup.setTitle("New Archetype");
-                    ArchetypeBuilder initializer = new ArchetypeBuilder(elementManager, popup);
-                    Scene scene = new VoogaScene(initializer);
-                    popup.setScene(scene);
-                    initializer.setImagePath(node.getPath());
-                    popup.showAndWait();
-                    addElement(node, event, initializer.getInfo());
+                    ArchetypeBuilder initializer = new ArchetypeBuilder(elementManager);
+                    initializer.setTitle("New Archetype");
+                    initializer.showAndWait();
+                    addElement(node, event, initializer.getArchetypeName());
                 }
                 success = true;
             }
@@ -110,8 +106,6 @@ public class DesignBoard extends Tab implements Observer{
         	GameObject object = (GameObject) elementManager.getElement(db.getString());
         	object.setTranslateX(event.getX() - x_offset);
         	object.setTranslateY(event.getY() - y_offset);
-        	object.getSprite().setX(event.getX());
-        	object.getSprite().setY(event.getY());
         }
 
         event.setDropCompleted(success);
