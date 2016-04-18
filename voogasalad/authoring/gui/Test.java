@@ -8,8 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Test extends Application {
 
@@ -53,8 +55,8 @@ public class Test extends Application {
 	            root.getChildren().add(rectangle);
 	        }
 	    }
-
-	    stage.setScene(new Scene(root, 500, 500));
+	    Scene scene = new Scene(root, 500, 500);
+	    stage.setScene(scene);
 	    stage.show();
 	  }
 
