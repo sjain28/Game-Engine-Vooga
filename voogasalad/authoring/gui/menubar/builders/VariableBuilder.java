@@ -20,7 +20,7 @@ public class VariableBuilder extends Builder {
         populate();
         this.variableName = new TextField();
         this.variableValue = new TextField();
-        show(this.container);
+        load(this.container);
     }
     
     private void populate() {

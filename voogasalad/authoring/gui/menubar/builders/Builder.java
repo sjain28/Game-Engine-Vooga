@@ -32,10 +32,9 @@ public abstract class Builder extends Stage {
 		}
 	}
 
-	protected void show(Parent region) {
+	protected void load(Parent region) {
 		Scene scene = new VoogaScene(region);
 		this.setScene(scene);
-		this.show();
 	}
 
 	protected HBox makeButtons() {

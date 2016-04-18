@@ -34,6 +34,7 @@ public class NewArchetypeFileItem extends AuthoringMenuItemHandler {
     public void handle () {
         Builder initializer = new ArchetypeBuilder(myManager);
         initializer.setTitle("Create an Archetype");
+        initializer.show();
     }
 
 }
