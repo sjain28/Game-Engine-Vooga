@@ -23,7 +23,8 @@ public class PropertiesTab extends VBox {
 		HBox container = new HBox();
 		Button add = new ButtonMaker().makeButton("+", e -> {
 			PropertyBuilder pBuilder = new PropertyBuilder();
-			pBuilder.passTable(pTable);
+			pBuilder.showAndWait();
+			pTable.addVariableToTable(pBuilder.getName(), new VoogaNumber(Double.parseDouble(pBuilder.getValue())));
 		});
 		Button remove = new ButtonMaker().makeButton("-", e -> {
 			Property toRemove = pTable.getSelectionModel().getSelectedItem();

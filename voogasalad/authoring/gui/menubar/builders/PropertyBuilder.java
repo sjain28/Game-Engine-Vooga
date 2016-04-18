@@ -25,7 +25,7 @@ public class PropertyBuilder extends Builder {
         this.variableName = new TextField();
         this.variableValue = new TextField();
         populate();
-        show(this.container);
+        load(this.container);
     }
     
     private void populate() {
@@ -34,20 +34,24 @@ public class PropertyBuilder extends Builder {
     								   makeInfo("Value:", "Enter a value...", variableValue),
     								   makeButtons());
     }
+    
+    public String getName() {
+    	return this.variableName.getText();
+    }
+    
+    public String getValue() {
+    	return this.variableValue.getText();
+    }
 
 	@Override
     public void compile () {
         try{
-        	pTable.addVariableToTable(variableName.getText(), new VoogaNumber(Double.parseDouble(variableValue.getText())));
+        	
         }
        catch(Exception e) {
            numberError("Please input a valid number");
        }
        quit();
     }
-
-	public void passTable(PropertiesTable pTable) {
-		this.pTable = pTable;
-	}
 
 }
