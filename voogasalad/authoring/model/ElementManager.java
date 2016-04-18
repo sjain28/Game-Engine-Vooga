@@ -30,7 +30,7 @@ import javafx.scene.Node;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
-public class ElementManager extends Observable implements Saveable, CompleteAuthoringModelable, Observer {
+public class ElementManager extends Observable implements Saveable, CompleteAuthoringModelable {
 
 	private List<Node> myGameElements;
 	private List<VoogaEvent> myEventList;
@@ -52,7 +52,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 		myIds = new HashSet<String>();
 		spriteFactory = new SpriteFactory();
 		myXmlDataFile = new File("/levels/Test.xml");
-		spriteFactory.addObserver(this);
 	}
 
 	public ElementManager(File xmlDataFile) {
@@ -181,14 +180,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void update(Observable o, Object obj) {
-		if (o instanceof SpriteFactory) {
-			setChanged();
-			notifyObservers(obj);
-		}
 	}
 
 }

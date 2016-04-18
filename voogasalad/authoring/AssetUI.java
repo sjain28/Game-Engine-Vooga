@@ -1,12 +1,17 @@
 package authoring;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
+import authoring.model.GameObject;
 import authoring.resourceutility.ResourceTreeView;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
+import gameengine.SpriteFactory;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 
 public class AssetUI extends Tab implements Observer {
@@ -22,6 +27,7 @@ public class AssetUI extends Tab implements Observer {
 	public AssetUI(CompleteAuthoringModelable myManager) {
 		this.myManager = myManager;
 		this.setText(WINDOW_NAME);
+		this.myManager.getSpriteFactory().addObserver(this);
 		this.myManager.addObserver(this);
 		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
 		archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, "Archetypes");
@@ -44,10 +50,21 @@ public class AssetUI extends Tab implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof CompleteAuthoringModelable) {
-			if(arg instanceof String) {
-				String[] components = ((String) arg).split("%");
-				addAsset(VoogaFileType.ARCHETYPE, components[0], components[1]);
+		if(o instanceof SpriteFactory) {
+			if(arg instanceof VoogaFile) {
+				addAsset(((VoogaFile) arg).getType(), ((VoogaFile) arg).toString(), ((VoogaFile) arg).getPath());
+			}
+		}
+		if(o instanceof ElementManager) {
+			if(arg instanceof List) {
+				List<Node> objects = (List<Node>) arg;
+				for(Node object : objects) {
+					if(object instanceof GameObject) {
+						VoogaFile file = new VoogaFile(VoogaFileType.GAME_OBJECT, ((GameObject) object).getSprite().getArchetype());
+						file.setPath(((GameObject) object).getSprite().getImagePath());
+						addAsset(file.getType(), file.toString(), file.getPath());
+					}
+				}
 			}
 		}
 		

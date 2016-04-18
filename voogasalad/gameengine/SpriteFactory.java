@@ -14,6 +14,9 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
+
+import authoring.resourceutility.VoogaFile;
+import authoring.resourceutility.VoogaFileType;
 import data.Serializer;
 import resources.VoogaBundles;
 import data.DeSerializer;
@@ -77,7 +80,9 @@ public class SpriteFactory extends Observable {
         else {
             myArchetypes.put(archetypeName, archetype);
             setChanged();
-            notifyObservers(archetypeName+"%"+archetype.getImagePath());
+            VoogaFile file = new VoogaFile(VoogaFileType.ARCHETYPE, archetypeName);
+            file.setPath(archetype.getImagePath());
+            notifyObservers(file);
         }
     }
 
