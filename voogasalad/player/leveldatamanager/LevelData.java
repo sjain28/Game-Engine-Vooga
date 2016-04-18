@@ -28,6 +28,9 @@ import tools.interfaces.VoogaData;
  *
  */
 public class LevelData implements ILevelData {
+	
+	private static final int SCREENSIZE = 600;
+	
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
 	private Map<String,Elementable> myElements;
@@ -42,10 +45,13 @@ public class LevelData implements ILevelData {
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
 	
+	private IDisplayScroller myScroller;
 	
-//	public LevelData() {
-//		
-//	}
+	public LevelData() {
+		
+		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
+		
+	}
 	
 	
 	/**
@@ -138,12 +144,11 @@ public class LevelData implements ILevelData {
 	 */
 	public List<Node> getDisplayableNodes(){
 		List<Node> displayablenodes = new ArrayList<Node>();
-
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 
-		return displayablenodes;
+		return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
 
 	}
 	/**
@@ -222,4 +227,9 @@ public class LevelData implements ILevelData {
 		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 	
+	public void setLevelNumber(int levelNumber) {
+		
+		myGlobalVariables.put("LevelIndex", new VoogaNumber((double) levelNumber));
+//		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
+	}
 }
