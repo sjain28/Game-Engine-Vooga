@@ -31,7 +31,7 @@ public class FileImporter {
         this.rtv = rtv;
 
         VoogaFileChooser chooser = new VoogaFileChooser();
-        String path = "file:"+chooser.launch();
+        String path = chooser.launch();
         fileToImport = new File(path);
         provideToUI();
     }
