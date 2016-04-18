@@ -21,6 +21,7 @@ import tools.VoogaFileChooser;
  */
 public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	
+	//TODO: Change GameRunner to IGameRunner
 	private GameRunner myGameRunner;
 	private VoogaFileChooser myFileChooser;
 	

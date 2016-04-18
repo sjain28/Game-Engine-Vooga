@@ -5,17 +5,26 @@ import authoring.gui.menubar.PlayerMenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import player.gamedisplay.Menuable;
+import player.gamerunner.GameRunner;
 
 
 /**
  * Menu Item to select the board of the display
  * 
- * @author Nick
+ * @author Nick, Hunter
  *
  */
 public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	
+	private static final String EXIT_MESSAGE = "Press Ctrl + Z to exit full screen mode";
+	
+	//TODO: Change GameRunner to IGameRunner
+	private GameRunner myGameRunner;
+
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -23,7 +32,8 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	 * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	 */
 	public FullScreenWindowItem(Menuable model, EventHandler<InputEvent> event) {
-		
+		super();
+		this.myGameRunner = (GameRunner) model;
 	}
 	
 	/**
@@ -31,8 +41,13 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
-		// TODO Auto-generated method stub
-		
+		this.myGameRunner.getGameDisplay().getStage().close();
+		this.myGameRunner.getGameDisplay().getStage().setFullScreen(true);
+		this.myGameRunner.getGameDisplay().getStage().setFullScreenExitHint(EXIT_MESSAGE);
+		this.myGameRunner.getGameDisplay().getStage()
+					.setFullScreenExitKeyCombination
+					(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
+		this.myGameRunner.getGameDisplay().getStage().show();
 	}
 
 }

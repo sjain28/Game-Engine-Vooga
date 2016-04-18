@@ -15,6 +15,8 @@ import player.gamerunner.GameRunner;
  */
 public class PlayerExitFileItem extends PlayerMenuItemHandler {
 	
+	//TODO: Change GameRunner to IGameRunner
+
 	private GameRunner myGameRunner;
 	
     /**
