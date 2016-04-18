@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Properties;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
@@ -29,7 +30,7 @@ import tools.VoogaNumber;
  *
  */
 
-public class SpriteFactory {
+public class SpriteFactory extends Observable {
 
     // private static final String DEFAULT_IMAGE = "/smile.jpg";
     // private static final String DEFAULT_ARCH = "default";
@@ -75,6 +76,8 @@ public class SpriteFactory {
         }
         else {
             myArchetypes.put(archetypeName, archetype);
+            setChanged();
+            notifyObservers(archetypeName+"%"+archetype.getImagePath());
         }
     }
 
