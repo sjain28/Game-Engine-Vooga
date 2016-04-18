@@ -4,13 +4,13 @@ import java.lang.reflect.InvocationTargetException;
 
 import authoring.CustomText;
 import authoring.interfaces.model.EditEventable;
-import auxiliary.VoogaException;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import tools.VoogaException;
 
 
 public class EventTitledPane extends TitledPane {

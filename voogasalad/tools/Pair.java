@@ -1,4 +1,4 @@
-package auxiliary;
+package tools;
 
 /**
  * A simple example used in many tutorials.

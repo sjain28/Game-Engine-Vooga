@@ -20,13 +20,13 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import auxiliary.VoogaException;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 

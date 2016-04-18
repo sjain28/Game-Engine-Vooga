@@ -15,11 +15,9 @@ public class LevelTransitioner {
 	public int advanceLevel(){
 		myLevelDataManager.clear();
 		int advanceLevel = 1;
+		return advanceLevel;
 	}
 	
-	public replayLevel(){
-//		myLevelDataManager.getNextLevel();
-	}
 	
 	
 	

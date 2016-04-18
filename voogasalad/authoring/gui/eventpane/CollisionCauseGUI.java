@@ -1,12 +1,12 @@
 package authoring.gui.eventpane;
 
 import authoring.interfaces.model.EditEventable;
-import auxiliary.VoogaException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.VoogaException;
 
 public class CollisionCauseGUI implements EventGUI{
     private SpriteComboBox group1;
