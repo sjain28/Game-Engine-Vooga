@@ -33,7 +33,7 @@ import player.leveldatamanager.LevelDataManager;
  * @author Hunter, Michael, Josh
  *
  */
-public class GameRunner implements IGameRunner{
+public class GameRunner implements IGameRunner {
 
     private static final int FRAMES_PER_SECOND = 1;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;

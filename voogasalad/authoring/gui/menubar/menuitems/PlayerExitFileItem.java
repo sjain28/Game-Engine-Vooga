@@ -10,12 +10,12 @@ import player.gamerunner.GameRunner;
 /**
  * MenuItem that defines functionality to exit out of the program
  * 
- * @author Nick
+ * @author Nick, Hunter
  *
  */
 public class PlayerExitFileItem extends PlayerMenuItemHandler {
 	
-	private GameRunner myRunner;
+	private GameRunner myGameRunner;
 	
     /**
      * Initializes the MenuItem
@@ -25,14 +25,14 @@ public class PlayerExitFileItem extends PlayerMenuItemHandler {
      */
 	public PlayerExitFileItem(Menuable model, EventHandler<InputEvent> event) {
 		super();
-		this.myRunner = (GameRunner) model;
+		this.myGameRunner = (GameRunner) model;
 	}
 	/**
          * Action to be taken on the selection of this menuItem
          */
 	@Override
 	public void handle() {
-		this.myRunner.getGameDisplay().getStage().close();
+		this.myGameRunner.getGameDisplay().getStage().close();
 	}
 
 }

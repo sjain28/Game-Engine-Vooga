@@ -140,10 +140,10 @@ public class StandardDisplay implements IGameDisplay {
 	private void createPane() {
 		//Adds all components into the main border pane
 		getPane().setCenter(myGameScreen);
-		System.out.println(myGameRunner);
-		getPane().setTop(new MenuPanel(myGameRunner, e -> {
-			new MenuPanelHandlingMirror(e, myGameRunner);
-		}, VoogaBundles.playerMenubarProperties));
+		//System.out.println(myGameRunner);
+		getPane().setTop(new MenuPanel(myGameRunner, 
+				e -> new MenuPanelHandlingMirror(e, myGameRunner), 
+				VoogaBundles.playerMenubarProperties));
 		getPane().setBottom(myControl.createControl());
 		//Below is optional (adds HUD)
 		getPane().setRight(myHUD.createHUD());

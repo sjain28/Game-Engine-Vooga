@@ -11,7 +11,7 @@ import player.gamedisplay.Menuable;
 /**
  * Menu Item to select the board of the display
  * 
- * @author Nick
+ * @author Nick, Hunter
  *
  */
 public class SaveGameFileItem extends PlayerMenuItemHandler {
@@ -30,7 +30,8 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
-		// TODO Auto-generated method stub
+		
+		//TODO: Find out what format/how games are saved!
 		
 	}
 
