@@ -40,7 +40,7 @@
         </tools.VoogaNumber>
       </entry>
     </myProperties>
-    <myImagePath>file:////Users/adityasrinivasan/Documents/GitHub/voogasalad_DoovalSalad/images/smile.jpg</myImagePath>
+    <myImagePath>/smile.jpg</myImagePath>
     <myArchetype>Smiley</myArchetype>
   </gameengine.Sprite>
 </object-stream>

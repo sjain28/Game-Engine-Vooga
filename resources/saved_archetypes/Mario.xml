@@ -58,7 +58,7 @@
         </tools.VoogaNumber>
       </entry>
     </myProperties>
-    <myImagePath>file:////Users/adityasrinivasan/Documents/GitHub/voogasalad_DoovalSalad/images/mario.png</myImagePath>
+    <myImagePath>/mario.png</myImagePath>
     <myArchetype>Mario</myArchetype>
     <myX>0.0</myX>
     <myY>0.0</myY>
