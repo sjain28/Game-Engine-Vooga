@@ -1,0 +1,26 @@
+package authoring.gui.menubar.menuitems;
+
+import authoring.gui.menubar.builders.SaveArchetype;
+import javafx.event.EventHandler;
+<<<<<<< HEAD
+=======
+import javafx.scene.input.InputEvent;
+>>>>>>> master
+import player.gamedisplay.Menuable;
+
+public class SaveArchetypeFileItem extends NewImportArchetypeFileItem{
+
+<<<<<<< HEAD
+    public SaveArchetypeFileItem (Menuable model, EventHandler event) {
+=======
+    public SaveArchetypeFileItem (Menuable model, EventHandler<InputEvent> event) {
+>>>>>>> master
+        super(model, event);
+    }
+    
+    @Override
+    public void handle(){
+        SaveArchetype saveArchetype = new SaveArchetype(getManager());
+        saveArchetype.show();
+    }
+}
