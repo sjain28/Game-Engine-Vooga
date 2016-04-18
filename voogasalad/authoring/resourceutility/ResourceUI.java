@@ -16,7 +16,7 @@ import tools.VoogaException;
  * @author DoovalSalad
  *
  */
-public class ResourceUI extends TabPane {
+public class ResourceUI extends Tab {
 
     /**
      * Private instance variables
@@ -47,9 +47,8 @@ public class ResourceUI extends TabPane {
 
         makeAddButtons();
 
-        Tab holder = new Tab(WINDOW_NAME);
-        holder.setContent(container);
-        this.getTabs().add(holder);
+        this.setText(WINDOW_NAME);
+        this.setContent(container);
 
     }
 
