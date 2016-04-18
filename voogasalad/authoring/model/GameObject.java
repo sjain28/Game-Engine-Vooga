@@ -29,7 +29,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     private Sprite mySprite;
     private String name;
 
-    public GameObject (Sprite sprite) {
+    public GameObject (Sprite sprite, String name) {
         mySprite = sprite;
         this.setId(mySprite.getID());
         this.name = mySprite.getID();

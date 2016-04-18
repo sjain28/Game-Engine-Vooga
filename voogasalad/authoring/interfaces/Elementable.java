@@ -21,4 +21,5 @@ public interface Elementable extends Updatable{
     public String getName();
     public String getID();
     public Node getNodeObject();
+    
 }
