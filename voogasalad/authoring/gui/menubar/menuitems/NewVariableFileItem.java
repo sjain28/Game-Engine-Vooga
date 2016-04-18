@@ -36,6 +36,7 @@ public class NewVariableFileItem extends MenuItemHandler {
 	public void handle() {
 		VariableBuilder initializer = new VariableBuilder(myManager);
 		initializer.setTitle("New Variable");
+		initializer.show();
 	}
 
 }

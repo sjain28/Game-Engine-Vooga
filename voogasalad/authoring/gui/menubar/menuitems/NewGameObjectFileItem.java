@@ -31,6 +31,7 @@ public class NewGameObjectFileItem extends MenuItemHandler {
 	public void handle() {
 	    Builder popup = new GameObjectBuilder(myManager);
 	    popup.setTitle("New Game Object");
+	    popup.show();
 	}
 
 }

@@ -30,7 +30,7 @@ public class GameObjectBuilder extends Builder {
 	public GameObjectBuilder(EditElementable editor) {
 		super(editor);
 		populate();
-		show(this.container);
+		load(this.container);
 	}
 
 	private void populate() {
