@@ -96,6 +96,9 @@ public class DesignBoard extends Tab implements Observer{
                 else {
                     ArchetypeBuilder initializer = new ArchetypeBuilder(elementManager);
                     initializer.setTitle("New Archetype");
+                    
+                    //TODO: MAKE SURE IT IS INITALIZED
+                    initializer.setImagePath(node.getPath());
                     initializer.showAndWait();
                     addElement(node, event, initializer.getArchetypeName());
                 }
