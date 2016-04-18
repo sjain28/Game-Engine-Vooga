@@ -2,31 +2,17 @@ package authoring.gui.menubar.builders;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditElementable;
-<<<<<<< HEAD
-import gameengine.Sprite;
-import javafx.scene.control.Button;
-=======
 import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.ButtonMaker;
-import authoring.resourceutility.VoogaFile;
-import authoring.resourceutility.VoogaFileType;
 import gameengine.Sprite;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
->>>>>>> master
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,29 +21,64 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 import tools.VoogaAlert;
-import tools.VoogaException;
 import tools.VoogaFileChooser;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
 public class ArchetypeBuilder extends Builder {
-	private static final double WIDTH = 400;
-	private static final double HEIGHT = 250;
-	private String myImagePath;
-	private Map<String, VoogaData> myProperties;
-	private Button image;
-	private ImageView iv;
-	private TabPane tabpane;
-	private Tab createTab;
-	private Tab propertiesTab;
-	private TextField archetypeName;
-	private TextField mass;
-	private VBox creation;
-	private CheckBox infiniteMass;
+    private static final double WIDTH = 400;
+    private static final double HEIGHT = 250;
+    private String myImagePath;
+    private Map<String, VoogaData> myProperties;
+    private Button image;
+    private ImageView iv;
+    private TabPane tabpane;
+    private Tab createTab;
+    private Tab propertiesTab;
+    private TextField archetypeName;
+    private TextField mass;
+    private VBox creation;
+    private CheckBox infiniteMass;
 
+    public ArchetypeBuilder (EditElementable editor) {
+        super(editor);
+        this.setMinWidth(WIDTH);
+        this.setMinHeight(HEIGHT);
+        this.tabpane = new TabPane();
+        this.myProperties = new HashMap<String, VoogaData>();
+        this.createTab = new Tab("Create");
+        this.propertiesTab = new Tab("Properties");
+        this.creation = new VBox();
+        this.tabpane.getTabs().addAll(createTab, propertiesTab);
+        this.archetypeName = new TextField();
+        this.mass = new TextField();
+        populate();
+        show(this.tabpane);
+        // makeInfo();
+        // makeProperty();
+        // makeImagePicker();
+        // makeInfo("Mass", MASS_INDEX);
+        // makeCreate();
+    }
+
+<<<<<<< HEAD
+    private void populate () {
+        createTab.setContent(creation);
+        creation.setSpacing(SPACING);
+        creation.setPadding(new Insets(SPACING));
+        creation.getChildren()
+                .addAll(makeInfo("Archetype:", "Enter an archetype...", archetypeName),
+                        makeImagePicker(),
+                        makeMassPicker(), makeButtons());
+        propertiesTab.setContent(new PropertiesTable());
+    }
+
+    private void makeProperty () {
+        HBox complete = new HBox();
+=======
 	public ArchetypeBuilder(EditElementable editor) {
 		super(editor);
 		this.setMinWidth(WIDTH);
@@ -71,7 +92,7 @@ public class ArchetypeBuilder extends Builder {
 		this.archetypeName = new TextField();
 		this.mass = new TextField();
 		populate();
-		show(this.tabpane);
+		load(this.tabpane);
 		// makeInfo();
 		// makeProperty();
 		// makeImagePicker();
@@ -85,42 +106,10 @@ public class ArchetypeBuilder extends Builder {
 		creation.setPadding(new Insets(SPACING));
 		creation.getChildren().addAll(makeInfo("Archetype:", "Enter an archetype...", archetypeName), makeImagePicker(),
 				makeMassPicker(), makeButtons());
-		propertiesTab.setContent(new PropertiesTable());
+		PropertiesTab pt = new PropertiesTab(myProperties);
+		propertiesTab.setContent(pt);
 	}
-
-	private void makeProperty() {
-		HBox complete = new HBox();
-
-		Text name = new Text("Property Name: ");
-		name.setFill(Color.WHITE);
-		TextField nameVal = new TextField();
-		Text value = new Text("Value: ");
-		value.setFill(Color.WHITE);
-		NumberTextField valueVal = new NumberTextField();
-		Button set = new Button("Add");
-		set.setOnAction(e -> {
-			VoogaData val = new VoogaNumber();
-			try {
-				val.setValue(Double.parseDouble(valueVal.getText()));
-				myProperties.put(nameVal.getText(), val);
-			} catch (Exception NumberFormatException) {
-				numberError("Property Value");
-			}
-
-			nameVal.clear();
-			valueVal.clear();
-		});
-		complete.getChildren().addAll(name, nameVal, value, valueVal, set);
-	}
-
-	private HBox makeImagePicker() {
-		iv = new ImageView();
-		image = new ButtonMaker().makeButton("Choose Image", e -> {
-			FileChooser fileChooser = new FileChooser();
-
-<<<<<<< HEAD
-    private void makeProperty () {
-        HBox complete = new HBox();
+>>>>>>> master
 
         Text name = new Text("Property Name: ");
         name.setFill(Color.WHITE);
@@ -128,7 +117,7 @@ public class ArchetypeBuilder extends Builder {
         Text value = new Text("Value: ");
         value.setFill(Color.WHITE);
         NumberTextField valueVal = new NumberTextField();
-        Button set = new Button("add");
+        Button set = new Button("Add");
         set.setOnAction(e -> {
             VoogaData val = new VoogaNumber();
             try {
@@ -143,117 +132,77 @@ public class ArchetypeBuilder extends Builder {
             valueVal.clear();
         });
         complete.getChildren().addAll(name, nameVal, value, valueVal, set);
-        this.getChildren().add(complete);
-
     }
 
-    private void makeImagePicker () {
-        HBox complete = new HBox();
-        Text label = new Text("Image");
-        label.setFill(Color.WHITE);
-        image = new Button("Choose Image");
+    private HBox makeImagePicker () {
         iv = new ImageView();
-        image.setOnAction(e -> {
+        image = new ButtonMaker().makeButton("Choose Image", e -> {
             VoogaFileChooser fileChooser = new VoogaFileChooser();
-
-            // Set extension filter
-            FileChooser.ExtensionFilter extFilterJPG =
-                    new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-            FileChooser.ExtensionFilter extFilterPNG =
-                    new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-            fileChooser.addFilters(extFilterJPG, extFilterPNG);
-
+            ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("png", "*.png");
+            ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("jpg", "*.jpg");
+            ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("jpeg", "*.jpeg");
+            fileChooser.addFilters(pngFilter,jpgFilter,jpegFilter);
+            String path;
             try {
-                myImagePath = fileChooser.launch();
+                path = fileChooser.launch();
+                loadImage(path);
             }
-            catch (VoogaException e1) {
+            catch (Exception e1) {
                 new VoogaAlert(e1.getMessage());
             }
-            
-            System.out.println(myImagePath);
-            
-            iv.setImage(new Image("file:"+myImagePath));
-            iv.setPreserveRatio(true);
-            iv.setFitWidth(80);
-            
         });
-        complete.getChildren().addAll(label, image, iv);
-        this.getChildren().add(complete);
+        
+        return makeRow(new CustomText("Image"), image, iv);
+    }
+
+    private HBox makeMassPicker () {
+        mass = new TextField();
+        mass.setPromptText("Enter a mass...");
+        infiniteMass = new CheckBox("Static (infinite mass)");
+        infiniteMass.selectedProperty().addListener( (obs, old, newVal) -> {
+            mass.setDisable(newVal);
+            if (newVal) {
+                mass.clear();
+            }
+        });
+        return makeRow(new CustomText("Mass:"), mass, infiniteMass);
     }
 
     public void setImagePath (String path) {
+        loadImage(path);
+        this.image.setDisable(true);
+    }
+
+    private void loadImage (String path) {
         this.myImagePath = path;
         this.iv.setImage(new Image("file:///" + myImagePath));
         this.iv.setPreserveRatio(true);
-        this.iv.setFitWidth(80);
-        this.image.setDisable(true);
+        this.iv.setFitWidth(50);
     }
-=======
-			java.io.File file = fileChooser.showOpenDialog(null);
-			loadImage(file.getPath());
-		});
-		return makeRow(new CustomText("Image"), image, iv);
-	}
-	
-	private HBox makeMassPicker() {
-		mass = new TextField();
-		mass.setPromptText("Enter a mass...");
-		infiniteMass = new CheckBox("Static (infinite mass)");
-		infiniteMass.selectedProperty().addListener((obs, old, newVal) -> {
-			mass.setDisable(newVal);
-			if(newVal) {
-				mass.clear();
-			}
-		});
-		return makeRow(new CustomText("Mass:"), mass, infiniteMass);
-	}
 
-	public void setImagePath(String path) {
-		loadImage(path);
-		this.image.setDisable(true);
-	}
->>>>>>> master
+    public String getArchetypeName () {
+        return this.archetypeName.getText();
+    }
 
-	private void loadImage(String path) {
-		this.myImagePath = path;
-		this.iv.setImage(new Image("file:///" + myImagePath));
-		this.iv.setPreserveRatio(true);
-		this.iv.setFitWidth(50);
-	}
-	
-	public String getArchetypeName() {
-		return this.archetypeName.getText();
-	}
-
-<<<<<<< HEAD
-            getSpriteMaker().addArchetype(getInfo(),
-                                          new Sprite("file:///" + myImagePath, getInfo(),
-                                                     myProperties, mass));
+    @Override
+    public void compile () {
+        VoogaNumber mass = new VoogaNumber();
+        try {
+            if (infiniteMass.isSelected()) {
+                mass.setValue(Double.POSITIVE_INFINITY);
+            }
+            else {
+                mass.setValue(Double.parseDouble(this.mass.getText()));
+            }
+            mySpriteFactory.addArchetype(archetypeName.getText(),
+                                         new Sprite("file:///" + myImagePath,
+                                                    archetypeName.getText(), myProperties, mass));
             quit();
         }
         catch (Exception e) {
             e.printStackTrace();
-            numberError("Please Input all Values");
+            numberError("Please input all values");
         }
     }
-=======
-	@Override
-	public void compile() {
-		VoogaNumber mass = new VoogaNumber();
-		try {
-			if(infiniteMass.isSelected()) {
-				mass.setValue(Double.POSITIVE_INFINITY);
-			} else {
-				mass.setValue(Double.parseDouble(this.mass.getText()));
-			}
-			mySpriteFactory.addArchetype(archetypeName.getText(),
-					new Sprite("file:///" + myImagePath, archetypeName.getText(), myProperties, mass));
-			quit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			numberError("Please input all values");
-		}
-	}
->>>>>>> master
 
 }

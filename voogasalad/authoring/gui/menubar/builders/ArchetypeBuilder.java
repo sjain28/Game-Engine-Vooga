@@ -7,10 +7,18 @@ import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditElementable;
 import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.ButtonMaker;
+import authoring.resourceutility.VoogaFile;
+import authoring.resourceutility.VoogaFileType;
 import gameengine.Sprite;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -22,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import tools.VoogaAlert;
 import tools.VoogaFileChooser;
 import tools.VoogaNumber;
@@ -56,7 +65,7 @@ public class ArchetypeBuilder extends Builder {
         this.archetypeName = new TextField();
         this.mass = new TextField();
         populate();
-        show(this.tabpane);
+        load(this.tabpane);
         // makeInfo();
         // makeProperty();
         // makeImagePicker();
@@ -72,7 +81,8 @@ public class ArchetypeBuilder extends Builder {
                 .addAll(makeInfo("Archetype:", "Enter an archetype...", archetypeName),
                         makeImagePicker(),
                         makeMassPicker(), makeButtons());
-        propertiesTab.setContent(new PropertiesTable());
+        PropertiesTab pt = new PropertiesTab(myProperties);
+        propertiesTab.setContent(pt);
     }
 
     private void makeProperty () {
@@ -105,20 +115,23 @@ public class ArchetypeBuilder extends Builder {
         iv = new ImageView();
         image = new ButtonMaker().makeButton("Choose Image", e -> {
             VoogaFileChooser fileChooser = new VoogaFileChooser();
-            ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("png", "*.png");
-            ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("jpg", "*.jpg");
-            ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("jpeg", "*.jpeg");
-            fileChooser.addFilters(pngFilter,jpgFilter,jpegFilter);
+            ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG (.png)", "*.png");
+            ExtensionFilter jpgFilter = new ExtensionFilter("JPG (.jpg)", "*.jpg");
+            ExtensionFilter jpegFilter = new ExtensionFilter("JPEG (.jpeg)", "*.jpeg");
+            fileChooser.addFilters(pngFilter, jpgFilter, jpegFilter);
             String path;
             try {
                 path = fileChooser.launch();
+                System.out.println("path: "+path);
                 loadImage(path);
             }
             catch (Exception e1) {
+                // TODO Auto-generated catch block
                 new VoogaAlert(e1.getMessage());
             }
+
+            
         });
-        
         return makeRow(new CustomText("Image"), image, iv);
     }
 
@@ -161,6 +174,7 @@ public class ArchetypeBuilder extends Builder {
             else {
                 mass.setValue(Double.parseDouble(this.mass.getText()));
             }
+            
             mySpriteFactory.addArchetype(archetypeName.getText(),
                                          new Sprite("file:///" + myImagePath,
                                                     archetypeName.getText(), myProperties, mass));

@@ -37,6 +37,7 @@ public class NewTextFileItem extends MenuItemHandler {
 	public void handle() {
 		TextObjectBuilder initializer = new TextObjectBuilder(myManager);
 		initializer.setTitle("New Text Object");
+		initializer.show();
 	}
 
 }
