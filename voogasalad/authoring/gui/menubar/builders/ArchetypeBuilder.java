@@ -91,7 +91,6 @@ public class ArchetypeBuilder extends Builder {
                 loadImage(path);
             }
             catch (Exception e1) {
-                // TODO Auto-generated catch block
                 new VoogaAlert(e1.getMessage());
             }
 
