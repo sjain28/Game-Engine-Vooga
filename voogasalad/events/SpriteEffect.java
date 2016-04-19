@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameengine.Sprite;
+import player.leveldatamanager.ILevelData;
 import tools.interfaces.VoogaData;
 
 public class SpriteEffect extends VariableEffect{
@@ -73,16 +74,8 @@ public class SpriteEffect extends VariableEffect{
 	}
 
 	@Override
-	public void init(){
-	    System.out.println("Initializing srite effect");
-		if(mySpriteID != null){
-			mySprites.add(getEvent().getManager().getSprite(mySpriteID));
-		}
-	}
-
-	@Override
-	public void execute() {
-		setSprites();
+	public void execute(ILevelData data) {
+		setSprites(data);
 		if (mySprites.size() > 0){
 			for (Sprite sprite : mySprites){
 				VoogaData variable = sprite.getParameterMap().get(getVariable());
@@ -94,22 +87,25 @@ public class SpriteEffect extends VariableEffect{
 	 * Determines which sprites need to be set for this effect depending on the constructor that was used, as well as the
 	 * sprite outputs of the cause within the same event.
 	 */
-	protected void setSprites(){
+	protected void setSprites(ILevelData data){
+		if(mySpriteID != null){
+			mySprites.add(data.getSpriteByID(mySpriteID));
+		}
 		if (needsSprites){
 			mySprites = getEvent().getSpritesFromCauses();
 		}
 		if (getMyArchetype() != null){
 			// get sprite manager, get all sprites of archetype
-			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(getMyArchetype());
+			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
 			if (mySprites.size() != 0){
 				for(Sprite causeSprite : mySprites){
-					if(!archSpriteIDs.contains(causeSprite.getID())){
+					if(!archSpriteIDs.contains(causeSprite)){
 						mySprites.remove(causeSprite);
 					}
 				}
 			}else {
-				for(String spriteID : archSpriteIDs){
-					mySprites.add(getEvent().getManager().getSprite(spriteID));
+				for(Sprite sprite : archSpriteIDs){
+					mySprites.add(sprite);
 				}
 			}
 		}

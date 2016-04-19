@@ -2,6 +2,8 @@ package events;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import player.leveldatamanager.ILevelData;
 import tools.interfaces.VoogaData;
 
 public class VariableCause extends Cause{
@@ -32,8 +34,9 @@ public class VariableCause extends Cause{
 	
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean check() {
-		
+	public boolean check(ILevelData data) {
+		myVariable = data.getGlobalVar(myVarName);
+
 		Class<?> variableClass = myVariable.getClass();
 		Class[] paramClass = {myTarget.getClass()};
 		
@@ -64,11 +67,4 @@ public class VariableCause extends Cause{
 	protected void setPredicate(String pred){
 		myOperation = pred;
 	}
-
-	@Override
-	public void init() {
-		myVariable = super.getEvent().getManager().getGlobalVar(myVarName);
-		
-	}
-
 }

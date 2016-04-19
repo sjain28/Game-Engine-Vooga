@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameengine.Sprite;
+import player.leveldatamanager.ILevelData;
 
 public class CollisionCause extends Cause{
 
@@ -13,43 +14,30 @@ public class CollisionCause extends Cause{
 	private String archA;
 	private String archB;
 	
-	
-	
 	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Given 2 archetype names
 		super(voogaEvent);
 		archA = archetypeA;
 		archB = archetypeB;
 	}
 	
-	
-	public void init(){
+	public void updateSprites(ILevelData data){
 	        groupA = new ArrayList<>();
 	        groupB = new ArrayList<>();
 		if(archA.contains("-") && archB.contains("-")){		
-			groupA.add(getEvent().getManager().getSprite(archA)); //If contains dash, it's a Sprite ID
-			groupB.add(getEvent().getManager().getSprite(archB));
+			groupA.add(data.getSpriteByID(archA)); //If contains dash, it's a Sprite ID
+			groupB.add(data.getSpriteByID(archB));
 		}
 		else{
-			List<String> IdA = getEvent().getManager().getSpriteIDs(archA);//Else, it's an arch name
-			List<String> IdB = getEvent().getManager().getSpriteIDs(archB);
-			
-			for(String o: IdA){	
-				groupA.add(getEvent().getManager().getSprite(o));
-			}
-			for(String o: IdB){
-				groupB.add(getEvent().getManager().getSprite(o));
-			}
+			groupA = data.getSpritesByArch(archA);//Else, it's an arch name
+			groupB = data.getSpritesByArch(archB);
 		}
-		
-
-		
-
 		collidedSprites = new ArrayList<>();
 	}
 	
 	@Override
-	public boolean check() {
+	public boolean check(ILevelData data) {
 		collidedSprites.clear();
+		updateSprites(data);
 		boolean myVal = false;
 		for(Sprite a: groupA){
 			for(Sprite b: groupB){

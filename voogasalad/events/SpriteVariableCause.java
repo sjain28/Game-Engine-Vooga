@@ -3,6 +3,7 @@ package events;
 import java.util.ArrayList;
 import java.util.List;
 import gameengine.Sprite;
+import player.leveldatamanager.ILevelData;
 
 public class SpriteVariableCause extends VariableCause {
 	
@@ -25,22 +26,17 @@ public class SpriteVariableCause extends VariableCause {
 	}
 
 	@Override
-	public boolean check(){
-		if(super.check()){
+	public boolean check(ILevelData data){
+		
+		Sprite temp = data.getSpriteByID(mySpriteID);
+		mySprites = new ArrayList<>();
+		mySprites.add(temp);
+		super.setVariable(temp.getProperty(myVarName));
+		
+		if(super.check(data)){
 			getEvent().addSpritesFromCause(mySprites);
 			return true;
 		}
 		return false;
 	}
-	
-	@Override
-	public void init(){
-		System.out.println("EVENT: "+getEvent());
-		System.out.println("MANAGER: "+getEvent().getManager());
-		Sprite temp = getEvent().getManager().getSprite(mySpriteID);
-		mySprites = new ArrayList<>();
-		mySprites.add(temp);
-		super.setVariable(temp.getProperty(myVarName));
-	}
-
 }
