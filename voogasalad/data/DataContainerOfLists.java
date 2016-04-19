@@ -22,7 +22,6 @@ public class DataContainerOfLists {
     private List<Elementable> elementableList;
     private Map<String, VoogaData> variableMap;
     private Map<String, Sprite> archetypeMap;
-    private List<Button> ButtonList; 
     
     public DataContainerOfLists () {
     }

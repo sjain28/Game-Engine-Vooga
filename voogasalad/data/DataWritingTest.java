@@ -18,7 +18,6 @@ import events.KeyCause;
 import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
-import gameengine.SpriteFactory;
 import tools.Position;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -32,20 +31,27 @@ public class DataWritingTest {
 
 	@Before
 	public void setup(){
-		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),generateEvents(), null);
+		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),generateEvents(), new HashMap<String,Sprite>());
 	}
 
 	private List<Elementable> generateSprites(){
 		List<Elementable> elements = new ArrayList<Elementable>();
-		for (int i=0;i<1;i++){
+		for (int i=1;i<2;i++){
 			Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
 			properties.put("health", new VoogaNumber(10d));
 			Sprite sprite = new Sprite("/mario.png","Mario",properties,new VoogaNumber(8.0));
-			sprite.setPosition(new Position(i*20,i*10));
+			sprite.setPosition(new Position(i*100,i*300));
 			elements.add(sprite);
 			sprite.addProperty("gravity", new VoogaNumber(.04));
 		}
-		
+		for (int i=1;i<2;i++){
+			Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
+			properties.put("softness", new VoogaNumber(10d));
+			Sprite sprite = new Sprite("/Grass.jpg","Grass Floor",properties,new VoogaNumber(1000000000000.0));
+			sprite.setPosition(new Position(i*20,i*20));
+			elements.add(sprite);
+			sprite.addProperty("gravity", new VoogaNumber(0.0));
+		}
 		return elements;
 	}
 
@@ -69,11 +75,6 @@ public class DataWritingTest {
 		map.put("LevelIndex",new VoogaNumber((double) -5));
 		
 		return map;
-	}
-
-	private SpriteFactory generateSpriteFactory(){
-		SpriteFactory sf = new SpriteFactory();
-		return sf;
 	}
 
 	@Test

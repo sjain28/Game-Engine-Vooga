@@ -91,11 +91,12 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myLoc.addY(myVelocity.getY());
        
         //Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
-        //myVelocity.addX(myAcceleration.getX());
-        //myVelocity.addY(myAcceleration.getY());
-
+        myVelocity.addX(myAcceleration.getX());
+        myVelocity.addY(myAcceleration.getY());
+        
+        //Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setLayoutX(myLoc.getX());
-        myImage.setLayoutY(myLoc.getY());
+        myImage.setLayoutY(((myLoc.getY()-300)*-1)+300);
         
         System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
         

@@ -81,9 +81,7 @@ public class StandardPhysics implements IPhysicsEngine{
 
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
-		//FOR SOME REASON IT IS ACCELERATING UPWARDS INSTEAD
-		//TODO: I DELETED THE NEGATIVE SIGN, BUT THIS GENERAL LOGIC NEEDS TO BE FIXED
-		Acceleration gravityAcceleration = new Acceleration(0, gravityMagnitude);
+		Acceleration gravityAcceleration = new Acceleration(0, -gravityMagnitude);
 		accelerate(sprite, gravityAcceleration);
 	}
 
