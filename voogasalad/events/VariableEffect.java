@@ -48,7 +48,6 @@ public class VariableEffect extends Effect {
 		Class dataType = variable.getClass();
 		try{			
 			if (myParameter != null){
-				System.out.println("METHOD NAME: "+myMethod);
 				Method variableMethod = dataType.getMethod(myMethod, new Class[]{myParameter.getClass()});
 				variableMethod.invoke(variable, myParameter);
 			}

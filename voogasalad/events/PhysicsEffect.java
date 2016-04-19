@@ -28,9 +28,10 @@ public class PhysicsEffect extends SpriteEffect {
 	@Override
 	public void execute(){
 		setSprites();
-		for (Sprite sprite: getSprites()){
-			System.out.println("in sprite loop");
-			callEffectMethod(sprite);
+		if (getSprites().size() > 0){
+			for (Sprite sprite: getSprites()){
+				callEffectMethod(sprite);
+			}
 		}
 		System.out.println("BOUNCING LEGGO");
 		System.out.println(getSprites().size());
@@ -40,9 +41,7 @@ public class PhysicsEffect extends SpriteEffect {
 		try{
 			Method physicsMethod = getEvent().getPhysicsEngine().getClass()
 					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameters().getClass()});
-			
-			System.out.println("METHOD NAME: "+getMethodString());
-			
+
 			physicsMethod.invoke(getEvent().getPhysicsEngine(), sprite, getParameters());
 		}catch (Exception e){
 			e.printStackTrace();
