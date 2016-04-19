@@ -51,7 +51,11 @@ public class SpriteFactory extends Observable {
         // myArchetypes.put(DEFAULT_SPRITE.getArchetype(), DEFAULT_SPRITE);
     }
 
-    /**
+    public SpriteFactory(Map<String, Sprite> archetypeMap) {
+		myArchetypes = new HashMap<String,Sprite>(archetypeMap);
+	}
+
+	/**
      * Create a completely new Sprite of a given archetype
      * 
      * @param archetype
