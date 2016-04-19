@@ -27,7 +27,7 @@ public class AssetUI extends Tab implements Observer {
 	public AssetUI(CompleteAuthoringModelable myManager) {
 		this.myManager = myManager;
 		this.setText(WINDOW_NAME);
-		//this.myManager.getSpriteFactory().addObserver(this);
+		this.myManager.getSpriteFactory().addObserver(this);
 		this.myManager.addObserver(this);
 		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
 		archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, "Archetypes");

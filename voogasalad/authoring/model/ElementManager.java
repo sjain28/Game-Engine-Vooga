@@ -129,7 +129,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
         try {
             DataContainerOfLists data =
-                    new DataContainerOfLists(elements, myGlobalVariables, myEventList, spriteFactory);
+                    new DataContainerOfLists(elements, myGlobalVariables, myEventList, spriteFactory.getArchetypeMap());
             System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data, filePath);
             System.out.println("I'm done saving in element manager");

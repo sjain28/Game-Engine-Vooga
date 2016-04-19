@@ -70,10 +70,10 @@ public class SpriteFactory extends Observable{
         }
         else {
             myArchetypes.put(archetypeName, archetype);
-            //setChanged();
+            setChanged();
             VoogaFile file = new VoogaFile(VoogaFileType.ARCHETYPE, archetypeName);
             file.setPath(archetype.getImagePath());
-            //notifyObservers(file);
+            notifyObservers(file);
         }
     }
 
@@ -136,6 +136,10 @@ public class SpriteFactory extends Observable{
                 throw new VoogaException("Could not save archetype");
             }
         }
+    }
+    
+    public Map<String,Sprite> getArchetypeMap(){
+        return myArchetypes;
     }
     
 
