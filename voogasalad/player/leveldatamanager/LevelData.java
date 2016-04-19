@@ -2,9 +2,9 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
@@ -16,6 +16,7 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import physics.StandardPhysics;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
@@ -43,6 +44,7 @@ public class LevelData implements ILevelData {
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
+	
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
 	
 	private IDisplayScroller myScroller;
@@ -50,6 +52,7 @@ public class LevelData implements ILevelData {
 	public LevelData() {
 		
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
+		myGlobalVariables = new HashMap<String, VoogaData>();
 		
 	}
 	
@@ -59,7 +62,7 @@ public class LevelData implements ILevelData {
 	 * @param id
 	 * @return Sprite
 	 */
-	public Sprite getSprite(String id){
+	public Sprite getSpriteByID(String id){
 		return (Sprite) myElements.get(id);
 	}
 	/**
@@ -89,12 +92,12 @@ public class LevelData implements ILevelData {
 	 * @param archetype
 	 * @return
 	 */
-	public List<String> getSpriteIDs(String archetype){
-		List<String> list = new ArrayList<String>();
+	public List<Sprite> getSpritesByArch(String archetype){
+		List<Sprite> list = new ArrayList<>();
 		for(String id : myElements.keySet()){
 			if(myElements.get(id) instanceof Sprite){
 				if(((Sprite) myElements.get(id)).getArchetype().equals(archetype)){
-					list.add(id);
+					list.add((Sprite)myElements.get(id));
 				}
 			}
 		}
@@ -182,16 +185,12 @@ public class LevelData implements ILevelData {
 	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
         myEvents.add(voogaEvent);
 		for(Cause c: voogaEvent.getCauses()){
-			c.init(this);
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
 				myKeyCauses.put(keyc.getKeys(), keyc); 
 				myKeyCombos.add(keyc.getKeys()); 
 				myKeyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
 			}
-		}
-		for(Effect e: voogaEvent.getEffects()){
-		    e.init(this);
 		}
 	}
 	/**
@@ -212,16 +211,15 @@ public class LevelData implements ILevelData {
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);
 
-//		for(VoogaEvent e : eventObjects){
-//			addEventAndPopulateKeyCombos(e);
-//		}
+		for(VoogaEvent e : eventObjects){
+			addEventAndPopulateKeyCombos(e);
+		}
 		
 		SpriteFactory factory = data.getSpriteFactory();
 		System.out.println("The spriteFactory here is" + factory);
 
-		myGlobalVariables = data.getVariableMap();
-		myGlobalVariables.put("levelIndex", new VoogaNumber((double) -1));
-		System.out.println("All the variables here are" + myGlobalVariables);
+		Map<String,VoogaData> variableObjects = data.getVariableMap();
+		System.out.println("All the variables here are" + variableObjects);
 	}
 	
 	public int getLevelNumber() {
@@ -232,5 +230,12 @@ public class LevelData implements ILevelData {
 		
 		myGlobalVariables.put("LevelIndex", new VoogaNumber((double) levelNumber));
 //		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
+	}
+
+
+	@Override
+	public StandardPhysics getPhysicsEngine() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
