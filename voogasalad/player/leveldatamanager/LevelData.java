@@ -228,7 +228,11 @@ public class LevelData implements ILevelData {
 		for(VoogaEvent e : eventObjects){
 			addEventAndPopulateKeyCombos(e);
 		}
-		mySpriteFactory = data.getSpriteFactory();
+		
+		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
+		System.out.println("All the events here are" + eventObjects);
+		
+		mySpriteFactory = new SpriteFactory(archetypeMap);
 		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
 		myGlobalVariables = data.getVariableMap();
