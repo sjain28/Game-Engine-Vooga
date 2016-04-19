@@ -82,6 +82,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 	public void removeEvents(VoogaEvent... events) {
 		myEventList.removeAll(Arrays.asList(events));
 	}
+	
+	public List<VoogaEvent> getEvents(){
+	    return myEventList;
+	}
 
 	public Node getElement(String id) {
 		for (Node node : myGameElements) {

@@ -38,29 +38,28 @@ public class UIManager extends VBox {
 	/**
 	 * Initializes the UI Manager
 	 * 
-	 * @param model
-	 *            Interface to mediate interactions with backend
+	 * @param model Interface to mediate interactions with backend
 	 */
 	public UIManager(CompleteAuthoringModelable model) {
 		elementManagers = new ArrayList<CompleteAuthoringModelable>();
 		elementManagers.add(model);
-		initializeComponents();
+		initializeComponents(model);
 	}
 
 	/**
 	 * Initializes all the pieces of the authoring environment
 	 */
-	private void initializeComponents() {
-		this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
-			new MenuPanelHandlingMirror(e, elementManagers.get(0), newScene);
+	private void initializeComponents(CompleteAuthoringModelable manager) {
+		this.getChildren().addAll(new MenuPanel(manager, e -> {
+			new MenuPanelHandlingMirror(e, manager, newScene);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
-			new ToolPanelHandlingMirror(e, elementManagers.get(0));
-		}), grid = new UIGrid(elementManagers.get(0)));
+			new ToolPanelHandlingMirror(e, manager);
+		}), grid = new UIGrid(manager));
 	}
 
 	EventHandler<InputEvent> newScene = e -> {
 		elementManagers.add(new ElementManager());
 		grid.addScene(elementManagers.get(1));
 	};
-
+	
 }
