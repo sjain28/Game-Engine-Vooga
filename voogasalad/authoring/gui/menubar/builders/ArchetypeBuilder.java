@@ -38,7 +38,7 @@ import tools.interfaces.VoogaData;
 
 
 public class ArchetypeBuilder extends Builder {
-	
+
     private static final double WIDTH = 400;
     private static final double HEIGHT = 250;
     private String myImagePath;
@@ -94,7 +94,6 @@ public class ArchetypeBuilder extends Builder {
                 new VoogaAlert(e1.getMessage());
             }
 
-            
         });
         return makeRow(new CustomText("Image"), image, iv);
     }
@@ -138,9 +137,9 @@ public class ArchetypeBuilder extends Builder {
             else {
                 mass.setValue(Double.parseDouble(this.mass.getText()));
             }
-            
+
             mySpriteFactory.addArchetype(archetypeName.getText(),
-                                         new Sprite("file:"+myImagePath,
+                                         new Sprite("file:" + myImagePath,
                                                     archetypeName.getText(), myProperties, mass));
             quit();
         }
