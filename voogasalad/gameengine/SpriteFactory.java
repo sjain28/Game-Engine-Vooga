@@ -19,7 +19,7 @@ import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
 import data.Serializer;
 import resources.VoogaBundles;
-import data.DeSerializer;
+import data.Deserializer;
 import tools.VoogaException;
 import tools.VoogaNumber;
 
@@ -124,7 +124,7 @@ public class SpriteFactory extends Observable {
 
     @Deprecated
     public void deSerializeArchetype (String fileLocation) throws VoogaException {
-        DeSerializer deserializer = new DeSerializer();
+        Deserializer deserializer = new Deserializer();
         Sprite newArchetype = (Sprite) deserializer.deserialize(1, fileLocation);
         addArchetype(newArchetype.getArchetype(), newArchetype);
         System.out.println(newArchetype);
@@ -144,7 +144,7 @@ public class SpriteFactory extends Observable {
     }
 
     private void loadArchetype (String archetypeName) throws VoogaException {
-        Sprite newSpriteOfArchetype = (Sprite) DeSerializer.deserialize(1, ARCHETYPE_RESOURCE_PATH +
+        Sprite newSpriteOfArchetype = (Sprite) Deserializer.deserialize(1, ARCHETYPE_RESOURCE_PATH +
                                                                            archetypeName + ".xml").get(0);
         addArchetype(archetypeName, newSpriteOfArchetype);
 

@@ -39,7 +39,7 @@ public class StandardPhysics implements IPhysicsEngine{
 		double newXVel = gradualChange(sprite.getVelocity().getX(), change.getX());
 		double newYVel = gradualChange(sprite.getVelocity().getY(), change.getY());
 		Velocity velocity = new Velocity(newXVel, newYVel);
-		sprite.setVelocity(velocity);
+		setVelocity(sprite, velocity);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class StandardPhysics implements IPhysicsEngine{
 		double newXVel = immediateChange(sprite.getVelocity().getX(), addedVelocity.getX());
 		double newYVel = immediateChange(sprite.getVelocity().getY(), addedVelocity.getY());
 		Velocity velocity = new Velocity(newXVel, newYVel);
-		sprite.setVelocity(velocity);
+		setVelocity(sprite, velocity);
 	}
 
 	@Override

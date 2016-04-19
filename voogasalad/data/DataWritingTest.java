@@ -37,7 +37,7 @@ public class DataWritingTest {
 	public void setup(){
 		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),
 				generateEvents(), new SpriteFactory());
-		manager.addButton(generateButtons());
+//		manager.addButton(generateButtons());
 		System.out.println("My Button list here is " + manager.getButtonList());
 	}
 
@@ -49,6 +49,7 @@ public class DataWritingTest {
 			Sprite sprite = new Sprite("/image.jpeg","healthy",properties,new VoogaNumber(8d));
 			sprite.setPosition(new Position(i*7,i*2));
 			elements.add(sprite);
+			sprite.addProperty("gravity", new VoogaNumber(3d));
 		}
 		
 		return elements;
@@ -65,20 +66,23 @@ public class DataWritingTest {
 		return elements;
 	}
 
-	private List<Button> generateButtons(){
-		List<Button> elements = new ArrayList<Button>();
-		for (int i =0;i<10;i++){
-			Button Button = new Button("hi");
-			elements.add(Button);
-		}
-		return elements;
-	}
+//	private List<Button> generateButtons(){
+//		List<Button> elements = new ArrayList<Button>();
+//		for (int i =0;i<10;i++){
+//			Button Button = new Button("hi");
+//			elements.add(Button);
+//		}
+//		return elements;
+//	}
 
 	private Map<String,VoogaData> generateGlobalVariables(){
 		Map<String,VoogaData> map = new HashMap<String,VoogaData>();
 		for (int i=0;i<10;i++){
 			map.put(""+i, new VoogaNumber((double) i));
 		}
+		
+		map.put("LevelIndex",new VoogaNumber((double) -5));
+		
 		return map;
 	}
 
