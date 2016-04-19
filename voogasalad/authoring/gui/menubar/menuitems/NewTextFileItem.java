@@ -6,6 +6,7 @@ import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.gui.menubar.builders.TextObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
+import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
@@ -24,7 +25,7 @@ public class NewTextFileItem extends MenuItemHandler {
 	 *            Unused vestige of previous poor programming. Should soon be
 	 *            phased out.
 	 */
-	public NewTextFileItem(Menuable model, EventHandler<InputEvent> event) {
+	public NewTextFileItem(Menuable model, Sceneable uiModel) {
 		super();
 		myManager = (EditElementable) model;
 

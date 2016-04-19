@@ -8,6 +8,7 @@ import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.interfaces.model.Sceneable;
 import authoring.model.ElementManager;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -31,9 +32,9 @@ import resources.VoogaBundles;
  */
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
-public class UIManager extends VBox {
+public class UIManager extends VBox implements Sceneable{
 	private ArrayList<CompleteAuthoringModelable> elementManagers;
-	private UIGrid grid;
+	private UIGridHousing grid;
 
 	/**
 	 * Initializes the UI Manager
@@ -51,15 +52,14 @@ public class UIManager extends VBox {
 	 */
 	private void initializeComponents(CompleteAuthoringModelable manager) {
 		this.getChildren().addAll(new MenuPanel(manager, e -> {
-			new MenuPanelHandlingMirror(e, manager, newScene);
+			new MenuPanelHandlingMirror(e, manager, this);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
 			new ToolPanelHandlingMirror(e, manager);
-		}), grid = new UIGrid(manager));
+		}), grid = new UIGridHousing(manager));
 	}
-
-	EventHandler<InputEvent> newScene = e -> {
-		elementManagers.add(new ElementManager());
-		grid.addScene(elementManagers.get(1));
-	};
 	
+	public void addScene(){
+	    elementManagers.add(new ElementManager());
+	    grid.addScene(elementManagers.get(elementManagers.size() - 1));
+	}
 }
