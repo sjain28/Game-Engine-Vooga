@@ -19,7 +19,5 @@ public class Run extends ToolbarItemHandler {
 	public void handle () {
 		GameRunner gameRunner = new GameRunner();
 		gameRunner.playLevel("levels/Test.xml", true);
-
 	}
-
 }
