@@ -48,10 +48,8 @@ public abstract class AbstractPropertiesTab extends Tab {
     private Stage stage;
 
     public AbstractPropertiesTab () {
-
-        // THIS LIL CHUNK USED FOR TEST PURPOSES ONLY
         propertiesMap = new HashMap<String, VoogaData>();
-
+        this.setClosable(false);
         box.getChildren().add(myScrollPane);
         this.setContent(box);
         displayProperties();
@@ -85,7 +83,7 @@ public abstract class AbstractPropertiesTab extends Tab {
             data = propertiesMap.get(property).display();
             bindDataToMap(property,data);
             
-            properties.getChildren().add(new Property(name, data));
+            properties.getChildren().add(new PropertyBox(name, data));
         }
 
         propertiesHBox.getChildren().addAll(properties);

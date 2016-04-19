@@ -1,9 +1,13 @@
 package authoring.gui.menubar.builders;
 
+import authoring.CustomText;
+import authoring.VoogaScene;
 import authoring.interfaces.model.EditElementable;
 import authoring.resourceutility.ButtonMaker;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -13,86 +17,56 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tools.VoogaAlert;
 
-public abstract class Builder extends VBox{
-    private TextField[] myText = new TextField[5];
-    private SpriteFactory mySpriteFactory;
-    private EditElementable myManager;
-    private Stage myStage;
-    
-    protected Builder(EditElementable editor, Stage popup){
-        mySpriteFactory = editor.getSpriteFactory();
-        myManager = editor;
-        myStage = popup;
-        this.setSpacing(10);
-    }
-    
-    protected EditElementable getManager(){
-        return myManager;
-    }
-   
-    protected SpriteFactory getSpriteMaker(){
-       return mySpriteFactory;
-   }
-    
-    public void makeInfo(String prompt, int index){
-        HBox text = new HBox();
-        Text label = new Text(prompt);
-        label.setFill(Color.WHITE);
-        myText[index] = new TextField();
-        text.getChildren().addAll(label, myText[index]);
-        this.getChildren().add(text);
-    }
-    
-    public void makeInfo(String prompt){
-        makeInfo(prompt, 0);
-    }
-    
-    public String getInfo(int index){
-        return myText[index].getText();
-    }
-    
-    public String getInfo(){
-        return myText[0].getText();
-    }
-    
-    protected void makeCreate () {
-        HBox buttons = new HBox();
-        Button create = new ButtonMaker().makeButton("Create", e -> compile());
-        Button cancel = new ButtonMaker().makeButton("Cancel", e -> quit());
-        buttons.getChildren().addAll(create, cancel);
-        this.getChildren().add(buttons);
-    }
-//    
-//    protected void makeXLocationPicker() {
-//        HBox location = new HBox();
-//        Text label = new Text("X Location");
-//        label.setFill(Color.WHITE);
-//        TextField input = new TextField();
-//        location.getChildren().addAll(label, input);
-//        this.getChildren().add(location);
-//    }
-//    
-//    protected void makeYLocationPicker() {
-//        HBox location = new HBox();
-//        Text label = new Text("Y Location");
-//        label.setFill(Color.WHITE);
-//        TextField input = new TextField();
-//        location.getChildren().addAll(label, input);
-//        this.getChildren().add(location);
-//    }
-//
+public abstract class Builder extends Stage {
 
-    protected void quit () {
-        myStage.close();
-    }
-    
-    protected void numberError(String s){
-        Alert number = new Alert(AlertType.ERROR);
-        number.setTitle("Error");
-        number.setContentText(s);
-        number.showAndWait();
-    }
-    
-    public abstract void compile();
+	protected SpriteFactory mySpriteFactory;
+	protected EditElementable myManager;
+	protected static final double SPACING = 10;
+
+	protected Builder(EditElementable editor) {
+		if (editor != null) {
+			mySpriteFactory = editor.getSpriteFactory();
+			myManager = editor;
+		}
+	}
+
+	protected void load(Parent region) {
+		Scene scene = new VoogaScene(region);
+		this.setScene(scene);
+	}
+
+	protected HBox makeButtons() {
+		HBox buttons = new HBox();
+		Button create = new ButtonMaker().makeButton("OK", e -> compile());
+		Button cancel = new ButtonMaker().makeButton("Cancel", e -> quit());
+		buttons.getChildren().addAll(create, cancel);
+		return buttons;
+	}
+
+	protected HBox makeInfo(String label, String prompt, TextField tf) {
+		tf.setPromptText(prompt);
+		return makeRow(new CustomText(label), tf);
+	}
+
+	protected void quit() {
+		this.close();
+	}
+
+	protected HBox makeRow(Node... items) {
+		HBox row = new HBox();
+		for (Node node : items) {
+			row.getChildren().add(node);
+		}
+		row.setSpacing(10);
+		return row;
+	}
+
+	protected void numberError(String s) {
+		new VoogaAlert(s);
+	}
+
+	public abstract void compile();
+
 }

@@ -1,27 +1,24 @@
 package data;
 
-//import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+
 import authoring.interfaces.Elementable;
-import authoring.model.ElementManager;
-import authoring.model.VoogaButton;
-import events.Cause;
 import events.KeyCause;
 import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
-import javafx.scene.control.Button;
-import javafx.scene.shape.Rectangle;
 import tools.Position;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -36,19 +33,19 @@ public class DataWritingTest {
 	@Before
 	public void setup(){
 		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),
-				generateEvents(), new SpriteFactory());
-		manager.addButton(generateButtons());
+				generateEvents(), generateSpriteFactory());
 		System.out.println("My Button list here is " + manager.getButtonList());
 	}
 
 	private List<Elementable> generateSprites(){
 		List<Elementable> elements = new ArrayList<Elementable>();
-		for (int i=0;i<10;i++){
+		for (int i=0;i<1;i++){
 			Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
 			properties.put("health", new VoogaNumber(10d));
-			Sprite sprite = new Sprite("/image.jpeg","healthy",properties,new VoogaNumber(8d));
-			sprite.setPosition(new Position(i*7,i*2));
+			Sprite sprite = new Sprite("/mario.png","healthy",properties,new VoogaNumber(8d));
+			sprite.setPosition(new Position(i*20,i*10));
 			elements.add(sprite);
+			sprite.addProperty("gravity", new VoogaNumber(9.0));
 		}
 		
 		return elements;
@@ -65,20 +62,14 @@ public class DataWritingTest {
 		return elements;
 	}
 
-	private List<Button> generateButtons(){
-		List<Button> elements = new ArrayList<Button>();
-		for (int i =0;i<10;i++){
-			Button Button = new Button("hi");
-			elements.add(Button);
-		}
-		return elements;
-	}
-
 	private Map<String,VoogaData> generateGlobalVariables(){
 		Map<String,VoogaData> map = new HashMap<String,VoogaData>();
 		for (int i=0;i<10;i++){
 			map.put(""+i, new VoogaNumber((double) i));
 		}
+		
+		map.put("LevelIndex",new VoogaNumber((double) -5));
+		
 		return map;
 	}
 
@@ -87,17 +78,10 @@ public class DataWritingTest {
 		return sf;
 	}
 
-	//    @Test
-	//    public void testWriting () {
-	//        try {
-	//            FileWriterFromGameObjects.saveGameObjects(manager, "/levels/TestWriting.xml");
-	//        }
-	//        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-	//            // TODO Auto-generated catch block
-	//            e.printStackTrace();
-	//        }
-	//        
-	//    }
+	@Test
+	public void testWriting () throws ParserConfigurationException, TransformerException, IOException, SAXException {
+		FileWriterFromGameObjects.saveGameObjects(manager, "TestWriting.xml");
+	}
 
 	public DataContainerOfLists getData() {
 		return manager;

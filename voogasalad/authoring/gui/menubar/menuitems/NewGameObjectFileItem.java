@@ -2,6 +2,7 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.gui.menubar.builders.Builder;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
@@ -28,13 +29,9 @@ public class NewGameObjectFileItem extends MenuItemHandler {
          */
 	@Override
 	public void handle() {
-	    Stage popup = new Stage();
+	    Builder popup = new GameObjectBuilder(myManager);
 	    popup.setTitle("New Game Object");
-	    GameObjectBuilder initializer = new GameObjectBuilder(myManager, popup);
-	    Scene scene = new VoogaScene(initializer);
-	    popup.setScene(scene);
 	    popup.show();
-	    
 	}
 
 }

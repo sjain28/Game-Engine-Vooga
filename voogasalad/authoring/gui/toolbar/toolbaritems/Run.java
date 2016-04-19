@@ -17,18 +17,7 @@ public class Run extends ToolbarItemHandler {
 
 	@Override
 	public void handle () {
-		//save.handle();
-		try {
-			GameRunner gameRunner = new GameRunner("levels/Test.xml");
-			gameRunner.playLevel("levels/Test.xml");
-		}
-		catch (FileNotFoundException e) {
-			new VoogaAlert("Can't Run this level");
-		}
-		catch (IOException e) {
-			new VoogaAlert("Can't Run this level");
-		}
-
+		GameRunner gameRunner = new GameRunner();
+		gameRunner.playLevel("levels/Test.xml", true);
 	}
-
 }

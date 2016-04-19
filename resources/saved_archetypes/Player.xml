@@ -13,7 +13,7 @@
       <x>0.0</x>
       <y>0.0</y>
     </myLoc>
-    <myID>a533b5c2-6cbb-4b7c-8b0c-0f92eee7de7b</myID>
+    <myID>c05eca75-afa5-4d26-8730-06f86512df46</myID>
     <myProperties>
       <entry>
         <string>alive</string>
@@ -28,19 +28,19 @@
         </tools.VoogaNumber>
       </entry>
       <entry>
-        <string>mass</string>
+        <string>Lives</string>
         <tools.VoogaNumber>
-          <myValue>1000.0</myValue>
+          <myValue>3.0</myValue>
         </tools.VoogaNumber>
       </entry>
       <entry>
-        <string>asdfas</string>
+        <string>mass</string>
         <tools.VoogaNumber>
-          <myValue>1.0</myValue>
+          <myValue>20.0</myValue>
         </tools.VoogaNumber>
       </entry>
     </myProperties>
-    <myImagePath>file:////Users/arjunaashna/Documents/workspace/voogasalad_DoovalSalad/images/bricks.jpg</myImagePath>
-    <myArchetype>asdfasfas</myArchetype>
+    <myImagePath>/mario.png</myImagePath>
+    <myArchetype>Player</myArchetype>
   </gameengine.Sprite>
 </object-stream>

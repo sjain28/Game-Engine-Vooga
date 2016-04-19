@@ -1,11 +1,11 @@
 package events;
 
-import player.leveldatamanager.LevelData;
+import player.leveldatamanager.ILevelData;
 
 public abstract class Cause {
 	
 	 private VoogaEvent myEvent;	
-	 public abstract boolean check(LevelData data);
+	 public abstract boolean check(ILevelData data);
 	 
 	 public Cause(VoogaEvent voogaEvent){
 		 myEvent = voogaEvent;
@@ -19,8 +19,6 @@ public abstract class Cause {
 	 protected void setEvent(VoogaEvent event){
 		 myEvent = event;
 	 }
-	 
-	 public abstract void init();
 }
 
 //Every cause and effect needs to look at both Sprite Maps from SpriteManager

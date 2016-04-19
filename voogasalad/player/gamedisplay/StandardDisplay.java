@@ -229,7 +229,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * @return the myKeyEvents
 	 */
 	@Override
-	public List<KeyEvent> getKeyClicks() {
+	public List<KeyEvent> getKeyEvents() {
 		return myKeyEvents;
 	}
 
@@ -238,7 +238,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * 
 	 */
 	@Override
-	public void clearKeyClicks() {
+	public void clearKeyEvents() {
 		myKeyEvents.clear();
 	}
 	/**

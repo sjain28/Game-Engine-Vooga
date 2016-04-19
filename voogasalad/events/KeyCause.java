@@ -3,7 +3,7 @@ package events;
 import java.util.Arrays;
 import java.util.List;
 
-import player.leveldatamanager.LevelData;
+import player.leveldatamanager.ILevelData;
 
 /*
  * This class extends cause to create the specificity needed to address key causes. This will allow us to deal with
@@ -20,7 +20,7 @@ public class KeyCause extends Cause {
 	}
 
 	@Override
-	public boolean check(LevelData data) {
+	public boolean check(ILevelData data) {
 		return myValue;
 	}
 	
@@ -32,8 +32,4 @@ public class KeyCause extends Cause {
 		myValue = val;
 	}
 
-	@Override
-	public void init() {
-		return;
-	}
 }

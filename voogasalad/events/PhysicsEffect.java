@@ -1,18 +1,11 @@
 package events;
 
 import java.lang.reflect.Method;
-import java.util.List;
 import gameengine.Sprite;
-import physics.StandardPhysics;
-import player.leveldatamanager.LevelData;
-import tools.VoogaException;
-import tools.interfaces.VoogaData;
+import player.leveldatamanager.ILevelData;
 
 public class PhysicsEffect extends SpriteEffect {
-	private StandardPhysics myPhysicsEngine = new StandardPhysics();
-	
-	//TODO: WHY SHOULD THE EVENT BE HOLDING THE PHYSICS ENGINE AND NOT THE PHYSICS EFFECT??
-	//^^moved it to be in here
+
 	public PhysicsEffect(String spriteID, String method, Double parameter, VoogaEvent event) {
 		super(method, parameter, event);
 		setSpriteID(spriteID);
@@ -31,24 +24,21 @@ public class PhysicsEffect extends SpriteEffect {
 	}
 
 	@Override
-	public void execute(LevelData data){
-		List<Sprite> sprites = super.getSpritesToBeEffected(data);
-		for (Sprite sprite: sprites){
-			System.out.println("in sprite loop");
-			callEffectMethod(sprite);
+	public void execute(ILevelData data){
+		setSprites(data);
+		if (getSprites().size() > 0){
+			for (Sprite sprite: getSprites()){
+				callEffectMethod(sprite, data);
+			}
 		}
-		System.out.println("BOUNCING LEGGO");
-		//System.out.println(getSprites().size());
 	}
 
-	private void callEffectMethod(Sprite sprite){
+	private void callEffectMethod(Sprite sprite, ILevelData data){
 		try{
-			Method physicsMethod = myPhysicsEngine.getClass()
+			Method physicsMethod = data.getPhysicsEngine().getClass()
 					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameters().getClass()});
-			
-			System.out.println("METHOD NAME: "+getMethodString());
-			
-			physicsMethod.invoke(myPhysicsEngine, sprite, getParameters());
+
+			physicsMethod.invoke(data.getPhysicsEngine(), sprite, getParameters());
 		}catch (Exception e){
 			e.printStackTrace();
 			//throw new VoogaException(String.format(format, args));

@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
  * EventManager is in charge of updating all LevelData according to
  * the Inputed Causes and Events
  * 
- * @author Krista
+ * @author Saumya, Krista
  *
  */
 public class EventManager {
@@ -19,15 +19,15 @@ public class EventManager {
 	 * @param leveldata
 	 * @param keyclicks
 	 */
-	public void update(LevelData levelData, List<KeyEvent> keyClicks){
-		Map<List<String>, KeyCause> keyCauses = levelData.getKeyCauses();
-
-		checkKeys(levelData.getKeyCombos(), keyClicks, keyCauses);
+	public void update(ILevelData myLevelData, List<KeyEvent> keyClicks){
 		
-		for(VoogaEvent e: levelData.getEvents()){
-			e.update(levelData);
-		}
+		Map<List<String>, KeyCause> keyCauses = myLevelData.getKeyCauses();
+		checkKeys(myLevelData.getKeyCombos(), keyClicks, keyCauses);
 				
+		for(VoogaEvent e: myLevelData.getEvents()){
+			e.update(myLevelData);
+		}
+						
 		for(List<String> cause: keyCauses.keySet()){
 			keyCauses.get(cause).setValue(false);
 		}
@@ -36,7 +36,7 @@ public class EventManager {
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
 	private void checkKeys(List<List<String>> keyCombos, List<KeyEvent> keyClicks, Map<List<String>, KeyCause> keyCauses){
-
+		
 		for (List<String> eventCombo : keyCombos){ //Check all tuples
 			if(keyClicks.size() < eventCombo.size()){
 				continue;

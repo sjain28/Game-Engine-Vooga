@@ -22,9 +22,9 @@ public interface IGameDisplay {
 	
 	void createPrompt(String message);
 	
-	List<KeyEvent> getKeyClicks();
+	List<KeyEvent> getKeyEvents();
 	
-	void clearKeyClicks();
+	void clearKeyEvents();
 	
 	Stage getStage();
 	

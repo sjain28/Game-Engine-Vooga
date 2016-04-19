@@ -8,14 +8,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Properties;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
+
+import authoring.resourceutility.VoogaFile;
+import authoring.resourceutility.VoogaFileType;
 import data.Serializer;
 import resources.VoogaBundles;
-import data.DeSerializer;
+import data.Deserializer;
 import tools.VoogaException;
 import tools.VoogaNumber;
 
@@ -29,7 +33,7 @@ import tools.VoogaNumber;
  *
  */
 
-public class SpriteFactory {
+public class SpriteFactory extends Observable {
 
     // private static final String DEFAULT_IMAGE = "/smile.jpg";
     // private static final String DEFAULT_ARCH = "default";
@@ -75,6 +79,10 @@ public class SpriteFactory {
         }
         else {
             myArchetypes.put(archetypeName, archetype);
+            setChanged();
+            VoogaFile file = new VoogaFile(VoogaFileType.ARCHETYPE, archetypeName);
+            file.setPath(archetype.getImagePath());
+            notifyObservers(file);
         }
     }
 
@@ -116,7 +124,7 @@ public class SpriteFactory {
 
     @Deprecated
     public void deSerializeArchetype (String fileLocation) throws VoogaException {
-        DeSerializer deserializer = new DeSerializer();
+        Deserializer deserializer = new Deserializer();
         Sprite newArchetype = (Sprite) deserializer.deserialize(1, fileLocation);
         addArchetype(newArchetype.getArchetype(), newArchetype);
         System.out.println(newArchetype);
@@ -136,9 +144,8 @@ public class SpriteFactory {
     }
 
     private void loadArchetype (String archetypeName) throws VoogaException {
-        Sprite newSpriteOfArchetype = (Sprite) DeSerializer.deserialize(1, ARCHETYPE_RESOURCE_PATH +
-                                                                           VoogaBundles.archetypeProperties
-                                                                                   .getString(archetypeName)).get(0);
+        Sprite newSpriteOfArchetype = (Sprite) Deserializer.deserialize(1, ARCHETYPE_RESOURCE_PATH +
+                                                                           archetypeName + ".xml").get(0);
         addArchetype(archetypeName, newSpriteOfArchetype);
 
     }

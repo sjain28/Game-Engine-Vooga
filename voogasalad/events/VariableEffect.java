@@ -2,7 +2,7 @@ package events;
 
 import java.lang.reflect.*;
 
-import player.leveldatamanager.LevelData;
+import player.leveldatamanager.ILevelData;
 import tools.interfaces.VoogaData;
 
 
@@ -35,8 +35,9 @@ public class VariableEffect extends Effect {
 		myMethod = method;
 		myParameter = parameter;
 	}
+	
 	@Override
-	public void execute (LevelData data) {
+	public void execute(ILevelData data) {
 		//Class varClass = getEvent().getManager().getGlobalVar(myVariable).getClass();
 		VoogaData variableData = data.getGlobalVar(myVariable);
 		callEffectMethod(variableData);
@@ -50,7 +51,6 @@ public class VariableEffect extends Effect {
 		Class dataType = variable.getClass();
 		try{			
 			if (myParameter != null){
-				System.out.println("METHOD NAME: "+myMethod);
 				Method variableMethod = dataType.getMethod(myMethod, new Class[]{myParameter.getClass()});
 				variableMethod.invoke(variable, myParameter);
 			}
