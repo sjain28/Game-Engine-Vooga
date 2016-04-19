@@ -25,6 +25,7 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	private GameRunner myGameRunner;
 	private VoogaFileChooser myFileChooser;
 	
+	
 	/**
 	 * Initializes the MenuItem
 	 * 
