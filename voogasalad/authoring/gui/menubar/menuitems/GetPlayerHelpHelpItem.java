@@ -27,7 +27,7 @@ import tools.VoogaException;
 public class GetPlayerHelpHelpItem extends PlayerMenuItemHandler {
 	//  private static final String HELP_URL =
 	//  "https://www.google.com/search?q=how+to+use+voogasalad&oq=how+to+use+voogasalad&aqs=chrome..69i57j69i60j69i65j69i60l3.2085j0j1&sourceid=chrome&ie=UTF-8";
-	private static final String HELP_VIDEO_URL = "http://www.youtube.com/watch?v=mJ68sEM7YFs";
+	private static final String HELP_VIDEO_URL = "https://www.youtube.com/watch?v=znMmrxpFKEs";
 	private static final String EXIT_MESSAGE = "Press Ctrl + Z to exit full screen mode";
 
 	private WebView	myBrowser;
@@ -60,6 +60,10 @@ public class GetPlayerHelpHelpItem extends PlayerMenuItemHandler {
 		//  }
 		//}
 
+		/**
+		 * Provides an instructional video on how to play the game
+		 * 
+		 */
 		popup(HELP_VIDEO_URL);
 
 
