@@ -18,7 +18,7 @@ public class CharWindowItem extends MenuItemHandler {
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
 	public CharWindowItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
-		super();
+		
 	}
 	
 	/**

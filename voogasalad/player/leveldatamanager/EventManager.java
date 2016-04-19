@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import events.Cause;
+import events.Effect;
 import events.VoogaEvent;
 import javafx.scene.input.KeyEvent;
 import events.KeyCause;
@@ -64,6 +65,8 @@ public class EventManager {
 	}
 
 	public void addEvent(VoogaEvent voogaEvent){
+	    voogaEvent.setManager(myEngineManager);
+            myEvents.add(voogaEvent);
 		for(Cause c: voogaEvent.getCauses()){
 			c.init();
 			if(c instanceof KeyCause){
@@ -74,9 +77,11 @@ public class EventManager {
 				keyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
 			}
 		}
+		for(Effect e: voogaEvent.getEffects()){
+		    e.init();
+		}
 
-		voogaEvent.setManager(myEngineManager);
-		myEvents.add(voogaEvent);
+		
 	}
 
 	/**

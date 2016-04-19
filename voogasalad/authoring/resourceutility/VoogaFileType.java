@@ -7,6 +7,6 @@ package authoring.resourceutility;
  *
  */
 public enum VoogaFileType {
-	FOLDER, IMAGE, AUDIO;
+	FOLDER, IMAGE, AUDIO, ARCHETYPE, GAME_OBJECT;
 
 }

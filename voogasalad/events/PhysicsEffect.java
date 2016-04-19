@@ -2,9 +2,8 @@ package events;
 
 import java.lang.reflect.Method;
 import java.util.List;
-
-import auxiliary.VoogaException;
 import gameengine.Sprite;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 public class PhysicsEffect extends SpriteEffect {
@@ -34,6 +33,8 @@ public class PhysicsEffect extends SpriteEffect {
 				callEffectMethod(sprite);
 			}
 		}
+		System.out.println("BOUNCING LEGGO");
+		System.out.println(getSprites().size());
 	}
 
 	private void callEffectMethod(Sprite sprite){

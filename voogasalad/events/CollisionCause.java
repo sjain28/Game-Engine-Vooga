@@ -20,15 +20,27 @@ public class CollisionCause extends Cause{
 	}
 	
 	public void init(){
-		List<String> IdA = getEvent().getManager().getSpriteIDs(archA);
-		List<String> IdB = getEvent().getManager().getSpriteIDs(archB);
+	        groupA = new ArrayList<>();
+	        groupB = new ArrayList<>();
+		if(archA.contains("-") && archB.contains("-")){		
+			groupA.add(getEvent().getManager().getSprite(archA)); //If contains dash, it's a Sprite ID
+			groupB.add(getEvent().getManager().getSprite(archB));
+		}
+		else{
+			List<String> IdA = getEvent().getManager().getSpriteIDs(archA);//Else, it's an arch name
+			List<String> IdB = getEvent().getManager().getSpriteIDs(archB);
+			
+			for(String o: IdA){	
+				groupA.add(getEvent().getManager().getSprite(o));
+			}
+			for(String o: IdB){
+				groupB.add(getEvent().getManager().getSprite(o));
+			}
+		}
 		
-		for(String o: IdA){
-			groupA.add(getEvent().getManager().getSprite(o));
-		}
-		for(String o: IdB){
-			groupB.add(getEvent().getManager().getSprite(o));
-		}
+
+		
+
 		collidedSprites = new ArrayList<>();
 	}
 	

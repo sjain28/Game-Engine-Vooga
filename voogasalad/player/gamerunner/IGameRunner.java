@@ -1,14 +1,15 @@
 package player.gamerunner;
 
 import java.util.Collections;
-import java.util.List;
+
+import player.gamedisplay.Menuable;
 
 /**
  * Main control interface for player runner
  * 
  * @author mykuryshev, Hunter
  */
-public interface IGameRunner {
+public interface IGameRunner extends Menuable {
 
 	void stop();
 
