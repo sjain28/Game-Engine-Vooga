@@ -158,6 +158,7 @@ public class DesignBoard extends Tab implements Observer {
             try {
                 if (ResourceDecipherer.isImage(elementPath)) {
                     System.out.print(archetype);
+                    
 //                    GameObjectBuilder gameObjectBuilder = new GameObjectBuilder(elementManager);
 //                    gameObjectBuilder.setArchetype(archetype);
 //                    gameObjectBuilder.showAndWait();
