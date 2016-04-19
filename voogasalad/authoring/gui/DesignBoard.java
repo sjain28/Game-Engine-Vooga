@@ -151,25 +151,37 @@ public class DesignBoard extends Tab implements Observer {
         event.consume();
     }
 
-	private void addElement(VoogaFile file, DragEvent event, String archetype) {
-		node = null;
-		String elementPath = file.getPath();
-		if (elementPath != null) {
-			try {
-				if (ResourceDecipherer.isImage(elementPath)) {
-					node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
-					node.setTranslateX(event.getX() - x_offset);
-					node.setTranslateY(event.getY() - y_offset);
-				} else if (ResourceDecipherer.isAudio(elementPath)) {
-					// node = new
-					// GameObject(elementManager.getSpriteFactory().createSprite(""));
-					node = new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri().toString())));
-				}
-			} catch (VoogaException e) {
-				new VoogaAlert(e.getMessage());
-			}
-			addElement(node, elementPath);
-		}
+    private void addElement (VoogaFile file, DragEvent event, String archetype) {
+        node = null;
+        String elementPath = file.getPath();
+        if (elementPath != null) {
+            try {
+                if (ResourceDecipherer.isImage(elementPath)) {
+                    
+//                    GameObjectBuilder builder = new GameObjectBuilder(elementManager);
+//                    builder.setArchetype(archetype);
+//                    builder.showAndWait();
+                    
+                    
+                    node =
+                            new GameObject(elementManager.getSpriteFactory()
+                                    .createSprite(archetype), "");
+                    node.setTranslateX(event.getX() - x_offset);
+                    node.setTranslateY(event.getY() - y_offset);
+                }
+                else if (ResourceDecipherer.isAudio(elementPath)) {
+                    // node = new
+                    // GameObject(elementManager.getSpriteFactory().createSprite(""));
+                    node =
+                            new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
+                                    .toString())));
+                }
+            }
+            catch (VoogaException e) {
+                new VoogaAlert(e.getMessage());
+            }
+            addElement(node, elementPath);
+        }
 
         System.out.println(elementManager.getIds());
 
