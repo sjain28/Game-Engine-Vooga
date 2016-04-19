@@ -23,9 +23,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -49,9 +46,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -75,9 +69,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -101,9 +92,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -127,9 +115,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -153,9 +138,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -179,9 +161,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -205,9 +184,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -231,9 +207,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
       <events.VoogaEvent>
         <myCauses>
@@ -257,9 +230,6 @@
           <events.VariableEffect reference="../events.VariableEffect"/>
         </myEffects>
         <myCauseSprites/>
-        <myPhysicsEngine>
-          <frameTime>0.0</frameTime>
-        </myPhysicsEngine>
       </events.VoogaEvent>
     </eventList>
     <elementableList>
@@ -277,24 +247,24 @@
           <x>0.0</x>
           <y>0.0</y>
         </myLoc>
-        <myID>49e8586f-e114-4a42-a5b1-3dd6f8242f66</myID>
+        <myID>5d1e8318-25e7-43e9-b5a3-8f5f14a1e8c4</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -303,9 +273,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -321,24 +317,24 @@
           <x>7.0</x>
           <y>2.0</y>
         </myLoc>
-        <myID>3b6923f9-dcc1-428b-b841-43f8440a38fe</myID>
+        <myID>503551bd-39fd-4ab0-be9f-0e41057e3239</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -347,9 +343,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -365,24 +387,24 @@
           <x>14.0</x>
           <y>4.0</y>
         </myLoc>
-        <myID>ee6d9184-72c2-4ec9-8034-fe2bece21fdf</myID>
+        <myID>1654f208-0e2f-4270-9bb5-c34efb53211e</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -391,9 +413,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -409,24 +457,24 @@
           <x>21.0</x>
           <y>6.0</y>
         </myLoc>
-        <myID>9708d401-95d1-453c-b5e2-182e41ca7a65</myID>
+        <myID>e98c2b29-ae3f-4c20-bb2d-f9bc8395d9db</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -435,9 +483,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -453,24 +527,24 @@
           <x>28.0</x>
           <y>8.0</y>
         </myLoc>
-        <myID>c1561163-68b0-42cc-8ba6-79b443c7841b</myID>
+        <myID>58958f76-6421-443c-8dd7-b8fb08e876f4</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -479,9 +553,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -497,24 +597,24 @@
           <x>35.0</x>
           <y>10.0</y>
         </myLoc>
-        <myID>912fef02-788d-480e-8a41-4591fa26abca</myID>
+        <myID>f6f32073-2ce5-42a6-a5b0-fbde70c337de</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -523,9 +623,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -541,24 +667,24 @@
           <x>42.0</x>
           <y>12.0</y>
         </myLoc>
-        <myID>cc8d0b48-ed44-46eb-a9fd-05d09f606fe3</myID>
+        <myID>58de4f3e-a71b-4675-8bb7-27025991909a</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -567,9 +693,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -585,24 +737,24 @@
           <x>49.0</x>
           <y>14.0</y>
         </myLoc>
-        <myID>8efbe204-6f32-4fe1-a38d-2adeb5e5afa2</myID>
+        <myID>f32278f7-09a7-431e-bd1a-a8cf26475757</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -611,9 +763,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -629,24 +807,24 @@
           <x>56.0</x>
           <y>16.0</y>
         </myLoc>
-        <myID>65c9224d-d1cd-48ac-8bd6-ef05e4d0450b</myID>
+        <myID>2c3f3c23-fd51-4e8e-94c9-78eaa591d9db</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -655,9 +833,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
       <gameengine.Sprite>
         <isMainCharacter>false</isMainCharacter>
@@ -673,24 +877,24 @@
           <x>63.0</x>
           <y>18.0</y>
         </myLoc>
-        <myID>bb82af1a-2413-4833-b9d0-8b0b5b28c6b8</myID>
+        <myID>3c6a127c-c4a6-4884-aac0-e0c5bb23fbc7</myID>
         <myProperties>
           <entry>
-            <string>alive</string>
-            <tools.VoogaBoolean>
-              <myValue>true</myValue>
-            </tools.VoogaBoolean>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
           </entry>
           <entry>
             <string>gravity</string>
             <tools.VoogaNumber>
-              <myValue>0.0</myValue>
+              <myValue>3.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
-            <string>mass</string>
+            <string>X Position</string>
             <tools.VoogaNumber>
-              <myValue>8.0</myValue>
+              <myValue>0.0</myValue>
             </tools.VoogaNumber>
           </entry>
           <entry>
@@ -699,9 +903,35 @@
               <myValue>10.0</myValue>
             </tools.VoogaNumber>
           </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>720.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>960.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
         </myProperties>
         <myImagePath>/image.jpeg</myImagePath>
         <myArchetype>healthy</myArchetype>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
       </gameengine.Sprite>
     </elementableList>
     <variableMap>
@@ -773,6 +1003,8 @@
       </entry>
     </variableMap>
     <spriteFactory>
+      <changed>false</changed>
+      <obs/>
       <myArchetypes/>
     </spriteFactory>
   </data.DataContainerOfLists>
