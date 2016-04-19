@@ -20,6 +20,17 @@ public class VoogaBundles {
 	public final static OrderedProperties playerMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playermenunames.properties"));
 	public final static ResourceBundle toolbarProperties = ResourceBundle.getBundle("resources/toolbarbuttons");
 	public final static ResourceBundle backendToGUIProperties = ResourceBundle.getBundle("resources/GUIClassMap");
-
+	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
+	public final static Properties archetypeProperties = archetypes();
 	
+	private static Properties archetypes() {
+		Properties props = new Properties();
+		try {
+			props.load(new FileInputStream("archetypes.properties"));
+			return props;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

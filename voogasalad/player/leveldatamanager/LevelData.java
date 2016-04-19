@@ -2,9 +2,9 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
@@ -16,6 +16,8 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import physics.StandardPhysics;
+import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 /**
@@ -26,7 +28,10 @@ import tools.interfaces.VoogaData;
  * @author Krista
  *
  */
-public class LevelData {
+public class LevelData implements ILevelData {
+	
+	private static final int SCREENSIZE = 600;
+	
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
 	private Map<String,Elementable> myElements;
@@ -39,14 +44,25 @@ public class LevelData {
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
+	
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
+	
+	private IDisplayScroller myScroller;
+	
+	public LevelData() {
+		
+		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
+		myGlobalVariables = new HashMap<String, VoogaData>();
+		
+	}
+	
 	
 	/**
 	 * Returns a sprite by id
 	 * @param id
 	 * @return Sprite
 	 */
-	public Sprite getSprite(String id){
+	public Sprite getSpriteByID(String id){
 		return (Sprite) myElements.get(id);
 	}
 	/**
@@ -76,12 +92,12 @@ public class LevelData {
 	 * @param archetype
 	 * @return
 	 */
-	public List<String> getSpriteIDs(String archetype){
-		List<String> list = new ArrayList<String>();
+	public List<Sprite> getSpritesByArch(String archetype){
+		List<Sprite> list = new ArrayList<>();
 		for(String id : myElements.keySet()){
 			if(myElements.get(id) instanceof Sprite){
 				if(((Sprite) myElements.get(id)).getArchetype().equals(archetype)){
-					list.add(id);
+					list.add((Sprite)myElements.get(id));
 				}
 			}
 		}
@@ -131,12 +147,11 @@ public class LevelData {
 	 */
 	public List<Node> getDisplayableNodes(){
 		List<Node> displayablenodes = new ArrayList<Node>();
-
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 
-		return displayablenodes;
+		return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
 
 	}
 	/**
@@ -170,16 +185,12 @@ public class LevelData {
 	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
         myEvents.add(voogaEvent);
 		for(Cause c: voogaEvent.getCauses()){
-			c.init(this);
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
 				myKeyCauses.put(keyc.getKeys(), keyc); 
 				myKeyCombos.add(keyc.getKeys()); 
 				myKeyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
 			}
-		}
-		for(Effect e: voogaEvent.getEffects()){
-		    e.init(this);
 		}
 	}
 	/**
@@ -211,6 +222,20 @@ public class LevelData {
 		System.out.println("All the variables here are" + variableObjects);
 	}
 	
+	public int getLevelNumber() {
+		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
+	}
+	
+	public void setLevelNumber(int levelNumber) {
+		
+		myGlobalVariables.put("LevelIndex", new VoogaNumber((double) levelNumber));
+//		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
+	}
+
+
+	@Override
+	public StandardPhysics getPhysicsEngine() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
-Status API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Contact Help

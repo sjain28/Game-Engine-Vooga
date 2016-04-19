@@ -9,6 +9,9 @@ import org.xml.sax.SAXException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+/* Serializer is a general tool that can be utilized by any class. It is a data utility tool that can write any object
+ * to a list. That list will be serialized to an XML file. For now, 
+ */
 
 public class Serializer {
 

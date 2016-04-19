@@ -31,4 +31,5 @@ public class SpriteManager {
 		double gravityMagnitude = (double) ((Sprite) e).getProperty("gravity").getValue();
 		physics.gravity((Sprite) e, gravityMagnitude);
 	}
+
 }
