@@ -41,7 +41,7 @@ public class VoogaFile extends HBox implements Serializable {
 		return this.fileName;
 	}
 	
-	void setPath(String path) {
+	public void setPath(String path) {
 		this.filePath = path;
 	}
 	

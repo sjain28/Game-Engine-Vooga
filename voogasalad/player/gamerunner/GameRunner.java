@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Queue;
 
 import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
+import player.gamedisplay.GameboyDisplay;
 import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelDataManager;
 
@@ -43,19 +43,7 @@ public class GameRunner implements IGameRunner{
 	private ILevelDataManager myCurrentLevelDataManager; //This has EventManager
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private Queue<String> levelQueue;
-	//private AnimationTimer myTimeline;
-//	private AnimationTimer myTimeline;
-////	private AnimationTimerExt myTimeline;
 	private Timeline myTimeline;
-//	private long myDelay;
-
-
-	//	private final Consumer<Float> updater = null; // secondsElapsed -> game.step(secondsElapsed, veloctyIter, positonIter)//
-	//	private final Runnable renderer = null; // () -> whatever calls position updates //
-	//	private final Consumer<Float> interpolater = null; //alpha -> interpolatatePositions(), null for no interpolation //
-	//	private final Consumer<Integer> fps_reporter = null; //fps -> Text label for fps display, null for no label //
-	//  GameLoop myGameLoop = new FixedStepLoopWithInterpolation();
-
 
 	/**
 	 * Default constructor
@@ -72,7 +60,6 @@ public class GameRunner implements IGameRunner{
 				e -> step());
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
-		//playGame();
 	}
 
 	/**
@@ -102,24 +89,6 @@ public class GameRunner implements IGameRunner{
 		}
 		return levelQueue;
 	}
-
-//	/**
-//	 * Public method in the IGameRunner interface that runs the game
-//	 * in the AnimationTimer timeline
-//	 * 
-//	 */
-//	public void run() {
-//		myTimeline = new AnimationTimerExt(myDelay) {
-//
-//			@Override
-//			public void handle() {
-//				// TODO Auto-generated method stub
-//				step();
-//				System.out.println(myDelay);
-//			}
-//		};
-//		myTimeline.start();
-//	}
 	
 	/**
 	 * Public method in the IGameRunner interface that runs the game
@@ -127,23 +96,8 @@ public class GameRunner implements IGameRunner{
 	 * 
 	 */
 	public void run() {
-//		myTimeline = new AnimationTimer() {
-//			@Override
-//			public void handle(long myDelay) {
-//				step();
-//				try {
-//					Thread.sleep(myDelay);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				System.out.println(myDelay);
-//			}
-//		};
-//		myTimeline.start();
 		getTimeline().setRate(INIT_SPEED);
 		getTimeline().play();
-		
 	}
 
 	/**

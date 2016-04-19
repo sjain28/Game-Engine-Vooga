@@ -74,6 +74,7 @@ public class SpriteEffect extends VariableEffect{
 
 	@Override
 	public void init(){
+	    System.out.println("Initializing srite effect");
 		if(mySpriteID != null){
 			mySprites.add(getEvent().getManager().getSprite(mySpriteID));
 		}

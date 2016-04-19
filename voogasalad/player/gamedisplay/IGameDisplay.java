@@ -3,6 +3,7 @@ package player.gamedisplay;
 import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 /**
  * Interface for GameDisplay
@@ -24,5 +25,7 @@ public interface IGameDisplay {
 	List<KeyEvent> getKeyEvents();
 	
 	void clearKeyEvents();
+	
+	Stage getStage();
 	
 }
