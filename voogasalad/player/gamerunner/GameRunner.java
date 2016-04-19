@@ -7,12 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-
-import data.Deserializer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,13 +17,11 @@ import physics.IPhysicsEngine;
 import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
-import player.gamedisplay.GameboyDisplay;
 import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import player.leveldatamanager.SpriteManager;
 import tools.VoogaAlert;
-import tools.VoogaException;
 
 /**
  * GameRunner class that runs the game player

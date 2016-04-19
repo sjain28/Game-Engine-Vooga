@@ -45,7 +45,7 @@ public class DataWritingTest {
 			Sprite sprite = new Sprite("/mario.png","Mario",properties,new VoogaNumber(8.0));
 			sprite.setPosition(new Position(i*20,i*10));
 			elements.add(sprite);
-			sprite.addProperty("gravity", new VoogaNumber(9.0));
+			sprite.addProperty("gravity", new VoogaNumber(.04));
 		}
 		
 		return elements;
