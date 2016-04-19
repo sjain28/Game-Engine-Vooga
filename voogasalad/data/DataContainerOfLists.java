@@ -21,7 +21,7 @@ public class DataContainerOfLists {
     private List<Elementable> elementableList;
     private Map<String, VoogaData> variableMap;
     private SpriteFactory spriteFactory;
-    private List<Button> ButtonList; 
+    //private List<Button> ButtonList; 
     
     public DataContainerOfLists () {
     }
@@ -36,14 +36,14 @@ public class DataContainerOfLists {
         this.spriteFactory = factory;
     }
     
-    public void addButton(List<Button> ButtonList){
-    	this.ButtonList = ButtonList;
-    }
-    
-    public List<Button> getButtonList () {
-
-        return this.ButtonList;
-    }
+//    public void addButton(List<Button> ButtonList){
+//    	this.ButtonList = ButtonList;
+//    }
+//    
+//    public List<Button> getButtonList () {
+//
+//        return this.ButtonList;
+//    }
 
     public List<Elementable> getElementableList () {
 

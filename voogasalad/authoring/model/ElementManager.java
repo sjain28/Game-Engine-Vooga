@@ -127,15 +127,15 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 //            }
         }
 
-        DataContainerOfLists data =
-                new DataContainerOfLists(elements, myGlobalVariables, myEventList, spriteFactory);
-        System.out.println("I'm done saving in element manager");
         try {
+            DataContainerOfLists data =
+                    new DataContainerOfLists(elements, myGlobalVariables, myEventList, spriteFactory);
             System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data, filePath);
-            System.out.println("Wohooo");
+            System.out.println("I'm done saving in element manager");
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
+            e.printStackTrace();
             throw new VoogaException();
         }
     }
