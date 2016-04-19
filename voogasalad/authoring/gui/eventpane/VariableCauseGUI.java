@@ -16,7 +16,7 @@ import tools.interfaces.VoogaData;
 
 public class VariableCauseGUI implements EventGUI{
     private ComboBox<String> level;
-    private ComboBox<String> name;
+    private SpriteComboBox name;
     private VariableComboBox variables;
     private ComboBox<String> actions;
     private Node amount;
@@ -35,7 +35,7 @@ public class VariableCauseGUI implements EventGUI{
 
     private void initialize (ComboBox ... cbs) {
         level = new ComboBox<String>();
-        name = new ComboBox<String>();
+        name = new SpriteComboBox(elementManager);
         variables = new VariableComboBox();
         actions = new ComboBox<String>();
         level.getItems().addAll("global", "local");
@@ -54,7 +54,7 @@ public class VariableCauseGUI implements EventGUI{
                 addGUIElements(variables);
             }
             if (level.getValue().equals("local")) {
-                name.getItems().addAll(elementManager.getMySpriteNames());
+                name = new SpriteComboBox(elementManager);
                 addGUIElements(name);
             }
         });
@@ -62,7 +62,7 @@ public class VariableCauseGUI implements EventGUI{
         name.setOnAction(e -> {
             System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
-            variables.onParentChanged(elementManager.getVoogaElement(name.getValue()).getVoogaProperties());
+            variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             addGUIElements(variables);
         });
 
@@ -121,7 +121,7 @@ public class VariableCauseGUI implements EventGUI{
             result += "events.VariableCause ";
         }
         if (level.getValue().contains("local")){
-            result += "events.SpriteVariableCause "+name.getValue()+" ";
+            result += "events.SpriteVariableCause "+name.getSpriteId()+" ";
         }
         result+=variables.getValue()+
                 " "+actions.getValue()+" ";

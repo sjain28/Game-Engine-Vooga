@@ -46,7 +46,7 @@ public class BackEndButton implements Elementable {
 	}
 
 	@Override
-	public String getID() {
+	public String getId() {
 		// TODO Auto-generated method stub
 		return null;
 	}

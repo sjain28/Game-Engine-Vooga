@@ -32,6 +32,7 @@ public class FileWriterFromGameObjects {
             System.out.println("The file name here is " + fileName);
             file.createNewFile();
         }
+        
        Serializer.serialize(lists, fileName);
     }
 }
