@@ -9,8 +9,14 @@ import javafx.scene.control.Button;
 import tools.interfaces.VoogaData;
 
 
+/* For now, DataContainerOfLists will contain 4 objects: A list of elementables, a Map of variables,
+ * a list of events, and a SpriteFactory that is used to generate archetypes. An instance of this class 
+ * will contain all the objects necessary to load into the levelDataManager to be sent to the different managers.
+ */
+
 public class DataContainerOfLists {
 
+	
     private List<VoogaEvent> eventList;
     private List<Elementable> elementableList;
     private Map<String, VoogaData> variableMap;
@@ -56,8 +62,8 @@ public class DataContainerOfLists {
         return this.variableMap;
     }
     
-    public String toString () {
-        return "Data Container";
-    }
+//    public String toString () {
+//        return "Data Container";
+//    }
 
 }
