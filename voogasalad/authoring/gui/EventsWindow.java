@@ -1,5 +1,7 @@
 package authoring.gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import authoring.CustomText;
@@ -19,27 +21,33 @@ public class EventsWindow extends TabPane implements Observer{
 	private static final String NAME = "Event Manager";
 	private CompleteAuthoringModelable myManager;
 	private Tab main;
+	private VBox content;
+	private List<VoogaEvent> current;
 	
 	/**
 	 * Initialized the Events Window, responsible for displaying all the currently initialized Causes and Events and their links.
 	 * 
-	 * TODO: actually implement
 	 */
     public EventsWindow(CompleteAuthoringModelable manager){
         myManager = manager;
+        main = new Tab(NAME);
+        content = new VBox();
+        current = new ArrayList<VoogaEvent>();   
         initialize();
-        
+        current.addAll(myManager.getEvents());
     }
     
     private void initialize(){
-        main = new Tab(NAME);
-        VBox content = new VBox();
         for(VoogaEvent e: myManager.getEvents()){
-            HBox info = new HBox();
-            ListView causes = new ListView((ObservableList) e.getCauses());
-            ListView effects = new ListView((ObservableList) e.getEffects());
-            info.getChildren().addAll(causes, effects);
-            content.getChildren().add(info);
+            if(!current.contains(e)){
+                HBox info = new HBox();
+                ListView causes = new ListView((ObservableList) e.getCauses());
+                ListView effects = new ListView((ObservableList) e.getEffects());
+                info.getChildren().addAll(causes, effects);
+                content.getChildren().add(info);
+                current.add(e);
+            }
+            
         }
         
         main.setContent(content);
@@ -48,7 +56,6 @@ public class EventsWindow extends TabPane implements Observer{
 
     @Override
     public void update (Observable o, Object arg) {
-        this.getTabs().clear();
         initialize();
     }
 

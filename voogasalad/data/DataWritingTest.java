@@ -36,7 +36,7 @@ public class DataWritingTest {
 	@Before
 	public void setup(){
 		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),
-				generateEvents(), new SpriteFactory());
+				generateEvents(), null);
 //		manager.addButton(generateButtons());
 		System.out.println("My Button list here is " + manager.getButtonList());
 	}

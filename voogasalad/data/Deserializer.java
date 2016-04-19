@@ -31,6 +31,7 @@ public final class Deserializer {
                 try {
                     Object object = null;
                     object = (Object) objectInputStream.readObject();
+                    System.out.println("The objects created here were" + object);
                     objectsCreated.add(object);
                 }
                 catch (ClassNotFoundException e) {
@@ -50,7 +51,6 @@ public final class Deserializer {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        System.out.println(objectsCreated);
         return objectsCreated;
     }
 }
