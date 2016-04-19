@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class GameRunnerTest extends Application {
 
-    private static final String TESTXML_PATH = "levels/Test1.xml";
+    private static final String TESTXML_PATH = "levels/formalTest1.xml";
 
     public static void main (String[] args) {
         launch(args);

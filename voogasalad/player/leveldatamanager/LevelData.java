@@ -212,15 +212,16 @@ public class LevelData implements ILevelData {
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);
 
-		for(VoogaEvent e : eventObjects){
-			addEventAndPopulateKeyCombos(e);
-		}
+//		for(VoogaEvent e : eventObjects){
+//			addEventAndPopulateKeyCombos(e);
+//		}
 		
 		SpriteFactory factory = data.getSpriteFactory();
 		System.out.println("The spriteFactory here is" + factory);
 
-		Map<String,VoogaData> variableObjects = data.getVariableMap();
-		System.out.println("All the variables here are" + variableObjects);
+		myGlobalVariables = data.getVariableMap();
+		myGlobalVariables.put("levelIndex", new VoogaNumber((double) -1));
+		System.out.println("All the variables here are" + myGlobalVariables);
 	}
 	
 	public int getLevelNumber() {
