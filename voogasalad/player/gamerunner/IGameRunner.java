@@ -1,14 +1,16 @@
 package player.gamerunner;
 
+import java.io.File;
 import java.util.Collections;
-import java.util.List;
+
+import player.gamedisplay.Menuable;
 
 /**
  * Main control interface for player runner
  * 
  * @author mykuryshev, Hunter
  */
-public interface IGameRunner {
+public interface IGameRunner extends Menuable {
 
 	void stop();
 
@@ -22,7 +24,11 @@ public interface IGameRunner {
 
 	IGameRunner getSelf();
 
-	void playLevel(String teststring);
+	void playLevel(String teststring, boolean debugMode);
+	
+	void playGame(File xmlList);
+	
+	void replayGame();
 
 	// Methods below only called by LevelDataManager
 
@@ -32,6 +38,5 @@ public interface IGameRunner {
 
 	@Deprecated
 	void read(Collections nodesToDisplay);
-
 
 }

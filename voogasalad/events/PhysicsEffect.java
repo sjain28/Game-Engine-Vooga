@@ -2,9 +2,9 @@ package events;
 
 import java.lang.reflect.Method;
 import java.util.List;
-
-import auxiliary.VoogaException;
 import gameengine.Sprite;
+import player.leveldatamanager.ILevelData;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 public class PhysicsEffect extends SpriteEffect {
@@ -27,24 +27,21 @@ public class PhysicsEffect extends SpriteEffect {
 	}
 
 	@Override
-	public void execute(){
-		setSprites();
-		for (Sprite sprite: getSprites()){
-			System.out.println("in sprite loop");
-			callEffectMethod(sprite);
+	public void execute(ILevelData data){
+		setSprites(data);
+		if (getSprites().size() > 0){
+			for (Sprite sprite: getSprites()){
+				callEffectMethod(sprite, data);
+			}
 		}
-		System.out.println("BOUNCING LEGGO");
-		System.out.println(getSprites().size());
 	}
 
-	private void callEffectMethod(Sprite sprite){
+	private void callEffectMethod(Sprite sprite, ILevelData data){
 		try{
-			Method physicsMethod = getEvent().getPhysicsEngine().getClass()
+			Method physicsMethod = data.getPhysicsEngine().getClass()
 					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameters().getClass()});
-			
-			System.out.println("METHOD NAME: "+getMethodString());
-			
-			physicsMethod.invoke(getEvent().getPhysicsEngine(), sprite, getParameters());
+
+			physicsMethod.invoke(data.getPhysicsEngine(), sprite, getParameters());
 		}catch (Exception e){
 			e.printStackTrace();
 			//throw new VoogaException(String.format(format, args));

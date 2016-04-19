@@ -3,6 +3,10 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
@@ -10,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Position;
-import tools.Vector;
 import tools.VoogaNumber;
 import tools.Velocity;
 import tools.VoogaBoolean;
@@ -19,9 +22,14 @@ import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable, Elementable {
 
-    protected static final String MASS = "mass";
-    protected static final String ALIVE = "alive";
-    protected static final String GRAVITY = "gravity";
+    protected static final String MASS = "Mass";
+    protected static final String ALIVE = "Alive";
+    protected static final String GRAVITY = "Gravity";
+    protected static final String WIDTH = "Width";
+    protected static final String HEIGHT = "Height";
+    protected static final String X_POS = "X Position";
+    protected static final String Y_POS = "Y Position";
+    private boolean isMainCharacter;
     private Velocity myVelocity;
     private Position myLoc;
     private String myID;
@@ -30,6 +38,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myImagePath;
     private String myArchetype;
     private transient ImageView myImage;
+    private double myX;
+    private double myY;
 
     public Sprite (String imagePath,
                    String archetype,
@@ -55,7 +65,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
-
+        myProperties.put(WIDTH, new VoogaNumber(image.getWidth()));
+        myProperties.put(HEIGHT, new VoogaNumber(image.getHeight()));
+        myProperties.put(X_POS, new VoogaNumber());
         
     }
 
@@ -67,8 +79,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         System.out.println("Dope- init is being called");
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
-        myImage.setLayoutX(myLoc.getX());
-        myImage.setLayoutY(myLoc.getY());
     }
 
     public void update () {
@@ -178,5 +188,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
     public String getName () {
         return myName;
     }
+
+	public boolean isMainCharacter() {
+		return isMainCharacter;
+	}
+
+	public void setMainCharacter(boolean isMainCharacter) {
+		this.isMainCharacter = isMainCharacter;
+	}
 
 }
