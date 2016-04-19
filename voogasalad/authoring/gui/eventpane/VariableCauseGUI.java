@@ -54,7 +54,6 @@ public class VariableCauseGUI implements EventGUI{
                 addGUIElements(variables);
             }
             if (level.getValue().equals("local")) {
-                name = new SpriteComboBox(elementManager);
                 addGUIElements(name);
             }
         });
@@ -62,6 +61,7 @@ public class VariableCauseGUI implements EventGUI{
         name.setOnAction(e -> {
             System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
+            System.out.println(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             addGUIElements(variables);
         });

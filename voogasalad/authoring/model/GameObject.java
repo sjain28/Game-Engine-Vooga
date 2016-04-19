@@ -92,6 +92,5 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
     }
-    
 
 }

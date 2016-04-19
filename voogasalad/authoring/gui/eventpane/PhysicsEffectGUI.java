@@ -67,7 +67,7 @@ public class PhysicsEffectGUI implements EventGUI{
     public String getDetails () throws VoogaException{
         String result = "events.PhysicsEffect ";
         if (name.getValue()!=null){
-            result+=name.getValue()+ " ";
+            result+=name.getSpriteId()+ " ";
         }
         result += actions.getValue()+" "+amount.getText();
         return result;
