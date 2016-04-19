@@ -1,8 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
-import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.PlayerMenuItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
@@ -16,7 +14,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 import tools.VoogaException;
-
 
 /**
  * Menu Item to select the board of the display

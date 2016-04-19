@@ -8,7 +8,6 @@ import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 import player.gamerunner.GameRunner;
 
-
 /**
  * Menu Item to select the board of the display
  * 
@@ -19,7 +18,6 @@ public class ReplayLevelFileItem extends PlayerMenuItemHandler {
 	
 	private GameRunner myGameRunner;
 
-	
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -36,6 +34,10 @@ public class ReplayLevelFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
+		/*
+		 * Gets the current level's filename and plays the level again
+		 * 
+		 */
 		this.myGameRunner.playLevel(this.myGameRunner.getLevelFileName());
 	}
 

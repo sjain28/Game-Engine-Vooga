@@ -1,8 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
-import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.PlayerMenuItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
@@ -10,7 +8,6 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import player.gamedisplay.Menuable;
 import player.gamerunner.GameRunner;
-
 
 /**
  * Menu Item to select the board of the display
@@ -41,6 +38,11 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
+		/*
+		 * Shuts the stage and sets fullscreen directives and defines
+		 * a KeyCombination and shows the stage
+		 * 
+		 */
 		this.myGameRunner.getGameDisplay().getStage().close();
 		this.myGameRunner.getGameDisplay().getStage().setFullScreen(true);
 		this.myGameRunner.getGameDisplay().getStage().setFullScreenExitHint(EXIT_MESSAGE);

@@ -12,7 +12,6 @@ import player.gamerunner.GameRunner;
 import tools.VoogaException;
 import tools.VoogaFileChooser;
 
-
 /**
  * Menu Item to select the board of the display
  * 
@@ -24,7 +23,6 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	//TODO: Change GameRunner to IGameRunner
 	private GameRunner myGameRunner;
 	private VoogaFileChooser myFileChooser;
-	
 	
 	/**
 	 * Initializes the MenuItem
@@ -44,10 +42,12 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() throws VoogaException {
+		/*
+		 * Using FileChooser, opens a new file and plays that file
+		 * 
+		 */
 		this.myGameRunner.getGameDisplay().getStage().close();
 		this.myGameRunner.playGame(new File(myFileChooser.launch()));
 		this.myGameRunner.getGameDisplay().getStage().show();
 	}
-
-
 }
