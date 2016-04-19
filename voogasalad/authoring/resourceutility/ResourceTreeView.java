@@ -28,7 +28,7 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	 * @param projectRoot
 	 */
 	public ResourceTreeView(VoogaFile projectRoot) {		
-		root = new TreeItem<VoogaFile>(projectRoot, makeImage(projectRoot.getType()));
+		root = new TreeItem<VoogaFile>(projectRoot, makeImage(projectRoot));
 		root.setExpanded(true);
 		this.setEditable(true);
 		this.setRoot(root);
@@ -44,9 +44,18 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	 * they are selected appropriately.
 	 * @param file
 	 */
-	void addItem(VoogaFile file) {
+	public void addItem(VoogaFile file) {
 		TreeItem<VoogaFile> parentDirectory = this.getSelectionModel().getSelectedItem();
-		TreeItem<VoogaFile> childItem = new TreeItem<VoogaFile>(file, makeImage(file.getType()));
+		add(file, parentDirectory);
+	}
+	
+	public void addItemToFolder(VoogaFile file, VoogaFile folder) {
+		TreeItem<VoogaFile> parentDirectory = findTreeItemFromFileByRoot(folder, root);
+		add(file, parentDirectory);
+	}
+	
+	private void add(VoogaFile child, TreeItem<VoogaFile> parentDirectory) {
+		TreeItem<VoogaFile> childItem = new TreeItem<VoogaFile>(child, makeImage(child));
 		if(parentDirectory != null) {
 			VoogaFile parent = parentDirectory.getValue();
 			if(parent.getType() == VoogaFileType.FOLDER) {
@@ -61,7 +70,7 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	}
 	
 	
-	TreeItem<VoogaFile> findTreeItemFromFileByRoot(VoogaFile file, TreeItem<VoogaFile> root) {
+	public TreeItem<VoogaFile> findTreeItemFromFileByRoot(VoogaFile file, TreeItem<VoogaFile> root) {
 		TreeIterator<VoogaFile> iterator = new TreeIterator<VoogaFile>(root);
 		TreeItem<VoogaFile> fileItem = null;
 		while(iterator.hasNext()) {
@@ -75,7 +84,7 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 		return fileItem;
 	}
 	
-	void reorder(VoogaFile child, VoogaFile newParent) {
+	public void reorder(VoogaFile child, VoogaFile newParent) {
 		TreeItem<VoogaFile> childItem = findTreeItemFromFileByRoot(child, root);
 		TreeItem<VoogaFile> newParentItem = findTreeItemFromFileByRoot(newParent, root);
 		if(findTreeItemFromFileByRoot(newParent, childItem) == null) {
@@ -90,8 +99,8 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	 * @param type
 	 * @return
 	 */
-	private ImageView makeImage(VoogaFileType type) {
-		return new ImageView(new Image(LOCATION	 + type.name() + EXTENSION));
+	private ImageView makeImage(VoogaFile file) {
+		return new ImageView(new Image(LOCATION	 + file.getType().name() + EXTENSION));
 	}
 
 	/**
@@ -100,7 +109,7 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 	 * @param fileType
 	 * @return
 	 */
-	List<String> getFileNamesOfType(VoogaFileType fileType) {
+	public List<String> getFileNamesOfType(VoogaFileType fileType) {
 		TreeIterator<VoogaFile> iterator = new TreeIterator<VoogaFile>(root);
 		List<String> matchingItems = new ArrayList<String>();
 		while(iterator.hasNext()) {
@@ -111,6 +120,17 @@ public class ResourceTreeView extends TreeView<VoogaFile> {
 		    }
 		}
 		return matchingItems;
+	}
+
+	public void remove(TreeItem<VoogaFile> treeItem) {
+		TreeIterator<VoogaFile> iterator = new TreeIterator<VoogaFile>(root);
+		while(iterator.hasNext()) {
+		    TreeItem<VoogaFile> iterItem = iterator.next();
+		    if(treeItem == iterItem) {
+		    	root.getChildren().remove(iterItem);
+		    	break;
+		    }
+		}
 	}
 	
 }

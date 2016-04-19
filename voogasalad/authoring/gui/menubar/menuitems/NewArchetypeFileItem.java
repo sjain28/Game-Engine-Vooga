@@ -4,6 +4,7 @@ import authoring.VoogaScene;
 import authoring.gui.menubar.AuthoringMenuItemHandler;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.ArchetypeBuilder;
+import authoring.gui.menubar.builders.Builder;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
@@ -31,12 +32,9 @@ public class NewArchetypeFileItem extends AuthoringMenuItemHandler {
      */
     @Override
     public void handle () {
-        Stage popup = new Stage();
-        popup.setTitle("New Archetype");
-        ArchetypeBuilder initializer = new ArchetypeBuilder(myManager, popup);
-        Scene scene = new VoogaScene(initializer);
-        popup.setScene(scene);
-        popup.show();
+        Builder initializer = new ArchetypeBuilder(myManager);
+        initializer.setTitle("Create an Archetype");
+        initializer.show();
     }
 
 }

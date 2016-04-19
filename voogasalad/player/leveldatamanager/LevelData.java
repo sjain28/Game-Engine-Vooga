@@ -29,34 +29,36 @@ import tools.interfaces.VoogaData;
  *
  */
 public class LevelData implements ILevelData {
-	
+
 	private static final int SCREENSIZE = 600;
-	
+
+	private StandardPhysics myPhysics = new StandardPhysics();
+
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
 	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
-	
+
 	/**Global Variable Information**/
 	private Map<String, VoogaData> myGlobalVariables;
-	
+
 	/** Event Information**/
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
-	
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
-	
 	private IDisplayScroller myScroller;
-	
+
 	public LevelData() {
-		
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
+		myElements = new HashMap<String, Elementable>();		
 		myGlobalVariables = new HashMap<String, VoogaData>();
-		
+		myEvents = new ArrayList<VoogaEvent>();
+		myKeyCombos = new ArrayList<List<String>>();
+		myKeyCauses = new HashMap<List<String>, KeyCause>();	
 	}
-	
-	
+
+
 	/**
 	 * Returns a sprite by id
 	 * @param id
@@ -183,7 +185,7 @@ public class LevelData implements ILevelData {
 	 * @param voogaEvent
 	 */
 	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
-        myEvents.add(voogaEvent);
+		myEvents.add(voogaEvent);
 		for(Cause c: voogaEvent.getCauses()){
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
@@ -204,38 +206,51 @@ public class LevelData implements ILevelData {
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
-      
-		List<Elementable> spriteObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + spriteObjects);
 
+		List<Elementable> elementObjects = data.getElementableList();
+		System.out.println("All the sprites here are" + elementObjects);
+
+		//add elements to map 
+		for(Elementable el : elementObjects){
+			myElements.put(el.getID(), el);
+		}
+
+		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
+		for(Elementable el : elementObjects){
+			if(el instanceof Sprite){
+				myMainCharacterID = el.getID();
+				break;
+			}
+		}
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);
 
 		for(VoogaEvent e : eventObjects){
 			addEventAndPopulateKeyCombos(e);
 		}
-		
-		SpriteFactory factory = data.getSpriteFactory();
-		System.out.println("The spriteFactory here is" + factory);
+		mySpriteFactory = data.getSpriteFactory();
+		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
-		Map<String,VoogaData> variableObjects = data.getVariableMap();
-		System.out.println("All the variables here are" + variableObjects);
+		myGlobalVariables = data.getVariableMap();
+		System.out.println("All the variables here are" + myGlobalVariables);
 	}
-	
+
 	public int getLevelNumber() {
-		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
+		//HARDCODED FOR NOW!!!!
+		return -5;
+		//return Integer.parseInt((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue().toString()));
 	}
-	
+
 	public void setLevelNumber(int levelNumber) {
-		
+
 		myGlobalVariables.put("LevelIndex", new VoogaNumber((double) levelNumber));
-//		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
+		//		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 
 
 	@Override
 	public StandardPhysics getPhysicsEngine() {
-		// TODO Auto-generated method stub
-		return null;
+		return myPhysics;
 	}
+
 }

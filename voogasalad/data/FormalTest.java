@@ -26,7 +26,7 @@ import tools.interfaces.VoogaData;
 
 public class FormalTest extends Application {
 	
-	 public static final String testString = "levels/formalTest1.xml";
+	 public static final String testString = "levels/WORKPLS.xml";
     public static void main (String[] args) {
         launch(args);
         

@@ -150,10 +150,14 @@ public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 	private ContextMenu menu() {
 		ContextMenu menu = new ContextMenu();
 		MenuItem preview = new MenuItem("Preview...");
+		MenuItem delete = new MenuItem("Delete");
 		preview.setOnAction(e -> {
 			new PreviewMirror(getItem());
 		});
-		menu.getItems().add(preview);
+		delete.setOnAction(e -> {
+			structure.remove(this.getTreeItem());
+		});
+		menu.getItems().addAll(preview, delete);
 		return menu;
 	}
 

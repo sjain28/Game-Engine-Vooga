@@ -49,6 +49,7 @@ public class DataWritingTest {
 			Sprite sprite = new Sprite("/image.jpeg","healthy",properties,new VoogaNumber(8d));
 			sprite.setPosition(new Position(i*7,i*2));
 			elements.add(sprite);
+			sprite.addProperty("gravity", new VoogaNumber(3d));
 		}
 		
 		return elements;
