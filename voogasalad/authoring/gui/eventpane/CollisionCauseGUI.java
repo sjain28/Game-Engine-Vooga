@@ -28,9 +28,7 @@ public class CollisionCauseGUI implements EventGUI{
 
     @Override
     public String getDetails () throws VoogaException {
-        if (group1.getValue()==null || group2.getValue()==null) {
-            throw new VoogaException();
-        }
-        return "events.CollisionCause "+group1.getValue()+" "+group2.getValue();
+        
+        return "events.CollisionCause "+group1.getSpriteId()+" "+group2.getSpriteId();
     }
 }
