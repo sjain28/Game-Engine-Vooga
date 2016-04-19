@@ -39,7 +39,6 @@ public class ObjectManager {
 		for(Elementable el : elements){
 			myElements.put(el.getId(), el);
 		}
-
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		keyEvents = new ArrayList<KeyEvent>();
 		//TODO: Once constructor is figured out, intialize all objects here.
