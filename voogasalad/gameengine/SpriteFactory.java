@@ -1,15 +1,10 @@
 package gameengine;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Properties;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -18,7 +13,6 @@ import org.xml.sax.SAXException;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
 import data.Serializer;
-import resources.VoogaBundles;
 import data.Deserializer;
 import tools.VoogaException;
 import tools.VoogaNumber;
@@ -33,25 +27,22 @@ import tools.VoogaNumber;
  *
  */
 
-public class SpriteFactory extends Observable {
-
-    // private static final String DEFAULT_IMAGE = "/smile.jpg";
-    // private static final String DEFAULT_ARCH = "default";
-    // public static final Sprite DEFAULT_SPRITE =
-    // new Sprite(DEFAULT_IMAGE, DEFAULT_ARCH, new HashMap<String, VoogaData>(), new
-    // VoogaNumber(1.0));
+public class SpriteFactory extends Observable{
 
     private Map<String, Sprite> myArchetypes;
 
     // Path for folder where all archetypes ever saved are stored
-    private static final String ARCHETYPE_RESOURCE_PATH = "resources/saved_archetypes/";
+    private final String ARCHETYPE_RESOURCE_PATH = "resources/saved_archetypes/";
 
     public SpriteFactory () {
         myArchetypes = new HashMap<String, Sprite>();
-        // myArchetypes.put(DEFAULT_SPRITE.getArchetype(), DEFAULT_SPRITE);
     }
 
-    /**
+    public SpriteFactory(Map<String, Sprite> archetypeMap) {
+		myArchetypes = new HashMap<String,Sprite>(archetypeMap);
+	}
+
+	/**
      * Create a completely new Sprite of a given archetype
      * 
      * @param archetype
@@ -107,29 +98,6 @@ public class SpriteFactory extends Observable {
     public Set<String> getAllArchetypeNames () {
         return myArchetypes.keySet();
     }
-
-    @Deprecated
-    public void serializeArchetypes (String fileLocation) {
-        Serializer serializer = new Serializer();
-        try {
-            for (String key : myArchetypes.keySet()) {
-                System.out.println(key);
-                serializer.serialize(myArchetypes.get(key), fileLocation + "_" + key);
-            }
-        }
-        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Deprecated
-    public void deSerializeArchetype (String fileLocation) throws VoogaException {
-        Deserializer deserializer = new Deserializer();
-        Sprite newArchetype = (Sprite) deserializer.deserialize(1, fileLocation);
-        addArchetype(newArchetype.getArchetype(), newArchetype);
-        System.out.println(newArchetype);
-    }
-    
     
     public void importArchetype (String ... archetypeNames) throws VoogaException {
         for (String name : archetypeNames) {
@@ -169,5 +137,10 @@ public class SpriteFactory extends Observable {
             }
         }
     }
+    
+    public Map<String,Sprite> getArchetypeMap(){
+        return myArchetypes;
+    }
+    
 
 }

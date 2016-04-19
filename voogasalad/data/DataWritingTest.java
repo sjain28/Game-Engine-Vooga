@@ -32,9 +32,7 @@ public class DataWritingTest {
 
 	@Before
 	public void setup(){
-		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),
-				generateEvents(), generateSpriteFactory());
-		System.out.println("My Button list here is " + manager.getButtonList());
+		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),generateEvents(), null);
 	}
 
 	private List<Elementable> generateSprites(){

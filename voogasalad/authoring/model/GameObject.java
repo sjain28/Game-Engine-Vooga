@@ -1,15 +1,7 @@
 package authoring.model;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
@@ -29,10 +21,10 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     private Sprite mySprite;
     private String name;
 
-    public GameObject (Sprite sprite) {
+    public GameObject (Sprite sprite, String name) {
         mySprite = sprite;
-        this.setId(mySprite.getID());
-        this.name = mySprite.getID();
+        this.setId(mySprite.getId());
+        this.name = name;
         this.setImage(mySprite.getImage().getImage());
         this.setTranslateX(mySprite.getPosition().getX());
         this.setTranslateY(mySprite.getPosition().getY());
@@ -69,19 +61,13 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     public Map<String, VoogaData> getVoogaProperties () {
         Map<String, VoogaData> propertiesMap = new HashMap<String, VoogaData>();
         propertiesMap.putAll(mySprite.getParameterMap());
-        
-//        propertiesMap.put("width", new VoogaNumber(this.getFitWidth()));
-//        propertiesMap.put("height", new VoogaNumber(this.getFitHeight()));
-//        propertiesMap.put("positionX", new VoogaNumber(mySprite.getPosition().getX()));
-//        propertiesMap.put("positionY", new VoogaNumber(mySprite.getPosition().getX()));
-
         return propertiesMap;
     }
 
     @Override
     public void addProperty (String name, VoogaData data) {
         mySprite.addProperty(name, data);
-        
+
     }
 
     @Override
@@ -103,14 +89,9 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     }
 
-    @Override
-    public String getID () {
-        // TODO Auto-generated method stub
-        return this.mySprite.getID();
-    }
-    
-    public void setProperties (Map<String,VoogaData> map){
+    public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
     }
+    
 
 }

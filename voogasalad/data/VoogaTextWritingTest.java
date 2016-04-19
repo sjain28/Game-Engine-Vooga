@@ -23,7 +23,7 @@ public class VoogaTextWritingTest extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
         DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),
-        			generateGlobalVariables(),generateEvents(), new SpriteFactory());
+        			generateGlobalVariables(),generateEvents(), null);
         
 
         Serializer.serialize(manager, "levels/Test.xml");
