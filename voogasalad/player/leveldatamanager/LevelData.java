@@ -16,6 +16,7 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import physics.IPhysicsEngine;
 import physics.StandardPhysics;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -32,7 +33,7 @@ public class LevelData implements ILevelData {
 
 	private static final int SCREENSIZE = 600;
 
-	private StandardPhysics myPhysics = new StandardPhysics();
+	private IPhysicsEngine myPhysics;
 
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
@@ -50,7 +51,8 @@ public class LevelData implements ILevelData {
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
 	private IDisplayScroller myScroller;
 
-	public LevelData() {
+	public LevelData(IPhysicsEngine physicsengine) {
+		myPhysics = physicsengine;
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
 		myElements = new HashMap<String, Elementable>();		
 		myGlobalVariables = new HashMap<String, VoogaData>();
@@ -255,7 +257,7 @@ public class LevelData implements ILevelData {
 
 
 	@Override
-	public StandardPhysics getPhysicsEngine() {
+	public IPhysicsEngine getPhysicsEngine() {
 		return myPhysics;
 	}
 }

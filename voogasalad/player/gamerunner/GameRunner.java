@@ -67,11 +67,11 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException
 	 */
 	public GameRunner() {
-		myLevelData = new LevelData();
 		myGameDisplay = new StandardDisplay(getSelf());
 		mySpriteManager = new SpriteManager();
 		myEventManager = new EventManager();
-		myPhysicsEngine = new StandardPhysics();
+		myPhysicsEngine = new StandardPhysics(FRAMES_PER_SECOND);
+		myLevelData = new LevelData(myPhysicsEngine);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> step());
