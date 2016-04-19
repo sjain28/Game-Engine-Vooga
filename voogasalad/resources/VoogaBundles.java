@@ -21,6 +21,7 @@ public class VoogaBundles {
 	public final static ResourceBundle toolbarProperties = ResourceBundle.getBundle("resources/toolbarbuttons");
 	public final static ResourceBundle backendToGUIProperties = ResourceBundle.getBundle("resources/GUIClassMap");
 	public final static ResourceBundle imageProperties = ResourceBundle.getBundle("resources/imageproperties");
-        public static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
+        public final static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
+        public final static ResourceBundle physicsEffectsToGUI = ResourceBundle.getBundle("resources/PhysicsEffectsToGUI");
 	
 }
