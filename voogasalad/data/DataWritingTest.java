@@ -38,7 +38,7 @@ public class DataWritingTest {
 		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),
 				generateEvents(), null);
 //		manager.addButton(generateButtons());
-		System.out.println("My Button list here is " + manager.getButtonList());
+	//	System.out.println("My Button list here is " + manager.getButtonList());
 	}
 
 	private List<Elementable> generateSprites(){

@@ -10,9 +10,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Queue;
 
 import data.Deserializer;
+import data.Serializer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -52,8 +54,9 @@ public class GameRunner implements IGameRunner{
     private ILevelData myLevelData;
     private SpriteManager mySpriteManager;
     private EventManager myEventManager;
-    
+    private String levelsPath = "levels/";
     private String gameLocation = "games/";
+    private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private List<String> myLevelList;
 //	private Queue<String> levelQueue;
@@ -149,15 +152,35 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 */
-	private List<String> createLevelList(File xmlList) throws FileNotFoundException, IOException{
-		List <String> levelList = new ArrayList<String>();
-		try (BufferedReader br = new BufferedReader(new FileReader(xmlList))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				//TODO: process the line.
-				levelList.add(line);
-			}
-		}
+//	@Deprecated
+//	private List<String> createLevelList(File xmlList) throws FileNotFoundException, IOException{
+//		List <String> levelList = new ArrayList<String>();
+//		try (BufferedReader br = new BufferedReader(new FileReader(xmlList))) {
+//			String line;
+//			while ((line = br.readLine()) != null) {
+//				//TODO: process the line.
+//				levelList.add(line);
+//			}
+//		}
+//		return levelList;
+//	}
+	
+
+	/**
+	 * createLevels takes in a text file and out of that file creates a Queue of levels.
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * @throws VoogaException 
+	 */
+	private List<String> createLevelList(String xmlList) throws FileNotFoundException, IOException, VoogaException{
+		//Go into the path for this file
+		List<String> levelList = new ArrayList<>();
+		gameLocation = gameLocation + xmlList + "/";
+		String resourcePath = gameLocation + xmlList + ".xml";
+		levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);
+		System.out.println("The resource path here is called" + resourcePath); 
+		System.out.println("Levellist is " + levelList);
+	//	VoogaGame currentGame = new VoogaGame(levelList); //Eventually be able to create a game.
 		return levelList;
 	}
 	
@@ -186,8 +209,16 @@ public class GameRunner implements IGameRunner{
 		//myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
 		
 		//check level transition
-		if (getNextLevelNumber() > -1) {
-			playLevel(myLevelList.get(getNextLevelNumber()), false);
+		
+		if (!myLevelData.getNextLevelName().equals("")) {
+			Optional<String> correctLevel = myLevelList
+					.stream()
+		            .filter(a -> a.equals(myLevelData.getNextLevelName()))
+		            .findFirst();
+			System.out.println("The next level that's trying to play is " + myLevelData.getNextLevelName());
+			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
+			System.out.println("The current correct level is " + correctLevel.get());
+			playLevel(correctLevel.get(), false);
 		}
 		
 		//update all Sprite's with physics engine 
@@ -220,16 +251,15 @@ public class GameRunner implements IGameRunner{
 //		myGameDisplay.populateGameScreen();
 	}
 
-	/**
-	 * Returns nextLevelBit (0: No level change, other numbers indicate the level to 
-	 * transition to)
-	 * 
-	 * @return
-	 */
-	private int getNextLevelNumber() {
-		
-		return myLevelData.getLevelNumber();
-	}
+//	/**
+//	 * Returns nextLevelBit (0: No level change, other numbers indicate the level to 
+//	 * transition to)
+//	 * 
+//	 * @return
+//	 */
+//	private String getNextLevelName() {
+//		return myLevelData.getNextLevelName();
+//	}
 	
 	/**
 	 * This makes GameDisplay read in Nodes to display on its screen
@@ -248,7 +278,7 @@ public class GameRunner implements IGameRunner{
 		already, the next level of the game will be played. playGame iterates through the queue of levels
 		that is created when the GameController is initialized
 	 */
-	public void playGame(File xmlList) {
+	public void playGame(String xmlList) {
 		
 		try {
 			myLevelList = createLevelList(xmlList);
@@ -257,8 +287,10 @@ public class GameRunner implements IGameRunner{
 		}
 
 		//false because playGame is not in the debugging mode (plays the entire game)
+		System.out.println("My list of levels here is " + myLevelList);
 		playLevel(myLevelList.get(0), false);
-		
+		run();
+		myGameDisplay.display();
 		
 //		int nextLevelIndex = 0;
 //		if (myLevelData.getLevelNumber() != 0){
@@ -278,19 +310,23 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName, boolean debugMode){
+		System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
+		myCurrentLevelString = fileName;
+		String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
 		
+		System.out.println("The filenamewithpath here is" + fileNameWithPath);
 		//If debugMode = true, we are only playing one level
 		if (debugMode) {
 			myLevelList = new ArrayList<>();
 			myLevelList.add(fileName);
+			run();
+			myGameDisplay.display();
 		}
 		
-		System.out.println(fileName);
+//		System.out.println(fileName);
 		//Set the levelNumber to 0 because we are not transitioning anymore
-		myLevelData.refreshLevelData(fileName);
+		myLevelData.refreshLevelData(fileNameWithPath);
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
-		myGameDisplay.display();
-		run();
 		
 //		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
 //		myCurrentLevelDataManager.update();		 
@@ -422,11 +458,23 @@ public class GameRunner implements IGameRunner{
 
 	}
 
-//	@Override
-//	public int replayLevel() {
-//		// TODO Auto-generated method stub
-//		return changeLevel();
-//	}
+	@Override
+	public void replayLevel() {
+		// TODO Auto-generated method stub
+		
+//		//Test here: for the ability to play THE NEXT LEVEL!!!
+//			Optional<String> correctLevel = myLevelList
+//					.stream()
+//		            .filter(a -> a.equals(myCurrentLevelString))
+//		            .findFirst();
+//		
+//		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
+//		String nextLevel = myLevelList.get(tempIndex);
+//		myLevelData.setNextLevelName(nextLevel);
+		
+		myLevelData.setNextLevelName(myCurrentLevelString);
+	}
+	
 
 	@Override
 	public void replayGame() {}
