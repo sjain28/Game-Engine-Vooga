@@ -89,4 +89,10 @@ public class VoogaFrontEndText extends TextField implements Elementable {
         return null;
     }
 
+	@Override
+	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
