@@ -1,6 +1,7 @@
 package authoring;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import com.sun.glass.events.MouseEvent;
 import authoring.gui.menubar.MenuPanel;
@@ -34,8 +35,8 @@ import resources.VoogaBundles;
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
 public class UIManager extends VBox implements Menuable{
-	private ArrayList<CompleteAuthoringModelable> elementManagers;
 	private UIGridHousing grid;
+	private List<CompleteAuthoringModelable> myModels;
 
 	/**
 	 * Initializes the UI Manager
@@ -43,28 +44,44 @@ public class UIManager extends VBox implements Menuable{
 	 * @param model Interface to mediate interactions with backend
 	 */
 	public UIManager(CompleteAuthoringModelable model) {
-		elementManagers = new ArrayList<CompleteAuthoringModelable>();
-		elementManagers.add(model);
-		initializeComponents(model);
+	        myModels = new ArrayList<CompleteAuthoringModelable>();
+		myModels.add(model);
+		initializeComponents();
 	}
 
 	/**
 	 * Initializes all the pieces of the authoring environment
 	 */
-	private void initializeComponents(CompleteAuthoringModelable manager) {
-		this.getChildren().addAll(new MenuPanel(manager, e -> {
+	private void initializeComponents() {
+		this.getChildren().addAll(new MenuPanel(this, e -> {
 			new MenuPanelHandlingMirror(e, this);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
-			new ToolPanelHandlingMirror(e, manager);
-		}), grid = new UIGridHousing(manager));
+			new ToolPanelHandlingMirror(e, this);
+		}), grid = new UIGridHousing(myModels.get(0)));
 	}
 	
 	public void addScene(){
-	    elementManagers.add(new ElementManager());
-	    grid.addScene(elementManagers.get(elementManagers.size() - 1));
+	    myModels.add(new ElementManager());
+	    //initializes a new scene using the most recently added model;
+	    grid.addScene(myModels.get(myModels.size() - 1));
 	}
 	
 	public CompleteAuthoringModelable getManager(){
 	    return grid.getManager();
 	}
+	
+	
+	//TODO: Format output correctly
+	public void saveAll(){
+	    for(CompleteAuthoringModelable m: myModels){
+                try {
+                    m.onSave();
+                }
+                catch (VoogaException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+	    }
+	}
+	
 }

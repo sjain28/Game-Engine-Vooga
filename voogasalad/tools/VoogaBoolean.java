@@ -41,4 +41,8 @@ public class VoogaBoolean implements VoogaData{
     	return val == myValue;
     }
     
+    public String toString() {
+    	return Boolean.toString(myValue);
+    }
+    
 }

@@ -16,6 +16,7 @@ import player.gamedisplay.Menuable;
  *
  */
 public class SaveGameFileItem extends PlayerMenuItemHandler {
+    private Menuable myModel;
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -24,6 +25,7 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	public SaveGameFileItem(Menuable model) {
 		super();
+		myModel = model;
 	}
 	
 	/**
@@ -31,8 +33,7 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
-		// TODO Auto-generated method stub
-		
+		myModel.saveAll();
 	}
 
 }

@@ -23,6 +23,7 @@ public class StandardControl implements IControl {
 	private static final String START_KEY = "Start";
 	private static final String SPEED_UP_KEY = "SpeedUp";
 	private static final String SLOW_DOWN_KEY = "SlowDown";
+	private static final String REPLAY_BUTTON_KEY = "ReplayLevel";
 	private static final int TOP_PADDING = 15;
 	private static final int LEFT_PADDING = 12;
 	private static final int RIGHT_PADDING = 15;
@@ -63,13 +64,17 @@ public class StandardControl implements IControl {
 		Button speedUp = createButton(gameDisplayProperties.getString(SPEED_UP_KEY)); //TODO: ResourceBundle
 		Button speedDown = createButton(gameDisplayProperties.getString(SLOW_DOWN_KEY));
 
+		//Add button here for changing levels
+		Button replayButton = createButton(gameDisplayProperties.getString(REPLAY_BUTTON_KEY));
+		
 		// TODO: Assign click actions
 		pause.setOnAction(e -> getGameRunner().stop());
 		start.setOnAction(e -> getGameRunner().start());
 		speedUp.setOnMouseClicked(e -> getGameRunner().speedUp());
 		speedDown.setOnMouseClicked(e -> getGameRunner().speedDown());
+		replayButton.setOnMouseClicked(e -> getGameRunner().replayLevel());
 
-		myControl.getChildren().addAll(start, pause, speedUp, speedDown);
+		myControl.getChildren().addAll(start, pause, speedUp, speedDown, replayButton);
 
 		return myControl;
 	}

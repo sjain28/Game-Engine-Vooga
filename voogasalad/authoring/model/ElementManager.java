@@ -38,11 +38,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     private GlobalPropertiesManager GPM;
     private Map<String, VoogaData> myGlobalVariables;
-
     private File myXmlDataFile;
     private SpriteFactory spriteFactory;
     private Set<String> myIds;
-    private String filePath = "levels/Test.xml";
+    private String filePath = "games/levels/Test.xml";
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
@@ -198,5 +197,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     public List<VoogaEvent> getEvents () {
         return myEventList;
     }
+
 
 }
