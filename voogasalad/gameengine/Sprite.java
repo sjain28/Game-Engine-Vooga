@@ -83,15 +83,15 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public void update () {
         // Still needed: Apply physics to myVelocity
-        System.out.println("");
-        System.out.println("VelocityY-Sprite.java: "+"Archetype: "+myArchetype+" "+myVelocity.getY());
+//        System.out.println("");
+//        System.out.println("VelocityY-Sprite.java: "+"Archetype: "+myArchetype+" "+myVelocity.getY());
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
         
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
         
-        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
+//        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
         
     }
 
