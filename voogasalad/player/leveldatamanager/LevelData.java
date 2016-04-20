@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import physics.StandardPhysics;
 import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
@@ -34,6 +35,7 @@ public class LevelData implements ILevelData {
 	private static final int SCREENSIZE = 600;
 
 	private IPhysicsEngine myPhysics;
+	private String currentLevelName;
 
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
@@ -247,18 +249,18 @@ public class LevelData implements ILevelData {
 
 		myGlobalVariables = data.getVariableMap();
 		System.out.println("All the variables here are" + myGlobalVariables);
+		
+		myGlobalVariables.put("LevelIndex", new VoogaString(""));
 	}
 
-	public int getLevelNumber() {
+	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-		return -5;
-		//return Integer.parseInt((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue().toString()));
+//		System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
-
-	public void setLevelNumber(int levelNumber) {
-		myGlobalVariables.put("LevelIndex", new VoogaNumber((double) levelNumber));
+	public void setNextLevelName(String levelName) {
+		myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
 	}
-
 
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {

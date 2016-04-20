@@ -26,9 +26,11 @@ public interface IGameRunner extends Menuable {
 
 	void playLevel(String teststring, boolean debugMode);
 	
-	void playGame(File xmlList);
+	void playGame(String xmlList);
 	
 	void replayGame();
+	
+	void replayLevel();
 
 	// Methods below only called by LevelDataManager
 

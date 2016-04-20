@@ -31,9 +31,9 @@ public interface ILevelData {
 
 	Collection<VoogaEvent> getEvents();
 
-	int getLevelNumber();
+	String getNextLevelName();
 
-	void setLevelNumber(int levelNumber);
+	void setNextLevelName(String levelNumber);
 	
 	Sprite getSpriteByID(String id);
 
