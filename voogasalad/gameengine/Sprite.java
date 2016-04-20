@@ -197,4 +197,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		this.isMainCharacter = isMainCharacter;
 	}
 
+	@Override
+	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
