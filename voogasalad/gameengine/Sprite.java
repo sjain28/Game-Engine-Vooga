@@ -10,6 +10,8 @@ import javax.script.ScriptEngineManager;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,14 +40,15 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myImagePath;
     private String myArchetype;
     private transient ImageView myImage;
-    private double myX;
-    private double myY;
+    private SimpleDoubleProperty myX;
+    private SimpleDoubleProperty myY;
 
     public Sprite (String imagePath,
                    String archetype,
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
-        myLoc = new Position(0, 0);
+    	initializeCoordinates();
+        myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
         
         myID = UUID.randomUUID().toString();
@@ -62,6 +65,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
 
+        //TODO: use properties file to put these
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
@@ -70,13 +74,23 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(X_POS, new VoogaNumber());
         
     }
+    
+    private void initializeCoordinates() {
+    	myX = new SimpleDoubleProperty();
+    	myY = new SimpleDoubleProperty();
+    	myX.addListener((obs, old, n) -> {
+    		myLoc.setX((double) n);
+    	});
+    	myY.addListener((obs, old, n) -> {
+    		myLoc.setY((double) n);
+    	});
+    }
 
     /**
      * Initializes JavaFX objects that can't be serialized
      * Need to call this before using the Sprite in the game engine!
      */
     public void init () {
-        System.out.println("Dope- init is being called");
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
     }
@@ -201,6 +215,14 @@ public class Sprite implements Moveable, Effectable, Elementable {
 	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Property<Number> getX() {
+		return this.myX;
+	}
+	
+	public Property<Number> getY() {
+		return this.myY;
 	}
 
 }

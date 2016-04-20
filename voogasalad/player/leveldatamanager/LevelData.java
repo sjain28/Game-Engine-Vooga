@@ -245,7 +245,7 @@ public class LevelData implements ILevelData {
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-//		System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		//System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 

@@ -25,16 +25,24 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     private String name;
 
     public GameObject (Sprite sprite, String name) {
-        mySprite = sprite;
-        this.setId(mySprite.getId());
+    	initializeSprite(sprite);
         this.name = name;
+        this.setId(mySprite.getId());
         this.setImage(mySprite.getImage().getImage());
-        this.setTranslateX(mySprite.getPosition().getX());
-        this.setTranslateY(mySprite.getPosition().getY());
         this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
         this.setOnDragDetected(e -> onDrag(e));
     }
 
+    private void initializeSprite(Sprite sprite) {
+        mySprite = sprite;
+        this.translateXProperty().addListener((obs, old, n) -> {
+        	mySprite.getX().setValue(n);
+        });
+        this.translateYProperty().addListener((obs, old, n) -> {
+        	mySprite.getY().setValue(n);
+        });
+    }
+    
     // TODO: Send back immutable sprite
     public Sprite getSprite () {
         return mySprite;
