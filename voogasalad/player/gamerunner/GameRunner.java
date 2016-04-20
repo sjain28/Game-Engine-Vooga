@@ -471,7 +471,7 @@ public class GameRunner implements IGameRunner{
 //		String nextLevel = myLevelList.get(tempIndex);
 //		myLevelData.setNextLevelName(nextLevel);
 		
-//		myLevelData.setNextLevelName(myCurrentLevelString);
+		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
 	
 
