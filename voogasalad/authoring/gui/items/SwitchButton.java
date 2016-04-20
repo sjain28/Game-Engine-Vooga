@@ -56,4 +56,8 @@ public class SwitchButton extends Label {
     public void setOn(boolean on){
         switchedOn.setValue(on);
     }
+    
+    public boolean booleanProperty(){
+    	return switchedOn.getValue();
+    }
 }
