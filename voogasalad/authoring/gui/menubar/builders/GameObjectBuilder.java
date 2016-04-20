@@ -19,6 +19,7 @@ public class GameObjectBuilder extends Builder {
 	private TextField myName;
 	private ComboBox<String> archetypes;
 	private VBox container;
+	private ArchetypeBuilder archetypeBuilder;
 
 	public GameObjectBuilder(EditElementable editor) {
 		super(editor);
@@ -38,7 +39,6 @@ public class GameObjectBuilder extends Builder {
 	private HBox makeAddNewArchetypeButton() {
 		HBox container = new HBox();
 		Button button = new ButtonMaker().makeButton("Add a new archetype", e -> {
-			ArchetypeBuilder archetypeBuilder = new ArchetypeBuilder(this.editor);
 			archetypeBuilder.showAndWait();
 			archetypes.getItems().add(archetypeBuilder.getArchetypeName());
 			archetypes.setValue(archetypeBuilder.getArchetypeName());
@@ -74,6 +74,11 @@ public class GameObjectBuilder extends Builder {
 				};
 		archetypes.getItems().addAll(items);
 		return makeRow(new CustomText("Select an archetype:"), archetypes);
+	}
+
+	public void setDraggedImage(String path) {
+		archetypeBuilder = new ArchetypeBuilder(this.editor);
+		archetypeBuilder.setImagePath(path);
 	}
 
 }
