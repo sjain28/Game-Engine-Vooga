@@ -12,6 +12,7 @@ public abstract class Effect {
     	 myEvent = voogaEvent;
     	 myEvent.addEffect(this);
      }
+     public abstract String toString();
      
 	 public void setEvent(VoogaEvent e){
 		 myEvent = e;

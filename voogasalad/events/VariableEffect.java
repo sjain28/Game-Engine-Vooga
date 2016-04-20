@@ -70,7 +70,15 @@ public class VariableEffect extends Effect {
 	public String getMethodString(){
 		return myMethod;
 	}
-	public Object getParameters(){
+	public Object getParameter(){
 		return myParameter;
+	}
+	@Override
+	public String toString() {
+		String effectString = myMethod + myVariable;
+		if (myParameter != null){
+			effectString += "[" + myParameter.toString() + "]";
+		}
+		return effectString;
 	}
 }
