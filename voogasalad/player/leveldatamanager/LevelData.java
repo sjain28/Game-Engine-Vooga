@@ -46,7 +46,6 @@ public class LevelData implements ILevelData {
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
-
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
 	private IDisplayScroller myScroller;
 
@@ -113,7 +112,7 @@ public class LevelData implements ILevelData {
 	 */
 	public Sprite addSprite(String archetype){
 		Elementable newSprite = mySpriteFactory.createSprite(archetype);
-		myElements.put(newSprite.getID(),newSprite);
+		myElements.put(newSprite.getId(),newSprite);
 		return (Sprite) newSprite;
 	}
 	/**
@@ -213,13 +212,13 @@ public class LevelData implements ILevelData {
 
 		//add elements to map 
 		for(Elementable el : elementObjects){
-			myElements.put(el.getID(), el);
+			myElements.put(el.getId(), el);
 		}
 
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
-				myMainCharacterID = el.getID();
+				myMainCharacterID = el.getId();
 				break;
 			}
 		}
@@ -229,7 +228,11 @@ public class LevelData implements ILevelData {
 		for(VoogaEvent e : eventObjects){
 			addEventAndPopulateKeyCombos(e);
 		}
-		mySpriteFactory = data.getSpriteFactory();
+		
+		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
+		System.out.println("All the events here are" + eventObjects);
+		
+		mySpriteFactory = new SpriteFactory(archetypeMap);
 		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
 		myGlobalVariables = data.getVariableMap();
@@ -253,4 +256,5 @@ public class LevelData implements ILevelData {
 	public StandardPhysics getPhysicsEngine() {
 		return myPhysics;
 	}
+
 }

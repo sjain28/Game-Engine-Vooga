@@ -285,8 +285,8 @@ public class GameRunner implements IGameRunner{
 			myLevelList.add(fileName);
 		}
 		
+		System.out.println(fileName);
 		//Set the levelNumber to 0 because we are not transitioning anymore
-		myLevelData.setLevelNumber(-1);
 		myLevelData.refreshLevelData(fileName);
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
 		myGameDisplay.display();
