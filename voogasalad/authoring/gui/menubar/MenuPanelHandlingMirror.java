@@ -23,7 +23,6 @@ public class MenuPanelHandlingMirror {
 
     private ActionEvent e;
     private Menuable myManager;
-    private Sceneable myUIManger;
 
     /**
      * Instantiates the menu panel handler.
@@ -34,22 +33,9 @@ public class MenuPanelHandlingMirror {
      * @param graphicsWindow
      */
     public MenuPanelHandlingMirror (ActionEvent e,
-                                    Menuable manager,
-                                    Sceneable newScene) {
+                                    Menuable manager) {
         this.e = e;
         myManager = manager;
-        myUIManger = newScene;
-        try {
-            handleEvent();
-        }
-        catch (VoogaException e1) {
-            new VoogaAlert(e1.getMessage());
-        }
-    }
-
-    public MenuPanelHandlingMirror (ActionEvent e, Menuable manager) {
-        this.e = e;
-        this.myManager = manager;
         try {
             handleEvent();
         }
@@ -70,8 +56,8 @@ public class MenuPanelHandlingMirror {
         try {
             clazz = Class.forName(PACKAGE_LOCATION + menuItem.getId());
             menuItemHandler =
-                    (MenuItemHandler) clazz.getConstructor(Menuable.class, Sceneable.class)
-                            .newInstance(myManager, myUIManger);
+                    (MenuItemHandler) clazz.getConstructor(Menuable.class)
+                            .newInstance(myManager);
             menuItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(menuItemHandler);
         }
         catch (Exception ee) {

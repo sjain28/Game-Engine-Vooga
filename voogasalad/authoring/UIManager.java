@@ -21,6 +21,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import player.gamedisplay.Menuable;
 import tools.VoogaAlert;
 import tools.VoogaException;
 import resources.VoogaBundles;
@@ -32,7 +33,7 @@ import resources.VoogaBundles;
  */
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
-public class UIManager extends VBox implements Sceneable{
+public class UIManager extends VBox implements Menuable{
 	private ArrayList<CompleteAuthoringModelable> elementManagers;
 	private UIGridHousing grid;
 
@@ -52,7 +53,7 @@ public class UIManager extends VBox implements Sceneable{
 	 */
 	private void initializeComponents(CompleteAuthoringModelable manager) {
 		this.getChildren().addAll(new MenuPanel(manager, e -> {
-			new MenuPanelHandlingMirror(e, manager, this);
+			new MenuPanelHandlingMirror(e, this);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
 			new ToolPanelHandlingMirror(e, manager);
 		}), grid = new UIGridHousing(manager));
@@ -61,5 +62,9 @@ public class UIManager extends VBox implements Sceneable{
 	public void addScene(){
 	    elementManagers.add(new ElementManager());
 	    grid.addScene(elementManagers.get(elementManagers.size() - 1));
+	}
+	
+	public CompleteAuthoringModelable getManager(){
+	    return grid.getManager();
 	}
 }

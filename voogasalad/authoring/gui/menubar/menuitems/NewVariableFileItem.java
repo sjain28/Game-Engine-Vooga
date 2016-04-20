@@ -25,9 +25,9 @@ public class NewVariableFileItem extends MenuItemHandler {
 	 *            Unused vestige of previous poor programming. Should soon be
 	 *            phased out.
 	 */
-	public NewVariableFileItem(Menuable model, Sceneable uiModel) {
+	public NewVariableFileItem(Menuable model) {
 		super();
-		myManager = (EditElementable) model;
+		myManager = (EditElementable) model.getManager();
 	}
 
 	/**

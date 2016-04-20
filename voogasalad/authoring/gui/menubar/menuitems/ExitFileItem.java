@@ -19,7 +19,7 @@ public class ExitFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public ExitFileItem(Menuable model, Sceneable uiModel) {
+	public ExitFileItem(Menuable model) {
 		
 	}
 	/**

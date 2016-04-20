@@ -10,16 +10,16 @@ import javafx.scene.input.MouseEvent;
 import player.gamedisplay.Menuable;
 
 public class NewSceneFileItem extends MenuItemHandler {
-    Sceneable myUIManager;
+    Menuable myUIManager;
         /**
          * Initializes the MenuItem
          * 
          * @param model to interface backend interactions with the model
          * @param event: Unused vestige of previous poor programming. Should soon be phased out.
          */
-	public NewSceneFileItem(Menuable model, Sceneable uiModel) {
+	public NewSceneFileItem(Menuable model) {
 		super();
-		myUIManager = uiModel;
+		myUIManager = model;
 	}
 	/**
          * Action to be taken on the selection of this menuItem

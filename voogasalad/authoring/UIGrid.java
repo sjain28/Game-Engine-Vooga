@@ -72,6 +72,10 @@ public class UIGrid extends GridPane{
         EventsWindow events = new EventsWindow(myManager);
         this.add(events, 0, 2);
     }
+    
+    public CompleteAuthoringModelable getModel(){
+        return myManager;
+    }
 
     /**
      * This function adds a new Scene, and thus tab in the design board housing, to the design

@@ -14,7 +14,7 @@ public class PrefFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public PrefFileItem(Menuable model, Sceneable uiModel) {
+	public PrefFileItem(Menuable model) {
 		super();
 	}
 	/**

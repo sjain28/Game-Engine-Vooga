@@ -13,8 +13,8 @@ import tools.VoogaException;
 public class NewImportArchetypeFileItem extends AuthoringMenuItemHandler {
     CompleteAuthoringModelable manager;
     
-    public NewImportArchetypeFileItem(Menuable model, Sceneable uiModel){
-        this.manager = (CompleteAuthoringModelable) model;
+    public NewImportArchetypeFileItem(Menuable model){
+        this.manager = (CompleteAuthoringModelable) model.getManager();
     }
     @Override
     public void handle () throws VoogaException {

@@ -10,7 +10,12 @@ public class UIGridHousing extends TabPane{
     }
     
     public void addScene(CompleteAuthoringModelable manager){
-        Tab scene = new Tab("Scene " + this.getTabs().size() + 1);
+        Tab scene = new Tab("Scene " + (this.getTabs().size() + 1));
         scene.setContent(new UIGrid(manager));
+        this.getTabs().add(scene);
+    }
+
+    public CompleteAuthoringModelable getManager () {
+        return ((UIGrid) this.getSelectionModel().getSelectedItem().getContent()).getModel();
     }
 }

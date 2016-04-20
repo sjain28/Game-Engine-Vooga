@@ -18,9 +18,9 @@ public class NewProjectFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public NewProjectFileItem(Menuable model, Sceneable uiModel) {
+	public NewProjectFileItem(Menuable model) {
 		super();
-		myManager = (Saveable) model;
+		myManager = (Saveable) model.getManager();
 	}
 	/**
          * Action to be taken on the selection of this menuItem

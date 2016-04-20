@@ -8,8 +8,8 @@ import player.gamedisplay.Menuable;
 
 public class SaveArchetypeFileItem extends NewImportArchetypeFileItem{
 
-    public SaveArchetypeFileItem (Menuable model, Sceneable uiModel) {
-        super(model, uiModel);
+    public SaveArchetypeFileItem (Menuable model) {
+        super(model);
     }
     
     @Override
