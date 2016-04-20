@@ -61,6 +61,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void addGameElements (Node ... elements) {
+    	System.out.println("ADDED");
         myGameElements.addAll(Arrays.asList(elements));
         setChanged();
         notifyObservers(myGameElements);

@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.Command;
 import authoring.gui.eventpane.EventWindow;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.EditEventable;
@@ -16,7 +17,7 @@ public class NewEventFileItem extends MenuItemHandler{
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-    public NewEventFileItem(Menuable model, EventHandler<InputEvent> event){
+    public NewEventFileItem(Menuable model, Command event){
         super();
         myManager = (EditEventable) model;
     }

@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.Command;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
@@ -19,7 +20,7 @@ public class BoardWindowItem extends MenuItemHandler {
 	 * @param model to interface backend interactions with the model
 	 * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	 */
-	public BoardWindowItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
+	public BoardWindowItem(CompleteAuthoringModelable model, Command event) {
 	}
 	
 	/**

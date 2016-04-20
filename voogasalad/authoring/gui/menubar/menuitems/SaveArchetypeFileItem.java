@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.Command;
 import authoring.gui.menubar.builders.SaveArchetype;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
@@ -7,7 +8,7 @@ import player.gamedisplay.Menuable;
 
 public class SaveArchetypeFileItem extends NewImportArchetypeFileItem{
 
-    public SaveArchetypeFileItem (Menuable model, EventHandler<InputEvent> event) {
+    public SaveArchetypeFileItem (Menuable model, Command event) {
         super(model, event);
     }
     

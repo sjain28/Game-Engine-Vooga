@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.Command;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.Event;
@@ -9,14 +10,14 @@ import javafx.scene.input.MouseEvent;
 import player.gamedisplay.Menuable;
 
 public class NewSceneFileItem extends MenuItemHandler {
-        private EventHandler myEvent;
+        private Command myEvent;
         /**
          * Initializes the MenuItem
          * 
          * @param model to interface backend interactions with the model
          * @param event: Unused vestige of previous poor programming. Should soon be phased out.
          */
-	public NewSceneFileItem(Menuable model, EventHandler<InputEvent> event) {
+	public NewSceneFileItem(Menuable model, Command event) {
 		super();
 		myEvent = event;
 	}
@@ -25,7 +26,7 @@ public class NewSceneFileItem extends MenuItemHandler {
          */
 	@Override
 	public void handle() {
-		
+		myEvent.execute();
 	}
 
 }
