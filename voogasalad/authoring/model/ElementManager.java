@@ -136,6 +136,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             e.printStackTrace();
             throw new VoogaException();
         }
+        
+        System.out.println("The save file location here is " + filePath);
     }
 
     public SpriteFactory getSpriteFactory () {
