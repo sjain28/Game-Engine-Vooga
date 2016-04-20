@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+
 import authoring.gui.menubar.builders.SaveArchetype;
 import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
@@ -10,6 +11,7 @@ public class SaveArchetypeFileItem extends NewImportArchetypeFileItem{
 
     public SaveArchetypeFileItem (Menuable model) {
         super(model);
+
     }
     
     @Override

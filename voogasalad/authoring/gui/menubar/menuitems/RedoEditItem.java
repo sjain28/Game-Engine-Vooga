@@ -14,7 +14,9 @@ public class RedoEditItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
+
 	public RedoEditItem(Menuable model) {
+
 		super();
 	}
 	/**

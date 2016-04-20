@@ -21,7 +21,9 @@ public class NewGameObjectFileItem extends MenuItemHandler {
          * @param model to interface backend interactions with the model
          * @param event: Unused vestige of previous poor programming. Should soon be phased out.
          */
+
 	public NewGameObjectFileItem(Menuable model) {
+
 		super();
 		myManager = (EditElementable) model.getManager();
 	}

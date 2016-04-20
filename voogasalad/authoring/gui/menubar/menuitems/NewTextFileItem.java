@@ -26,6 +26,7 @@ public class NewTextFileItem extends MenuItemHandler {
 	 *            phased out.
 	 */
 	public NewTextFileItem(Menuable model) {
+
 		super();
 		myManager = (EditElementable) model.getManager();
 

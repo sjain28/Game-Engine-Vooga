@@ -22,7 +22,9 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	 * @param model to interface backend interactions with the model
 	 * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	 */
+
 	public LoadNewGameFileItem(Menuable model) {
+
 		super();
 	}
 	

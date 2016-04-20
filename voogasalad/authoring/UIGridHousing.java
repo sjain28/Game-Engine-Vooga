@@ -1,8 +1,10 @@
 package authoring;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import javafx.beans.property.Property;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+
 
 public class UIGridHousing extends TabPane{
     public UIGridHousing(CompleteAuthoringModelable manager){

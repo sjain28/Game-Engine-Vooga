@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import player.gamedisplay.Menuable;
 
 public class NewSceneFileItem extends MenuItemHandler {
+
     Menuable myUIManager;
         /**
          * Initializes the MenuItem
@@ -18,6 +19,7 @@ public class NewSceneFileItem extends MenuItemHandler {
          * @param event: Unused vestige of previous poor programming. Should soon be phased out.
          */
 	public NewSceneFileItem(Menuable model) {
+
 		super();
 		myUIManager = model;
 	}

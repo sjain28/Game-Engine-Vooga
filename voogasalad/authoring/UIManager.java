@@ -11,6 +11,9 @@ import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.Sceneable;
 import authoring.model.ElementManager;
+import authoring.model.ElementTabManager;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -36,7 +39,8 @@ import resources.VoogaBundles;
 // components
 public class UIManager extends VBox implements Menuable{
 	private UIGridHousing grid;
-	private List<CompleteAuthoringModelable> myModels;
+	private SimpleIntegerProperty currentTabIndex;
+	private ElementTabManager elementTabManager;
 
 	/**
 	 * Initializes the UI Manager
@@ -44,8 +48,11 @@ public class UIManager extends VBox implements Menuable{
 	 * @param model Interface to mediate interactions with backend
 	 */
 	public UIManager(CompleteAuthoringModelable model) {
-	        myModels = new ArrayList<CompleteAuthoringModelable>();
-		myModels.add(model);
+		this.currentTabIndex = new SimpleIntegerProperty(-1);
+		this.elementTabManager = new ElementTabManager();
+		this.elementTabManager.addManager(new ElementManager());
+		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
+		
 		initializeComponents();
 	}
 
@@ -57,13 +64,13 @@ public class UIManager extends VBox implements Menuable{
 			new MenuPanelHandlingMirror(e, this);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
 			new ToolPanelHandlingMirror(e, this);
-		}), grid = new UIGridHousing(myModels.get(0)));
+		}), grid = new UIGridHousing(elementTabManager.getCurrentManager()));
 	}
 	
 	public void addScene(){
-	    myModels.add(new ElementManager());
+	    elementTabManager.addManager(new ElementManager());
 	    //initializes a new scene using the most recently added model;
-	    grid.addScene(myModels.get(myModels.size() - 1));
+	    grid.addScene(elementTabManager.getCurrentManager());
 	}
 	
 	public CompleteAuthoringModelable getManager(){
@@ -73,7 +80,7 @@ public class UIManager extends VBox implements Menuable{
 	
 	//TODO: Format output correctly
 	public void saveAll(){
-	    for(CompleteAuthoringModelable m: myModels){
+	    for(CompleteAuthoringModelable m: elementTabManager.getAllManagers()){
                 try {
                     m.onSave();
                 }

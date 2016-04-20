@@ -60,7 +60,7 @@ public class AssetUI extends Tab implements Observer {
 				List<Node> objects = (List<Node>) arg;
 				for(Node object : objects) {
 					if(object instanceof GameObject) {
-						VoogaFile file = new VoogaFile(VoogaFileType.GAME_OBJECT, ((GameObject) object).getSprite().getArchetype());
+						VoogaFile file = new VoogaFile(VoogaFileType.GAME_OBJECT, ((GameObject) object).getName());
 						file.setPath(((GameObject) object).getSprite().getImagePath());
 						addAsset(file.getType(), file.toString(), file.getPath());
 					}

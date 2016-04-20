@@ -28,7 +28,7 @@ public class MenuPanelHandlingMirror {
      * Instantiates the menu panel handler.
      * 
      * @param e
-     * @param newScene
+     * @param newSceneCommand
      * @param view
      * @param graphicsWindow
      */
@@ -36,6 +36,7 @@ public class MenuPanelHandlingMirror {
                                     Menuable manager) {
         this.e = e;
         myManager = manager;
+
         try {
             handleEvent();
         }

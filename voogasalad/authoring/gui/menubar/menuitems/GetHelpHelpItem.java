@@ -2,6 +2,7 @@ package authoring.gui.menubar.menuitems;
 
 import java.awt.Desktop;
 import java.net.URI;
+
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.Sceneable;
@@ -29,6 +30,7 @@ public class GetHelpHelpItem extends MenuItemHandler {
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
     public GetHelpHelpItem (Menuable model) {
+
 
     }
 

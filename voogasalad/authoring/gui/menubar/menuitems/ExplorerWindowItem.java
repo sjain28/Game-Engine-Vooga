@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+
 import authoring.gui.menubar.AuthoringMenuItemHandler;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -21,6 +22,7 @@ public class ExplorerWindowItem extends AuthoringMenuItemHandler {
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
 	public ExplorerWindowItem(Menuable model) {
+
 		
 	}
 	/**

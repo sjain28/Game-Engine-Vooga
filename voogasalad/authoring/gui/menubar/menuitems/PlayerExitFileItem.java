@@ -25,6 +25,7 @@ public class PlayerExitFileItem extends PlayerMenuItemHandler {
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
 	public PlayerExitFileItem(Menuable model) {
+
 		super();
 		this.myRunner = (GameRunner) model.getManager();
 	}

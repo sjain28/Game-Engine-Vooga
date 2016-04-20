@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.TextObjectBuilder;
@@ -26,6 +27,7 @@ public class NewVariableFileItem extends MenuItemHandler {
 	 *            phased out.
 	 */
 	public NewVariableFileItem(Menuable model) {
+
 		super();
 		myManager = (EditElementable) model.getManager();
 	}

@@ -17,6 +17,7 @@ public class NewEventFileItem extends MenuItemHandler{
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
+
     public NewEventFileItem(Menuable model){
         super();
         myManager = (EditEventable) model.getManager();

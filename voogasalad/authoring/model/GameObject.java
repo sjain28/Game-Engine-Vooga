@@ -2,10 +2,14 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import authoring.gui.Selector;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
 import javafx.scene.Node;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -15,9 +19,8 @@ import tools.Vector;
 import tools.Velocity;
 import tools.interfaces.VoogaData;
 
-
 public class GameObject extends ImageView implements Moveable, Elementable {
-
+	
     private Sprite mySprite;
     private String name;
 
@@ -88,6 +91,14 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     public void update () {
 
     }
+    
+    public void select(Selector selector) {
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(selector.getLightness());
+		
+		this.setEffect(colorAdjust);
+		this.setEffect(new Glow(selector.getGlow()));
+	}
 
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
