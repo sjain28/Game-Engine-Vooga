@@ -9,6 +9,9 @@ import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
+import authoring.model.ElementTabManager;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -32,8 +35,9 @@ import resources.VoogaBundles;
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
 public class UIManager extends VBox {
-	private ArrayList<CompleteAuthoringModelable> elementManagers;
 	private UIGrid grid;
+	private SimpleIntegerProperty currentTabIndex;
+	private ElementTabManager elementTabManager;
 
 	/**
 	 * Initializes the UI Manager
@@ -42,8 +46,10 @@ public class UIManager extends VBox {
 	 *            Interface to mediate interactions with backend
 	 */
 	public UIManager(CompleteAuthoringModelable model) {
-		elementManagers = new ArrayList<CompleteAuthoringModelable>();
-		elementManagers.add(model);
+		this.currentTabIndex = new SimpleIntegerProperty(-1);
+		this.elementTabManager = new ElementTabManager();
+		this.elementTabManager.addManager(new ElementManager());
+		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
 		initializeComponents();
 	}
 
@@ -51,16 +57,11 @@ public class UIManager extends VBox {
 	 * Initializes all the pieces of the authoring environment
 	 */
 	private void initializeComponents() {
-		this.getChildren().addAll(new MenuPanel(elementManagers.get(0), e -> {
-			new MenuPanelHandlingMirror(e, elementManagers.get(0), newScene);
+		this.getChildren().addAll(new MenuPanel(this.elementTabManager.getCurrentManager(), e -> {
+			new MenuPanelHandlingMirror(e, this.elementTabManager.getCurrentManager(), new NewSceneCommand(this.elementTabManager, grid));
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
-			new ToolPanelHandlingMirror(e, elementManagers.get(0));
-		}), grid = new UIGrid(elementManagers.get(0)));
+			new ToolPanelHandlingMirror(e, this.elementTabManager.getCurrentManager());
+		}), grid = new UIGrid(this.elementTabManager.getCurrentManager()));
 	}
-
-	EventHandler<InputEvent> newScene = e -> {
-		elementManagers.add(new ElementManager());
-		grid.addScene(elementManagers.get(1));
-	};
 
 }

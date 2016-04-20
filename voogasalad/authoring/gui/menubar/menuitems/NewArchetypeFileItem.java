@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.Command;
 import authoring.VoogaScene;
 import authoring.gui.menubar.AuthoringMenuItemHandler;
 import authoring.gui.menubar.MenuItemHandler;
@@ -22,7 +23,7 @@ public class NewArchetypeFileItem extends AuthoringMenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-    public NewArchetypeFileItem(Menuable model, EventHandler<InputEvent> event) {
+    public NewArchetypeFileItem(Menuable model, Command event) {
             super();
             myManager = (EditElementable) model;
     }

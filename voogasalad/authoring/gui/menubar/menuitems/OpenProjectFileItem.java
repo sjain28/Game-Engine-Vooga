@@ -2,6 +2,7 @@ package authoring.gui.menubar.menuitems;
 
 import java.io.File;
 import application.Launcher;
+import authoring.Command;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -20,7 +21,7 @@ public class OpenProjectFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public OpenProjectFileItem(Menuable model, EventHandler<InputEvent> event) {
+	public OpenProjectFileItem(Menuable model, Command event) {
 		super();
 		myManager = (Saveable) model;
 	}

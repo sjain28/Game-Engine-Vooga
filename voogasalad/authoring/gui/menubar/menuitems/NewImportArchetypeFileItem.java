@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.Command;
 import authoring.gui.menubar.AuthoringMenuItemHandler;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.ImportArchetype;
@@ -12,7 +13,7 @@ import tools.VoogaException;
 public class NewImportArchetypeFileItem extends AuthoringMenuItemHandler {
     CompleteAuthoringModelable manager;
     
-    public NewImportArchetypeFileItem(Menuable model, EventHandler<InputEvent> event){
+    public NewImportArchetypeFileItem(Menuable model, Command event){
         this.manager = (CompleteAuthoringModelable) model;
     }
     @Override

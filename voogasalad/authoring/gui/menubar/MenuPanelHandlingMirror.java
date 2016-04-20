@@ -1,5 +1,7 @@
 package authoring.gui.menubar;
 
+import authoring.Command;
+import authoring.NewSceneCommand;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
@@ -22,22 +24,22 @@ public class MenuPanelHandlingMirror {
 
     private ActionEvent e;
     private Menuable myManager;
-    private EventHandler<InputEvent> myEvent;
+    private Command myEvent;
 
     /**
      * Instantiates the menu panel handler.
      * 
      * @param e
-     * @param newScene
+     * @param newSceneCommand
      * @param view
      * @param graphicsWindow
      */
     public MenuPanelHandlingMirror (ActionEvent e,
                                     Menuable manager,
-                                    EventHandler<InputEvent> newScene) {
+                                    NewSceneCommand newSceneCommand) {
         this.e = e;
         myManager = manager;
-        myEvent = newScene;
+        myEvent = newSceneCommand;
         try {
             handleEvent();
         }
@@ -69,7 +71,7 @@ public class MenuPanelHandlingMirror {
         try {
             clazz = Class.forName(PACKAGE_LOCATION + menuItem.getId());
             menuItemHandler =
-                    (MenuItemHandler) clazz.getConstructor(Menuable.class, EventHandler.class)
+                    (MenuItemHandler) clazz.getConstructor(Menuable.class, Command.class)
                             .newInstance(myManager, myEvent);
             menuItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(menuItemHandler);
         }
