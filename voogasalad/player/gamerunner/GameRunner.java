@@ -287,7 +287,8 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName, boolean debugMode){
 		System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
 		myCurrentLevelString = fileName;
-		String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
+		//String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
+		String fileNameWithPath =fileName;
 		
 		System.out.println("The filenamewithpath here is" + fileNameWithPath);
 		//If debugMode = true, we are only playing one level

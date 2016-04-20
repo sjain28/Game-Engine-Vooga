@@ -42,7 +42,7 @@ public class DataWritingTest {
 			Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
 			properties.put("health", new VoogaNumber(10d));
 			Sprite sprite = new Sprite("/mario.png","Mario",properties,new VoogaNumber(8.0));
-			sprite.setPosition(new Position(i*100,i*300));
+			sprite.setPosition(new Position(0,0));
 			elements.add(sprite);
 			sprite.addProperty("gravity", new VoogaNumber(.04));
 		}
