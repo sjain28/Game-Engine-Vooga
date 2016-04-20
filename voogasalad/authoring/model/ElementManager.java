@@ -16,8 +16,6 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -60,6 +58,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void addGameElements (Node ... elements) {
+    	System.out.println("ADDED");
         myGameElements.addAll(Arrays.asList(elements));
         setChanged();
         notifyObservers(myGameElements);
@@ -137,6 +136,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             e.printStackTrace();
             throw new VoogaException();
         }
+        
+        System.out.println("The save file location here is " + filePath);
     }
 
     public SpriteFactory getSpriteFactory () {
@@ -191,6 +192,11 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             }
         }
         return null;
+    }
+
+    @Override
+    public List<VoogaEvent> getEvents () {
+        return myEventList;
     }
 
 

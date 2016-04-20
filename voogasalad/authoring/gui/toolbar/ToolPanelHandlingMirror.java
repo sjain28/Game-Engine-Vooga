@@ -6,6 +6,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import player.gamedisplay.Menuable;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -17,9 +18,9 @@ public class ToolPanelHandlingMirror {
     private static final String HANDLE = "handle";
 
     private ActionEvent e;
-    private CompleteAuthoringModelable myManager;
+    private Menuable myManager;
 
-    public ToolPanelHandlingMirror (ActionEvent toolbarEvent, CompleteAuthoringModelable manager) {
+    public ToolPanelHandlingMirror (ActionEvent toolbarEvent, Menuable manager) {
         this.e = toolbarEvent;
         this.myManager = manager;
         try {
@@ -44,7 +45,7 @@ public class ToolPanelHandlingMirror {
             clazz = Class.forName(PACKAGE_LOCATION + toolbarItem.getId());
             System.out.println("Class-Tool: "+clazz);
             toolbarItemHandler =
-                    (ToolbarItemHandler) clazz.getConstructor(CompleteAuthoringModelable.class)
+                    (ToolbarItemHandler) clazz.getConstructor(Menuable.class)
                             .newInstance(myManager);
             System.out.println("ToolBarItemHandler-Tool: "+toolbarItemHandler);
             toolbarItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(toolbarItemHandler);

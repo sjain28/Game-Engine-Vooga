@@ -1,5 +1,6 @@
 package authoring.gui.items;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -57,7 +58,7 @@ public class SwitchButton extends Label {
         switchedOn.setValue(on);
     }
     
-    public boolean booleanProperty(){
-    	return switchedOn.getValue();
+    public BooleanProperty booleanProperty(){
+    	return switchedOn;
     }
 }

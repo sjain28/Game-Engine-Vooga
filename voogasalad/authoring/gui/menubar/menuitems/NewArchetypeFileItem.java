@@ -8,6 +8,7 @@ import authoring.gui.menubar.builders.Builder;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
+import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
@@ -22,9 +23,10 @@ public class NewArchetypeFileItem extends AuthoringMenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-    public NewArchetypeFileItem(Menuable model, EventHandler<InputEvent> event) {
+    public NewArchetypeFileItem(Menuable model) {
+
             super();
-            myManager = (EditElementable) model;
+            myManager =  (EditElementable) model.getManager();
     }
 
     /**

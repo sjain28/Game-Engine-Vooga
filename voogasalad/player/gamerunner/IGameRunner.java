@@ -36,8 +36,6 @@ public interface IGameRunner extends Menuable {
 
 	//List<?> getKeyEvents();
 
-	void clearKeyEvents();
-
 	@Deprecated
 	void read(Collections nodesToDisplay);
 

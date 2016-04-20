@@ -1,11 +1,8 @@
 package events;
 
 import java.lang.reflect.Method;
-import java.util.List;
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
-import tools.VoogaException;
-import tools.interfaces.VoogaData;
 
 public class PhysicsEffect extends SpriteEffect {
 
@@ -39,13 +36,32 @@ public class PhysicsEffect extends SpriteEffect {
 	private void callEffectMethod(Sprite sprite, ILevelData data){
 		try{
 			Method physicsMethod = data.getPhysicsEngine().getClass()
-					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameters().getClass()});
-
-			physicsMethod.invoke(data.getPhysicsEngine(), sprite, getParameters());
+					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameter().getClass()});
+			physicsMethod.invoke(data.getPhysicsEngine(), sprite, getParameter());
 		}catch (Exception e){
 			e.printStackTrace();
 			//throw new VoogaException(String.format(format, args));
 		}
+	}
+	@Override
+	public String toString() {
+		String effectString = "Apply " + getMethodString() + " to ";
+
+		if (getMyArchetype() != null){
+			effectString += getMyArchetype();
+		}
+
+		// TODO: MAKE INTO SPRITE NAME, NOT ID
+		if (getSpriteID() != null){
+			effectString += getSpriteID();
+		}
+		if (getNeedsSprites()){
+			effectString += "sprites from causes";
+		}
+		if (getParameter() != null){
+			effectString += "[" + getParameter().toString() + "]";
+		}
+		return effectString;
 	}
 
 }
