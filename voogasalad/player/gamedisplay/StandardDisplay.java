@@ -169,10 +169,11 @@ public class StandardDisplay implements IGameDisplay {
 	public void populateGameScreen() {
 		getGameScreen().getChildren().clear();
 		getListToDisplay().forEach(n -> {
+			//n.setTranslateY(flipYCoordinate(n.getTranslateY()));
 			getGameScreen().getChildren().add(n);
 		});
 	}
-
+	
 	/**
 	 * @return the pane
 	 */

@@ -8,29 +8,23 @@ package authoring.properties;
 import java.util.HashMap;
 import java.util.Map;
 import authoring.CustomText;
-import authoring.VoogaScene;
-import authoring.gui.items.NewPropertyFactory;
+
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SwitchButton;
+import authoring.gui.menubar.builders.PropertyBuilder;
 import authoring.interfaces.Elementable;
 import authoring.resourceutility.ButtonMaker;
-import javafx.geometry.Insets;
+
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import tools.VoogaBoolean;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -40,31 +34,50 @@ public abstract class AbstractPropertiesTab extends Tab {
 
     private static final double SPACING = 10;
 
-    private VBox box = new VBox(SPACING);;
+    private VBox box = new VBox(SPACING);
     protected Map<String, VoogaData> propertiesMap;
-    protected Map<String, VoogaData> originalPropertiesMap;
     private HBox propertiesHBox = new HBox(10);
-    protected ScrollPane myScrollPane = new ScrollPane();;
-    private Stage stage;
+    protected ScrollPane myScrollPane = new ScrollPane();
+    private Elementable myElementable;
 
     public AbstractPropertiesTab () {
         propertiesMap = new HashMap<String, VoogaData>();
-        this.setClosable(false);
+        
+//        propertiesMap.addListener(new MapChangeListener<String,VoogaData>(){
+//    		@Override
+//    		public void onChanged(
+//    				javafx.collections.MapChangeListener.Change<? extends String, ? extends VoogaData> change) {
+//    			onMapChange();
+//    		}
+//        });
+        
+        this.setClosable(false); 
         box.getChildren().add(myScrollPane);
         this.setContent(box);
-        displayProperties();
         createButtons();
 
     }
+    
+    /**
+     * Gets the properties map based off the Elementable
+     * 
+     * @param o
+     */
+    public void getPropertiesMap(Elementable elem) {
+		myElementable = elem;
+		propertiesMap = myElementable.getVoogaProperties();
+		updateProperties();
+	}
 
-    public void displayProperties () {
+    public void updateProperties () {
         propertiesHBox.getChildren().clear();
-
+     
         VBox properties = new VBox(SPACING);
 
         Text name = null;
         Node data = null;
 
+      
         for (String property : propertiesMap.keySet()) {
 
             name = new CustomText(property);
@@ -81,6 +94,7 @@ public abstract class AbstractPropertiesTab extends Tab {
             });
 
             data = propertiesMap.get(property).display();
+            
             bindDataToMap(property,data);
             
             properties.getChildren().add(new PropertyBox(name, data));
@@ -97,100 +111,62 @@ public abstract class AbstractPropertiesTab extends Tab {
                 propertiesMap.put(property, new VoogaNumber(Double.parseDouble(newVal)));
             });
         }
+        if (node instanceof SwitchButton) {
+        	SwitchButton field = (SwitchButton) node;
+        	System.out.println(field.booleanProperty().toString());
+        	field.booleanProperty().addListener((obs,old,newVal)->{
+        		propertiesMap.put(property, new VoogaBoolean(newVal));
+            });
+        }
     }
+    
     /**
      * Creates the Add, Apply, and Cancel Buttons for the Properties Pane.
      */
     public void createButtons () {
-        Button addProperty =
-                new ButtonMaker().makeButton("Add Property", e -> addNewPropertyPrompt());
-
+        Button addProperty = new ButtonMaker().makeButton("Add Property", e -> addNewPropertyPrompt());
+        Button apply = new ButtonMaker().makeButton("Apply Changes", e -> updateProperties());
         HBox buttonsPanel = new HBox(SPACING);
-        Button apply = new ButtonMaker().makeButton("Apply", e -> updateProperties());
-        Button cancel = new ButtonMaker().makeButton("Cancel", e -> cancelUpdateProperties());
-
-        buttonsPanel.getChildren().addAll(apply, cancel);
-        this.box.getChildren().addAll(addProperty, buttonsPanel);
+        buttonsPanel.getChildren().addAll(apply, addProperty);
+        this.box.getChildren().addAll(buttonsPanel);
     }
 
-    private void cancelUpdateProperties () {
-        propertiesMap.clear();
-        propertiesMap.putAll(originalPropertiesMap);
-        displayProperties();
-    }
-
-    /**
+	/**
      * Creates the Dialog Box that allows new Properties to be added
      */
     public void addNewPropertyPrompt () {
-
-        NewPropertyFactory factory = new NewPropertyFactory();
-        VBox root = new VBox();
-        stage = new Stage();
-        Scene addPropScene = new VoogaScene(root);
-        stage.setX(500);
-        stage.setY(200);
-        stage.setScene(addPropScene);
-        stage.setTitle("Add new property...");
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField propertyName = new TextField();
-        propertyName.setPromptText("Property Name");
-
-        ChoiceBox<String> propertyType = new ChoiceBox<String>();
-        propertyType.getItems().addAll(factory.getChoices());
-
-        grid.add(new CustomText("Name:"), 0, 0);
-        grid.add(propertyName, 1, 0);
-        grid.add(new CustomText("Type:"), 0, 1);
-        grid.add(propertyType, 1, 1);
-
-        stage.show();
-
-        Button add = new ButtonMaker().makeButton("Add", e -> {
-            VoogaData newVGData = factory.createNewProperty(propertyType.getValue());
-            addNewProperty(propertyName.getText(), newVGData);
-            displayProperties();
-            this.stage.close();
-        });
-
-        root.getChildren().addAll(grid, add);
-
+    	PropertyBuilder pBuilder = new PropertyBuilder();
+        pBuilder.showAndWait();
+        addNewProperty(pBuilder.getName(), pBuilder.getValue());
     }
-
-    /**
-     * Updates all the properties that the user changed
-     */
-    public void updateProperties () {
-        for (String s : propertiesMap.keySet()) {
-            // propertiesMap.get(s).update();
-        }
-    }
-
-    /**
-     * Gets the properties map based off of generic object
-     * 
-     * @param o
-     */
-    public abstract void getPropertiesMap (Object o);
-
+  
     /**
      * Adds new property to properties map based on string and vooga Data
      * 
      * @param s
      * @param vgData
      */
-    public abstract void addNewProperty (String s, VoogaData vgData);
+	public void addNewProperty(String s, VoogaData vgData) {
+		myElementable.addProperty(s, vgData);
+		propertiesMap.put(s, vgData);
+		for (String property:myElementable.getVoogaProperties().keySet()){
+	        System.out.println(property+" "+myElementable.getVoogaProperties().get(property).toString());
+	    }
+		updateProperties();
+	}
 
     /**
      * Removes the property from the property map based on the string
      * 
      * @param s
      */
-    public abstract void removeProperty (String s);
+	public void removeProperty(String s) {
+		myElementable.removeProperty(s);
+		propertiesMap.remove(s);
+		for (String property:myElementable.getVoogaProperties().keySet()){
+	        System.out.println(property+" "+myElementable.getVoogaProperties().get(property).toString());
+	    }
+		updateProperties();
+	}
 
 }

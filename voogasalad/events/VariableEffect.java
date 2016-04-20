@@ -38,13 +38,8 @@ public class VariableEffect extends Effect {
 	
 	@Override
 	public void execute(ILevelData data) {
-		//Class varClass = getEvent().getManager().getGlobalVar(myVariable).getClass();
 		VoogaData variableData = data.getGlobalVar(myVariable);
 		callEffectMethod(variableData);
-	}
-	
-	public void init(){
-		return;
 	}
 
 	protected void callEffectMethod(VoogaData variable){

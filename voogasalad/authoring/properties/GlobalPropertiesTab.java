@@ -10,12 +10,13 @@ package authoring.properties;
 import java.util.Map;
 
 import authoring.interfaces.Elementable;
+import authoring.model.GameObject;
 import authoring.model.GlobalPropertiesManager;
 import tools.interfaces.VoogaData;
 
 public class GlobalPropertiesTab extends AbstractPropertiesTab {
 
-	public final static String GLOBAL_PROPERTIES = "Global Properties";
+	public final static String GLOBAL_PROPERTIES = "Global Variables";
 	private Elementable myElementable;
 	
 	/**
@@ -28,44 +29,7 @@ public class GlobalPropertiesTab extends AbstractPropertiesTab {
 		this.setText(GLOBAL_PROPERTIES);
 	}
 
-	/**
-	 * Get the properties map. Can be modified to take in any object in 
-	 * case of elementable or just a regular map.
-	 */
-	//Pass in 
-	@Override
-	public void getPropertiesMap(Object o) {
-		propertiesMap = (Map<String, VoogaData>) o;
-		displayProperties();
+	public void getMap(Map<String, VoogaData> global) {
+		propertiesMap.putAll(global);
 	}
-
-	/**
-	 * Add new property.
-	 */
-	@Override
-	public void addNewProperty(String s, VoogaData vgData) {
-		myElementable.addProperty(s, vgData);
-		displayProperties();
-	}
-
-	/**
-	 * Removes a property.
-	 */
-	@Override
-	public void removeProperty(String s) {
-		myElementable.removeProperty(s);
-		displayProperties();
-		
-	}
-	
-	/**
-	 * Set the map based on a previous map. 
-	 * @param map
-	 */
-	public void setPropertiesMap(Map<String, VoogaData> map) {
-		propertiesMap.clear();
-		propertiesMap.putAll(map);
-		displayProperties();
-	}
-
 }

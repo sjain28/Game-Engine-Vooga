@@ -18,7 +18,7 @@ import tools.VoogaException;
  * Specifically: The DesignBoardHousing, EventWindow, PropertiesPane, and Explorer
  *
  */
-public class UIGrid extends GridPane {
+public class UIGrid extends GridPane{
 
     private PropertiesPane propertiesPane;
     private DesignBoardHousing designBoard;
@@ -66,11 +66,14 @@ public class UIGrid extends GridPane {
         GridPane.setRowSpan(designBoard, REMAINING);
         propertiesPane = new PropertiesPane();
         myManager.addObserver(propertiesPane);
-        // this looks like a bad piece of code
 
         this.add(propertiesPane, 0, 1);
-        EventsWindow events = new EventsWindow();
+        EventsWindow events = new EventsWindow(myManager);
         this.add(events, 0, 2);
+    }
+    
+    public CompleteAuthoringModelable getModel(){
+        return myManager;
     }
 
     /**

@@ -2,20 +2,21 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import events.Cause;
-import events.Effect;
 import events.KeyCause;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import physics.IPhysicsEngine;
 import physics.StandardPhysics;
 import tools.VoogaNumber;
 import tools.VoogaString;
@@ -32,26 +33,28 @@ import tools.interfaces.VoogaData;
 public class LevelData implements ILevelData {
 
 	private static final int SCREENSIZE = 600;
+
+	private IPhysicsEngine myPhysics;
 	private String currentLevelName;
-	
-	private StandardPhysics myPhysics = new StandardPhysics();
 
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
 	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
-
+	
 	/**Global Variable Information**/
 	private Map<String, VoogaData> myGlobalVariables;
-
+	
 	/** Event Information**/
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
+	
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
 	private IDisplayScroller myScroller;
 
-	public LevelData() {
+	public LevelData(IPhysicsEngine physicsengine) {
+		myPhysics = physicsengine;
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
 		myElements = new HashMap<String, Elementable>();		
 		myGlobalVariables = new HashMap<String, VoogaData>();
@@ -152,12 +155,12 @@ public class LevelData implements ILevelData {
 	 */
 	public List<Node> getDisplayableNodes(){
 		List<Node> displayablenodes = new ArrayList<Node>();
+
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 
 		return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
-
 	}
 	/**
 	 * Returns unmodifiable list of key combos
@@ -188,6 +191,7 @@ public class LevelData implements ILevelData {
 	 * @param voogaEvent
 	 */
 	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
+
 		myEvents.add(voogaEvent);
 		for(Cause c: voogaEvent.getCauses()){
 			if(c instanceof KeyCause){
@@ -209,6 +213,10 @@ public class LevelData implements ILevelData {
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
+      
+		List<Elementable> spriteObjects = data.getElementableList();
+		System.out.println("All the sprites here are" + spriteObjects);
+
 
 		List<Elementable> elementObjects = data.getElementableList();
 		System.out.println("All the sprites here are" + elementObjects);
@@ -225,6 +233,7 @@ public class LevelData implements ILevelData {
 				break;
 			}
 		}
+
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);
 
@@ -236,6 +245,7 @@ public class LevelData implements ILevelData {
 		System.out.println("All the events here are" + eventObjects);
 		
 		mySpriteFactory = new SpriteFactory(archetypeMap);
+
 		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
 		myGlobalVariables = data.getVariableMap();
@@ -246,20 +256,15 @@ public class LevelData implements ILevelData {
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-//		System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		//System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
-
 	public void setNextLevelName(String levelName) {
-
 		myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
-		//		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
-
 
 	@Override
-	public StandardPhysics getPhysicsEngine() {
+	public IPhysicsEngine getPhysicsEngine() {
 		return myPhysics;
 	}
-
 }

@@ -13,14 +13,14 @@ public class ProjectileEffect extends SpawnEffect {
 		super(archetype, x, y, voogaEvent);
 		myVelocity = new Velocity(xVelocity, yVelocity);
 	}
-	public ProjectileEffect(String archetype, String shooterID, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
-		super(archetype, shooterID, voogaEvent);
+	public ProjectileEffect(String archetype, String shooterID, Double x, Double y, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
+		super(archetype, shooterID, x, y, voogaEvent);
 		myShooterID = shooterID;
 		myVelocity = new Velocity(xVelocity, yVelocity);
 	}
 
-	public ProjectileEffect(String archetype, String shooterID, Double velocityScaleFactor, VoogaEvent voogaEvent) {
-		super(archetype, shooterID, voogaEvent);
+	public ProjectileEffect(String archetype, String shooterID, Double x, Double y, Double velocityScaleFactor, VoogaEvent voogaEvent) {
+		super(archetype, shooterID, x, y, voogaEvent);
 		myShooterID = shooterID;
 		myVelocityScale = velocityScaleFactor;
 	}
@@ -28,13 +28,13 @@ public class ProjectileEffect extends SpawnEffect {
 
 	@Override
 	public void execute(ILevelData data){
-		super.execute(data);
-
+	
 		if (myVelocityScale != null){
 			myVelocity = new Velocity(data.getSpriteByID(myShooterID).getVelocity().getX()*myVelocityScale, 
 					data.getSpriteByID(myShooterID).getVelocity().getY()*myVelocityScale);
 		}
-
+		
+		super.execute(data);
 		getNewSprite().setVelocity(myVelocity);
 
 	}

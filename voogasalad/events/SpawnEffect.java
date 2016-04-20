@@ -16,12 +16,12 @@ public class SpawnEffect extends Effect {
 		myArchetype = archetype;
 		setMyPosition(new Position(x, y));
 	}
-	public SpawnEffect(String archetype, String targetID, VoogaEvent voogaEvent) {
+	/*public SpawnEffect(String archetype, String targetID, VoogaEvent voogaEvent) {
 		super(voogaEvent);
 		myArchetype = archetype;
 		setMyTargetID(targetID);
 		setMyPosition(new Position(0, 0));
-	}
+	}*/
 	public SpawnEffect(String archetype, String targetID, Double x, Double y, VoogaEvent voogaEvent) {
 		super(voogaEvent);
 		myArchetype = archetype;
