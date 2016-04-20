@@ -7,8 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
@@ -24,10 +22,8 @@ import physics.IPhysicsEngine;
 import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
-import player.gamedisplay.GameboyDisplay;
 import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
-import player.leveldatamanager.ILevelDataManager;
 import player.leveldatamanager.LevelData;
 import player.leveldatamanager.SpriteManager;
 import tools.VoogaAlert;
@@ -59,7 +55,6 @@ public class GameRunner implements IGameRunner{
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private List<String> myLevelList;
-//	private Queue<String> levelQueue;
 	private Timeline myTimeline;
     
     
@@ -72,11 +67,11 @@ public class GameRunner implements IGameRunner{
 	 * @throws IOException
 	 */
 	public GameRunner() {
-		myLevelData = new LevelData();
 		myGameDisplay = new StandardDisplay(getSelf());
 		mySpriteManager = new SpriteManager();
 		myEventManager = new EventManager();
-		myPhysicsEngine = new StandardPhysics();
+		myPhysicsEngine = new StandardPhysics(FRAMES_PER_SECOND);
+		myLevelData = new LevelData(myPhysicsEngine);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> step());
@@ -202,12 +197,6 @@ public class GameRunner implements IGameRunner{
 	 * 
 	 */
 	private void step() {		
-		
-		//take care of setting and resetting key events
-		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
-		//TODO: PASS IN KEY EVENTS AND EVENTS TO 
-		//myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
-		
 		//check level transition
 		
 		if (!myLevelData.getNextLevelName().equals("")) {
@@ -235,20 +224,6 @@ public class GameRunner implements IGameRunner{
 		
 		//clear key events from myGameDisplay.
 		myGameDisplay.clearKeyEvents();	
-		
-//		//take care of setting and resetting key events
-//		//System.out.println("Getting key events from standard display in game runner: "+myGameDisplay.getKeyEvents());
-//		myCurrentLevelDataManager.setKeyEvents(myGameDisplay.getKeyEvents());
-//		myGameDisplay.clearKeyEvents();
-//		
-//		//update all logic in the backend, updating game objects w/ Causes and Events
-//		myCurrentLevelDataManager.update();		 
-//		
-//		//send these updated Nodes to the GameDisplay
-//		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
-//
-//		//repopulate the game screen
-//		myGameDisplay.populateGameScreen();
 	}
 
 //	/**
@@ -312,7 +287,8 @@ public class GameRunner implements IGameRunner{
 	public void playLevel(String fileName, boolean debugMode){
 		System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
 		myCurrentLevelString = fileName;
-		String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
+		//String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
+		String fileNameWithPath =fileName;
 		
 		System.out.println("The filenamewithpath here is" + fileNameWithPath);
 		//If debugMode = true, we are only playing one level
@@ -327,6 +303,8 @@ public class GameRunner implements IGameRunner{
 		//Set the levelNumber to 0 because we are not transitioning anymore
 		myLevelData.refreshLevelData(fileNameWithPath);
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
+		myGameDisplay.display();
+		run();
 		
 //		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
 //		myCurrentLevelDataManager.update();		 
@@ -350,13 +328,6 @@ public class GameRunner implements IGameRunner{
 		return myGameDisplay;
 	}
 
-	/**
-	 * @return the levelQueue
-	 */
-//	public Queue<String> getLevelQueue() {
-//		return levelQueue;
-//	}
-	
 	/**
 	 * @return the List of levels to be played.
 	 */
@@ -386,7 +357,6 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void start() {
-//		getTimeline().start();
 		getTimeline().play();
 	}
 
@@ -399,49 +369,15 @@ public class GameRunner implements IGameRunner{
 	public IGameRunner getSelf() {
 		return this;
 	}
-
-	/**
-	 * Returns KeyEvents to be passed into LevelDataManager
-	 * 
-	 * KeyEvents (Collections--List<KeyEvent>) are passed to LevelDataManager
-	 * through GameRunner
-	 * 
-	 */
-//	@Override
-//	public List<?> getKeyEvents() {
-//		System.out.println("Getting key events from GameDisplay in GameRunner: "+getGameDisplay().getKeyEvents().size());
-//		return getGameDisplay().getKeyEvents();
-//	}
-
-	/**
-	 * Clears KeyEvents collections after applying events
-	 * (cause and effects) to sprites
-	 * 
-	 */
-	@Override
-	public void clearKeyEvents() {
-
-	}
-
 	@Override
 	public void speedUp() {
-		// TODO Auto-generated method stub
-//		if (myDelay >= 0) {
-//			myDelay = myDelay - 100;
-//			if (myDelay < 0) {
-//				myDelay = 1;
-//			}
-//		}
-		
         getTimeline().stop();
         getTimeline().setRate(getTimeline().getRate() + SPEEDCONTROL);
         getTimeline().play();
-
 	}
 
 	@Override
 	public void speedDown() {
-//		// TODO Auto-generated method stub
 //		myDelay = myDelay - 100;
 		
         getTimeline().stop();
@@ -475,7 +411,6 @@ public class GameRunner implements IGameRunner{
 		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
 	
-
 	@Override
 	public void replayGame() {}
 		// TODO Auto-generated method stub

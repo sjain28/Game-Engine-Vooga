@@ -70,6 +70,9 @@ public class VariableEffect extends Effect {
 	public String getMethodString(){
 		return myMethod;
 	}
+	public String getMethodStringAsLowerCamelCase() {
+		return myMethod.substring(0, 1).toLowerCase() + myMethod.substring(1);
+	}
 	public Object getParameters(){
 		return myParameter;
 	}

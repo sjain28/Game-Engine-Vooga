@@ -7,18 +7,23 @@ import tools.Velocity;
 
 public class StandardPhysics implements IPhysicsEngine{
 	//TODO find which methods overlap in code and reduce the bulk from that
-	private double frameTime;
+	private double myFrameTime;
 
-	public StandardPhysics(){	
+	public StandardPhysics(double frameTime){	
 //		this.frameTime = (float) FixedStepLoopWithInterpolation.FRAME_TIME;
+		myFrameTime = frameTime;
 	}
-
+	
 	@Override
 	public void translate(Sprite sprite, Velocity change) {
 		double newX = gradualChange(sprite.getPosition().getX(), change.getX());
 		double newY = gradualChange(sprite.getPosition().getY(), change.getY());
 		Position position = new Position(newX, newY);
 		sprite.setPosition(position);
+	}
+	
+	public void translateX(Sprite sprite, Double change) {
+		translate(sprite, new Velocity(gradualChange(sprite.getPosition().getX(), change), 0));
 	}
 
 	@Override
@@ -37,7 +42,9 @@ public class StandardPhysics implements IPhysicsEngine{
 	@Override
 	public void accelerate(Sprite sprite, Acceleration change) {
 		double newXVel = gradualChange(sprite.getVelocity().getX(), change.getX());
+		System.out.println(newXVel);
 		double newYVel = gradualChange(sprite.getVelocity().getY(), change.getY());
+		System.out.println(newYVel);
 		Velocity velocity = new Velocity(newXVel, newYVel);
 		setVelocity(sprite, velocity);
 	}
@@ -88,7 +95,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	}
 
 	private double gradualChange(double curr, double change){
-		return curr + change*frameTime;
+		return curr + change*myFrameTime;
 	}
 
 	private double immediateChange(double curr, double change){

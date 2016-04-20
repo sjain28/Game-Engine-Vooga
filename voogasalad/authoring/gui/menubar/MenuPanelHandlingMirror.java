@@ -1,5 +1,6 @@
 package authoring.gui.menubar;
 
+import authoring.interfaces.model.Sceneable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
@@ -22,33 +23,20 @@ public class MenuPanelHandlingMirror {
 
     private ActionEvent e;
     private Menuable myManager;
-    private EventHandler<InputEvent> myEvent;
 
     /**
      * Instantiates the menu panel handler.
      * 
      * @param e
-     * @param newScene
+     * @param newSceneCommand
      * @param view
      * @param graphicsWindow
      */
     public MenuPanelHandlingMirror (ActionEvent e,
-                                    Menuable manager,
-                                    EventHandler<InputEvent> newScene) {
+                                    Menuable manager) {
         this.e = e;
         myManager = manager;
-        myEvent = newScene;
-        try {
-            handleEvent();
-        }
-        catch (VoogaException e1) {
-            new VoogaAlert(e1.getMessage());
-        }
-    }
 
-    public MenuPanelHandlingMirror (ActionEvent e, Menuable manager) {
-        this.e = e;
-        this.myManager = manager;
         try {
             handleEvent();
         }
@@ -69,8 +57,8 @@ public class MenuPanelHandlingMirror {
         try {
             clazz = Class.forName(PACKAGE_LOCATION + menuItem.getId());
             menuItemHandler =
-                    (MenuItemHandler) clazz.getConstructor(Menuable.class, EventHandler.class)
-                            .newInstance(myManager, myEvent);
+                    (MenuItemHandler) clazz.getConstructor(Menuable.class)
+                            .newInstance(myManager);
             menuItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(menuItemHandler);
         }
         catch (Exception ee) {
