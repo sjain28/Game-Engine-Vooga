@@ -152,6 +152,8 @@ public class DesignBoard extends Tab implements Observer {
 					GameObjectBuilder builder = new GameObjectBuilder(elementManager);
 					if (!archetype.isEmpty()) {
 						builder.setArchetype(archetype);
+					} else {
+						builder.setDraggedImage(file.getPath());
 					}
 					builder.showAndWait();
 

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
 
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.Deserializer;
 import data.Serializer;
 import javafx.animation.Animation;
@@ -414,5 +415,22 @@ public class GameRunner implements IGameRunner{
 	@Override
 	public void replayGame() {}
 		// TODO Auto-generated method stub
+
+	@Override
+	public CompleteAuthoringModelable getManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addScene() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveAll() {
+		// TODO Auto-generated method stub
+	}
 	
 }

@@ -39,8 +39,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myImagePath;
     private String myArchetype;
     private transient ImageView myImage;
-    private SimpleDoubleProperty myX;
-    private SimpleDoubleProperty myY;
+    private transient SimpleDoubleProperty myX;
+    private transient SimpleDoubleProperty myY;
 
     public Sprite (String imagePath,
                    String archetype,
