@@ -229,6 +229,7 @@ public class GameRunner implements IGameRunner{
 		
 		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
+//		System.out.println("The list of displayable nodes here is " + myLevelData.getDisplayableNodes());
 
 		//re-populate the game screen
 		myGameDisplay.populateGameScreen();
@@ -287,7 +288,8 @@ public class GameRunner implements IGameRunner{
 		}
 
 		//false because playGame is not in the debugging mode (plays the entire game)
-		System.out.println("My list of levels here is " + myLevelList);
+//		System.out.println("My list of levels here is " + myLevelList);
+		//Play just the first level.
 		playLevel(myLevelList.get(0), false);
 		run();
 		myGameDisplay.display();
@@ -310,11 +312,11 @@ public class GameRunner implements IGameRunner{
 	 */
 	@Override
 	public void playLevel(String fileName, boolean debugMode){
-		System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
+//		System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
 		myCurrentLevelString = fileName;
 		String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
 		
-		System.out.println("The filenamewithpath here is" + fileNameWithPath);
+//		System.out.println("The filenamewithpath here is" + fileNameWithPath);
 		//If debugMode = true, we are only playing one level
 		if (debugMode) {
 			myLevelList = new ArrayList<>();
@@ -462,17 +464,17 @@ public class GameRunner implements IGameRunner{
 	public void replayLevel() {
 		// TODO Auto-generated method stub
 		
-//		//Test here: for the ability to play THE NEXT LEVEL!!!
-//			Optional<String> correctLevel = myLevelList
-//					.stream()
-//		            .filter(a -> a.equals(myCurrentLevelString))
-//		            .findFirst();
-//		
-//		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
-//		String nextLevel = myLevelList.get(tempIndex);
-//		myLevelData.setNextLevelName(nextLevel);
+		//Test here: for the ability to play THE NEXT LEVEL!!!
+			Optional<String> correctLevel = myLevelList
+					.stream()
+		            .filter(a -> a.equals(myCurrentLevelString))
+		            .findFirst();
 		
-		myLevelData.setNextLevelName(myCurrentLevelString);
+		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
+		String nextLevel = myLevelList.get(tempIndex);
+		myLevelData.setNextLevelName(nextLevel);
+		
+//		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
 	
 
