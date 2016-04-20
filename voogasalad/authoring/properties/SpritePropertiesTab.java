@@ -2,6 +2,8 @@ package authoring.properties;
 
 import java.util.HashMap;
 
+import authoring.gui.menubar.builders.PropertyBuilder;
+
 /**
  * Tab to represent sprite properties/variables.
  * 
@@ -32,11 +34,11 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	 * Get the properties map. Can be modified to take in any object in 
 	 * case of elementable or just a regular map.
 	 */
+	
 	@Override
-	public void getPropertiesMap(Object o) {
-		myElementable = (Elementable) o;
+	public void getPropertiesMap(Elementable elem) {
+		myElementable = elem;
 		propertiesMap = myElementable.getVoogaProperties();
-		originalPropertiesMap = new HashMap<String,VoogaData>(myElementable.getVoogaProperties());
 		displayProperties();
 	}
 
@@ -45,8 +47,25 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	 */
 	@Override
 	public void addNewProperty(String s, VoogaData vgData) {
+		
+//		PropertyBuilder pBuilder = new PropertyBuilder();
+//      pBuilder.showAndWait();
+//      myElementable.addProperty(pBuilder.getName(), pBuilder.getValue());
+      
+      
+      //pTable.addVariableToTable(pBuilder.getName(), pBuilder.getValue());
+		
+		System.out.println("HERE WE GO PROPERTIES");
 		myElementable.addProperty(s, vgData);
+//		GameObject object = (GameObject) myElementable; 
+		
 		propertiesMap.put(s, vgData);
+//		object.setProperties(propertiesMap);
+		
+		for (String property:myElementable.getVoogaProperties().keySet()){
+	        System.out.println(property+" "+propertiesMap.get(property).toString());
+	    }
+		
 		displayProperties();
 	}
 
@@ -55,6 +74,7 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	 */
 	@Override
 	public void removeProperty(String s) {
+		
 		myElementable.removeProperty(s);
 		displayProperties();
 	}
@@ -68,5 +88,7 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	    }
 	    object.setProperties(propertiesMap);
 	}
+
+
 
 }

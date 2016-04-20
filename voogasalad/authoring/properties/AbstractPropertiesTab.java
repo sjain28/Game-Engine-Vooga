@@ -12,6 +12,7 @@ import authoring.VoogaScene;
 import authoring.gui.items.NewPropertyFactory;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SwitchButton;
+import authoring.gui.menubar.builders.PropertyBuilder;
 import authoring.interfaces.Elementable;
 import authoring.resourceutility.ButtonMaker;
 import javafx.geometry.Insets;
@@ -42,7 +43,6 @@ public abstract class AbstractPropertiesTab extends Tab {
 
     private VBox box = new VBox(SPACING);;
     protected Map<String, VoogaData> propertiesMap;
-    protected Map<String, VoogaData> originalPropertiesMap;
     private HBox propertiesHBox = new HBox(10);
     protected ScrollPane myScrollPane = new ScrollPane();;
     private Stage stage;
@@ -59,6 +59,7 @@ public abstract class AbstractPropertiesTab extends Tab {
 
     public void displayProperties () {
         propertiesHBox.getChildren().clear();
+        
 
         VBox properties = new VBox(SPACING);
 
@@ -97,6 +98,10 @@ public abstract class AbstractPropertiesTab extends Tab {
                 propertiesMap.put(property, new VoogaNumber(Double.parseDouble(newVal)));
             });
         }
+        if (node instanceof SwitchButton) {
+        	SwitchButton field = (SwitchButton) node;
+        	propertiesMap.put(property, new VoogaBoolean(field.booleanProperty()));
+        }
     }
     /**
      * Creates the Add, Apply, and Cancel Buttons for the Properties Pane.
@@ -104,18 +109,24 @@ public abstract class AbstractPropertiesTab extends Tab {
     public void createButtons () {
         Button addProperty =
                 new ButtonMaker().makeButton("Add Property", e -> addNewPropertyPrompt());
+        
+//        Button addProperty = new ButtonMaker().makeButton("+", e -> {
+//            PropertyBuilder pBuilder = new PropertyBuilder();
+//            pBuilder.showAndWait();
+//            pTable.addVariableToTable(pBuilder.getName(), pBuilder.getValue());
+//        });
 
         HBox buttonsPanel = new HBox(SPACING);
-        Button apply = new ButtonMaker().makeButton("Apply", e -> updateProperties());
-        Button cancel = new ButtonMaker().makeButton("Cancel", e -> cancelUpdateProperties());
+        //Button apply = new ButtonMaker().makeButton("Apply", e -> updateProperties());
+        //Button cancel = new ButtonMaker().makeButton("Cancel", e -> cancelUpdateProperties());
 
-        buttonsPanel.getChildren().addAll(apply, cancel);
+        //buttonsPanel.getChildren().addAll(apply, cancel);
         this.box.getChildren().addAll(addProperty, buttonsPanel);
     }
 
     private void cancelUpdateProperties () {
         propertiesMap.clear();
-        propertiesMap.putAll(originalPropertiesMap);
+       // propertiesMap.putAll(originalPropertiesMap);
         displayProperties();
     }
 
@@ -123,42 +134,47 @@ public abstract class AbstractPropertiesTab extends Tab {
      * Creates the Dialog Box that allows new Properties to be added
      */
     public void addNewPropertyPrompt () {
+    	
+    	PropertyBuilder pBuilder = new PropertyBuilder();
+        pBuilder.showAndWait();
+        addNewProperty(pBuilder.getName(), pBuilder.getValue());
+        
 
-        NewPropertyFactory factory = new NewPropertyFactory();
-        VBox root = new VBox();
-        stage = new Stage();
-        Scene addPropScene = new VoogaScene(root);
-        stage.setX(500);
-        stage.setY(200);
-        stage.setScene(addPropScene);
-        stage.setTitle("Add new property...");
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField propertyName = new TextField();
-        propertyName.setPromptText("Property Name");
-
-        ChoiceBox<String> propertyType = new ChoiceBox<String>();
-        propertyType.getItems().addAll(factory.getChoices());
-
-        grid.add(new CustomText("Name:"), 0, 0);
-        grid.add(propertyName, 1, 0);
-        grid.add(new CustomText("Type:"), 0, 1);
-        grid.add(propertyType, 1, 1);
-
-        stage.show();
-
-        Button add = new ButtonMaker().makeButton("Add", e -> {
-            VoogaData newVGData = factory.createNewProperty(propertyType.getValue());
-            addNewProperty(propertyName.getText(), newVGData);
-            displayProperties();
-            this.stage.close();
-        });
-
-        root.getChildren().addAll(grid, add);
+//        NewPropertyFactory factory = new NewPropertyFactory();
+//        VBox root = new VBox();
+//        stage = new Stage();
+//        Scene addPropScene = new VoogaScene(root);
+//        stage.setX(500);
+//        stage.setY(200);
+//        stage.setScene(addPropScene);
+//        stage.setTitle("Add new property...");
+//
+//        GridPane grid = new GridPane();
+//        grid.setHgap(10);
+//        grid.setVgap(10);
+//        grid.setPadding(new Insets(20, 150, 10, 10));
+//
+//        TextField propertyName = new TextField();
+//        propertyName.setPromptText("Property Name");
+//
+//        ChoiceBox<String> propertyType = new ChoiceBox<String>();
+//        propertyType.getItems().addAll(factory.getChoices());
+//
+//        grid.add(new CustomText("Name:"), 0, 0);
+//        grid.add(propertyName, 1, 0);
+//        grid.add(new CustomText("Type:"), 0, 1);
+//        grid.add(propertyType, 1, 1);
+//
+//        stage.show();
+//
+//        Button add = new ButtonMaker().makeButton("Add", e -> {
+//            VoogaData newVGData = factory.createNewProperty(propertyType.getValue());
+//            addNewProperty(propertyName.getText(), newVGData);
+//            displayProperties();
+//            this.stage.close();
+//        });
+//
+//        root.getChildren().addAll(grid, add);
 
     }
 
@@ -176,7 +192,7 @@ public abstract class AbstractPropertiesTab extends Tab {
      * 
      * @param o
      */
-    public abstract void getPropertiesMap (Object o);
+    public abstract void getPropertiesMap (Elementable elem);
 
     /**
      * Adds new property to properties map based on string and vooga Data
