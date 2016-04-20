@@ -3,13 +3,14 @@ package authoring.gui.toolbar.toolbaritems;
 import authoring.gui.toolbar.ToolbarItemHandler;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import player.gamedisplay.Menuable;
 import tools.VoogaException;
 
 
 public class Save extends ToolbarItemHandler {
-    Saveable manager;
+    Menuable manager;
 
-    public Save (CompleteAuthoringModelable model) {
+    public Save (Menuable model) {
         manager = model;
         System.out.println("Manager initialized");
     }
@@ -17,13 +18,7 @@ public class Save extends ToolbarItemHandler {
     @Override
     public void handle () {
         System.out.println("Saving");
-        try {
-            manager.onSave();
-        }
-        catch (VoogaException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        manager.saveAll();
     }
 
 }

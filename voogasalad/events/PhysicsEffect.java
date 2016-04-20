@@ -1,11 +1,8 @@
 package events;
 
 import java.lang.reflect.Method;
-import java.util.List;
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
-import tools.VoogaException;
-import tools.interfaces.VoogaData;
 
 public class PhysicsEffect extends SpriteEffect {
 
@@ -39,7 +36,7 @@ public class PhysicsEffect extends SpriteEffect {
 	private void callEffectMethod(Sprite sprite, ILevelData data){
 		try{
 			Method physicsMethod = data.getPhysicsEngine().getClass()
-					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameters().getClass()});
+					.getMethod(getMethodStringAsLowerCamelCase(), new Class[]{Sprite.class, getParameters().getClass()});
 
 			physicsMethod.invoke(data.getPhysicsEngine(), sprite, getParameters());
 		}catch (Exception e){

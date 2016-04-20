@@ -1,7 +1,9 @@
 package authoring.interfaces.model;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Observer;
 import events.VoogaEvent;
 import tools.interfaces.VoogaData;
 
@@ -13,6 +15,10 @@ public interface EditEventable extends EditSpritable,EditElementable{
     public Map<String, VoogaData> getGlobalVariables ();
 
     public Collection<String> getMySpriteNames ();
+    
+    public void addObserver (Observer o);
+    
+    public List<VoogaEvent> getEvents();
 
    
 }

@@ -2,10 +2,10 @@ package authoring.gui.menubar.menuitems;
 
 import java.io.File;
 import application.Launcher;
-import authoring.Command;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import javafx.stage.FileChooser;
@@ -21,9 +21,9 @@ public class OpenProjectFileItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public OpenProjectFileItem(Menuable model, Command event) {
+	public OpenProjectFileItem(Menuable model) {
 		super();
-		myManager = (Saveable) model;
+		myManager = (Saveable) model.getManager();
 	}
 	/**
          * Action to be taken on the selection of this menuItem
