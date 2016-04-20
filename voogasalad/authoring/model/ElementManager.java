@@ -192,5 +192,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         return null;
     }
 
+    @Override
+    public List<VoogaEvent> getEvents () {
+        return myEventList;
+    }
+
 
 }

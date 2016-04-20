@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
@@ -15,6 +12,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import tools.Acceleration;
 import tools.Position;
 import tools.VoogaNumber;
 import tools.Velocity;
@@ -33,6 +31,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String Y_POS = "Y Position";
     private boolean isMainCharacter;
     private Velocity myVelocity;
+    private Acceleration myAcceleration;
     private Position myLoc;
     private String myID;
     private String myName;
@@ -50,6 +49,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     	initializeCoordinates();
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
+        myAcceleration = new Acceleration(0,0);
         
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
@@ -58,7 +58,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         if (myImagePath.contains("file:")) {
             image = new Image(myImagePath);
         }
-        else {
+        else 
+        {
             image = new Image(this.getClass().getResourceAsStream(myImagePath));
         }
         myImage = new ImageView(image);
@@ -97,13 +98,20 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public void update () {
         // Still needed: Apply physics to myVelocity
-//        System.out.println("");
-//        System.out.println("VelocityY-Sprite.java: "+"Archetype: "+myArchetype+" "+myVelocity.getY());
+    	
+    	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
+        System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
+
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
+       
+        //Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
+        myVelocity.addX(myAcceleration.getX());
+        myVelocity.addY(myAcceleration.getY());
         
+        //Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setLayoutX(myLoc.getX());
-        myImage.setLayoutY(myLoc.getY());
+        myImage.setLayoutY(((myLoc.getY()-300)*-1)+300);
         
 //        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
         
