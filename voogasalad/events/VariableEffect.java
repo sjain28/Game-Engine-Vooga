@@ -73,13 +73,13 @@ public class VariableEffect extends Effect {
 		return effectString;
 	}
 	
-	public String getVariable(){
+	protected String getVariable(){
 		return myVariable;
 	}
-	public String getMethodString(){
+	protected String getMethodString(){
 		return myMethod;
 	}
-	public Object getParameter(){
+	protected Object getParameter(){
 		return myParameter;
 	}
 }

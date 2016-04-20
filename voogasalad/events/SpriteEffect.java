@@ -137,28 +137,28 @@ public class SpriteEffect extends VariableEffect{
 		return mySprites;
 	}
 
-	public String getMyArchetype() {
+	protected String getMyArchetype() {
 		return myArchetype;
 	}
 
-	public void setMyArchetype(String archetype) {
+	protected void setMyArchetype(String archetype) {
 		myArchetype = archetype;
 	}
-	public void setNeedsSprites(Boolean needsSprites){
+	protected void setNeedsSprites(Boolean needsSprites){
 		this.needsSprites = needsSprites;
 	}
-	public List<Sprite> getMySprites(){
+	protected List<Sprite> getMySprites(){
 		return mySprites;
 	}
-	public void setSpriteID(String spriteID){
+	protected void setSpriteID(String spriteID){
 		mySpriteID = spriteID;
 	}
 
-	public String getSpriteID() {
+	protected String getSpriteID() {
 		return mySpriteID;
 	}
 
-	public Boolean getNeedsSprites() {
+	protected Boolean getNeedsSprites() {
 		return needsSprites;
 	}
 }
