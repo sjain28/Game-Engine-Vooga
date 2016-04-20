@@ -37,7 +37,7 @@ public class ObjectManager {
 	public ObjectManager(List<Elementable> elements, Map<String,VoogaData> data, SpriteFactory factory) {
 		myElements = new HashMap<String,Elementable>();
 		for(Elementable el : elements){
-			myElements.put(el.getID(), el);
+			myElements.put(el.getId(), el);
 		}
 		myGlobalVariables = new HashMap<String, VoogaData>(data);
 		keyEvents = new ArrayList<KeyEvent>();
@@ -103,7 +103,7 @@ public class ObjectManager {
 	 */
 	public Elementable addSprite(String archetype){
 		Elementable newSprite = mySpriteFactory.createSprite(archetype);
-		myElements.put(newSprite.getID(),newSprite);
+		myElements.put(newSprite.getId(),newSprite);
 		return newSprite;
 	}
 

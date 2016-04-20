@@ -133,7 +133,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         return (HashMap<String, VoogaData>) myProperties;
     }
 
-    public String getID () {
+    public String getId () {
         return myID;
     }
 
