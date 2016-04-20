@@ -17,19 +17,19 @@ public class SpriteEffect extends VariableEffect{
 	// constructor with sprites- apply to given sprites
 	public SpriteEffect(String spriteID, String variable, String method, VoogaEvent event) {
 		super(variable, method, event);
-		setSpriteID(spriteID);
+		mySpriteID = spriteID;
 		setNeedsSprites(false);
 	}
 
 	public SpriteEffect(String spriteID, String variable, String method, Double parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
-		setSpriteID(spriteID);
+		mySpriteID = spriteID;
 		setNeedsSprites(false);
 	}
 
 	public SpriteEffect(String spriteID, String variable, String method, Boolean parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
-		setSpriteID(spriteID);
+		mySpriteID = spriteID;
 		setNeedsSprites(false);
 	}
 
@@ -82,17 +82,16 @@ public class SpriteEffect extends VariableEffect{
 				callEffectMethod(variable);
 			}
 		}
-		mySprites.clear();
 	}
 	/**
 	 * Determines which sprites need to be set for this effect depending on the constructor that was used, as well as the
 	 * sprite outputs of the cause within the same event.
 	 */
 	protected void setSprites(ILevelData data){
-		if(getSpriteID() != null){
-			mySprites.add(data.getSpriteByID(getSpriteID()));
+		if(mySpriteID != null){
+			mySprites.add(data.getSpriteByID(mySpriteID));
 		}
-		if (getNeedsSprites()){
+		if (needsSprites){
 			mySprites = getEvent().getSpritesFromCauses();
 		}
 		if (getMyArchetype() != null){
@@ -100,7 +99,11 @@ public class SpriteEffect extends VariableEffect{
 			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
 			if (mySprites.size() != 0){
 				for(Sprite causeSprite : mySprites){
+<<<<<<< HEAD
+					if(!archSpriteIDs.contains(causeSprite.getId())){
+=======
 					if(!archSpriteIDs.contains(causeSprite)){
+>>>>>>> master
 						mySprites.remove(causeSprite);
 					}
 				}
@@ -111,28 +114,7 @@ public class SpriteEffect extends VariableEffect{
 			}
 		}
 	}
-	@Override
-	public String toString() {
-		String effectString = getMethodString() + " " + getVariable() + " for " ;
-		
-		if (myArchetype != null){
-			effectString += myArchetype;
-		}
-		
-		// TODO: MAKE INTO SPRITE NAME, NOT ID
-		if (getSpriteID() != null){
-			effectString += getSpriteID();
-		}
-		
-		//TODO: PUT THIS IN RESOURCE BUNDLE
-		if (getNeedsSprites()){
-			effectString += "sprites from causes";
-		}
-		if (getParameter() != null){
-			effectString += "[" + getParameter().toString() + "]";
-		}
-		return effectString;
-	}
+
 	protected List<Sprite> getSprites(){
 		return mySprites;
 	}
@@ -152,13 +134,5 @@ public class SpriteEffect extends VariableEffect{
 	}
 	public void setSpriteID(String spriteID){
 		mySpriteID = spriteID;
-	}
-
-	public String getSpriteID() {
-		return mySpriteID;
-	}
-
-	public Boolean getNeedsSprites() {
-		return needsSprites;
 	}
 }

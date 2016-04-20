@@ -18,6 +18,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.StandardPhysics;
 import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
@@ -31,7 +32,8 @@ import tools.interfaces.VoogaData;
 public class LevelData implements ILevelData {
 
 	private static final int SCREENSIZE = 600;
-
+	private String currentLevelName;
+	
 	private StandardPhysics myPhysics = new StandardPhysics();
 
 	/**Sprite and Text Information**/
@@ -46,7 +48,6 @@ public class LevelData implements ILevelData {
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
 	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
-
 	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
 	private IDisplayScroller myScroller;
 
@@ -113,7 +114,7 @@ public class LevelData implements ILevelData {
 	 */
 	public Sprite addSprite(String archetype){
 		Elementable newSprite = mySpriteFactory.createSprite(archetype);
-		myElements.put(newSprite.getID(),newSprite);
+		myElements.put(newSprite.getId(),newSprite);
 		return (Sprite) newSprite;
 	}
 	/**
@@ -213,13 +214,13 @@ public class LevelData implements ILevelData {
 
 		//add elements to map 
 		for(Elementable el : elementObjects){
-			myElements.put(el.getID(), el);
+			myElements.put(el.getId(), el);
 		}
 
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
-				myMainCharacterID = el.getID();
+				myMainCharacterID = el.getId();
 				break;
 			}
 		}
@@ -229,22 +230,28 @@ public class LevelData implements ILevelData {
 		for(VoogaEvent e : eventObjects){
 			addEventAndPopulateKeyCombos(e);
 		}
-		mySpriteFactory = data.getSpriteFactory();
+		
+		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
+		System.out.println("All the events here are" + eventObjects);
+		
+		mySpriteFactory = new SpriteFactory(archetypeMap);
 		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
 		myGlobalVariables = data.getVariableMap();
 		System.out.println("All the variables here are" + myGlobalVariables);
+		
+		myGlobalVariables.put("LevelIndex", new VoogaString(""));
 	}
 
-	public int getLevelNumber() {
+	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-		return -5;
-		//return Integer.parseInt((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue().toString()));
+//		System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 
-	public void setLevelNumber(int levelNumber) {
+	public void setNextLevelName(String levelName) {
 
-		myGlobalVariables.put("LevelIndex", new VoogaNumber((double) levelNumber));
+		myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
 		//		return (int) ((((VoogaNumber) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 
@@ -253,4 +260,5 @@ public class LevelData implements ILevelData {
 	public StandardPhysics getPhysicsEngine() {
 		return myPhysics;
 	}
+
 }

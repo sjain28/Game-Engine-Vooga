@@ -7,6 +7,7 @@ import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.VoogaNumber;
@@ -32,7 +33,7 @@ public class PhysicsEffectGUI implements EventGUI{
     private void initialize () {
         name = new SpriteComboBox(elementManager);
         actions = new ComboBox<String>();
-        actions.getItems().addAll("bounce","friction","jump","gravity");
+        actions.getItems().addAll(VoogaBundles.physicsEffectsToGUI.keySet());
         amount = new NumberTextField();
         
         addGUIElements(name,actions,amount);
@@ -66,7 +67,7 @@ public class PhysicsEffectGUI implements EventGUI{
     public String getDetails () throws VoogaException{
         String result = "events.PhysicsEffect ";
         if (name.getValue()!=null){
-            result+=name.getValue()+ " ";
+            result+=name.getSpriteId()+ " ";
         }
         result += actions.getValue()+" "+amount.getText();
         return result;

@@ -63,7 +63,16 @@ public class VariableEffect extends Effect {
 			//throw new VoogaException(String.format(format, args));
 		}
 	}
-
+	
+	@Override
+	public String toString() {
+		String effectString = myMethod + myVariable;
+		if (myParameter != null){
+			effectString += "[" + myParameter.toString() + "]";
+		}
+		return effectString;
+	}
+	
 	public String getVariable(){
 		return myVariable;
 	}
@@ -72,13 +81,5 @@ public class VariableEffect extends Effect {
 	}
 	public Object getParameter(){
 		return myParameter;
-	}
-	@Override
-	public String toString() {
-		String effectString = myMethod + myVariable;
-		if (myParameter != null){
-			effectString += "[" + myParameter.toString() + "]";
-		}
-		return effectString;
 	}
 }

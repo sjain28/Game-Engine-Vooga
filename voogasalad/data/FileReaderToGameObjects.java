@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import events.VoogaEvent;
+import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -63,8 +64,8 @@ public class FileReaderToGameObjects {
         return data.getVariableMap();
     }
 
-    public SpriteFactory createSpriteFactory () {
-        return data.getSpriteFactory();
+    public Map<String, Sprite> createSpriteFactory () {
+        return data.getArchetypeMap();
     }
 
     public DataContainerOfLists getDataContainer () {

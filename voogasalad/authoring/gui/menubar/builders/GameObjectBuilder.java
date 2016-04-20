@@ -1,32 +1,23 @@
 package authoring.gui.menubar.builders;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import authoring.CustomText;
 import authoring.interfaces.model.EditElementable;
 import authoring.model.GameObject;
 import gameengine.Sprite;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import tools.Vector;
 
 
 public class GameObjectBuilder extends Builder {
 
-    private String myArchtype;
+    private TextField myName;
+    private ComboBox<String> archetypes;
     private VBox container;
-
+    
     public GameObjectBuilder (EditElementable editor) {
         super(editor);
         populate();
@@ -36,23 +27,28 @@ public class GameObjectBuilder extends Builder {
     private void populate () {
         this.container = new VBox();
         this.container.setSpacing(SPACING);
-        container.getChildren().addAll(makeArchetypePicker(), makeButtons());
+        myName = makeNameField();
+        container.getChildren().addAll(makeArchetypePicker(), myName, makeButtons());
     }
 
     public void compile () {
         try {
-            Sprite sprite = mySpriteFactory.createSprite(myArchtype);
-            myManager.addGameElements(new GameObject(sprite));
-            myManager.addElementId(myArchtype);
+            Sprite sprite = mySpriteFactory.createSprite(archetypes.getValue());
+            myManager.addGameElements(new GameObject(sprite, myName.getText()));
             quit();
         }
         catch (Exception e) {
             numberError("Please select an Archtype");
         }
     }
-
+    
+    public void setArchetype(String string){
+        archetypes.setValue(string);
+        archetypes.setDisable(true);
+    }
+    
     private HBox makeArchetypePicker () {
-        ComboBox<String> archetypes = new ComboBox<String>();
+        archetypes = new ComboBox<String>();
         Collection<String> items = new ArrayList<String>();
         items = (mySpriteFactory.getAllArchetypeNames().size() > 0)
                                                                     ? mySpriteFactory
@@ -63,8 +59,13 @@ public class GameObjectBuilder extends Builder {
                                                                         }
                                                                     };
         archetypes.getItems().addAll(items);
-        archetypes.setOnAction(e -> myArchtype = archetypes.getValue());
         return makeRow(new CustomText("Select an archetype:"), archetypes);
+    }
+
+    private TextField makeNameField () {
+        TextField textField = new TextField();
+        textField.setPromptText("Enter name");
+        return textField;
     }
 
 }
