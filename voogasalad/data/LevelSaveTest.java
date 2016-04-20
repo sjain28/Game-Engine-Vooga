@@ -29,21 +29,20 @@ public class LevelSaveTest extends Application{
 	@Override
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub
-		String filePath = "levels/";
-		String fileName = filePath + "levelTestFileVoogaGame.xml";
+		String filePath = "games/JoshGame/";
+		String fileName = filePath + "JoshGame.xml";
 		File file = new File(fileName);
 		List<String> stringofLevels = new ArrayList<String>();
 		stringofLevels.add("Test1.xml");
 		stringofLevels.add("Test2.xml");
-		stringofLevels.add("level7.xml");
-		stringofLevels.add("Trythislevel.xml");
-		Map<String,String> levelMap = new HashMap<String,String>();
-		levelMap.put("Player1", "Test1.xml");
-		levelMap.put("Player2", "Test2.xml");
-		levelMap.put("Player3", "level7.xml");
-		levelMap.put("Player4", "Trythislevel.xml");
-		VoogaGame game = new VoogaGame(stringofLevels,levelMap);
-		Serializer.serialize(game, fileName);
+		stringofLevels.add("Test3.xml");
+		stringofLevels.add("Test4.xml");
+//		Map<String,String> levelMap = new HashMap<String,String>();
+//		levelMap.put("Player1", "Test1.xml");
+//		levelMap.put("Player2", "Test2.xml");
+//		levelMap.put("Player3", "level7.xml");
+//		levelMap.put("Player4", "Trythislevel.xml");
+		Serializer.serialize(stringofLevels, fileName);
 //		IGameRunner gameRunner = new GameRunner(game);
 //		gameRunner.playGame();
 	}
