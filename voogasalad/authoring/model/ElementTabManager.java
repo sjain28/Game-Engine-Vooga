@@ -5,7 +5,7 @@ import java.util.List;
 import javafx.beans.property.SimpleIntegerProperty;
 import player.gamedisplay.Menuable;
 
-public class ElementTabManager implements Menuable {
+public class ElementTabManager {
 	
 	private List<ElementManager> myManagers;
 	private SimpleIntegerProperty currentManagerIndex;
@@ -30,5 +30,9 @@ public class ElementTabManager implements Menuable {
 	public SimpleIntegerProperty getCurrentManagerIndexProperty() {
 		return this.currentManagerIndex;
 	}
+
+    public List<ElementManager> getAllManagers () {
+        return myManagers;
+    }
 
 }
