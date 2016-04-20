@@ -314,6 +314,7 @@ public class GameRunner implements IGameRunner{
 		myCurrentLevelString = fileName;
 		String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
 		
+		System.out.println("The filenamewithpath here is" + fileNameWithPath);
 		//If debugMode = true, we are only playing one level
 		if (debugMode) {
 			myLevelList = new ArrayList<>();
@@ -322,7 +323,7 @@ public class GameRunner implements IGameRunner{
 			myGameDisplay.display();
 		}
 		
-		System.out.println(fileName);
+//		System.out.println(fileName);
 		//Set the levelNumber to 0 because we are not transitioning anymore
 		myLevelData.refreshLevelData(fileNameWithPath);
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
