@@ -2,6 +2,8 @@ package authoring.properties;
 
 import java.util.HashMap;
 
+import authoring.gui.menubar.builders.PropertyBuilder;
+
 /**
  * Tab to represent sprite properties/variables.
  * 
@@ -11,12 +13,12 @@ import java.util.HashMap;
 
 import authoring.interfaces.Elementable;
 import authoring.model.GameObject;
+import javafx.beans.property.SimpleMapProperty;
 import tools.interfaces.VoogaData;
 
 public class SpritePropertiesTab extends AbstractPropertiesTab {
 	
 	public final static String SPRITE_PROPERTIES = "Sprite Properties";
-	private Elementable myElementable;
 	
 	/**
 	 * Takes constructor of super class.
@@ -26,47 +28,6 @@ public class SpritePropertiesTab extends AbstractPropertiesTab {
 	public SpritePropertiesTab() {
 		super();
 		this.setText(SPRITE_PROPERTIES);
-	}
-
-	/**
-	 * Get the properties map. Can be modified to take in any object in 
-	 * case of elementable or just a regular map.
-	 */
-	@Override
-	public void getPropertiesMap(Object o) {
-		myElementable = (Elementable) o;
-		propertiesMap = myElementable.getVoogaProperties();
-		originalPropertiesMap = new HashMap<String,VoogaData>(myElementable.getVoogaProperties());
-		displayProperties();
-	}
-
-	/**
-	 * Add new property.
-	 */
-	@Override
-	public void addNewProperty(String s, VoogaData vgData) {
-		myElementable.addProperty(s, vgData);
-		propertiesMap.put(s, vgData);
-		displayProperties();
-	}
-
-	/**
-	 * Removes a property.
-	 */
-	@Override
-	public void removeProperty(String s) {
-		myElementable.removeProperty(s);
-		displayProperties();
-	}
-	
-	@Override
-	public void updateProperties(){
-	    System.out.println("Updating properties");
-	    GameObject object = (GameObject) myElementable; 
-	    for (String property:propertiesMap.keySet()){
-	        System.out.println(property+" "+propertiesMap.get(property));
-	    }
-	    object.setProperties(propertiesMap);
 	}
 
 }

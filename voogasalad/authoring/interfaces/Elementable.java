@@ -17,6 +17,8 @@ import tools.interfaces.VoogaData;
 public interface Elementable extends Updatable {
 
     public Map<String, VoogaData> getVoogaProperties ();
+    
+    public void setVoogaProperties(Map<String,VoogaData> newVoogaProperties);
 
     public void addProperty (String name, VoogaData data);
 
@@ -27,5 +29,6 @@ public interface Elementable extends Updatable {
     public String getId ();
 
     public Node getNodeObject ();
+    
 
 }

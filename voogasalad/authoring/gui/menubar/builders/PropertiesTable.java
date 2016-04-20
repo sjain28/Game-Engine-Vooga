@@ -34,6 +34,11 @@ public class PropertiesTable extends TableView<Property> {
 
         this.getColumns().setAll(nameColumn, valueColumn);
     }
+    
+    public void setTable(Map<String, VoogaData> properties) {
+    	this.properties = properties;
+    	displayTable();
+    }
 
     public void addVariableToTable(String name, VoogaData value) {
     	this.getItems().add(new Property(name, value));
@@ -43,6 +48,13 @@ public class PropertiesTable extends TableView<Property> {
     public void removeVariableFromTable(Property remove) {
     	this.getItems().remove(remove);
     	properties.remove(remove.getName());
+    }
+    
+    public void displayTable() {
+    	this.getItems().clear();
+    	for (String key: properties.keySet()) {
+    		this.getItems().add(new Property(key, properties.get(key)));
+    	}
     }
 
 }

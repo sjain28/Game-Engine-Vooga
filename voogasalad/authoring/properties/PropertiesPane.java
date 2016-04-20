@@ -28,8 +28,6 @@ public class PropertiesPane extends TabPane implements Windowable, Observer {
      * Constructor to instantiate the properties Pane
      */
     public PropertiesPane () {
-        // used for testing purposes, going to just create an instance of PropertiesTabManager and
-        // set it to
         ptm = new PropertiesTabManager();
         populateTabPane();
     }
@@ -82,8 +80,8 @@ public class PropertiesPane extends TabPane implements Windowable, Observer {
      */
     @Override
     public void update (Observable o, Object arg) {
-        if ((o instanceof CompleteAuthoringModelable) && (arg instanceof Map)) {
-            Map<String, VoogaData> global = (Map<String, VoogaData>) arg;
+        if ((o instanceof CompleteAuthoringModelable) && (arg instanceof Elementable)) {
+            Elementable global = (Elementable) arg;
             ptm.getGlobalPropertiesTab().getPropertiesMap(global);
         }
     }
