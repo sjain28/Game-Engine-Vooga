@@ -112,6 +112,7 @@ public class LevelData implements ILevelData {
 	 * @param archetype
 	 * @return 
 	 */
+	@Override
 	public Sprite addSprite(String archetype){
 		Elementable newSprite = mySpriteFactory.createSprite(archetype);
 		myElements.put(newSprite.getId(),newSprite);

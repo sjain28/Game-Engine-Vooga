@@ -40,6 +40,8 @@ public interface ILevelData {
 	List<List<String>> getKeyCombos();
 
 	VoogaData getGlobalVar(String myVarName);
+	
+	Sprite addSprite(String archetype);
 
 	StandardPhysics getPhysicsEngine();
 	
