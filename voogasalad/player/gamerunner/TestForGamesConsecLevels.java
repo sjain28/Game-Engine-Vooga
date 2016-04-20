@@ -10,9 +10,9 @@ import javafx.stage.Stage;
  * them
  *
  */
-public class GameRunnerTest extends Application {
+public class TestForGamesConsecLevels extends Application {
 
-    private static final String TESTXML_PATH = "levels/WORKPLS.xml";
+    private static final String TESTXML_PATH = "JoshGame";
 
     public static void main (String[] args) {
         launch(args);
@@ -23,8 +23,9 @@ public class GameRunnerTest extends Application {
     public void start (Stage primaryStage) throws Exception {
 
         IGameRunner gameRunner = new GameRunner();
-        gameRunner.playLevel(TESTXML_PATH, true);
+        gameRunner.playGame(TESTXML_PATH);
         
     }
 
 }
+
