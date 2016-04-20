@@ -9,6 +9,13 @@
         <project.build.sourceEncoding>iso-8859-1</project.build.sourceEncoding>
     </properties>
 
+ 	<repositories>
+  		<repository>
+   			<id>xuggle repo</id>
+   			<url>http://xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+  		</repository>
+ 	</repositories>
+ 	
     <dependencies>
         <dependency>
           <groupId>Mosaic</groupId>
@@ -38,6 +45,11 @@
             <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
             <scope>system</scope>
         </dependency>
+        <dependency>
+   			<groupId>xuggle</groupId>
+  			<artifactId>xuggle-xuggler</artifactId>
+   			<version>5.2</version>
+  		</dependency>
     </dependencies>
 
     <build>
