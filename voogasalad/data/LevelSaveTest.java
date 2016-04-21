@@ -33,10 +33,10 @@ public class LevelSaveTest extends Application{
 		String fileName = filePath + "JoshGame.xml";
 		File file = new File(fileName);
 		List<String> stringofLevels = new ArrayList<String>();
-		stringofLevels.add("Test1.xml");
+//		stringofLevels.add("Test1.xml");
 		stringofLevels.add("Test2.xml");
-		stringofLevels.add("Test3.xml");
 		stringofLevels.add("Test4.xml");
+		stringofLevels.add("Test1.xml");
 //		Map<String,String> levelMap = new HashMap<String,String>();
 //		levelMap.put("Player1", "Test1.xml");
 //		levelMap.put("Player2", "Test2.xml");
