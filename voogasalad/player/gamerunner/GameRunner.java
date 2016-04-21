@@ -201,6 +201,9 @@ public class GameRunner implements IGameRunner {
 	private void step() {		
 		//check level transition
 		
+		//check if the pane still exists: for debugging purposes
+		if(!myGameDisplay.stageIsShowing()){stop();}
+		
 		if (!myLevelData.getNextLevelName().equals("")) {
 			Optional<String> correctLevel = myLevelList
 					.stream()

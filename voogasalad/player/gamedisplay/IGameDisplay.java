@@ -26,6 +26,8 @@ public interface IGameDisplay {
 	
 	void clearKeyEvents();
 	
+	boolean stageIsShowing();
+	
 	Stage getStage();
 	
 }

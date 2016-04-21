@@ -65,6 +65,11 @@ public class StandardDisplay implements IGameDisplay {
 		myGameRunner = gamerunner;
 		initialize();
 	}
+	
+	//TODO: DELETE THIS IS DEBUGGING METHOD
+	public boolean stageIsShowing(){
+		return myStage.isShowing();
+	}
 
 	/**
 	 * Method that contains a series of initialize statements
