@@ -64,17 +64,17 @@ public class StandardControl implements IControl {
 		Button speedUp = createButton(gameDisplayProperties.getString(SPEED_UP_KEY)); //TODO: ResourceBundle
 		Button speedDown = createButton(gameDisplayProperties.getString(SLOW_DOWN_KEY));
 
-		//Add button here for changing levels
-		Button replayButton = createButton(gameDisplayProperties.getString(REPLAY_BUTTON_KEY));
-		
+//		//Add button here for changing levels
+//		Button replayButton = createButton(gameDisplayProperties.getString(REPLAY_BUTTON_KEY));
+//		
 		// TODO: Assign click actions
 		pause.setOnAction(e -> getGameRunner().stop());
 		start.setOnAction(e -> getGameRunner().start());
 		speedUp.setOnMouseClicked(e -> getGameRunner().speedUp());
 		speedDown.setOnMouseClicked(e -> getGameRunner().speedDown());
-		replayButton.setOnMouseClicked(e -> getGameRunner().replayLevel());
+//		replayButton.setOnMouseClicked(e -> getGameRunner().replayLevel());
 
-		myControl.getChildren().addAll(start, pause, speedUp, speedDown, replayButton);
+		myControl.getChildren().addAll(start, pause, speedUp, speedDown);
 
 		return myControl;
 	}
