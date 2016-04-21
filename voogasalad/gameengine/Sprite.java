@@ -47,9 +47,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient SimpleDoubleProperty myY;
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
-    
+
     private ImageProperties imageProperties;
-    
+
     public Sprite (String imagePath,
                    String archetype,
                    Map<String, VoogaData> properties,
@@ -80,25 +80,18 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
-        
+
         initializeDimensions(image.getWidth(), image.getHeight());
     }
-    
-    private void initializeDimensions(double width, double height) {
+
+    private void initializeDimensions (double width, double height) {
         myProperties.put(WIDTH, new VoogaNumber(width));
         myProperties.put(HEIGHT, new VoogaNumber(height));
-    	myWidth = new SimpleDoubleProperty();
+        myWidth = new SimpleDoubleProperty();
         myHeight = new SimpleDoubleProperty();
         Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
         Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
-        spriteWidth = width;
-        spriteHeight = height;
-        myWidth.addListener((obs, old, n) -> {
-        	spriteWidth = (double) n;
-        });
-        myHeight.addListener((obs, old, n) -> {
-        	spriteHeight = (double) n;
-        });
+
     }
 
     private void initializeCoordinates () {
@@ -116,8 +109,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         });
     }
 
-
-
     public void update () {
         // Still needed: Apply physics to myVelocity
 
@@ -131,13 +122,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
         myVelocity.addX(myAcceleration.getX());
         myVelocity.addY(myAcceleration.getY());
-        
-        //Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setTranslateX(myLoc.getX() - spriteWidth/2);
-        myImage.setTranslateY(myLoc.getY() - spriteHeight/2);
-        
-//        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
-        
+
+        // Convert the Sprite's Cartesian Coordinates to display-able x and y's
+        myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
+        myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
+
+        // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
+
     }
 
     public void setName (String name) {
@@ -245,21 +236,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
         this.myProperties = newVoogaProperties;
     }
 
-	public Property<Number> getX() {
-		return this.myX;
-	}
-	
-	public Property<Number> getY() {
-		return this.myY;
-	}
-	
-	public Property<Number> getWidth() {
-		return this.myWidth;
-	}
-	
-	public Property<Number> getHeight() {
-		return this.myHeight;
-	}
+    public Property<Number> getX () {
+        return this.myX;
+    }
 
     public Property<Number> getY () {
         return this.myY;
@@ -270,34 +249,37 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     public Property<Number> getHeight () {
-        return this.myWidth;
+        return this.myHeight;
     }
-    
-    public void initializeImage(){
+
+    public void initializeImage () {
         if (myImage == null) {
             myImage = new ImageView(getImagePath());
         }
     }
-    
-    public void setImageProperties(ImageProperties ip){
-        imageProperties=ip;
+
+    public void setImageProperties (ImageProperties ip) {
+        imageProperties = ip;
     }
+
     /**
      * Initializes JavaFX objects that can't be serialized
      * Need to call this before using the Sprite in the game engine!
-     * @throws VoogaException 
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
+     * 
+     * @throws VoogaException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
      */
-    
+
     public void init () throws VoogaException {
-        if (myImage != null) return;
-        
+        if (myImage != null)
+            return;
+
         Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
         myImage = new ImageView(image);
-        
+
         imageProperties.loadData(myImage);
-        
+
     }
 }

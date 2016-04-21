@@ -5,6 +5,7 @@ import java.util.List;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.Deserializer;
+import data.FileReaderToGameObjects;
 import gameengine.BackEndText;
 import gameengine.Sprite;
 import javafx.scene.Node;
@@ -21,13 +22,9 @@ public class ElementManagerUnserializer {
     }
     
     public ElementManager unserialize() throws VoogaException{
-        Object o = Deserializer.deserialize(1, xmlPath);
-        System.out.println(o.getClass());
-        if (!(((List) o).get(0) instanceof DataContainerOfLists)){
-            throw new VoogaException("Failed to load level");
-        }
-        
-        DataContainerOfLists data = (DataContainerOfLists) ((List)o).get(0);
+        FileReaderToGameObjects reader = new FileReaderToGameObjects(xmlPath);
+        DataContainerOfLists data = reader.getDataContainer();
+
         
         elementManager.setSpriteFactory(data.getArchetypeMap());
         elementManager.setEventList(data.getEventList());
