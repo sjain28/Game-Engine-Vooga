@@ -431,7 +431,8 @@ public class GameRunner implements IGameRunner {
 
 	@Override
 	public void playNextLevel() {
-		getTimeline().stop();
+		stop();
+		System.out.println("The timeline stopped here");
 		// TODO Auto-generated method stub
 		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
 		String nextLevel = myLevelList.get(tempIndex);
