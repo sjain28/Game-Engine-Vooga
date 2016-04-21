@@ -50,7 +50,8 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 		 * 
 		 */
 		this.myGameRunner.getGameDisplay().getStage().close();
-		this.myGameRunner.playGame(new File(myFileChooser.launch()));
+//		this.myGameRunner.playGame(new File(myFileChooser.launch()));
+		this.myGameRunner.playGame(myFileChooser.launch());
 		this.myGameRunner.getGameDisplay().getStage().show();
 	}
 }
