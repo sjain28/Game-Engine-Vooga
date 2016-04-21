@@ -19,7 +19,7 @@ public class CollisionCause extends Cause{
 		archA = archetypeA;
 		archB = archetypeB;
 	}
-	
+
 	public void updateSprites(ILevelData data){
 	        groupA = new ArrayList<>();
 	        groupB = new ArrayList<>();
@@ -36,8 +36,8 @@ public class CollisionCause extends Cause{
 	
 	@Override
 	public boolean check(ILevelData data) {
-		collidedSprites.clear();
 		updateSprites(data);
+		collidedSprites.clear();
 		boolean myVal = false;
 		for(Sprite a: groupA){
 			for(Sprite b: groupB){

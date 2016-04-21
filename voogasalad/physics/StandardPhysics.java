@@ -22,8 +22,9 @@ public class StandardPhysics implements IPhysicsEngine{
 		sprite.setPosition(position);
 	}
 	
+	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getPosition().addX(change);
+		sprite.getVelocity().setX(change/10);
 	}
 	
 	public void translateY(Sprite sprite, Double change) {
@@ -70,7 +71,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	public void bounce(Sprite sprite, Double bounceCoefficient) {
 		Velocity curr = sprite.getVelocity();
 		curr.setX(-1*curr.getX()*bounceCoefficient);
-		curr.setX(-1*curr.getY()*bounceCoefficient);
+		curr.setY(-1*curr.getY()*bounceCoefficient);
 	}
 
 	@Override
@@ -89,7 +90,8 @@ public class StandardPhysics implements IPhysicsEngine{
 
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
-		Acceleration gravityAcceleration = new Acceleration(0, -gravityMagnitude);
+		Double mass = (((Double) sprite.getPropertiesMap().get("Mass").getValue()).isInfinite()) ? 0d : (Double) sprite.getPropertiesMap().get("Mass").getValue();
+		Acceleration gravityAcceleration = new Acceleration(0, mass * gravityMagnitude/Math.pow(10, 9));
 		accelerate(sprite, gravityAcceleration);
 	}
 

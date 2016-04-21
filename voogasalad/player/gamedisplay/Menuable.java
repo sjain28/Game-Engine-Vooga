@@ -7,6 +7,7 @@ public interface Menuable {
     public CompleteAuthoringModelable getManager();
     
     public void addScene();
-
+    
+    public void addScene(CompleteAuthoringModelable manager);
     public void saveAll ();
 }

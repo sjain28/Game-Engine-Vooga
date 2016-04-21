@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.UUID;
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -94,5 +93,11 @@ public class VoogaFrontEndText extends TextField implements Elementable {
 		// TODO Auto-generated method stub
 		
 	}
+
+    @Override
+    public void setName (String name) {
+        // TODO Auto-generated method stub
+        
+    }
 
 }
