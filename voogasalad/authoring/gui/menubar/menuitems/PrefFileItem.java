@@ -1,6 +1,7 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.gui.menubar.builders.PreferencesSetter;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
@@ -24,8 +25,9 @@ public class PrefFileItem extends MenuItemHandler {
          */
 	@Override
 	public void handle() {
-		// TODO Auto-generated method stub
-		
+		PreferencesSetter pref = new PreferencesSetter();
+		pref.setTitle("Preferences");
+		pref.show();
 	}
 
 }
