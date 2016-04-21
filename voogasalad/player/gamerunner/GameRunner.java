@@ -431,12 +431,12 @@ public class GameRunner implements IGameRunner {
 
 	@Override
 	public void playNextLevel() {
-		stop();
+		getTimeline().stop();
 		// TODO Auto-generated method stub
 		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
 		String nextLevel = myLevelList.get(tempIndex);
 		myLevelData.setNextLevelName(nextLevel);
-		start();
+		getTimeline().play();
 	}
 	
 }
