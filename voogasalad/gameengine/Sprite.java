@@ -75,13 +75,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
-        myProperties.put(WIDTH, new VoogaNumber(image.getWidth()));
-        myProperties.put(HEIGHT, new VoogaNumber(image.getHeight()));
         
         initializeDimensions(image.getWidth(), image.getHeight());
     }
     
     private void initializeDimensions(double width, double height) {
+        myProperties.put(WIDTH, new VoogaNumber(width));
+        myProperties.put(HEIGHT, new VoogaNumber(height));
     	myWidth = new SimpleDoubleProperty();
         myHeight = new SimpleDoubleProperty();
         Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
@@ -91,7 +91,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myWidth.addListener((obs, old, n) -> {
         	spriteWidth = (double) n;
         });
-        myWidth.addListener((obs, old, n) -> {
+        myHeight.addListener((obs, old, n) -> {
         	spriteHeight = (double) n;
         });
     }
@@ -262,7 +262,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 	}
 	
 	public Property<Number> getHeight() {
-		return this.myWidth;
+		return this.myHeight;
 	}
 
 }
