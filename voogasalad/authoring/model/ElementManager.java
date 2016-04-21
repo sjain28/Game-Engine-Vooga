@@ -119,10 +119,9 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         for (Node element : myGameElements) {
             if (element instanceof GameObject) {
                 GameObject object = (GameObject) element;
-                ImageProperties ip = new ImageProperties(VoogaBundles.imageProperties);
-                ip.storeData(object);
+                ImageProperties ip = new ImageProperties();
                 Sprite sprite = ((GameObject) element).getSprite();
-                sprite.setImageProperties(ip);
+                sprite.setInitializationMap(ip.storeData(object));
                 elements.add(sprite);
             }
 
@@ -210,7 +209,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void setGameObjects (List<Node> elementableList) throws VoogaException {
-        if (!elementableList.isEmpty()){
+        if (!myGameElements.isEmpty()){
             throw new VoogaException();
         }
         

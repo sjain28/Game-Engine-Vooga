@@ -48,7 +48,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
 
-    private ImageProperties imageProperties;
+    private Map<String,Object> initializationProperties;
 
     public Sprite (String imagePath,
                    String archetype,
@@ -82,6 +82,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
 
         initializeDimensions(image.getWidth(), image.getHeight());
+        
     }
 
     private void initializeDimensions (double width, double height) {
@@ -258,8 +259,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         }
     }
 
-    public void setImageProperties (ImageProperties ip) {
-        imageProperties = ip;
+    public void setInitializationMap (Map<String,Object> ip) {
+        initializationProperties = ip;
     }
 
     /**
@@ -273,13 +274,20 @@ public class Sprite implements Moveable, Effectable, Elementable {
      */
 
     public void init () throws VoogaException {
+        System.out.println(myImagePath);
         if (myImage != null)
             return;
-
-        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        System.out.println("My image was null");
+        
+        ImageProperties imageProperties= new ImageProperties();
+        Image image = new Image(myImagePath);
         myImage = new ImageView(image);
 
-        imageProperties.loadData(myImage);
-
+        imageProperties.loadData(myImage,initializationProperties);
+        
+        myX = new SimpleDoubleProperty();
+        myY = new SimpleDoubleProperty();
+        myWidth = new SimpleDoubleProperty();
+        myHeight = new SimpleDoubleProperty();
     }
 }

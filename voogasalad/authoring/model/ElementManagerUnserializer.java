@@ -14,22 +14,23 @@ import tools.VoogaException;
 public class ElementManagerUnserializer {
     
     private String xmlPath;
-    private ElementManager elementManager;
     
     public ElementManagerUnserializer(String xmlPath){
         this.xmlPath=xmlPath;
-        this.elementManager = new ElementManager();
     }
     
     public ElementManager unserialize() throws VoogaException{
+        ElementManager elementManager = new ElementManager();
+        
         FileReaderToGameObjects reader = new FileReaderToGameObjects(xmlPath);
         DataContainerOfLists data = reader.getDataContainer();
-
         
+        System.out.println(elementManager.getElements().size());
+        elementManager.setGameObjects(getNodeList(data.getElementableList()));
         elementManager.setSpriteFactory(data.getArchetypeMap());
         elementManager.setEventList(data.getEventList());
         elementManager.setGlobalProperties(data.getVariableMap());
-        elementManager.setGameObjects(getNodeList(data.getElementableList()));
+        
         
         return elementManager;
     }

@@ -1,7 +1,7 @@
 package tools.bindings;
 
 import java.lang.reflect.Method;
-
+import java.util.Map;
 import javafx.application.Application;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -19,11 +19,11 @@ public class NodePropertiesTest extends Application{
         image.setTranslateX(1);
         image.setTranslateY(2);
         image.setTranslateZ(3);
-        ImageProperties np = new ImageProperties(VoogaBundles.imageProperties);
-        np.storeData(image);
+        ImageProperties np = new ImageProperties();
+        Map<String,Object> storedData=np.storeData(image);
         
         ImageView loadedImage = new ImageView();
-        np.loadData(loadedImage);
+        np.loadData(loadedImage,storedData);
         System.out.println(loadedImage.getFitHeight()+" "+loadedImage.getFitWidth());
     }
     
