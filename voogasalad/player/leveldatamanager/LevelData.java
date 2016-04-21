@@ -257,12 +257,15 @@ public class LevelData implements ILevelData {
 		myGlobalVariables = data.getVariableMap();
 		System.out.println("All the variables here are" + myGlobalVariables);
 		
+		System.out.println("putting");
 		myGlobalVariables.put("LevelIndex", new VoogaString(""));
+		
 	}
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
 		//System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		System.out.println(myGlobalVariables.containsKey("LevelIndex"));
 		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 	public void setNextLevelName(String levelName) {

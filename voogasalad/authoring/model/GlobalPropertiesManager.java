@@ -7,6 +7,7 @@ import authoring.interfaces.Elementable;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.Node;
 import tools.VoogaBoolean;
+import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 public class GlobalPropertiesManager implements Elementable {
@@ -16,7 +17,8 @@ public class GlobalPropertiesManager implements Elementable {
 	
 	public GlobalPropertiesManager() {
 		//used for testing
-		globalPropertiesMap.put("RaggityRick", new VoogaBoolean());
+		globalPropertiesMap.put("Timer", new VoogaNumber(0.0));
+		globalPropertiesMap.put("NextLevel", new VoogaNumber(0.0));
 	}
 
 	@Override

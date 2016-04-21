@@ -53,6 +53,7 @@ public class GameRunner implements IGameRunner{
     private EventManager myEventManager;
     private String levelsPath = "levels/";
     private String gameLocation = "games/";
+    //private String gameLocation = "";
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private List<String> myLevelList;

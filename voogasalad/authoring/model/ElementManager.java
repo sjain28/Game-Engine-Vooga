@@ -40,6 +40,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private SpriteFactory spriteFactory;
     private Set<String> myIds;
     private String filePath = "games/levels/Test.xml";
+    //private String filePath = "levels/Test.xml";
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
