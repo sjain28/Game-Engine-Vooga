@@ -1,15 +1,19 @@
 package data;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
 import events.VoogaEvent;
+import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import tools.VoogaAlert;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;
+
+/* This class is a custom tool that utilizes the Deserializer to allow a user to obtain game-specific objects 
+ * an XML file. Because the game objects are currently serialized in a DataContainer, the deserialize method 
+ * will return all the data of different game objects in a custom DataContainerOfLists class. 
+ */
 
 
 public class FileReaderToGameObjects {
@@ -27,8 +31,8 @@ public class FileReaderToGameObjects {
         objectNames = new ArrayList<String>();
         objectNames.add("");
         System.out.println("The  file checked here is" + fileName);
-        try {
-            data = (DataContainerOfLists) DeSerializer.deserialize(1, fileName).get(0);
+        try{
+        data = (DataContainerOfLists) Deserializer.deserialize(1, fileName).get(0);
         }
         catch (RuntimeException e) {
             System.out.println("error came from the filereadertogameobjects");
@@ -58,8 +62,8 @@ public class FileReaderToGameObjects {
         return data.getVariableMap();
     }
 
-    public SpriteFactory createSpriteFactory () {
-        return data.getSpriteFactory();
+    public Map<String, Sprite> createSpriteFactory () {
+        return data.getArchetypeMap();
     }
 
     public DataContainerOfLists getDataContainer () {

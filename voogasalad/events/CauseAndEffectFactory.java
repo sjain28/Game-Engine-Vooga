@@ -2,6 +2,7 @@ package events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
 import tools.VoogaException;
 
 public class CauseAndEffectFactory {
@@ -79,6 +80,7 @@ public class CauseAndEffectFactory {
             return new Boolean(true);
 
         if (input.equalsIgnoreCase("false"))
+        	//Saumya: should this be false in purple rather than false in quotations? -JOSH
             return new Boolean("false");
         try {
         	Double d = Double.parseDouble(input);

@@ -6,6 +6,7 @@ import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.gui.menubar.builders.TextObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
+import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
@@ -13,30 +14,32 @@ import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
 public class NewTextFileItem extends MenuItemHandler {
-    private EditElementable myManager;
-    /**
-     * Initializes the MenuItem
-     * 
-     * @param model to interface backend interactions with the model
-     * @param event: Unused vestige of previous poor programming. Should soon be phased out.
-     */
-	public NewTextFileItem(Menuable model, EventHandler<InputEvent> event) {
-		super();
-		myManager = (EditElementable) model;
-		
-	}
+	private EditElementable myManager;
+
 	/**
-         * Action to be taken on the selection of this menuItem
-         */
+	 * Initializes the MenuItem
+	 * 
+	 * @param model
+	 *            to interface backend interactions with the model
+	 * @param event:
+	 *            Unused vestige of previous poor programming. Should soon be
+	 *            phased out.
+	 */
+	public NewTextFileItem(Menuable model) {
+
+		super();
+		myManager = (EditElementable) model.getManager();
+
+	}
+
+	/**
+	 * Action to be taken on the selection of this menuItem
+	 */
 	@Override
 	public void handle() {
-	    Stage popup = new Stage();
-            popup.setTitle("New Text Object");
-            TextObjectBuilder initializer = new TextObjectBuilder(myManager, popup);
-            Scene scene = new VoogaScene(initializer);
-            popup.setScene(scene);
-            popup.show();
-            
+		TextObjectBuilder initializer = new TextObjectBuilder(myManager);
+		initializer.setTitle("New Text Object");
+		initializer.show();
 	}
 
 }

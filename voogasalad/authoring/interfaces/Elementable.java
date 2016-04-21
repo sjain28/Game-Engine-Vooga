@@ -1,24 +1,34 @@
 package authoring.interfaces;
 
 import java.util.Map;
-
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
+
 /**
  * Forms a relationship between all elements, objects that are going to be present in the game.
- * This relationship makes it easier to define any basic options for these objects, such as dragging them onto the 
+ * This relationship makes it easier to define any basic options for these objects, such as dragging
+ * them onto the
  * screen.
  * 
  * @author Aditya Srinivasan, Arjun Desai, Harry Guo, Nick Lockett
  *
  */
-public interface Elementable extends Updatable{
+public interface Elementable extends Updatable {
+
+    public Map<String, VoogaData> getVoogaProperties ();
     
-    public Map<String,VoogaData> getVoogaProperties();
-    public void addProperty(String name, VoogaData data);
-    public void removeProperty(String name);
-    public String getName();
-    public String getID();
-    public Node getNodeObject();
+    public void setVoogaProperties(Map<String,VoogaData> newVoogaProperties);
+
+    public void addProperty (String name, VoogaData data);
+
+    public void removeProperty (String name);
+
+    public String getName ();
+
+    public String getId ();
+
+    public Node getNodeObject ();
+    
+
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import authoring.interfaces.Elementable;
+import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.Node;
 import tools.VoogaBoolean;
 import tools.interfaces.VoogaData;
@@ -11,6 +12,7 @@ import tools.interfaces.VoogaData;
 public class GlobalPropertiesManager implements Elementable {
 	
 	private Map<String, VoogaData> globalPropertiesMap = new HashMap<String, VoogaData>();
+	private SimpleMapProperty<String, VoogaData> globalProperties;
 	
 	public GlobalPropertiesManager() {
 		//used for testing
@@ -50,9 +52,15 @@ public class GlobalPropertiesManager implements Elementable {
 	}
 
 	@Override
-	public String getID() {
+	public String getId() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

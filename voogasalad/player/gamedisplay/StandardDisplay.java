@@ -3,6 +3,7 @@ package player.gamedisplay;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
@@ -140,10 +141,10 @@ public class StandardDisplay implements IGameDisplay {
 	private void createPane() {
 		//Adds all components into the main border pane
 		getPane().setCenter(myGameScreen);
-		System.out.println(myGameRunner);
-		getPane().setTop(new MenuPanel(myGameRunner, e -> {
-			new MenuPanelHandlingMirror(e, myGameRunner);
-		}, VoogaBundles.playerMenubarProperties));
+		//System.out.println(myGameRunner);
+		getPane().setTop(new MenuPanel(myGameRunner, 
+				e -> new MenuPanelHandlingMirror(e, myGameRunner), 
+				VoogaBundles.playerMenubarProperties));
 		getPane().setBottom(myControl.createControl());
 		//Below is optional (adds HUD)
 		getPane().setRight(myHUD.createHUD());
@@ -169,10 +170,11 @@ public class StandardDisplay implements IGameDisplay {
 	public void populateGameScreen() {
 		getGameScreen().getChildren().clear();
 		getListToDisplay().forEach(n -> {
+			//n.setTranslateY(flipYCoordinate(n.getTranslateY()));
 			getGameScreen().getChildren().add(n);
 		});
 	}
-
+	
 	/**
 	 * @return the pane
 	 */

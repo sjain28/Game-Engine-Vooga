@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameengine.Sprite;
+import player.leveldatamanager.ILevelData;
 import tools.interfaces.VoogaData;
 
 public class SpriteEffect extends VariableEffect{
@@ -16,22 +17,22 @@ public class SpriteEffect extends VariableEffect{
 	// constructor with sprites- apply to given sprites
 	public SpriteEffect(String spriteID, String variable, String method, VoogaEvent event) {
 		super(variable, method, event);
-		mySpriteID = spriteID;
+		setSpriteID(spriteID);
 		setNeedsSprites(false);
 	}
-	
+
 	public SpriteEffect(String spriteID, String variable, String method, Double parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
-		mySpriteID = spriteID;
+		setSpriteID(spriteID);
 		setNeedsSprites(false);
 	}
-	
+
 	public SpriteEffect(String spriteID, String variable, String method, Boolean parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
-		mySpriteID = spriteID;
+		setSpriteID(spriteID);
 		setNeedsSprites(false);
 	}
-	
+
 	// constructor with archetype, boolean true- apply to all of archetype
 	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
 	public SpriteEffect(String archetype, Boolean needsSprites, String variable, String method, VoogaEvent event) {
@@ -39,30 +40,30 @@ public class SpriteEffect extends VariableEffect{
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
 	}
-	
+
 	public SpriteEffect(String archetype, Boolean needsSprites, String variable, String method, Double parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
 	}
-	
+
 	public SpriteEffect(String archetype, Boolean needsSprites, String variable, String method, Boolean parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
 	}
-	
+
 	// constructor with nothing- apply to all for which event supplies
 	public SpriteEffect(String method, String variable, VoogaEvent event) {
 		super(variable, method, event);
 		setNeedsSprites(true);
 	}
-	
+
 	public SpriteEffect(String variable, String method, Double parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
 		setNeedsSprites(true);
 	}
-	
+
 	public SpriteEffect(String variable, String method, Boolean parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
 		setNeedsSprites(true);
@@ -71,68 +72,92 @@ public class SpriteEffect extends VariableEffect{
 	public SpriteEffect(String method, Double parameter, VoogaEvent event){
 		super(method, parameter, event);
 	}
-	
+
 	@Override
-	public void init(){
-	    System.out.println("Initializing srite effect");
-		if(mySpriteID != null){
-			System.out.println("Initializing the Sprite now");
-			mySprites.add(getEvent().getManager().getSprite(mySpriteID));
-			System.out.println(mySprites.size());
+	public void execute(ILevelData data) {
+		setSprites(data);
+		if (mySprites.size() > 0){
+			for (Sprite sprite : mySprites){
+				VoogaData variable = sprite.getParameterMap().get(getVariable());
+				callEffectMethod(variable);
+			}
 		}
-	}
-	
-	@Override
-	public void execute() {
-		setSprites();
-		for (Sprite sprite : mySprites){
-			VoogaData variable = sprite.getParameterMap().get(getVariable());
-			callEffectMethod(variable);
-		}
+		mySprites.clear();
 	}
 	/**
 	 * Determines which sprites need to be set for this effect depending on the constructor that was used, as well as the
 	 * sprite outputs of the cause within the same event.
 	 */
-	protected void setSprites(){
-		if (needsSprites){
+	protected void setSprites(ILevelData data){
+		if(getSpriteID() != null){
+			mySprites.add(data.getSpriteByID(getSpriteID()));
+		}
+		if (getNeedsSprites()){
 			mySprites = getEvent().getSpritesFromCauses();
 		}
 		if (getMyArchetype() != null){
-			// get sprite manager, get all sprites of archetype
-			List<String> archSpriteIDs = getEvent().getManager().getSpriteIDs(getMyArchetype());
+			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
 			if (mySprites.size() != 0){
 				for(Sprite causeSprite : mySprites){
-					if(!archSpriteIDs.contains(causeSprite.getID())){
+					if(!archSpriteIDs.contains(causeSprite)){
 						mySprites.remove(causeSprite);
 					}
 				}
 			}else {
-				for(String spriteID : archSpriteIDs){
-					mySprites.add(getEvent().getManager().getSprite(spriteID));
+				for(Sprite sprite : archSpriteIDs){
+					mySprites.add(sprite);
 				}
 			}
 		}
 	}
-	
+	@Override
+	public String toString() {
+		String effectString = getMethodString() + " " + getVariable() + " for " ;
+		
+		if (myArchetype != null){
+			effectString += myArchetype;
+		}
+		
+		// TODO: MAKE INTO SPRITE NAME, NOT ID
+		if (getSpriteID() != null){
+			effectString += getSpriteID();
+		}
+		
+		//TODO: PUT THIS IN RESOURCE BUNDLE
+		if (getNeedsSprites()){
+			effectString += "sprites from causes";
+		}
+		if (getParameter() != null){
+			effectString += "[" + getParameter().toString() + "]";
+		}
+		return effectString;
+	}
 	protected List<Sprite> getSprites(){
 		return mySprites;
 	}
 
-	public String getMyArchetype() {
+	protected String getMyArchetype() {
 		return myArchetype;
 	}
 
-	public void setMyArchetype(String archetype) {
+	protected void setMyArchetype(String archetype) {
 		myArchetype = archetype;
 	}
-	public void setNeedsSprites(Boolean needsSprites){
+	protected void setNeedsSprites(Boolean needsSprites){
 		this.needsSprites = needsSprites;
 	}
-	public List<Sprite> getMySprites(){
+	protected List<Sprite> getMySprites(){
 		return mySprites;
 	}
-	public void setSpriteID(String spriteID){
+	protected void setSpriteID(String spriteID){
 		mySpriteID = spriteID;
+	}
+
+	protected String getSpriteID() {
+		return mySpriteID;
+	}
+
+	protected Boolean getNeedsSprites() {
+		return needsSprites;
 	}
 }

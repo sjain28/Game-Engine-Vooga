@@ -10,6 +10,10 @@ import org.xml.sax.SAXException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+/* This class is a custom tool that utilizes the Deserializer to allow a user to write game-specific objects 
+ * an XML file. Because the game objects are currently serialized in a DataContainer, the saveGameObjects method 
+ * requires that the user put the desired objects into a DataContainerOfLists.
+ */
 
 public class FileWriterFromGameObjects {
 
@@ -28,6 +32,7 @@ public class FileWriterFromGameObjects {
             System.out.println("The file name here is " + fileName);
             file.createNewFile();
         }
+        
        Serializer.serialize(lists, fileName);
     }
 }

@@ -1,10 +1,8 @@
 package events;
 
 import java.lang.reflect.Method;
-import java.util.List;
 import gameengine.Sprite;
-import tools.VoogaException;
-import tools.interfaces.VoogaData;
+import player.leveldatamanager.ILevelData;
 
 public class PhysicsEffect extends SpriteEffect {
 
@@ -26,28 +24,44 @@ public class PhysicsEffect extends SpriteEffect {
 	}
 
 	@Override
-	public void execute(){
-		setSprites();
-		for (Sprite sprite: getSprites()){
-			System.out.println("in sprite loop");
-			callEffectMethod(sprite);
+	public void execute(ILevelData data){
+		setSprites(data);
+		if (getSprites().size() > 0){
+			for (Sprite sprite: getSprites()){
+				callEffectMethod(sprite, data);
+			}
 		}
-		System.out.println("BOUNCING LEGGO");
-		System.out.println(getSprites().size());
 	}
 
-	private void callEffectMethod(Sprite sprite){
+	private void callEffectMethod(Sprite sprite, ILevelData data){
 		try{
-			Method physicsMethod = getEvent().getPhysicsEngine().getClass()
-					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameters().getClass()});
-			
-			System.out.println("METHOD NAME: "+getMethodString());
-			
-			physicsMethod.invoke(getEvent().getPhysicsEngine(), sprite, getParameters());
+			Method physicsMethod = data.getPhysicsEngine().getClass()
+					.getMethod(getMethodString(), new Class[]{Sprite.class, getParameter().getClass()});
+			physicsMethod.invoke(data.getPhysicsEngine(), sprite, getParameter());
 		}catch (Exception e){
 			e.printStackTrace();
 			//throw new VoogaException(String.format(format, args));
 		}
+	}
+	@Override
+	public String toString() {
+		String effectString = "Apply " + getMethodString() + " to ";
+
+		if (getMyArchetype() != null){
+			effectString += getMyArchetype();
+		}
+
+		// TODO: MAKE INTO SPRITE NAME, NOT ID
+		if (getSpriteID() != null){
+			effectString += getSpriteID();
+		}
+		if (getNeedsSprites()){
+			effectString += "sprites from causes";
+		}
+		if (getParameter() != null){
+			effectString += "[" + getParameter().toString() + "]";
+		}
+		return effectString;
 	}
 
 }

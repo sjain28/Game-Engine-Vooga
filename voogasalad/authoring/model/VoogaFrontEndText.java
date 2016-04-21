@@ -19,7 +19,6 @@ import tools.interfaces.VoogaData;
 public class VoogaFrontEndText extends TextField implements Elementable {
 
     Map<String, VoogaData> myProperties = new HashMap<String, VoogaData>();
-    String myID;
 
     public VoogaFrontEndText () {
         init();
@@ -27,6 +26,7 @@ public class VoogaFrontEndText extends TextField implements Elementable {
 
     // stroke, color, font, text, size, name/group, position (x,y,z),
     public VoogaFrontEndText (double x, double y, String text) {
+        
         init();
         this.setTranslateX(x);
         this.setTranslateY(y);
@@ -38,8 +38,7 @@ public class VoogaFrontEndText extends TextField implements Elementable {
     }
 
     private void init () {
-        myID = UUID.randomUUID().toString();
-        this.setId(myID);
+        setId(UUID.randomUUID().toString());
         setBackground(Background.EMPTY);
         this.setOnDragDetected( (MouseEvent e) -> onDrag(e));
     }
@@ -83,15 +82,17 @@ public class VoogaFrontEndText extends TextField implements Elementable {
         // TODO Auto-generated method stub
         return this;
     }
-
-    public String getID () {
-        return myID;
-    }
-
+    
     @Override
     public String getName () {
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

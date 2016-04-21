@@ -31,19 +31,4 @@ public class SpriteFactoryTester {
 		assertEquals(1,myFactory.getAllArchetypeNames().size());
 	}
 	
-	@Test
-	public void serializeAndDeserializeAListOfSprites() throws Exception{
-		addArchetypeToListListIncrements();
-		myFactory.serializeArchetypes("archetypes_saved_here");
-		
-		SpriteFactory myTesterFactory = new SpriteFactory();
-		assertEquals(0,myTesterFactory.getAllArchetypeNames().size());
-		myTesterFactory.deSerializeArchetype("archetypes_saved_here_Pirate");
-		assertEquals(1,myFactory.getAllArchetypeNames().size());
-//		Sprite sprite = new Sprite("","Pirate");
-//		sprite.setProperties(newProperties);
-//		s.setArchetype("Pirate", sprite);
-//		s.createSprite("Pirate");
-		assertEquals(1,myFactory.getAllArchetypeNames().size());
-	}
 }
