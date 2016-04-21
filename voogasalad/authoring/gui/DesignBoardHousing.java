@@ -28,8 +28,8 @@ public class DesignBoardHousing extends TabPane {
  * @param elem: Interface for Manager to Update Backend 
  */
     public DesignBoardHousing (CompleteAuthoringModelable elem) {
-    	//this.getTabs().add(new DesignBoardPreferences());
-        this.getTabs().add(new DesignBoard(elem));
+    	this.getTabs().add(new DesignBoardPreferences());
+        //this.getTabs().add(new DesignBoard(elem));
     }
 
     /**

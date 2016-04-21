@@ -25,9 +25,9 @@ public class PrefFileItem extends MenuItemHandler {
          */
 	@Override
 	public void handle() {
-		PreferencesSetter pref = new PreferencesSetter();
-		pref.setTitle("Preferences");
-		pref.show();
+		//PreferencesSetter pref = new PreferencesSetter();
+		//pref.setTitle("Preferences");
+		// spref.show();
 	}
 
 }

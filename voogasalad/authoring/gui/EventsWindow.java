@@ -1,12 +1,17 @@
 package authoring.gui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import authoring.CustomText;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import events.Cause;
+import events.Effect;
 import events.VoogaEvent;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -22,7 +27,8 @@ public class EventsWindow extends TabPane implements Observer{
 	private CompleteAuthoringModelable myManager;
 	private Tab main;
 	private VBox content;
-	private List<VoogaEvent> current;
+	private Map<VoogaEvent, ObservableList<String>> effects;
+	private Map<VoogaEvent, ObservableList<String>> causes;
 	
 	/**
 	 * Initialized the Events Window, responsible for displaying all the currently initialized Causes and Events and their links.
@@ -32,26 +38,37 @@ public class EventsWindow extends TabPane implements Observer{
         myManager = manager;
         main = new Tab(NAME);
         content = new VBox();
-        current = new ArrayList<VoogaEvent>();   
+        causes = new HashMap<VoogaEvent, ObservableList<String>>(); 
+        effects = new HashMap<VoogaEvent, ObservableList<String>>(); 
         initialize();
-        current.addAll(myManager.getEvents());
+        main.setContent(content);
+        this.getTabs().add(main);
     }
     
     private void initialize(){
         for(VoogaEvent e: myManager.getEvents()){
-            if(!current.contains(e)){
-                HBox info = new HBox();
-                ListView causes = new ListView((ObservableList) e.getCauses());
-                ListView effects = new ListView((ObservableList) e.getEffects());
-                info.getChildren().addAll(causes, effects);
-                content.getChildren().add(info);
-                current.add(e);
+            if(!causes.keySet().contains(e)){
+                ObservableList<String> causesString = FXCollections.observableArrayList();
+                for(Cause cause: e.getCauses()){
+                    causesString.addAll(cause.toString());
+                }  
+                causes.put(e, causesString);
+                
             }
-            
+            if(!effects.keySet().contains(e)){
+                ObservableList<String> effectsString = FXCollections.observableArrayList();
+                for(Effect effect: e.getEffects()){
+                    effectsString.addAll(effect.toString());
+                }  
+                causes.put(e, effectsString);
+            }
+            HBox info = new HBox();
+            ListView<String> causeList = new ListView<String>(causes.get(e));
+            ListView<String> effectList = new ListView<String>(effects.get(e));
+            info.getChildren().addAll(causeList, effectList);
+            content.getChildren().add(info);
         }
         
-        main.setContent(content);
-        this.getTabs().add(main);
     }
 
     @Override
