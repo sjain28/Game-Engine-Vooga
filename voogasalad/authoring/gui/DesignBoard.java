@@ -51,8 +51,8 @@ import tools.VoogaException;
 public class DesignBoard extends Tab implements Observer {
 
 	private static final String DESIGN_BOARD = "Design Board";
-	private static final double HEIGHT = 1000;
-	private static final double WIDTH = 1000;
+	private static final double HEIGHT = 2000;
+	private static final double WIDTH = 2000;
 
 	private ScrollPane container;
 	private StackPane contentPane;
@@ -86,6 +86,19 @@ public class DesignBoard extends Tab implements Observer {
 		this.setContent(container);
 		y_offset = HEIGHT / 2;
 		x_offset = WIDTH / 2;
+		addGuides();
+	}
+
+	private void addGuides() {
+		// TODO: replace hardcode with actual value from standard display
+		Rectangle guide = new Rectangle(600, 600);
+		guide.setStroke(Paint.valueOf("white"));
+		guide.setStrokeWidth(4);
+		guide.setFill(Paint.valueOf("transparent"));
+		guide.setStrokeDashOffset(40);
+		guide.setTranslateX(300);
+		guide.setTranslateY(300);
+		this.contentPane.getChildren().add(guide);
 	}
 
 	private void initializeDragAndDrop() {
@@ -172,7 +185,6 @@ public class DesignBoard extends Tab implements Observer {
 
 	}
 
-
 	private void moveElement(String id, DragEvent e) {
 		Node element = elementManager.getElement(id);
 		System.out.println("" + e.getX() + " " + e.getY());
@@ -198,12 +210,14 @@ public class DesignBoard extends Tab implements Observer {
 		if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)) {
 			displayElements(((CompleteAuthoringModelable) o).getElements());
 		}
-		if((o instanceof ElementSelectionModel) && (arg instanceof Elementable)) {
-			for(Node object : contentPane.getChildren()) {
-				if(arg == object) {
-					((GameObject) object).select(Selector.HIGHLIGHTED);
-				} else {
-					((GameObject) object).select(Selector.UNHIGHLIGHTED);
+		if ((o instanceof ElementSelectionModel) && (arg instanceof Elementable)) {
+			for (Node object : contentPane.getChildren()) {
+				if (object instanceof GameObject) {
+					if (arg == object) {
+						((GameObject) object).select(Selector.HIGHLIGHTED);
+					} else {
+						((GameObject) object).select(Selector.UNHIGHLIGHTED);
+					}
 				}
 			}
 		}
