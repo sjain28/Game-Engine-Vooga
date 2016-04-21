@@ -2,36 +2,32 @@ package tools;
 
 import javafx.beans.property.Property;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.TextField;
 import tools.interfaces.VoogaData;
 
-public class VoogaDataImage implements VoogaData{
+public class VoogaDataText implements VoogaData{
+    String text;
     
-    String imagePath;
-    ImageView image;
-    
-    public VoogaDataImage(String imagePath){
-        this.imagePath= imagePath;
+    public VoogaDataText(String text){
+        this.text=text;
     }
     
     @Override
     public Object getValue () {
-        return imagePath;
+        return text;
     }
 
     @Override
     public void setValue (Object o) {
         if (!(o instanceof String)) return;
-        imagePath = (String) imagePath;
+        text = (String) o;
     }
 
     @Override
     public Node display () {
-        Button button = new Button();
-        button.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream(imagePath))));
-        return button;
+        TextField textField = new TextField();
+        textField.setText(text);
+        return textField;
     }
 
 	@Override
@@ -40,10 +36,18 @@ public class VoogaDataImage implements VoogaData{
 		return null;
 	}
 
+<<<<<<< HEAD
+    @Override
+    public <T> void setProperty (T newVal) {
+        // TODO Auto-generated method stub
+        
+    }
+=======
 	@Override
 	public <T> void setProperty(T newVal) {
 		// TODO Auto-generated method stub
 		
 	}
+>>>>>>> master
 
 }

@@ -40,10 +40,18 @@ public class VoogaDataImage implements VoogaData{
 		return null;
 	}
 
+<<<<<<< HEAD
+    @Override
+    public <T> void setProperty (T newVal) {
+        // TODO Auto-generated method stub
+        
+    }
+=======
 	@Override
 	public <T> void setProperty(T newVal) {
 		// TODO Auto-generated method stub
 		
 	}
+>>>>>>> master
 
 }

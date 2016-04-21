@@ -22,8 +22,9 @@ public class StandardPhysics implements IPhysicsEngine{
 		sprite.setPosition(position);
 	}
 	
+	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getPosition().addX(change);
+		sprite.getVelocity().setX(change/10);
 	}
 	
 	public void translateY(Sprite sprite, Double change) {
@@ -89,7 +90,7 @@ public class StandardPhysics implements IPhysicsEngine{
 
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
-		Acceleration gravityAcceleration = new Acceleration(0, -gravityMagnitude);
+		Acceleration gravityAcceleration = new Acceleration(0, gravityMagnitude/Math.pow(10, 7));
 		accelerate(sprite, gravityAcceleration);
 	}
 

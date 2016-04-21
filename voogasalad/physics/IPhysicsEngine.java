@@ -97,5 +97,7 @@ public interface IPhysicsEngine {
 	 * 
 	 * @param alpha
 	 */
-	void interpolatePositions(float alpha);	
+	void interpolatePositions(float alpha);
+
+	void translateX(Sprite sprite, Double change);	
 }

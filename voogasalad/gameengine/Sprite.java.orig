@@ -47,15 +47,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient SimpleDoubleProperty myY;
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
-<<<<<<< HEAD
-    
-    private ImageProperties imageProperties;
-    
-=======
-    private double spriteWidth;
-    private double spriteHeight;
 
->>>>>>> master
+    private Map<String,Object> initializationProperties;
+
     public Sprite (String imagePath,
                    String archetype,
                    Map<String, VoogaData> properties,
@@ -86,36 +80,19 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
-<<<<<<< HEAD
-        myProperties.put(WIDTH, new VoogaNumber(image.getWidth()));
-        myProperties.put(HEIGHT, new VoogaNumber(image.getHeight()));
 
+        initializeDimensions(image.getWidth(), image.getHeight());
+        
+    }
+
+    private void initializeDimensions (double width, double height) {
+        myProperties.put(WIDTH, new VoogaNumber(width));
+        myProperties.put(HEIGHT, new VoogaNumber(height));
         myWidth = new SimpleDoubleProperty();
         myHeight = new SimpleDoubleProperty();
         Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
         Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
 
-=======
-        
-        initializeDimensions(image.getWidth(), image.getHeight());
-    }
-    
-    private void initializeDimensions(double width, double height) {
-        myProperties.put(WIDTH, new VoogaNumber(width));
-        myProperties.put(HEIGHT, new VoogaNumber(height));
-    	myWidth = new SimpleDoubleProperty();
-        myHeight = new SimpleDoubleProperty();
-        Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
-        Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
-        spriteWidth = width;
-        spriteHeight = height;
-        myWidth.addListener((obs, old, n) -> {
-        	spriteWidth = (double) n;
-        });
-        myHeight.addListener((obs, old, n) -> {
-        	spriteHeight = (double) n;
-        });
->>>>>>> master
     }
 
     private void initializeCoordinates () {
@@ -133,14 +110,18 @@ public class Sprite implements Moveable, Effectable, Elementable {
         });
     }
 
-
-
     public void update () {
         // Still needed: Apply physics to myVelocity
+<<<<<<< HEAD
 
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
         System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
                            "velocityX" + myVelocity.getX());
+=======
+    	
+    	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
+        //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
+>>>>>>> master
 
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
@@ -148,23 +129,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
         myVelocity.addX(myAcceleration.getX());
         myVelocity.addY(myAcceleration.getY());
-<<<<<<< HEAD
 
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setTranslateX(myLoc.getX());
-        myImage.setTranslateY(myLoc.getY());
+        myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
+        myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
 
         // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
 
-=======
-        
-        //Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setTranslateX(myLoc.getX() - spriteWidth/2);
-        myImage.setTranslateY(myLoc.getY() - spriteHeight/2);
-        
-//        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
-        
->>>>>>> master
     }
 
     public void setName (String name) {
@@ -259,7 +230,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         return myName;
     }
 
-<<<<<<< HEAD
     public boolean isMainCharacter () {
         return isMainCharacter;
     }
@@ -267,37 +237,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
     public void setMainCharacter (boolean isMainCharacter) {
         this.isMainCharacter = isMainCharacter;
     }
-=======
-	public boolean isMainCharacter() {
-		return isMainCharacter;
-	}
-
-	public void setMainCharacter(boolean isMainCharacter) {
-		this.isMainCharacter = isMainCharacter;
-	}
-
-	@Override
-	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Property<Number> getX() {
-		return this.myX;
-	}
-	
-	public Property<Number> getY() {
-		return this.myY;
-	}
-	
-	public Property<Number> getWidth() {
-		return this.myWidth;
-	}
-	
-	public Property<Number> getHeight() {
-		return this.myHeight;
-	}
->>>>>>> master
 
     @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
@@ -317,34 +256,48 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     public Property<Number> getHeight () {
-        return this.myWidth;
+        return this.myHeight;
     }
-    
-    public void initializeImage(){
+
+    public void initializeImage () {
         if (myImage == null) {
             myImage = new ImageView(getImagePath());
         }
     }
-    
-    public void setImageProperties(ImageProperties ip){
-        imageProperties=ip;
+
+<<<<<<< HEAD
+    public void setInitializationMap (Map<String,Object> ip) {
+        initializationProperties = ip;
     }
+
     /**
      * Initializes JavaFX objects that can't be serialized
      * Need to call this before using the Sprite in the game engine!
-     * @throws VoogaException 
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
+     * 
+     * @throws VoogaException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
      */
-    
+
     public void init () throws VoogaException {
-        if (myImage != null) return;
+        System.out.println(myImagePath);
+        if (myImage != null)
+            return;
+        System.out.println("My image was null");
         
-        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        ImageProperties imageProperties= new ImageProperties();
+        Image image = new Image(myImagePath);
         myImage = new ImageView(image);
+
+        imageProperties.loadData(myImage,initializationProperties);
         
-        imageProperties.loadData(myImage);
-        
+        myX = new SimpleDoubleProperty();
+        myY = new SimpleDoubleProperty();
+        myWidth = new SimpleDoubleProperty();
+        myHeight = new SimpleDoubleProperty();
     }
 }
+=======
+}
+>>>>>>> master
