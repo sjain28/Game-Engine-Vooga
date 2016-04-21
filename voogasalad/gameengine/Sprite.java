@@ -3,7 +3,6 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;

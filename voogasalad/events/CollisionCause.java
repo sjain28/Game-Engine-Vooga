@@ -19,7 +19,7 @@ public class CollisionCause extends Cause{
 		archA = archetypeA;
 		archB = archetypeB;
 	}
-	
+
 	public void updateSprites(ILevelData data){
 	        groupA = new ArrayList<>();
 	        groupB = new ArrayList<>();
