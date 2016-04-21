@@ -201,10 +201,6 @@ public class GameRunner implements IGameRunner {
 		//check level transition
 		
 		if (!myLevelData.getNextLevelName().equals("")) {
-//			Optional<String> correctLevel = myLevelList
-//					.stream()
-//		            .filter(a -> a.equals(myLevelData.getNextLevelName()))
-//		            .findFirst();
 			System.out.println("The next level that's trying to play is " + myLevelData.getNextLevelName());
 			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())), false);
@@ -268,17 +264,6 @@ public class GameRunner implements IGameRunner {
 		playLevel(myLevelList.get(0), false);
 		run();
 		myGameDisplay.display();
-		
-//		int nextLevelIndex = 0;
-//		if (myLevelData.getLevelNumber() != 0){
-//			nextLevelIndex = myLevelData.getLevelNumber();
-//		}
-//		
-////		if (myLevelData.getLevelNumber() > 0){
-////			String nextLevel = myLevelList.get(nextLevelIndex);
-////			playLevel("levels/" +nextLevel);
-////			System.out.println("Did I advance");
-////		}
 	}
 
 	/**
@@ -307,12 +292,6 @@ public class GameRunner implements IGameRunner {
 		//Set the levelNumber to 0 because we are not transitioning anymore
 		myLevelData.refreshLevelData(fileNameWithPath);
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
-//		myGameDisplay.display();
-//		run();
-		
-//		myCurrentLevelDataManager = new LevelDataManager(getSelf(), fileName);
-//		myCurrentLevelDataManager.update();		 
-//		myGameDisplay.read(myCurrentLevelDataManager.getDisplayableObjects());
 //		myGameDisplay.display();
 //		run();
 	}

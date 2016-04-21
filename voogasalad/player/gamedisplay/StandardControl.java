@@ -77,7 +77,7 @@ public class StandardControl implements IControl {
 		speedDown.setOnMouseClicked(e -> getGameRunner().speedDown());
 //		replayButton.setOnMouseClicked(e -> getGameRunner().replayLevel());
 		playNextButton.setOnMouseClicked(e -> getGameRunner().playNextLevel());
-		myControl.getChildren().addAll(start, pause, speedUp, speedDown);
+		myControl.getChildren().addAll(start, pause, speedUp, speedDown, playNextButton);
 
 		return myControl;
 	}
