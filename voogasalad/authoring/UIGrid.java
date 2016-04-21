@@ -41,6 +41,7 @@ public class UIGrid extends GridPane{
         catch (VoogaException e) {
             new VoogaAlert(e.getMessage());
         }
+        
     }
 
     private void sector () {

@@ -1,10 +1,10 @@
 package player.leveldatamanager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
@@ -18,9 +18,11 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import physics.StandardPhysics;
+import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
+
 
 /**
  * A centralized class to contain and access data relevant to a level
@@ -242,10 +244,6 @@ public class LevelData implements ILevelData {
 		
 		//now make elements continuous
 		
-		
-		private void continueFromPreviousLevel(List<Sprite> previousSprites) {
-			
-		}
 		
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);

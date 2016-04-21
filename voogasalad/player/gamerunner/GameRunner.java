@@ -444,5 +444,11 @@ public class GameRunner implements IGameRunner {
 	public String getLevelNameString() {
 		return this.myCurrentLevelString;
 	}
+
+    @Override
+    public void addScene (CompleteAuthoringModelable manager) {
+        // TODO Auto-generated method stub
+        
+    }
 	
 }

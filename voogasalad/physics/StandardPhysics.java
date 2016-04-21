@@ -90,7 +90,8 @@ public class StandardPhysics implements IPhysicsEngine{
 
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
-		Acceleration gravityAcceleration = new Acceleration(0, gravityMagnitude/Math.pow(10, 7));
+		Double mass = (((Double) sprite.getPropertiesMap().get("Mass").getValue()).isInfinite()) ? 0d : (Double) sprite.getPropertiesMap().get("Mass").getValue();
+		Acceleration gravityAcceleration = new Acceleration(0, mass * gravityMagnitude/Math.pow(10, 9));
 		accelerate(sprite, gravityAcceleration);
 	}
 
