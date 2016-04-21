@@ -1,6 +1,8 @@
 package authoring.gui;
 
 import java.util.UUID;
+
+import authoring.CustomText;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
@@ -12,6 +14,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +28,7 @@ public class DesignBoardHousing extends TabPane {
  * @param elem: Interface for Manager to Update Backend 
  */
     public DesignBoardHousing (CompleteAuthoringModelable elem) {
+    	//this.getTabs().add(new DesignBoardPreferences());
         this.getTabs().add(new DesignBoard(elem));
     }
 

@@ -25,10 +25,8 @@ public class PropertyBuilder extends Builder {
 	private static final String VOOGA_BOOLEAN = "VoogaBoolean";
 
 	private VBox container;
-	private PropertiesTable pTable;
 	private TextField variableName;
 	private TextField variableValue;
-	private RadioButton number;
 	private HBox numberSelector;
 	private HBox boolSelector;
 	private HBox buttons;
