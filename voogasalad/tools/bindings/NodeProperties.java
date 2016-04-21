@@ -17,8 +17,7 @@ public abstract class NodeProperties {
         
     }
 
-    public void storeData (Node node) throws VoogaException, IllegalArgumentException,
-                                      IllegalAccessException, InvocationTargetException {
+    public void storeData (Node node) throws VoogaException {
         System.out.println("Storing Data");
         System.out.println(this.getClass());
         System.out.println(this.getClass().getDeclaredFields().length);
@@ -29,27 +28,30 @@ public abstract class NodeProperties {
             System.out.println("Method: " + method.toString());
 
             if (method.getParameters().length == 0) {
-                field.set(this, method.invoke(node, null));
+                try {
+                    field.set(this, method.invoke(node, null));
+                }
+                catch (IllegalArgumentException | IllegalAccessException
+                        | InvocationTargetException e) {
+                    throw new VoogaException("Failed to store the data");
+                }
             }
-        }
-
-        for (Field field : this.getClass().getDeclaredFields()) {
-            System.out.println(field.getName() + " " + field.get(this));
         }
     }
 
-    public void loadData (Node node) throws VoogaException, IllegalAccessException,
-                                     IllegalArgumentException, InvocationTargetException {
+    public void loadData (Node node) throws VoogaException {
         System.out.println("Loading Data");
         for (Field field : this.getClass().getDeclaredFields()) {
             System.out.println("field name: " + field.getName());
             Method method =
                     getMethodName(node, getResourceBundle().getString(field.getName()), "set");
-            method.invoke(node, field.get(this));
-
-            Method method2 =
-                    getMethodName(node, getResourceBundle().getString(field.getName()), "get");
-            System.out.println(method2.getName() + " " + method2.invoke(node, null));
+            try {
+                method.invoke(node, field.get(this));
+            }
+            catch (IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException e) {
+                throw new VoogaException("Failed to load the data");
+            }
         }
 
     }

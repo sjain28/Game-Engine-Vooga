@@ -171,6 +171,7 @@ public class GameRunner implements IGameRunner {
                                                           VoogaException {
         // Go into the path for this file
         List<String> levelList = new ArrayList<>();
+        System.out.println("XMLList: "+xmlList);
         gameLocation = gameLocation + xmlList + "/";
         String resourcePath = gameLocation + xmlList + ".xml";
         levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);

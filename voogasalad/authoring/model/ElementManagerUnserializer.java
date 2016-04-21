@@ -37,13 +37,13 @@ public class ElementManagerUnserializer {
         return elementManager;
     }
     
-    private List<Node> getNodeList(List<Elementable> elements){
+    private List<Node> getNodeList(List<Elementable> elements) throws VoogaException{
         List<Node> nodeList = new ArrayList<Node>();
         
         for (Elementable e : elements){
             if (e instanceof Sprite){
                 Sprite sprite = (Sprite) e;
-                System.out.println("Image Path: "+sprite.getImagePath());
+                sprite.init();
                 nodeList.add(new GameObject((Sprite) e, e.getName()));
             }
             if (e instanceof BackEndText){

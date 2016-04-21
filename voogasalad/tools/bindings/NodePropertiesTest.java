@@ -24,6 +24,7 @@ public class NodePropertiesTest extends Application{
         
         ImageView loadedImage = new ImageView();
         np.loadData(loadedImage);
+        System.out.println(loadedImage.getFitHeight()+" "+loadedImage.getFitWidth());
     }
     
     public static void main(String[] args){

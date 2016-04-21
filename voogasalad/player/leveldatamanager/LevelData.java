@@ -1,5 +1,6 @@
 package player.leveldatamanager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import physics.StandardPhysics;
+import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -233,10 +235,7 @@ public class LevelData implements ILevelData {
         DataContainerOfLists data = new DataContainerOfLists();
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
         data = fileManager.getDataContainer();
-
-        List<Elementable> spriteObjects = data.getElementableList();
-        System.out.println("All the sprites here are" + spriteObjects);
-
+        
         List<Elementable> elementObjects = data.getElementableList();
         System.out.println("All the sprites here are" + elementObjects);
 
@@ -245,6 +244,16 @@ public class LevelData implements ILevelData {
 
         // add elements to map
         for (Elementable el : elementObjects) {
+            if (el instanceof Sprite){
+                try {
+                    ((Sprite) el).init();
+                }
+                catch (VoogaException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+            
             myElements.put(el.getId(), el);
         }
 
@@ -280,6 +289,7 @@ public class LevelData implements ILevelData {
         // HARDCODED FOR NOW!!!!
         // System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String)
         // (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+        
         return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
     }
 

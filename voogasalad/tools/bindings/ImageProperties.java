@@ -25,9 +25,5 @@ public class ImageProperties extends NodeProperties{
         super(bundle);
     }
     
-    
-   
-    
-    
-    
+
 }

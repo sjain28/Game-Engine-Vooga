@@ -3,6 +3,7 @@ package authoring.model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,7 +26,9 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import resources.VoogaBundles;
 import tools.VoogaException;
+import tools.bindings.ImageProperties;
 import tools.interfaces.VoogaData;
 
 
@@ -50,7 +53,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
-        myXmlDataFile = new File("file:levels/Test.xml");
+        myXmlDataFile = new File(filePath);
     }
 
     public ElementManager (File xmlDataFile) {
@@ -115,7 +118,11 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
         for (Node element : myGameElements) {
             if (element instanceof GameObject) {
+                GameObject object = (GameObject) element;
+                ImageProperties ip = new ImageProperties(VoogaBundles.imageProperties);
+                ip.storeData(object);
                 Sprite sprite = ((GameObject) element).getSprite();
+                sprite.setImageProperties(ip);
                 elements.add(sprite);
             }
 

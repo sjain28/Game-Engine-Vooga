@@ -41,4 +41,10 @@ public class VoogaString implements VoogaData {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    @Override
+    public <T> void setProperty (T newVal) {
+        // TODO Auto-generated method stub
+        
+    }
 }
