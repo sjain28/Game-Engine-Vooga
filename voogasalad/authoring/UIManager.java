@@ -37,7 +37,7 @@ import resources.VoogaBundles;
  */
 // Temporarily extending GridPane, eventually will use Mosaic to display
 // components
-public class UIManager extends VBox implements Menuable{
+public class UIManager extends VBox implements Menuable {
 	private UIGridHousing grid;
 	private SimpleIntegerProperty currentTabIndex;
 	private ElementTabManager elementTabManager;
@@ -45,14 +45,15 @@ public class UIManager extends VBox implements Menuable{
 	/**
 	 * Initializes the UI Manager
 	 * 
-	 * @param model Interface to mediate interactions with backend
+	 * @param model
+	 *            Interface to mediate interactions with backend
 	 */
 	public UIManager(CompleteAuthoringModelable model) {
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
 		this.elementTabManager.addManager(new ElementManager());
 		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
-		
+
 		initializeComponents();
 	}
 
@@ -66,29 +67,27 @@ public class UIManager extends VBox implements Menuable{
 			new ToolPanelHandlingMirror(e, this);
 		}), grid = new UIGridHousing(elementTabManager.getCurrentManager()));
 	}
-	
-	public void addScene(){
-	    elementTabManager.addManager(new ElementManager());
-	    //initializes a new scene using the most recently added model;
-	    grid.addScene(elementTabManager.getCurrentManager());
+
+	public void addScene() {
+		elementTabManager.addManager(new ElementManager());
+		// initializes a new scene using the most recently added model;
+		grid.addScene(elementTabManager.getCurrentManager());
 	}
-	
-	public CompleteAuthoringModelable getManager(){
-	    return grid.getManager();
+
+	public CompleteAuthoringModelable getManager() {
+		return grid.getManager();
 	}
-	
-	
-	//TODO: Format output correctly
-	public void saveAll(){
-	    for(CompleteAuthoringModelable m: elementTabManager.getAllManagers()){
-                try {
-                    m.onSave();
-                }
-                catch (VoogaException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-	    }
+
+	// TODO: Format output correctly
+	public void saveAll() {
+		for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
+			try {
+				m.onSave();
+			} catch (VoogaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-	
+
 }

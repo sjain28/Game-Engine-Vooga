@@ -1,8 +1,10 @@
 package authoring;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
@@ -20,6 +22,7 @@ public class AssetUI extends Tab implements Observer {
 	private VoogaFile archetypesFolder;
 	private VoogaFile objectsFolder;
 	private CompleteAuthoringModelable myManager;
+	private Set<Node> gameObjects;
 
 	private static final String WINDOW_NAME = "Game Assets";
 	private static final String DEFAULT_PROJECT_NAME = "My Project";
@@ -29,6 +32,7 @@ public class AssetUI extends Tab implements Observer {
 		this.setText(WINDOW_NAME);
 		this.myManager.getSpriteFactory().addObserver(this);
 		this.myManager.addObserver(this);
+		this.gameObjects = new HashSet<Node>();
 		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
 		archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, "Archetypes");
 		objectsFolder = new VoogaFile(VoogaFileType.FOLDER, "Game Objects");
@@ -59,7 +63,8 @@ public class AssetUI extends Tab implements Observer {
 			if(arg instanceof List) {
 				List<Node> objects = (List<Node>) arg;
 				for(Node object : objects) {
-					if(object instanceof GameObject) {
+					if(object instanceof GameObject && !gameObjects.contains(object)) {
+						gameObjects.add(object);
 						VoogaFile file = new VoogaFile(VoogaFileType.GAME_OBJECT, ((GameObject) object).getName());
 						file.setPath(((GameObject) object).getSprite().getImagePath());
 						addAsset(file.getType(), file.toString(), file.getPath());

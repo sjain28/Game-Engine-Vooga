@@ -19,6 +19,6 @@ public class Run extends ToolbarItemHandler {
 	@Override
 	public void handle () {
 		GameRunner gameRunner = new GameRunner();
-		gameRunner.playLevel("levels/Test.xml", true);
+		gameRunner.playLevel("Test.xml", true);
 	}
 }

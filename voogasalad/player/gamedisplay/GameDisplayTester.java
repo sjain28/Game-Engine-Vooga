@@ -6,6 +6,7 @@ package player.gamedisplay;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import data.FileReaderToGameObjects;
 import javafx.application.Application;
 import javafx.event.EventHandler;

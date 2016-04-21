@@ -1,17 +1,27 @@
 package tools;
 
 import authoring.gui.items.SwitchButton;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 public class VoogaBoolean implements VoogaData{
     private boolean myValue;
+    private transient SimpleBooleanProperty valueProperty;
     
     public VoogaBoolean() {
-    	this.myValue = true;
+    	this.valueProperty = new SimpleBooleanProperty();
+    	this.valueProperty.setValue(myValue);
+    	this.myValue = (Boolean) this.valueProperty.get();
+    	this.valueProperty.addListener((obs, old, n) -> {
+    		this.myValue = (Boolean) n;
+    		System.out.println(n);
+    	});
     }
     
-    public VoogaBoolean(boolean value){
+    public VoogaBoolean(boolean value) {
         this.myValue=value;
     }
     
@@ -26,6 +36,13 @@ public class VoogaBoolean implements VoogaData{
     
     public Node display(){
         SwitchButton switchButton = new SwitchButton(myValue);
+        switchButton.booleanProperty().addListener((obs, old, n) -> {
+    		try {
+    			this.valueProperty.set(n);
+    		} catch(Exception e) {
+    			
+    		}
+    	});
         switchButton.setOn(myValue);
         return switchButton;
     }
@@ -44,5 +61,15 @@ public class VoogaBoolean implements VoogaData{
     public String toString() {
     	return Boolean.toString(myValue);
     }
+
+	@Override
+	public <T> Property<T> getProperty() {
+		return (Property<T>) this.valueProperty;
+	}
+
+	@Override
+	public <T> void setProperty(T newVal) {
+		this.valueProperty.set((boolean) newVal);
+	}
     
 }

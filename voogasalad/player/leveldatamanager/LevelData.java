@@ -115,6 +115,7 @@ public class LevelData implements ILevelData {
 	 * @param archetype
 	 * @return 
 	 */
+	@Override
 	public Sprite addSprite(String archetype){
 		Elementable newSprite = mySpriteFactory.createSprite(archetype);
 		myElements.put(newSprite.getId(),newSprite);
@@ -158,7 +159,10 @@ public class LevelData implements ILevelData {
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
-
+		// IF THE MAIN CHARACTER HASN'T BEEN SET
+		if (getMainCharacter() == null){
+			return myScroller.centerScroll(displayablenodes, 5);
+		}
 		return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
 	}
 	/**
@@ -220,6 +224,9 @@ public class LevelData implements ILevelData {
 		List<Elementable> elementObjects = data.getElementableList();
 		System.out.println("All the sprites here are" + elementObjects);
 
+		//clear whats in the myElements Map.
+		myElements.clear();
+		
 		//add elements to map 
 		for(Elementable el : elementObjects){
 			myElements.put(el.getId(), el);
@@ -255,7 +262,7 @@ public class LevelData implements ILevelData {
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-//		System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		//System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
 	}
 	public void setNextLevelName(String levelName) {

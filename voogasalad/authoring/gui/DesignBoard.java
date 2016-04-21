@@ -61,8 +61,6 @@ public class DesignBoard extends Tab implements Observer {
 	private CompleteAuthoringModelable elementManager;
 	private ElementSelectionModel selectionModel;
 
-	private PropertiesTabManager propertiesTabManager;
-
 	private double y_offset, x_offset;
 
 	/**
@@ -154,14 +152,11 @@ public class DesignBoard extends Tab implements Observer {
 					GameObjectBuilder builder = new GameObjectBuilder(elementManager);
 					if (!archetype.isEmpty()) {
 						builder.setArchetype(archetype);
+					} else {
+						builder.setDraggedImage(file.getPath());
 					}
 					builder.showAndWait();
 
-					// node = new
-					// GameObject(elementManager.getSpriteFactory().createSprite(archetype),
-					// "");
-					// node.setTranslateX(event.getX() - x_offset);
-					// node.setTranslateY(event.getY() - y_offset);
 				} else if (ResourceDecipherer.isAudio(elementPath)) {
 					// node = new
 					// GameObject(elementManager.getSpriteFactory().createSprite(""));
@@ -170,17 +165,13 @@ public class DesignBoard extends Tab implements Observer {
 			} catch (VoogaException e) {
 				new VoogaAlert(e.getMessage());
 			}
-			addElement(node, elementPath);
+			elementManager.addElementId(elementPath);
 		}
 
 		System.out.println(elementManager.getIds());
 
 	}
 
-	private void addElement(Node node, String id) {
-		// elementManager.addGameElements(node);
-		elementManager.addElementId(id);
-	}
 
 	private void moveElement(String id, DragEvent e) {
 		Node element = elementManager.getElement(id);
