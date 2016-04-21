@@ -36,8 +36,8 @@ public class CollisionCause extends Cause{
 	
 	@Override
 	public boolean check(ILevelData data) {
-		collidedSprites.clear();
 		updateSprites(data);
+		collidedSprites.clear();
 		boolean myVal = false;
 		for(Sprite a: groupA){
 			for(Sprite b: groupB){
