@@ -7,6 +7,7 @@ import java.util.UUID;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
@@ -39,13 +40,19 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myImagePath;
     private String myArchetype;
     private transient ImageView myImage;
-    private SimpleDoubleProperty myX;
-    private SimpleDoubleProperty myY;
+    private transient SimpleDoubleProperty myX;
+    private transient SimpleDoubleProperty myY;
+    private transient SimpleDoubleProperty myWidth;
+    private transient SimpleDoubleProperty myHeight;
+    private double spriteWidth;
+    private double spriteHeight;
 
     public Sprite (String imagePath,
                    String archetype,
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
+    	myProperties = new HashMap<String, VoogaData>();
+        myProperties = properties;
     	initializeCoordinates();
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
@@ -63,22 +70,39 @@ public class Sprite implements Moveable, Effectable, Elementable {
             image = new Image(this.getClass().getResourceAsStream(myImagePath));
         }
         myImage = new ImageView(image);
-        myProperties = new HashMap<String, VoogaData>();
-        myProperties = properties;
 
         //TODO: use properties file to put these
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
-        myProperties.put(WIDTH, new VoogaNumber(image.getWidth()));
-        myProperties.put(HEIGHT, new VoogaNumber(image.getHeight()));
-        myProperties.put(X_POS, new VoogaNumber());
         
+        initializeDimensions(image.getWidth(), image.getHeight());
+    }
+    
+    private void initializeDimensions(double width, double height) {
+        myProperties.put(WIDTH, new VoogaNumber(width));
+        myProperties.put(HEIGHT, new VoogaNumber(height));
+    	myWidth = new SimpleDoubleProperty();
+        myHeight = new SimpleDoubleProperty();
+        Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
+        Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
+        spriteWidth = width;
+        spriteHeight = height;
+        myWidth.addListener((obs, old, n) -> {
+        	spriteWidth = (double) n;
+        });
+        myHeight.addListener((obs, old, n) -> {
+        	spriteHeight = (double) n;
+        });
     }
     
     private void initializeCoordinates() {
+        myProperties.put(X_POS, new VoogaNumber());
+        myProperties.put(Y_POS, new VoogaNumber());
     	myX = new SimpleDoubleProperty();
     	myY = new SimpleDoubleProperty();
+    	Bindings.bindBidirectional(myX, myProperties.get(X_POS).getProperty());
+    	Bindings.bindBidirectional(myY, myProperties.get(Y_POS).getProperty());
     	myX.addListener((obs, old, n) -> {
     		myLoc.setX((double) n);
     	});
@@ -110,8 +134,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myVelocity.addY(myAcceleration.getY());
         
         //Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setLayoutX(myLoc.getX());
-        myImage.setLayoutY(((myLoc.getY()-300)*-1)+300);
+        myImage.setTranslateX(myLoc.getX() - spriteWidth/2);
+        myImage.setTranslateY(myLoc.getY() - spriteHeight/2);
         
 //        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
         
@@ -231,6 +255,14 @@ public class Sprite implements Moveable, Effectable, Elementable {
 	
 	public Property<Number> getY() {
 		return this.myY;
+	}
+	
+	public Property<Number> getWidth() {
+		return this.myWidth;
+	}
+	
+	public Property<Number> getHeight() {
+		return this.myHeight;
 	}
 
 }

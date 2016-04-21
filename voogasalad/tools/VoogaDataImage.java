@@ -1,5 +1,6 @@
 package tools;
 
+import javafx.beans.property.Property;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -32,5 +33,11 @@ public class VoogaDataImage implements VoogaData{
         button.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream(imagePath))));
         return button;
     }
+
+	@Override
+	public Property<Object> getProperty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

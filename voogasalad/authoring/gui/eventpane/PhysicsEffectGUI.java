@@ -69,7 +69,7 @@ public class PhysicsEffectGUI implements EventGUI{
         if (name.getValue()!=null){
             result+=name.getSpriteId()+ " ";
         }
-        result += actions.getValue()+" "+amount.getText();
+        result += VoogaBundles.physicsEffectsToGUI.getString(actions.getValue()) +" "+amount.getText();
         return result;
     }
 }
