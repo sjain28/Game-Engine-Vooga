@@ -32,7 +32,7 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	 * @param model to interface backend interactions with the model
 	 * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	 */
-	public FullScreenWindowItem(Menuable model, EventHandler<InputEvent> event) {
+	public FullScreenWindowItem(Menuable model) {
 		super();
 		this.myGameRunner = (GameRunner) model;
 		System.out.println(myGameRunner + "NULL>??");
