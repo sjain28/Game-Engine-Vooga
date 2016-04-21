@@ -71,7 +71,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage = new ImageView(image);
 
         //TODO: use properties file to put these
-        myProperties.put(MASS, mass);
+        myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
         
