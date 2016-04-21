@@ -19,7 +19,7 @@ public class Main extends Application {
 		new Launcher(primaryStage);
 		
 		// Launches Mosaic
-		//new Tester();
+		// new BoundsTester();
 	}
 	
 	public static void main(String[] args) {

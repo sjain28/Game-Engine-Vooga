@@ -76,8 +76,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
         myImage = new ImageView(image);
 
+<<<<<<< HEAD
         // TODO: use properties file to put these
         myProperties.put(MASS, mass);
+=======
+        //TODO: use properties file to put these
+        myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
+>>>>>>> master
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
 
@@ -112,16 +117,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public void update () {
         // Still needed: Apply physics to myVelocity
-<<<<<<< HEAD
+    	
+    	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
+        //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
 
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
         System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
                            "velocityX" + myVelocity.getX());
-=======
-    	
-    	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
-        //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
->>>>>>> master
 
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
@@ -265,7 +267,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         }
     }
 
-<<<<<<< HEAD
     public void setInitializationMap (Map<String,Object> ip) {
         initializationProperties = ip;
     }
@@ -281,10 +282,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
      */
 
     public void init () throws VoogaException {
-        System.out.println(myImagePath);
         if (myImage != null)
-            return;
-        System.out.println("My image was null");
+            throw new VoogaException("Cannot initialize already created sprite");
         
         ImageProperties imageProperties= new ImageProperties();
         Image image = new Image(myImagePath);
@@ -292,12 +291,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
         imageProperties.loadData(myImage,initializationProperties);
         
-        myX = new SimpleDoubleProperty();
-        myY = new SimpleDoubleProperty();
-        myWidth = new SimpleDoubleProperty();
-        myHeight = new SimpleDoubleProperty();
+        initializeCoordinates();
     }
 }
-=======
-}
->>>>>>> master
