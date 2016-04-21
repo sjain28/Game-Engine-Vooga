@@ -3,7 +3,6 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
@@ -124,8 +123,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Still needed: Apply physics to myVelocity
     	
     	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
-        System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
-
+        //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
+    	System.out.println("MASS: "+ myProperties.get(MASS));
+    	
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
        
