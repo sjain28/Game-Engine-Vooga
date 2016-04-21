@@ -32,6 +32,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 /**
  * This class handles the display of all objects on the Authoring Environment GUI.
@@ -108,6 +110,8 @@ public class DesignBoard extends Tab implements Observer{
         	GameObject object = (GameObject) elementManager.getElement(db.getString());
         	object.setTranslateX(event.getX() - x_offset);
         	object.setTranslateY(event.getY() - y_offset);
+        	object.getSprite().setX(event.getX());
+        	object.getSprite().setY(event.getY());
         }
 
         event.setDropCompleted(success);
@@ -138,17 +142,22 @@ public class DesignBoard extends Tab implements Observer{
         node = null;
         String elementPath = file.getPath();
         if (elementPath != null) {
-            if (ResourceDecipherer.isImage(elementPath)) {
-                node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
-                node.setTranslateX(event.getX() - x_offset);
-                node.setTranslateY(event.getY() - y_offset);
+            try {
+                if (ResourceDecipherer.isImage(elementPath)) {
+                    node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
+                    node.setTranslateX(event.getX() - x_offset);
+                    node.setTranslateY(event.getY() - y_offset);
+                }
+                else if (ResourceDecipherer.isAudio(elementPath)) {
+                    // node = new
+                    // GameObject(elementManager.getSpriteFactory().createSprite(""));
+                    node =
+                            new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
+                                    .toString())));
+                }
             }
-            else if (ResourceDecipherer.isAudio(elementPath)) {
-                // node = new
-                // GameObject(elementManager.getSpriteFactory().createSprite(""));
-                node =
-                        new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
-                                .toString())));
+            catch (VoogaException e) {
+                new VoogaAlert(e.getMessage());
             }
             addElement(node, elementPath);
         }

@@ -2,9 +2,8 @@ package authoring.resourceutility;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import auxiliary.VoogaException;
 import resources.VoogaBundles;
+import tools.VoogaException;
 
 /**
  * A decrypter of file paths, in order to determine what kind of file a user is
@@ -27,8 +26,9 @@ public class ResourceDecipherer {
 	 * @param path:
 	 *            path of the image
 	 * @return a VoogaFileType (IMAGE or AUDIO)
+	 * @throws VoogaException 
 	 */
-	public static VoogaFileType decipherName(String path) {
+	public static VoogaFileType decipherName(String path) throws VoogaException {
 		fileExtensions = VoogaBundles.extensionProperties;
 		try {
 			return VoogaFileType.valueOf(fileExtensions.getString(getExtension(path, '.')));
@@ -43,8 +43,9 @@ public class ResourceDecipherer {
 	 * @param path:
 	 *            the path of the item
 	 * @return: true if it is valid
+	 * @throws VoogaException 
 	 */
-	public static boolean isImage(String path) {
+	public static boolean isImage(String path) throws VoogaException {
 		return decipherName(path).name().equals(IMAGE);
 	}
 
@@ -54,8 +55,9 @@ public class ResourceDecipherer {
 	 * @param path:
 	 *            the path of the item
 	 * @return: true if it is valid
+	 * @throws VoogaException 
 	 */
-	public static boolean isAudio(String path) {
+	public static boolean isAudio(String path) throws VoogaException {
 		return decipherName(path).name().equals(AUDIO);
 	}
 

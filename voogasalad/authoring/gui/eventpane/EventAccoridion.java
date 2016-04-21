@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
-import auxiliary.VoogaAlert;
-import auxiliary.VoogaException;
 import events.VoogaEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import resources.VoogaBundles;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 
 public class EventAccoridion extends Tab {
@@ -52,11 +52,17 @@ public class EventAccoridion extends Tab {
 
     private void generateTiles (int count) {
         for (int i = 0; i < count; i++) {
-            tiles.add(populateTiles(name + " " + (tiles.size() + 1)));
+            try {
+                tiles.add(populateTiles(name + " " + (tiles.size() + 1)));
+            }
+            catch (VoogaException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 
-    private TitledPane populateTiles (String name) {
+    private TitledPane populateTiles (String name) throws VoogaException {
         TitledPane tile = createTile();
         tile.setText(name);
         tile.setOnMouseClicked( (MouseEvent e) -> {
@@ -69,12 +75,15 @@ public class EventAccoridion extends Tab {
         return tile;
     }
 
-    private TitledPane createTile () {
-        if (name == null)
+    private TitledPane createTile () throws VoogaException {
+        if (name == null){
             return null;
+        }
+        
         String className = VoogaBundles.backendToGUIProperties.getString(name);
         System.out.println(className);
         Class<?> c = null;
+        
         try {
             c = Class.forName(className);
         }
@@ -95,9 +104,7 @@ public class EventAccoridion extends Tab {
 
         }
         catch (Exception e) {
-
             throw new VoogaException(e.getMessage());
-
         }
     }
 

@@ -42,15 +42,15 @@ public class VoogaNumber implements VoogaData{
     
     @Override
     public Object getValue () {
-        if (myValue == ((int) myValue)){
-            int number = (int) myValue;
+        if (myValue == ((double) myValue)){
+            double number = (double) myValue;
             return number;
         }
         return myValue;
     }
     
     public String toString(){
-        return "";
+        return ""+myValue;
     }
     
     public Node display(){
@@ -65,5 +65,7 @@ public class VoogaNumber implements VoogaData{
         if (!(o instanceof Number)) return;
         myValue = (double) o; 
     }
+    
+
    
 }

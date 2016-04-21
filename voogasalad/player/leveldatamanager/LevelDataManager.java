@@ -23,7 +23,9 @@ public class LevelDataManager implements ILevelDataManager {
 	private DisplayScroller displayScroller;
 	private ObjectManager myObjectManager;
 	private EventManager myEventManager;
+	private GlobalVariableManager myGlobalVariableManager;
 	private List<KeyEvent> myKeyEvents;
+	
 	/**
 	 * Default constructor
 	 * 
@@ -120,7 +122,6 @@ public class LevelDataManager implements ILevelDataManager {
 	}
 
 	/**
->>>>>>> master
 	 * Creates the Sprites, Events, and Variables which will be loaded into the managers, which
 	 * include
 	 * the sprite, event, and variable managers
@@ -136,6 +137,7 @@ public class LevelDataManager implements ILevelDataManager {
 		myObjectManager = new ObjectManager(elementObjects, variableObjects, factory);
 		myObjectManager.setKeyEvents(myKeyEvents);
 		myEventManager = new EventManager(myObjectManager, eventObjects);
+		myGlobalVariableManager = new GlobalVariableManager(myObjectManager, variableObjects);
 	}
 
 	/**
@@ -157,6 +159,13 @@ public class LevelDataManager implements ILevelDataManager {
 	 */
 	public void setKeyEvents(List<?> myKeyEvents) {
 		myEventManager.setKeyStrokes(myKeyEvents);
+	}
+
+	/**
+	 * @return the myGlobalVariableManager
+	 */
+	public GlobalVariableManager getGlobalVariableManager() {
+		return myGlobalVariableManager;
 	}
 
 //	@Override
