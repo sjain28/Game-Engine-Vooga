@@ -70,7 +70,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	public void bounce(Sprite sprite, Double bounceCoefficient) {
 		Velocity curr = sprite.getVelocity();
 		curr.setX(-1*curr.getX()*bounceCoefficient);
-		curr.setX(-1*curr.getY()*bounceCoefficient);
+		curr.setY(-1*curr.getY()*bounceCoefficient);
 	}
 
 	@Override
