@@ -7,6 +7,7 @@ import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.VoogaNumber;
@@ -70,13 +71,13 @@ public class VariableEffectGUI implements EventGUI {
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
             if (vd instanceof VoogaNumber) {
-                actions.getItems().addAll("set","decrease","increase");
+                actions.getItems().addAll("Set", "Decrease", "Increase");
                 NumberTextField numField = new NumberTextField();
                 amount = numField;
                 addGUIElements(actions, amount);
             }
             if (vd instanceof VoogaBoolean) {
-                actions.getItems().addAll(("set"));
+                actions.getItems().addAll(("Set"));
                 ComboBox<String> cb = new ComboBox<String>();
                 cb.getItems().addAll("true", "false");
                 amount = cb;
@@ -122,7 +123,7 @@ public class VariableEffectGUI implements EventGUI {
             result += "events.SpriteEffect "+name.getSpriteId()+" ";
         }
         result+=variables.getValue()+
-                " "+actions.getValue()+" ";
+                " "+VoogaBundles.eventMethodsToGUI.getString(actions.getValue())+" ";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();
