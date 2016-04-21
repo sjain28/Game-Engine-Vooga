@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
-
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.GameObject;
@@ -16,63 +15,84 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 
+
 public class AssetUI extends Tab implements Observer {
 
-	private ResourceTreeView rtv;
-	private VoogaFile archetypesFolder;
-	private VoogaFile objectsFolder;
-	private CompleteAuthoringModelable myManager;
-	private Set<Node> gameObjects;
+    private ResourceTreeView rtv;
+    private VoogaFile archetypesFolder;
+    private VoogaFile objectsFolder;
+    private CompleteAuthoringModelable myManager;
+    private Set<Node> gameObjects;
 
-	private static final String WINDOW_NAME = "Game Assets";
-	private static final String DEFAULT_PROJECT_NAME = "My Project";
+    private static final String WINDOW_NAME = "Game Assets";
+    private static final String DEFAULT_PROJECT_NAME = "My Project";
 
-	public AssetUI(CompleteAuthoringModelable myManager) {
-		this.myManager = myManager;
-		this.setText(WINDOW_NAME);
-		this.myManager.getSpriteFactory().addObserver(this);
-		this.myManager.addObserver(this);
-		this.gameObjects = new HashSet<Node>();
-		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
-		archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, "Archetypes");
-		objectsFolder = new VoogaFile(VoogaFileType.FOLDER, "Game Objects");
-		rtv.addItem(archetypesFolder);
-		rtv.addItem(objectsFolder);
-		this.setContent(rtv);
-	}
+    public AssetUI (CompleteAuthoringModelable myManager) {
+        this.myManager = myManager;
+        this.setText(WINDOW_NAME);
+        this.myManager.getSpriteFactory().addObserver(this);
+        this.myManager.addObserver(this);
+        this.gameObjects = new HashSet<Node>();
+        rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
+        archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, "Archetypes");
+        objectsFolder = new VoogaFile(VoogaFileType.FOLDER, "Game Objects");
+        rtv.addItem(archetypesFolder);
+        rtv.addItem(objectsFolder);
+        this.setContent(rtv);
+        
+        initializeArchetypeFolder(myManager.getSpriteFactory());
+        addGameObjects(myManager.getElements());
 
-	private void addAsset(VoogaFileType type, String archetype, String path) {
-		//TODO: use reflection or something
-		VoogaFile file = new VoogaFile(type, archetype);
-		file.setPath(path);
-		if(type == VoogaFileType.ARCHETYPE) {
-			rtv.addItemToFolder(file, archetypesFolder);
-		} else if(type == VoogaFileType.GAME_OBJECT) {
-			rtv.addItemToFolder(new VoogaFile(type, archetype), objectsFolder);
-		}
-	}
+    }
 
-	@Override
-	public void update(Observable o, Object arg) {
-		if(o instanceof SpriteFactory) {
-			if(arg instanceof VoogaFile) {
-				addAsset(((VoogaFile) arg).getType(), ((VoogaFile) arg).toString(), ((VoogaFile) arg).getPath());
-			}
-		}
-		if(o instanceof ElementManager) {
-			if(arg instanceof List) {
-				List<Node> objects = (List<Node>) arg;
-				for(Node object : objects) {
-					if(object instanceof GameObject && !gameObjects.contains(object)) {
-						gameObjects.add(object);
-						VoogaFile file = new VoogaFile(VoogaFileType.GAME_OBJECT, ((GameObject) object).getName());
-						file.setPath(((GameObject) object).getSprite().getImagePath());
-						addAsset(file.getType(), file.toString(), file.getPath());
-					}
-				}
-			}
-		}
-		
-	}
+    private void addAsset (VoogaFileType type, String archetype, String path) {
+        // TODO: use reflection or something
+        VoogaFile file = new VoogaFile(type, archetype);
+        file.setPath(path);
+        if (type == VoogaFileType.ARCHETYPE) {
+            rtv.addItemToFolder(file, archetypesFolder);
+        }
+        else if (type == VoogaFileType.GAME_OBJECT) {
+            rtv.addItemToFolder(new VoogaFile(type, archetype), objectsFolder);
+        }
+    }
+
+    @Override
+    public void update (Observable o, Object arg) {
+        if (o instanceof SpriteFactory) {
+            if (arg instanceof VoogaFile) {
+                addAsset(((VoogaFile) arg).getType(), ((VoogaFile) arg).toString(),
+                         ((VoogaFile) arg).getPath());
+            }
+        }
+        if (o instanceof ElementManager) {
+            if (arg instanceof List) {
+                addGameObjects((List<Node>) arg);
+            }
+        }
+
+    }
+
+    private void addGameObjects (List<Node> arg) {
+        List<Node> objects = (List<Node>) arg;
+        for (Node object : objects) {
+            if (object instanceof GameObject && !gameObjects.contains(object)) {
+                gameObjects.add(object);
+                VoogaFile file =
+                        new VoogaFile(VoogaFileType.GAME_OBJECT,
+                                      ((GameObject) object).getName());
+                file.setPath(((GameObject) object).getSprite().getImagePath());
+                addAsset(file.getType(), file.toString(), file.getPath());
+            }
+        }
+    }
+
+    private void initializeArchetypeFolder (SpriteFactory sf) {
+        for (String archetype : sf.getArchetypeMap().keySet()) {
+            VoogaFile file = new VoogaFile(VoogaFileType.ARCHETYPE, archetype);
+            file.setPath(sf.getArchetype(archetype).getImagePath());
+            addAsset(file.getType(),file.toString(),file.getPath());
+        }
+    }
 
 }

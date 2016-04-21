@@ -53,6 +53,8 @@ public class DesignBoard extends Tab implements Observer {
 	private static final String DESIGN_BOARD = "Design Board";
 	private static final double HEIGHT = 2000;
 	private static final double WIDTH = 2000;
+	private static final double DISPLAY_WIDTH = 600;
+	private static final double DISPLAY_HEIGHT = 600;
 
 	private ScrollPane container;
 	private StackPane contentPane;
@@ -92,14 +94,16 @@ public class DesignBoard extends Tab implements Observer {
 
 	private void addGuides() {
 		// TODO: replace hardcode with actual value from standard display
-		Rectangle guide = new Rectangle(600, 600);
+		Rectangle guide = new Rectangle(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 		guide.setStroke(Paint.valueOf("white"));
 		guide.setStrokeWidth(4);
 		guide.setFill(Paint.valueOf("transparent"));
 		guide.setStrokeDashOffset(40);
-		guide.setTranslateX(300);
-		guide.setTranslateY(300);
+		guide.setTranslateX(DISPLAY_WIDTH/2);
+		guide.setTranslateY(DISPLAY_HEIGHT/2);
 		this.contentPane.getChildren().add(guide);
+		this.container.setVvalue(0.72);
+		this.container.setHvalue(0.8);
 	}
 
 	private void initializeDragAndDrop() {

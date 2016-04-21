@@ -32,6 +32,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String HEIGHT = "Height";
     protected static final String X_POS = "X Position";
     protected static final String Y_POS = "Y Position";
+    
     private boolean isMainCharacter;
     private Velocity myVelocity;
     private Acceleration myAcceleration;
@@ -75,13 +76,14 @@ public class Sprite implements Moveable, Effectable, Elementable {
         }
 
         myImage = new ImageView(image);
-
-        //TODO: use properties file to put these
-        myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
+        myImage.setFitHeight(image.getHeight());
+        myImage.setFitWidth(image.getWidth());
+        // TODO: use properties file to put these
+        myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
 
-        initializeDimensions(image.getWidth(), image.getHeight());
+        initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
         
     }
 
@@ -278,14 +280,24 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public void init () throws VoogaException {
         if (myImage != null)
-            throw new VoogaException("Cannot initialize already created sprite");
+            return;
+        System.out.println("My image was null");
         
         ImageProperties imageProperties= new ImageProperties();
         Image image = new Image(myImagePath);
         myImage = new ImageView(image);
-
+        
         imageProperties.loadData(myImage,initializationProperties);
+        System.out.println("Image Size: "+image.getWidth()+" "+image.getHeight());
+        System.out.println("ImageView Size: "+myImage.getFitWidth()+ " "+myImage.getFitHeight());
         
         initializeCoordinates();
+        initializeDimensions(myImage.getFitWidth(),myImage.getFitHeight());
+        
+        myX.set(myImage.getTranslateX());
+        myY.set(myImage.getTranslateY());
+        myWidth.set(myImage.getFitWidth());
+        myHeight.set(myImage.getFitHeight());
+        
     }
 }
