@@ -44,6 +44,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient SimpleDoubleProperty myY;
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
+    private double spriteWidth;
+    private double spriteHeight;
 
     public Sprite (String imagePath,
                    String archetype,
@@ -76,11 +78,22 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(WIDTH, new VoogaNumber(image.getWidth()));
         myProperties.put(HEIGHT, new VoogaNumber(image.getHeight()));
         
-        myWidth = new SimpleDoubleProperty();
+        initializeDimensions(image.getWidth(), image.getHeight());
+    }
+    
+    private void initializeDimensions(double width, double height) {
+    	myWidth = new SimpleDoubleProperty();
         myHeight = new SimpleDoubleProperty();
         Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
         Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
-        
+        spriteWidth = width;
+        spriteHeight = height;
+        myWidth.addListener((obs, old, n) -> {
+        	spriteWidth = (double) n;
+        });
+        myWidth.addListener((obs, old, n) -> {
+        	spriteHeight = (double) n;
+        });
     }
     
     private void initializeCoordinates() {
@@ -121,8 +134,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myVelocity.addY(myAcceleration.getY());
         
         //Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setTranslateX(myLoc.getX());
-        myImage.setTranslateY(myLoc.getY());
+        myImage.setTranslateX(myLoc.getX() - spriteWidth/2);
+        myImage.setTranslateY(myLoc.getY() - spriteHeight/2);
         
 //        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
         
