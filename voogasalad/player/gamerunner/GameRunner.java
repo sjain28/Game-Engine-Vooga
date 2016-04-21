@@ -437,4 +437,8 @@ public class GameRunner implements IGameRunner {
 		// TODO Auto-generated method stub
 	}
 	
+	public String getLevelNameString() {
+		return this.myCurrentLevelString;
+	}
+	
 }
