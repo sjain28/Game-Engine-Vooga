@@ -2,8 +2,10 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
+import player.gamedisplay.Menuable;
 /**
  * MenuItem to Select the Event Window
  * @author Nick
@@ -16,7 +18,9 @@ public class EventsWindowItem extends MenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-	public EventsWindowItem(CompleteAuthoringModelable model, EventHandler<InputEvent> event) {
+
+	public EventsWindowItem(Menuable model) {
+
 		
 	}
 	/**

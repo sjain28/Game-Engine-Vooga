@@ -5,6 +5,7 @@ import java.io.File;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.PlayerMenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
@@ -30,7 +31,9 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	 * @param model to interface backend interactions with the model
 	 * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	 */
-	public LoadNewGameFileItem(Menuable model, EventHandler<InputEvent> event) {
+
+	public LoadNewGameFileItem(Menuable model) {
+
 		super();
 		this.myGameRunner = (GameRunner) model;
 		this.myFileChooser = new VoogaFileChooser();

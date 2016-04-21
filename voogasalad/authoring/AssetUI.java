@@ -1,12 +1,19 @@
 package authoring;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
+import authoring.model.GameObject;
 import authoring.resourceutility.ResourceTreeView;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
+import gameengine.SpriteFactory;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 
 public class AssetUI extends Tab implements Observer {
@@ -15,6 +22,7 @@ public class AssetUI extends Tab implements Observer {
 	private VoogaFile archetypesFolder;
 	private VoogaFile objectsFolder;
 	private CompleteAuthoringModelable myManager;
+	private Set<Node> gameObjects;
 
 	private static final String WINDOW_NAME = "Game Assets";
 	private static final String DEFAULT_PROJECT_NAME = "My Project";
@@ -22,7 +30,9 @@ public class AssetUI extends Tab implements Observer {
 	public AssetUI(CompleteAuthoringModelable myManager) {
 		this.myManager = myManager;
 		this.setText(WINDOW_NAME);
+		this.myManager.getSpriteFactory().addObserver(this);
 		this.myManager.addObserver(this);
+		this.gameObjects = new HashSet<Node>();
 		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
 		archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, "Archetypes");
 		objectsFolder = new VoogaFile(VoogaFileType.FOLDER, "Game Objects");
@@ -44,10 +54,22 @@ public class AssetUI extends Tab implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof CompleteAuthoringModelable) {
-			if(arg instanceof String) {
-				String[] components = ((String) arg).split("%");
-				addAsset(VoogaFileType.ARCHETYPE, components[0], components[1]);
+		if(o instanceof SpriteFactory) {
+			if(arg instanceof VoogaFile) {
+				addAsset(((VoogaFile) arg).getType(), ((VoogaFile) arg).toString(), ((VoogaFile) arg).getPath());
+			}
+		}
+		if(o instanceof ElementManager) {
+			if(arg instanceof List) {
+				List<Node> objects = (List<Node>) arg;
+				for(Node object : objects) {
+					if(object instanceof GameObject && !gameObjects.contains(object)) {
+						gameObjects.add(object);
+						VoogaFile file = new VoogaFile(VoogaFileType.GAME_OBJECT, ((GameObject) object).getName());
+						file.setPath(((GameObject) object).getSprite().getImagePath());
+						addAsset(file.getType(), file.toString(), file.getPath());
+					}
+				}
 			}
 		}
 		

@@ -1,6 +1,7 @@
 package authoring.gui.toolbar.toolbaritems;
 
 import java.io.File;
+
 import authoring.VoogaScene;
 import authoring.gui.toolbar.ToolbarItemHandler;
 import javafx.stage.FileChooser;

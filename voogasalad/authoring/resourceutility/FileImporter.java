@@ -2,8 +2,7 @@ package authoring.resourceutility;
 
 import java.io.File;
 import java.util.List;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 import tools.VoogaException;
 import tools.VoogaFileChooser;
 

@@ -60,9 +60,10 @@ public class VoogaButton extends Button implements Elementable {
     }
 
 	@Override
-	public String getID() {
+	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
+
 
 }

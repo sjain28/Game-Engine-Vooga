@@ -1,11 +1,13 @@
 package authoring.gui.menubar.menuitems;
 
+
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.TextObjectBuilder;
 import authoring.gui.menubar.builders.VariableBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
+import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
@@ -24,9 +26,10 @@ public class NewVariableFileItem extends MenuItemHandler {
 	 *            Unused vestige of previous poor programming. Should soon be
 	 *            phased out.
 	 */
-	public NewVariableFileItem(Menuable model, EventHandler<InputEvent> event) {
+	public NewVariableFileItem(Menuable model) {
+
 		super();
-		myManager = (EditElementable) model;
+		myManager = (EditElementable) model.getManager();
 	}
 
 	/**

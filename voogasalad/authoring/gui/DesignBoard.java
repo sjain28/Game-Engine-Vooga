@@ -6,13 +6,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
 import com.sun.prism.paint.Color;
-
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementSelectionModel;
 import authoring.model.GameObject;
 import authoring.VoogaScene;
 import authoring.gui.menubar.builders.ArchetypeBuilder;
+import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.Elementable;
 import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
@@ -51,16 +51,15 @@ import tools.VoogaException;
 public class DesignBoard extends Tab implements Observer {
 
 	private static final String DESIGN_BOARD = "Design Board";
-	private static final double HEIGHT = 1000;
-	private static final double WIDTH = 1000;
+	private static final double HEIGHT = 2000;
+	private static final double WIDTH = 2000;
 
 	private ScrollPane container;
 	private StackPane contentPane;
 	private Node node;
 
 	private CompleteAuthoringModelable elementManager;
-
-	private PropertiesTabManager propertiesTabManager;
+	private ElementSelectionModel selectionModel;
 
 	private double y_offset, x_offset;
 
@@ -73,6 +72,8 @@ public class DesignBoard extends Tab implements Observer {
 	 *            interface
 	 */
 	public DesignBoard(CompleteAuthoringModelable elem) {
+		selectionModel = ElementSelectionModel.getInstance();
+		selectionModel.addObserver(this);
 		this.setText(DESIGN_BOARD);
 		this.setClosable(false);
 		contentPane = new StackPane();
@@ -85,6 +86,19 @@ public class DesignBoard extends Tab implements Observer {
 		this.setContent(container);
 		y_offset = HEIGHT / 2;
 		x_offset = WIDTH / 2;
+		addGuides();
+	}
+
+	private void addGuides() {
+		// TODO: replace hardcode with actual value from standard display
+		Rectangle guide = new Rectangle(600, 600);
+		guide.setStroke(Paint.valueOf("white"));
+		guide.setStrokeWidth(4);
+		guide.setFill(Paint.valueOf("transparent"));
+		guide.setStrokeDashOffset(40);
+		guide.setTranslateX(300);
+		guide.setTranslateY(300);
+		this.contentPane.getChildren().add(guide);
 	}
 
 	private void initializeDragAndDrop() {
@@ -99,23 +113,19 @@ public class DesignBoard extends Tab implements Observer {
 		if (db.hasContent(VoogaFileFormat.getInstance())) {
 			VoogaFile node = (VoogaFile) db.getContent(VoogaFileFormat.getInstance());
 			if (node.getType() != VoogaFileType.FOLDER) {
-				if (elementManager.hasElement(node.getPath())) {
-					moveElement(node.getPath(), event);
-				} else {
-					if (node.getType() != VoogaFileType.ARCHETYPE && node.getType() != VoogaFileType.GAME_OBJECT) {
-						ArchetypeBuilder initializer = new ArchetypeBuilder(elementManager);
-						initializer.setTitle("New Archetype");
-						initializer.setImagePath(node.getPath());
-						initializer.showAndWait();
-						addElement(node, event, initializer.getArchetypeName());
+				if (node.getType() != VoogaFileType.ARCHETYPE && node.getType() != VoogaFileType.GAME_OBJECT) {
+					if (elementManager.hasElement(node.getPath())) {
+						moveElement(node.getPath(), event);
 					} else {
-						if(node.getType() == VoogaFileType.ARCHETYPE) {
-							addElement(node, event, node.toString());
-						}
+						addElement(node, event, "");
+					}
+				} else {
+					if (node.getType() == VoogaFileType.ARCHETYPE) {
+						addElement(node, event, node.toString());
 					}
 				}
-				success = true;
 			}
+			success = true;
 		}
 		if (db.hasString()) {
 			GameObject object = (GameObject) elementManager.getElement(db.getString());
@@ -151,10 +161,15 @@ public class DesignBoard extends Tab implements Observer {
 		if (elementPath != null) {
 			try {
 				if (ResourceDecipherer.isImage(elementPath)) {
-					System.out.print(archetype);
-					node = new GameObject(elementManager.getSpriteFactory().createSprite(archetype));
-					node.setTranslateX(event.getX() - x_offset);
-					node.setTranslateY(event.getY() - y_offset);
+
+					GameObjectBuilder builder = new GameObjectBuilder(elementManager);
+					if (!archetype.isEmpty()) {
+						builder.setArchetype(archetype);
+					} else {
+						builder.setDraggedImage(file.getPath());
+					}
+					builder.showAndWait();
+
 				} else if (ResourceDecipherer.isAudio(elementPath)) {
 					// node = new
 					// GameObject(elementManager.getSpriteFactory().createSprite(""));
@@ -163,16 +178,11 @@ public class DesignBoard extends Tab implements Observer {
 			} catch (VoogaException e) {
 				new VoogaAlert(e.getMessage());
 			}
-			addElement(node, elementPath);
+			elementManager.addElementId(elementPath);
 		}
 
 		System.out.println(elementManager.getIds());
 
-	}
-
-	private void addElement(Node node, String id) {
-		elementManager.addGameElements(node);
-		elementManager.addElementId(id);
 	}
 
 	private void moveElement(String id, DragEvent e) {
@@ -199,6 +209,17 @@ public class DesignBoard extends Tab implements Observer {
 	public void update(Observable o, Object arg) {
 		if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)) {
 			displayElements(((CompleteAuthoringModelable) o).getElements());
+		}
+		if ((o instanceof ElementSelectionModel) && (arg instanceof Elementable)) {
+			for (Node object : contentPane.getChildren()) {
+				if (object instanceof GameObject) {
+					if (arg == object) {
+						((GameObject) object).select(Selector.HIGHLIGHTED);
+					} else {
+						((GameObject) object).select(Selector.UNHIGHLIGHTED);
+					}
+				}
+			}
 		}
 	}
 
