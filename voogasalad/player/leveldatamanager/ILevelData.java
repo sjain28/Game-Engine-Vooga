@@ -40,7 +40,7 @@ public interface ILevelData {
 	List<Sprite> getSpritesByArch(String archA);
 
 	List<List<String>> getKeyCombos();
-
+	
 	VoogaData getGlobalVar(String myVarName);
 	
 	Sprite addSprite(String archetype);

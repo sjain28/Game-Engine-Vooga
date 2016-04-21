@@ -332,5 +332,10 @@ public class GameboyDisplay implements IGameDisplay {
 		return myHUD;
 	}
 
+	@Override
+	public boolean stageIsShowing() {
+		return myStage.isShowing();
+	}
+
 
 }

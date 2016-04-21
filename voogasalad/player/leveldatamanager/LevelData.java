@@ -29,7 +29,7 @@ import tools.interfaces.VoogaData;
  * 
  * @author Krista
  *
- */
+ */ 
 public class LevelData implements ILevelData {
 
 	private static final int SCREENSIZE = 600;
@@ -38,7 +38,7 @@ public class LevelData implements ILevelData {
 	private String currentLevelName;
 
 	/**Sprite and Text Information**/
-	private String myMainCharacterID;
+	private List<String> myMainCharacterIDs;
 	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
 	
@@ -71,14 +71,6 @@ public class LevelData implements ILevelData {
 	 */
 	public Sprite getSpriteByID(String id){
 		return (Sprite) myElements.get(id);
-	}
-	/**
-	 * Returns Main Character Sprite
-	 * @param id
-	 * @return Sprite
-	 */
-	public Sprite getMainCharacter(){
-		return (Sprite) myElements.get(myMainCharacterID);
 	}
 	/**
 	 * returns all Sprite's 
@@ -159,11 +151,13 @@ public class LevelData implements ILevelData {
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
-		// IF THE MAIN CHARACTER HASN'T BEEN SET
-		if (getMainCharacter() == null){
+		// IF THE MAIN CHARACTER HASN'T BEEN SET TODO: IF THIS IS HARDCODED, CHANGE
+		if (myMainCharacterIDs.size()==0){
 			return myScroller.centerScroll(displayablenodes, 5);
 		}
-		return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
+		//centers on first main character in list TODO: If passed something different, change this
+		Sprite centeredCharacter = getSpriteByID(myMainCharacterIDs.get(0));
+		return myScroller.centerScroll(displayablenodes,centeredCharacter.getPosition().getX());
 	}
 	/**
 	 * Returns unmodifiable list of key combos
@@ -212,34 +206,47 @@ public class LevelData implements ILevelData {
 	 * 
 	 * @param filename
 	 */
+	//TODO: REFACTOR THIS TO MAKE IT SHORTER
 	public void refreshLevelData(String levelfilename){
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
       
-		List<Elementable> spriteObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + spriteObjects);
-
-
 		List<Elementable> elementObjects = data.getElementableList();
 		System.out.println("All the sprites here are" + elementObjects);
 
+		//must save past maincharacter info
+		//if main character list is not equal to zero
+		//save the main character sprites for later 
+		List<Sprite> previousContinuousSprites = new ArrayList<Sprite>();
+		if(!myMainCharacterIDs.isEmpty()){
+			for(String id : myMainCharacterIDs){
+				previousContinuousSprites.add(getSpriteByID(id));
+			}
+		}
+		
 		//clear whats in the myElements Map.
 		myElements.clear();
 		
 		//add elements to map 
 		for(Elementable el : elementObjects){
 			myElements.put(el.getId(), el);
-		}
-
-		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
-		for(Elementable el : elementObjects){
+			//if an element is a sprite and a main character, add its id to the main char list
 			if(el instanceof Sprite){
-				myMainCharacterID = el.getId();
-				break;
+				if(((Sprite) el).isMainCharacter()){
+					myMainCharacterIDs.add(el.getId());
+										//check by name and archetype -> must both be the same
+				}
 			}
 		}
-
+		
+		//now make elements continuous
+		
+		
+		private void continueFromPreviousLevel(List<Sprite> previousSprites) {
+			
+		}
+		
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);
 
@@ -261,6 +268,7 @@ public class LevelData implements ILevelData {
 		myGlobalVariables.put("LevelIndex", new VoogaString(""));
 		
 	}
+
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
