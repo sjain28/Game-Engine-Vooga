@@ -87,6 +87,7 @@ public class DesignBoard extends Tab implements Observer {
 		y_offset = HEIGHT / 2;
 		x_offset = WIDTH / 2;
 		addGuides();
+		displayElements(elem.getElements());
 	}
 
 	private void addGuides() {
