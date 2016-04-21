@@ -38,18 +38,13 @@ public class VariableEffect extends Effect {
 	
 	@Override
 	public void execute(ILevelData data) {
-		//Class varClass = getEvent().getManager().getGlobalVar(myVariable).getClass();
 		VoogaData variableData = data.getGlobalVar(myVariable);
 		callEffectMethod(variableData);
-	}
-	
-	public void init(){
-		return;
 	}
 
 	protected void callEffectMethod(VoogaData variable){
 		Class dataType = variable.getClass();
-		try{			
+		try{
 			if (myParameter != null){
 				Method variableMethod = dataType.getMethod(myMethod, new Class[]{myParameter.getClass()});
 				variableMethod.invoke(variable, myParameter);
@@ -63,14 +58,23 @@ public class VariableEffect extends Effect {
 			//throw new VoogaException(String.format(format, args));
 		}
 	}
-
-	public String getVariable(){
+	
+	@Override
+	public String toString() {
+		String effectString = myMethod + myVariable;
+		if (myParameter != null){
+			effectString += "[" + myParameter.toString() + "]";
+		}
+		return effectString;
+	}
+	
+	protected String getVariable(){
 		return myVariable;
 	}
-	public String getMethodString(){
+	protected String getMethodString(){
 		return myMethod;
 	}
-	public Object getParameters(){
+	protected Object getParameter(){
 		return myParameter;
 	}
 }

@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import player.leveldatamanager.ILevelData;
-import player.leveldatamanager.ObjectManager;
 import gameengine.Sprite;
-import physics.StandardPhysics;
 
 public class VoogaEvent {
 
@@ -34,13 +32,14 @@ public class VoogaEvent {
 	 */
 	public void update(ILevelData data){
 		myCauseSprites.clear();
-		
 		for(Cause c: myCauses){
 			if(!c.check(data)){
 				return;
 			}
 		}
+		System.out.println("Cause was true!");
 		for(Effect e: myEffects){
+			System.out.println(e);
 			e.execute(data);
 		}
 	}

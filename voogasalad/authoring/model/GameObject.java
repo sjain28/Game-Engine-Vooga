@@ -2,10 +2,15 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import authoring.gui.Selector;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
+import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -15,23 +20,36 @@ import tools.Vector;
 import tools.Velocity;
 import tools.interfaces.VoogaData;
 
-
 public class GameObject extends ImageView implements Moveable, Elementable {
-
+	
     private Sprite mySprite;
     private String name;
 
     public GameObject (Sprite sprite, String name) {
-        mySprite = sprite;
-        this.setId(mySprite.getId());
+    	initializeSprite(sprite);
         this.name = name;
+        this.setId(mySprite.getId());
         this.setImage(mySprite.getImage().getImage());
-        this.setTranslateX(mySprite.getPosition().getX());
-        this.setTranslateY(mySprite.getPosition().getY());
         this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
         this.setOnDragDetected(e -> onDrag(e));
     }
 
+    private void initializeSprite(Sprite sprite) {
+        mySprite = sprite;
+        Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
+        Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
+        Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
+        Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
+        this.translateXProperty().addListener((obs, old, n) -> {
+        	mySprite.getX().setValue(n);
+        	ElementSelectionModel.getInstance().setSelected(this);
+        });
+        this.translateYProperty().addListener((obs, old, n) -> {
+        	mySprite.getY().setValue(n);
+        	ElementSelectionModel.getInstance().setSelected(this);
+        });
+    }
+    
     // TODO: Send back immutable sprite
     public Sprite getSprite () {
         return mySprite;
@@ -49,6 +67,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     }
 
     void onDrag (MouseEvent event) {
+    	ElementSelectionModel.getInstance().setSelected(this);
         Dragboard db = this.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putString(getId());
@@ -88,6 +107,14 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     public void update () {
 
     }
+    
+    public void select(Selector selector) {
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(selector.getLightness());
+		
+		this.setEffect(colorAdjust);
+		this.setEffect(new Glow(selector.getGlow()));
+	}
 
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);

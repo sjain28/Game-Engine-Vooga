@@ -35,7 +35,10 @@ public class VariableCause extends Cause{
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean check(ILevelData data) {
-		myVariable = data.getGlobalVar(myVarName);
+		
+		if(myVariable == null){
+			myVariable = data.getGlobalVar(myVarName);
+		}	
 
 		Class<?> variableClass = myVariable.getClass();
 		Class[] paramClass = {myTarget.getClass()};

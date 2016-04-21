@@ -10,6 +10,8 @@ import events.KeyCause;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import javafx.scene.Node;
+import physics.IPhysics;
+import physics.IPhysicsEngine;
 import physics.StandardPhysics;
 import tools.interfaces.VoogaData;
 
@@ -40,7 +42,8 @@ public interface ILevelData {
 	List<List<String>> getKeyCombos();
 
 	VoogaData getGlobalVar(String myVarName);
-
-	StandardPhysics getPhysicsEngine();
 	
+	Sprite addSprite(String archetype);
+
+	IPhysicsEngine getPhysicsEngine();
 }

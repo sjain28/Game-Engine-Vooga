@@ -28,8 +28,7 @@ public class SpriteManager {
 	 * 
 	 */
 	private void applyGravity(Sprite e, IPhysicsEngine physics) {
-		double gravityMagnitude = (double) ((Sprite) e).getProperty("gravity").getValue();
+		double gravityMagnitude = (double) ((Sprite) e).getProperty("Gravity").getValue();
 		physics.gravity((Sprite) e, gravityMagnitude);
 	}
-
 }

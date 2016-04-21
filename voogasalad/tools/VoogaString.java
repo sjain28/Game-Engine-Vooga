@@ -1,5 +1,6 @@
 package tools;
 
+import javafx.beans.property.Property;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -33,5 +34,17 @@ public class VoogaString implements VoogaData {
 	public Node display() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Property<Object> getProperty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T> void setProperty(T newVal) {
+		// TODO Auto-generated method stub
+		
 	}
 }
