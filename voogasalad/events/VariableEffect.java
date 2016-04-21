@@ -44,7 +44,7 @@ public class VariableEffect extends Effect {
 
 	protected void callEffectMethod(VoogaData variable){
 		Class dataType = variable.getClass();
-		try{			
+		try{
 			if (myParameter != null){
 				Method variableMethod = dataType.getMethod(myMethod, new Class[]{myParameter.getClass()});
 				variableMethod.invoke(variable, myParameter);
