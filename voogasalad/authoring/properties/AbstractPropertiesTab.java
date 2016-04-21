@@ -64,6 +64,7 @@ public abstract class AbstractPropertiesTab extends Tab {
      * @param o
      */
     public void getPropertiesMap(Elementable elem) {
+    	System.out.println("Setting Up Global Properties");
 		myElementable = elem;
 		propertiesMap = myElementable.getVoogaProperties();
 		updateProperties();
@@ -141,6 +142,7 @@ public abstract class AbstractPropertiesTab extends Tab {
      * @param vgData
      */
 	public void addNewProperty(String s, VoogaData vgData) {
+		System.out.println("Adding Property");
 		myElementable.addProperty(s, vgData);
 		propertiesMap.put(s, vgData);
 		for (String property:myElementable.getVoogaProperties().keySet()){

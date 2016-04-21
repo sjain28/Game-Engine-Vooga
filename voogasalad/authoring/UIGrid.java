@@ -65,7 +65,7 @@ public class UIGrid extends GridPane{
         this.add(designBoard, 1, 0);
         GridPane.setRowSpan(designBoard, REMAINING);
         propertiesPane = new PropertiesPane();
-        myManager.addObserver(propertiesPane);
+        myManager.addObserver(propertiesPane.getPropertiesTabManager());
 
         this.add(propertiesPane, 0, 1);
         EventsWindow events = new EventsWindow(myManager);

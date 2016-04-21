@@ -16,7 +16,7 @@ import tools.interfaces.VoogaData;
 
 public class GlobalPropertiesTab extends AbstractPropertiesTab {
 
-	public final static String GLOBAL_PROPERTIES = "Level Variables";
+	public final static String GLOBAL_PROPERTIES = "Global Variables";
 	private Elementable myElementable;
 	
 	/**
@@ -26,6 +26,7 @@ public class GlobalPropertiesTab extends AbstractPropertiesTab {
 	
 	public GlobalPropertiesTab() {
 		super();
+		this.getPropertiesMap(new GlobalPropertiesManager());
 		this.setText(GLOBAL_PROPERTIES);
 	}
 

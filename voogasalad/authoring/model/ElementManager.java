@@ -50,6 +50,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
         myXmlDataFile = new File("file:levels/Test.xml");
+        setGV();
     }
 
     public ElementManager (File xmlDataFile) {
@@ -176,9 +177,17 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     @Override
     public void addGlobalVariable (String name, VoogaData value) {
+    	
         myGlobalVariables.put(name, value);
         setChanged();
-        notifyObservers(myGlobalVariables);
+        notifyObservers(GPM);
+    }
+    
+    
+    public void setGV() {
+    	System.out.println("HERE");
+    	setChanged();
+    	notifyObservers(GPM);
     }
 
     @Override
