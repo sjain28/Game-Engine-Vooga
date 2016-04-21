@@ -2,7 +2,6 @@ package player.leveldatamanager;
 
 import java.util.List;
 import java.util.Map;
-
 import events.KeyCause;
 import events.VoogaEvent;
 import javafx.scene.input.KeyEvent;
@@ -42,10 +41,10 @@ public class EventManager {
 				continue;
 			}
 
-			for(int i = 0; i < keyClicks.size(); i++){ //Checking for a tuple in a list: Need a nested for loop :(
+			for(int i = 0; i < keyClicks.size(); i++){ 
 				boolean match = true;
 				for(int j = 0; j < eventCombo.size(); j++){ //Compare the tuple to the keycombo			
-					if(!((keyClicks.get(j+i).getCode().toString()).compareTo(eventCombo.get(j))==0)){
+					if(!((keyClicks.get(j+i).getCode().toString()).equals(eventCombo.get(j)))){
 						match = false;
 					}
 				}
@@ -57,6 +56,8 @@ public class EventManager {
 			}
 		}
 	}
+	
+	
 	/**
 	 * Removes specified KeyClick from the list once they're used for an event
 	 */

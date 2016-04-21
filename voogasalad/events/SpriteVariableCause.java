@@ -27,10 +27,11 @@ public class SpriteVariableCause extends VariableCause {
 
 	@Override
 	public boolean check(ILevelData data){
-		
-		Sprite temp = data.getSpriteByID(mySpriteID);
+				
+		Sprite temp = data.getSpriteByID(mySpriteID);		
 		mySprites = new ArrayList<>();
 		mySprites.add(temp);
+		
 		super.setVariable(temp.getProperty(myVarName));
 		
 		if(super.check(data)){
