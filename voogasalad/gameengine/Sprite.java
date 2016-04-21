@@ -6,6 +6,7 @@ import java.util.UUID;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
@@ -41,12 +42,16 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
     private transient SimpleDoubleProperty myY;
+    private transient SimpleDoubleProperty myWidth;
+    private transient SimpleDoubleProperty myHeight;
 
     public Sprite (String imagePath,
                    String archetype,
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
-        initializeCoordinates();
+    	myProperties = new HashMap<String, VoogaData>();
+        myProperties = properties;
+    	initializeCoordinates();
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
         myAcceleration = new Acceleration(0, 0);
@@ -65,8 +70,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         }
 
         myImage = new ImageView(image);
-        myProperties = new HashMap<String, VoogaData>();
-        myProperties = properties;
 
         // TODO: use properties file to put these
         myProperties.put(MASS, mass);
@@ -74,19 +77,27 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
         myProperties.put(WIDTH, new VoogaNumber(image.getWidth()));
         myProperties.put(HEIGHT, new VoogaNumber(image.getHeight()));
-        myProperties.put(X_POS, new VoogaNumber());
-
+        
+        myWidth = new SimpleDoubleProperty();
+        myHeight = new SimpleDoubleProperty();
+        Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
+        Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
+        
     }
-
-    private void initializeCoordinates () {
-        myX = new SimpleDoubleProperty();
-        myY = new SimpleDoubleProperty();
-        myX.addListener( (obs, old, n) -> {
-            myLoc.setX((double) n);
-        });
-        myY.addListener( (obs, old, n) -> {
-            myLoc.setY((double) n);
-        });
+    
+    private void initializeCoordinates() {
+        myProperties.put(X_POS, new VoogaNumber());
+        myProperties.put(Y_POS, new VoogaNumber());
+    	myX = new SimpleDoubleProperty();
+    	myY = new SimpleDoubleProperty();
+    	Bindings.bindBidirectional(myX, myProperties.get(X_POS).getProperty());
+    	Bindings.bindBidirectional(myY, myProperties.get(Y_POS).getProperty());
+    	myX.addListener((obs, old, n) -> {
+    		myLoc.setX((double) n);
+    	});
+    	myY.addListener((obs, old, n) -> {
+    		myLoc.setY((double) n);
+    	});
     }
 
     /**
@@ -111,13 +122,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
         myVelocity.addX(myAcceleration.getX());
         myVelocity.addY(myAcceleration.getY());
-
-        // Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setLayoutX(myLoc.getX());
-        myImage.setLayoutY(((myLoc.getY() - 300) * -1) + 300);
-
-        // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
-
+        
+        //Convert the Sprite's Cartesian Coordinates to display-able x and y's
+        myImage.setTranslateX(myLoc.getX());
+        myImage.setTranslateY(myLoc.getY());
+        
+//        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
+        
     }
     
     public void setName (String name) {
@@ -232,8 +243,20 @@ public class Sprite implements Moveable, Effectable, Elementable {
         return this.myX;
     }
 
-    public Property<Number> getY () {
-        return this.myY;
-    }
+	public Property<Number> getX() {
+		return this.myX;
+	}
+	
+	public Property<Number> getY() {
+		return this.myY;
+	}
+	
+	public Property<Number> getWidth() {
+		return this.myWidth;
+	}
+	
+	public Property<Number> getHeight() {
+		return this.myWidth;
+	}
 
 }

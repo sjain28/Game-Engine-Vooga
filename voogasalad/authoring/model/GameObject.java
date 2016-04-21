@@ -7,6 +7,7 @@ import authoring.gui.Selector;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
+import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
@@ -35,11 +36,17 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     private void initializeSprite(Sprite sprite) {
         mySprite = sprite;
+        Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
+        Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
+        Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
+        Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
         this.translateXProperty().addListener((obs, old, n) -> {
         	mySprite.getX().setValue(n);
+        	ElementSelectionModel.getInstance().setSelected(this);
         });
         this.translateYProperty().addListener((obs, old, n) -> {
         	mySprite.getY().setValue(n);
+        	ElementSelectionModel.getInstance().setSelected(this);
         });
     }
     
@@ -60,6 +67,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     }
 
     void onDrag (MouseEvent event) {
+    	ElementSelectionModel.getInstance().setSelected(this);
         Dragboard db = this.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putString(getId());

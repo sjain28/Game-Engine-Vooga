@@ -73,13 +73,10 @@ public abstract class AbstractPropertiesTab extends Tab {
         propertiesHBox.getChildren().clear();
      
         VBox properties = new VBox(SPACING);
-
         Text name = null;
-        Node data = null;
+        Node node = null;
 
-      
         for (String property : propertiesMap.keySet()) {
-
             name = new CustomText(property);
 
             ContextMenu menu = new ContextMenu();
@@ -92,30 +89,27 @@ public abstract class AbstractPropertiesTab extends Tab {
                     menu.show(myScrollPane, e.getScreenX(), e.getScreenY());
                 }
             });
-
-            data = propertiesMap.get(property).display();
-            
-            bindDataToMap(property,data);
-            
-            properties.getChildren().add(new PropertyBox(name, data));
+            node = propertiesMap.get(property).display();
+            bindDataToMap(property, node, propertiesMap.get(property));   
+            properties.getChildren().add(new PropertyBox(name, node));
         }
-
         propertiesHBox.getChildren().addAll(properties);
         myScrollPane.setContent(propertiesHBox);
     }
     
-    public void bindDataToMap(String property, Node node){
-        if (node instanceof NumberTextField){
+    public void bindDataToMap(String property, Node node, VoogaData data){
+        if (data instanceof VoogaNumber){
             NumberTextField field = (NumberTextField) node;
             field.textProperty().addListener((obs,old,newVal)->{
-                propertiesMap.put(property, new VoogaNumber(Double.parseDouble(newVal)));
+            	data.setProperty(newVal);
+                propertiesMap.put(property, data);
             });
         }
-        if (node instanceof SwitchButton) {
+        if (data instanceof VoogaBoolean) {
         	SwitchButton field = (SwitchButton) node;
-        	System.out.println(field.booleanProperty().toString());
         	field.booleanProperty().addListener((obs,old,newVal)->{
-        		propertiesMap.put(property, new VoogaBoolean(newVal));
+        		data.setProperty(newVal);
+        		propertiesMap.put(property, data);
             });
         }
     }
