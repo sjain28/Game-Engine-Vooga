@@ -37,6 +37,7 @@ public class LevelSaveTest extends Application{
 		stringofLevels.add("Test2.xml");
 		stringofLevels.add("Test4.xml");
 		stringofLevels.add("Test3.xml");
+		stringofLevels.add("Test3.xml");
 		stringofLevels.add("Test1.xml");
 //		Map<String,String> levelMap = new HashMap<String,String>();
 //		levelMap.put("Player1", "Test1.xml");

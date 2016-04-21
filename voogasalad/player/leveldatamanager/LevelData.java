@@ -226,6 +226,8 @@ public class LevelData implements ILevelData {
 
 		//clear whats in the myElements Map.
 		myElements.clear();
+		myEvents.clear();
+		myKeyCauses.clear();
 		
 		//add elements to map 
 		for(Elementable el : elementObjects){
