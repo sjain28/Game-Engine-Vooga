@@ -43,7 +43,7 @@ import tools.VoogaException;
  */
 public class GameRunner implements IGameRunner {
 
-    private static final int FRAMES_PER_SECOND = 1;
+    private static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final int SPEEDCONTROL = 10;
     private static final int INIT_SPEED = 61;
