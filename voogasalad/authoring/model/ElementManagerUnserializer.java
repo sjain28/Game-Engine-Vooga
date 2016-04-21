@@ -42,7 +42,7 @@ public class ElementManagerUnserializer {
             if (e instanceof Sprite){
                 Sprite sprite = (Sprite) e;
                 sprite.init();
-                nodeList.add(new GameObject((Sprite) e, e.getName()));
+                nodeList.add(new GameObject(sprite, e.getName()));
             }
             if (e instanceof BackEndText){
                 

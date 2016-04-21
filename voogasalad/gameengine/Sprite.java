@@ -277,10 +277,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
      */
 
     public void init () throws VoogaException {
-        System.out.println(myImagePath);
         if (myImage != null)
-            return;
-        System.out.println("My image was null");
+            throw new VoogaException("Cannot initialize already created sprite");
         
         ImageProperties imageProperties= new ImageProperties();
         Image image = new Image(myImagePath);
@@ -288,9 +286,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
         imageProperties.loadData(myImage,initializationProperties);
         
-        myX = new SimpleDoubleProperty();
-        myY = new SimpleDoubleProperty();
-        myWidth = new SimpleDoubleProperty();
-        myHeight = new SimpleDoubleProperty();
+        initializeCoordinates();
     }
 }

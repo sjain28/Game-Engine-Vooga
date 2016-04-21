@@ -2,7 +2,6 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import authoring.gui.Selector;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
@@ -20,13 +19,14 @@ import tools.Vector;
 import tools.Velocity;
 import tools.interfaces.VoogaData;
 
+
 public class GameObject extends ImageView implements Moveable, Elementable {
-	
+
     private Sprite mySprite;
     private String name;
 
     public GameObject (Sprite sprite, String name) {
-    	initializeSprite(sprite);
+        initializeSprite(sprite);
         this.name = name;
         this.setId(mySprite.getId());
         this.setImage(mySprite.getImage().getImage());
@@ -34,22 +34,24 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         this.setOnDragDetected(e -> onDrag(e));
     }
 
-    private void initializeSprite(Sprite sprite) {
+    private void initializeSprite (Sprite sprite) {
         mySprite = sprite;
+
         Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
         Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
-        this.translateXProperty().addListener((obs, old, n) -> {
-        	mySprite.getX().setValue(n);
-        	ElementSelectionModel.getInstance().setSelected(this);
+
+        this.translateXProperty().addListener( (obs, old, n) -> {
+            mySprite.getX().setValue(n);
+            ElementSelectionModel.getInstance().setSelected(this);
         });
-        this.translateYProperty().addListener((obs, old, n) -> {
-        	mySprite.getY().setValue(n);
-        	ElementSelectionModel.getInstance().setSelected(this);
+        this.translateYProperty().addListener( (obs, old, n) -> {
+            mySprite.getY().setValue(n);
+            ElementSelectionModel.getInstance().setSelected(this);
         });
     }
-    
+
     // TODO: Send back immutable sprite
     public Sprite getSprite () {
         return mySprite;
@@ -67,7 +69,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     }
 
     void onDrag (MouseEvent event) {
-    	ElementSelectionModel.getInstance().setSelected(this);
+        ElementSelectionModel.getInstance().setSelected(this);
         Dragboard db = this.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putString(getId());
@@ -91,7 +93,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     @Override
     public void removeProperty (String name) {
-    	mySprite.removeProperty(name);
+        mySprite.removeProperty(name);
     }
 
     @Override
@@ -107,29 +109,29 @@ public class GameObject extends ImageView implements Moveable, Elementable {
     public void update () {
 
     }
-    
-    public void select(Selector selector) {
-		ColorAdjust colorAdjust = new ColorAdjust();
-		colorAdjust.setBrightness(selector.getLightness());
-		
-		this.setEffect(colorAdjust);
-		this.setEffect(new Glow(selector.getGlow()));
-	}
+
+    public void select (Selector selector) {
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(selector.getLightness());
+
+        this.setEffect(colorAdjust);
+        this.setEffect(new Glow(selector.getGlow()));
+    }
 
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
     }
 
-	@Override
-	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
+        // TODO Auto-generated method stub
+
+    }
 
     @Override
     public void setName (String name) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
