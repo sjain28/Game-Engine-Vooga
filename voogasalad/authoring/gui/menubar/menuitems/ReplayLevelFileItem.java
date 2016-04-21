@@ -7,15 +7,18 @@ import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
-
+import player.gamerunner.GameRunner;
 
 /**
  * Menu Item to select the board of the display
  * 
- * @author Nick
+ * @author Nick, Hunter
  *
  */
 public class ReplayLevelFileItem extends PlayerMenuItemHandler {
+	
+	private GameRunner myGameRunner;
+
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -26,6 +29,7 @@ public class ReplayLevelFileItem extends PlayerMenuItemHandler {
 	public ReplayLevelFileItem(Menuable model) {
 
 		super();
+		this.myGameRunner = (GameRunner) model;
 	}
 	
 	/**
@@ -33,8 +37,20 @@ public class ReplayLevelFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
-		// TODO Auto-generated method stub
-		
+		/*
+		 * Gets the current level's filename and plays the level again
+		 * 
+		 */
+		this.myGameRunner.playLevel(this.myGameRunner.getLevelNameString(), false);
 	}
 
+	
+	/**
+	 * TODO: Add the following to GameRunner
+	 * 
+	 */
+
+//	public String getLevelFileName() {
+//		return this.myLevelList.get(this.currentLevelNumber);
+//	}
 }
