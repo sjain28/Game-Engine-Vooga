@@ -439,5 +439,9 @@ public class GameRunner implements IGameRunner {
 		myLevelData.setNextLevelName(nextLevel);
 		getTimeline().play();
 	}
-	
+    @Override
+    public void addScene (CompleteAuthoringModelable manager) {
+        // TODO Auto-generated method stub
+        
+    }
 }

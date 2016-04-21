@@ -245,6 +245,7 @@ public class LevelData implements ILevelData {
 
             myElements.put(el.getId(), el);
         }
+
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
