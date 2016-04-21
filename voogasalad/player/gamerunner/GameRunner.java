@@ -404,16 +404,16 @@ public class GameRunner implements IGameRunner {
 		// TODO Auto-generated method stub
 		
 		//Test here: for the ability to play THE NEXT LEVEL!!!
-			Optional<String> correctLevel = myLevelList
-					.stream()
-		            .filter(a -> a.equals(myCurrentLevelString))
-		            .findFirst();
+//			Optional<String> correctLevel = myLevelList
+//					.stream()
+//		            .filter(a -> a.equals(myCurrentLevelString))
+//		            .findFirst();
+//		
+//		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
+//		String nextLevel = myLevelList.get(tempIndex);
+//		myLevelData.setNextLevelName(nextLevel);
 		
-		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
-		String nextLevel = myLevelList.get(tempIndex);
-		myLevelData.setNextLevelName(nextLevel);
-		
-//		myLevelData.setNextLevelName(myCurrentLevelString);
+		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
 	
 	@Override
@@ -439,6 +439,19 @@ public class GameRunner implements IGameRunner {
 	
 	public String getLevelNameString() {
 		return this.myCurrentLevelString;
+	}
+
+	@Override
+	public void playNextLevel() {
+		// TODO Auto-generated method stub
+		Optional<String> correctLevel = myLevelList
+				.stream()
+				.filter(a -> a.equals(myCurrentLevelString))
+				.findFirst();
+
+		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
+		String nextLevel = myLevelList.get(tempIndex);
+		myLevelData.setNextLevelName(nextLevel);
 	}
 	
 }
