@@ -209,7 +209,7 @@ public class GameRunner implements IGameRunner {
 			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())), false);
 		}
-		System.out.println("The current level is " + myCurrentLevelString);
+//		System.out.println("The current level is " + myCurrentLevelString);
 		//update all Sprite's with physics engine 
 		mySpriteManager.update(myLevelData.getAllSprites(),myPhysicsEngine);
 		
@@ -218,7 +218,7 @@ public class GameRunner implements IGameRunner {
 		
 		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
-		System.out.println("The list of displayable nodes here is " + myLevelData.getDisplayableNodes());
+//		System.out.println("The list of displayable nodes here is " + myLevelData.getDisplayableNodes());
 
 		//re-populate the game screen
 		myGameDisplay.populateGameScreen();
