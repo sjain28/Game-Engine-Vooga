@@ -8,8 +8,8 @@
     <properties>
         <project.build.sourceEncoding>iso-8859-1</project.build.sourceEncoding>
     </properties>
-
- 	<repositories>
+ 	
+ 	 <repositories>
   		<repository>
    			<id>xuggle repo</id>
    			<url>http://xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
@@ -51,7 +51,7 @@
    			<version>5.2</version>
   		</dependency>
     </dependencies>
-
+ 	
     <build>
         <sourceDirectory>.</sourceDirectory>
         <plugins>
