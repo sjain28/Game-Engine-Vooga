@@ -3,7 +3,6 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
@@ -38,6 +37,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private Map<String, VoogaData> myProperties;
     private String myImagePath;
     private String myArchetype;
+
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
     private transient SimpleDoubleProperty myY;
@@ -46,45 +46,47 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    String archetype,
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
-    	initializeCoordinates();
+        initializeCoordinates();
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
-        myAcceleration = new Acceleration(0,0);
-        
+        myAcceleration = new Acceleration(0, 0);
+
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
         myImagePath = imagePath;
         Image image = null;
+        
         if (myImagePath.contains("file:")) {
             image = new Image(myImagePath);
         }
-        else 
-        {
+        else {
             image = new Image(this.getClass().getResourceAsStream(myImagePath));
+            
         }
+
         myImage = new ImageView(image);
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
 
-        //TODO: use properties file to put these
+        // TODO: use properties file to put these
         myProperties.put(MASS, mass);
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
         myProperties.put(WIDTH, new VoogaNumber(image.getWidth()));
         myProperties.put(HEIGHT, new VoogaNumber(image.getHeight()));
         myProperties.put(X_POS, new VoogaNumber());
-        
+
     }
-    
-    private void initializeCoordinates() {
-    	myX = new SimpleDoubleProperty();
-    	myY = new SimpleDoubleProperty();
-    	myX.addListener((obs, old, n) -> {
-    		myLoc.setX((double) n);
-    	});
-    	myY.addListener((obs, old, n) -> {
-    		myLoc.setY((double) n);
-    	});
+
+    private void initializeCoordinates () {
+        myX = new SimpleDoubleProperty();
+        myY = new SimpleDoubleProperty();
+        myX.addListener( (obs, old, n) -> {
+            myLoc.setX((double) n);
+        });
+        myY.addListener( (obs, old, n) -> {
+            myLoc.setY((double) n);
+        });
     }
 
     /**
@@ -98,25 +100,26 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public void update () {
         // Still needed: Apply physics to myVelocity
-    	
-    	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
-        System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
+
+        // Velocity in m/s >> Each step is one s, so the number of meters u should increment
+        System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
+                           "velocityX" + myVelocity.getX());
 
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
-       
-        //Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
+
+        // Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
         myVelocity.addX(myAcceleration.getX());
         myVelocity.addY(myAcceleration.getY());
-        
-        //Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setLayoutX(myLoc.getX());
-        myImage.setLayoutY(((myLoc.getY()-300)*-1)+300);
-        
-//        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
-        
-    }
 
+        // Convert the Sprite's Cartesian Coordinates to display-able x and y's
+        myImage.setLayoutX(myLoc.getX());
+        myImage.setLayoutY(((myLoc.getY() - 300) * -1) + 300);
+
+        // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
+
+    }
+    
     public void setName (String name) {
         myName = name;
     }
@@ -148,7 +151,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     public void setProperties (Map<String, VoogaData> properties) {
-        myProperties = new HashMap<String,VoogaData>(properties);
+        myProperties = new HashMap<String, VoogaData>(properties);
     }
 
     public HashMap<String, VoogaData> getPropertiesMap () {
@@ -210,27 +213,27 @@ public class Sprite implements Moveable, Effectable, Elementable {
     public String getName () {
         return myName;
     }
+    
+    
+    public boolean isMainCharacter () {
+        return isMainCharacter;
+    }
 
-	public boolean isMainCharacter() {
-		return isMainCharacter;
-	}
+    public void setMainCharacter (boolean isMainCharacter) {
+        this.isMainCharacter = isMainCharacter;
+    }
 
-	public void setMainCharacter(boolean isMainCharacter) {
-		this.isMainCharacter = isMainCharacter;
-	}
+    @Override
+    public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
+        this.myProperties=newVoogaProperties;
+    }
 
-	@Override
-	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
-		// TODO Auto-generated method stub
-		
-	}
+    public Property<Number> getX () {
+        return this.myX;
+    }
 
-	public Property<Number> getX() {
-		return this.myX;
-	}
-	
-	public Property<Number> getY() {
-		return this.myY;
-	}
+    public Property<Number> getY () {
+        return this.myY;
+    }
 
 }

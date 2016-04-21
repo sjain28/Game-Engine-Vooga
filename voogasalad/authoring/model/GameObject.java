@@ -118,4 +118,10 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 		
 	}
 
+    @Override
+    public void setName (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
