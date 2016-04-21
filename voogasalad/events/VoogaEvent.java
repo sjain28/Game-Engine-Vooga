@@ -32,7 +32,6 @@ public class VoogaEvent {
 	 */
 	public void update(ILevelData data){
 		myCauseSprites.clear();
-		
 		for(Cause c: myCauses){
 			if(!c.check(data)){
 				return;
@@ -40,6 +39,7 @@ public class VoogaEvent {
 		}
 		System.out.println("Cause was true!");
 		for(Effect e: myEffects){
+			System.out.println(e);
 			e.execute(data);
 		}
 	}

@@ -22,8 +22,9 @@ public class StandardPhysics implements IPhysicsEngine{
 		sprite.setPosition(position);
 	}
 	
+	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getPosition().addX(change);
+		sprite.getVelocity().setX(change/10);
 	}
 	
 	public void translateY(Sprite sprite, Double change) {
