@@ -1,6 +1,7 @@
 package tools.bindings;
 
 import java.lang.reflect.Method;
+
 import javafx.application.Application;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
