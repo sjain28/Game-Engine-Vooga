@@ -38,6 +38,8 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         mySprite = sprite;
         Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
         Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
+        Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
+        Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
         this.translateXProperty().addListener((obs, old, n) -> {
         	mySprite.getX().setValue(n);
         	ElementSelectionModel.getInstance().setSelected(this);
