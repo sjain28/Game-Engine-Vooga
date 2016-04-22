@@ -186,13 +186,10 @@ public class DesignBoard extends Tab implements Observer {
 			elementManager.addElementId(elementPath);
 		}
 
-		System.out.println(elementManager.getIds());
-
 	}
 
 	private void moveElement(String id, DragEvent e) {
 		Node element = elementManager.getElement(id);
-		System.out.println("" + e.getX() + " " + e.getY());
 		element.setTranslateX(e.getX() - x_offset);
 		element.setTranslateY(e.getY() - y_offset);
 

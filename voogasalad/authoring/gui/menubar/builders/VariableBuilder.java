@@ -17,9 +17,9 @@ public class VariableBuilder extends Builder {
 	
     public VariableBuilder (EditElementable editor) {
         super(editor);
-        populate();
         this.variableName = new TextField();
         this.variableValue = new TextField();
+        populate();
         load(this.container);
     }
     
