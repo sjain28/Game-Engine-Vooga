@@ -22,17 +22,17 @@ public class UILauncher {
 		
 		// ***
 		// new Splash(e -> {
-			ProjectInitializationPrompt prompt = new ProjectInitializationPrompt();
-			prompt.setProceedEvent(ee -> {
-				prompt.close();
+			//ProjectInitializationPrompt prompt = new ProjectInitializationPrompt();
+			//prompt.setProceedEvent(ee -> {
+				// prompt.close();
 				UIManager manager = new UIManager(model);
-				manager.setProjectName(prompt.getName());
+				manager.setProjectName("My Project");
 				Scene scene = new VoogaScene(manager);
 				primaryStage.setScene(scene);
 				primaryStage.setMaximized(true);
 				primaryStage.show();
-			});
-			prompt.show();
+			//});
+			//prompt.show();
 		// });
 		
 	}
