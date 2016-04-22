@@ -1,8 +1,12 @@
 package authoring;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import com.sun.glass.events.MouseEvent;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
@@ -81,6 +85,14 @@ public class UIManager extends VBox implements Menuable {
 	
 	public CompleteAuthoringModelable getManager() {
 		return grid.getManager();
+	}
+	
+	public List<String> getAllManagerNames() {
+		List<String> names = new ArrayList<String>();
+		elementTabManager.getAllManagers().stream()
+										  .map(ElementManager::getName)
+										  .forEach(names::add);
+		return names;
 	}
 
 	// TODO: Format output correctly

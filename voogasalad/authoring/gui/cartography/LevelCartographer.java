@@ -2,10 +2,13 @@ package authoring.gui.cartography;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import authoring.UIManager;
 import authoring.VoogaScene;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
 import authoring.resourceutility.ButtonMaker;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -23,9 +26,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
+import player.gamedisplay.Menuable;
 
 public class LevelCartographer extends Stage {
-	
+
 	private static final double WINDOW_WIDTH = 1000;
 	private static final double WINDOW_HEIGHT = 800;
 	private static final double CIRCLE_SIZE = 200;
@@ -36,60 +40,85 @@ public class LevelCartographer extends Stage {
 	private List<String> levelNames;
 	private List<Level> levels;
 	
-	public LevelCartographer(CompleteAuthoringModelable model) {
+	private UIManager manager;
+
+	public LevelCartographer(Menuable model) {
+		this.manager = (UIManager) model;
 		initializeScene();
 		loadLevels();
 		populate();
 	}
-	
+
 	private void initializeScene() {
 		myGUI = new BorderPane();
 		myMap = new Group();
 		myGUI.setCenter(myMap);
 		myGUI.setBottom(buttons());
 		this.setScene(new VoogaScene(myGUI, WINDOW_WIDTH, WINDOW_HEIGHT));
-		this.show();
 	}
-	
+
 	private HBox buttons() {
 		HBox container = new HBox();
-		container.getChildren().add(new ButtonMaker().makeButton("Add connection", e -> {
-			Connection connector = new Connection();
-			connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
-				for(Level level : levels) {
-					if(connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-						connector.setStartpoint(level.getName());
-					}
-				}
-			});
-			connector.getEndAnchor().centerXProperty().addListener((obs, old, n) -> {
-				for(Level level : levels) {
-					if(connector.getEndAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-						connector.setEndpoint(level.getName());
-					}
-				}
-			});
-			myMap.getChildren().addAll(connector);
-		}));
+		container.getChildren().addAll(new ButtonMaker().makeButton("Add connection", e -> addConnector()),
+				new ButtonMaker().makeButton("Make entrypoint", e -> makeEntrypoint()));
 		container.setAlignment(Pos.CENTER);
 		return container;
 	}
-	
-	private void loadLevels() {
-		//================================================================================|
-		//   Temporary code until level saving and loading can be implemented completely. |
-		//================================================================================|
-		levelNames = new ArrayList<String>();
-		levels = new ArrayList<Level>();
-		levelNames.addAll(Arrays.asList("Splash Screen", "Intro: Forest of Fire", "I: Hills of Hell", "II: Dunes of Doom",
-				"III: Abyss of Animals", "IV: Seas of Solace", "V: Towers of Terror", "VI: Boss"));
+
+	private void addConnector() {
+		Connection connector = new Connection();
+		connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
+			for (Level level : levels) {
+				if (connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
+					connector.setStartpoint(level.getName());
+				}
+			}
+		});
+		connector.getEndAnchor().centerXProperty().addListener((obs, old, n) -> {
+			for (Level level : levels) {
+				if (connector.getEndAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
+					connector.setEndpoint(level.getName());
+				}
+			}
+		});
+		myMap.getChildren().addAll(connector);
+	}
+
+	private void makeEntrypoint() {
+		Entrypoint ep = Entrypoint.getInstance();
+		if (!myMap.getChildren().contains(ep)) {
+			addEntrypoint(ep);
+		}
+		ep.setRadius(1.2 * CIRCLE_SIZE / levelNames.size());
 	}
 	
+	private void addEntrypoint(Entrypoint circ) {
+		myMap.getChildren().add(circ);
+		circ.centerXProperty().addListener((obs, old, n) -> {
+			for (Level level : levels) {
+				if (circ.getBoundsInParent().intersects(level.getBoundsInParent())) {
+					circ.setEntrypoint(level.getName());
+					return;
+				}
+			}
+		});
+		circ.toBack();
+	}
+
+	private void loadLevels() {
+		// ================================================================================|
+		// Temporary code until level saving and loading can be implemented
+		// completely. |
+		// ================================================================================|
+		levels = new ArrayList<Level>();
+		levelNames = this.manager.getAllManagerNames();
+	}
+
 	private void populate() {
-		for(int i = 0; i < levelNames.size(); i++) {
-			Level circ = new Level(levelNames.get(i), CIRCLE_SIZE/levelNames.size());
-			circ.setTranslateX(RING_SIZE * Math.cos(Math.toRadians((i-1)*(CIRCLE_DEGREES/levelNames.size()))));
-			circ.setTranslateY(RING_SIZE * Math.sin(Math.toRadians((i-1)*(CIRCLE_DEGREES/levelNames.size()))));
+		for (int i = 0; i < levelNames.size(); i++) {
+			Level circ = new Level(levelNames.get(i), CIRCLE_SIZE / levelNames.size());
+			circ.setTranslateX(RING_SIZE * Math.cos(Math.toRadians((i - 1) * (CIRCLE_DEGREES / levelNames.size()))));
+			circ.setTranslateY(RING_SIZE * Math.sin(Math.toRadians((i - 1) * (CIRCLE_DEGREES / levelNames.size()))));
 			levels.add(circ);
 			myMap.getChildren().add(circ);
 			StackPane.setAlignment(circ, Pos.CENTER);

@@ -44,6 +44,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private SpriteFactory spriteFactory;
 
     private Set<String> myIds;
+    
+    private String myManagerName;
 
     private String filePath = "games/levels/Test.xml";
 
@@ -232,6 +234,20 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             throw new VoogaException();
         }
         GPM.setVoogaProperties(globalPropertiesMap);
+    }
+    
+    /**
+     * Used to populate preferences
+     */
+    
+    @Override
+    public void setName(String name) {
+    	this.myManagerName = name;
+    }
+    
+    @Override
+    public String getName() {
+    	return this.myManagerName;
     }
 
 }
