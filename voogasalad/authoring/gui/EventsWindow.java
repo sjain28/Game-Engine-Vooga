@@ -39,6 +39,7 @@ public class EventsWindow extends TabPane implements Observer{
 	 */
     public EventsWindow(CompleteAuthoringModelable manager){
         myManager = manager;
+        myManager.addObserver(this);
         main = new Tab(NAME);
         content = new VBox();
         causes = new HashMap<VoogaEvent, ObservableList<String>>(); 
@@ -56,7 +57,6 @@ public class EventsWindow extends TabPane implements Observer{
                     causesString.addAll(cause.toString());
                 }  
                 causes.put(e, causesString);
-                
             }
             if(!effects.keySet().contains(e)){
                 ObservableList<String> effectsString = FXCollections.observableArrayList();
