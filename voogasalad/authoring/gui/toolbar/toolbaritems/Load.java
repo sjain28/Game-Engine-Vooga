@@ -7,11 +7,12 @@ import authoring.gui.toolbar.ToolbarItemHandler;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import player.gamedisplay.Menuable;
 
-public class Open extends ToolbarItemHandler{
+public class Load extends ToolbarItemHandler{
     
-    public Open(){
-        handle();
+    public Load(Menuable model){
+    	
     }
     
     @Override

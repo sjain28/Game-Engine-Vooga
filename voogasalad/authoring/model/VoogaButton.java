@@ -65,5 +65,11 @@ public class VoogaButton extends Button implements Elementable {
 		
 	}
 
+    @Override
+    public void setName (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }

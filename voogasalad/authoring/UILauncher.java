@@ -21,13 +21,19 @@ public class UILauncher {
 	public UILauncher(Stage primaryStage, CompleteAuthoringModelable model) {
 		
 		// ***
-		//new Splash(e -> {
-			UIManager manager = new UIManager(model);
-			Scene scene = new VoogaScene(manager);
-			primaryStage.setScene(scene);
-			primaryStage.setMaximized(true);
-			primaryStage.show();
-		//});
+		// new Splash(e -> {
+			//ProjectInitializationPrompt prompt = new ProjectInitializationPrompt();
+			//prompt.setProceedEvent(ee -> {
+				// prompt.close();
+				UIManager manager = new UIManager(model);
+				manager.setProjectName("My Project");
+				Scene scene = new VoogaScene(manager);
+				primaryStage.setScene(scene);
+				primaryStage.setMaximized(true);
+				primaryStage.show();
+			//});
+			//prompt.show();
+		// });
 		
 	}
 

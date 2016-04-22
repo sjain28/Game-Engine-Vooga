@@ -11,11 +11,13 @@ import java.util.Observable;
 import java.util.Observer;
 
 import authoring.interfaces.Elementable;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
+import authoring.model.GameObject;
 import javafx.scene.control.Tab;
 
 public class PropertiesTabManager implements Observer {
-	
+
 	private ArrayList<Tab> myPropertyTabs = new ArrayList<Tab>();
 	private SpritePropertiesTab SPT = new SpritePropertiesTab();
 	private GlobalPropertiesTab GPT = new GlobalPropertiesTab();
@@ -30,15 +32,16 @@ public class PropertiesTabManager implements Observer {
 		selector.addObserver(this);
 		populateTabList();
 	}
-	
+
 	/**
 	 * Returns list of tabs managed by the properties tab manager.
+	 * 
 	 * @return
 	 */
 	public ArrayList<Tab> getTabList() {
 		return myPropertyTabs;
 	}
-	
+
 	/**
 	 * Populates the tab list.
 	 */
@@ -46,31 +49,39 @@ public class PropertiesTabManager implements Observer {
 		myPropertyTabs.add(SPT);
 		myPropertyTabs.add(GPT);
 	}
-	
+
 	/**
 	 * Returns the Sprite Properties Tab.
+	 * 
 	 * @return
 	 */
 	public SpritePropertiesTab getSpritePropertiesTab() {
 		return SPT;
 	}
-	
+
 	/**
 	 * Returns the Global Properties Tab.
+	 * 
 	 * @return
 	 */
 	public GlobalPropertiesTab getGlobalPropertiesTab() {
-		 return GPT;
+		return GPT;
 	}
 
 	/**
-	 * Updates the sprite properties tab based on observing elementals in the 
+	 * Updates the sprite properties tab based on observing elementals in the
 	 * Design Board.
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		Elementable e = (Elementable) arg;
-		SPT.getPropertiesMap(e);
+		if (arg instanceof Elementable) {
+			Elementable tabInfo = (Elementable) arg;
+			if ((o instanceof CompleteAuthoringModelable)) {
+				GPT.getPropertiesMap(tabInfo);
+			} else {
+				SPT.getPropertiesMap(tabInfo);
+			}
+		}
 	}
 
 }

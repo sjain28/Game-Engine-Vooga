@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
-
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.Deserializer;
 import data.Serializer;
@@ -43,10 +42,9 @@ import tools.VoogaException;
  */
 public class GameRunner implements IGameRunner {
 
-    private static final int FRAMES_PER_SECOND = 60;
-    private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private static final int SPEEDCONTROL = 10;
     private static final int INIT_SPEED = 61;
+    private static final int MILLISECOND_DELAY = 1000 / INIT_SPEED;
+    private static final int SPEEDCONTROL = 10;
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
     private SpriteManager mySpriteManager;
@@ -56,7 +54,7 @@ public class GameRunner implements IGameRunner {
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private List<String> myLevelList;
-	private Timeline myTimeline;
+	private static Timeline myTimeline;
     
     
     
@@ -71,7 +69,7 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay = new StandardDisplay(getSelf());
 		mySpriteManager = new SpriteManager();
 		myEventManager = new EventManager();
-		myPhysicsEngine = new StandardPhysics(FRAMES_PER_SECOND);
+		myPhysicsEngine = new StandardPhysics();
 		myLevelData = new LevelData(myPhysicsEngine);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -79,32 +77,6 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 	}
-
-//	/**
-//	 * Overloaded constructor with String parameter
-//	 * 
-//	 * @param fileString
-//	 * @throws FileNotFoundException
-//	 * @throws IOException
-//	 */
-//	public GameRunner(String fileString) throws FileNotFoundException, IOException {
-//		this(new File(fileString));
-//	}
-//	
-//	/**
-//	 * Creating a game from a VoogaGame
-//	 * 
-//	 * @param Voogagame
-//	 */
-//	public GameRunner(VoogaGame game){
-//		myGameDisplay = new StandardDisplay(getSelf());
-//		myLevelList = game.getGameLevels();
-//		myTimeline = new Timeline();
-//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-//				e -> step());
-//		myTimeline.setCycleCount(Animation.INDEFINITE);
-//		myTimeline.getKeyFrames().add(frame);
-//	}
 
 	
 	/**
@@ -174,8 +146,8 @@ public class GameRunner implements IGameRunner {
 		gameLocation = gameLocation + xmlList + "/";
 		String resourcePath = gameLocation + xmlList + ".xml";
 		levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);
-		System.out.println("The resource path here is called" + resourcePath); 
-		System.out.println("Levellist is " + levelList);
+//		System.out.println("The resource path here is called" + resourcePath); 
+//		System.out.println("Levellist is " + levelList);
 	//	VoogaGame currentGame = new VoogaGame(levelList); //Eventually be able to create a game.
 		return levelList;
 	}
@@ -205,12 +177,12 @@ public class GameRunner implements IGameRunner {
 					.stream()
 		            .filter(a -> a.equals(myLevelData.getNextLevelName()))
 		            .findFirst();
-			System.out.println("The next level that's trying to play is " + myLevelData.getNextLevelName());
-			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
-			System.out.println("The current correct level is " + correctLevel.get());
+//			System.out.println("The next level that's trying to play is " + myLevelData.getNextLevelName());
+//			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
+//			System.out.println("The current correct level is " + correctLevel.get());
 			playLevel(correctLevel.get(), false);
 		}
-		
+//		System.out.println("The current level is " + myCurrentLevelString);
 		//update all Sprite's with physics engine 
 		mySpriteManager.update(myLevelData.getAllSprites(),myPhysicsEngine);
 		
@@ -219,7 +191,7 @@ public class GameRunner implements IGameRunner {
 		
 		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
-		System.out.println("The list of displayable nodes here is " + myLevelData.getDisplayableNodes());
+//		System.out.println("The list of displayable nodes here is " + myLevelData.getDisplayableNodes());
 
 		//re-populate the game screen
 		myGameDisplay.populateGameScreen();
@@ -302,7 +274,7 @@ public class GameRunner implements IGameRunner {
 			myGameDisplay.display();
 		}
 		
-		System.out.println("The play level method is playing here at " + fileNameWithPath);
+//		System.out.println("The play level method is playing here at " + fileNameWithPath);
 		
 //		System.out.println(fileName);
 		//Set the levelNumber to 0 because we are not transitioning anymore
@@ -402,43 +374,56 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void replayLevel() {
 		// TODO Auto-generated method stub
-		
-		//Test here: for the ability to play THE NEXT LEVEL!!!
-			Optional<String> correctLevel = myLevelList
-					.stream()
-		            .filter(a -> a.equals(myCurrentLevelString))
-		            .findFirst();
-		
-		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
-		String nextLevel = myLevelList.get(tempIndex);
-		myLevelData.setNextLevelName(nextLevel);
-		
-//		myLevelData.setNextLevelName(myCurrentLevelString);
+		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
 	
 	@Override
 	public void replayGame() {}
 		// TODO Auto-generated method stub
 
-	@Override
-	public CompleteAuthoringModelable getManager() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public CompleteAuthoringModelable getManager () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public void addScene() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void addScene () {
+        // TODO Auto-generated method stub
+        
+    }
 
-	@Override
-	public void saveAll() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void saveAll () {
+        // TODO Auto-generated method stub
+        
+    }
+
 	
 	public String getLevelNameString() {
 		return this.myCurrentLevelString;
 	}
-	
+
+	@Override
+	public void playNextLevel() {
+		stop();
+		System.out.println("The timeline stopped here");
+		// TODO Auto-generated method stub
+		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
+		String nextLevel = myLevelList.get(tempIndex);
+		myLevelData.setNextLevelName(nextLevel);
+		getTimeline().play();
+	}
+    @Override
+    public void addScene (CompleteAuthoringModelable manager) {
+        // TODO Auto-generated method stub
+        
+    }
+	@Override
+	public void exit() {
+		// TODO Auto-generated method stub
+		myTimeline.stop();
+		//myTimeline = null;
+		myGameDisplay.exit();
+	}
 }

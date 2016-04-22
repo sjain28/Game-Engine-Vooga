@@ -11,6 +11,7 @@ import gameengine.Sprite;
  * @author Hunter Lee
  *
  */
+@Deprecated
 public class BasicPhysics implements IPhysics {
 
 	/**

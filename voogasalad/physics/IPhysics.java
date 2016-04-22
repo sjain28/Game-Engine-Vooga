@@ -9,6 +9,7 @@ import gameengine.Sprite;
  * @author Hunter Lee
  *
  */
+@Deprecated
 public interface IPhysics {
 
 	public void translateX(Sprite sprite, Double amount);
