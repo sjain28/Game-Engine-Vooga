@@ -31,6 +31,7 @@ public class PhysicsEffect extends SpriteEffect {
 				callEffectMethod(sprite, data);
 			}
 		}
+		getSprites().clear();
 	}
 
 	private void callEffectMethod(Sprite sprite, ILevelData data){
