@@ -2,6 +2,9 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+
 import authoring.interfaces.Elementable;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.Node;
@@ -12,15 +15,14 @@ import tools.interfaces.VoogaData;
 public class GlobalPropertiesManager implements Elementable {
 
     private Map<String, VoogaData> globalPropertiesMap;
+    private String myName;
 
     public GlobalPropertiesManager () {
         globalPropertiesMap = new HashMap<String, VoogaData>();
     }
 
     @Override
-    public void update () {
-        // TODO Auto-generated method stub
-    }
+    public void update () {}
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
@@ -39,32 +41,28 @@ public class GlobalPropertiesManager implements Elementable {
 
     @Override
     public String getName () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Node getNodeObject () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public String getId () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-        // TODO Auto-generated method stub
-
+        globalPropertiesMap.putAll(newVoogaProperties);
     }
 
     @Override
     public void setName (String name) {
-        // TODO Auto-generated method stub
-
+        this.myName = name;
     }
+
 
 }
