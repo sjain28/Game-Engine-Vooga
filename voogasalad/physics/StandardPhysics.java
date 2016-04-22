@@ -56,7 +56,7 @@ public class StandardPhysics implements IPhysicsEngine{
 		sprite.setPosition(newPosition);
 	}
 
-	@Override
+
 	public void setVelocity(Sprite sprite, Velocity newVelocity) {
 		sprite.setVelocity(newVelocity);
 	}

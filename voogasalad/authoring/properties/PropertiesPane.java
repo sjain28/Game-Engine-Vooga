@@ -20,7 +20,7 @@ import javafx.scene.control.TabPane;
 import tools.interfaces.VoogaData;
 
 
-public class PropertiesPane extends TabPane implements Windowable, Observer {
+public class PropertiesPane extends TabPane implements Windowable {
 
     private PropertiesTabManager ptm;
 
@@ -73,17 +73,6 @@ public class PropertiesPane extends TabPane implements Windowable, Observer {
     @Override
     public Node getWindow () {
         return this;
-    }
-
-    /**
-     * Observer interface method to keep track of global variables.
-     */
-    @Override
-    public void update (Observable o, Object arg) {
-        if ((o instanceof CompleteAuthoringModelable) && (arg instanceof Elementable)) {
-            Elementable global = (Elementable) arg;
-            ptm.getGlobalPropertiesTab().getPropertiesMap(global);
-        }
     }
 
 }

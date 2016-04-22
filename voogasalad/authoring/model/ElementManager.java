@@ -27,6 +27,7 @@ import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import resources.VoogaBundles;
+import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.bindings.ImageProperties;
 import tools.interfaces.VoogaData;
@@ -54,6 +55,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
         myXmlDataFile = new File(filePath);
+        initGlobalVariablesPane();
     }
 
     public ElementManager (File xmlDataFile) {
@@ -62,7 +64,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void addGameElements (Node ... elements) {
-//        System.out.println("ADDED");
         myGameElements.addAll(Arrays.asList(elements));
         setChanged();
         notifyObservers(myGameElements);
@@ -80,12 +81,15 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     public void addEvents (VoogaEvent ... events) {
         myEventList.addAll(Arrays.asList(events));
+        setChanged();
+        notifyObservers(myEventList);
     }
 
     public void removeEvents (VoogaEvent ... events) {
         myEventList.removeAll(Arrays.asList(events));
+        setChanged();
+        notifyObservers();
     }
-
     public Node getElement (String id) {
         for (Node node : myGameElements) {
 
@@ -123,6 +127,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                 Sprite sprite = ((GameObject) element).getSprite();
                 sprite.setInitializationMap(ip.storeData(object));
                 elements.add(sprite);
+                //System.out.println(object.getVoogaProperties().toString().toString());
             }
 
             // if (element instanceof VoogaFrontEndText) {
@@ -136,7 +141,9 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                                              spriteFactory.getArchetypeMap());
 //            System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data, filePath);
-//            System.out.println("I'm done saving in element manager");
+            System.out.println("I'm done saving in element manager");
+            //System.out.println(GPM.getVoogaProperties().toString().toString());
+
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             e.printStackTrace();
@@ -171,15 +178,9 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         return GPM.getVoogaProperties();
     }
 
-    public GlobalPropertiesManager getGlobalPropertiesManager () {
-        return GPM;
-    }
-
-    @Override
-    public void addGlobalVariable (String name, VoogaData value) {
-        GPM.addProperty(name, value);
-        setChanged();
-        notifyObservers(GPM.getVoogaProperties());
+    public void initGlobalVariablesPane(){
+    	setChanged();
+    	notifyObservers(GPM);
     }
 
     @Override
@@ -230,7 +231,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         if (!GPM.getVoogaProperties().isEmpty()) {
             throw new VoogaException();
         }
-        
         GPM.setVoogaProperties(globalPropertiesMap);
     }
 

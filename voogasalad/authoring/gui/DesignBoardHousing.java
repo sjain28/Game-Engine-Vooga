@@ -1,18 +1,10 @@
 package authoring.gui;
 
-import java.util.UUID;
-
-import authoring.CustomText;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.model.ElementManager;
-import authoring.model.GameObject;
-import authoring.resourceutility.ResourceDecipherer;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import resources.VoogaBundles;
 
 
 public class DesignBoardHousing extends TabPane {
@@ -25,6 +17,7 @@ public class DesignBoardHousing extends TabPane {
  * @param elem: Interface for Manager to Update Backend 
  */
     public DesignBoardHousing (CompleteAuthoringModelable elem) {
+
     	mySceneName = new SimpleStringProperty();
     	DesignBoardPreferences preferences = new DesignBoardPreferences(elem);
     	preferences.setListener(e -> {
