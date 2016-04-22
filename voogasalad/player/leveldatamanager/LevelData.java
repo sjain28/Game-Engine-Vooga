@@ -237,7 +237,7 @@ public class LevelData implements ILevelData {
         data = fileManager.getDataContainer();
         
         List<Elementable> elementObjects = data.getElementableList();
-        System.out.println("All the sprites here are" + elementObjects);
+//        System.out.println("All the sprites here are" + elementObjects);
 
         // clear whats in the myElements Map.
         myElements.clear();
@@ -266,21 +266,21 @@ public class LevelData implements ILevelData {
         }
 
         List<VoogaEvent> eventObjects = data.getEventList();
-        System.out.println("All the events here are" + eventObjects);
+//        System.out.println("All the events here are" + eventObjects);
 
         for (VoogaEvent e : eventObjects) {
             addEventAndPopulateKeyCombos(e);
         }
 
         Map<String, Sprite> archetypeMap = data.getArchetypeMap();
-        System.out.println("All the events here are" + eventObjects);
+//        System.out.println("All the events here are" + eventObjects);
 
         mySpriteFactory = new SpriteFactory(archetypeMap);
 
-        System.out.println("The spriteFactory here is" + mySpriteFactory);
+//        System.out.println("The spriteFactory here is" + mySpriteFactory);
 
         myGlobalVariables = data.getVariableMap();
-        System.out.println("All the variables here are" + myGlobalVariables);
+//        System.out.println("All the variables here are" + myGlobalVariables);
 
         myGlobalVariables.put("LevelIndex", new VoogaString(""));
     }

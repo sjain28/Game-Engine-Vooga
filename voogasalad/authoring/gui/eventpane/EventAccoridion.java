@@ -81,7 +81,7 @@ public class EventAccoridion extends Tab {
         }
         
         String className = VoogaBundles.backendToGUIProperties.getString(name);
-        System.out.println(className);
+        //System.out.println(className);
         Class<?> c = null;
         
         try {
@@ -95,7 +95,7 @@ public class EventAccoridion extends Tab {
             try {
                 Object o = c.getConstructor(EditEventable.class).newInstance(manager);
                 titledPane = (EventTitledPane) o;
-                System.out.println("TitledPane created in EventAccoridion.java");
+                //System.out.println("TitledPane created in EventAccoridion.java");
                 return titledPane;
             }
             catch (Exception e) {
