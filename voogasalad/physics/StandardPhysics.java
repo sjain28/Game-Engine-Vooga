@@ -36,9 +36,15 @@ public class StandardPhysics implements IPhysicsEngine{
 		myFrameTime = frameTime;
 	}
 	
+//	@Override
+//	public void translateX(Sprite sprite, Double change) {
+//		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+//	}
+	
 	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+		for (int i = 0; i < 10; i++)
+		sprite.getPosition().addX(change * REDUCE_FACTOR);
 	}
 	
 	public void translateY(Sprite sprite, Double change) {
