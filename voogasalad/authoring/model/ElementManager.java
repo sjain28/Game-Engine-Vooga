@@ -79,8 +79,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void addEvents (VoogaEvent ... events) {
-        System.out.println("ADDED");
-        
         myEventList.addAll(Arrays.asList(events));
         setChanged();
         notifyObservers(myEventList);
