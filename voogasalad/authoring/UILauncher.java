@@ -21,9 +21,9 @@ public class UILauncher {
 	public UILauncher(Stage primaryStage, CompleteAuthoringModelable model) {
 		
 		// ***
-		//new Splash(e -> {
+		// new Splash(e -> {
 			ProjectInitializationPrompt prompt = new ProjectInitializationPrompt();
-			prompt.setProceedEvent(e -> {
+			prompt.setProceedEvent(ee -> {
 				prompt.close();
 				UIManager manager = new UIManager(model);
 				manager.setProjectName(prompt.getName());
@@ -33,7 +33,7 @@ public class UILauncher {
 				primaryStage.show();
 			});
 			prompt.show();
-		//});
+		// });
 		
 	}
 
