@@ -7,13 +7,6 @@ import tools.Velocity;
 
 public interface IPhysicsEngine {
 
-	/**
-	 * Take in a sprite's position and add velocity per frame
-	 * 
-	 * @param sprite
-	 * @param change
-	 */
-	void translate(Sprite sprite, Velocity change);
 
 	/**
 	 * Set a sprite's position to a new vector
@@ -23,13 +16,6 @@ public interface IPhysicsEngine {
 	 */
 	void setPosition(Sprite sprite, Position newPosition);
 
-	/**
-	 * Take in a sprite's position and add a position vector directly to it
-	 * 
-	 * @param sprite
-	 * @param addedPosition
-	 */
-	void addPosition(Sprite sprite, Position addedPosition);
 
 	/**
 	 * Set a sprite's velocity to a new vector
@@ -39,13 +25,7 @@ public interface IPhysicsEngine {
 	 */
 	void setVelocity(Sprite sprite, Velocity newVelocity);
 
-	/**
-	 * Take in a sprite's position and add velocity vector directly to it
-	 * 
-	 * @param sprite
-	 * @param addedVelocity
-	 */
-	void addVelocity(Sprite sprite, Velocity addedVelocity);
+
 
 	/**
 	 * Take in a sprite's velocity and add acceleration per frame
@@ -90,14 +70,6 @@ public interface IPhysicsEngine {
 	 * @param gravityAcceleration
 	 */
 	void gravity(Sprite sprite, Double gravityAcceleration);
-
-	/**
-	 * Given enough time in the frame for physics operations, look at the next frame 
-	 * and prepare for operations
-	 * 
-	 * @param alpha
-	 */
-	void interpolatePositions(float alpha);
 
 	void translateX(Sprite sprite, Double change);	
 }
