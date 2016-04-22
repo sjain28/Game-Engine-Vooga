@@ -18,7 +18,7 @@ public class VariableBuilder extends PropertyBuilder {
 	@Override
     public void compile () {
         try{
-            myManager.addGlobalVariable(getName(), getValue());
+            //myManager.addGlobalVariable(getName(), getValue());
         }
        catch(Exception e) {
            numberError("Please input a valid number");
