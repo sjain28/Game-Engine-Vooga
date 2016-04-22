@@ -118,6 +118,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
         //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
 
+
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
 //        System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
 //                           "velocityX" + myVelocity.getX());

@@ -37,9 +37,8 @@ public class VoogaEvent {
 				return;
 			}
 		}
-//		System.out.println("Cause " + myCauses.get(0) + " was true!");
+
 		for(Effect e: myEffects){
-//			System.out.println(e);
 			e.execute(data);
 			System.out.println("Effect executing");
 		}
