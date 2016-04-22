@@ -16,6 +16,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.Sceneable;
 import authoring.model.ElementManager;
 import authoring.model.ElementTabManager;
+import data.Serializer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.Event;
@@ -41,13 +42,12 @@ import resources.VoogaBundles;
  * menubar, toolbar, and grid of windows
  * 
  */
-// Temporarily extending GridPane, eventually will use Mosaic to display
-// components
 public class UIManager extends VBox implements Menuable {
+	
 	private UIGridHousing grid;
 	private SimpleIntegerProperty currentTabIndex;
 	private ElementTabManager elementTabManager;
-
+	
 	/**
 	 * Initializes the UI Manager
 	 * 
@@ -72,44 +72,45 @@ public class UIManager extends VBox implements Menuable {
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
 			new ToolPanelHandlingMirror(e, this);
 		}), grid = new UIGridHousing(elementTabManager.getCurrentManager()));
-		
-        grid.getSelectionModel().selectedIndexProperty().addListener((obs, old, n) -> {
-        	this.currentTabIndex.set((int) n);
-        });
+
+		grid.getSelectionModel().selectedIndexProperty().addListener((obs, old, n) -> {
+			this.currentTabIndex.set((int) n);
+		});
+	}
+	
+	public void setProjectName(String name) {
+		grid.setProjectName(name);
 	}
 
 	public void addScene() {
-		elementTabManager.addManager(new ElementManager());
-		// initializes a new scene using the most recently added model;
+		addScene(new ElementManager());
+	}
+
+	public void addScene(CompleteAuthoringModelable manager) {
+		elementTabManager.addManager((ElementManager) manager);
 		grid.addScene(elementTabManager.getCurrentManager());
 	}
-	
-	public void addScene(CompleteAuthoringModelable manager){
-	    elementTabManager.addManager((ElementManager) manager);
-	    grid.addScene(elementTabManager.getCurrentManager());
-	}
-	
+
 	public CompleteAuthoringModelable getManager() {
 		return elementTabManager.getCurrentManager();
 	}
-	
+
 	public List<String> getAllManagerNames() {
 		List<String> names = new ArrayList<String>();
-		elementTabManager.getAllManagers().stream()
-										  .map(ElementManager::getName)
-										  .forEach(names::add);
+		elementTabManager.getAllManagers().stream().map(ElementManager::getName).forEach(names::add);
 		return names;
 	}
 
 	// TODO: Format output correctly
 	public void saveAll() {
-		for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
-			try {
+		try {
+			for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
 				m.onSave();
-			} catch (VoogaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			Serializer.serialize(getAllManagerNames(), "LevelProgressionText.xml");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

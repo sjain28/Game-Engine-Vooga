@@ -27,6 +27,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
+import resources.VoogaBundles;
 
 public class LevelCartographer extends Stage {
 
@@ -35,6 +36,8 @@ public class LevelCartographer extends Stage {
 	private static final double CIRCLE_SIZE = 200;
 	private static final double CIRCLE_DEGREES = 360;
 	private static final double RING_SIZE = 300;
+	private static final double INCREASE_FACTOR = 1.2;
+	
 	private BorderPane myGUI;
 	private Group myMap;
 	private List<String> levelNames;
@@ -46,6 +49,7 @@ public class LevelCartographer extends Stage {
 		this.manager = (UIManager) model;
 		initializeScene();
 		loadLevels();
+		loadLinesAndPoints();
 		populate();
 	}
 
@@ -66,7 +70,7 @@ public class LevelCartographer extends Stage {
 	}
 
 	private void addConnector() {
-		Connection connector = new Connection();
+		Connection connector = new Connection(this.manager.getManager());
 		connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
 			for (Level level : levels) {
 				if (connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
@@ -89,7 +93,7 @@ public class LevelCartographer extends Stage {
 		if (!myMap.getChildren().contains(ep)) {
 			addEntrypoint(ep);
 		}
-		ep.setRadius(1.2 * CIRCLE_SIZE / levelNames.size());
+		ep.setRadius(INCREASE_FACTOR * CIRCLE_SIZE / levelNames.size());
 	}
 	
 	private void addEntrypoint(Entrypoint circ) {
@@ -112,6 +116,10 @@ public class LevelCartographer extends Stage {
 		// ================================================================================|
 		levels = new ArrayList<Level>();
 		levelNames = this.manager.getAllManagerNames();
+	}
+	
+	private void loadLinesAndPoints() {
+		
 	}
 
 	private void populate() {

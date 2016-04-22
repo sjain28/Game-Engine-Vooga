@@ -3,6 +3,7 @@ package authoring.gui.cartography;
 import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.gui.eventpane.CauseTitledPane;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.resourceutility.ButtonMaker;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,10 +21,10 @@ public class ConnectionPrompt extends Stage {
 	
 	private VBox container;
 	
-	public ConnectionPrompt(String start, String end) {
+	public ConnectionPrompt(String start, String end, CompleteAuthoringModelable model) {
 		String startLevel = (start == null) ? NO_LEVEL_SELECTED : start;
 		String endLevel = (end == null) ? NO_LEVEL_SELECTED : end;
-		Button addCond = new ButtonMaker().makeButton("Add Condition", e -> new LevelCauseWindow(null));
+		Button addCond = new ButtonMaker().makeButton("Add Condition", e -> new LevelCauseWindow(model));
 		addCond.setDisable(start == null || end == null);
 		container = new VBox();
 		container.getChildren().addAll(makeRow(new CustomText("Start:", FontWeight.BOLD), new CustomText(startLevel)),
