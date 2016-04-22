@@ -15,11 +15,6 @@ public class SpriteEffect extends VariableEffect{
 	private List<Sprite> mySprites = new ArrayList<>();
 
 	// constructor with sprites- apply to given sprites
-	public SpriteEffect(String spriteID, String variable, String method, VoogaEvent event) {
-		super(variable, method, event);
-		setSpriteID(spriteID);
-		setNeedsSprites(false);
-	}
 
 	public SpriteEffect(String spriteID, String variable, String method, Double parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
@@ -32,14 +27,16 @@ public class SpriteEffect extends VariableEffect{
 		setSpriteID(spriteID);
 		setNeedsSprites(false);
 	}
+	
+	public SpriteEffect(String spriteID, String variable, String method, String parameter, VoogaEvent event) {
+		super(variable, method, parameter, event);
+		setSpriteID(spriteID);
+		setNeedsSprites(false);
+	}
+	
 
 	// constructor with archetype, boolean true- apply to all of archetype
 	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
-	public SpriteEffect(String archetype, Boolean needsSprites, String variable, String method, VoogaEvent event) {
-		super(variable, method, event);
-		setMyArchetype(archetype);
-		setNeedsSprites(needsSprites);
-	}
 
 	public SpriteEffect(String archetype, Boolean needsSprites, String variable, String method, Double parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
@@ -52,12 +49,14 @@ public class SpriteEffect extends VariableEffect{
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
 	}
+	
+	public SpriteEffect(String archetype, Boolean needsSprites, String variable, String method, String parameter, VoogaEvent event) {
+		super(variable, method, parameter, event);
+		setMyArchetype(archetype);
+		setNeedsSprites(needsSprites);
+	}
 
 	// constructor with nothing- apply to all for which event supplies
-	public SpriteEffect(String method, String variable, VoogaEvent event) {
-		super(variable, method, event);
-		setNeedsSprites(true);
-	}
 
 	public SpriteEffect(String variable, String method, Double parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
@@ -65,6 +64,11 @@ public class SpriteEffect extends VariableEffect{
 	}
 
 	public SpriteEffect(String variable, String method, Boolean parameter, VoogaEvent event) {
+		super(variable, method, parameter, event);
+		setNeedsSprites(true);
+	}
+	
+	public SpriteEffect(String variable, String method, String parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
 		setNeedsSprites(true);
 	}

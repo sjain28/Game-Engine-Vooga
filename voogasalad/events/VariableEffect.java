@@ -3,6 +3,7 @@ package events;
 import java.lang.reflect.*;
 
 import player.leveldatamanager.ILevelData;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
@@ -24,10 +25,11 @@ public class VariableEffect extends Effect {
 		myVariable = variable;
 		myParameter = parameter;
 	}
-	public VariableEffect (String variable, String method, VoogaEvent event) {
+	public VariableEffect (String variable, String method, String parameter, VoogaEvent event) {
 		super(event);
 		myMethod = method;
 		myVariable = variable;
+		myParameter = parameter;
 	}
 
 	public VariableEffect (String method, Double parameter, VoogaEvent event){
@@ -77,5 +79,12 @@ public class VariableEffect extends Effect {
 	protected Object getParameter(){
 		return myParameter;
 	}
-
+	
+	public void setParameter(Object parameter) throws VoogaException{
+		if (!parameter.getClass().equals(myParameter.getClass())){
+			throw new VoogaException("Please input a " + myParameter.getClass());
+		}else{
+			myParameter = parameter;
+		}
+	}	
 }

@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import tools.Acceleration;
 import tools.Position;
 import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.bindings.ImageProperties;
 import tools.Velocity;
 import tools.VoogaBoolean;
@@ -41,7 +42,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myID;
     private String myName;
     private Map<String, VoogaData> myProperties;
-    private String myImagePath;
     private String myArchetype;
 
     private transient ImageView myImage;
@@ -62,17 +62,16 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
         myAcceleration = new Acceleration(0, 0);
-
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
-        myImagePath = imagePath;
+        myProperties.put(IMAGE_PATH, new VoogaString(imagePath));
         Image image = null;
 
-        if (myImagePath.contains("file:")) {
-            image = new Image(myImagePath);
+        if (myProperties.get(IMAGE_PATH).getValue().toString().contains("file:")) {
+            image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
         }
         else {
-            image = new Image(this.getClass().getResourceAsStream(myImagePath));
+            image = new Image(this.getClass().getResourceAsStream(myProperties.get(IMAGE_PATH).getValue().toString()));
 
         }
 
@@ -194,15 +193,15 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     public void setImagePath (String path) {
-        myImagePath = path;
-        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        myProperties.put(IMAGE_PATH, new VoogaString(path));
+        Image image = new Image(this.getClass().getResourceAsStream(myProperties.get(IMAGE_PATH).getValue().toString()));
         myImage = new ImageView(image);
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
     }
 
     public String getImagePath () {
-        return myImagePath;
+        return myProperties.get(IMAGE_PATH).getValue().toString();
     }
 
     @Override
@@ -286,7 +285,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 //        System.out.println("My image was null");
         
         ImageProperties imageProperties= new ImageProperties();
-        Image image = new Image(myImagePath);
+        Image image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
         myImage = new ImageView(image);
         
         imageProperties.loadData(myImage,initializationProperties);
