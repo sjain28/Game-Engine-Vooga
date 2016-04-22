@@ -10,15 +10,16 @@ import tools.VoogaAlert;
 
 
 public class Run extends ToolbarItemHandler {
-	Save save;
+    Save save;
 
-	public Run (Menuable model) {
-		//save = new Save(model);
-	}
+    public Run (Menuable model) {
+        save = new Save(model);
+    }
 
-	@Override
-	public void handle () {
-		GameRunner gameRunner = new GameRunner();
-		gameRunner.playLevel("Test.xml", true);
-	}
+    @Override
+    public void handle () {
+        save.handle();
+        GameRunner gameRunner = new GameRunner();
+        gameRunner.playLevel("Test.xml", true);
+    }
 }
