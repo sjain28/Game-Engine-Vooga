@@ -119,7 +119,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
 
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
-        System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
+//        System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
                            "velocityX" + myVelocity.getX());
 
         myLoc.addX(myVelocity.getX());
@@ -281,15 +281,15 @@ public class Sprite implements Moveable, Effectable, Elementable {
     public void init () throws VoogaException {
         if (myImage != null)
             return;
-        System.out.println("My image was null");
+//        System.out.println("My image was null");
         
         ImageProperties imageProperties= new ImageProperties();
         Image image = new Image(myImagePath);
         myImage = new ImageView(image);
         
         imageProperties.loadData(myImage,initializationProperties);
-        System.out.println("Image Size: "+image.getWidth()+" "+image.getHeight());
-        System.out.println("ImageView Size: "+myImage.getFitWidth()+ " "+myImage.getFitHeight());
+//        System.out.println("Image Size: "+image.getWidth()+" "+image.getHeight());
+//        System.out.println("ImageView Size: "+myImage.getFitWidth()+ " "+myImage.getFitHeight());
         
         initializeCoordinates();
         initializeDimensions(myImage.getFitWidth(),myImage.getFitHeight());

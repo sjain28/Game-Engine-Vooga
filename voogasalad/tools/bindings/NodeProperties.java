@@ -20,16 +20,16 @@ public abstract class NodeProperties {
     }
 
     public Map<String,Object> storeData (Node node) throws VoogaException {
-        System.out.println("Storing Data");
-        System.out.println(this.getClass());
-        System.out.println(this.getClass().getDeclaredFields().length);
+//        System.out.println("Storing Data");
+//        System.out.println(this.getClass());
+//        System.out.println(this.getClass().getDeclaredFields().length);
         
         Map<String,Object> propertiesMap = new HashMap<String,Object>();
         
         for (Field field : this.getClass().getDeclaredFields()) {
             Method method =
                     getMethodName(node, getResourceBundle().getString(field.getName()), "get");
-            System.out.println("Method: " + method.toString());
+//            System.out.println("Method: " + method.toString());
 
             if (method.getParameters().length == 0) {
                 try {
@@ -47,9 +47,9 @@ public abstract class NodeProperties {
     }
 
     public void loadData (Node node, Map<String,Object> nodeProperties) throws VoogaException {
-        System.out.println("Loading Data");
+//        System.out.println("Loading Data");
         for (String field : nodeProperties.keySet()) {
-            System.out.println("field name: " + field);
+//            System.out.println("field name: " + field);
             Method method =
                     getMethodName(node, getResourceBundle().getString(field), "set");
             try {
