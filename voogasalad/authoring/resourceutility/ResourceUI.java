@@ -41,16 +41,16 @@ public class ResourceUI extends Tab {
         container = new VBox(SPACING);
         buttonContainer = new HBox(SPACING);
 
-        rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
-
-        container.getChildren().addAll(rtv, buttonContainer);
-
-        makeAddButtons();
-
         this.setText(WINDOW_NAME);
         this.setContent(container);
 
     }
+    
+    public void setProjectName(String name) {
+    	rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, name));
+        container.getChildren().addAll(rtv, buttonContainer);
+        makeAddButtons();
+	}
 
     /**
      * Makes buttons to add folders and import files.

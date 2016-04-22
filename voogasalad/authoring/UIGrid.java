@@ -121,6 +121,10 @@ public class UIGrid extends GridPane{
         this.add(events, 0, 2);
     }
     
+    public void setProjectName(String name) {
+    	explorer.setProjectName(name);
+    }
+    
     public CompleteAuthoringModelable getModel(){
         return myManager;
     }
