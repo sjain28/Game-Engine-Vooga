@@ -2,7 +2,6 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 import tools.VoogaNumber;
@@ -67,6 +66,4 @@ public class GlobalPropertiesManager implements Elementable {
     public void setName (String name) {
         this.myName = name;
     }
-
-
 }

@@ -8,9 +8,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class Open extends ToolbarItemHandler{
+public class Load extends ToolbarItemHandler{
     
-    public Open(){
+    public Load(){
         handle();
     }
     

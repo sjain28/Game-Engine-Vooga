@@ -15,6 +15,8 @@ public interface IGameRunner extends Menuable {
 	void stop();
 
 	void start();
+	
+	void exit();
 
 	void speedUp();
 
@@ -31,5 +33,7 @@ public interface IGameRunner extends Menuable {
 	void replayGame();
 	
 	void replayLevel();
+
+	void playNextLevel();
 
 }

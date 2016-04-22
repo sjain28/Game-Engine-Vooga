@@ -16,6 +16,7 @@ import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
+import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
@@ -266,6 +267,11 @@ public class LevelData implements ILevelData {
 			myElements.put(el.getId(), el);
 			//if an element is a sprite and a main character, add its id to the main char list
 			if(el instanceof Sprite){
+				try {
+					((Sprite) el).init();
+				} catch (VoogaException e) {
+					e.printStackTrace();
+				}
 				if(((Sprite) el).isContinuous()){
 					//add in the new continuous sprite ids
 					myContinuousSpriteIDs.add(el.getId());

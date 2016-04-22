@@ -18,6 +18,8 @@ public class DisplayScroller implements IDisplayScroller {
 	private int myAdjustFactorX;
 	//	private int myAdjustFactorY;
 	private int myConstantScrollCenter;
+	
+//	private boolean DEBUG = false;
 
 	/**
 	 * Default constructor that sets the screen size to be used
@@ -82,6 +84,10 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	public <E> List<Node> centerScroll(List<E> allNodes, double ceneteredCharXPos) {
 		//double mainCharXPos = mainCharLocation.getX();
+		
+//		if (DEBUG) (ArrayListList<Nodes>) allNodes;
+		
+		
 		List<Node> nodesToDisplay;
 		if (ceneteredCharXPos <= myAdjustFactorX) {
 			nodesToDisplay = allNodes.stream()

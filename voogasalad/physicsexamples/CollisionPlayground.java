@@ -1,4 +1,4 @@
-package physics;
+package physicsexamples;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;

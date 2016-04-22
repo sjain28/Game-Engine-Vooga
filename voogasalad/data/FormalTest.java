@@ -37,10 +37,10 @@ public class FormalTest extends Application {
         DataWritingTest dataTest= new DataWritingTest();
         dataTest.setup();
         DataContainerOfLists manager = dataTest.getData();
-        System.out.println(System.getProperty("java.class.path"));
+//        System.out.println(System.getProperty("java.class.path"));
         File file = new File(testString);
-        System.out.println("Does the file here exist?" + file.exists());
-        System.out.println("The file location here is " + file.getCanonicalPath());
+//        System.out.println("Does the file here exist?" + file.exists());
+//        System.out.println("The file location here is " + file.getCanonicalPath());
         try {
             FileWriterFromGameObjects.saveGameObjects(manager, testString);
         }

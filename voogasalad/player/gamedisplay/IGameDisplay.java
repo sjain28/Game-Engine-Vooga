@@ -30,4 +30,6 @@ public interface IGameDisplay {
 	
 	Stage getStage();
 	
+	void exit();
+	
 }
