@@ -1,5 +1,6 @@
 package authoring.gui.cartography;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -30,6 +31,31 @@ public class Connection extends Group {
 		connector.setStrokeWidth(LINE_WIDTH);
 		connector.setStroke(Paint.valueOf("white"));
 	}
+	
+	public Anchor getStartAnchor() {
+		return this.anchor1;
+	}
+	
+	public Anchor getEndAnchor() {
+		return this.anchor2;
+	}
+	
+	public DoubleProperty getStartXProperty() {
+		return anchor1.centerXProperty();
+	}
+	
+	public DoubleProperty getStartYProperty() {
+		return anchor1.centerYProperty();
+	}
+	
+	public DoubleProperty getEndXProperty() {
+		return anchor2.centerXProperty();
+	}
+	
+	public DoubleProperty getEndYProperty() {
+		return anchor2.centerYProperty();
+	}
+	
 	
 	private void attachAnchors() {
 		anchor1 = new Anchor(connector.startXProperty(), connector.startYProperty(), TransitionOrder.FIRST);

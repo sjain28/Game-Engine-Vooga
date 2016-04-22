@@ -33,6 +33,7 @@ import tools.interfaces.VoogaData;
  *
  */
 public class LevelData implements ILevelData {
+	private boolean DEBUG = true;
 
 	private static final int SCREENSIZE = 600;
 
@@ -161,6 +162,10 @@ public class LevelData implements ILevelData {
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
+		
+		if (DEBUG) return displayablenodes;
+
+		
 		// IF THE MAIN CHARACTER HASN'T BEEN SET
 		if (getMainCharacter() == null){
 			return myScroller.centerScroll(displayablenodes, 5);
