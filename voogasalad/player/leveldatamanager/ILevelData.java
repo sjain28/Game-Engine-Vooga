@@ -44,6 +44,8 @@ public interface ILevelData {
 	VoogaData getGlobalVar(String myVarName);
 	
 	Sprite addSprite(String archetype);
+	
+	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
 }

@@ -54,9 +54,9 @@ public class StandardHUD implements IHUD {
 		Label score = new Label(SCORE_LABEL);
 		//	    score.textProperty().bind(valueProperty);
 		//	    Label timer = new Timer();
-		CountdownTimer cttimer = new CountdownTimer();
+		Timer cttimer = new Timer();
 
-		myHUD.getChildren().addAll(score, cttimer.getTimeString());
+		myHUD.getChildren().addAll(score, cttimer.getTimeLabel());
 		return myHUD;
 	}
 

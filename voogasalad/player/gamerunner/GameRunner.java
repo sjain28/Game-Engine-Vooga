@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.Deserializer;
 import data.Serializer;
@@ -42,9 +43,9 @@ import tools.VoogaException;
  */
 public class GameRunner implements IGameRunner {
 
-    private static final int INIT_SPEED = 61;
-    private static final int MILLISECOND_DELAY = 1000 / INIT_SPEED;
-    private static final int SPEEDCONTROL = 10;
+    private static final double INIT_SPEED = 60;
+    private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
+    private static final double SPEEDCONTROL = 10;
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
     private SpriteManager mySpriteManager;
@@ -54,8 +55,9 @@ public class GameRunner implements IGameRunner {
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay;
 	private List<String> myLevelList;
+	private int myCurrentStep;
 	private static Timeline myTimeline;
-    
+
 	/**
 	 * Default constructor
 	 * 
@@ -99,6 +101,7 @@ public class GameRunner implements IGameRunner {
 	 * 
 	 */
 	public void run() {
+		myCurrentStep = 0;
 		getTimeline().setRate(INIT_SPEED);
 		getTimeline().play();
 	}
@@ -112,6 +115,13 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void step() {	
 		System.out.println("step");
+		myCurrentStep++;
+		double secondspassed = myCurrentStep*(1/INIT_SPEED)/60;
+		System.out.println(myCurrentStep);
+		System.out.println(secondspassed);
+		myLevelData.updatedGlobalTimer(secondspassed);
+		
+		System.out.println("Current time in seconds: "+ myLevelData.getGlobalVar("Time"));
 		//check if the pane still exists: for debugging purposes
 		if(!myGameDisplay.stageIsShowing()){stop();}
 		//check if a new level has been triggered or not

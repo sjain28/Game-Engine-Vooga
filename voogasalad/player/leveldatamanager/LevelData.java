@@ -17,6 +17,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import tools.VoogaException;
+import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
@@ -50,7 +51,8 @@ public class LevelData implements ILevelData {
 	private Map<List<String>, KeyCause> myKeyCauses;
 	
 	/**Important Static Variables**/
-	private static final String LEVEL_INDEX = "LevelIndex";
+	private static final String TIMER = "Time";
+	private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
 	private static final String CONTINIOUS_CHAR = "MainCharacterID";
 	
 	private IDisplayScroller myScroller;
@@ -203,96 +205,13 @@ public class LevelData implements ILevelData {
 		}
 	}
 	/**
-	 * Populates the LevelData with the Data from a level specified by filename
-	 * TODO: Handle continuity here
-	 * TODO: Make sure to bind all Sprite images here when they are sent over
+	 * refreshes LevelData with the data from a specified level
+	 * also restarts timer in global variable
+	 * and sets level path
 	 * 
-	 * @param filename
+	 * @param levelfilename
 	 */
-	//TODO: REFACTOR THIS TO MAKE IT SHORTER
-	/*public void refreshLevelData(String levelfilename){
-		DataContainerOfLists data = new DataContainerOfLists();
-		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
-		data = fileManager.getDataContainer();
-      
-		//clear whats in the myElements Map.
-		myEvents.clear();
-		myKeyCauses.clear();
-		
-		List<Elementable> elementObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + elementObjects);
-
-		processContinuousSpritesAndPopulateElementables(elementObjects);		
-		
-		List<VoogaEvent> eventObjects = data.getEventList();
-		System.out.println("All the events here are" + eventObjects);
-
-		for(VoogaEvent e : eventObjects){
-			addEventAndPopulateKeyCombos(e);
-		}
-		
-		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
-		System.out.println("All the events here are" + eventObjects);
-		
-		mySpriteFactory = new SpriteFactory(archetypeMap);
-
-		System.out.println("The spriteFactory here is" + mySpriteFactory);
-
-		myGlobalVariables = data.getVariableMap();
-		System.out.println("All the variables here are" + myGlobalVariables);
-		System.out.println("global variables contians main char id "+myGlobalVariables.containsKey(CONTINIOUS_CHAR));
-		
-		//TODO: HARD CODED RN, SETTING THE MAIN CHAR TO BE THE FIRST CONTINUOUS SPRITE
-		myMainCharID = myContinuousSpriteIDs.get(0);
-		
-		System.out.println("putting");
-		myGlobalVariables.put(LEVEL_INDEX, new VoogaString(""));
-		
-	}
-
-	//TODO: ALSO REFACTOR THIS SO IT IS SHORTER
-	private void processContinuousSpritesAndPopulateElementables(List<Elementable> elementObjects) {
-		//must save past maincharacter info
-		//if main character list is not equal to zero
-		//save the main character sprites for later 
-		Map<String,Sprite> previousContinuousSprites = new HashMap<String,Sprite>();
-		if(!myContinuousSpriteIDs.isEmpty()){
-			for(String id : myContinuousSpriteIDs){
-				previousContinuousSprites.put(getSpriteByID(id).getName(),getSpriteByID(id));
-			}
-		}
-		
-		//clear whats in the myElements Map.
-		myElements.clear();
-		
-		System.out.println("here1");
-		//add elements to map 
-		for(Elementable el : elementObjects){
-			myElements.put(el.getId(), el);
-			//if an element is a sprite and a main character, add its id to the main char list
-			if(el instanceof Sprite){
-				try {
-					System.out.println("here2");
-					((Sprite) el).init();
-				} catch (VoogaException e) {
-					System.out.println("here3");
-					e.printStackTrace();
-				}
-				System.out.println("here4");
-				if(((Sprite) el).isContinuous()){
-					//add in the new continuous sprite ids
-					myContinuousSpriteIDs.add(el.getId());
-					if(previousContinuousSprites.containsKey(el.getName())){
-						//if they are of the same name, set the new sprite to have all the same variables
-						//as the old sprite
-						//Note: this does not include 
-						((Sprite) el).setProperties(previousContinuousSprites.get(el.getName()).getParameterMap());
-					}
-				}
-			}
-		}
-	}*/
-	public void refreshLevelData(String levelfilename){
+	public void refreshLevelData(String levelfilename){		
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
@@ -347,19 +266,22 @@ public class LevelData implements ILevelData {
 
 		myGlobalVariables = data.getVariableMap();
 		System.out.println("All the variables here are" + myGlobalVariables);
-		
-		myGlobalVariables.put("LevelIndex", new VoogaString(""));
+		//initialize timer to zero here as well as level index
+		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
+		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));
 	}
 
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-		return ((String) (((VoogaString) myGlobalVariables.get(LEVEL_INDEX)).getValue()));
+		return ((String) (((VoogaString) myGlobalVariables.get(NEXT_LEVEL_INDEX)).getValue()));
 	}
 	public void setNextLevelName(String levelName) {
-		myGlobalVariables.put(LEVEL_INDEX, new VoogaString(levelName));
+		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(levelName));
 	}
-
+	public void updatedGlobalTimer(double time){
+		myGlobalVariables.get(TIMER).setValue(new Double(time));
+	}
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {
 		return myPhysics;
