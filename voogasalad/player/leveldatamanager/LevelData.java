@@ -49,7 +49,7 @@ public class LevelData implements ILevelData {
 	private static final String XML_SUFFIX = ".xml";
 	
 	private IPhysicsEngine myPhysics;
-	private String currentLevelName;
+//	private String currentLevelName; Take out for now
 
 	/**Sprite and Text Information**/
 	private String myMainCharacterID;
@@ -300,14 +300,19 @@ public class LevelData implements ILevelData {
 	}
 
 	
-	public void saveProgress(String playerName) throws ParserConfigurationException, TransformerException, IOException, SAXException{
+	public void saveProgress(String filePath,String playerName){
 		
 		List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
 		DataContainerOfLists dataContainer = new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                 mySpriteFactory.getArchetypeMap());
-		String newFileName = currentLevelName + UNDERSCORE + playerName + XML_SUFFIX;
-		FileWriterFromGameObjects.saveGameObjects(dataContainer, newFileName);
-		System.out.println("The file here saved at location" + newFileName);
+		String newFileName =  playerName + XML_SUFFIX;
+		try{
+		FileWriterFromGameObjects.saveGameObjects(dataContainer, playerName + newFileName);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("The file here saved at location " + filePath + playerName + newFileName);
 	}
 	
 

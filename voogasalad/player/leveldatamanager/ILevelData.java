@@ -47,5 +47,5 @@ public interface ILevelData {
 
 	IPhysicsEngine getPhysicsEngine();
 
-	void saveProgress();
+	void saveProgress(String playerName, String filePath);
 }

@@ -1,5 +1,6 @@
 package data;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -18,6 +19,7 @@ public class Serializer {
     public static void serialize (Object object, String fileName) throws ParserConfigurationException,
                                                            TransformerException, IOException,
                                                            SAXException {
+
         XStream serializer = new XStream(new DomDriver());
         ObjectOutputStream objectOutputStream =
                 serializer.createObjectOutputStream(new FileOutputStream(fileName));

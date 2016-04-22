@@ -50,7 +50,7 @@ public class GameRunner implements IGameRunner {
     private SpriteManager mySpriteManager;
     private EventManager myEventManager;
     private String levelsPath = "levels/";
-    private String gameLocation = "games/";
+    private String gamesPath = "games/";
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private List<String> myLevelList;
@@ -143,8 +143,8 @@ public class GameRunner implements IGameRunner {
 	private List<String> createLevelList(String xmlList) throws FileNotFoundException, IOException, VoogaException{
 		//Go into the path for this file
 		List<String> levelList = new ArrayList<>();
-		gameLocation = gameLocation + xmlList + "/";
-		String resourcePath = gameLocation + xmlList + ".xml";
+		gamesPath = gamesPath + xmlList + "/";
+		String resourcePath = gamesPath + xmlList + ".xml";
 		levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);
 //		System.out.println("The resource path here is called" + resourcePath); 
 //		System.out.println("Levellist is " + levelList);
@@ -262,7 +262,7 @@ public class GameRunner implements IGameRunner {
 	public void playLevel(String fileName, boolean debugMode){
 //		System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
 		myCurrentLevelString = fileName;
-		String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
+		String fileNameWithPath = this.gamesPath + levelsPath + fileName; 
 //		String fileNameWithPath =fileName;
 		
 //		System.out.println("The filenamewithpath here is" + fileNameWithPath);
@@ -431,6 +431,6 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void saveGameProgress(String playerName) {
 		// TODO Auto-generated method stub
-		myLevelData.saveProgress();
+		myLevelData.saveProgress(gamesPath,playerName);
 	}
 }
