@@ -79,32 +79,6 @@ public class GameRunner implements IGameRunner {
 		myTimeline.getKeyFrames().add(frame);
 	}
 
-//	/**
-//	 * Overloaded constructor with String parameter
-//	 * 
-//	 * @param fileString
-//	 * @throws FileNotFoundException
-//	 * @throws IOException
-//	 */
-//	public GameRunner(String fileString) throws FileNotFoundException, IOException {
-//		this(new File(fileString));
-//	}
-//	
-//	/**
-//	 * Creating a game from a VoogaGame
-//	 * 
-//	 * @param Voogagame
-//	 */
-//	public GameRunner(VoogaGame game){
-//		myGameDisplay = new StandardDisplay(getSelf());
-//		myLevelList = game.getGameLevels();
-//		myTimeline = new Timeline();
-//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-//				e -> step());
-//		myTimeline.setCycleCount(Animation.INDEFINITE);
-//		myTimeline.getKeyFrames().add(frame);
-//	}
-
 	
 	/**
 	 * Specify a GameName for which the folder will contain the file with the list of levels.
@@ -445,5 +419,12 @@ public class GameRunner implements IGameRunner {
         // TODO Auto-generated method stub
         
     }
+
+	@Override
+	public void exit() {
+		// TODO Auto-generated method stub
+		myTimeline.stop();
+		myGameDisplay.exit();
+	}
 	
 }
