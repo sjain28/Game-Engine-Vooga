@@ -37,6 +37,7 @@ public class VoogaEvent {
 				return;
 			}
 		}
+
 		for(Effect e: myEffects){
 			e.execute(data);
 		}

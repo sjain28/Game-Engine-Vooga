@@ -1,43 +1,32 @@
 package authoring.gui;
 
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import com.sun.prism.paint.Color;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.model.GameObject;
-import authoring.VoogaScene;
-import authoring.gui.menubar.builders.ArchetypeBuilder;
+import authoring.UIGridHousing;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.Elementable;
-import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
 import authoring.resourceutility.VoogaFileType;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -53,6 +42,8 @@ public class DesignBoard extends Tab implements Observer {
 	private static final String DESIGN_BOARD = "Design Board";
 	private static final double HEIGHT = 2000;
 	private static final double WIDTH = 2000;
+	private static final double DISPLAY_WIDTH = 600;
+	private static final double DISPLAY_HEIGHT = 600;
 
 	private ScrollPane container;
 	private StackPane contentPane;
@@ -87,18 +78,21 @@ public class DesignBoard extends Tab implements Observer {
 		y_offset = HEIGHT / 2;
 		x_offset = WIDTH / 2;
 		addGuides();
+		displayElements(elem.getElements());
 	}
 
 	private void addGuides() {
 		// TODO: replace hardcode with actual value from standard display
-		Rectangle guide = new Rectangle(600, 600);
+		Rectangle guide = new Rectangle(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 		guide.setStroke(Paint.valueOf("white"));
 		guide.setStrokeWidth(4);
 		guide.setFill(Paint.valueOf("transparent"));
 		guide.setStrokeDashOffset(40);
-		guide.setTranslateX(300);
-		guide.setTranslateY(300);
+		guide.setTranslateX(DISPLAY_WIDTH/2);
+		guide.setTranslateY(DISPLAY_HEIGHT/2);
 		this.contentPane.getChildren().add(guide);
+		this.container.setVvalue(0.72);
+		this.container.setHvalue(0.8);
 	}
 
 	private void initializeDragAndDrop() {
@@ -180,14 +174,10 @@ public class DesignBoard extends Tab implements Observer {
 			}
 			elementManager.addElementId(elementPath);
 		}
-
-		System.out.println(elementManager.getIds());
-
 	}
 
 	private void moveElement(String id, DragEvent e) {
 		Node element = elementManager.getElement(id);
-		System.out.println("" + e.getX() + " " + e.getY());
 		element.setTranslateX(e.getX() - x_offset);
 		element.setTranslateY(e.getY() - y_offset);
 

@@ -290,5 +290,12 @@ public class StandardDisplay implements IGameDisplay {
 		return myHUD;
 	}
 
+	@Override
+	public void exit() {
+		// TODO Auto-generated method stub
+		myMediaPlayer.stop();
+		myStage.close();
+	}
+
 
 }

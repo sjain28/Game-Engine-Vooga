@@ -14,12 +14,11 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		System.setProperty("glass.accessible.force", "false");
-		// Launches Main Program (only MenuBar of GUI implemented as of April 5)
+		// Launches Main Program
 		new Launcher(primaryStage);
 		
 		// Launches Mosaic
-		//new Tester();
+		// new BoundsTester();
 	}
 	
 	public static void main(String[] args) {

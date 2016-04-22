@@ -6,9 +6,19 @@ import javafx.scene.control.TabPane;
 
 public class Explorer extends TabPane {
 	
+	private ResourceUI resourceExplorer;
+	private AssetUI assetExplorer;
+	
 	public Explorer(CompleteAuthoringModelable myManager) {
-		this.getTabs().addAll(new ResourceUI(),
-						      new AssetUI(myManager));
+		resourceExplorer = new ResourceUI();
+		assetExplorer = new AssetUI(myManager);
+		this.getTabs().addAll(resourceExplorer,
+						      assetExplorer);
+	}
+	
+	public void setProjectName(String name) {
+		resourceExplorer.setProjectName(name);
+		assetExplorer.setProjectName(name);
 	}
 
 }

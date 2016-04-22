@@ -1,10 +1,10 @@
 package player.leveldatamanager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
@@ -18,9 +18,11 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import physics.StandardPhysics;
+import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
+
 
 /**
  * A centralized class to contain and access data relevant to a level
@@ -31,6 +33,7 @@ import tools.interfaces.VoogaData;
  *
  */
 public class LevelData implements ILevelData {
+	private boolean DEBUG = true;
 
 	private static final int SCREENSIZE = 600;
 
@@ -159,6 +162,10 @@ public class LevelData implements ILevelData {
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
+		
+		if (DEBUG) return displayablenodes;
+
+		
 		// IF THE MAIN CHARACTER HASN'T BEEN SET
 		if (getMainCharacter() == null){
 			return myScroller.centerScroll(displayablenodes, 5);
@@ -226,12 +233,23 @@ public class LevelData implements ILevelData {
 
 		//clear whats in the myElements Map.
 		myElements.clear();
+		myEvents.clear();
+		myKeyCauses.clear();
 		
 		//add elements to map 
-		for(Elementable el : elementObjects){
-			myElements.put(el.getId(), el);
-		}
+	    for (Elementable el : elementObjects) {
+            if (el instanceof Sprite) {
 
+                try {
+                    ((Sprite) el).init();
+                }
+                catch (VoogaException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+            myElements.put(el.getId(), el);
+        }
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
