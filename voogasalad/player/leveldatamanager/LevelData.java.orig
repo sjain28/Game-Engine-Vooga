@@ -234,7 +234,6 @@ public class LevelData implements ILevelData {
 		//add elements to map 
 	    for (Elementable el : elementObjects) {
             if (el instanceof Sprite) {
-
                 try {
                     ((Sprite) el).init();
                 }
@@ -243,8 +242,10 @@ public class LevelData implements ILevelData {
                     e1.printStackTrace();
                 }
             }
+
             myElements.put(el.getId(), el);
         }
+
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
