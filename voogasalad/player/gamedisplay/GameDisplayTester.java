@@ -3,23 +3,16 @@
  */
 package player.gamedisplay;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.FileReaderToGameObjects;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import tools.VoogaAlert;
-import tools.VoogaException;
 
 
 /**

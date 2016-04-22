@@ -32,6 +32,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String HEIGHT = "Height";
     protected static final String X_POS = "X Position";
     protected static final String Y_POS = "Y Position";
+    protected static final String IMAGE_PATH = "Image";
     
     private boolean isMainCharacter;
     private Velocity myVelocity;
@@ -79,7 +80,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setFitHeight(image.getHeight());
         myImage.setFitWidth(image.getWidth());
         // TODO: use properties file to put these
-        myProperties.put(MASS, mass);
+        myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
         myProperties.put(ALIVE, new VoogaBoolean(true));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
 
@@ -117,6 +118,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     	
     	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
         //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
+
 
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
 //        System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +

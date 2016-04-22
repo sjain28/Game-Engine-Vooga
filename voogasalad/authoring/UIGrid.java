@@ -10,6 +10,9 @@ import authoring.resourceutility.ResourceUI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -31,18 +34,48 @@ public class UIGrid extends GridPane{
     private CompleteAuthoringModelable myManager;
     
     private transient SimpleStringProperty mySceneName;
+    
+    private SingleSelectionModel<Tab> sm;
 
     /**
      * Initialized the UIGrid
      * 
      * TODO: Implement with Mosaic
+     * @param singleSelectionModel 
      * 
      * @param elem: Interface to Manager for the backend
      */
+    @Deprecated
     public UIGrid (CompleteAuthoringModelable elem) {
-    	
         myManager = elem;
         this.mySceneName = new SimpleStringProperty();
+        this.mySceneName.addListener((obs, old, n) -> {
+        	System.out.println(n);
+        });
+        sector();
+        try {
+            populate();
+        }
+        catch (VoogaException e) {
+            new VoogaAlert(e.getMessage());
+        }
+        
+    }
+    
+    /**
+     * Initialized the UIGrid
+     * 
+     * TODO: Implement with Mosaic
+     * @param singleSelectionModel 
+     * 
+     * @param elem: Interface to Manager for the backend
+     */
+    public UIGrid (CompleteAuthoringModelable elem, Tab container) {
+        myManager = elem;
+        this.mySceneName = new SimpleStringProperty();
+        this.mySceneName.addListener((obs, old, n) -> {
+        	container.setText(n);
+        });
         sector();
         try {
             populate();
@@ -72,6 +105,7 @@ public class UIGrid extends GridPane{
     	
         explorer = new Explorer(myManager);
         this.add(explorer, 0, 0);
+        
         designBoard = new DesignBoardHousing(myManager);
         Bindings.bindBidirectional(this.mySceneName, designBoard.getName());
         this.add(designBoard, 1, 0);
@@ -85,6 +119,10 @@ public class UIGrid extends GridPane{
         this.add(propertiesPane, 0, 1);
         EventsWindow events = new EventsWindow(myManager);
         this.add(events, 0, 2);
+    }
+    
+    public void setProjectName(String name) {
+    	explorer.setProjectName(name);
     }
     
     public CompleteAuthoringModelable getModel(){

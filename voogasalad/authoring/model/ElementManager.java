@@ -48,6 +48,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private String myManagerName;
 
     private String filePath = "games/levels/Test.xml";
+    //private String filePath = "levels/Test.xml";
 
     public ElementManager () {
         myGameElements = new ArrayList<Node>();

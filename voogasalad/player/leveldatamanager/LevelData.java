@@ -1,7 +1,5 @@
 package player.leveldatamanager;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +24,6 @@ import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
-import physics.StandardPhysics;
 import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
@@ -40,19 +37,18 @@ import tools.interfaces.VoogaData;
  * 
  * @author Krista
  *
- */
+ */ 
 public class LevelData implements ILevelData {
-	private boolean DEBUG = true;
 
 	private static final int SCREENSIZE = 600;
 	private static final String UNDERSCORE = "_";
 	private static final String XML_SUFFIX = ".xml";
 	
 	private IPhysicsEngine myPhysics;
-//	private String currentLevelName; Take out for now
 
 	/**Sprite and Text Information**/
-	private String myMainCharacterID;
+	private String myMainCharID;
+	private List<String> myContinuousSpriteIDs;
 	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
 	
@@ -62,13 +58,18 @@ public class LevelData implements ILevelData {
 	/** Event Information**/
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
-	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
+	private Map<List<String>, KeyCause> myKeyCauses;
 	
-	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
+	/**Important Static Variables**/
+	private static final String TIMER = "Time";
+	private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
+	private static final String CONTINIOUS_CHAR = "MainCharacterID";
+	
 	private IDisplayScroller myScroller;
 
 	public LevelData(IPhysicsEngine physicsengine) {
 		myPhysics = physicsengine;
+		myContinuousSpriteIDs = new ArrayList<String>();
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
 		myElements = new HashMap<String, Elementable>();		
 		myGlobalVariables = new HashMap<String, VoogaData>();
@@ -85,14 +86,6 @@ public class LevelData implements ILevelData {
 	 */
 	public Sprite getSpriteByID(String id){
 		return (Sprite) myElements.get(id);
-	}
-	/**
-	 * Returns Main Character Sprite
-	 * @param id
-	 * @return Sprite
-	 */
-	public Sprite getMainCharacter(){
-		return (Sprite) myElements.get(myMainCharacterID);
 	}
 	/**
 	 * returns all Sprite's 
@@ -173,15 +166,13 @@ public class LevelData implements ILevelData {
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
-		
-		if (DEBUG) return displayablenodes;
-
-		
-		// IF THE MAIN CHARACTER HASN'T BEEN SET
-		if (getMainCharacter() == null){
+		// IF THE MAIN CHARACTER HASN'T BEEN SET TODO: IF THIS IS HARDCODED, CHANGE
+		if (myContinuousSpriteIDs.size()==0){
 			return myScroller.centerScroll(displayablenodes, 5);
 		}
-		return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
+		//centers on first main character in list TODO: If passed something different, change this
+		Sprite centeredCharacter = getSpriteByID(myContinuousSpriteIDs.get(0));
+		return myScroller.centerScroll(displayablenodes,centeredCharacter.getPosition().getX());
 	}
 	/**
 	 * Returns unmodifiable list of key combos
@@ -224,13 +215,13 @@ public class LevelData implements ILevelData {
 		}
 	}
 	/**
-	 * Populates the LevelData with the Data from a level specified by filename
-	 * TODO: Handle continuity here
-	 * TODO: Make sure to bind all Sprite images here when they are sent over
+	 * refreshes LevelData with the data from a specified level
+	 * also restarts timer in global variable
+	 * and sets level path
 	 * 
-	 * @param filename
+	 * @param levelfilename
 	 */
-	public void refreshLevelData(String levelfilename){
+	public void refreshLevelData(String levelfilename){		
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
@@ -265,7 +256,7 @@ public class LevelData implements ILevelData {
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
-				myMainCharacterID = el.getId();
+				myMainCharID = el.getId();
 				break;
 			}
 		}
@@ -286,20 +277,22 @@ public class LevelData implements ILevelData {
 
 		myGlobalVariables = data.getVariableMap();
 		System.out.println("All the variables here are" + myGlobalVariables);
-		
-		myGlobalVariables.put("LevelIndex", new VoogaString(""));
+		//initialize timer to zero here as well as level index
+		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
+		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));
 	}
+
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-		//System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
-		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		return ((String) (((VoogaString) myGlobalVariables.get(NEXT_LEVEL_INDEX)).getValue()));
 	}
 	public void setNextLevelName(String levelName) {
-		myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
+		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(levelName));
 	}
-
-	
+	public void updatedGlobalTimer(double time){
+		myGlobalVariables.get(TIMER).setValue(new Double(time));
+	}	
 	public void saveProgress(String filePath,String playerName){
 		
 		List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
@@ -314,10 +307,6 @@ public class LevelData implements ILevelData {
 		}
 		System.out.println("The file here saved at location " + filePath + playerName + newFileName);
 	}
-	
-
-	
-	
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {
 		return myPhysics;

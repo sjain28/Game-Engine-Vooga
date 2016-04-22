@@ -7,7 +7,7 @@ import player.leveldatamanager.ILevelData;
 
 public class SpriteVariableCause extends VariableCause {
 	
-	private List<Sprite> mySprites;
+	private List<Sprite> mySprites = new ArrayList<>();
 	private String mySpriteID;
 	private String myVarName;
 	
@@ -27,9 +27,9 @@ public class SpriteVariableCause extends VariableCause {
 
 	@Override
 	public boolean check(ILevelData data){
-				
+		
+		mySprites.clear();
 		Sprite temp = data.getSpriteByID(mySpriteID);		
-		mySprites = new ArrayList<>();
 		mySprites.add(temp);
 		
 		super.setVariable(temp.getProperty(myVarName));

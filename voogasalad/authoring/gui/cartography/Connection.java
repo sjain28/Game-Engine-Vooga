@@ -1,6 +1,6 @@
 package authoring.gui.cartography;
 
-import javafx.beans.property.DoubleProperty;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -22,20 +22,20 @@ public class Connection extends Group {
 	private String start;
 	private String end;
 
-	public Connection() {
-		initializeLine();
+	public Connection(CompleteAuthoringModelable model) {
+		initializeLine(model);
 		attachAnchors();
 
 		this.getChildren().addAll(connector, anchor1, anchor2);
 	}
 
-	private void initializeLine() {
+	private void initializeLine(CompleteAuthoringModelable model) {
 		connector = new Line(0, 0, END_X, END_Y);
 		connector.setStrokeWidth(LINE_WIDTH);
 		connector.setStroke(Paint.valueOf("white"));
 		connector.setOnMouseClicked(e -> {
 			if(e.getClickCount() == 2) {
-				new ConnectionPrompt(start, end);
+				new ConnectionPrompt(start, end, model);
 			}
 		});
 	}

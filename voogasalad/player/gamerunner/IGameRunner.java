@@ -36,12 +36,6 @@ public interface IGameRunner extends Menuable {
 
 	void saveGameProgress(String playerName);
 	
-	// Methods below only called by LevelDataManager
-
-	//List<?> getKeyEvents();
-
-	@Deprecated
-	void read(Collections nodesToDisplay);
 
 	void playNextLevel();
 
