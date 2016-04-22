@@ -1,6 +1,5 @@
 package player.leveldatamanager;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,9 +16,6 @@ import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
-import physics.StandardPhysics;
-import tools.VoogaException;
-import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
@@ -37,10 +33,10 @@ public class LevelData implements ILevelData {
 	private static final int SCREENSIZE = 600;
 
 	private IPhysicsEngine myPhysics;
-	private String currentLevelName;
 
 	/**Sprite and Text Information**/
-	private List<String> myMainCharacterIDs;
+	private String myMainCharID;
+	private List<String> myContinuousSpriteIDs;
 	private Map<String,Elementable> myElements;
 	private SpriteFactory mySpriteFactory;
 	
@@ -50,13 +46,17 @@ public class LevelData implements ILevelData {
 	/** Event Information**/
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> myKeyCombos;
-	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
+	private Map<List<String>, KeyCause> myKeyCauses;
 	
-	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
+	/**Important Static Variables**/
+	private static final String LEVEL_INDEX = "LevelIndex";
+	private static final String CONTINIOUS_CHAR = "MainCharacterID";
+	
 	private IDisplayScroller myScroller;
 
 	public LevelData(IPhysicsEngine physicsengine) {
 		myPhysics = physicsengine;
+		myContinuousSpriteIDs = new ArrayList<String>();
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
 		myElements = new HashMap<String, Elementable>();		
 		myGlobalVariables = new HashMap<String, VoogaData>();
@@ -154,11 +154,11 @@ public class LevelData implements ILevelData {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 		// IF THE MAIN CHARACTER HASN'T BEEN SET TODO: IF THIS IS HARDCODED, CHANGE
-		if (myMainCharacterIDs.size()==0){
+		if (myContinuousSpriteIDs.size()==0){
 			return myScroller.centerScroll(displayablenodes, 5);
 		}
 		//centers on first main character in list TODO: If passed something different, change this
-		Sprite centeredCharacter = getSpriteByID(myMainCharacterIDs.get(0));
+		Sprite centeredCharacter = getSpriteByID(myContinuousSpriteIDs.get(0));
 		return myScroller.centerScroll(displayablenodes,centeredCharacter.getPosition().getX());
 	}
 	/**
@@ -217,33 +217,7 @@ public class LevelData implements ILevelData {
 		List<Elementable> elementObjects = data.getElementableList();
 		System.out.println("All the sprites here are" + elementObjects);
 
-		//must save past maincharacter info
-		//if main character list is not equal to zero
-		//save the main character sprites for later 
-		List<Sprite> previousContinuousSprites = new ArrayList<Sprite>();
-		if(!myMainCharacterIDs.isEmpty()){
-			for(String id : myMainCharacterIDs){
-				previousContinuousSprites.add(getSpriteByID(id));
-			}
-		}
-		
-		//clear whats in the myElements Map.
-		myElements.clear();
-		
-		//add elements to map 
-		for(Elementable el : elementObjects){
-			myElements.put(el.getId(), el);
-			//if an element is a sprite and a main character, add its id to the main char list
-			if(el instanceof Sprite){
-				if(((Sprite) el).isMainCharacter()){
-					myMainCharacterIDs.add(el.getId());
-										//check by name and archetype -> must both be the same
-				}
-			}
-		}
-		
-		//now make elements continuous
-		
+		processContinuousSpritesAndPopulateElementables(elementObjects);		
 		
 		List<VoogaEvent> eventObjects = data.getEventList();
 		System.out.println("All the events here are" + eventObjects);
@@ -261,21 +235,58 @@ public class LevelData implements ILevelData {
 
 		myGlobalVariables = data.getVariableMap();
 		System.out.println("All the variables here are" + myGlobalVariables);
+		System.out.println("global variables contians main char id "+myGlobalVariables.containsKey(CONTINIOUS_CHAR));
+		
+		//TODO: HARD CODED RN, SETTING THE MAIN CHAR TO BE THE FIRST CONTINUOUS SPRITE
+		myMainCharID = myContinuousSpriteIDs.get(0);
 		
 		System.out.println("putting");
 		myGlobalVariables.put("LevelIndex", new VoogaString(""));
 		
 	}
 
+	//TODO: ALSO REFACTOR THIS SO IT IS SHORTER
+	private void processContinuousSpritesAndPopulateElementables(List<Elementable> elementObjects) {
+		//must save past maincharacter info
+		//if main character list is not equal to zero
+		//save the main character sprites for later 
+		Map<String,Sprite> previousContinuousSprites = new HashMap<String,Sprite>();
+		if(!myContinuousSpriteIDs.isEmpty()){
+			for(String id : myContinuousSpriteIDs){
+				previousContinuousSprites.put(getSpriteByID(id).getName(),getSpriteByID(id));
+			}
+		}
+		
+		//clear whats in the myElements Map.
+		myElements.clear();
+		
+		
+		//add elements to map 
+		for(Elementable el : elementObjects){
+			myElements.put(el.getId(), el);
+			//if an element is a sprite and a main character, add its id to the main char list
+			if(el instanceof Sprite){
+				if(((Sprite) el).isContinuous()){
+					//add in the new continuous sprite ids
+					myContinuousSpriteIDs.add(el.getId());
+					if(previousContinuousSprites.containsKey(el.getName())){
+						//if they are of the same name, set the new sprite to have all the same variables
+						//as the old sprite
+						//Note: this does not include 
+						((Sprite) el).setProperties(previousContinuousSprites.get(el.getName()).getParameterMap());
+					}
+				}
+			}
+		}
+	}
+
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-		//System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
-		System.out.println(myGlobalVariables.containsKey("LevelIndex"));
-		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		return ((String) (((VoogaString) myGlobalVariables.get(LEVEL_INDEX)).getValue()));
 	}
 	public void setNextLevelName(String levelName) {
-		myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
+		myGlobalVariables.put(LEVEL_INDEX, new VoogaString(levelName));
 	}
 
 	@Override

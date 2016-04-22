@@ -33,7 +33,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String X_POS = "X Position";
     protected static final String Y_POS = "Y Position";
     
-    private boolean isMainCharacter;
+    private boolean isContinuous;
     private Velocity myVelocity;
     private Acceleration myAcceleration;
     private Position myLoc;
@@ -229,12 +229,12 @@ public class Sprite implements Moveable, Effectable, Elementable {
         return myName;
     }
 
-    public boolean isMainCharacter () {
-        return isMainCharacter;
+    public boolean isContinuous () {
+        return isContinuous;
     }
 
-    public void setMainCharacter (boolean isMainCharacter) {
-        this.isMainCharacter = isMainCharacter;
+    public void setContinuity (boolean isContinuous) {
+        this.isContinuous = isContinuous;
     }
 
     @Override
