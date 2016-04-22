@@ -1,4 +1,4 @@
-package physics;
+package physicsexamples;
 
 import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
@@ -28,6 +28,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /** Demo for understanding JavaFX Layout Bounds */
+@Deprecated
 public class BoundsPlayground extends Application {
   final ObservableList<Shape>     shapes        = FXCollections.observableArrayList();
   final ObservableList<ShapePair> intersections = FXCollections.observableArrayList();
