@@ -90,7 +90,6 @@ public class EventsWindow extends TabPane implements Observer{
     }
 
     private void delete (VoogaEvent e, HBox info) {
-        System.out.println("I WAS CALLED");
        myManager.getEvents().remove(e);
        content.getChildren().remove(info);
        causes.remove(e);

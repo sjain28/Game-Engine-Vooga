@@ -15,7 +15,7 @@ import tools.Velocity;
  */
 public class StandardPhysics implements IPhysicsEngine{
 	
-	public static final double REDUCE_FACTOR = 0.1;
+	public static final double REDUCE_FACTOR = 0.05;
 	
 	
 	/**
@@ -36,11 +36,17 @@ public class StandardPhysics implements IPhysicsEngine{
 		myFrameTime = frameTime;
 	}
 	
+//	@Override
+//	public void translateX(Sprite sprite, Double change) {
+//		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+//		
+//	}
+	
 	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+		sprite.getPosition().addX(change * REDUCE_FACTOR);
 	}
-	
+//	
 	public void translateY(Sprite sprite, Double change) {
 		sprite.getPosition().addY(change);
 	}
@@ -80,14 +86,19 @@ public class StandardPhysics implements IPhysicsEngine{
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
 		Double mass = (((Double) sprite.getPropertiesMap().get("Mass").getValue()).isInfinite()) ? 0d : (Double) sprite.getPropertiesMap().get("Mass").getValue();
-		Acceleration gravityAcceleration = new Acceleration(0, mass * gravityMagnitude/Math.pow(10, 9));
-		accelerate(sprite, gravityAcceleration);
+//		sprite.getVelocity().setX(sprite.getVelocity().getX() + 0.0001);
+		sprite.getVelocity().setY(sprite.getVelocity().getY() + gravityMagnitude * 0.000001);
+		
+//		Acceleration gravityAcceleration = new Acceleration(0, mass * gravityMagnitude/Math.pow(10, 9));
+//		accelerate(sprite, gravityAcceleration);
 	}
 
 	@Override
 	public void accelerate(Sprite sprite, Acceleration change) {
 		// TODO Auto-generated method stub
-		
+		sprite.getVelocity().setX(sprite.getVelocity().getX() + change.getX() * REDUCE_FACTOR);
+		sprite.getVelocity().setY(sprite.getVelocity().getY() + change.getY() * REDUCE_FACTOR);
+
 	}
 
 }

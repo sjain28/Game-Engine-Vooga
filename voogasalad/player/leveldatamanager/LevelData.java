@@ -33,222 +33,211 @@ import tools.interfaces.VoogaData;
  *
  */
 public class LevelData implements ILevelData {
+	private boolean DEBUG = true;
 
-    private static final int SCREENSIZE = 600;
+	private static final int SCREENSIZE = 600;
 
-    private IPhysicsEngine myPhysics;
-    private String currentLevelName;
+	private IPhysicsEngine myPhysics;
+	private String currentLevelName;
 
-    /** Sprite and Text Information **/
-    private String myMainCharacterID;
-    private Map<String, Elementable> myElements;
-    private SpriteFactory mySpriteFactory;
+	/**Sprite and Text Information**/
+	private String myMainCharacterID;
+	private Map<String,Elementable> myElements;
+	private SpriteFactory mySpriteFactory;
+	
+	/**Global Variable Information**/
+	private Map<String, VoogaData> myGlobalVariables;
+	
+	/** Event Information**/
+	private List<VoogaEvent> myEvents;
+	private List<List<String>> myKeyCombos;
+	private Map<List<String>, KeyCause> myKeyCauses; //Maps Strings 
+	
+	//TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
+	private IDisplayScroller myScroller;
 
-    /** Global Variable Information **/
-    private Map<String, VoogaData> myGlobalVariables;
+	public LevelData(IPhysicsEngine physicsengine) {
+		myPhysics = physicsengine;
+		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
+		myElements = new HashMap<String, Elementable>();		
+		myGlobalVariables = new HashMap<String, VoogaData>();
+		myEvents = new ArrayList<VoogaEvent>();
+		myKeyCombos = new ArrayList<List<String>>();
+		myKeyCauses = new HashMap<List<String>, KeyCause>();	
+	}
 
-    /** Event Information **/
-    private List<VoogaEvent> myEvents;
-    private List<List<String>> myKeyCombos;
-    private Map<List<String>, KeyCause> myKeyCauses; // Maps Strings
 
-    // TODO: REFACTOR EXACTLY WHAT GETTER AND SETTER METHODS WE WANT IN HERE
-    private IDisplayScroller myScroller;
+	/**
+	 * Returns a sprite by id
+	 * @param id
+	 * @return Sprite
+	 */
+	public Sprite getSpriteByID(String id){
+		return (Sprite) myElements.get(id);
+	}
+	/**
+	 * Returns Main Character Sprite
+	 * @param id
+	 * @return Sprite
+	 */
+	public Sprite getMainCharacter(){
+		return (Sprite) myElements.get(myMainCharacterID);
+	}
+	/**
+	 * returns all Sprite's 
+	 * 
+	 * @return
+	 */
+	public List<Sprite> getAllSprites(){
+		List<Sprite> sprites = new ArrayList<Sprite>();
+		for(String id : myElements.keySet()){
+			if(myElements.get(id) instanceof Sprite){
+				sprites.add((Sprite) myElements.get(id));
+			}
+		}
+		return sprites;
+	}
+	/**
+	 * Returns a list of sprite IDs given an archetype
+	 * @param archetype
+	 * @return
+	 */
+	public List<Sprite> getSpritesByArch(String archetype){
+		List<Sprite> list = new ArrayList<>();
+		for(String id : myElements.keySet()){
+			if(myElements.get(id) instanceof Sprite){
+				if(((Sprite) myElements.get(id)).getArchetype().equals(archetype)){
+					list.add((Sprite)myElements.get(id));
+				}
+			}
+		}
+		return list;
+	}
+	/**
+	 * Adds a sprite given an archetype
+	 * @param archetype
+	 * @return 
+	 */
+	@Override
+	public Sprite addSprite(String archetype){
+		Elementable newSprite = mySpriteFactory.createSprite(archetype);
+		myElements.put(newSprite.getId(),newSprite);
+		return (Sprite) newSprite;
+	}
+	/**
+	 * Removes sprite given an id
+	 * 
+	 * @param id
+	 */
+	public void removeSprite(Object id){
+		myElements.remove(id);
+	}
+	/**
+	 * Returns a Global Variable (VoogaData) as specified
+	 * by it's variable name
+	 * 
+	 * @param variable
+	 * @return
+	 */
+	public VoogaData getGlobalVar(String variable){
+		return myGlobalVariables.get(variable);
+	}
+	/**
+	 * Returns a VoogaText by id
+	 * @param id
+	 * @return
+	 */
+	public VoogaFrontEndText getText(Object id){
+		return (VoogaFrontEndText) myElements.get(id);
+	}
+	/**
+	 * put all objects into a generic list of display-able objects
+	 * to be accessed by the GameRunner after every update cycle.
+	 * 
+	 * @return
+	 */
+	public List<Node> getDisplayableNodes(){
+		List<Node> displayablenodes = new ArrayList<Node>();
 
-    public LevelData (IPhysicsEngine physicsengine) {
-        myPhysics = physicsengine;
-        myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
-        myElements = new HashMap<String, Elementable>();
-        myGlobalVariables = new HashMap<String, VoogaData>();
-        myEvents = new ArrayList<VoogaEvent>();
-        myKeyCombos = new ArrayList<List<String>>();
-        myKeyCauses = new HashMap<List<String>, KeyCause>();
-    }
+		for(Object key : myElements.keySet()){
+			displayablenodes.add(myElements.get(key).getNodeObject());
+		}
+		
+		if (DEBUG) return displayablenodes;
 
-    /**
-     * Returns a sprite by id
-     * 
-     * @param id
-     * @return Sprite
-     */
-    public Sprite getSpriteByID (String id) {
-        return (Sprite) myElements.get(id);
-    }
+		
+		// IF THE MAIN CHARACTER HASN'T BEEN SET
+		if (getMainCharacter() == null){
+			return myScroller.centerScroll(displayablenodes, 5);
+		}
+		return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
+	}
+	/**
+	 * Returns unmodifiable list of key combos
+	 * 
+	 * @return
+	 */
+	public List<List<String>> getKeyCombos(){
+		return Collections.unmodifiableList(myKeyCombos);
+	}
+	/**
+	 * Returns unmodifiable map of key causes
+	 * 
+	 * @return
+	 */
+	public Map<List<String>, KeyCause> getKeyCauses(){
+		return Collections.unmodifiableMap(myKeyCauses);
+	}
+	/**
+	 * Returns unmodifiable list of key events
+	 * 
+	 * @return
+	 */
+	public List<VoogaEvent> getEvents(){
+		return Collections.unmodifiableList(myEvents);
+	}
+	/**
+	 * 
+	 * @param voogaEvent
+	 */
+	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
 
-    /**
-     * Returns Main Character Sprite
-     * 
-     * @param id
-     * @return Sprite
-     */
-    public Sprite getMainCharacter () {
-        return (Sprite) myElements.get(myMainCharacterID);
-    }
+		myEvents.add(voogaEvent);
+		for(Cause c: voogaEvent.getCauses()){
+			if(c instanceof KeyCause){
+				KeyCause keyc = (KeyCause) c;
+				myKeyCauses.put(keyc.getKeys(), keyc); 
+				myKeyCombos.add(keyc.getKeys()); 
+				myKeyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
+			}
+		}
+	}
+	/**
+	 * Populates the LevelData with the Data from a level specified by filename
+	 * TODO: Handle continuity here
+	 * TODO: Make sure to bind all Sprite images here when they are sent over
+	 * 
+	 * @param filename
+	 */
+	public void refreshLevelData(String levelfilename){
+		DataContainerOfLists data = new DataContainerOfLists();
+		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
+		data = fileManager.getDataContainer();
+      
+		List<Elementable> spriteObjects = data.getElementableList();
+		System.out.println("All the sprites here are" + spriteObjects);
 
-    /**
-     * returns all Sprite's
-     * 
-     * @return
-     */
-    public List<Sprite> getAllSprites () {
-        List<Sprite> sprites = new ArrayList<Sprite>();
-        for (String id : myElements.keySet()) {
-            if (myElements.get(id) instanceof Sprite) {
-                sprites.add((Sprite) myElements.get(id));
-            }
-        }
-        return sprites;
-    }
 
-    /**
-     * Returns a list of sprite IDs given an archetype
-     * 
-     * @param archetype
-     * @return
-     */
-    public List<Sprite> getSpritesByArch (String archetype) {
-        List<Sprite> list = new ArrayList<>();
-        for (String id : myElements.keySet()) {
-            if (myElements.get(id) instanceof Sprite) {
-                if (((Sprite) myElements.get(id)).getArchetype().equals(archetype)) {
-                    list.add((Sprite) myElements.get(id));
-                }
-            }
-        }
-        return list;
-    }
+		List<Elementable> elementObjects = data.getElementableList();
+		System.out.println("All the sprites here are" + elementObjects);
 
-    /**
-     * Adds a sprite given an archetype
-     * 
-     * @param archetype
-     * @return
-     */
-    @Override
-    public Sprite addSprite (String archetype) {
-        Elementable newSprite = mySpriteFactory.createSprite(archetype);
-        myElements.put(newSprite.getId(), newSprite);
-        return (Sprite) newSprite;
-    }
-
-    /**
-     * Removes sprite given an id
-     * 
-     * @param id
-     */
-    public void removeSprite (Object id) {
-        myElements.remove(id);
-    }
-
-    /**
-     * Returns a Global Variable (VoogaData) as specified
-     * by it's variable name
-     * 
-     * @param variable
-     * @return
-     */
-    public VoogaData getGlobalVar (String variable) {
-        return myGlobalVariables.get(variable);
-    }
-
-    /**
-     * Returns a VoogaText by id
-     * 
-     * @param id
-     * @return
-     */
-    public VoogaFrontEndText getText (Object id) {
-        return (VoogaFrontEndText) myElements.get(id);
-    }
-
-    /**
-     * put all objects into a generic list of display-able objects
-     * to be accessed by the GameRunner after every update cycle.
-     * 
-     * @return
-     */
-    public List<Node> getDisplayableNodes () {
-        List<Node> displayablenodes = new ArrayList<Node>();
-
-        for (Object key : myElements.keySet()) {
-            displayablenodes.add(myElements.get(key).getNodeObject());
-        }
-        // IF THE MAIN CHARACTER HASN'T BEEN SET
-        if (getMainCharacter() == null) {
-            return myScroller.centerScroll(displayablenodes, 5);
-        }
-        return myScroller.centerScroll(displayablenodes, getMainCharacter().getPosition().getX());
-    }
-
-    /**
-     * Returns unmodifiable list of key combos
-     * 
-     * @return
-     */
-    public List<List<String>> getKeyCombos () {
-        return Collections.unmodifiableList(myKeyCombos);
-    }
-
-    /**
-     * Returns unmodifiable map of key causes
-     * 
-     * @return
-     */
-    public Map<List<String>, KeyCause> getKeyCauses () {
-        return Collections.unmodifiableMap(myKeyCauses);
-    }
-
-    /**
-     * Returns unmodifiable list of key events
-     * 
-     * @return
-     */
-    public List<VoogaEvent> getEvents () {
-        return Collections.unmodifiableList(myEvents);
-    }
-
-    /**
-     * 
-     * @param voogaEvent
-     */
-    public void addEventAndPopulateKeyCombos (VoogaEvent voogaEvent) {
-
-        myEvents.add(voogaEvent);
-        for (Cause c : voogaEvent.getCauses()) {
-            if (c instanceof KeyCause) {
-                KeyCause keyc = (KeyCause) c;
-                myKeyCauses.put(keyc.getKeys(), keyc);
-                myKeyCombos.add(keyc.getKeys());
-                myKeyCombos.sort( (List<String> a, List<String> b) -> -a.size() - b.size());
-            }
-        }
-    }
-
-    /**
-     * Populates the LevelData with the Data from a level specified by filename
-     * TODO: Handle continuity here
-     * TODO: Make sure to bind all Sprite images here when they are sent over
-     * 
-     * @param filename
-     */
-    public void refreshLevelData (String levelfilename) {
-        DataContainerOfLists data = new DataContainerOfLists();
-        FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
-        data = fileManager.getDataContainer();
-
-        List<Elementable> spriteObjects = data.getElementableList();
-        System.out.println("All the sprites here are" + spriteObjects);
-
-        List<Elementable> elementObjects = data.getElementableList();
-        System.out.println("All the sprites here are" + elementObjects);
-
-        // clear whats in the myElements Map.
-        myElements.clear();
-        myEvents.clear();
-        myKeyCauses.clear();
-
-        // add elements to map
-        for (Elementable el : elementObjects) {
+		//clear whats in the myElements Map.
+		myElements.clear();
+		myEvents.clear();
+		myKeyCauses.clear();
+		
+		//add elements to map 
+	    for (Elementable el : elementObjects) {
             if (el instanceof Sprite) {
 
                 try {
@@ -261,47 +250,45 @@ public class LevelData implements ILevelData {
             }
             myElements.put(el.getId(), el);
         }
-        // TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
-        for (Elementable el : elementObjects) {
-            if (el instanceof Sprite) {
-                myMainCharacterID = el.getId();
-                break;
-            }
-        }
+		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
+		for(Elementable el : elementObjects){
+			if(el instanceof Sprite){
+				myMainCharacterID = el.getId();
+				break;
+			}
+		}
 
-        List<VoogaEvent> eventObjects = data.getEventList();
-        System.out.println("All the events here are" + eventObjects);
+		List<VoogaEvent> eventObjects = data.getEventList();
+		System.out.println("All the events here are" + eventObjects);
 
-        for (VoogaEvent e : eventObjects) {
-            addEventAndPopulateKeyCombos(e);
-        }
+		for(VoogaEvent e : eventObjects){
+			addEventAndPopulateKeyCombos(e);
+		}
+		
+		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
+		System.out.println("All the events here are" + eventObjects);
+		
+		mySpriteFactory = new SpriteFactory(archetypeMap);
 
-        Map<String, Sprite> archetypeMap = data.getArchetypeMap();
-        System.out.println("All the events here are" + eventObjects);
+		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
-        mySpriteFactory = new SpriteFactory(archetypeMap);
+		myGlobalVariables = data.getVariableMap();
+		System.out.println("All the variables here are" + myGlobalVariables);
+		
+		myGlobalVariables.put("LevelIndex", new VoogaString(""));
+	}
 
-        System.out.println("The spriteFactory here is" + mySpriteFactory);
+	public String getNextLevelName() {
+		//HARDCODED FOR NOW!!!!
+		//System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+		return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
+	}
+	public void setNextLevelName(String levelName) {
+		myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
+	}
 
-        myGlobalVariables = data.getVariableMap();
-        System.out.println("All the variables here are" + myGlobalVariables);
-
-        myGlobalVariables.put("LevelIndex", new VoogaString(""));
-    }
-
-    public String getNextLevelName () {
-        // HARDCODED FOR NOW!!!!
-        // System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String)
-        // (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
-        return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
-    }
-
-    public void setNextLevelName (String levelName) {
-        myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
-    }
-
-    @Override
-    public IPhysicsEngine getPhysicsEngine () {
-        return myPhysics;
-    }
+	@Override
+	public IPhysicsEngine getPhysicsEngine() {
+		return myPhysics;
+	}
 }

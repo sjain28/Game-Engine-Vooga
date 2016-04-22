@@ -1,17 +1,21 @@
 package authoring.gui;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 
 import authoring.CustomText;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
 import authoring.resourceutility.ButtonMaker;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
@@ -22,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
+import resources.VoogaBundles;
 
 public class DesignBoardPreferences extends Tab {
 
@@ -47,6 +52,7 @@ public class DesignBoardPreferences extends Tab {
 	private EventHandler<ActionEvent> e;
 
 	public DesignBoardPreferences(CompleteAuthoringModelable model) {
+		
 		gameObjects = model.getElements();
 		container = new VBox();
 		container.setSpacing(SPACING);
@@ -55,8 +61,11 @@ public class DesignBoardPreferences extends Tab {
 		container.getChildren().addAll(header(), chooseName(), choosePhysicsModule(), chooseTrackingMode());
 
 		initializeSpecifics();
-
 		chooseSpecificTrackingMode();
+	}
+	
+	public void setName(String name) {
+		this.levelName.setText(name);
 	}
 	
 	public void setListener(EventHandler<ActionEvent> proceed) {
@@ -65,7 +74,7 @@ public class DesignBoardPreferences extends Tab {
 	}
 
 	private HBox header() {
-		return makeRow(new CustomText("Create a new level!", FontWeight.BOLD, 20));
+		return makeRow(new CustomText("Define your level.", FontWeight.BOLD, 20));
 	}
 
 	private HBox chooseName() {
@@ -115,7 +124,8 @@ public class DesignBoardPreferences extends Tab {
 	}
 
 	private HBox buttonRow() {
-		buttons = makeRow(new ButtonMaker().makeButton("OK", this.e));
+		Button ok = new ButtonMaker().makeButton("OK", this.e);
+		buttons = makeRow(ok);
 		return buttons;
 	}
 

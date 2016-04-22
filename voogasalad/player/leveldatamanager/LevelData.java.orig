@@ -33,6 +33,7 @@ import tools.interfaces.VoogaData;
  *
  */
 public class LevelData implements ILevelData {
+	private boolean DEBUG = true;
 
 <<<<<<< HEAD
     private static final int SCREENSIZE = 600;
@@ -237,15 +238,19 @@ public class LevelData implements ILevelData {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
         data = fileManager.getDataContainer();
 
+        List<Elementable> spriteObjects = data.getElementableList();
+        System.out.println("All the sprites here are" + spriteObjects);
+
         List<Elementable> elementObjects = data.getElementableList();
-//        System.out.println("All the sprites here are" + elementObjects);
+        System.out.println("All the sprites here are" + elementObjects);
 
         // clear whats in the myElements Map.
         myElements.clear();
+        myEvents.clear();
+        myKeyCauses.clear();
 
         // add elements to map
         for (Elementable el : elementObjects) {
-            if (el instanceof Sprite) {
 =======
 	private static final int SCREENSIZE = 600;
 
@@ -374,6 +379,10 @@ public class LevelData implements ILevelData {
 		for(Object key : myElements.keySet()){
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
+		
+		if (DEBUG) return displayablenodes;
+
+		
 		// IF THE MAIN CHARACTER HASN'T BEEN SET
 		if (getMainCharacter() == null){
 			return myScroller.centerScroll(displayablenodes, 5);
@@ -446,9 +455,9 @@ public class LevelData implements ILevelData {
 		
 		//add elements to map 
 	    for (Elementable el : elementObjects) {
+>>>>>>> master
             if (el instanceof Sprite) {
 
->>>>>>> master
                 try {
                     ((Sprite) el).init();
                 }
@@ -457,11 +466,9 @@ public class LevelData implements ILevelData {
                     e1.printStackTrace();
                 }
             }
-<<<<<<< HEAD
-
             myElements.put(el.getId(), el);
         }
-
+<<<<<<< HEAD
         // TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
         for (Elementable el : elementObjects) {
             if (el instanceof Sprite) {
@@ -471,21 +478,21 @@ public class LevelData implements ILevelData {
         }
 
         List<VoogaEvent> eventObjects = data.getEventList();
-//        System.out.println("All the events here are" + eventObjects);
+        System.out.println("All the events here are" + eventObjects);
 
         for (VoogaEvent e : eventObjects) {
             addEventAndPopulateKeyCombos(e);
         }
 
         Map<String, Sprite> archetypeMap = data.getArchetypeMap();
-//        System.out.println("All the events here are" + eventObjects);
+        System.out.println("All the events here are" + eventObjects);
 
         mySpriteFactory = new SpriteFactory(archetypeMap);
 
-//        System.out.println("The spriteFactory here is" + mySpriteFactory);
+        System.out.println("The spriteFactory here is" + mySpriteFactory);
 
         myGlobalVariables = data.getVariableMap();
-//        System.out.println("All the variables here are" + myGlobalVariables);
+        System.out.println("All the variables here are" + myGlobalVariables);
 
         myGlobalVariables.put("LevelIndex", new VoogaString(""));
     }
@@ -494,7 +501,6 @@ public class LevelData implements ILevelData {
         // HARDCODED FOR NOW!!!!
         // System.out.println("IN LEVEL DATA THE CURRENT FILE THATS TRYING TO PLAY IS " + (String)
         // (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
-
         return ((String) (((VoogaString) myGlobalVariables.get("LevelIndex")).getValue()));
     }
 
@@ -506,9 +512,8 @@ public class LevelData implements ILevelData {
     public IPhysicsEngine getPhysicsEngine () {
         return myPhysics;
     }
+}
 =======
-            myElements.put(el.getId(), el);
-        }
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
@@ -550,5 +555,5 @@ public class LevelData implements ILevelData {
 	public IPhysicsEngine getPhysicsEngine() {
 		return myPhysics;
 	}
->>>>>>> master
 }
+>>>>>>> master

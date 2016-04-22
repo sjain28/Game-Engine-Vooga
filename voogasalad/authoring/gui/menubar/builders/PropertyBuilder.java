@@ -108,7 +108,7 @@ public class PropertyBuilder extends Builder {
 	@Override
 	public void compile() {
 		try {
-
+			
 		} catch (Exception e) {
 			numberError("Please input a valid number");
 		}

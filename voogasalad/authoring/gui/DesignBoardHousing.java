@@ -1,18 +1,11 @@
 package authoring.gui;
 
-import java.util.UUID;
-
-import authoring.CustomText;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.model.ElementManager;
-import authoring.model.GameObject;
-import authoring.resourceutility.ResourceDecipherer;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import resources.VoogaBundles;
 
 
 public class DesignBoardHousing extends TabPane {
@@ -28,10 +21,12 @@ public class DesignBoardHousing extends TabPane {
 
     	mySceneName = new SimpleStringProperty();
     	DesignBoardPreferences preferences = new DesignBoardPreferences(elem);
+    	preferences.setClosable(false);
     	preferences.setListener(e -> {
     		mySceneName.set(preferences.getName());
     		this.getTabs().remove(preferences);
             this.getTabs().add(new DesignBoard(elem));
+            elem.setName(preferences.getName());
     	});
     	this.getTabs().add(preferences);
     }

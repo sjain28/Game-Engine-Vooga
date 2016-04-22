@@ -2,6 +2,7 @@ package authoring.gui.eventpane;
 
 import authoring.VoogaScene;
 import authoring.interfaces.model.EditEventable;
+import authoring.resourceutility.ButtonMaker;
 import events.CauseAndEffectFactory;
 import events.VoogaEvent;
 import javafx.event.EventHandler;
@@ -27,15 +28,17 @@ public class EventWindow extends Stage{
     public EventWindow(EditEventable manager){
         this.manager = manager;
         
+        ButtonMaker maker = new ButtonMaker();
+        
         tabPane = new TabPane();
         myScene = new VoogaScene(tabPane);
         event = new VoogaEvent();
         eventFactory = new CauseAndEffectFactory();
         
-        Button apply1 = buttonFactory("Apply",e->apply());
-        Button apply2=buttonFactory("Apply",e->apply());
-        Button cancel1 = buttonFactory("Cancel",e->cancel());
-        Button cancel2 = buttonFactory("Cancel",e->cancel());
+        Button apply1 = maker.makeButton("Apply",e->apply());
+        Button apply2= maker.makeButton("Apply",e->apply());
+        Button cancel1 = maker.makeButton("Cancel",e->cancel());
+        Button cancel2 = maker.makeButton("Cancel",e->cancel());
         
         causeAccoridion = new EventAccoridion(manager,"Cause",apply1,cancel1);
         effectAccoridion = new EventAccoridion(manager,"Effect",apply2,cancel2);
@@ -83,10 +86,4 @@ public class EventWindow extends Stage{
         this.close();
     }
     
-    private Button buttonFactory(String name,EventHandler e){
-        Button button = new Button(name);
-        button.setOnAction(e);
-        button.setAlignment(Pos.CENTER);
-        return button;
-    }
 }
