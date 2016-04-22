@@ -9,6 +9,7 @@ public class CustomText extends Text {
 	
 	private static final String COLOR = "WHITE";
 	private static final String FONT = "Segoe UI Semibold";
+	private static final double FONT_SIZE = 13d;
 	
 	/**
 	 * new Object to allow for easy standardized text settings, like a constant font, color etc
@@ -23,6 +24,11 @@ public class CustomText extends Text {
 	public CustomText(String text, double fontSize) {
 		this(text);
 		this.setFont(Font.font(fontSize));
+	}
+	
+	public CustomText(String text, FontWeight weight) {
+		this(text);
+		this.setFont(Font.font(FONT, weight, FONT_SIZE));
 	}
 	
 	public CustomText(String text, FontWeight weight, double fontSize) {

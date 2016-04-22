@@ -18,6 +18,9 @@ public class Connection extends Group {
 	private Line connector;
 	private Anchor anchor1;
 	private Anchor anchor2;
+	
+	private String start;
+	private String end;
 
 	public Connection() {
 		initializeLine();
@@ -30,6 +33,11 @@ public class Connection extends Group {
 		connector = new Line(0, 0, END_X, END_Y);
 		connector.setStrokeWidth(LINE_WIDTH);
 		connector.setStroke(Paint.valueOf("white"));
+		connector.setOnMouseClicked(e -> {
+			if(e.getClickCount() == 2) {
+				new ConnectionPrompt(start, end);
+			}
+		});
 	}
 	
 	public Anchor getStartAnchor() {
@@ -106,6 +114,14 @@ public class Connection extends Group {
 				}
 			}
 		});
+	}
+
+	public void setStartpoint(String name) {
+		this.start = name;
+	}
+	
+	public void setEndpoint(String name) {
+		this.end = name;
 	}
 
 }
