@@ -1,61 +1,32 @@
 package authoring.gui.cartography;
 
-import javafx.beans.property.DoubleProperty;
+import authoring.interfaces.Elementable;
+import authoring.model.ElementSelectionModel;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
-public class Connection extends Group {
-
-	private static final double LINE_WIDTH = 5;
-	private static final double END_X = 100;
-	private static final double END_Y = -100;
-
-	private Line connector;
-	private Anchor anchor1;
-	private Anchor anchor2;
+public class Entrypoint extends Circle {
 	
-	private String start;
-	private String end;
-
-	public Connection() {
-		initializeLine();
-		attachAnchors();
-
-		this.getChildren().addAll(connector, anchor1, anchor2);
-	}
-
-	private void initializeLine() {
-		connector = new Line(0, 0, END_X, END_Y);
-		connector.setStrokeWidth(LINE_WIDTH);
-		connector.setStroke(Paint.valueOf("white"));
-		connector.setOnMouseClicked(e -> {
-			if(e.getClickCount() == 2) {
-				new ConnectionPrompt(start, end);
-			}
-		});
+	private String entryLevel;
+	
+	private Entrypoint() {
+		super(0, Color.LIGHTGREEN);
+		this.setStroke(Color.WHITE);
+		this.setStrokeWidth(3);
+		enableDrag(this);
 	}
 	
-	public Anchor getStartAnchor() {
-		return this.anchor1;
+	private static class SingletonHolder {
+		private static final Entrypoint INSTANCE = new Entrypoint();
 	}
 	
-	public Anchor getEndAnchor() {
-		return this.anchor2;
+	public static Entrypoint getInstance() {
+		return SingletonHolder.INSTANCE;
 	}
 	
-	private void attachAnchors() {
-		anchor1 = new Anchor(connector.startXProperty(), connector.startYProperty(), TransitionOrder.FIRST);
-		anchor2 = new Anchor(connector.endXProperty(), connector.endYProperty(), TransitionOrder.LAST);
-
-		enableDrag(anchor1);
-		enableDrag(anchor2);
-	}
-
 	private void enableDrag(final Circle circle) {
 		final Delta dragDelta = new Delta();
 		circle.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -97,13 +68,12 @@ public class Connection extends Group {
 		});
 	}
 
-	public void setStartpoint(String name) {
-		this.start = name;
+	public void setEntrypoint(String name) {
+		this.entryLevel = name;
 	}
 	
-	public void setEndpoint(String name) {
-		this.end = name;
+	public String getEntrypoint() {
+		return this.entryLevel;
 	}
-	
 
 }
