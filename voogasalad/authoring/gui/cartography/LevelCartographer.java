@@ -58,14 +58,14 @@ public class LevelCartographer extends Stage {
 			connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
 				for(Level level : levels) {
 					if(connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-						System.out.println(level.getName());
+						connector.setStartpoint(level.getName());
 					}
 				}
 			});
 			connector.getEndAnchor().centerXProperty().addListener((obs, old, n) -> {
 				for(Level level : levels) {
 					if(connector.getEndAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-						System.out.println(level.getName());
+						connector.setEndpoint(level.getName());
 					}
 				}
 			});
@@ -82,7 +82,7 @@ public class LevelCartographer extends Stage {
 		levelNames = new ArrayList<String>();
 		levels = new ArrayList<Level>();
 		levelNames.addAll(Arrays.asList("Splash Screen", "Intro: Forest of Fire", "I: Hills of Hell", "II: Dunes of Doom",
-				"Splash Screen", "Intro: Forest of Fire", "I: Hills of Hell", "II: Dunes of Doom"));
+				"III: Abyss of Animals", "IV: Seas of Solace", "V: Towers of Terror", "VI: Boss"));
 	}
 	
 	private void populate() {
