@@ -8,6 +8,7 @@ import java.util.Observer;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.model.GameObject;
+import authoring.UIGridHousing;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.Elementable;
 import authoring.resourceutility.ResourceDecipherer;

@@ -10,11 +10,13 @@ public class ElementTabManager {
 	private List<ElementManager> myManagers;
 	private SimpleIntegerProperty currentManagerIndex;
 	
+	private ElementManager myCurrentManager;
+	
 	public ElementTabManager() {
 		this.myManagers = new ArrayList<ElementManager>();
 		this.currentManagerIndex = new SimpleIntegerProperty(-1);
 		this.currentManagerIndex.addListener((obs, old, n) -> {
-			System.out.println("NEW TAB WITH INDEX " + n);
+			myCurrentManager = myManagers.get((int) n);
 		});
 	}
 	
@@ -24,7 +26,7 @@ public class ElementTabManager {
 	}
 	
 	public ElementManager getCurrentManager() {
-		return myManagers.get(currentManagerIndex.get());
+		return myCurrentManager;
 	}
 	
 	public SimpleIntegerProperty getCurrentManagerIndexProperty() {

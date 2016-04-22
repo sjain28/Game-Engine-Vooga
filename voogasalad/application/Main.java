@@ -1,6 +1,5 @@
 package application;
 
-import authoring.gui.cartography.LevelCartographer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -20,8 +19,6 @@ public class Main extends Application {
 		
 		// Launches Mosaic
 		// new BoundsTester();
-		
-		// new LevelCartographer(null);
 	}
 	
 	public static void main(String[] args) {

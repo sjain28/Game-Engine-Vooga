@@ -34,7 +34,6 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
-
 		myModel.saveAll();
 	}
 
