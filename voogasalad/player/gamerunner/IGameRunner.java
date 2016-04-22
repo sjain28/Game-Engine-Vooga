@@ -41,4 +41,6 @@ public interface IGameRunner extends Menuable {
 	@Deprecated
 	void read(Collections nodesToDisplay);
 
+	void playNextLevel();
+
 }
