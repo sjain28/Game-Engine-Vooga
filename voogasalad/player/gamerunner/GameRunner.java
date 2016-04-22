@@ -43,10 +43,9 @@ import tools.VoogaException;
  */
 public class GameRunner implements IGameRunner {
 
-    private static final int FRAMES_PER_SECOND = 60;
-    private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private static final int SPEEDCONTROL = 10;
     private static final int INIT_SPEED = 61;
+    private static final int MILLISECOND_DELAY = 1000 / INIT_SPEED;
+    private static final int SPEEDCONTROL = 10;
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
     private SpriteManager mySpriteManager;
@@ -71,7 +70,7 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay = new StandardDisplay(getSelf());
 		mySpriteManager = new SpriteManager();
 		myEventManager = new EventManager();
-		myPhysicsEngine = new StandardPhysics(FRAMES_PER_SECOND);
+		myPhysicsEngine = new StandardPhysics();
 		myLevelData = new LevelData(myPhysicsEngine);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -440,5 +439,11 @@ public class GameRunner implements IGameRunner {
 	public String getLevelNameString() {
 		return this.myCurrentLevelString;
 	}
+
+    @Override
+    public void addScene (CompleteAuthoringModelable manager) {
+        // TODO Auto-generated method stub
+        
+    }
 	
 }

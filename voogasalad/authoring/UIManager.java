@@ -73,7 +73,12 @@ public class UIManager extends VBox implements Menuable {
 		// initializes a new scene using the most recently added model;
 		grid.addScene(elementTabManager.getCurrentManager());
 	}
-
+	
+	public void addScene(CompleteAuthoringModelable manager){
+	    elementTabManager.addManager((ElementManager) manager);
+	    grid.addScene(elementTabManager.getCurrentManager());
+	}
+	
 	public CompleteAuthoringModelable getManager() {
 		return grid.getManager();
 	}

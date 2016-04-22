@@ -5,6 +5,9 @@ import authoring.properties.PropertiesPane;
 import authoring.gui.EventsWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.resourceutility.ResourceUI;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -24,6 +27,8 @@ public class UIGrid extends GridPane{
     private DesignBoardHousing designBoard;
     private Explorer explorer;
     private CompleteAuthoringModelable myManager;
+    
+    private transient SimpleStringProperty mySceneName;
 
     /**
      * Initialized the UIGrid
@@ -34,6 +39,7 @@ public class UIGrid extends GridPane{
      */
     public UIGrid (CompleteAuthoringModelable elem) {
         myManager = elem;
+        this.mySceneName = new SimpleStringProperty();
         sector();
         try {
             populate();
@@ -41,6 +47,7 @@ public class UIGrid extends GridPane{
         catch (VoogaException e) {
             new VoogaAlert(e.getMessage());
         }
+        
     }
 
     private void sector () {
@@ -62,11 +69,11 @@ public class UIGrid extends GridPane{
         explorer = new Explorer(myManager);
         this.add(explorer, 0, 0);
         designBoard = new DesignBoardHousing(myManager);
+        Bindings.bindBidirectional(this.mySceneName, designBoard.getName());
         this.add(designBoard, 1, 0);
         GridPane.setRowSpan(designBoard, REMAINING);
         propertiesPane = new PropertiesPane();
         myManager.addObserver(propertiesPane);
-
         this.add(propertiesPane, 0, 1);
         EventsWindow events = new EventsWindow(myManager);
         this.add(events, 0, 2);
@@ -84,6 +91,10 @@ public class UIGrid extends GridPane{
      */
     public void addScene (CompleteAuthoringModelable elem) {
         designBoard.addScene(elem);
+    }
+    
+    public Property<String> getName() {
+    	return this.mySceneName;
     }
 
 }

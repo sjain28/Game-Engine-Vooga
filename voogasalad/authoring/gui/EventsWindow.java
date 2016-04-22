@@ -41,10 +41,10 @@ public class EventsWindow extends TabPane implements Observer{
         for(VoogaEvent e: myManager.getEvents()){
             if(!current.contains(e)){
                 HBox info = new HBox();
-                ListView causes = new ListView((ObservableList) e.getCauses());
-                ListView effects = new ListView((ObservableList) e.getEffects());
-                info.getChildren().addAll(causes, effects);
-                content.getChildren().add(info);
+                //ListView causes = new ListView((ObservableList) e.getCauses());
+                //ListView effects = new ListView((ObservableList) e.getEffects());
+                //info.getChildren().addAll(causes, effects);
+                //content.getChildren().add(info);
                 current.add(e);
             }
             

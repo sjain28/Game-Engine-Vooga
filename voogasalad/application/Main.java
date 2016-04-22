@@ -17,9 +17,6 @@ public class Main extends Application {
 		System.setProperty("glass.accessible.force", "false");
 		// Launches Main Program (only MenuBar of GUI implemented as of April 5)
 		new Launcher(primaryStage);
-		
-		// Launches Mosaic
-		//new Tester();
 	}
 	
 	public static void main(String[] args) {

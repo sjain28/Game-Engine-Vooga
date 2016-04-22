@@ -66,4 +66,10 @@ public class BackEndText implements Elementable{
 		
 	}
 
+    @Override
+    public void setName (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
