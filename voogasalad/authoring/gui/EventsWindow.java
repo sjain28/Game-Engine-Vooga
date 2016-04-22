@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import authoring.CustomText;
+import authoring.gui.eventpane.EventWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import events.Cause;
 import events.Effect;
@@ -15,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -45,7 +47,7 @@ public class EventsWindow extends TabPane implements Observer{
         causes = new HashMap<VoogaEvent, ObservableList<String>>(); 
         effects = new HashMap<VoogaEvent, ObservableList<String>>(); 
         initialize();
-        main.setContent(content);
+        main.setContent(new VBox(content, addButton()));
         this.getTabs().add(main);
     }
     
@@ -68,19 +70,27 @@ public class EventsWindow extends TabPane implements Observer{
             HBox info = new HBox();
             ListView<String> causeList = new ListView<String>(causes.get(e));
             ListView<String> effectList = new ListView<String>(effects.get(e));
-            info.getChildren().addAll(causeList, effectList);
-            info.setOnMouseClicked(new EventHandler(){
-                @Override
-                public void handle (Event event) {
-                    delete(info, e);
-                }
-            });
+            Button delete = new Button("Delete");
+            delete.setOnAction(ee -> delete(e, info));
+            info.getChildren().addAll(causeList, effectList, delete);
             content.getChildren().add(info);
         }
         
     }
+    
+    private Button addButton(){
+        Button add = new Button("Add Event");     
+        add.setOnAction(e -> addEvent());
+        return add;
+    }
 
-    private void delete (HBox info, VoogaEvent e) {
+    private void addEvent () {
+      EventWindow popup = new EventWindow(myManager);
+      popup.show();
+    }
+
+    private void delete (VoogaEvent e, HBox info) {
+        System.out.println("I WAS CALLED");
        myManager.getEvents().remove(e);
        content.getChildren().remove(info);
        causes.remove(e);
