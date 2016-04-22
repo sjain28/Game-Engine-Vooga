@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditEventable;
-import authoring.model.ElementManager;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
-import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
@@ -46,7 +44,7 @@ public class VariableCauseGUI implements EventGUI{
 
     private void setChangeListeners () {
         level.setOnAction(e -> {
-            System.out.println("level activated");
+            //System.out.println("level activated");
             resetNode();
             addGUIElements(level);
 
@@ -60,15 +58,15 @@ public class VariableCauseGUI implements EventGUI{
         });
 
         name.setOnAction(e -> {
-            System.out.println("name activated");
+            //System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
-            System.out.println(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
+            //System.out.println(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             addGUIElements(variables);
         });
 
         variables.setOnAction(e -> {
-            System.out.println("variables activated");
+            //System.out.println("variables activated");
             removeInactiveNodes(actions, amount);
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());

@@ -55,7 +55,7 @@ public class GameRunner implements IGameRunner {
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private List<String> myLevelList;
-	private Timeline myTimeline;
+	private static Timeline myTimeline;
     
     
     
@@ -147,8 +147,8 @@ public class GameRunner implements IGameRunner {
 		gameLocation = gameLocation + xmlList + "/";
 		String resourcePath = gameLocation + xmlList + ".xml";
 		levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);
-		System.out.println("The resource path here is called" + resourcePath); 
-		System.out.println("Levellist is " + levelList);
+//		System.out.println("The resource path here is called" + resourcePath); 
+//		System.out.println("Levellist is " + levelList);
 	//	VoogaGame currentGame = new VoogaGame(levelList); //Eventually be able to create a game.
 		return levelList;
 	}
@@ -178,9 +178,9 @@ public class GameRunner implements IGameRunner {
 					.stream()
 		            .filter(a -> a.equals(myLevelData.getNextLevelName()))
 		            .findFirst();
-			System.out.println("The next level that's trying to play is " + myLevelData.getNextLevelName());
-			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
-			System.out.println("The current correct level is " + correctLevel.get());
+//			System.out.println("The next level that's trying to play is " + myLevelData.getNextLevelName());
+//			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
+//			System.out.println("The current correct level is " + correctLevel.get());
 			playLevel(correctLevel.get(), false);
 		}
 		
@@ -192,7 +192,7 @@ public class GameRunner implements IGameRunner {
 		
 		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
-		System.out.println("The list of displayable nodes here is " + myLevelData.getDisplayableNodes());
+//		System.out.println("The list of displayable nodes here is " + myLevelData.getDisplayableNodes());
 
 		//re-populate the game screen
 		myGameDisplay.populateGameScreen();
@@ -275,7 +275,7 @@ public class GameRunner implements IGameRunner {
 			myGameDisplay.display();
 		}
 		
-		System.out.println("The play level method is playing here at " + fileNameWithPath);
+//		System.out.println("The play level method is playing here at " + fileNameWithPath);
 		
 //		System.out.println(fileName);
 		//Set the levelNumber to 0 because we are not transitioning anymore
@@ -424,6 +424,7 @@ public class GameRunner implements IGameRunner {
 	public void exit() {
 		// TODO Auto-generated method stub
 		myTimeline.stop();
+		//myTimeline = null;
 		myGameDisplay.exit();
 	}
 	

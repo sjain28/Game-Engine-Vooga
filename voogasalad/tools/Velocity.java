@@ -64,14 +64,14 @@ public class Velocity extends Vector {
 		Velocity v2 = new Velocity(1, 0);
 		Velocity v3 = new Velocity(-1, -1);
 		
-		System.out.println("v1's Magnitude: " + v1.getMagnitude());
-		System.out.println("v1's Direction angle: " + v1.getAngleDegree());
-		
-		System.out.println("v2's Magnitude: " + v2.getMagnitude());
-		System.out.println("v2's Direction angle: " + v2.getAngleDegree());
-		
-		System.out.println("v3's Magnitude: " + v3.getMagnitude());
-		System.out.println("v3's Direction angle: " + v3.getAngleDegree());
+//		System.out.println("v1's Magnitude: " + v1.getMagnitude());
+//		System.out.println("v1's Direction angle: " + v1.getAngleDegree());
+//		
+//		System.out.println("v2's Magnitude: " + v2.getMagnitude());
+//		System.out.println("v2's Direction angle: " + v2.getAngleDegree());
+//		
+//		System.out.println("v3's Magnitude: " + v3.getMagnitude());
+//		System.out.println("v3's Direction angle: " + v3.getAngleDegree());
 		
 	}
 
