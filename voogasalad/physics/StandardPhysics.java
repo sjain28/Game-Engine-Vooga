@@ -5,53 +5,49 @@ import tools.Acceleration;
 import tools.Position;
 import tools.Velocity;
 
+/**
+ * Standard Physics Module
+ * 
+ * A set of methods that provide physics-related functionalities
+ * 
+ * @author Michael, Hunter
+ *
+ */
 public class StandardPhysics implements IPhysicsEngine{
-	//TODO find which methods overlap in code and reduce the bulk from that
+	
+	public static final double REDUCE_FACTOR = 0.1;
+	
+	
+	/**
+	 * Default constructor for Standard Physics module
+	 * 
+	 */
+	public StandardPhysics() {
+
+	}
+	
+	
+	@Deprecated
 	private double myFrameTime;
 
+	@Deprecated
 	public StandardPhysics(double frameTime){	
 //		this.frameTime = (float) FixedStepLoopWithInterpolation.FRAME_TIME;
 		myFrameTime = frameTime;
 	}
 	
 	@Override
-	public void translate(Sprite sprite, Velocity change) {
-		double newX = gradualChange(sprite.getPosition().getX(), change.getX());
-		double newY = gradualChange(sprite.getPosition().getY(), change.getY());
-		Position position = new Position(newX, newY);
-		sprite.setPosition(position);
-	}
-	
-	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getVelocity().setX(change/10);
+		sprite.getVelocity().setX(change * REDUCE_FACTOR);
 	}
 	
 	public void translateY(Sprite sprite, Double change) {
 		sprite.getPosition().addY(change);
 	}
-
+		
 	@Override
 	public void setPosition(Sprite sprite, Position newPosition) {
 		sprite.setPosition(newPosition);
-	}
-
-	@Override
-	public void addPosition(Sprite sprite, Position addedPosition) {
-		double newX = immediateChange(sprite.getPosition().getX(), addedPosition.getX());
-		double newY = immediateChange(sprite.getPosition().getY(), addedPosition.getY());
-		Position position = new Position(newX, newY);
-		sprite.setPosition(position);
-	}
-
-	@Override
-	public void accelerate(Sprite sprite, Acceleration change) {
-		double newXVel = gradualChange(sprite.getVelocity().getX(), change.getX());
-		System.out.println(newXVel);
-		double newYVel = gradualChange(sprite.getVelocity().getY(), change.getY());
-		System.out.println(newYVel);
-		Velocity velocity = new Velocity(newXVel, newYVel);
-		setVelocity(sprite, velocity);
 	}
 
 	@Override
@@ -59,13 +55,6 @@ public class StandardPhysics implements IPhysicsEngine{
 		sprite.setVelocity(newVelocity);
 	}
 
-	@Override
-	public void addVelocity(Sprite sprite, Velocity addedVelocity) {
-		double newXVel = immediateChange(sprite.getVelocity().getX(), addedVelocity.getX());
-		double newYVel = immediateChange(sprite.getVelocity().getY(), addedVelocity.getY());
-		Velocity velocity = new Velocity(newXVel, newYVel);
-		setVelocity(sprite, velocity);
-	}
 
 	@Override
 	public void bounce(Sprite sprite, Double bounceCoefficient) {
@@ -96,15 +85,9 @@ public class StandardPhysics implements IPhysicsEngine{
 	}
 
 	@Override
-	public void interpolatePositions(float alpha) {
-		// TODO for extension, infer future positions by priority of operations
+	public void accelerate(Sprite sprite, Acceleration change) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	private double gradualChange(double curr, double change){
-		return curr + change*myFrameTime;
-	}
-
-	private double immediateChange(double curr, double change){
-		return curr + change;
-	}
 }
