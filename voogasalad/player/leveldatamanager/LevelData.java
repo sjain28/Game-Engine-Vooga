@@ -1,15 +1,24 @@
 package player.leveldatamanager;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
+import data.FileWriterFromGameObjects;
+import data.Serializer;
 import events.Cause;
 import events.KeyCause;
 import events.VoogaEvent;
@@ -36,7 +45,9 @@ public class LevelData implements ILevelData {
 	private boolean DEBUG = true;
 
 	private static final int SCREENSIZE = 600;
-
+	private static final String UNDERSCORE = "_";
+	private static final String XML_SUFFIX = ".xml";
+	
 	private IPhysicsEngine myPhysics;
 	private String currentLevelName;
 
@@ -288,6 +299,20 @@ public class LevelData implements ILevelData {
 		myGlobalVariables.put("LevelIndex", new VoogaString(levelName));
 	}
 
+	
+	public void saveProgress(String playerName) throws ParserConfigurationException, TransformerException, IOException, SAXException{
+		
+		List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
+		DataContainerOfLists dataContainer = new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
+                mySpriteFactory.getArchetypeMap());
+		String newFileName = currentLevelName + UNDERSCORE + playerName + XML_SUFFIX;
+		FileWriterFromGameObjects.saveGameObjects(dataContainer, newFileName);
+		System.out.println("The file here saved at location" + newFileName);
+	}
+	
+
+	
+	
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {
 		return myPhysics;

@@ -426,4 +426,11 @@ public class GameRunner implements IGameRunner {
 		//myTimeline = null;
 		myGameDisplay.exit();
 	}
+
+
+	@Override
+	public void saveGameProgress(String playerName) {
+		// TODO Auto-generated method stub
+		myLevelData.saveProgress();
+	}
 }

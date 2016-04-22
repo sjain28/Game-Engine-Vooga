@@ -7,6 +7,7 @@ import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
+import player.gamerunner.IGameRunner;
 
 
 /**
@@ -17,6 +18,7 @@ import player.gamedisplay.Menuable;
  */
 public class SaveGameFileItem extends PlayerMenuItemHandler {
     private Menuable myModel;
+    private IGameRunner myGameRunner;
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -35,6 +37,8 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	@Override
 	public void handle() {
 
+		myGameRunner.saveGameProgress("Josh");
+		System.out.println("This save game file class was accessed");
 		myModel.saveAll();
 	}
 

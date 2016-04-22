@@ -46,4 +46,6 @@ public interface ILevelData {
 	Sprite addSprite(String archetype);
 
 	IPhysicsEngine getPhysicsEngine();
+
+	void saveProgress();
 }

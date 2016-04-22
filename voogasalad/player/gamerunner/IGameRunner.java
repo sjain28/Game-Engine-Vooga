@@ -34,6 +34,8 @@ public interface IGameRunner extends Menuable {
 	
 	void replayLevel();
 
+	void saveGameProgress(String playerName);
+	
 	// Methods below only called by LevelDataManager
 
 	//List<?> getKeyEvents();
