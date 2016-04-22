@@ -12,8 +12,9 @@ public class SpriteComboBox extends ComboBox<String> {
     public SpriteComboBox(EditEventable manager){
         this.manager=manager;
         setPadding(new Insets(10,10,10,10));
+        
         getItems().addAll(manager.getMySpriteNames());
-        //getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
+        getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
     }
     
     public String getSpriteId(){
