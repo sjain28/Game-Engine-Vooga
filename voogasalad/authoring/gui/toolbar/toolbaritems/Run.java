@@ -18,7 +18,7 @@ public class Run extends ToolbarItemHandler {
 
     @Override
     public void handle () {
-        save.handle();
+        //save.handle();
         GameRunner gameRunner = new GameRunner();
         gameRunner.playLevel("Test.xml", true);
     }
