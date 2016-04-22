@@ -4,6 +4,8 @@ import authoring.gui.DesignBoardHousing;
 import authoring.properties.PropertiesPane;
 import authoring.gui.EventsWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
+import authoring.model.GlobalPropertiesManager;
 import authoring.resourceutility.ResourceUI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
@@ -38,6 +40,7 @@ public class UIGrid extends GridPane{
      * @param elem: Interface to Manager for the backend
      */
     public UIGrid (CompleteAuthoringModelable elem) {
+    	
         myManager = elem;
         this.mySceneName = new SimpleStringProperty();
         sector();
@@ -66,15 +69,19 @@ public class UIGrid extends GridPane{
     }
 
     private void populate () throws VoogaException {
+    	
         explorer = new Explorer(myManager);
         this.add(explorer, 0, 0);
         designBoard = new DesignBoardHousing(myManager);
         Bindings.bindBidirectional(this.mySceneName, designBoard.getName());
         this.add(designBoard, 1, 0);
         GridPane.setRowSpan(designBoard, REMAINING);
+
         propertiesPane = new PropertiesPane();
         myManager.addObserver(propertiesPane.getPropertiesTabManager());
-
+        ElementManager em = ((ElementManager) myManager);
+        em.initGlobalVariablesPane();
+        
         this.add(propertiesPane, 0, 1);
         EventsWindow events = new EventsWindow(myManager);
         this.add(events, 0, 2);

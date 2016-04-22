@@ -35,7 +35,7 @@ public class VariableBuilder extends Builder {
         VoogaData value = new VoogaNumber();
         try{
             value.setValue(Double.parseDouble(variableValue.getText()));
-            myManager.addGlobalVariable(variableName.getText(), value);
+            //myManager.addGlobalVariable(variableName.getText(), value);
         }
        catch(Exception e) {
            numberError("Please input a valid number");

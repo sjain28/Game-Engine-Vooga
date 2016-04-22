@@ -47,6 +47,7 @@ public class PropertiesTabManager implements Observer {
 	private void populateTabList() {
 		myPropertyTabs.add(SPT);
 		myPropertyTabs.add(GPT);
+		System.out.println("Here we go");
 	}
 
 	/**
@@ -71,6 +72,7 @@ public class PropertiesTabManager implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Successfully Began Initializing");
 		Elementable tabInfo = (Elementable) arg;
 		if ( (o instanceof CompleteAuthoringModelable) ){
 			GPT.getPropertiesMap(tabInfo);

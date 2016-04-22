@@ -26,11 +26,7 @@ public class GlobalPropertiesTab extends AbstractPropertiesTab {
 	
 	public GlobalPropertiesTab() {
 		super();
-		this.getPropertiesMap(new GlobalPropertiesManager());
 		this.setText(GLOBAL_PROPERTIES);
 	}
-
-	public void getMap(Map<String, VoogaData> global) {
-		propertiesMap.putAll(global);
-	}
+	
 }
