@@ -70,4 +70,9 @@ public class VariableCause extends Cause{
 	protected void setPredicate(String pred){
 		myOperation = pred;
 	}
+	
+	@Override
+	public String toString(){
+		return "Checking if the variable " + myVarName + " is equal to " + myTarget;
+	}
 }

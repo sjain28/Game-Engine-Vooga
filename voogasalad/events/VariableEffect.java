@@ -77,4 +77,5 @@ public class VariableEffect extends Effect {
 	protected Object getParameter(){
 		return myParameter;
 	}
+
 }
