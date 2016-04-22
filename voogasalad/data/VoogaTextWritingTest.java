@@ -29,8 +29,8 @@ public class VoogaTextWritingTest extends Application {
         Serializer.serialize(manager, "levels/Test.xml");
         Object o = Deserializer.deserialize(1, "levels/Test.xml").get(0);
         DataContainerOfLists vt2 = (DataContainerOfLists) o;
-        System.out.println("Unserialized");
-        System.out.println(vt2);
+//        System.out.println("Unserialized");
+//        System.out.println(vt2);
     }
     
     private List<Elementable> generateSprites(){

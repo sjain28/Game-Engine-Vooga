@@ -62,7 +62,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void addGameElements (Node ... elements) {
-        System.out.println("ADDED");
+//        System.out.println("ADDED");
         myGameElements.addAll(Arrays.asList(elements));
         setChanged();
         notifyObservers(myGameElements);
@@ -79,13 +79,18 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void addEvents (VoogaEvent ... events) {
+        System.out.println("ADDED");
+        
         myEventList.addAll(Arrays.asList(events));
+        setChanged();
+        notifyObservers(myEventList);
     }
 
     public void removeEvents (VoogaEvent ... events) {
         myEventList.removeAll(Arrays.asList(events));
+        setChanged();
+        notifyObservers();
     }
-
     public Node getElement (String id) {
         for (Node node : myGameElements) {
 
@@ -134,16 +139,16 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             DataContainerOfLists data =
                     new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
                                              spriteFactory.getArchetypeMap());
-            System.out.println(myXmlDataFile.getPath());
+//            System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data, filePath);
-            System.out.println("I'm done saving in element manager");
+//            System.out.println("I'm done saving in element manager");
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             e.printStackTrace();
             throw new VoogaException();
         }
 
-        System.out.println("The save file location here is " + filePath);
+//        System.out.println("The save file location here is " + filePath);
     }
 
     public SpriteFactory getSpriteFactory () {

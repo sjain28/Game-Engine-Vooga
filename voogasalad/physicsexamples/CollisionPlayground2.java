@@ -1,4 +1,4 @@
-package physics;
+package physicsexamples;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;

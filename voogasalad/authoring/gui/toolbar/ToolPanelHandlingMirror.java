@@ -1,11 +1,7 @@
 package authoring.gui.toolbar;
 
-import java.lang.reflect.Method;
-import authoring.gui.menubar.MenuItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import player.gamedisplay.Menuable;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -30,7 +26,7 @@ public class ToolPanelHandlingMirror {
             // TODO Auto-generated catch block
             new VoogaAlert(e1.getMessage());
         }
-        System.out.println(toolbarEvent.getSource());
+//        System.out.println(toolbarEvent.getSource());
     }
 
     /**
@@ -43,11 +39,11 @@ public class ToolPanelHandlingMirror {
         Class<?> clazz;
         try {
             clazz = Class.forName(PACKAGE_LOCATION + toolbarItem.getId());
-            System.out.println("Class-Tool: "+clazz);
+//            System.out.println("Class-Tool: "+clazz);
             toolbarItemHandler =
                     (ToolbarItemHandler) clazz.getConstructor(Menuable.class)
                             .newInstance(myManager);
-            System.out.println("ToolBarItemHandler-Tool: "+toolbarItemHandler);
+//            System.out.println("ToolBarItemHandler-Tool: "+toolbarItemHandler);
             toolbarItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(toolbarItemHandler);
         }
         catch (Exception ee) {
