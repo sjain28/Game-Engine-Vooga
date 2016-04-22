@@ -33,7 +33,8 @@ public class LevelCartographer extends Stage {
 	private static final double RING_SIZE = 300;
 	private BorderPane myGUI;
 	private Group myMap;
-	private List<String> levels;
+	private List<String> levelNames;
+	private List<Level> levels;
 	
 	public LevelCartographer(CompleteAuthoringModelable model) {
 		initializeScene();
@@ -54,6 +55,20 @@ public class LevelCartographer extends Stage {
 		HBox container = new HBox();
 		container.getChildren().add(new ButtonMaker().makeButton("Add connection", e -> {
 			Connection connector = new Connection();
+			connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
+				for(Level level : levels) {
+					if(connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
+						System.out.println(level.getName());
+					}
+				}
+			});
+			connector.getEndAnchor().centerXProperty().addListener((obs, old, n) -> {
+				for(Level level : levels) {
+					if(connector.getEndAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
+						System.out.println(level.getName());
+					}
+				}
+			});
 			myMap.getChildren().addAll(connector);
 		}));
 		container.setAlignment(Pos.CENTER);
@@ -64,16 +79,18 @@ public class LevelCartographer extends Stage {
 		//================================================================================|
 		//   Temporary code until level saving and loading can be implemented completely. |
 		//================================================================================|
-		levels = new ArrayList<String>();
-		levels.addAll(Arrays.asList("Splash Screen", "Intro: Forest of Fire", "I: Hills of Hell", "II: Dunes of Doom",
+		levelNames = new ArrayList<String>();
+		levels = new ArrayList<Level>();
+		levelNames.addAll(Arrays.asList("Splash Screen", "Intro: Forest of Fire", "I: Hills of Hell", "II: Dunes of Doom",
 				"Splash Screen", "Intro: Forest of Fire", "I: Hills of Hell", "II: Dunes of Doom"));
 	}
 	
 	private void populate() {
-		for(int i = 0; i < levels.size(); i++) {
-			Level circ = new Level(levels.get(i), CIRCLE_SIZE/levels.size());
-			circ.setTranslateX(RING_SIZE * Math.cos(Math.toRadians((i-1)*(CIRCLE_DEGREES/levels.size()))));
-			circ.setTranslateY(RING_SIZE * Math.sin(Math.toRadians((i-1)*(CIRCLE_DEGREES/levels.size()))));
+		for(int i = 0; i < levelNames.size(); i++) {
+			Level circ = new Level(levelNames.get(i), CIRCLE_SIZE/levelNames.size());
+			circ.setTranslateX(RING_SIZE * Math.cos(Math.toRadians((i-1)*(CIRCLE_DEGREES/levelNames.size()))));
+			circ.setTranslateY(RING_SIZE * Math.sin(Math.toRadians((i-1)*(CIRCLE_DEGREES/levelNames.size()))));
+			levels.add(circ);
 			myMap.getChildren().add(circ);
 			StackPane.setAlignment(circ, Pos.CENTER);
 		}
