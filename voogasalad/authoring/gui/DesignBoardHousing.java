@@ -3,6 +3,7 @@ package authoring.gui;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import resources.VoogaBundles;
 
@@ -20,6 +21,7 @@ public class DesignBoardHousing extends TabPane {
 
     	mySceneName = new SimpleStringProperty();
     	DesignBoardPreferences preferences = new DesignBoardPreferences(elem);
+    	preferences.setClosable(false);
     	preferences.setListener(e -> {
     		mySceneName.set(preferences.getName());
     		this.getTabs().remove(preferences);
