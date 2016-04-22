@@ -116,7 +116,7 @@ public class EventAccoridion extends Tab {
         buttons.getChildren().addAll(addedButtons);
     }
 
-    List<String> getDetails () {
+    public List<String> getDetails () {
         try {
             List<String> eventList = new ArrayList<String>();
             for (TitledPane pane : accordion.getPanes()) {
