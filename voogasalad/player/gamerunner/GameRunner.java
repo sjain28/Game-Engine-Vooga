@@ -182,7 +182,7 @@ public class GameRunner implements IGameRunner {
 //			System.out.println("The current correct level is " + correctLevel.get());
 			playLevel(correctLevel.get(), false);
 		}
-		
+//		System.out.println("The current level is " + myCurrentLevelString);
 		//update all Sprite's with physics engine 
 		mySpriteManager.update(myLevelData.getAllSprites(),myPhysicsEngine);
 		
@@ -374,18 +374,7 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void replayLevel() {
 		// TODO Auto-generated method stub
-		
-		//Test here: for the ability to play THE NEXT LEVEL!!!
-			Optional<String> correctLevel = myLevelList
-					.stream()
-		            .filter(a -> a.equals(myCurrentLevelString))
-		            .findFirst();
-		
-		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
-		String nextLevel = myLevelList.get(tempIndex);
-		myLevelData.setNextLevelName(nextLevel);
-		
-//		myLevelData.setNextLevelName(myCurrentLevelString);
+		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
 	
 	@Override
@@ -415,12 +404,21 @@ public class GameRunner implements IGameRunner {
 		return this.myCurrentLevelString;
 	}
 
+	@Override
+	public void playNextLevel() {
+		stop();
+		System.out.println("The timeline stopped here");
+		// TODO Auto-generated method stub
+		int tempIndex = myLevelList.indexOf(myCurrentLevelString) + 1;
+		String nextLevel = myLevelList.get(tempIndex);
+		myLevelData.setNextLevelName(nextLevel);
+		getTimeline().play();
+	}
     @Override
     public void addScene (CompleteAuthoringModelable manager) {
         // TODO Auto-generated method stub
         
     }
-
 	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
@@ -428,5 +426,4 @@ public class GameRunner implements IGameRunner {
 		//myTimeline = null;
 		myGameDisplay.exit();
 	}
-	
 }
