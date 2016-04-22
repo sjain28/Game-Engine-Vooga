@@ -137,7 +137,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setTranslateY(myLoc.getY() - spriteHeight/2);
         
 //        System.out.println(myArchetype +" Location: " +  myLoc.getX() + ", "+myLoc.getY());
-        
+        System.out.println("Sprite's Mass: " + myProperties.get(MASS));
     }
 
     public void setName (String name) {
