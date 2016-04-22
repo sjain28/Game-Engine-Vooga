@@ -44,6 +44,8 @@ import resources.VoogaBundles;
  */
 public class UIManager extends VBox implements Menuable {
 	
+	private static final String DEFAULT_PROJECT_NAME = "My Project";
+
 	private UIGridHousing grid;
 	private SimpleIntegerProperty currentTabIndex;
 	private ElementTabManager elementTabManager;
@@ -79,6 +81,7 @@ public class UIManager extends VBox implements Menuable {
 	}
 	
 	public void setProjectName(String name) {
+		name = (name.isEmpty()) ? DEFAULT_PROJECT_NAME : name;
 		grid.setProjectName(name);
 	}
 

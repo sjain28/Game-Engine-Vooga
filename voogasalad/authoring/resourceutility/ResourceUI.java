@@ -47,11 +47,8 @@ public class ResourceUI extends Tab {
     }
     
     public void setProjectName(String name) {
-		name = (name.isEmpty()) ? DEFAULT_PROJECT_NAME : name;
     	rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, name));
-    	
         container.getChildren().addAll(rtv, buttonContainer);
-
         makeAddButtons();
 	}
 

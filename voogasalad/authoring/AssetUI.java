@@ -24,7 +24,6 @@ public class AssetUI extends Tab implements Observer {
 	private Set<Node> gameObjects;
 
 	private static final String WINDOW_NAME = "Game Assets";
-	private static final String DEFAULT_PROJECT_NAME = "My Project";
 
 	public AssetUI(CompleteAuthoringModelable myManager) {
 		this.myManager = myManager;
@@ -42,7 +41,6 @@ public class AssetUI extends Tab implements Observer {
 	}
 	
 	public void setProjectName(String name) {
-		name = (name.isEmpty()) ? DEFAULT_PROJECT_NAME : name;
 		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, name));
 		rtv.addItem(archetypesFolder);
 		rtv.addItem(objectsFolder);
