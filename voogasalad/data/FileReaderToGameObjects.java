@@ -30,18 +30,18 @@ public class FileReaderToGameObjects {
     private void loadGameObjects (String fileName) {
         objectNames = new ArrayList<String>();
         objectNames.add("");
-        System.out.println("The  file checked here is" + fileName);
+//        System.out.println("The  file checked here is" + fileName);
         try{
         data = (DataContainerOfLists) Deserializer.deserialize(1, fileName).get(0);
         }
         catch (RuntimeException e) {
-            System.out.println("error came from the filereadertogameobjects");
+//            System.out.println("error came from the filereadertogameobjects");
             e.printStackTrace();
         }
         catch (VoogaException e) {
             new VoogaAlert(e.getMessage());
         }
-        System.out.println("What is the data here" + data);
+//        System.out.println("What is the data here" + data);
         // DataContainerOfLists data2 = (DataContainerOfLists) UnSerializer.deserialize(2,
         // fileName).get(0);
         // System.out.println("The current object being loaded is from the second container: " +

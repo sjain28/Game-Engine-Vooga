@@ -23,10 +23,10 @@ public class VoogaFileChooser{
         if (isLocal(file)){
             String path = file.getPath().split(LOCAL_PATH)[1];
             path=path.substring(1);
-            System.out.println("local: "+path);
+//            System.out.println("local: "+path);
             return path;
         } else {
-            System.out.println("Not local: "+ file.getPath());
+//            System.out.println("Not local: "+ file.getPath());
             String path= moveToLocalPath(file);
             return path;
         }
