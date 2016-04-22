@@ -14,7 +14,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// Launches Main Program
+		// launches Main Program
 		new Launcher(primaryStage);
 		
 		// Launches Mosaic
