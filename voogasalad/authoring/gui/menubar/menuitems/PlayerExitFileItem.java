@@ -37,7 +37,7 @@ public class PlayerExitFileItem extends PlayerMenuItemHandler {
          */
 	@Override
 	public void handle() {
-		this.myGameRunner.getGameDisplay().getStage().close();
+		this.myGameRunner.exit();
 	}
 
 }
