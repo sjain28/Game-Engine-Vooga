@@ -226,10 +226,11 @@ public class LevelData implements ILevelData {
 		List<Elementable> elementObjects = data.getElementableList();
 		System.out.println("All the sprites here are" + elementObjects);
 
-		//clear whats in the myElements Map.
+		//clear all the instance variables
 		myElements.clear();
 		myEvents.clear();
 		myKeyCauses.clear();
+		myKeyCombos.clear();
 		
 		//add elements to map 
 	    for (Elementable el : elementObjects) {
