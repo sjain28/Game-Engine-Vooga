@@ -64,7 +64,7 @@ public abstract class AbstractPropertiesTab extends Tab {
      * @param o
      */
     public void getPropertiesMap(Elementable elem) {
-    	System.out.println("Setting Up Global Properties");
+    	//System.out.println("Setting Up Global Properties");
 		myElementable = elem;
 		propertiesMap = myElementable.getVoogaProperties();
 		updateProperties();

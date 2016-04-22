@@ -137,10 +137,17 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data, filePath);
             System.out.println("I'm done saving in element manager");
+            for (String la: GPM.getVoogaProperties().keySet()) {
+            	System.out.println(la + " " + GPM.getVoogaProperties().get(la));
+            }
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             e.printStackTrace();
             throw new VoogaException();
+        }
+        
+        for (String la: GPM.getVoogaProperties().keySet()) {
+        	System.out.println(la + "asf " + GPM.getVoogaProperties().get(la));
         }
 
         System.out.println("The save file location here is " + filePath);
