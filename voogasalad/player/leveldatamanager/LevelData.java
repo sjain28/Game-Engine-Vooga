@@ -210,11 +210,15 @@ public class LevelData implements ILevelData {
 	 * @param filename
 	 */
 	//TODO: REFACTOR THIS TO MAKE IT SHORTER
-	public void refreshLevelData(String levelfilename){
+	/*public void refreshLevelData(String levelfilename){
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
       
+		//clear whats in the myElements Map.
+		myEvents.clear();
+		myKeyCauses.clear();
+		
 		List<Elementable> elementObjects = data.getElementableList();
 		System.out.println("All the sprites here are" + elementObjects);
 
@@ -242,7 +246,7 @@ public class LevelData implements ILevelData {
 		myMainCharID = myContinuousSpriteIDs.get(0);
 		
 		System.out.println("putting");
-		myGlobalVariables.put("LevelIndex", new VoogaString(""));
+		myGlobalVariables.put(LEVEL_INDEX, new VoogaString(""));
 		
 	}
 
@@ -261,17 +265,20 @@ public class LevelData implements ILevelData {
 		//clear whats in the myElements Map.
 		myElements.clear();
 		
-		
+		System.out.println("here1");
 		//add elements to map 
 		for(Elementable el : elementObjects){
 			myElements.put(el.getId(), el);
 			//if an element is a sprite and a main character, add its id to the main char list
 			if(el instanceof Sprite){
 				try {
+					System.out.println("here2");
 					((Sprite) el).init();
 				} catch (VoogaException e) {
+					System.out.println("here3");
 					e.printStackTrace();
 				}
+				System.out.println("here4");
 				if(((Sprite) el).isContinuous()){
 					//add in the new continuous sprite ids
 					myContinuousSpriteIDs.add(el.getId());
@@ -284,6 +291,64 @@ public class LevelData implements ILevelData {
 				}
 			}
 		}
+	}*/
+	public void refreshLevelData(String levelfilename){
+		DataContainerOfLists data = new DataContainerOfLists();
+		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
+		data = fileManager.getDataContainer();
+      
+		List<Elementable> spriteObjects = data.getElementableList();
+		System.out.println("All the sprites here are" + spriteObjects);
+
+
+		List<Elementable> elementObjects = data.getElementableList();
+		System.out.println("All the sprites here are" + elementObjects);
+
+		//clear whats in the myElements Map.
+		myElements.clear();
+		myEvents.clear();
+		myKeyCauses.clear();
+		
+		//add elements to map 
+	    for (Elementable el : elementObjects) {
+            if (el instanceof Sprite) {
+
+                try {
+                    ((Sprite) el).init();
+                }
+                catch (VoogaException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+            myElements.put(el.getId(), el);
+        }
+		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
+		for(Elementable el : elementObjects){
+			if(el instanceof Sprite){
+				myMainCharID = el.getId();
+				break;
+			}
+		}
+
+		List<VoogaEvent> eventObjects = data.getEventList();
+		System.out.println("All the events here are" + eventObjects);
+
+		for(VoogaEvent e : eventObjects){
+			addEventAndPopulateKeyCombos(e);
+		}
+		
+		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
+		System.out.println("All the events here are" + eventObjects);
+		
+		mySpriteFactory = new SpriteFactory(archetypeMap);
+
+		System.out.println("The spriteFactory here is" + mySpriteFactory);
+
+		myGlobalVariables = data.getVariableMap();
+		System.out.println("All the variables here are" + myGlobalVariables);
+		
+		myGlobalVariables.put("LevelIndex", new VoogaString(""));
 	}
 
 

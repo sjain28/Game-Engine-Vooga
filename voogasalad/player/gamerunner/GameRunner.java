@@ -56,7 +56,25 @@ public class GameRunner implements IGameRunner {
 	private List<String> myLevelList;
 	private static Timeline myTimeline;
     
-    
+	/**
+	 * Default constructor
+	 * 
+	 * @param xmlList
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public GameRunner() {
+		myGameDisplay = new StandardDisplay(getSelf());
+		mySpriteManager = new SpriteManager();
+		myEventManager = new EventManager();
+		myPhysicsEngine = new StandardPhysics();
+		myLevelData = new LevelData(myPhysicsEngine);
+		myTimeline = new Timeline();
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+				e -> step());
+		myTimeline.setCycleCount(Animation.INDEFINITE);
+		myTimeline.getKeyFrames().add(frame);
+	}
 	/**
 	 * createLevels takes in a text file and out of that file creates a Queue of levels.
 	 * @throws IOException 
@@ -92,7 +110,8 @@ public class GameRunner implements IGameRunner {
 	 * Update sprites, get the list of Nodes, and displays
 	 * 
 	 */
-	private void step() {		
+	private void step() {	
+		System.out.println("step");
 		//check if the pane still exists: for debugging purposes
 		if(!myGameDisplay.stageIsShowing()){stop();}
 		//check if a new level has been triggered or not

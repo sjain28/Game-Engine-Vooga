@@ -2,10 +2,13 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+
 import authoring.interfaces.Elementable;
+import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.Node;
-import tools.VoogaNumber;
-import tools.VoogaString;
+import tools.VoogaBoolean;
 import tools.interfaces.VoogaData;
 
 
@@ -13,15 +16,9 @@ public class GlobalPropertiesManager implements Elementable {
 
     private Map<String, VoogaData> globalPropertiesMap;
     private String myName;
-    
+
     public GlobalPropertiesManager () {
         globalPropertiesMap = new HashMap<String, VoogaData>();
-        
-        //add in default global properties
-        addProperty("LevelIndex", new VoogaString(""));
-        addProperty("Score", new VoogaNumber(0.0));
-        addProperty("MainCharacterID", new VoogaNumber(0.0));
-        addProperty("Clock", new VoogaNumber(0.0));
     }
 
     @Override
@@ -44,7 +41,7 @@ public class GlobalPropertiesManager implements Elementable {
 
     @Override
     public String getName () {
-        return myName;
+        return null;
     }
 
     @Override
@@ -66,4 +63,6 @@ public class GlobalPropertiesManager implements Elementable {
     public void setName (String name) {
         this.myName = name;
     }
+
+
 }
