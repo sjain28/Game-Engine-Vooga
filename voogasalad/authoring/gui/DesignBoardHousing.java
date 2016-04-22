@@ -24,6 +24,7 @@ public class DesignBoardHousing extends TabPane {
     		mySceneName.set(preferences.getName());
     		this.getTabs().remove(preferences);
             this.getTabs().add(new DesignBoard(elem));
+            elem.setName(preferences.getName());
     	});
     	this.getTabs().add(preferences);
     }
