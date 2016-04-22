@@ -17,6 +17,7 @@ public class DesignBoardHousing extends TabPane {
  * @param elem: Interface for Manager to Update Backend 
  */
     public DesignBoardHousing (CompleteAuthoringModelable elem) {
+
     	mySceneName = new SimpleStringProperty();
     	DesignBoardPreferences preferences = new DesignBoardPreferences(elem);
     	preferences.setListener(e -> {

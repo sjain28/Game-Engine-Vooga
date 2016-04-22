@@ -1,43 +1,31 @@
 package authoring.gui;
 
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import com.sun.prism.paint.Color;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.model.GameObject;
-import authoring.VoogaScene;
-import authoring.gui.menubar.builders.ArchetypeBuilder;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.Elementable;
-import authoring.properties.PropertiesTabManager;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
 import authoring.resourceutility.VoogaFileType;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -185,7 +173,6 @@ public class DesignBoard extends Tab implements Observer {
 			}
 			elementManager.addElementId(elementPath);
 		}
-
 	}
 
 	private void moveElement(String id, DragEvent e) {

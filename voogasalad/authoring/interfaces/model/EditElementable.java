@@ -15,6 +15,5 @@ public interface EditElementable extends EditSpritable{
     public Node getElement(String id);
     public Set<String> getIds();
     public boolean hasElement(String id);
-    public void addGlobalVariable(String name, VoogaData value);
     public Elementable getVoogaElement(String id);
 }

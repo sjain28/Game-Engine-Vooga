@@ -10,7 +10,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class VoogaFileChooser{
     private static final String USER_RESOURCES_PATH = "user_resources/";
-    private static final String LOCAL_PATH= "voogasalad_DoovalSalad/";
+    private static final String LOCAL_PATH= "voogasalad_DoovalSalad";
     
     private FileChooser fileChooser;
     
@@ -22,11 +22,12 @@ public class VoogaFileChooser{
         File file = fileChooser.showOpenDialog(null);
         if (isLocal(file)){
             String path = file.getPath().split(LOCAL_PATH)[1];
-            System.out.println("local: "+path);
+            path=path.substring(1);
+//            System.out.println("local: "+path);
             return path;
         } else {
+//            System.out.println("Not local: "+ file.getPath());
             String path= moveToLocalPath(file);
-            System.out.println("Not local: "+path);
             return path;
         }
     }
@@ -36,6 +37,7 @@ public class VoogaFileChooser{
     }
     
     private boolean isLocal(File file){
+//    	System.out.println(file.getPath());
         return file.getPath().contains(LOCAL_PATH);
     }
     

@@ -15,13 +15,13 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// Launches Main Program (only MenuBar of GUI implemented as of April 5)
-		// new Launcher(primaryStage);
+		// Launches Main Program
+		new Launcher(primaryStage);
 		
 		// Launches Mosaic
 		// new BoundsTester();
 		
-		new LevelCartographer(null);
+		// new LevelCartographer(null);
 	}
 	
 	public static void main(String[] args) {

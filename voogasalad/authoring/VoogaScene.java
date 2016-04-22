@@ -45,8 +45,8 @@ public class VoogaScene extends Scene {
 		
         //this.getStylesheets().addAll(this.getClass().getResource(csspath).toExternalForm());
 		this.getStylesheets().add(csspath);
-		System.out.println(parent.getId());
-		System.out.println(this.getClass().getResource(csspath).toExternalForm());
+//		System.out.println(parent.getId());
+//		System.out.println(this.getClass().getResource(csspath).toExternalForm());
 
 	}
 

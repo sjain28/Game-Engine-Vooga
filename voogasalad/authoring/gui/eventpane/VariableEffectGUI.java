@@ -45,7 +45,7 @@ public class VariableEffectGUI implements EventGUI {
 
     private void setChangeListeners () {
         level.setOnAction(e -> {
-            System.out.println("level activated");
+            //System.out.println("level activated");
             resetNode();
             addGUIElements(level);
 
@@ -59,14 +59,14 @@ public class VariableEffectGUI implements EventGUI {
         });
 
         name.setOnAction(e -> {
-            System.out.println("name activated");
+//            System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
             variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             addGUIElements(variables);
         });
 
         variables.setOnAction(e -> {
-            System.out.println("variables activated");
+//            System.out.println("variables activated");
             removeInactiveNodes(actions, amount);
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
