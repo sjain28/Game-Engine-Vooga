@@ -64,13 +64,17 @@ public class DesignBoardPreferences extends Tab {
 		chooseSpecificTrackingMode();
 	}
 	
+	public void setName(String name) {
+		this.levelName.setText(name);
+	}
+	
 	public void setListener(EventHandler<ActionEvent> proceed) {
 		this.e = proceed;
 		container.getChildren().add(buttonRow());
 	}
 
 	private HBox header() {
-		return makeRow(new CustomText("Create a new level!", FontWeight.BOLD, 20));
+		return makeRow(new CustomText("Define your level.", FontWeight.BOLD, 20));
 	}
 
 	private HBox chooseName() {
