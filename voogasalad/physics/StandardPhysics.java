@@ -20,7 +20,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	private static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
 	private static final double LIFT = 0.00001;
-	private static final double ERROR = 0.005;
+	private static final double ERROR = 0.01;
+	private static final double JUMP_FACTOR = 0.05;
 	
 	
 	/**
@@ -190,12 +191,12 @@ public class StandardPhysics implements IPhysicsEngine{
 	@Override
 	public void jump(Sprite sprite, Double jumpMagnitude) {
 		
-		System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
-		System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
+		//System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
+		//System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
 		// Check if the main character is on the ground, not in the air to be able to jump
 		if (isZero(sprite.getVelocity().getY())) {
 			// Apply change to the velocity so that the character has upward velocity
-			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude / 20);
+			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude * JUMP_FACTOR);
 		}
 	}
 
