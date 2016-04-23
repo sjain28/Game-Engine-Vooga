@@ -91,7 +91,7 @@ public abstract class AbstractPropertiesTab extends Tab {
                 }
             });
             node = propertiesMap.get(property).display();
-            bindDataToMap(property, node, propertiesMap.get(property));   
+            bindDataToMap(property, node, propertiesMap.get(property));  
             properties.getChildren().add(new PropertyBox(name, node));
         }
         propertiesHBox.getChildren().addAll(properties);
