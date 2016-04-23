@@ -39,10 +39,6 @@ public final class Deserializer {
                 }
             }
         }
-        catch (VoogaException e1) {
-//            System.out.println("IO exception from deserializer");
-            e1.printStackTrace();
-        }
         catch (FileNotFoundException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

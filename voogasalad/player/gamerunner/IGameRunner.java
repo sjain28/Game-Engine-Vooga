@@ -26,7 +26,9 @@ public interface IGameRunner extends Menuable {
 
 	IGameRunner getSelf();
 
-	void playLevel(String teststring, boolean debugMode);
+	void testLevel(String fileName);
+	
+	void playLevel(String teststring);
 	
 	void playGame(String xmlList);
 	

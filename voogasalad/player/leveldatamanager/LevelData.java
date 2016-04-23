@@ -5,10 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-import org.xml.sax.SAXException;
 
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
@@ -16,7 +12,6 @@ import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import data.FileWriterFromGameObjects;
-import data.Serializer;
 import events.Cause;
 import events.KeyCause;
 import events.VoogaEvent;
@@ -279,6 +274,7 @@ public class LevelData implements ILevelData {
 		System.out.println("All the variables here are" + myGlobalVariables);
 		//initialize timer to zero here as well as level index
 		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
+		System.out.println("Did the timer here happen");
 		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));
 	}
 
