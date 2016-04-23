@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
 import data.Deserializer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -318,6 +319,11 @@ public class GameRunner implements IGameRunner {
 		myLevelData.saveProgress(gamesPath,playerName);
 	}
 	@Override
-	public void testLevel(String levelName) {		
+	public void testLevel(String levelName) {	
+	}
+	
+	public void openScene(ElementManager unserialize) {
+		// TODO Auto-generated method stub
+		
 	}
 }
