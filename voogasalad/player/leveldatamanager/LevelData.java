@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
+import data.FileWriterFromGameObjects;
 import events.Cause;
 import events.KeyCause;
 import events.VoogaEvent;
@@ -33,7 +36,9 @@ import tools.interfaces.VoogaData;
 public class LevelData implements ILevelData {
 
 	private static final int SCREENSIZE = 600;
-
+	private static final String UNDERSCORE = "_";
+	private static final String XML_SUFFIX = ".xml";
+	
 	private IPhysicsEngine myPhysics;
 
 	/**Sprite and Text Information**/
@@ -223,10 +228,11 @@ public class LevelData implements ILevelData {
 		List<Elementable> elementObjects = data.getElementableList();
 		System.out.println("All the sprites here are" + elementObjects);
 
-		//clear whats in the myElements Map.
+		//clear all the instance variables
 		myElements.clear();
 		myEvents.clear();
 		myKeyCauses.clear();
+		myKeyCombos.clear();
 		
 		//add elements to map 
 	    for (Elementable el : elementObjects) {
@@ -268,6 +274,7 @@ public class LevelData implements ILevelData {
 		System.out.println("All the variables here are" + myGlobalVariables);
 		//initialize timer to zero here as well as level index
 		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
+		System.out.println("Did the timer here happen");
 		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));
 	}
 
@@ -281,6 +288,27 @@ public class LevelData implements ILevelData {
 	}
 	public void updatedGlobalTimer(double time){
 		myGlobalVariables.get(TIMER).setValue(new Double(time));
+	}	
+	
+	/*Save progress saves the currently existing data to a data container. Then, everything is saved to the location 
+	
+	filePath, which is specified in the function, along with the players name"
+	*/
+	
+	public void saveProgress(String filePath,String playerName){
+		
+		List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
+		DataContainerOfLists dataContainer = new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
+                mySpriteFactory.getArchetypeMap());
+		String newFileName =  playerName + XML_SUFFIX;
+		String finalLocation = filePath + newFileName;
+		try{
+		FileWriterFromGameObjects.saveGameObjects(dataContainer,finalLocation);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("The file here saved at location " + finalLocation);
 	}
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {

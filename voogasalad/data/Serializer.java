@@ -18,6 +18,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Serializer {
 
+
 	public static void serialize(Object object, String fileName)
 			throws ParserConfigurationException, TransformerException, IOException, SAXException {
 		XStream serializer = new XStream(new DomDriver());

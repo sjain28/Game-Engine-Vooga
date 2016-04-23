@@ -21,6 +21,7 @@ public class FileWriterFromGameObjects {
                                         String fileName) throws ParserConfigurationException,
                                                          TransformerException, IOException,
                                                          SAXException {
+    	System.out.println("What is the filename here? " + fileName);
         File file = new File(fileName);
         if (!file.exists()) {
 
