@@ -37,6 +37,7 @@ public class LevelData implements ILevelData {
 
 	private static final int SCREENSIZE = 600;
 	private static final String UNDERSCORE = "_";
+	private static final String LEVELS = "levels/";
 	private static final String XML_SUFFIX = ".xml";
 	
 	private IPhysicsEngine myPhysics;
@@ -301,7 +302,7 @@ public class LevelData implements ILevelData {
 		DataContainerOfLists dataContainer = new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                 mySpriteFactory.getArchetypeMap());
 		String newFileName =  playerName + XML_SUFFIX;
-		String finalLocation = filePath + newFileName;
+		String finalLocation = filePath+ LEVELS+ playerName+ "/"+ newFileName;
 		try{
 		FileWriterFromGameObjects.saveGameObjects(dataContainer,finalLocation);
 		}

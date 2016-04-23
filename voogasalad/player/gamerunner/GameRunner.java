@@ -159,9 +159,6 @@ public class GameRunner implements IGameRunner {
 		that is created when the GameController is initialized
 	 */
 	public void playGame(String gameXmlList) {
-		for (int i =0 ; i < 10000000; i++){
-		System.out.println("what is the xml list here" + gameXmlList);
-		}
 		System.out.println("gameXMllist here " + gameXmlList);
 		try {
 			myLevelList = createLevelList(gameXmlList);
