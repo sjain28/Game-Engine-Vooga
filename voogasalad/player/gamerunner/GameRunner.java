@@ -1,18 +1,14 @@
 package player.gamerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Queue;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.Deserializer;
-import data.Serializer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -55,8 +51,6 @@ public class GameRunner implements IGameRunner {
 	private IGameDisplay myGameDisplay; //This HAS key events
 	private List<String> myLevelList;
 	private static Timeline myTimeline;
-    
-    
     
 	/**
 	 * Default constructor
@@ -416,14 +410,12 @@ public class GameRunner implements IGameRunner {
 	}
     @Override
     public void addScene (CompleteAuthoringModelable manager) {
-        // TODO Auto-generated method stub
         
     }
+    
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 		myTimeline.stop();
-		//myTimeline = null;
 		myGameDisplay.exit();
 	}
 }
