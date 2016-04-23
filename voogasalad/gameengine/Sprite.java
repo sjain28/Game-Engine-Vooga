@@ -10,12 +10,14 @@ import events.Effectable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Acceleration;
 import tools.Position;
 import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.bindings.ImageProperties;
 import tools.Velocity;
 import tools.VoogaBoolean;
@@ -41,14 +43,15 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myID;
     private String myName;
     private Map<String, VoogaData> myProperties;
-    private String myImagePath;
     private String myArchetype;
+    private String myImagePath;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
     private transient SimpleDoubleProperty myY;
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
+    private transient SimpleStringProperty myImagePathProperty;
 
     private Map<String,Object> initializationProperties;
 
@@ -58,27 +61,16 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    VoogaNumber mass) {
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
+        myImagePath = imagePath;
         initializeCoordinates();
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
         myAcceleration = new Acceleration(0, 0);
-
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
-        myImagePath = imagePath;
-        Image image = null;
-
-        if (myImagePath.contains("file:")) {
-            image = new Image(myImagePath);
-        }
-        else {
-            image = new Image(this.getClass().getResourceAsStream(myImagePath));
-
-        }
-
-        myImage = new ImageView(image);
-        myImage.setFitHeight(image.getHeight());
-        myImage.setFitWidth(image.getWidth());
+        
+        initializeImage(imagePath);
+        
         // TODO: use properties file to put these
         myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
         myProperties.put(ALIVE, new VoogaBoolean(true));
@@ -86,6 +78,26 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
         initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
         
+    }
+    
+    private void initializeImage(String path) {
+    	VoogaString imagePathString = new VoogaString(path);
+    	myImagePathProperty = new SimpleStringProperty(path);
+        myProperties.put(IMAGE_PATH, imagePathString);
+        Image image = null;
+
+        if (myProperties.get(IMAGE_PATH).getValue().toString().contains("file:")) {
+            image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
+        }
+        else {
+            image = new Image(this.getClass().getResourceAsStream(myProperties.get(IMAGE_PATH).getValue().toString()));
+
+        }
+        Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
+
+        myImage = new ImageView(image);
+        myImage.setFitHeight(image.getHeight());
+        myImage.setFitWidth(image.getWidth());
     }
 
     private void initializeDimensions (double width, double height) {
@@ -118,6 +130,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     	
     	//Velocity in m/s >> Each step is one s, so the number of meters u should increment
         //System.out.println("Archetype: "+myArchetype+" "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
+
 
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
 //        System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
@@ -193,15 +206,15 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     public void setImagePath (String path) {
-        myImagePath = path;
-        Image image = new Image(this.getClass().getResourceAsStream(myImagePath));
+        myProperties.put(IMAGE_PATH, new VoogaString(path));
+        Image image = new Image(this.getClass().getResourceAsStream(myProperties.get(IMAGE_PATH).getValue().toString()));
         myImage = new ImageView(image);
         myImage.setLayoutX(myLoc.getX());
         myImage.setLayoutY(myLoc.getY());
     }
 
     public String getImagePath () {
-        return myImagePath;
+        return myProperties.get(IMAGE_PATH).getValue().toString();
     }
 
     @Override
@@ -258,6 +271,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
     public Property<Number> getHeight () {
         return this.myHeight;
     }
+    
+    public Property<String> getImagePathProperty() {
+    	return this.myImagePathProperty;
+    }
 
     public void initializeImage () {
         if (myImage == null) {
@@ -283,9 +300,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         if (myImage != null)
             return;
 //        System.out.println("My image was null");
-        
         ImageProperties imageProperties= new ImageProperties();
-        Image image = new Image(myImagePath);
+        Image image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
         myImage = new ImageView(image);
         
         imageProperties.loadData(myImage,initializationProperties);

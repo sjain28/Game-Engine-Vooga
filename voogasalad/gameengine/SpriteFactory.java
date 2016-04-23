@@ -124,7 +124,6 @@ public class SpriteFactory extends Observable{
             try {
                 archetypeFile.createNewFile();
                 try {
-                    System.out.println(archetypeName);
                     Serializer.serialize(myArchetypes.get(archetypeName), archetypeFile.getPath());
                 }
                 catch (ParserConfigurationException | TransformerException | IOException

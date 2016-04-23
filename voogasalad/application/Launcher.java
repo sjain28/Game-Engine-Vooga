@@ -21,8 +21,7 @@ public class Launcher {
 	 *            to display the environment in
 	 */
 	public Launcher(Stage primaryStage) {
-		CompleteAuthoringModelable model = new ElementManager();
-		new UILauncher(primaryStage, model);
+		new UILauncher(primaryStage);
 	}
 
 	/**
@@ -36,8 +35,7 @@ public class Launcher {
 	public Launcher(Stage primaryStage, File fileToLoadIn) {
 
 		// TODO: Parse the file, use it to instantiate the ElementManager
-		CompleteAuthoringModelable model = new ElementManager();
-		new UILauncher(primaryStage, model);
+		new UILauncher(primaryStage);
 	}
 
 }

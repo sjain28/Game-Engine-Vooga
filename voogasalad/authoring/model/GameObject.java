@@ -7,9 +7,11 @@ import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -24,13 +26,16 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     private Sprite mySprite;
     private String name;
+    
+    private transient SimpleStringProperty imagePath;
 
     public GameObject (Sprite sprite, String name) {
+    	imagePath = new SimpleStringProperty(sprite.getImagePath());
         initializeSprite(sprite);
         sprite.setName(name);
         this.name = name;
         this.setId(mySprite.getId());
-        this.setImage(mySprite.getImage().getImage());
+        this.setImage(new Image(imagePath.get()));
         this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
         this.setOnDragDetected(e -> onDrag(e));
     }
@@ -42,6 +47,11 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
+        Bindings.bindBidirectional(imagePath, mySprite.getImagePathProperty());
+        
+        mySprite.getImagePathProperty().addListener((obs, old, n) -> {
+        	this.setImage(new Image(n));
+        });
 
         this.translateXProperty().addListener( (obs, old, n) -> {
             mySprite.getX().setValue(n);
@@ -75,7 +85,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         ClipboardContent content = new ClipboardContent();
         content.putString(getId());
         db.setContent(content);
-        db.setDragView(this.getImage());
+        if(!this.imagePath.get().contains(".gif")) db.setDragView(this.getImage());
         event.consume();
     }
 
