@@ -45,7 +45,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myName;
     private Map<String, VoogaData> myProperties;
     private String myArchetype;
-    private String myImagePath;
+    private String previousImage;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
@@ -96,11 +96,20 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     private void initializeImage (String path) {
         VoogaString imagePathString = new VoogaString(path);
+        previousImage = path;
         myImagePathProperty = new SimpleStringProperty(path);
         myProperties.put(IMAGE_PATH, imagePathString);
-        Image image = null;
+        Image newImage = setNewImage();
+        Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
 
-        if (myProperties.get(IMAGE_PATH).getValue().toString().contains("file:")) {
+        myImage = new ImageView(newImage);
+        myImage.setFitHeight(newImage.getHeight());
+        myImage.setFitWidth(newImage.getWidth());
+    }
+
+	private Image setNewImage() {
+		Image image;
+		if (myProperties.get(IMAGE_PATH).getValue().toString().contains("file:")) {
             image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
         }
         else {
@@ -109,12 +118,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
                             .getValue().toString()));
 
         }
-        Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
-
-        myImage = new ImageView(image);
-        myImage.setFitHeight(image.getHeight());
-        myImage.setFitWidth(image.getWidth());
-    }
+		return image;
+	}
 
     private void initializeDimensions (double width, double height) {
         myProperties.put(WIDTH, new VoogaNumber(width));
@@ -162,6 +167,12 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
+        
+        if (!myProperties.get(IMAGE_PATH).getValue().toString().equals(previousImage)){
+        Image newImage = setNewImage();
+        myImage.setImage(newImage);
+        previousImage = myProperties.get(IMAGE_PATH).getValue().toString();
+        }
 
         // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
 
@@ -320,7 +331,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         
         ImageProperties imageProperties = new ImageProperties();
         myImagePathProperty= new SimpleStringProperty();
-        System.out.println("This is my image path" +myProperties.get(IMAGE_PATH).getValue().toString());
         myImagePathProperty.set(myProperties.get(IMAGE_PATH).getValue().toString());
         
         Image image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
