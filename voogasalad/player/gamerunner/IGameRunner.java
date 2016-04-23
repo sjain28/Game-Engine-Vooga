@@ -22,7 +22,6 @@ public interface IGameRunner extends Menuable {
 	void speedDown();
 
 	void mute();
-
 		
 	void playGame(String xmlList);
 	
@@ -35,6 +34,4 @@ public interface IGameRunner extends Menuable {
 	void replayLevel();
 
 	void saveGameProgress(String playerName);
-	
-
 }

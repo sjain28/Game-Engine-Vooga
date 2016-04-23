@@ -2,10 +2,8 @@ package authoring.gui.cartography;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,6 +26,7 @@ import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 import resources.VoogaPaths;
+import tools.VoogaAlert;
 import tools.VoogaException;
 
 public class LevelCartographer extends Stage {
@@ -38,13 +37,15 @@ public class LevelCartographer extends Stage {
 	private static final double CIRCLE_DEGREES = 360;
 	private static final double RING_SIZE = 300;
 	private static final double INCREASE_FACTOR = 1.2;
+	private static final String MAP_XML_PATH = VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName")
+			+ "/map/" + VoogaBundles.preferences.getProperty("GameName") + "Map.xml";
 
 	private BorderPane myGUI;
 	private Group myMap;
 	private List<String> levelNames;
 	private List<Level> levels;
-	private List<Connection> connectors;
-	private Map<String, Set<String>> levelMap;
+	private Set<Connection> connectors;
+	private Set<Mapping> mappings;
 
 	private UIManager manager;
 
@@ -52,8 +53,8 @@ public class LevelCartographer extends Stage {
 		this.manager = (UIManager) model;
 		initializeScene();
 		loadLevels();
-		loadLinesAndPoints();
 		populate();
+		loadLinesAndPoints();
 	}
 
 	private void initializeScene() {
@@ -61,8 +62,8 @@ public class LevelCartographer extends Stage {
 		myMap = new Group();
 		myGUI.setCenter(myMap);
 		myGUI.setBottom(buttons());
-		this.levelMap = new HashMap<String, Set<String>>();
-		this.connectors = new ArrayList<Connection>();
+		this.mappings = new HashSet<Mapping>();
+		this.connectors = new HashSet<Connection>();
 		this.setScene(new VoogaScene(myGUI, WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 
@@ -75,24 +76,20 @@ public class LevelCartographer extends Stage {
 		return container;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void save() {
-		writeLinesAndPoints();
+		connectorsToCoordinates();
 		new Save(this.manager).handle();
 		try {
-			String mapXMLPath = VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName") + "/map/"
-					+ VoogaBundles.preferences.getProperty("GameName") + "Map.xml";
-			Serializer.serializeLevel(levelMap, mapXMLPath);
-			Map<String, List<String>> map = (Map<String, List<String>>) Deserializer.deserialize(1, mapXMLPath);
-			System.out.println(map.keySet());
-		} catch (ParserConfigurationException | TransformerException | IOException | SAXException | VoogaException e) {
-			// TODO Auto-generated catch block
+			Serializer.serializeLevel(mappings, MAP_XML_PATH);
+		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void writeLinesAndPoints() {
-		
+	private void connectorsToCoordinates() {
+		for(Connection connector : connectors) {
+			mappings.add(new Mapping(connector.getStartpoint().getName(), connector.getEndpoint().getName()));
+		}
 	}
 
 	private void addConnector() {
@@ -100,18 +97,18 @@ public class LevelCartographer extends Stage {
 		connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
 			for (Level level : levels) {
 				if (connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-					connector.setStartpoint(level.getName());
+					connector.setStartpoint(level);
 				}
 			}
 		});
 		connector.getEndAnchor().centerXProperty().addListener((obs, old, n) -> {
 			for (Level level : levels) {
 				if (connector.getEndAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-					connector.setEndpoint(level.getName());
+					connector.setEndpoint(level);
 				}
 			}
 		});
-		//connectors.add
+		connectors.add(connector);
 		myMap.getChildren().add(connector);
 	}
 
@@ -141,12 +138,37 @@ public class LevelCartographer extends Stage {
 		levelNames = this.manager.getAllManagerNames();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadLinesAndPoints() {
-		for (Level level : levels) {
-			
+		Set<Mapping> mappings;
+		try {
+			List<Object> deserialization = Deserializer.deserialize(1, MAP_XML_PATH);
+			if (deserialization.size() > 0) {
+				mappings = (Set<Mapping>) deserialization.get(0);
+				for(Mapping mapping : mappings) {
+					Level startLevel = getLevelFromString(mapping.getStart());
+					Level endLevel = getLevelFromString(mapping.getEnd());
+					myMap.getChildren().add(new Connection(this.manager.getManager(),
+										    startLevel.getTranslateX() + CIRCLE_SIZE / levelNames.size(),
+										    startLevel.getTranslateY() + CIRCLE_SIZE / levelNames.size(),
+										    endLevel.getTranslateX() + CIRCLE_SIZE / levelNames.size(),
+										    endLevel.getTranslateY()+ CIRCLE_SIZE / levelNames.size()));
+				}
+			}
+		} catch (VoogaException e) {
+			new VoogaAlert("This is the first time opening the Cartographer.");
 		}
 	}
-
+	
+	private Level getLevelFromString(String levelName) {
+		for(Level level : levels) {
+			if(level.getName().equals(levelName)) {
+				return level;
+			}
+		}
+		return null;
+	}
+	
 	private void populate() {
 		for (int i = 0; i < levelNames.size(); i++) {
 			Level circ = new Level(levelNames.get(i), CIRCLE_SIZE / levelNames.size());
@@ -155,9 +177,6 @@ public class LevelCartographer extends Stage {
 			levels.add(circ);
 			myMap.getChildren().add(circ);
 			StackPane.setAlignment(circ, Pos.CENTER);
-			if (!levelMap.containsKey(circ.getName())) {
-				levelMap.put(circ.getName(), new HashSet<String>());
-			}
 		}
 	}
 

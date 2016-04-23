@@ -79,7 +79,6 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 
-
 		myGameFilePath = GAMES_PATH_PREFIX;
 	}
 	
@@ -117,7 +116,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void step() {	
 		myCurrentStep++;
-		double secondspassed = myCurrentStep*(1/INIT_SPEED)/60;
+		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / 60;
 
 		myLevelData.updatedGlobalTimer(secondspassed);
 

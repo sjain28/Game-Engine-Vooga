@@ -13,14 +13,14 @@ public class Connection extends Group {
 
 	private static final double LINE_WIDTH = 5;
 
-	private Line connector;
-	private Anchor anchor1;
-	private Anchor anchor2;
+	private transient Line connector;
+	private transient Anchor anchor1;
+	private transient Anchor anchor2;
 	
 	private double startx, starty, endx, endy;
 	
-	private String start;
-	private String end;
+	private Level start;
+	private Level end;
 
 	public Connection(CompleteAuthoringModelable model, double startx, double starty, double endx, double endy) {
 		this.startx = startx;
@@ -40,7 +40,7 @@ public class Connection extends Group {
 		connector.setStroke(Paint.valueOf("white"));
 		connector.setOnMouseClicked(e -> {
 			if(e.getClickCount() == 2) {
-				new ConnectionPrompt(start, end, model);
+				new ConnectionPrompt(start.getName(), end.getName(), model);
 			}
 		});
 	}
@@ -102,19 +102,19 @@ public class Connection extends Group {
 		});
 	}
 
-	public void setStartpoint(String name) {
-		this.start = name;
+	public void setStartpoint(Level start) {
+		this.start = start;
 	}
 	
-	public void setEndpoint(String name) {
-		this.end = name;
+	public void setEndpoint(Level end) {
+		this.end = end;
 	}
 	
-	public String getStartpoint() {
+	public Level getStartpoint() {
 		return this.start;
 	}
 	
-	public String getEndpoint() {
+	public Level getEndpoint() {
 		return this.end;
 	}
 	
