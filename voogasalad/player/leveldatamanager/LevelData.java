@@ -298,7 +298,8 @@ public class LevelData implements ILevelData {
 	
 	public void saveProgress(String filePath,String playerName){
 		
-		List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
+		List<Elementable> elementList = new ArrayList<Elementable>();
+		elementList.addAll(myElements.values());
 		DataContainerOfLists dataContainer = new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                 mySpriteFactory.getArchetypeMap());
 		String newFileName =  playerName + XML_SUFFIX;

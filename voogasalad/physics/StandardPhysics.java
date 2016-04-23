@@ -2,6 +2,7 @@ package physics;
 
 import gameengine.Sprite;
 import javafx.geometry.Bounds;
+import javafx.scene.input.KeyEvent;
 import tools.Acceleration;
 import tools.Position;
 import tools.Velocity;
@@ -19,7 +20,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	private static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
 	private static final double LIFT = 0.00001;
-	private static final double ERROR = 0.005;
+	private static final double ERROR = 0.01;
+	private static final double JUMP_FACTOR = 0.05;
 	
 	
 	/**
@@ -52,7 +54,16 @@ public class StandardPhysics implements IPhysicsEngine{
 	
 	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getVelocity().setX(change * 0.1);
+		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+		//System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
+	}
+	
+
+	public void translateXwithKeyEvent(Sprite sprite, Double change, KeyEvent event) {
+		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+		if (event.isConsumed()) {
+			sprite.getVelocity().setX(0);
+		}
 		//System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
 	}
 	
@@ -65,6 +76,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	public void translateY(Sprite sprite, Double change) {
 		sprite.getPosition().addY(change);
 	}
+	
+	
 		
 	@Override
 	public void setPosition(Sprite sprite, Position newPosition) {
@@ -178,12 +191,12 @@ public class StandardPhysics implements IPhysicsEngine{
 	@Override
 	public void jump(Sprite sprite, Double jumpMagnitude) {
 		
-		System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
-		System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
+		//System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
+		//System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
 		// Check if the main character is on the ground, not in the air to be able to jump
 		if (isZero(sprite.getVelocity().getY())) {
 			// Apply change to the velocity so that the character has upward velocity
-			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude / 20);
+			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude * JUMP_FACTOR);
 		}
 	}
 

@@ -11,7 +11,7 @@ public class DragDropTest extends Application{
 
     @Override
     public void start (Stage primaryStage) throws Exception {
-        DesignBoardHousing designBoard = new DesignBoardHousing(new ElementManager());
+        DesignBoardHousing designBoard = new DesignBoardHousing(new ElementManager(), false);
         Scene scene = new Scene (designBoard);
         VoogaFrontEndText vt = new VoogaFrontEndText();
         vt.setMaxWidth(100);

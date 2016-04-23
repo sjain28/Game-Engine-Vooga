@@ -3,7 +3,6 @@ package player.gamedisplay;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
@@ -18,6 +17,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import tools.OrderedProperties;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -42,7 +42,6 @@ public class StandardDisplay implements IGameDisplay {
 	private Pane myGameScreen;
 	private PromptFactory myPrompt;
 	private List<Node> myListToDisplay;
-	//	private EventHandler<KeyEvent> myKeyListener;
 	private List<KeyEvent> myKeyEvents;
 
 	// BGM
@@ -66,11 +65,6 @@ public class StandardDisplay implements IGameDisplay {
 		initialize();
 	}
 	
-	//TODO: DELETE THIS IS DEBUGGING METHOD
-	public boolean stageIsShowing(){
-		return myStage.isShowing();
-	}
-
 	/**
 	 * Method that contains a series of initialize statements
 	 * 
@@ -115,18 +109,29 @@ public class StandardDisplay implements IGameDisplay {
 	 * 
 	 */
 	@Override
-	public void display(boolean debugMode) {
-		//Creates the main pane
-		createPane(debugMode);
+	public void display() {
+		createPane(VoogaBundles.playerMenubarProperties);
+		addEffects();
+	}
+	
+	/**
+	 * Create a display to be used for testing (single level)
+	 * 
+	 */
+	@Override
+	public void displayTestMode() {
+		createPane(VoogaBundles.playerTesterMenubarProperties);
+		addEffects();
 
-		//Creates the game screen
-		//		populateGameScreen();
-
-		//Shows the scene
+	}
+	
+	/**
+	 * Add secondary effects to the stage, called by display and displayTestMode
+	 * 
+	 */
+	private void addEffects() {
 		getStage().show();
-		//Adds keyinput listener
 		getScene().addEventHandler(KeyEvent.ANY, keyListener);
-		//Plays BGM music
 		playMusic();
 	}
 
@@ -140,24 +145,13 @@ public class StandardDisplay implements IGameDisplay {
 	}
 
 	/**
-	 * Creates the game display
+	 * Creates the game display, adding all components
 	 * 
 	 */
-	private void createPane(boolean debugMode) {
-		//Adds all components into the main border pane
+	private void createPane(OrderedProperties resource) {
 		getPane().setCenter(myGameScreen);
-		//System.out.println(myGameRunner);
-		if (debugMode){
-			getPane().setTop(new MenuPanel(myGameRunner, 
-					e -> new MenuPanelHandlingMirror(e, myGameRunner), 
-					VoogaBundles.playerTesterMenubarProperties));
-		}
-		else{
-			getPane().setTop(new MenuPanel(myGameRunner, 
-					e -> new MenuPanelHandlingMirror(e, myGameRunner), 
-					VoogaBundles.playerMenubarProperties));
-		}
-
+		getPane().setTop(new MenuPanel(myGameRunner, 
+				e -> new MenuPanelHandlingMirror(e, myGameRunner), resource));
 		getPane().setBottom(myControl.createControl());
 		//Below is optional (adds HUD)
 		getPane().setRight(myHUD.createHUD());
@@ -182,10 +176,7 @@ public class StandardDisplay implements IGameDisplay {
 	@Override
 	public void populateGameScreen() {
 		getGameScreen().getChildren().clear();
-		getListToDisplay().forEach(n -> {
-			//n.setTranslateY(flipYCoordinate(n.getTranslateY()));
-			getGameScreen().getChildren().add(n);
-		});
+		getListToDisplay().forEach(n -> getGameScreen().getChildren().add(n));
 	}
 	
 	/**
@@ -305,10 +296,8 @@ public class StandardDisplay implements IGameDisplay {
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 		myMediaPlayer.stop();
 		myStage.close();
 	}
-
 
 }
