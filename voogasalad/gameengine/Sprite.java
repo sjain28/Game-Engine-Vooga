@@ -44,6 +44,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myName;
     private Map<String, VoogaData> myProperties;
     private String myArchetype;
+    private String previousImage;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
@@ -83,6 +84,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     private void initializeImage (String path) {
         VoogaString imagePathString = new VoogaString(path);
+        previousImage = path;
         myImagePathProperty = new SimpleStringProperty(path);
         myProperties.put(IMAGE_PATH, imagePathString);
         Image image = null;
@@ -149,6 +151,15 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
+        
+        if (!myProperties.get(IMAGE_PATH).getValue().toString().equals(previousImage)){
+        myImage.setImage(new Image(this.getClass()
+                        .getResourceAsStream(myProperties.get(IMAGE_PATH).getValue().toString())));
+        previousImage = myProperties.get(IMAGE_PATH).getValue().toString();
+        }
+        
+        System.out.println("Image path: " + myProperties.get(IMAGE_PATH).getValue());
+        System.out.println("Image View: " + myImage.getImage().toString());
 
         // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
 
