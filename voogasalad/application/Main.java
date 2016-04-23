@@ -16,7 +16,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// Launches Main Program
 		System.setProperty("glass.accessible.force", "false"); //This fixes a stupid bug on Saumya's machine - it's harmless. 
-
 		new Launcher(primaryStage);
 		
 		
