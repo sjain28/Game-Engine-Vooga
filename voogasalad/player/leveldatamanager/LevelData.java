@@ -274,13 +274,13 @@ public class LevelData implements ILevelData {
 
 	public String getNextLevelName() {
 		//HARDCODED FOR NOW!!!!
-		return ((String) (((VoogaString) myGlobalVariables.get(NEXT_LEVEL_INDEX)).getValue()));
+		return "";//((String) (((VoogaString) myGlobalVariables.get(NEXT_LEVEL_INDEX)).getValue()));
 	}
 	public void setNextLevelName(String levelName) {
 		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(levelName));
 	}
 	public void updatedGlobalTimer(double time){
-		myGlobalVariables.get(TIMER).setValue(new Double(time));
+		//myGlobalVariables.get(TIMER).setValue(new Double(time));
 	}
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {

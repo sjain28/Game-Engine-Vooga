@@ -30,6 +30,8 @@ public interface IGameRunner extends Menuable {
 	
 	void playGame(String xmlList);
 	
+	void testLevel(String levelName);
+	
 	void replayGame();
 	
 	void replayLevel();
