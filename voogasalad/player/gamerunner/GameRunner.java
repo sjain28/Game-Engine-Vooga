@@ -52,6 +52,7 @@ public class GameRunner implements IGameRunner {
 	private IGameDisplay myGameDisplay;
 	private List<String> myLevelList;
 	private int myCurrentStep;
+	private boolean myDebugMode;
 	private static Timeline myTimeline;
 
 	/**
@@ -61,7 +62,7 @@ public class GameRunner implements IGameRunner {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public GameRunner() {
+	public GameRunner(boolean debugMode) {
 		myGameDisplay = new StandardDisplay(getSelf());
 		mySpriteManager = new SpriteManager();
 		myEventManager = new EventManager();
@@ -73,6 +74,7 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 		gamesPath = gamesPrefix;
+		myDebugMode = debugMode;
 	}
 	/**
 	 * createLevels takes in a text file and out of that file creates a Queue of levels.
@@ -158,6 +160,9 @@ public class GameRunner implements IGameRunner {
 		that is created when the GameController is initialized
 	 */
 	public void playGame(String gameXmlList) {
+		for (int i =0 ; i < 10000000; i++){
+		System.out.println("what is the xml list here" + gameXmlList);
+		}
 		System.out.println("gameXMllist here " + gameXmlList);
 		try {
 			myLevelList = createLevelList(gameXmlList);
@@ -166,24 +171,20 @@ public class GameRunner implements IGameRunner {
 		}
 		playLevel(myLevelList.get(0));
 		run();
-		myGameDisplay.display();
+		// FALSE BECAUSE WE ARE NOT IN DEBUG MODE!!!
+		myGameDisplay.display(myDebugMode);
 	}
 
 	
 	//USES ABSOLUTE PATH!!!
+	@Deprecated
 	public void testLevel(String fileName){
 		
 		myLevelList = new ArrayList<>();
 		myLevelList.add(fileName);
-		run();
-		myGameDisplay.display();
-		
-//		System.out.println("The play level method is playing here at " + fileNameWithPath);
-		
-//		System.out.println("The test file here is " + fileName);
-		
-		//Set the levelNumber to 0 because we are not transitioning anymore
-//		System.out.println("Refreshing leveldata");
+		run();		
+		//True because we are in debug mode!!!
+		myGameDisplay.display(myDebugMode);
 		myLevelData.refreshLevelData(fileName);
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
 	}
@@ -195,23 +196,26 @@ public class GameRunner implements IGameRunner {
 	 */
 	
 	public void playLevel(String fileName){
-		//System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
+		
 		myCurrentLevelString = fileName;
-//		System.out.println("the game path here in play level is " + this.gamesPath);
-		String fileNameWithPath = this.gamesPath + levelsPath + fileName + xmlSuffix; 
-		System.out.println("The filenamewithpath here is " + fileNameWithPath);
-		//If debugMode = true, we are only playing one level
-//		if (debugMode) {
-//			myLevelList = new ArrayList<>();
-//			myLevelList.add(fileName);
-//			run();
-//			myGameDisplay.display();
-//		}
-		
-//		System.out.println("The play level method is playing here at " + fileNameWithPath);
-		
-		//Set the levelNumber to 0 because we are not transitioning anymore
-		myLevelData.refreshLevelData(fileNameWithPath);
+		if (myDebugMode){
+			myLevelList = new ArrayList<>();
+			myLevelList.add(fileName);
+			run();		
+			myLevelData.refreshLevelData(fileName);
+			myGameDisplay.display(myDebugMode);
+		}
+		else{
+			//System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
+//			System.out.println("the game path here in play level is " + this.gamesPath);
+			String fileNameWithPath = this.gamesPath + levelsPath + fileName + xmlSuffix; 
+			System.out.println("The filenamewithpath here is " + fileNameWithPath);
+//			System.out.println("The play level method is playing here at " + fileNameWithPath);
+			
+			//Set the levelString to 0 because we are not transitioning anymore
+			myLevelData.refreshLevelData(fileNameWithPath);
+			return;
+		}
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
 	}
 

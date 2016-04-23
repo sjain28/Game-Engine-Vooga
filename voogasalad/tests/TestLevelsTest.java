@@ -23,7 +23,7 @@ public class TestLevelsTest extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
 
-        IGameRunner gameRunner = new GameRunner();
+        IGameRunner gameRunner = new GameRunner(true);
         gameRunner.testLevel(TESTXML_PATH);
     }
 
