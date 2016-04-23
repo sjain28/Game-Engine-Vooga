@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 import resources.VoogaPaths;
+import tools.VoogaAlert;
 import tools.VoogaException;
 
 public class LevelCartographer extends Stage {
@@ -155,8 +156,7 @@ public class LevelCartographer extends Stage {
 				}
 			}
 		} catch (VoogaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new VoogaAlert("This is the first time opening the Cartographer.");
 		}
 	}
 	
