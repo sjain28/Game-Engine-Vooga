@@ -9,7 +9,6 @@ import javafx.stage.Stage;
  * Interface for GameDisplay
  * 
  * @author Hunter Lee
- * @param <E>
  *
  */
 public interface IGameDisplay {
