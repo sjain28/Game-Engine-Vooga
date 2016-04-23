@@ -63,14 +63,15 @@ public class EventsWindow extends TabPane implements Observer{
             if(!effects.keySet().contains(e)){
                 ObservableList<String> effectsString = FXCollections.observableArrayList();
                 for(Effect effect: e.getEffects()){
+                    System.out.println(effect.toString());
                     effectsString.addAll(effect.toString());
                 }  
-                causes.put(e, effectsString);
+                effects.put(e, effectsString);
             }
             HBox info = new HBox();
             ListView<String> causeList = new ListView<String>(causes.get(e));
             ListView<String> effectList = new ListView<String>(effects.get(e));
-            Button delete = new Button("Delete");
+            Button delete = new Button("X");
             delete.setOnAction(ee -> delete(e, info));
             info.getChildren().addAll(causeList, effectList, delete);
             content.getChildren().add(info);
