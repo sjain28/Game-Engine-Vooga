@@ -36,6 +36,8 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
+		
+		//Save Game Progress saves this as the name of the player who is currently playing.
 		myGameRunner.saveGameProgress("Josh");
 		System.out.println("This save game file class was accessed");
 	}

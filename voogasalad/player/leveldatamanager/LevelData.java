@@ -293,19 +293,26 @@ public class LevelData implements ILevelData {
 	public void updatedGlobalTimer(double time){
 		myGlobalVariables.get(TIMER).setValue(new Double(time));
 	}	
+	
+	/*Save progress saves the currently existing data to a data container. Then, everything is saved to the location 
+	
+	filePath, which is specified in the function, along with the players name"
+	*/
+	
 	public void saveProgress(String filePath,String playerName){
 		
 		List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
 		DataContainerOfLists dataContainer = new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                 mySpriteFactory.getArchetypeMap());
 		String newFileName =  playerName + XML_SUFFIX;
+		String finalLocation = filePath + newFileName;
 		try{
-		FileWriterFromGameObjects.saveGameObjects(dataContainer, playerName + newFileName);
+		FileWriterFromGameObjects.saveGameObjects(dataContainer,finalLocation);
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
-		System.out.println("The file here saved at location " + filePath + playerName + newFileName);
+		System.out.println("The file here saved at location " + finalLocation);
 	}
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {

@@ -249,6 +249,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     public void setName(String name) {
     	this.myManagerName = name;
     	this.filePath = "games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/" + myManagerName + ".xml";
+    	System.out.println("The file path here is " + filePath);
     }
 
 }

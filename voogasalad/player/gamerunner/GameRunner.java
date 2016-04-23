@@ -52,6 +52,7 @@ public class GameRunner implements IGameRunner {
     private EventManager myEventManager;
     private String levelsPath = "levels/";
     private String gamesPath = "games/";
+    private String gamesPrefix;
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay;
 	private List<String> myLevelList;
@@ -86,11 +87,9 @@ public class GameRunner implements IGameRunner {
 	private List<String> createLevelList(String xmlList) throws FileNotFoundException, IOException, VoogaException{
 		//Go into the path for this file
 		List<String> levelList = new ArrayList<>();
-		gamesPath = gamesPath + xmlList + "/";
+		gamesPath = gamesPrefix + xmlList + "/";
 		String resourcePath = gamesPath + xmlList + ".xml";
 		levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);
-//		System.out.println("The resource path here is called" + resourcePath); 
-//		System.out.println("Levellist is " + levelList);
 	//	VoogaGame currentGame = new VoogaGame(levelList); //Eventually be able to create a game.
 		return levelList;
 	}
@@ -114,14 +113,14 @@ public class GameRunner implements IGameRunner {
 	 * 
 	 */
 	private void step() {	
-		System.out.println("step");
+//		System.out.println("step");
 		myCurrentStep++;
 		double secondspassed = myCurrentStep*(1/INIT_SPEED)/60;
-		System.out.println(myCurrentStep);
-		System.out.println(secondspassed);
+//		System.out.println(myCurrentStep);
+//		System.out.println(secondspassed);
 		myLevelData.updatedGlobalTimer(secondspassed);
 		
-		System.out.println("Current time in seconds: "+ myLevelData.getGlobalVar("Time"));
+//		System.out.println("Current time in seconds: "+ myLevelData.getGlobalVar("Time"));
 		//check if the pane still exists: for debugging purposes
 		if(!myGameDisplay.stageIsShowing()){stop();}
 		//check if a new level has been triggered or not
@@ -157,9 +156,10 @@ public class GameRunner implements IGameRunner {
 		already, the next level of the game will be played. playGame iterates through the queue of levels
 		that is created when the GameController is initialized
 	 */
-	public void playGame(String xmlList) {
+	public void playGame(String gameXmlList) {
+		System.out.println("gameXMllist here " + gameXmlList);
 		try {
-			myLevelList = createLevelList(xmlList);
+			myLevelList = createLevelList(gameXmlList);
 		} catch (Exception e) {
 			VoogaAlert myAlert = new VoogaAlert("Level List Initialization failed");			
 		}
@@ -176,6 +176,7 @@ public class GameRunner implements IGameRunner {
 	public void playLevel(String fileName, boolean debugMode){
 		//System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
 		myCurrentLevelString = fileName;
+		System.out.println("the game path here in play level is " + this.gamesPath);
 		String fileNameWithPath = this.gamesPath + levelsPath + fileName; 
 		System.out.println("The filenamewithpath here is " + fileNameWithPath);
 		//If debugMode = true, we are only playing one level
@@ -260,7 +261,6 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void speedDown() {
 //		myDelay = myDelay - 100;
-		
         getTimeline().stop();
         double newRate = getTimeline().getRate() - SPEEDCONTROL;
         if (newRate > 0) {
@@ -334,7 +334,7 @@ public class GameRunner implements IGameRunner {
 
 	@Override
 	public void saveGameProgress(String playerName) {
-		// TODO Auto-generated method stub
+		System.out.println("What is gamespath in the save game progress method " + gamesPath);
 		myLevelData.saveProgress(gamesPath,playerName);
 	}
 }
