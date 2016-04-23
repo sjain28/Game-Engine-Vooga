@@ -150,7 +150,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
         // System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
         // "velocityX" + myVelocity.getX());
-
+    	//TODO: IF IMAGE PATH UPDATES, ACTUALLY UPDATE THE IMAGE
+    	
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
 
@@ -162,6 +163,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
 
+        System.out.println("isAlive: "+ myProperties.get(ALIVE));
         // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
 
     }

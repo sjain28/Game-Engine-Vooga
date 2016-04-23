@@ -12,6 +12,7 @@ import physics.IPhysicsEngine;
  *
  */
 public class SpriteManager {
+	private static final String ALIVE = "Alive";
 	/**
 	 * This method updates each sprite's Position
 	 * before Events (causes and effects) are applied
@@ -19,8 +20,16 @@ public class SpriteManager {
 	 */
 	public void update(List<Sprite> sprites, IPhysicsEngine physics) {
 		for(Sprite s: sprites){
-			applyGravity(s, physics);
-			s.update();
+			//Clean up all dead Sprites
+			if((Boolean) s.getProperty(ALIVE).getValue() == false){
+				System.out.println("removing sprite");
+				sprites.remove(s);
+			}
+			else{
+				//Apply gravity to all Sprites
+				applyGravity(s, physics);
+				s.update();
+			}
 		}
 	}
 	/**

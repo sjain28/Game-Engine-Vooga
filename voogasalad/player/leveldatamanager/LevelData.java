@@ -94,6 +94,7 @@ public class LevelData implements ILevelData {
 				sprites.add((Sprite) myElements.get(id));
 			}
 		}
+		System.out.println("Size of all sprites: "+ sprites.size());
 		return sprites;
 	}
 	/**
