@@ -1,5 +1,8 @@
 package authoring;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import javafx.animation.PauseTransition;
@@ -36,6 +39,11 @@ public class UILauncher {
 				primaryStage.setScene(scene);
 				primaryStage.setMaximized(true);
 				primaryStage.show();
+				try {
+					VoogaBundles.preferences.storeToXML(new FileOutputStream(new File("LevelConnection.xml")), "Level Connection");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			});
 			prompt.show();
 		// });

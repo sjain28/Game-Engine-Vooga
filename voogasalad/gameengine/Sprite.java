@@ -10,6 +10,7 @@ import events.Effectable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,7 +51,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient SimpleDoubleProperty myY;
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
-
+    private transient SimpleStringProperty myImagePathProperty;
 
     private Map<String,Object> initializationProperties;
 
@@ -67,7 +68,22 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myAcceleration = new Acceleration(0, 0);
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
-        myProperties.put(IMAGE_PATH, new VoogaString(imagePath));
+        
+        initializeImage(imagePath);
+        
+        // TODO: use properties file to put these
+        myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
+        myProperties.put(ALIVE, new VoogaBoolean(true));
+        myProperties.put(GRAVITY, new VoogaNumber(0.0));
+
+        initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
+        
+    }
+    
+    private void initializeImage(String path) {
+    	VoogaString imagePathString = new VoogaString(path);
+    	myImagePathProperty = new SimpleStringProperty(path);
+        myProperties.put(IMAGE_PATH, imagePathString);
         Image image = null;
 
         if (myProperties.get(IMAGE_PATH).getValue().toString().contains("file:")) {
@@ -77,17 +93,11 @@ public class Sprite implements Moveable, Effectable, Elementable {
             image = new Image(this.getClass().getResourceAsStream(myProperties.get(IMAGE_PATH).getValue().toString()));
 
         }
+        Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
 
         myImage = new ImageView(image);
         myImage.setFitHeight(image.getHeight());
         myImage.setFitWidth(image.getWidth());
-        // TODO: use properties file to put these
-        myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
-        myProperties.put(ALIVE, new VoogaBoolean(true));
-        myProperties.put(GRAVITY, new VoogaNumber(0.0));
-
-        initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
-        
     }
 
     private void initializeDimensions (double width, double height) {
@@ -261,6 +271,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
     public Property<Number> getHeight () {
         return this.myHeight;
     }
+    
+    public Property<String> getImagePathProperty() {
+    	return this.myImagePathProperty;
+    }
 
     public void initializeImage () {
         if (myImage == null) {
@@ -286,7 +300,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         if (myImage != null)
             return;
 //        System.out.println("My image was null");
-        
         ImageProperties imageProperties= new ImageProperties();
         Image image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
         myImage = new ImageView(image);

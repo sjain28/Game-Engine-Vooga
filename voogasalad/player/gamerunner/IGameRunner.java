@@ -25,12 +25,12 @@ public interface IGameRunner extends Menuable {
 	void mute();
 
 	IGameRunner getSelf();
-
-	void testLevel(String fileName);
 	
 	void playLevel(String teststring);
 	
 	void playGame(String xmlList);
+	
+	void testLevel(String levelName);
 	
 	void replayGame();
 	

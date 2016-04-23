@@ -26,12 +26,12 @@ public class VoogaBundles {
     public final static ResourceBundle physicsEffectsToGUI = ResourceBundle.getBundle("resources/PhysicsEffectsToGUI");
 	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
 	public final static ResourceBundle eventMethodsToGUI = ResourceBundle.getBundle("resources/EventMethods");
-	public final static Properties preferences = prefProperties();
+	public final static Properties preferences = makeProperties("preferences.properties");
 	
-	private static Properties prefProperties() {
+	private static Properties makeProperties(String path) {
 		try {
 			Properties props = new Properties();
-			props.load(VoogaBundles.class.getResourceAsStream("preferences.properties"));
+			props.load(VoogaBundles.class.getResourceAsStream(path));
 			return props;
 		} catch (IOException e) {
 			return null;
