@@ -1,6 +1,7 @@
 package physics;
 
 import gameengine.Sprite;
+import javafx.geometry.Bounds;
 import tools.Acceleration;
 import tools.Position;
 import tools.Velocity;
@@ -29,6 +30,12 @@ public class StandardPhysics implements IPhysicsEngine{
 
 	}
 	
+	/**
+	 * Checks whether a double is zero
+	 * 
+	 * @param number
+	 * @return
+	 */
 	private boolean isZero(Double number) {
 		return Math.abs(number.doubleValue()) < ERROR;
 	}
@@ -51,7 +58,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	
 //	@Override
 //	public void translateX(Sprite sprite, Double change) {
-//		sprite.getPosition().addX(change * REDUCE_FACTOR);
+//		sprite.getPosition().addX(change* 5);
+//		
 //	}
 	
 	public void translateY(Sprite sprite, Double change) {
@@ -68,7 +76,10 @@ public class StandardPhysics implements IPhysicsEngine{
 		sprite.setVelocity(newVelocity);
 	}
 
-
+	/**
+	 * Elastic bounce in Y direction
+	 * 
+	 */
 	@Override
 	public void bounce(Sprite sprite, Double bounceCoefficient) {
 		//System.out.println("Bounce is called");
@@ -90,8 +101,66 @@ public class StandardPhysics implements IPhysicsEngine{
 
 	}
 	
-	public void bounceX(Sprite sprite, Double bounceCoefficient) {
-		
+	/**
+	 * Sets X velocity to the opposite direction with bounceCoefficient applied
+	 * 
+	 * @param sprite
+	 * @param bounceCoefficient
+	 */
+	public void elasticBounceX(Sprite sprite, Double bounceCoefficient) {
+		sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
+	}
+	
+	/**
+	 * Sets X velocity to zero (stops the movement)
+	 * 
+	 * @param sprite
+	 * @param bounceCoefficient
+	 */
+	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
+		sprite.getVelocity().setX(0);
+	}
+	
+	/**
+	 * Checks if the collision is happening horizontally
+	 * 
+	 * @param spriteA
+	 * @param spriteB
+	 * @return
+	 */
+	public boolean checkCollisionX(Sprite spriteA, Sprite spriteB) {
+		Bounds boundA = spriteA.getImage().getBoundsInLocal();
+		Bounds boundB = spriteB.getImage().getBoundsInLocal();
+        boolean atRightBorder = boundA.getMaxX() >= boundB.getMaxX();
+        boolean atLeftBorder = boundA.getMinX() <= boundB.getMinX();
+        
+        if (atRightBorder || atLeftBorder) {
+        	return true;
+        }
+        else {
+        	return false;
+        }
+	}
+	
+	/**
+	 * Checks if the collision is happening vertically
+	 * 
+	 * @param spriteA
+	 * @param spriteB
+	 * @return
+	 */
+	public boolean checkCollisionY(Sprite spriteA, Sprite spriteB) {
+		Bounds boundA = spriteA.getImage().getBoundsInLocal();
+		Bounds boundB = spriteB.getImage().getBoundsInLocal();
+        boolean atTopBorder = boundA.getMaxY() >= boundB.getMaxY();
+        boolean atBottomBorder = boundA.getMinY() <= boundB.getMinY();
+        
+        if (atTopBorder || atBottomBorder) {
+        	return true;
+        }
+        else {
+        	return false;
+        }
 	}
 
 	@Override
@@ -102,6 +171,10 @@ public class StandardPhysics implements IPhysicsEngine{
 		accelerate(sprite, curr);
 	}
 
+	/**
+	 * Jump method that allows the main character to gain upward velocity
+	 * 
+	 */
 	@Override
 	public void jump(Sprite sprite, Double jumpMagnitude) {
 		
@@ -110,10 +183,14 @@ public class StandardPhysics implements IPhysicsEngine{
 		// Check if the main character is on the ground, not in the air to be able to jump
 		if (isZero(sprite.getVelocity().getY())) {
 			// Apply change to the velocity so that the character has upward velocity
-			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude / 100);
+			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude / 20);
 		}
 	}
 
+	/**
+	 * Applies the effect of gravity by giving it a downward force
+	 * 
+	 */
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
 		//System.out.println("Gravity is called");
