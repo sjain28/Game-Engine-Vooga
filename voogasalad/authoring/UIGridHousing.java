@@ -22,8 +22,4 @@ public class UIGridHousing extends TabPane{
         this.getTabs().add(scene);
     }
     
-    public void setProjectName(String name) {
-    	grid.setProjectName(name);
-    }
-    
 }

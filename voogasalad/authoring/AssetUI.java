@@ -14,6 +14,7 @@ import authoring.resourceutility.VoogaFileType;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
+import resources.VoogaBundles;
 
 public class AssetUI extends Tab implements Observer {
 
@@ -32,19 +33,16 @@ public class AssetUI extends Tab implements Observer {
 		this.myManager.addObserver(this);
 		this.gameObjects = new HashSet<Node>();
 
+		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, VoogaBundles.preferences.getProperty("GameName")));
 		archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, "Archetypes");
 		objectsFolder = new VoogaFile(VoogaFileType.FOLDER, "Game Objects");
+		rtv.addItem(archetypesFolder);
+		rtv.addItem(objectsFolder);
+		this.setContent(rtv);
 
 		initializeArchetypeFolder(myManager.getSpriteFactory());
 		addGameObjects(myManager.getElements());
 
-	}
-	
-	public void setProjectName(String name) {
-		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, name));
-		rtv.addItem(archetypesFolder);
-		rtv.addItem(objectsFolder);
-		this.setContent(rtv);
 	}
 
 	private void addAsset(VoogaFileType type, String archetype, String path) {

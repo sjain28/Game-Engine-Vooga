@@ -15,10 +15,5 @@ public class Explorer extends TabPane {
 		this.getTabs().addAll(resourceExplorer,
 						      assetExplorer);
 	}
-	
-	public void setProjectName(String name) {
-		resourceExplorer.setProjectName(name);
-		assetExplorer.setProjectName(name);
-	}
 
 }

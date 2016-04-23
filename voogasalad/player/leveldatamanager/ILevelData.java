@@ -40,10 +40,14 @@ public interface ILevelData {
 	List<Sprite> getSpritesByArch(String archA);
 
 	List<List<String>> getKeyCombos();
-
+	
 	VoogaData getGlobalVar(String myVarName);
 	
 	Sprite addSprite(String archetype);
+	
+	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
+
+	void saveProgress(String playerName, String filePath);
 }
