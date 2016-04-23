@@ -6,7 +6,6 @@ package videos;
  * @author mykuryshev
  */
 
-/*
 import com.xuggle.mediatool.IMediaWriter;
 import com.xuggle.mediatool.ToolFactory;
 import com.xuggle.xuggler.IContainer;
@@ -25,7 +24,7 @@ import com.xuggle.xuggler.IRational;
  * This class converts JPEG images to MPEG (.mp4) extension video using Xuggler library
  */
 public class XugglerVideoEncodeTester {
-/*
+
     private int videoFrameRate = 60;
     private long durationPerFrame = 1000; 
     private String outputFilenamePath = "";
@@ -45,7 +44,6 @@ public class XugglerVideoEncodeTester {
     /** 
      * Method that converts JPEG images to MPEG (.mp4) extension video using Xuggler library
      */
-/*
     public void convertJpegFramesToMpegVideo() {
         System.out.println("convertJpegFramesToMpegVideo, start...");
         BufferedImage img = null;
@@ -114,5 +112,5 @@ public class XugglerVideoEncodeTester {
     public void setJpegFileList(List<BufferedImage> jpegFileList) {
         this.jpegFileList = jpegFileList;
     }
-*/
+
 }
