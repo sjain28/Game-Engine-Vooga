@@ -29,7 +29,7 @@ public class UILauncher {
 			ProjectInitializationPrompt prompt = new ProjectInitializationPrompt();
 			prompt.setProceedEvent(ee -> {
 				prompt.close();
-				String name = (prompt.getName() == null) ? DEFAULT_PROJECT_NAME : prompt.getName();
+				String name = (prompt.getName() == null || prompt.getName().isEmpty()) ? DEFAULT_PROJECT_NAME : prompt.getName();
 				VoogaBundles.preferences.setProperty("GameName", name);
 				UIManager manager = new UIManager(new ElementManager());
 				Scene scene = new VoogaScene(manager);
