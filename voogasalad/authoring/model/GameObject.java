@@ -26,11 +26,11 @@ public class GameObject extends ImageView implements Moveable, Elementable {
 
     private Sprite mySprite;
     private String name;
-    
+
     private transient SimpleStringProperty imagePath;
 
     public GameObject (Sprite sprite, String name) {
-    	imagePath = new SimpleStringProperty(sprite.getImagePath());
+        imagePath = new SimpleStringProperty(sprite.getImagePath());
         initializeSprite(sprite);
         sprite.setName(name);
         this.name = name;
@@ -48,9 +48,9 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
         Bindings.bindBidirectional(imagePath, mySprite.getImagePathProperty());
-        
-        mySprite.getImagePathProperty().addListener((obs, old, n) -> {
-        	this.setImage(new Image(n));
+
+        mySprite.getImagePathProperty().addListener( (obs, old, n) -> {
+            this.setImage(new Image(n));
         });
 
         this.translateXProperty().addListener( (obs, old, n) -> {
@@ -85,7 +85,8 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         ClipboardContent content = new ClipboardContent();
         content.putString(getId());
         db.setContent(content);
-        if(!this.imagePath.get().contains(".gif")) db.setDragView(this.getImage());
+        if (!this.imagePath.get().contains(".gif"))
+            db.setDragView(this.getImage());
         event.consume();
     }
 
