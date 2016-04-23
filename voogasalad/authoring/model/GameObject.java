@@ -21,131 +21,130 @@ import tools.Vector;
 import tools.Velocity;
 import tools.interfaces.VoogaData;
 
-
 public class GameObject extends ImageView implements Moveable, Elementable {
 
-    private Sprite mySprite;
-    private String name;
+	private Sprite mySprite;
+	private String name;
 
-    private transient SimpleStringProperty imagePath;
+	private transient SimpleStringProperty imagePath;
 
-    public GameObject (Sprite sprite, String name) {
-        imagePath = new SimpleStringProperty(sprite.getImagePath());
-        initializeSprite(sprite);
-        sprite.setName(name);
-        this.name = name;
-        this.setId(mySprite.getId());
-        this.setImage(new Image(imagePath.get()));
-        this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
-        this.setOnDragDetected(e -> onDrag(e));
-    }
+	public GameObject(Sprite sprite, String name) {
+		imagePath = new SimpleStringProperty(sprite.getImagePath());
+		initializeSprite(sprite);
+		sprite.setName(name);
+		this.name = name;
+		this.setId(mySprite.getId());
+		this.setImage(new Image(imagePath.get()));
+		this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
+		this.setOnDragDetected(e -> onDrag(e));
+	}
 
-    private void initializeSprite (Sprite sprite) {
-        mySprite = sprite;
+	private void initializeSprite(Sprite sprite) {
+		mySprite = sprite;
 
-        Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
-        Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
-        Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
-        Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
-        Bindings.bindBidirectional(imagePath, mySprite.getImagePathProperty());
-        Bindings.bindBidirectional(this.visibleProperty(), mySprite.isAlive());
+		Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
+		Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
+		Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
+		Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
+		Bindings.bindBidirectional(imagePath, mySprite.getImagePathProperty());
+		Bindings.bindBidirectional(this.visibleProperty(), mySprite.isAlive());
 
-        mySprite.getImagePathProperty().addListener( (obs, old, n) -> {
-            this.setImage(new Image(n));
-        });
+		mySprite.getImagePathProperty().addListener((obs, old, n) -> {
+			this.setImage(new Image(n));
+		});
 
-        this.translateXProperty().addListener( (obs, old, n) -> {
-            mySprite.getX().setValue(n);
-            ElementSelectionModel.getInstance().setSelected(this);
-        });
-        this.translateYProperty().addListener( (obs, old, n) -> {
-            mySprite.getY().setValue(n);
-            ElementSelectionModel.getInstance().setSelected(this);
-        });
-    }
+		this.translateXProperty().addListener((obs, old, n) -> {
+			mySprite.getX().setValue(n);
+			ElementSelectionModel.getInstance().setSelected(this);
+		});
+		this.translateYProperty().addListener((obs, old, n) -> {
+			mySprite.getY().setValue(n);
+			ElementSelectionModel.getInstance().setSelected(this);
+		});
+	}
 
-    // TODO: Send back immutable sprite
-    public Sprite getSprite () {
-        return mySprite;
-    }
+	// TODO: Send back immutable sprite
+	public Sprite getSprite() {
+		return mySprite;
+	}
 
-    @Override
-    public Vector getVelocity () {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public Vector getVelocity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public void setVelocity (Velocity velocity) {
-        // TODO Auto-generated method stub
-    }
+	@Override
+	public void setVelocity(Velocity velocity) {
+		// TODO Auto-generated method stub
+	}
 
-    void onDrag (MouseEvent event) {
-        ElementSelectionModel.getInstance().setSelected(this);
-        Dragboard db = this.startDragAndDrop(TransferMode.ANY);
-        ClipboardContent content = new ClipboardContent();
-        content.putString(getId());
-        db.setContent(content);
-        if (!this.imagePath.get().contains(".gif")) {
-            db.setDragView(this.getImage());
-        }
-        event.consume();
-    }
+	void onDrag(MouseEvent event) {
+		ElementSelectionModel.getInstance().setSelected(this);
+		Dragboard db = this.startDragAndDrop(TransferMode.ANY);
+		ClipboardContent content = new ClipboardContent();
+		content.putString(getId());
+		db.setContent(content);
+		if (!this.imagePath.get().contains(".gif")) {
+			db.setDragView(this.getImage());
+		}
+		event.consume();
+	}
 
-    @Override
-    public Map<String, VoogaData> getVoogaProperties () {
-        Map<String, VoogaData> propertiesMap = new HashMap<String, VoogaData>();
-        propertiesMap.putAll(mySprite.getParameterMap());
-        return propertiesMap;
-    }
+	@Override
+	public Map<String, VoogaData> getVoogaProperties() {
+		Map<String, VoogaData> propertiesMap = new HashMap<String, VoogaData>();
+		propertiesMap.putAll(mySprite.getParameterMap());
+		return propertiesMap;
+	}
 
-    @Override
-    public void addProperty (String name, VoogaData data) {
-        mySprite.addProperty(name, data);
+	@Override
+	public void addProperty(String name, VoogaData data) {
+		mySprite.addProperty(name, data);
 
-    }
+	}
 
-    @Override
-    public void removeProperty (String name) {
-        mySprite.removeProperty(name);
-    }
+	@Override
+	public void removeProperty(String name) {
+		mySprite.removeProperty(name);
+	}
 
-    @Override
-    public Node getNodeObject () {
-        return mySprite.getImage();
-    }
+	@Override
+	public Node getNodeObject() {
+		return mySprite.getImage();
+	}
 
-    public String getName () {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    public void update () {
+	@Override
+	public void update() {
 
-    }
+	}
 
-    public void select (Selector selector) {
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setBrightness(selector.getLightness());
+	public void select(Selector selector) {
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(selector.getLightness());
 
-        this.setEffect(colorAdjust);
-        this.setEffect(new Glow(selector.getGlow()));
-    }
+		this.setEffect(colorAdjust);
+		this.setEffect(new Glow(selector.getGlow()));
+	}
 
-    public void setProperties (Map<String, VoogaData> map) {
-        mySprite.setProperties(map);
-    }
+	public void setProperties(Map<String, VoogaData> map) {
+		mySprite.setProperties(map);
+	}
 
-    @Override
-    public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-        // TODO Auto-generated method stub
+	@Override
+	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    @Override
-    public void setName (String name) {
-        // TODO Auto-generated method stub
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
 }
