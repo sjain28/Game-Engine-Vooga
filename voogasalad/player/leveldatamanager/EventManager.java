@@ -48,7 +48,8 @@ public class EventManager {
 						match = false;
 					}
 				}
-				if(match){					
+				if(match){	
+					System.out.println("Key matched");
 					keyCauses.get(eventCombo).setValue(true);
 					clearUsedKeyClick(keyClicks, i, i+eventCombo.size()-1);
 					break;

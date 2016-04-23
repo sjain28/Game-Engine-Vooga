@@ -55,4 +55,9 @@ public class CollisionCause extends Cause{
 	public List<Sprite> getAllCollidedSprites(){
 		return collidedSprites;
 	}
+	
+	@Override
+	public String toString(){
+		return archA + " is colliding with " + archB;
+	}
 }

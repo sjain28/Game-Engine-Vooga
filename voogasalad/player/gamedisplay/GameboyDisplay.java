@@ -333,10 +333,12 @@ public class GameboyDisplay implements IGameDisplay {
 	}
 
 	@Override
+	public boolean stageIsShowing() {
+		return myStage.isShowing();
+	}
 	public void exit() {
 		// TODO Auto-generated method stub
 		myMediaPlayer.stop();
 		myStage.close();
 	}
-
 }
