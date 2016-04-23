@@ -110,5 +110,13 @@ public class Connection extends Group {
 		this.end = name;
 	}
 	
+	public String getStartpoint() {
+		return this.start;
+	}
+	
+	public String getEndpoint() {
+		return this.end;
+	}
+	
 
 }

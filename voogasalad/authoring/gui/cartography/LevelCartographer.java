@@ -1,11 +1,24 @@
 package authoring.gui.cartography;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import authoring.UIManager;
 import authoring.VoogaScene;
+import authoring.gui.toolbar.toolbaritems.Save;
 import authoring.resourceutility.ButtonMaker;
+import data.Deserializer;
+import data.Serializer;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +26,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
+import resources.VoogaBundles;
+import resources.VoogaPaths;
+import tools.VoogaException;
 
 public class LevelCartographer extends Stage {
 
@@ -22,12 +38,14 @@ public class LevelCartographer extends Stage {
 	private static final double CIRCLE_DEGREES = 360;
 	private static final double RING_SIZE = 300;
 	private static final double INCREASE_FACTOR = 1.2;
-	
+
 	private BorderPane myGUI;
 	private Group myMap;
 	private List<String> levelNames;
 	private List<Level> levels;
-	
+	private List<Connection> connectors;
+	private Map<String, Set<String>> levelMap;
+
 	private UIManager manager;
 
 	public LevelCartographer(Menuable model) {
@@ -43,6 +61,8 @@ public class LevelCartographer extends Stage {
 		myMap = new Group();
 		myGUI.setCenter(myMap);
 		myGUI.setBottom(buttons());
+		this.levelMap = new HashMap<String, Set<String>>();
+		this.connectors = new ArrayList<Connection>();
 		this.setScene(new VoogaScene(myGUI, WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 
@@ -54,8 +74,24 @@ public class LevelCartographer extends Stage {
 		container.setAlignment(Pos.CENTER);
 		return container;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	private void save() {
+		writeLinesAndPoints();
+		new Save(this.manager).handle();
+		try {
+			String mapXMLPath = VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName") + "/map/"
+					+ VoogaBundles.preferences.getProperty("GameName") + "Map.xml";
+			Serializer.serializeLevel(levelMap, mapXMLPath);
+			Map<String, List<String>> map = (Map<String, List<String>>) Deserializer.deserialize(1, mapXMLPath);
+			System.out.println(map.keySet());
+		} catch (ParserConfigurationException | TransformerException | IOException | SAXException | VoogaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void writeLinesAndPoints() {
 		
 	}
 
@@ -75,7 +111,8 @@ public class LevelCartographer extends Stage {
 				}
 			}
 		});
-		myMap.getChildren().addAll(connector);
+		//connectors.add
+		myMap.getChildren().add(connector);
 	}
 
 	private void makeEntrypoint() {
@@ -85,7 +122,7 @@ public class LevelCartographer extends Stage {
 		}
 		ep.setRadius(INCREASE_FACTOR * CIRCLE_SIZE / levelNames.size());
 	}
-	
+
 	private void addEntrypoint(Entrypoint circ) {
 		myMap.getChildren().add(circ);
 		circ.centerXProperty().addListener((obs, old, n) -> {
@@ -100,16 +137,14 @@ public class LevelCartographer extends Stage {
 	}
 
 	private void loadLevels() {
-		// ================================================================================|
-		// Temporary code until level saving and loading can be implemented
-		// completely. |
-		// ================================================================================|
 		levels = new ArrayList<Level>();
 		levelNames = this.manager.getAllManagerNames();
 	}
-	
+
 	private void loadLinesAndPoints() {
-		//for()
+		for (Level level : levels) {
+			
+		}
 	}
 
 	private void populate() {
@@ -120,6 +155,9 @@ public class LevelCartographer extends Stage {
 			levels.add(circ);
 			myMap.getChildren().add(circ);
 			StackPane.setAlignment(circ, Pos.CENTER);
+			if (!levelMap.containsKey(circ.getName())) {
+				levelMap.put(circ.getName(), new HashSet<String>());
+			}
 		}
 	}
 
