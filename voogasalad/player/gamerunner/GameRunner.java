@@ -46,6 +46,7 @@ public class GameRunner implements IGameRunner {
     private String levelsPath = "levels/";
     private String gamesPath;
     private String gamesPrefix = "games/";
+    private String xmlSuffix = ".xml";
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay;
 	private List<String> myLevelList;
@@ -195,8 +196,8 @@ public class GameRunner implements IGameRunner {
 		//System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
 		myCurrentLevelString = fileName;
 //		System.out.println("the game path here in play level is " + this.gamesPath);
-		String fileNameWithPath = this.gamesPath + levelsPath + fileName; 
-//		System.out.println("The filenamewithpath here is " + fileNameWithPath);
+		String fileNameWithPath = this.gamesPath + levelsPath + fileName + xmlSuffix; 
+		System.out.println("The filenamewithpath here is " + fileNameWithPath);
 		//If debugMode = true, we are only playing one level
 //		if (debugMode) {
 //			myLevelList = new ArrayList<>();
