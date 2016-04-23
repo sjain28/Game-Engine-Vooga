@@ -42,6 +42,7 @@ public class GameObjectBuilder extends Builder {
 	private HBox makeAddNewArchetypeButton() {
 		HBox container = new HBox();
 		Button button = new ButtonMaker().makeButton("Add a new archetype", e -> {
+			archetypeBuilder = new ArchetypeBuilder(editor);
 			archetypeBuilder.showAndWait();
 			archetypes.getItems().add(archetypeBuilder.getArchetypeName());
 			archetypes.setValue(archetypeBuilder.getArchetypeName());

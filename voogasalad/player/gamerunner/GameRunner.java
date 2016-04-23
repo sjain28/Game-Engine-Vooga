@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
 import data.Deserializer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -355,5 +356,10 @@ public class GameRunner implements IGameRunner {
 	public void saveGameProgress(String playerName) {
 		System.out.println("What is gamespath in the save game progress method " + gamesPath);
 		myLevelData.saveProgress(gamesPath,playerName);
+	}
+	@Override
+	public void openScene(ElementManager unserialize) {
+		// TODO Auto-generated method stub
+		
 	}
 }

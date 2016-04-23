@@ -1,33 +1,18 @@
 package authoring.gui.cartography;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import authoring.UIManager;
 import authoring.VoogaScene;
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.model.ElementManager;
 import authoring.resourceutility.ButtonMaker;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
-import resources.VoogaBundles;
 
 public class LevelCartographer extends Stage {
 
@@ -64,13 +49,18 @@ public class LevelCartographer extends Stage {
 	private HBox buttons() {
 		HBox container = new HBox();
 		container.getChildren().addAll(new ButtonMaker().makeButton("Add connection", e -> addConnector()),
-				new ButtonMaker().makeButton("Make entrypoint", e -> makeEntrypoint()));
+				new ButtonMaker().makeButton("Make entrypoint", e -> makeEntrypoint()),
+				new ButtonMaker().makeButton("Save", e -> save()));
 		container.setAlignment(Pos.CENTER);
 		return container;
 	}
+	
+	private void save() {
+		
+	}
 
 	private void addConnector() {
-		Connection connector = new Connection(this.manager.getManager());
+		Connection connector = new Connection(this.manager.getManager(), 0, 0, 100, -100);
 		connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
 			for (Level level : levels) {
 				if (connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
@@ -119,7 +109,7 @@ public class LevelCartographer extends Stage {
 	}
 	
 	private void loadLinesAndPoints() {
-		
+		//for()
 	}
 
 	private void populate() {

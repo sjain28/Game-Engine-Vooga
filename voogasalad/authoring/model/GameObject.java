@@ -85,8 +85,9 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         ClipboardContent content = new ClipboardContent();
         content.putString(getId());
         db.setContent(content);
-        if (!this.imagePath.get().contains(".gif"))
+        if (!this.imagePath.get().contains(".gif")) {
             db.setDragView(this.getImage());
+        }
         event.consume();
     }
 
