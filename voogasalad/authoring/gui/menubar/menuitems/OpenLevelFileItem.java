@@ -3,6 +3,7 @@ package authoring.gui.menubar.menuitems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import authoring.UIManager;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.model.ElementManager;
 import authoring.model.ElementManagerUnserializer;
@@ -28,7 +29,7 @@ public class OpenLevelFileItem extends MenuItemHandler {
 		Path p = Paths.get(xmlPath);
 		String file = p.getFileName().toString();
 		manager.setName(file.replace(".xml", ""));
-		myUIManager.openScene(manager);
+		((UIManager) myUIManager).openScene(manager);
 	}
 
 	private String getLevelPath() throws VoogaException {
