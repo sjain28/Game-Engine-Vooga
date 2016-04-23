@@ -20,6 +20,11 @@ public class EventManager {
 	 */
 	public void update(ILevelData myLevelData, List<KeyEvent> keyClicks){
 		
+		
+		for(KeyEvent k: keyClicks){
+			System.out.println(k.getEventType());
+		}
+		
 		Map<List<String>, KeyCause> keyCauses = myLevelData.getKeyCauses();
 		checkKeys(myLevelData.getKeyCombos(), keyClicks, keyCauses);
 				
@@ -30,6 +35,8 @@ public class EventManager {
 		for(List<String> cause: keyCauses.keySet()){
 			keyCauses.get(cause).setValue(false);
 		}
+		
+
 	} 
 	/**
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
