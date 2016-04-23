@@ -30,9 +30,9 @@ public class FileWriterFromGameObjects {
              * this name does not exist in given abstract pathname.
              */
             System.out.println("The file name here is " + fileName);
-            file.createNewFile();
+            file.getParentFile().mkdir();
         }
         
-       Serializer.serialize(lists, fileName);
+       Serializer.serializeLevel(lists, fileName);
     }
 }

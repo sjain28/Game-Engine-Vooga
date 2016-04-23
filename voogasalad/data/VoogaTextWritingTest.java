@@ -58,7 +58,7 @@ public class VoogaTextWritingTest extends Application {
         for (int i =0;i<10;i++){
                 VoogaEvent testEvent = new VoogaEvent();
                 testEvent.addCause(new KeyCause("k", testEvent));
-                testEvent.addEffect(new VariableEffect("LevelIndex", "set", "Level2", testEvent));
+//                testEvent.addEffect(new VariableEffect("LevelIndex", "set", "Level2", testEvent));
             elements.add(testEvent);
         }
         return elements;
