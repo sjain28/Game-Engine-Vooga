@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 
 public class Level extends VBox {
 	
-	private Circle circle;
+	private transient Circle circle;
 	private String name;
 
 	public Level(String levelName, double size) {
