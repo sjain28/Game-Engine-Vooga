@@ -22,6 +22,7 @@ public class VoogaBoolean implements VoogaData{
     }
     
     public VoogaBoolean(boolean value) {
+    	this();
         this.myValue=value;
     }
     

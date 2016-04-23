@@ -48,6 +48,7 @@ public class GameObject extends ImageView implements Moveable, Elementable {
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
         Bindings.bindBidirectional(imagePath, mySprite.getImagePathProperty());
+        Bindings.bindBidirectional(this.visibleProperty(), mySprite.isAlive());
 
         mySprite.getImagePathProperty().addListener( (obs, old, n) -> {
             this.setImage(new Image(n));
