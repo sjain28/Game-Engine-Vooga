@@ -1,8 +1,11 @@
 package data;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.List;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
@@ -15,13 +18,31 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Serializer {
 
-    public static void serialize (Object object, String fileName) throws ParserConfigurationException,
-                                                           TransformerException, IOException,
-                                                           SAXException {
-        XStream serializer = new XStream(new DomDriver());
-        ObjectOutputStream objectOutputStream =
-                serializer.createObjectOutputStream(new FileOutputStream(fileName));
-        objectOutputStream.writeObject(object);
-        objectOutputStream.close();
-    }
+	public static void serialize(Object object, String fileName)
+			throws ParserConfigurationException, TransformerException, IOException, SAXException {
+		XStream serializer = new XStream(new DomDriver());
+		ObjectOutputStream objectOutputStream = serializer.createObjectOutputStream(new FileOutputStream(fileName));
+		objectOutputStream.writeObject(object);
+		objectOutputStream.close();
+	}
+
+	public static void serializeLevel(Object object, String fileName)
+			throws ParserConfigurationException, TransformerException, IOException, SAXException {
+		File file = new File(fileName);
+		if (!file.exists()) {
+			System.out.println("creating directory: " + file.getParent());
+			boolean result = false;
+
+			try {
+				file.getParentFile().mkdir();
+				result = true;
+			} catch (Exception e) {
+				throw e;
+			}
+			if (result) {
+				System.out.println("DIR created");
+			}
+		}
+		serialize(object, fileName);
+	}
 }

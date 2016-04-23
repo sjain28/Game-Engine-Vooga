@@ -40,29 +40,29 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     private GlobalPropertiesManager GPM;
 
-    private File myXmlDataFile;
+    //private File myXmlDataFile;
     private SpriteFactory spriteFactory;
 
     private Set<String> myIds;
     
     private String myManagerName;
 
-    private String filePath = "games/levels/Test.xml";
+    private String filePath;
 
-    public ElementManager () {
+    public ElementManager () {;
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
         GPM = new GlobalPropertiesManager();
-        myXmlDataFile = null;
+        //myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
-        myXmlDataFile = new File(filePath);
+        //myXmlDataFile = new File(filePath);
         initGlobalVariablesPane();
     }
 
     public ElementManager (File xmlDataFile) {
         this();
-        this.myXmlDataFile = xmlDataFile;
+        //this.myXmlDataFile = xmlDataFile;
     }
 
     public void addGameElements (Node ... elements) {
@@ -241,13 +241,14 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
      */
     
     @Override
-    public void setName(String name) {
-    	this.myManagerName = name;
+    public String getName() {
+    	return this.myManagerName;
     }
     
     @Override
-    public String getName() {
-    	return this.myManagerName;
+    public void setName(String name) {
+    	this.myManagerName = name;
+    	this.filePath = "games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/" + myManagerName + ".xml";
     }
 
 }

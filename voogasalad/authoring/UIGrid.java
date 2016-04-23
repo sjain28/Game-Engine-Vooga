@@ -34,8 +34,6 @@ public class UIGrid extends GridPane{
     private CompleteAuthoringModelable myManager;
     
     private transient SimpleStringProperty mySceneName;
-    
-    private SingleSelectionModel<Tab> sm;
 
     /**
      * Initialized the UIGrid
@@ -119,10 +117,6 @@ public class UIGrid extends GridPane{
         this.add(propertiesPane, 0, 1);
         EventsWindow events = new EventsWindow(myManager);
         this.add(events, 0, 2);
-    }
-    
-    public void setProjectName(String name) {
-    	explorer.setProjectName(name);
     }
     
     public CompleteAuthoringModelable getModel(){
