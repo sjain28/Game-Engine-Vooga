@@ -130,7 +130,7 @@ public class GameboyDisplay implements IGameDisplay {
 	 * 
 	 */
 	@Override
-	public void display() {
+	public void display(boolean debugMode) {
 		//Creates the main pane
 		createPane();
 		//Shows the scene

@@ -18,8 +18,10 @@ public class Run extends ToolbarItemHandler {
 
 	@Override
 	public void handle () {
-		GameRunner gameRunner = new GameRunner();
-		//gameRunner.testLevel("games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/" + this.model.getManager().getName() + ".xml");
-		gameRunner.playGame(VoogaBundles.preferences.getProperty("GameName"));
+		
+		boolean debugMode = true;
+		GameRunner gameRunner = new GameRunner(debugMode);
+		gameRunner.playLevel("games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/" + this.model.getManager().getName() + ".xml");
+		//gameRunner(VoogaBundles.preferences.getProperty("GameName"));
 	}
 }
