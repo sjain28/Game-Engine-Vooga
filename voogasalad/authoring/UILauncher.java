@@ -17,7 +17,6 @@ import resources.VoogaBundles;
 public class UILauncher {
 	
 	static final Duration SPLASH_DURATION = Duration.millis(6500);
-	private static final String DEFAULT_PROJECT_NAME = "My DoovalSalad Project";
 	
 	/**
 	 * Initializes and Launches the UI components, can be adjusted to implement a splash screen or other UI Features
@@ -28,25 +27,7 @@ public class UILauncher {
 	public UILauncher(Stage primaryStage) {
 		
 		// ***
-		// new Splash(e -> {
-			ProjectInitializationPrompt prompt = new ProjectInitializationPrompt();
-			prompt.setProceedEvent(ee -> {
-				prompt.close();
-				String name = (prompt.getName() == null || prompt.getName().isEmpty()) ? DEFAULT_PROJECT_NAME : prompt.getName();
-				VoogaBundles.preferences.setProperty("GameName", name);
-				UIManager manager = new UIManager(new ElementManager());
-				Scene scene = new VoogaScene(manager);
-				primaryStage.setScene(scene);
-				primaryStage.setMaximized(true);
-				primaryStage.show();
-				try {
-					VoogaBundles.preferences.storeToXML(new FileOutputStream(new File("LevelConnection.xml")), "Level Connection");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			});
-			prompt.show();
-		// });
+		new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
 		
 	}
 
