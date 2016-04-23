@@ -1,5 +1,7 @@
 package physics;
 
+import java.util.concurrent.TimeUnit;
+
 import gameengine.Sprite;
 import tools.Acceleration;
 import tools.Position;
@@ -44,7 +46,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	
 	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getPosition().addX(change * REDUCE_FACTOR);
+		//sprite.getPosition().addX(change * 10);
+		sprite.getVelocity().setX(change * REDUCE_FACTOR);
 	}
 //	
 	public void translateY(Sprite sprite, Double change) {

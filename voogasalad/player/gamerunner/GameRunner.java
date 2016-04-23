@@ -85,6 +85,7 @@ public class GameRunner implements IGameRunner {
 		gamesPath = gamesPrefix + xmlList + "/";
 		String resourcePath = gamesPath + xmlList + ".xml";
 		levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);
+		System.out.println(levelList);
 	//	VoogaGame currentGame = new VoogaGame(levelList); //Eventually be able to create a game.
 		return levelList;
 	}
