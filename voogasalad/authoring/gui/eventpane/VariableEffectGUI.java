@@ -6,11 +6,13 @@ import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 
@@ -83,6 +85,12 @@ public class VariableEffectGUI implements EventGUI {
                 amount = cb;
                 addGUIElements(actions, amount);
             }
+            if (vd instanceof VoogaString) {
+            	actions.getItems().addAll("Set");
+            	TextField field = new TextField();
+            	amount = field;
+            	addGUIElements(actions, amount);
+            }
 
             actions.getItems().addAll();
         });
@@ -120,16 +128,21 @@ public class VariableEffectGUI implements EventGUI {
             result += "events.VariableEffect ";
         }
         if (level.getValue().contains("local")){
-            result += "events.SpriteEffect "+name.getSpriteId()+" ";
+            result += "events.SpriteEffect "+name.getSpriteId() + " ";
         }
         result+=variables.getValue()+
                 " "+VoogaBundles.eventMethodsToGUI.getString(actions.getValue())+" ";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();
-        } else {
+        } else if (amount instanceof ComboBox){
             result += ((ComboBox) amount).getValue();
+        } else if (amount instanceof TextField) {
+        	result += ((TextField) amount).getText();
         }
+        
+        System.out.println(result);
+        
         return result;
     }
 

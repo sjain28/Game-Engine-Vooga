@@ -16,7 +16,7 @@ public interface IGameDisplay {
 	
 	void read(List<Node> listToDisplay);
 	
-	void display();
+	void display(boolean debugMode);
 	
 	void populateGameScreen();
 	
@@ -26,8 +26,10 @@ public interface IGameDisplay {
 	
 	void clearKeyEvents();
 	
+	boolean stageIsShowing();
+	
 	Stage getStage();
 	
 	void exit();
-	
+
 }

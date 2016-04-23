@@ -1,6 +1,6 @@
 package authoring.gui.cartography;
 
-import javafx.beans.property.DoubleProperty;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -12,24 +12,37 @@ import javafx.scene.shape.Line;
 public class Connection extends Group {
 
 	private static final double LINE_WIDTH = 5;
-	private static final double END_X = 100;
-	private static final double END_Y = -100;
 
 	private Line connector;
 	private Anchor anchor1;
 	private Anchor anchor2;
+	
+	private double startx, starty, endx, endy;
+	
+	private String start;
+	private String end;
 
-	public Connection() {
-		initializeLine();
+	public Connection(CompleteAuthoringModelable model, double startx, double starty, double endx, double endy) {
+		this.startx = startx;
+		this.starty = starty;
+		this.endx = endx;
+		this.endy = endy;
+		
+		initializeLine(model);
 		attachAnchors();
 
 		this.getChildren().addAll(connector, anchor1, anchor2);
 	}
 
-	private void initializeLine() {
-		connector = new Line(0, 0, END_X, END_Y);
+	private void initializeLine(CompleteAuthoringModelable model) {
+		connector = new Line(startx, starty, endx, endy);
 		connector.setStrokeWidth(LINE_WIDTH);
 		connector.setStroke(Paint.valueOf("white"));
+		connector.setOnMouseClicked(e -> {
+			if(e.getClickCount() == 2) {
+				new ConnectionPrompt(start, end, model);
+			}
+		});
 	}
 	
 	public Anchor getStartAnchor() {
@@ -40,23 +53,6 @@ public class Connection extends Group {
 		return this.anchor2;
 	}
 	
-	public DoubleProperty getStartXProperty() {
-		return anchor1.centerXProperty();
-	}
-	
-	public DoubleProperty getStartYProperty() {
-		return anchor1.centerYProperty();
-	}
-	
-	public DoubleProperty getEndXProperty() {
-		return anchor2.centerXProperty();
-	}
-	
-	public DoubleProperty getEndYProperty() {
-		return anchor2.centerYProperty();
-	}
-	
-	
 	private void attachAnchors() {
 		anchor1 = new Anchor(connector.startXProperty(), connector.startYProperty(), TransitionOrder.FIRST);
 		anchor2 = new Anchor(connector.endXProperty(), connector.endYProperty(), TransitionOrder.LAST);
@@ -65,13 +61,11 @@ public class Connection extends Group {
 		enableDrag(anchor2);
 	}
 
-	// make a node movable by dragging it around with the mouse.
 	private void enableDrag(final Circle circle) {
 		final Delta dragDelta = new Delta();
 		circle.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				// record a delta distance for the drag and drop operation.
 				dragDelta.x = circle.getCenterX() - mouseEvent.getX();
 				dragDelta.y = circle.getCenterY() - mouseEvent.getY();
 				circle.getScene().setCursor(Cursor.MOVE);
@@ -107,5 +101,22 @@ public class Connection extends Group {
 			}
 		});
 	}
+
+	public void setStartpoint(String name) {
+		this.start = name;
+	}
+	
+	public void setEndpoint(String name) {
+		this.end = name;
+	}
+	
+	public String getStartpoint() {
+		return this.start;
+	}
+	
+	public String getEndpoint() {
+		return this.end;
+	}
+	
 
 }

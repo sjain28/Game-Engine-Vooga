@@ -65,6 +65,11 @@ public class StandardDisplay implements IGameDisplay {
 		myGameRunner = gamerunner;
 		initialize();
 	}
+	
+	//TODO: DELETE THIS IS DEBUGGING METHOD
+	public boolean stageIsShowing(){
+		return myStage.isShowing();
+	}
 
 	/**
 	 * Method that contains a series of initialize statements
@@ -110,9 +115,9 @@ public class StandardDisplay implements IGameDisplay {
 	 * 
 	 */
 	@Override
-	public void display() {
+	public void display(boolean debugMode) {
 		//Creates the main pane
-		createPane();
+		createPane(debugMode);
 
 		//Creates the game screen
 		//		populateGameScreen();
@@ -138,13 +143,21 @@ public class StandardDisplay implements IGameDisplay {
 	 * Creates the game display
 	 * 
 	 */
-	private void createPane() {
+	private void createPane(boolean debugMode) {
 		//Adds all components into the main border pane
 		getPane().setCenter(myGameScreen);
 		//System.out.println(myGameRunner);
-		getPane().setTop(new MenuPanel(myGameRunner, 
-				e -> new MenuPanelHandlingMirror(e, myGameRunner), 
-				VoogaBundles.playerMenubarProperties));
+		if (debugMode){
+			getPane().setTop(new MenuPanel(myGameRunner, 
+					e -> new MenuPanelHandlingMirror(e, myGameRunner), 
+					VoogaBundles.playerTesterMenubarProperties));
+		}
+		else{
+			getPane().setTop(new MenuPanel(myGameRunner, 
+					e -> new MenuPanelHandlingMirror(e, myGameRunner), 
+					VoogaBundles.playerMenubarProperties));
+		}
+
 		getPane().setBottom(myControl.createControl());
 		//Below is optional (adds HUD)
 		getPane().setRight(myHUD.createHUD());

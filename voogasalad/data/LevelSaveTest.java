@@ -43,7 +43,7 @@ public class LevelSaveTest extends Application{
 		//Notice how the path of the file (containing the serialized list) is games/NAMEOFTHEGAMEHERE and the file name is NAMEOFTHEGAMEHERE.xml. 
 		
 		String filePath = "games/JoshGame/";
-		String fileName = filePath + "JoshGame.xml";
+		String fileName = filePath + "asasdfasdfasdfasdfdfasdf.xml";
 		File file = new File(fileName);
 		List<String> stringofLevels = new ArrayList<String>();
 		
@@ -54,7 +54,7 @@ public class LevelSaveTest extends Application{
 		stringofLevels.add("Level3.xml");
 		stringofLevels.add("Level4.xml");
 		stringofLevels.add("Level5.xml");
-		Serializer.serialize(stringofLevels, filePath+fileName);
+		Serializer.serialize(stringofLevels,fileName);
 		
 		// THIS CODE IS STRICTLY IN THE TEST LEVEL
 		
@@ -89,10 +89,10 @@ public class LevelSaveTest extends Application{
 		 * 
 		 */
 		
-        IGameRunner gameRunner = new GameRunner();
-        gameRunner.playGame(TESTXML_PATH);
+//        IGameRunner gameRunner = new GameRunner();
+//        gameRunner.playGame(TESTXML_PATH);
 		
-		Serializer.serialize(stringofLevels, fileName);
+//		Serializer.serialize(stringofLevels, fileName);
 
 	}
 

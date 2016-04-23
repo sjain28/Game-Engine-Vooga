@@ -9,11 +9,12 @@ import tools.VoogaException;
 
 public class SpriteComboBox extends ComboBox<String> {
     EditEventable manager;
+    
     public SpriteComboBox(EditEventable manager){
         this.manager=manager;
         setPadding(new Insets(10,10,10,10));
+        
         getItems().addAll(manager.getMySpriteNames());
-        //getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
     }
     
     public String getSpriteId(){

@@ -1,6 +1,5 @@
 package application;
 
-import authoring.gui.cartography.LevelCartographer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,12 +15,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// Launches Main Program
+		System.setProperty("glass.accessible.force", "false"); //This fixes a stupid bug on Saumya's machine - it's harmless. 
 		new Launcher(primaryStage);
+		
 		
 		// Launches Mosaic
 		// new BoundsTester();
-		
-		// new LevelCartographer(null);
 	}
 	
 	public static void main(String[] args) {

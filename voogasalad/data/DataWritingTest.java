@@ -45,6 +45,7 @@ public class DataWritingTest {
 			sprite.setPosition(new Position(0,0));
 			elements.add(sprite);
 			sprite.addProperty("gravity", new VoogaNumber(.04));
+			sprite.isMainCharacter();
 		}
 		for (int i=1;i<2;i++){
 			Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
@@ -53,6 +54,7 @@ public class DataWritingTest {
 			sprite.setPosition(new Position(i*20,i*20));
 			elements.add(sprite);
 			sprite.addProperty("gravity", new VoogaNumber(0.0));
+			sprite.isMainCharacter();
 		}
 		return elements;
 	}
@@ -62,7 +64,7 @@ public class DataWritingTest {
 		for (int i =0;i<10;i++){
 			VoogaEvent testEvent = new VoogaEvent();
 			testEvent.addCause(new KeyCause("k", testEvent));
-			testEvent.addEffect(new VariableEffect("GameWon", "toggle", testEvent));
+			testEvent.addEffect(new VariableEffect("LevelIndex", "set", "Level2", testEvent));
 			elements.add(testEvent);
 		}
 		return elements;
@@ -81,7 +83,7 @@ public class DataWritingTest {
 
 	@Test
 	public void testWriting () throws ParserConfigurationException, TransformerException, IOException, SAXException {
-		FileWriterFromGameObjects.saveGameObjects(manager, "TestWriting.xml");
+		FileWriterFromGameObjects.saveGameObjects(manager, "games/levels/DataWritingTest.xml");
 	}
 
 	public DataContainerOfLists getData() {

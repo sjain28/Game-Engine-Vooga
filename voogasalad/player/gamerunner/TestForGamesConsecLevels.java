@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class TestForGamesConsecLevels extends Application {
 
-    private static final String TESTXML_PATH = "JoshGame";
+    private static final String TESTXML_PATH = "a";
 
     public static void main (String[] args) {
         launch(args);
@@ -22,7 +22,7 @@ public class TestForGamesConsecLevels extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
 
-        IGameRunner gameRunner = new GameRunner();
+        IGameRunner gameRunner = new GameRunner(false);
         gameRunner.playGame(TESTXML_PATH);
         
     }

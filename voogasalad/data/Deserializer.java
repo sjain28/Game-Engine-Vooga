@@ -39,10 +39,6 @@ public final class Deserializer {
                 }
             }
         }
-        catch (RuntimeException e) {
-//            System.out.println("IO exception from deserializer");
-            e.printStackTrace();
-        }
         catch (FileNotFoundException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

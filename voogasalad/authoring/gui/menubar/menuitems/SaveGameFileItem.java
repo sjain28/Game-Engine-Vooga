@@ -7,6 +7,8 @@ import authoring.interfaces.model.Sceneable;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
+import player.gamerunner.GameRunner;
+import player.gamerunner.IGameRunner;
 
 
 /**
@@ -16,7 +18,7 @@ import player.gamedisplay.Menuable;
  *
  */
 public class SaveGameFileItem extends PlayerMenuItemHandler {
-    private Menuable myModel;
+    private GameRunner myGameRunner;
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -26,7 +28,7 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 
 	public SaveGameFileItem(Menuable model) {
 		super();
-		myModel = model;
+		this.myGameRunner = (GameRunner) model;
 	}
 	
 	/**
@@ -34,8 +36,10 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
-
-		myModel.saveAll();
+		
+		//Save Game Progress saves this as the name of the player who is currently playing.
+		myGameRunner.saveGameProgress("Josh");
+		System.out.println("This save game file class was accessed");
 	}
 
 }
