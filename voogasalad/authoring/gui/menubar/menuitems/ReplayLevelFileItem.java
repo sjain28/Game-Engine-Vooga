@@ -41,7 +41,7 @@ public class ReplayLevelFileItem extends PlayerMenuItemHandler {
 		 * Gets the current level's filename and plays the level again
 		 * 
 		 */
-		this.myGameRunner.testLevel(this.myGameRunner.getLevelNameString());
+		this.myGameRunner.playLevel(this.myGameRunner.getLevelNameString());
 	}
 
 	

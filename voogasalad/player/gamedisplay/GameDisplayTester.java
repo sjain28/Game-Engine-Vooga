@@ -81,7 +81,7 @@ public class GameDisplayTester extends Application {
         // fileReader.createNodeList().toString();
         // scroller.centerScroll(fileReader.createNodeList(), 50);
         gd.read(nodes);
-        gd.display();
+        gd.display(true);
         pf.prompt("Hi! Prompt worked!");
 
     }
