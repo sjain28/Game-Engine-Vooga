@@ -31,4 +31,13 @@ public class KeyCause extends Cause {
 	public void setValue(boolean val){
 		myValue = val;
 	}
+	
+	@Override
+	public String toString(){
+		String result = "Checking if the following keys have been pressed: ";
+		for(String a: myKeys){
+			result += " "+a;
+		}
+		return result;
+	}
 }

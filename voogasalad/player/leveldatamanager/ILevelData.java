@@ -48,4 +48,6 @@ public interface ILevelData {
 	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
+
+	void saveProgress(String playerName, String filePath);
 }

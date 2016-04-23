@@ -10,19 +10,22 @@ public class SpriteVariableCause extends VariableCause {
 	private List<Sprite> mySprites = new ArrayList<>();
 	private String mySpriteID;
 	private String myVarName;
+	private Object targetValue;
 	
-	public SpriteVariableCause(String spriteID, String varName, String predicate, Double targetValue, VoogaEvent voogaEvent) {
+	public SpriteVariableCause(String spriteID, String varName, String predicate, Double target, VoogaEvent voogaEvent) {
 		super(predicate, voogaEvent);
-		super.setTarget(targetValue);
+		super.setTarget(target);
 		mySpriteID = spriteID;
 		myVarName = varName;
+		targetValue = target;
 	}
 	
-	public SpriteVariableCause(String spriteID, String varName, String predicate, Boolean targetValue, VoogaEvent voogaEvent) {
+	public SpriteVariableCause(String spriteID, String varName, String predicate, Boolean target, VoogaEvent voogaEvent) {
 		super(predicate, voogaEvent);
-		super.setTarget(targetValue);
+		super.setTarget(target);
 		mySpriteID = spriteID;
 		myVarName = varName;
+		targetValue = target;
 	}
 
 	@Override
@@ -39,5 +42,10 @@ public class SpriteVariableCause extends VariableCause {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString(){
+		return "Checking if the variable " + myVarName + " in Sprite " + mySpriteID + " is equal to " + targetValue;
 	}
 }

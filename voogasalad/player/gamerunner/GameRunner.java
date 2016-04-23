@@ -1,23 +1,16 @@
 package player.gamerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Queue;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.Deserializer;
-import data.Serializer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Node;
 import javafx.util.Duration;
 import physics.IPhysicsEngine;
 import physics.StandardPhysics;
@@ -51,7 +44,9 @@ public class GameRunner implements IGameRunner {
     private SpriteManager mySpriteManager;
     private EventManager myEventManager;
     private String levelsPath = "levels/";
-    private String gameLocation = "games/";
+    private String gamesPath;
+    private String gamesPrefix = "games/";
+    private String xmlSuffix = ".xml";
     private String myCurrentLevelString;
 	private IGameDisplay myGameDisplay;
 	private List<String> myLevelList;
@@ -76,6 +71,7 @@ public class GameRunner implements IGameRunner {
 				e -> step());
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
+		gamesPath = gamesPrefix;
 	}
 	/**
 	 * createLevels takes in a text file and out of that file creates a Queue of levels.
@@ -86,11 +82,10 @@ public class GameRunner implements IGameRunner {
 	private List<String> createLevelList(String xmlList) throws FileNotFoundException, IOException, VoogaException{
 		//Go into the path for this file
 		List<String> levelList = new ArrayList<>();
-		gameLocation = gameLocation + xmlList + "/";
-		String resourcePath = gameLocation + xmlList + ".xml";
+		gamesPath = gamesPrefix + xmlList + "/";
+		String resourcePath = gamesPath + xmlList + ".xml";
 		levelList = (List<String>) Deserializer.deserialize(1, resourcePath).get(0);
-//		System.out.println("The resource path here is called" + resourcePath); 
-//		System.out.println("Levellist is " + levelList);
+		System.out.println(levelList);
 	//	VoogaGame currentGame = new VoogaGame(levelList); //Eventually be able to create a game.
 		return levelList;
 	}
@@ -114,14 +109,16 @@ public class GameRunner implements IGameRunner {
 	 * 
 	 */
 	private void step() {	
-		System.out.println("step");
+//		System.out.println("step");
+		
+//		System.out.println("The game path here is" + this.gamesPath);
 		myCurrentStep++;
 		double secondspassed = myCurrentStep*(1/INIT_SPEED)/60;
-		System.out.println(myCurrentStep);
-		System.out.println(secondspassed);
+//		System.out.println(myCurrentStep);
+//		System.out.println(secondspassed);
 		myLevelData.updatedGlobalTimer(secondspassed);
 		
-		System.out.println("Current time in seconds: "+ myLevelData.getGlobalVar("Time"));
+//		System.out.println("Current time in seconds: "+ myLevelData.getGlobalVar("Time"));
 		//check if the pane still exists: for debugging purposes
 		if(!myGameDisplay.stageIsShowing()){stop();}
 		//check if a new level has been triggered or not
@@ -130,10 +127,12 @@ public class GameRunner implements IGameRunner {
 					.stream()
 		            .filter(a -> a.equals(myLevelData.getNextLevelName()))
 		            .findFirst();
+//			myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName()));
 //			System.out.println("The next level that's trying to play is " + myLevelData.getNextLevelName());
 //			System.out.println("What is myCurrentLevelString here? " + myCurrentLevelString);
 //			System.out.println("The current correct level is " + correctLevel.get());
-			playLevel(correctLevel.get(), false);
+//			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
+			playLevel(correctLevel.get());
 		}
 //		System.out.println("The current level is " + myCurrentLevelString);
 		//update all Sprite's with physics engine 
@@ -157,40 +156,60 @@ public class GameRunner implements IGameRunner {
 		already, the next level of the game will be played. playGame iterates through the queue of levels
 		that is created when the GameController is initialized
 	 */
-	public void playGame(String xmlList) {
+	public void playGame(String gameXmlList) {
+		System.out.println("gameXMllist here " + gameXmlList);
 		try {
-			myLevelList = createLevelList(xmlList);
+			myLevelList = createLevelList(gameXmlList);
 		} catch (Exception e) {
 			VoogaAlert myAlert = new VoogaAlert("Level List Initialization failed");			
 		}
-		playLevel(myLevelList.get(0), false);
+		playLevel(myLevelList.get(0));
 		run();
 		myGameDisplay.display();
 	}
 
-	/**
-	 * playLevel plays a single level. This method can be called on its own if the user wants flexibility in testing
-	 * only a single level.
-	 */
+	
+	//USES ABSOLUTE PATH!!!
+	public void testLevel(String fileName){
+		
+		myLevelList = new ArrayList<>();
+		myLevelList.add(fileName);
+		run();
+		myGameDisplay.display();
+		
+//		System.out.println("The play level method is playing here at " + fileNameWithPath);
+		
+//		System.out.println("The test file here is " + fileName);
+		
+		//Set the levelNumber to 0 because we are not transitioning anymore
+//		System.out.println("Refreshing leveldata");
+		myLevelData.refreshLevelData(fileName);
+		myGameDisplay.read(myLevelData.getDisplayableNodes());
+	}
+	
 	@Override
-	public void playLevel(String fileName, boolean debugMode){
+	
+	/**
+	 * playLevel plays a single level. USES RELATIVE PATH. NO LONGER CAN SUPPORT JUST TESTING A SINGLE LEVEL.
+	 */
+	
+	public void playLevel(String fileName){
 		//System.out.println("A new level has been started. This level here is " + myCurrentLevelString);
 		myCurrentLevelString = fileName;
-		String fileNameWithPath = this.gameLocation + levelsPath + fileName; 
-		
+//		System.out.println("the game path here in play level is " + this.gamesPath);
+		String fileNameWithPath = this.gamesPath + levelsPath + fileName + xmlSuffix; 
 		System.out.println("The filenamewithpath here is " + fileNameWithPath);
 		//If debugMode = true, we are only playing one level
-		if (debugMode) {
-			myLevelList = new ArrayList<>();
-			myLevelList.add(fileName);
-			run();
-			myGameDisplay.display();
-		}
+//		if (debugMode) {
+//			myLevelList = new ArrayList<>();
+//			myLevelList.add(fileName);
+//			run();
+//			myGameDisplay.display();
+//		}
 		
 //		System.out.println("The play level method is playing here at " + fileNameWithPath);
 		
 		//Set the levelNumber to 0 because we are not transitioning anymore
-		System.out.println("Refreshing leveldata");
 		myLevelData.refreshLevelData(fileNameWithPath);
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
 	}
@@ -261,7 +280,6 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void speedDown() {
 //		myDelay = myDelay - 100;
-		
         getTimeline().stop();
         double newRate = getTimeline().getRate() - SPEEDCONTROL;
         if (newRate > 0) {
@@ -330,5 +348,12 @@ public class GameRunner implements IGameRunner {
 		myTimeline.stop();
 		//myTimeline = null;
 		myGameDisplay.exit();
+	}
+
+
+	@Override
+	public void saveGameProgress(String playerName) {
+		System.out.println("What is gamespath in the save game progress method " + gamesPath);
+		myLevelData.saveProgress(gamesPath,playerName);
 	}
 }

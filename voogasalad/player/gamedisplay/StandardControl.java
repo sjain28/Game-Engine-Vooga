@@ -1,6 +1,8 @@
 package player.gamedisplay;
 
 import java.util.ResourceBundle;
+
+import authoring.resourceutility.ButtonMaker;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -23,7 +25,7 @@ public class StandardControl implements IControl {
 	private static final String START_KEY = "Start";
 	private static final String SPEED_UP_KEY = "SpeedUp";
 	private static final String SLOW_DOWN_KEY = "SlowDown";
-	private static final String PlAYNEXTLEVEL_BUTTON_KEY = "PlayNextLevel";
+	private static final String PLAYNEXTLEVEL_BUTTON_KEY = "PlayNextLevel";
 	private static final String REPLAY_BUTTON_KEY = "ReplayLevel";
 	private static final int TOP_PADDING = 15;
 	private static final int LEFT_PADDING = 12;
@@ -59,39 +61,24 @@ public class StandardControl implements IControl {
 		myControl.setPadding(new Insets(TOP_PADDING,RIGHT_PADDING, BOTTOM_PADDING,LEFT_PADDING)); //TODO: Magic number
 		myControl.setSpacing(SPACING); //TODO: Magic number
 
+		ButtonMaker maker = new ButtonMaker();
+		
 		// Buttons
-		Button pause = createButton(gameDisplayProperties.getString(PAUSE_KEY));
-		Button start = createButton(gameDisplayProperties.getString(START_KEY));
-		Button speedUp = createButton(gameDisplayProperties.getString(SPEED_UP_KEY)); //TODO: ResourceBundle
-		Button speedDown = createButton(gameDisplayProperties.getString(SLOW_DOWN_KEY));
+		Button pause = maker.makeButton((gameDisplayProperties.getString(PAUSE_KEY)), e -> getGameRunner().stop());
+		Button start = maker.makeButton((gameDisplayProperties.getString(START_KEY)), e -> getGameRunner().start());
+		Button speedUp = maker.makeButton((gameDisplayProperties.getString(SPEED_UP_KEY)), e -> getGameRunner().speedUp());
+		Button speedDown = maker.makeButton((gameDisplayProperties.getString(SLOW_DOWN_KEY)), e -> getGameRunner().speedDown());
 
 //		//Add button here for changing levels
 //		Button replayButton = createButton(gameDisplayProperties.getString(REPLAY_BUTTON_KEY));
 //		
-		Button playNextButton = createButton(gameDisplayProperties.getString(PlAYNEXTLEVEL_BUTTON_KEY));
+		Button playNextButton = maker.makeButton((gameDisplayProperties.getString(PLAYNEXTLEVEL_BUTTON_KEY)), e -> getGameRunner().playNextLevel());
 		
 		// TODO: Assign click actions
-		pause.setOnAction(e -> getGameRunner().stop());
-		start.setOnAction(e -> getGameRunner().start());
-		speedUp.setOnMouseClicked(e -> getGameRunner().speedUp());
-		speedDown.setOnMouseClicked(e -> getGameRunner().speedDown());
 //		replayButton.setOnMouseClicked(e -> getGameRunner().replayLevel());
-		playNextButton.setOnMouseClicked(e -> getGameRunner().playNextLevel());
 		myControl.getChildren().addAll(start, pause, speedUp, speedDown, playNextButton);
 
 		return myControl;
-	}
-
-	/**
-	 * Private method used to create a Button
-	 * 
-	 * @param name
-	 * @return
-	 */
-	private Button createButton(String name) {
-		Button button = new Button();
-		button.setText(name);
-		return button;
 	}
 
 	/**

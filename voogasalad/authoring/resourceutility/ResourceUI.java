@@ -4,6 +4,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -40,17 +41,15 @@ public class ResourceUI extends Tab {
     public ResourceUI () {
         container = new VBox(SPACING);
         buttonContainer = new HBox(SPACING);
+        
+        rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, VoogaBundles.preferences.getProperty("GameName")));
+        container.getChildren().addAll(rtv, buttonContainer);
+        makeAddButtons();
 
         this.setText(WINDOW_NAME);
         this.setContent(container);
 
     }
-    
-    public void setProjectName(String name) {
-    	rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, name));
-        container.getChildren().addAll(rtv, buttonContainer);
-        makeAddButtons();
-	}
 
     /**
      * Makes buttons to add folders and import files.

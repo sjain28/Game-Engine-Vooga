@@ -36,6 +36,7 @@ import player.gamedisplay.Menuable;
 import tools.VoogaAlert;
 import tools.VoogaException;
 import resources.VoogaBundles;
+import resources.VoogaPaths;
 
 /**
  * The UIManager is responsible for assembling view components, such as the
@@ -43,13 +44,11 @@ import resources.VoogaBundles;
  * 
  */
 public class UIManager extends VBox implements Menuable {
-	
-	private static final String DEFAULT_PROJECT_NAME = "My Project";
 
 	private UIGridHousing grid;
 	private SimpleIntegerProperty currentTabIndex;
 	private ElementTabManager elementTabManager;
-	
+
 	/**
 	 * Initializes the UI Manager
 	 * 
@@ -79,11 +78,6 @@ public class UIManager extends VBox implements Menuable {
 			this.currentTabIndex.set((int) n);
 		});
 	}
-	
-	public void setProjectName(String name) {
-		name = (name.isEmpty()) ? DEFAULT_PROJECT_NAME : name;
-		grid.setProjectName(name);
-	}
 
 	public void addScene() {
 		addScene(new ElementManager());
@@ -107,11 +101,10 @@ public class UIManager extends VBox implements Menuable {
 	// TODO: Format output correctly
 	public void saveAll() {
 		try {
+			Serializer.serializeLevel(getAllManagerNames(), VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName") + "/" + VoogaBundles.preferences.getProperty("GameName") + ".xml");
 			for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
 				m.onSave();
-			}
-			Serializer.serialize(getAllManagerNames(), "LevelProgressionText.xml");
-		} catch (Exception e) {
+			}} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
