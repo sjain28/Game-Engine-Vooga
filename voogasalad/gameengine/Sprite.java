@@ -43,12 +43,14 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myName;
     private Map<String, VoogaData> myProperties;
     private String myArchetype;
+    private String myImagePath;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
     private transient SimpleDoubleProperty myY;
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
+
 
     private Map<String,Object> initializationProperties;
 
@@ -58,6 +60,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    VoogaNumber mass) {
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
+        myImagePath = imagePath;
         initializeCoordinates();
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
