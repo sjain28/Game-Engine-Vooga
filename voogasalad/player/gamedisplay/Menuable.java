@@ -1,6 +1,7 @@
 package player.gamedisplay;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementManager;
 
 public interface Menuable {
     
@@ -9,5 +10,6 @@ public interface Menuable {
     public void addScene();
     
     public void addScene(CompleteAuthoringModelable manager);
+    
     public void saveAll ();
 }

@@ -12,17 +12,22 @@ import javafx.scene.shape.Line;
 public class Connection extends Group {
 
 	private static final double LINE_WIDTH = 5;
-	private static final double END_X = 100;
-	private static final double END_Y = -100;
 
 	private Line connector;
 	private Anchor anchor1;
 	private Anchor anchor2;
 	
+	private double startx, starty, endx, endy;
+	
 	private String start;
 	private String end;
 
-	public Connection(CompleteAuthoringModelable model) {
+	public Connection(CompleteAuthoringModelable model, double startx, double starty, double endx, double endy) {
+		this.startx = startx;
+		this.starty = starty;
+		this.endx = endx;
+		this.endy = endy;
+		
 		initializeLine(model);
 		attachAnchors();
 
@@ -30,7 +35,7 @@ public class Connection extends Group {
 	}
 
 	private void initializeLine(CompleteAuthoringModelable model) {
-		connector = new Line(0, 0, END_X, END_Y);
+		connector = new Line(startx, starty, endx, endy);
 		connector.setStrokeWidth(LINE_WIDTH);
 		connector.setStroke(Paint.valueOf("white"));
 		connector.setOnMouseClicked(e -> {
@@ -103,6 +108,14 @@ public class Connection extends Group {
 	
 	public void setEndpoint(String name) {
 		this.end = name;
+	}
+	
+	public String getStartpoint() {
+		return this.start;
+	}
+	
+	public String getEndpoint() {
+		return this.end;
 	}
 	
 
