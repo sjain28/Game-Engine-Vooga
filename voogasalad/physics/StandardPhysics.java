@@ -45,8 +45,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	
 	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getVelocity().setX(change * VELOCITY_FACTOR);
-		System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
+		sprite.getVelocity().setX(change * 0.1);
+		//System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
 	}
 	
 //	@Override
@@ -82,10 +82,16 @@ public class StandardPhysics implements IPhysicsEngine{
 		}
 		
 		else {
-			sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
+			
+			//sprite.getImage().getBoundsInParent().
+			//sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
 			sprite.getVelocity().setY(-1 * sprite.getVelocity().getY() * bounceCoefficient);
 		}
 
+	}
+	
+	public void bounceX(Sprite sprite, Double bounceCoefficient) {
+		
 	}
 
 	@Override
@@ -110,7 +116,7 @@ public class StandardPhysics implements IPhysicsEngine{
 
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
-		System.out.println("Gravity is called");
+		//System.out.println("Gravity is called");
 		
 		//if (onGround) return;
 		
