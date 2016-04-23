@@ -12,6 +12,7 @@ public class VoogaBoolean implements VoogaData{
     private transient SimpleBooleanProperty valueProperty;
     
     public VoogaBoolean() {
+    	myValue = true;
     	this.valueProperty = new SimpleBooleanProperty();
     	this.valueProperty.setValue(myValue);
     	this.myValue = (Boolean) this.valueProperty.get();

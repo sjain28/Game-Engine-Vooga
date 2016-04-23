@@ -45,6 +45,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String myName;
     private Map<String, VoogaData> myProperties;
     private String myArchetype;
+    private String myImagePath;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;

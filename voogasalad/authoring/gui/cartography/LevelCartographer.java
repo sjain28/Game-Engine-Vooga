@@ -3,8 +3,10 @@ package authoring.gui.cartography;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -41,7 +43,8 @@ public class LevelCartographer extends Stage {
 	private Group myMap;
 	private List<String> levelNames;
 	private List<Level> levels;
-	private Map<String, List<String>> levelMap;
+	private List<Connection> connectors;
+	private Map<String, Set<String>> levelMap;
 
 	private UIManager manager;
 
@@ -58,7 +61,8 @@ public class LevelCartographer extends Stage {
 		myMap = new Group();
 		myGUI.setCenter(myMap);
 		myGUI.setBottom(buttons());
-		this.levelMap = new HashMap<String, List<String>>();
+		this.levelMap = new HashMap<String, Set<String>>();
+		this.connectors = new ArrayList<Connection>();
 		this.setScene(new VoogaScene(myGUI, WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 
@@ -73,10 +77,11 @@ public class LevelCartographer extends Stage {
 
 	@SuppressWarnings("unchecked")
 	private void save() {
+		writeLinesAndPoints();
 		new Save(this.manager).handle();
 		try {
-			String mapXMLPath = VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName")
-			+ "/map/" + VoogaBundles.preferences.getProperty("GameName") + "Map.xml";
+			String mapXMLPath = VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName") + "/map/"
+					+ VoogaBundles.preferences.getProperty("GameName") + "Map.xml";
 			Serializer.serializeLevel(levelMap, mapXMLPath);
 			Map<String, List<String>> map = (Map<String, List<String>>) Deserializer.deserialize(1, mapXMLPath);
 			System.out.println(map.keySet());
@@ -84,6 +89,10 @@ public class LevelCartographer extends Stage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void writeLinesAndPoints() {
+		
 	}
 
 	private void addConnector() {
@@ -102,7 +111,8 @@ public class LevelCartographer extends Stage {
 				}
 			}
 		});
-		myMap.getChildren().addAll(connector);
+		//connectors.add
+		myMap.getChildren().add(connector);
 	}
 
 	private void makeEntrypoint() {
@@ -132,7 +142,9 @@ public class LevelCartographer extends Stage {
 	}
 
 	private void loadLinesAndPoints() {
-		
+		for (Level level : levels) {
+			
+		}
 	}
 
 	private void populate() {
@@ -143,6 +155,9 @@ public class LevelCartographer extends Stage {
 			levels.add(circ);
 			myMap.getChildren().add(circ);
 			StackPane.setAlignment(circ, Pos.CENTER);
+			if (!levelMap.containsKey(circ.getName())) {
+				levelMap.put(circ.getName(), new HashSet<String>());
+			}
 		}
 	}
 
