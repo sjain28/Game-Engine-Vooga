@@ -42,7 +42,7 @@ public interface IPhysicsEngine {
 	 * @param sprite
 	 * @param bounceCoefficient
 	 */
-	void bounce(Sprite sprite, Double bounceCoefficient);
+	void elasticBounceY(Sprite sprite, Double bounceCoefficient);
 
 	/**
 	 * Produce an acceleration vector in the same direction per sprite motion

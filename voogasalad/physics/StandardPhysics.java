@@ -94,7 +94,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * 
 	 */
 	@Override
-	public void bounce(Sprite sprite, Double bounceCoefficient) {
+	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
 		//System.out.println("Bounce is called");
 		
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
