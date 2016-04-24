@@ -55,6 +55,7 @@ public class StandardDisplay implements IGameDisplay {
 	private void initialize() {
 		myControl = new StandardControl(myGameRunner);
 		myHUD = new StandardHUD(myGameRunner);
+		myGameSound = new GameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
