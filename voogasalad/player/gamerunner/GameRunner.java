@@ -36,7 +36,7 @@ import tools.VoogaException;
  */
 public class GameRunner implements IGameRunner {
 
-    private static final double INIT_SPEED = 60;
+    private static final double INIT_SPEED = 1;
     private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
     private static final double SPEEDCONTROL = 10;
     
