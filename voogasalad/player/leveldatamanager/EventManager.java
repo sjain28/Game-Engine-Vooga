@@ -18,11 +18,13 @@ public class EventManager {
 	 * @param leveldata
 	 * @param keyclicks
 	 */
-	public void update(ILevelData myLevelData, List<KeyEvent> keyClicks){
-		
+	public void update(ILevelData myLevelData, List<KeyEvent> keyPresses, List<KeyEvent> keyReleases){
+
 		Map<List<String>, KeyCause> keyCauses = myLevelData.getKeyCauses();
-		checkKeys(myLevelData.getKeyCombos(), keyClicks, keyCauses);
-				
+		
+		checkKeys(myLevelData.getKeyPressCombos(), keyPresses, keyCauses);
+		checkKeys(myLevelData.getKeyReleasedCombos(), keyReleases, keyCauses);
+		
 		for(VoogaEvent e: myLevelData.getEvents()){
 			e.update(myLevelData);
 		}
@@ -30,17 +32,17 @@ public class EventManager {
 		for(List<String> cause: keyCauses.keySet()){
 			keyCauses.get(cause).setValue(false);
 		}
+		
 	} 
 	/**
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
-	private void checkKeys(List<List<String>> keyCombos, List<KeyEvent> keyClicks, Map<List<String>, KeyCause> keyCauses){
+	private void checkKeys(List<List<String>> keyCo, List<KeyEvent> keyClicks, Map<List<String>, KeyCause> keyCauses){
 		
-		for (List<String> eventCombo : keyCombos){ //Check all tuples
+		for (List<String> eventCombo : keyCo){ //Check all tuples
 			if(keyClicks.size() < eventCombo.size()){
 				continue;
 			}
-
 			for(int i = 0; i < keyClicks.size(); i++){ 
 				boolean match = true;
 				for(int j = 0; j < eventCombo.size(); j++){ //Compare the tuple to the keycombo			
@@ -49,7 +51,6 @@ public class EventManager {
 					}
 				}
 				if(match){	
-					System.out.println("Key matched");
 					keyCauses.get(eventCombo).setValue(true);
 					clearUsedKeyClick(keyClicks, i, i+eventCombo.size()-1);
 					break;

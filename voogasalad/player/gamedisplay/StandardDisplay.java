@@ -38,6 +38,8 @@ public class StandardDisplay implements IGameDisplay {
 	private Pane myGameScreen;
 	private List<Node> myListToDisplay;
 	private List<KeyEvent> myKeyEvents;
+	private List<KeyEvent> myKeyPresses;
+	private List<KeyEvent> myKeyReleases;
 	
 	/**
 	 * Overloaded constructor to set the reference to GameRunner
@@ -59,8 +61,11 @@ public class StandardDisplay implements IGameDisplay {
 		myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
+		myKeyPresses = new ArrayList<>();
+		myKeyReleases = new ArrayList<>();
+
 	}
-	
+
 	/**
 	 * Creates a keyListener for listening in on key inputs and adds each event to the list
 	 */
@@ -68,6 +73,11 @@ public class StandardDisplay implements IGameDisplay {
 		@Override
 		public void handle(KeyEvent event) {
 			myKeyEvents.add(event);
+			if(event.getEventType().equals(KeyEvent.KEY_PRESSED)){
+				myKeyPresses.add(event);
+			}else{
+				myKeyReleases.add(event);
+			}
 		}
 	};
 
@@ -171,6 +181,14 @@ public class StandardDisplay implements IGameDisplay {
 	public void exit() {
 		myGameSound.stopBGM();
 		myStage.close();
+	}
+	
+	public List<KeyEvent> getMyKeyPresses() {
+		return myKeyPresses;
+	}
+
+	public List<KeyEvent> getMyKeyReleases() {
+		return myKeyReleases;
 	}
 
 	/**

@@ -30,7 +30,7 @@ import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
-public abstract class AbstractPropertiesTab extends Tab {
+public class GenericPropertiesTab extends Tab {
 
     private static final double SPACING = 10;
 
@@ -40,22 +40,13 @@ public abstract class AbstractPropertiesTab extends Tab {
     protected ScrollPane myScrollPane = new ScrollPane();
     private Elementable myElementable;
 
-    public AbstractPropertiesTab () {
+    public GenericPropertiesTab (String tabName) {
         propertiesMap = new HashMap<String, VoogaData>();
-        
-//        propertiesMap.addListener(new MapChangeListener<String,VoogaData>(){
-//    		@Override
-//    		public void onChanged(
-//    				javafx.collections.MapChangeListener.Change<? extends String, ? extends VoogaData> change) {
-//    			onMapChange();
-//    		}
-//        });
-        
+        this.setText(tabName);
         this.setClosable(false); 
         box.getChildren().add(myScrollPane);
         this.setContent(box);
         createButtons();
-
     }
     
     /**
@@ -98,6 +89,12 @@ public abstract class AbstractPropertiesTab extends Tab {
         myScrollPane.setContent(propertiesHBox);
     }
     
+    /**
+     * Binds data to property map when adding/deleting/updating the map
+     * @param property
+     * @param node
+     * @param data
+     */
     public void bindDataToMap(String property, Node node, VoogaData data){
         if (data instanceof VoogaNumber){
             NumberTextField field = (NumberTextField) node;
@@ -142,12 +139,8 @@ public abstract class AbstractPropertiesTab extends Tab {
      * @param vgData
      */
 	public void addNewProperty(String s, VoogaData vgData) {
-		System.out.println("Adding Property");
 		myElementable.addProperty(s, vgData);
 		propertiesMap.put(s, vgData);
-		for (String property:myElementable.getVoogaProperties().keySet()){
-//	        System.out.println(property+" "+myElementable.getVoogaProperties().get(property).toString());
-	    }
 		updateProperties();
 	}
 
@@ -159,9 +152,6 @@ public abstract class AbstractPropertiesTab extends Tab {
 	public void removeProperty(String s) {
 		myElementable.removeProperty(s);
 		propertiesMap.remove(s);
-		for (String property:myElementable.getVoogaProperties().keySet()){
-//	        System.out.println(property+" "+myElementable.getVoogaProperties().get(property).toString());
-	    }
 		updateProperties();
 	}
 
