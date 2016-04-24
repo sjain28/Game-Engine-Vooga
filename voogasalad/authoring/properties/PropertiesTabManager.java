@@ -13,14 +13,16 @@ import java.util.Observer;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
-import authoring.model.GameObject;
 import javafx.scene.control.Tab;
 
 public class PropertiesTabManager implements Observer {
+	
+	public final static String GLOBAL_PROPERTIES = "Global Variables";
+	public final static String SPRITE_PROPERTIES = "Sprite Properties";
 
 	private ArrayList<Tab> myPropertyTabs = new ArrayList<Tab>();
-	private SpritePropertiesTab SPT = new SpritePropertiesTab();
-	private GlobalPropertiesTab GPT = new GlobalPropertiesTab();
+	private GenericPropertiesTab SPT = new GenericPropertiesTab(SPRITE_PROPERTIES);
+	private GenericPropertiesTab GPT = new GenericPropertiesTab(GLOBAL_PROPERTIES);
 	private ElementSelectionModel selector;
 
 	/**
@@ -56,7 +58,7 @@ public class PropertiesTabManager implements Observer {
 	 * 
 	 * @return
 	 */
-	public SpritePropertiesTab getSpritePropertiesTab() {
+	public GenericPropertiesTab getSpritePropertiesTab() {
 		return SPT;
 	}
 
@@ -65,7 +67,7 @@ public class PropertiesTabManager implements Observer {
 	 * 
 	 * @return
 	 */
-	public GlobalPropertiesTab getGlobalPropertiesTab() {
+	public GenericPropertiesTab getGlobalPropertiesTab() {
 		return GPT;
 	}
 
