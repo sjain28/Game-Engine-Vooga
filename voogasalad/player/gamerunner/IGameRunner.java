@@ -28,9 +28,7 @@ public interface IGameRunner extends Menuable {
 	void testLevel(String levelName);
 	
 	void playNextLevel();
-	
-	void replayGame();
-	
+		
 	void replayLevel();
 
 	void saveGameProgress(String playerName);

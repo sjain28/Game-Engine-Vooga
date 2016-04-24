@@ -219,7 +219,8 @@ public class LevelData implements ILevelData {
 	 * 
 	 * @param levelfilename
 	 */
-	public void refreshLevelData(String levelfilename){		
+	public void refreshLevelData(String levelfilename){
+		
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
@@ -251,6 +252,10 @@ public class LevelData implements ILevelData {
             }
             myElements.put(el.getId(), el);
         }
+		for (Elementable e: spriteObjects){
+			Sprite s = (Sprite) e;
+			System.out.println("the x location of the sprite is " + s.getPosition().getX()+ "and in this method the y is" +s.getPosition().getY() );
+		}
 		//TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
 		for(Elementable el : elementObjects){
 			if(el instanceof Sprite){
@@ -300,11 +305,14 @@ public class LevelData implements ILevelData {
 	
 	public void saveProgress(String filePath,String playerName){
 		
-		List<Elementable> elementList = new ArrayList<Elementable>();
-		elementList.addAll(myElements.values());
+		List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
+		for (Elementable e: elementList){
+			Sprite s = (Sprite) e;
+			System.out.println("the x location of the sprite is " + s.getPosition().getX() + " and the y location is " + s.getPosition().getY());
+		}
 		DataContainerOfLists dataContainer = new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                 mySpriteFactory.getArchetypeMap());
-		String newFileName =  playerName + XML_SUFFIX;
+		String newFileName =  playerName + "LEVEL1" + XML_SUFFIX;
 		String finalLocation = filePath+ LEVELS+ playerName+ SLASH_STRING+ newFileName;
 		try{
 		FileWriterFromGameObjects.saveGameObjects(dataContainer,finalLocation);
