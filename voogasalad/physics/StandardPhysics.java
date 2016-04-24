@@ -194,27 +194,31 @@ public class StandardPhysics implements IPhysicsEngine{
 	 */
 	public int checkCollisionY(Sprite spriteA, Sprite spriteB) {
 		
-		Bounds boundA = spriteA.getImage().getBoundsInLocal();
-		Bounds boundB = spriteB.getImage().getBoundsInLocal();
+		Bounds boundA = spriteA.getImage().getBoundsInParent();
+		Bounds boundB = spriteB.getImage().getBoundsInParent();
 //		if (boundA.intersects(boundB)) {
 //			if (checkOverlapX(spriteA, spriteB) == 1) {
 //				if (checkOverlapY(spriteA, spriteB) == )
 //			}
 //		}
 		
-		if (checkOverlapX(spriteA, spriteB, false) == 1) {
-			if (checkOverlapY(spriteA, spriteB) == 1) {
-				return -1;
-			}
-			if (checkOverlapY(spriteA, spriteB) == 2) {
-				return 1;
-			}
-			else {
+		if(boundA.intersects(boundB)){
+			if (checkOverlapX(spriteA, spriteB, false) == 1) {
+				if (checkOverlapY(spriteA, spriteB) == 1) {
+					return -1;
+				}
+				if (checkOverlapY(spriteA, spriteB) == 2) {
+					return 1;
+				}
+				else {
+					return 0;
+				}
+			} else {
 				return 0;
 			}
-		} else {
-			return 0;
 		}
+		
+		return 0;
 		
 		
 //		Bounds boundA = spriteA.getImage().getBoundsInLocal();
@@ -268,19 +272,20 @@ public class StandardPhysics implements IPhysicsEngine{
 	        atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
 		}
 
-        
-        // If A left B right
-        if (boundA.getMinX() <= boundB.getMinX()) {
-        	if (atRightBorder) {
-        		return 1;
-        	}
-        }
-        // If A right B left
-        if (boundA.getMinX() > boundB.getMinX()) {
-        	if (atLeftBorder) {
-        		return 1;
-        	}
-        }
+       if(boundA.intersects(boundB)){ 
+	        // If A left B right
+	        if (boundA.getMinX() <= boundB.getMinX()) {
+	        	if (atRightBorder) {
+	        		return 1;
+	        	}
+	        }
+	        // If A right B left
+	        if (boundA.getMinX() > boundB.getMinX()) {
+	        	if (atLeftBorder) {
+	        		return 1;
+	        	}
+	        }
+        }     
         return 0;
 
 //        if (atRightBorder || atLeftBorder) {
