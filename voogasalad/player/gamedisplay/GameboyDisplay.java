@@ -332,13 +332,16 @@ public class GameboyDisplay implements IGameDisplay {
 		return myHUD;
 	}
 
-	@Override
-	public boolean stageIsShowing() {
-		return myStage.isShowing();
-	}
 	public void exit() {
 		// TODO Auto-generated method stub
 		myMediaPlayer.stop();
 		myStage.close();
 	}
+
+	@Override
+	public void displayTestMode() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

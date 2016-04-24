@@ -110,4 +110,9 @@ public class UIManager extends VBox implements Menuable {
 		}
 	}
 
+	public void openScene(ElementManager manager) {
+		elementTabManager.addManager(manager);
+		grid.openScene(manager);
+	}
+
 }

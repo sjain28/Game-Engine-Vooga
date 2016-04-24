@@ -52,7 +52,7 @@ public class UIGrid extends GridPane{
         });
         sector();
         try {
-            populate();
+            populate(false);
         }
         catch (VoogaException e) {
             new VoogaAlert(e.getMessage());
@@ -68,7 +68,7 @@ public class UIGrid extends GridPane{
      * 
      * @param elem: Interface to Manager for the backend
      */
-    public UIGrid (CompleteAuthoringModelable elem, Tab container) {
+    public UIGrid (CompleteAuthoringModelable elem, Tab container, boolean bypass) {
         myManager = elem;
         this.mySceneName = new SimpleStringProperty();
         this.mySceneName.addListener((obs, old, n) -> {
@@ -76,7 +76,7 @@ public class UIGrid extends GridPane{
         });
         sector();
         try {
-            populate();
+            populate(bypass);
         }
         catch (VoogaException e) {
             new VoogaAlert(e.getMessage());
@@ -99,12 +99,33 @@ public class UIGrid extends GridPane{
         this.getRowConstraints().addAll(topRow, middleRow, bottomRow);
     }
 
+    @Deprecated
     private void populate () throws VoogaException {
     	
         explorer = new Explorer(myManager);
         this.add(explorer, 0, 0);
         
-        designBoard = new DesignBoardHousing(myManager);
+        designBoard = new DesignBoardHousing(myManager, false);
+        Bindings.bindBidirectional(this.mySceneName, designBoard.getName());
+        this.add(designBoard, 1, 0);
+        GridPane.setRowSpan(designBoard, REMAINING);
+
+        propertiesPane = new PropertiesPane();
+        myManager.addObserver(propertiesPane.getPropertiesTabManager());
+        ElementManager em = ((ElementManager) myManager);
+        em.initGlobalVariablesPane();
+        
+        this.add(propertiesPane, 0, 1);
+        EventsWindow events = new EventsWindow(myManager);
+        this.add(events, 0, 2);
+    }
+    
+    private void populate (boolean bypass) throws VoogaException {
+    	
+        explorer = new Explorer(myManager);
+        this.add(explorer, 0, 0);
+        
+        designBoard = new DesignBoardHousing(myManager, bypass);
         Bindings.bindBidirectional(this.mySceneName, designBoard.getName());
         this.add(designBoard, 1, 0);
         GridPane.setRowSpan(designBoard, REMAINING);
