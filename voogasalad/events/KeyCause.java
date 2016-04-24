@@ -25,6 +25,11 @@ public class KeyCause extends Cause {
 		myKeys = Arrays.asList(allKeyInputs.split("\\s+"));
 		myPressed = pressStatus;
 	}
+	
+	public KeyCause(String allKeyInputs,VoogaEvent voogaEvent) {
+		super(voogaEvent);
+		myKeys = Arrays.asList(allKeyInputs.split("\\s+"));
+	}
 
 	@Override
 	public boolean check(ILevelData data) {
