@@ -62,9 +62,11 @@ public class LevelData implements ILevelData {
 	private static final String CONTINIOUS_CHAR = "MainCharacterID";
 	
 	private IDisplayScroller myScroller;
-	private ResourceBundle methods = VoogaBundles.EventMethods;
+	private ResourceBundle methods;
 	
 	public LevelData(IPhysicsEngine physicsengine) {
+		methods = VoogaBundles.EventMethods;
+		System.out.println(methods);
 		myPhysics = physicsengine;
 		myContinuousSpriteIDs = new ArrayList<String>();
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
@@ -205,7 +207,7 @@ public class LevelData implements ILevelData {
 		for (Cause c: voogaEvent.getCauses()) {
 			if (c instanceof KeyCause) {
 				KeyCause keyc = (KeyCause) c;
-				myKeyCauses.put(keyc.getKeys(), keyc); 
+				myKeyCauses.put(keyc.getKeys(), keyc);
 				if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
 					keyPressedCombos.add(keyc.getKeys()); 
 				} else {

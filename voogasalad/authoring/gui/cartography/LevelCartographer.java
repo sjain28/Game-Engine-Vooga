@@ -47,7 +47,7 @@ public class LevelCartographer extends Stage {
 	 */
 	private BorderPane myGUI;
 	private Group myMap;
-	private Set<String> levelNames;
+	private List<String> levelNames;
 	private Set<Level> levels;
 	private Set<Connection> connectors;
 	private Set<Mapping> mappings;
