@@ -1,4 +1,3 @@
-
 package player.gamerunner;
 
 import javafx.application.Application;

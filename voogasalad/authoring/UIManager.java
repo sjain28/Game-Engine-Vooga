@@ -55,10 +55,26 @@ public class UIManager extends VBox implements Menuable {
 	 * @param model
 	 *            Interface to mediate interactions with backend
 	 */
+	
+	public UIManager(List<CompleteAuthoringModelable> models) {
+		this.currentTabIndex = new SimpleIntegerProperty(-1);
+		this.elementTabManager = new ElementTabManager();
+		ElementManager temp = new ElementManager();
+		this.elementTabManager.addManager(temp);
+		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
+		initializeComponents();
+		for(int i = 0; i < models.size(); i++) {
+			openScene((ElementManager) models.get(i));
+		}
+		this.elementTabManager.removeManager(temp);
+		grid.removeFirstTab();
+		System.out.println(elementTabManager.getAllManagers().size());
+	}
+	
 	public UIManager(CompleteAuthoringModelable model) {
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
-		this.elementTabManager.addManager(new ElementManager());
+		this.elementTabManager.addManager((ElementManager) model);
 		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
 
 		initializeComponents();
@@ -67,7 +83,7 @@ public class UIManager extends VBox implements Menuable {
 	/**
 	 * Initializes all the pieces of the authoring environment
 	 */
-	private void initializeComponents() {
+	void initializeComponents() {
 		this.getChildren().addAll(new MenuPanel(this, e -> {
 			new MenuPanelHandlingMirror(e, this);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
@@ -105,7 +121,6 @@ public class UIManager extends VBox implements Menuable {
 			for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
 				m.onSave();
 			}} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -37,7 +37,7 @@ public class OpenLevelFileItem extends MenuItemHandler {
 	private String getLevelPath() throws VoogaException {
 		VoogaFileChooser fileChooser = new VoogaFileChooser();
 		fileChooser.addFilters(new ExtensionFilter("XML (.xml)", "*.xml"));
-		fileChooser.setInitialDirectory(new File("games/"+VoogaBundles.preferences.getProperty("GameName")+"/levels/"));
+		fileChooser.setInitialDirectory(new File("games/"));
 		return fileChooser.launch();
 	}
 

@@ -24,6 +24,7 @@ public abstract class Builder extends Stage {
 	protected SpriteFactory mySpriteFactory;
 	protected EditElementable myManager;
 	protected static final double SPACING = 10;
+	protected boolean compile = true;
 
 	protected Builder(EditElementable editor) {
 		if (editor != null) {
@@ -51,7 +52,12 @@ public abstract class Builder extends Stage {
 	}
 
 	protected void quit() {
+		compile = false;
 		this.close();
+	}
+	
+	protected boolean getStatus(){
+		return compile;
 	}
 
 	protected HBox makeRow(Node... items) {
