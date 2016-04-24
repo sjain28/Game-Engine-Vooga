@@ -8,6 +8,7 @@ import authoring.model.ElementManager;
 import authoring.splash.CreateCommand;
 import authoring.splash.LearnCommand;
 import authoring.splash.OpenCommand;
+import authoring.splash.PlayGameCommand;
 import authoring.splash.Splash;
 import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
