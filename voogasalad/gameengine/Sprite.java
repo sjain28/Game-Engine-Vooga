@@ -173,7 +173,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
 
-        System.out.println("isAlive: "+ myProperties.get(ALIVE));
         if (!myProperties.get(IMAGE_PATH).getValue().toString().equals(previousImage)) {
             Image newImage = setNewImage();
             myImage.setImage(newImage);
