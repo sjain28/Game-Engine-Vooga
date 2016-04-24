@@ -83,7 +83,6 @@ public class SpriteEffect extends VariableEffect{
 			for (Sprite sprite : mySprites){
 				VoogaData variable = sprite.getParameterMap().get(getVariable());
 				callEffectMethod(variable);
-				System.out.println("Variable Value: " + variable.getValue());
 			}
 		}
 		mySprites.clear();

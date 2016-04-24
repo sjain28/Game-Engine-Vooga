@@ -99,7 +99,6 @@ public class LevelData implements ILevelData {
 				sprites.add((Sprite) myElements.get(id));
 			}
 		}
-		System.out.println("Size of all sprites: "+ sprites.size());
 		return sprites;
 	}
 	/**
@@ -233,11 +232,9 @@ public class LevelData implements ILevelData {
 		data = fileManager.getDataContainer();
       
 		List<Elementable> spriteObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + spriteObjects);
 
 
 		List<Elementable> elementObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + elementObjects);
 
 		//clear all the instance variables
 		myElements.clear();
@@ -268,24 +265,19 @@ public class LevelData implements ILevelData {
 		}
 
 		List<VoogaEvent> eventObjects = data.getEventList();
-		System.out.println("All the events here are" + eventObjects);
 
 		for(VoogaEvent e : eventObjects){
 			addEventAndPopulateKeyCombos(e);
 		}
 		
 		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
-		System.out.println("All the events here are" + eventObjects);
 		
 		mySpriteFactory = new SpriteFactory(archetypeMap);
 
-		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
 		myGlobalVariables = data.getVariableMap();
-		System.out.println("All the variables here are" + myGlobalVariables);
 		//initialize timer to zero here as well as level index
 		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
-		System.out.println("Did the timer here happen");
 		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));
 	}
 

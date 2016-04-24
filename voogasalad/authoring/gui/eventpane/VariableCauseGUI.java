@@ -123,7 +123,7 @@ public class VariableCauseGUI implements EventGUI{
             result += "events.SpriteVariableCause "+name.getSpriteId()+" ";
         }
         result+=variables.getValue()+
-                " "+VoogaBundles.eventMethodsToGUI.getString(actions.getValue())+" ";
+                " "+VoogaBundles.EventMethods.getString(actions.getValue())+" ";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();
