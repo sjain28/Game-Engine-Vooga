@@ -1,5 +1,6 @@
 package authoring.gui.toolbar;
 
+import java.util.Enumeration;
 import authoring.resourceutility.ButtonMaker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,10 +25,15 @@ public class ToolPanel extends ToolBar {
 
     private void populate () {
         ButtonMaker maker = new ButtonMaker();
-        for (String key : VoogaBundles.toolbarProperties.keySet()) {
+        
+        for (Enumeration<?> enumer = VoogaBundles.toolbarProperties.propertyNames(); enumer.hasMoreElements();) {
+            String key = (String) enumer.nextElement();
+            
             ImageView graphic =
                     new ImageView(new Image("file:resources/" +
-                                            VoogaBundles.toolbarProperties.getString(key)));
+                                            VoogaBundles.toolbarProperties.getProperty(key)));
+            graphic.setFitWidth(30);
+            graphic.setFitHeight(30);
             Button btn = maker.makeButton("", toolbarEvent);
             btn.setGraphic(graphic);
             btn.setId(key);
