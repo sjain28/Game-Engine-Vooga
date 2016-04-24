@@ -34,7 +34,6 @@ public class SpriteEffect extends VariableEffect{
 		setNeedsSprites(false);
 	}
 	
-
 	// constructor with archetype, boolean true- apply to all of archetype
 	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
 
@@ -84,6 +83,7 @@ public class SpriteEffect extends VariableEffect{
 			for (Sprite sprite : mySprites){
 				VoogaData variable = sprite.getParameterMap().get(getVariable());
 				callEffectMethod(variable);
+				System.out.println("Variable Value: " + variable.getValue());
 			}
 		}
 		mySprites.clear();

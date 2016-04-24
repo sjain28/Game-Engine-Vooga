@@ -18,20 +18,21 @@ import resources.VoogaBundles;
  */
 public class StandardControl implements IControl {
 
-	private ResourceBundle gameDisplayProperties;
-	private IGameRunner myGameRunner;
-	private HBox myControl;
 	private static final String PAUSE_KEY = "Pause";
 	private static final String START_KEY = "Start";
 	private static final String SPEED_UP_KEY = "SpeedUp";
 	private static final String SLOW_DOWN_KEY = "SlowDown";
 	private static final String PLAYNEXTLEVEL_BUTTON_KEY = "PlayNextLevel";
-	private static final String REPLAY_BUTTON_KEY = "ReplayLevel";
 	private static final int TOP_PADDING = 15;
 	private static final int LEFT_PADDING = 12;
 	private static final int RIGHT_PADDING = 15;
 	private static final int BOTTOM_PADDING = 12;
 	private static final int SPACING = 10;
+	
+	private ResourceBundle gameDisplayProperties;
+	private IGameRunner myGameRunner;
+	private HBox myControl;
+
 	/**
 	 * Default constructor
 	 * 
@@ -43,7 +44,7 @@ public class StandardControl implements IControl {
 
 	/**
 	 * Overloaded constructor that takes in a reference to GameRunner
-	 * to enable StandardControl to adjust framerate
+	 * to enable StandardControl to adjust frame rate
 	 * 
 	 */
 	public StandardControl(IGameRunner gamerunner) {
@@ -58,8 +59,8 @@ public class StandardControl implements IControl {
 	 */
 	public HBox createControl() {
 		// myControlBox
-		myControl.setPadding(new Insets(TOP_PADDING,RIGHT_PADDING, BOTTOM_PADDING,LEFT_PADDING)); //TODO: Magic number
-		myControl.setSpacing(SPACING); //TODO: Magic number
+		myControl.setPadding(new Insets(TOP_PADDING,RIGHT_PADDING, BOTTOM_PADDING, LEFT_PADDING));
+		myControl.setSpacing(SPACING);
 
 		ButtonMaker maker = new ButtonMaker();
 		
@@ -68,16 +69,8 @@ public class StandardControl implements IControl {
 		Button start = maker.makeButton((gameDisplayProperties.getString(START_KEY)), e -> getGameRunner().start());
 		Button speedUp = maker.makeButton((gameDisplayProperties.getString(SPEED_UP_KEY)), e -> getGameRunner().speedUp());
 		Button speedDown = maker.makeButton((gameDisplayProperties.getString(SLOW_DOWN_KEY)), e -> getGameRunner().speedDown());
-
-//		//Add button here for changing levels
-//		Button replayButton = createButton(gameDisplayProperties.getString(REPLAY_BUTTON_KEY));
-//		
-		Button playNextButton = maker.makeButton((gameDisplayProperties.getString(PLAYNEXTLEVEL_BUTTON_KEY)), e -> getGameRunner().playNextLevel());
-		
-		// TODO: Assign click actions
-//		replayButton.setOnMouseClicked(e -> getGameRunner().replayLevel());
-		myControl.getChildren().addAll(start, pause, speedUp, speedDown, playNextButton);
-
+		Button playNext = maker.makeButton((gameDisplayProperties.getString(PLAYNEXTLEVEL_BUTTON_KEY)), e -> getGameRunner().playNextLevel());
+		myControl.getChildren().addAll(start, pause, speedUp, speedDown, playNext);
 		return myControl;
 	}
 
