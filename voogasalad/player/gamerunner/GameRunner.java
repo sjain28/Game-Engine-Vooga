@@ -89,9 +89,8 @@ public class GameRunner implements IGameRunner {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
 		mySpriteManager.update(myLevelData.getAllSprites(), myPhysicsEngine);
-		myEventManager.update(myLevelData, myGameDisplay.getKeyEvents());
-		myGameDisplay.read(myLevelData.getDisplayableNodes());
-		myGameDisplay.populateGameScreen();
+		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
+		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();	
 	}
 	/**
@@ -113,7 +112,7 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		myGameDisplay.read(myLevelData.getDisplayableNodes());
+		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**
 	 * Plays a single level called by authoring for testing purposes

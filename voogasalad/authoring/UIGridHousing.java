@@ -31,5 +31,9 @@ public class UIGridHousing extends TabPane{
 		this.getSelectionModel().select(scene);
 		this.getTabs().add(scene);
 	}
+	
+	public void removeFirstTab() {
+		this.getTabs().remove(0);
+	}
     
 }

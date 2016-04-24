@@ -28,6 +28,8 @@ public class VoogaBundles {
 	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
 	public final static ResourceBundle eventMethodsToGUI = ResourceBundle.getBundle("resources/EventMethods");
 	public final static Properties preferences = makeProperties("preferences.properties");
+	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
+
 	
 	private static Properties makeProperties(String path) {
 		try {

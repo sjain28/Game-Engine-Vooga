@@ -72,4 +72,10 @@ public interface IPhysicsEngine {
 	void gravity(Sprite sprite, Double gravityAcceleration);
 
 	void translateX(Sprite sprite, Double change);	
+	
+	int checkCollisionY(Sprite spriteA, Sprite spriteB);
+	
+	int checkCollisionX(Sprite spriteA, Sprite spriteB);
+
+
 }
