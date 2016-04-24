@@ -18,6 +18,7 @@ public class CollisionCause extends Cause{
 	private Map<String, Integer> collisionDirections;
 	private List<Sprite> groupA;
 	private List<Sprite> groupB;
+
 	
 	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Simple Collision
 		super(voogaEvent);

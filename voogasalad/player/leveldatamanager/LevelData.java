@@ -230,7 +230,7 @@ public class LevelData implements ILevelData {
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
-      
+		
 		List<Elementable> spriteObjects = data.getElementableList();
 
 
