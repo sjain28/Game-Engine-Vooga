@@ -99,6 +99,7 @@ public class LevelData implements ILevelData {
 				sprites.add((Sprite) myElements.get(id));
 			}
 		}
+		System.out.println("Size of all sprites: "+ sprites.size());
 		return sprites;
 	}
 	/**
@@ -133,7 +134,7 @@ public class LevelData implements ILevelData {
 	 * 
 	 * @param id
 	 */
-	public void removeSprite(Object id){
+	public void removeSprite(String id){
 		myElements.remove(id);
 	}
 	/**
