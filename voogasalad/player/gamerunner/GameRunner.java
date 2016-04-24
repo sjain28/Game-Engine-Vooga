@@ -35,12 +35,15 @@ import tools.VoogaException;
 public class GameRunner implements IGameRunner {
 
     private static final double INIT_SPEED = 60;
+    private static final double SEC_PER_MIN = 60;
     private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
     private static final double SPEEDCONTROL = 10;
     
     private static final String LEVELS_PATH = "levels/";
     private static final String GAMES_PATH_PREFIX = "games/";
+    private static final String SLASH_STRING = "/";
     private static final String XML_EXTENSION_SUFFIX = ".xml";
+    private static final String NULL_STRING = "";
     
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
@@ -91,8 +94,8 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void createLevelList(String xmlList) 
 			throws FileNotFoundException, IOException, VoogaException {
-		myGameFilePath = GAMES_PATH_PREFIX + xmlList + "/";
-		String XMLwithListOfLevels = myGameFilePath + xmlList + ".xml";
+		myGameFilePath = GAMES_PATH_PREFIX + xmlList + SLASH_STRING;
+		String XMLwithListOfLevels = myGameFilePath + xmlList + XML_EXTENSION_SUFFIX;
 		myLevelList = (List<String>) Deserializer.deserialize(1, XMLwithListOfLevels).get(0);
 	}
 	
@@ -116,12 +119,12 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void step() {	
 		myCurrentStep++;
-		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / 60;
+		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN;
 
 		myLevelData.updatedGlobalTimer(secondspassed);
 
 		//check if we need to transition to a different level
-		if (!myLevelData.getNextLevelName().equals("")) {
+		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
 
