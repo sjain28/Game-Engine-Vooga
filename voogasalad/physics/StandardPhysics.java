@@ -235,8 +235,8 @@ public class StandardPhysics implements IPhysicsEngine{
 	private int checkOverlapX(Sprite spriteA, Sprite spriteB) {
 		Bounds boundA = spriteA.getImage().getBoundsInLocal();
 		Bounds boundB = spriteB.getImage().getBoundsInLocal();
-        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
-        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
+        boolean atRightBorder = boundA.getMaxX() <= boundB.getMinX();
+        boolean atLeftBorder = boundA.getMinX() >= boundB.getMaxX();
         if (atRightBorder || atLeftBorder) {
         	return 1;
         } else {
