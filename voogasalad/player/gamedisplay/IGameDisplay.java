@@ -13,14 +13,12 @@ import javafx.stage.Stage;
  */
 public interface IGameDisplay {
 	
-	void read(List<Node> listToDisplay);
+	void readAndPopulate(List<Node> listToDisplay);
 	
 	void display();
 	
 	void displayTestMode();
-	
-	void populateGameScreen();
-	
+		
 	void createPrompt(String message);
 	
 	List<KeyEvent> getKeyEvents();

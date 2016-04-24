@@ -120,8 +120,16 @@ public class GameboyDisplay implements IGameDisplay {
 	 * Reads in the list of Nodes to display
 	 * 
 	 */
-	public void read(List<Node> listToDisplay) {
+	@Override
+	public void readAndPopulate(List<Node> listToDisplay) {
 		myListToDisplay = listToDisplay;
+		getGameScreen().getChildren().clear();
+		getListToDisplay().forEach(n -> {
+			getGameScreen().getChildren().add(n);
+//			getGameScreen().setClip(n);
+//			n.setLayoutX(n.getLayoutX() + 400);
+//			n.setLayoutY(n.getLayoutY() + 200);
+		});
 	}
 
 	/**
@@ -202,21 +210,21 @@ public class GameboyDisplay implements IGameDisplay {
 		getStage().setOnCloseRequest(e -> getMediaPlayer().stop());
 	}
 
-	/**
-	 * Populates the game screen that goes into the center
-	 * of the game display (BorderPane)
-	 * 
-	 */
-	@Override
-	public void populateGameScreen() {
-		getGameScreen().getChildren().clear();
-		getListToDisplay().forEach(n -> {
-			getGameScreen().getChildren().add(n);
-//			getGameScreen().setClip(n);
-//			n.setLayoutX(n.getLayoutX() + 400);
-//			n.setLayoutY(n.getLayoutY() + 200);
-		});
-	}
+//	/**
+//	 * Populates the game screen that goes into the center
+//	 * of the game display (BorderPane)
+//	 * 
+//	 */
+//	@Override
+//	public void populateGameScreen() {
+//		getGameScreen().getChildren().clear();
+//		getListToDisplay().forEach(n -> {
+//			getGameScreen().getChildren().add(n);
+////			getGameScreen().setClip(n);
+////			n.setLayoutX(n.getLayoutX() + 400);
+////			n.setLayoutY(n.getLayoutY() + 200);
+//		});
+//	}
 
 	/**
 	 * @return the pane
