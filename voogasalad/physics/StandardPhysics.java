@@ -201,7 +201,9 @@ public class StandardPhysics implements IPhysicsEngine{
 //				if (checkOverlapY(spriteA, spriteB) == )
 //			}
 //		}
+
 		if (boundA.intersects(boundB)) {
+
 			if (checkOverlapX(spriteA, spriteB, false) == 1) {
 				if (checkOverlapY(spriteA, spriteB) == 1) {
 					return -1;
@@ -215,10 +217,8 @@ public class StandardPhysics implements IPhysicsEngine{
 			} else {
 				return 0;
 			}
-
 		}
 		return 0;
-
 		
 		
 //		Bounds boundA = spriteA.getImage().getBoundsInParent();
@@ -272,19 +272,20 @@ public class StandardPhysics implements IPhysicsEngine{
 	        atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
 		}
 
-        
-        // If A left B right
-        if (boundA.getMinX() <= boundB.getMinX()) {
-        	if (atRightBorder) {
-        		return 1;
-        	}
-        }
-        // If A right B left
-        if (boundA.getMinX() > boundB.getMinX()) {
-        	if (atLeftBorder) {
-        		return 1;
-        	}
-        }
+       if(boundA.intersects(boundB)){ 
+	        // If A left B right
+	        if (boundA.getMinX() <= boundB.getMinX()) {
+	        	if (atRightBorder) {
+	        		return 1;
+	        	}
+	        }
+	        // If A right B left
+	        if (boundA.getMinX() > boundB.getMinX()) {
+	        	if (atLeftBorder) {
+	        		return 1;
+	        	}
+	        }
+        }     
         return 0;
 
 //        if (atRightBorder || atLeftBorder) {
