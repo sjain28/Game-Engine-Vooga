@@ -3,7 +3,9 @@ package authoring;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -108,8 +110,8 @@ public class UIManager extends VBox implements Menuable {
 		return elementTabManager.getCurrentManager();
 	}
 
-	public List<String> getAllManagerNames() {
-		List<String> names = new ArrayList<String>();
+	public Set<String> getAllManagerNames() {
+		Set<String> names = new HashSet<String>();
 		elementTabManager.getAllManagers().stream().map(ElementManager::getName).forEach(names::add);
 		return names;
 	}
