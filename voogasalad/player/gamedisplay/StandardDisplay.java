@@ -55,6 +55,7 @@ public class StandardDisplay implements IGameDisplay {
 	private void initialize() {
 		myControl = new StandardControl(myGameRunner);
 		myHUD = new StandardHUD(myGameRunner);
+		myGameSound = new GameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
@@ -114,7 +115,10 @@ public class StandardDisplay implements IGameDisplay {
 		myStage.show();
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
-		myStage.setOnCloseRequest(e -> myGameSound.stopBGM());
+		myStage.setOnCloseRequest(e -> {
+			myGameRunner.stop();
+			myGameSound.stopBGM();
+		});
 	}
 	
 	/**

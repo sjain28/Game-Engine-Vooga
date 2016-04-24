@@ -24,13 +24,13 @@ public class ConnectionPrompt extends Stage {
 	public ConnectionPrompt(String start, String end, CompleteAuthoringModelable model) {
 		String startLevel = (start == null) ? NO_LEVEL_SELECTED : start;
 		String endLevel = (end == null) ? NO_LEVEL_SELECTED : end;
-		Button addCond = new ButtonMaker().makeButton("Add Condition", e -> new LevelCauseWindow(model));
+		Button addCond = new ButtonMaker().makeButton("Add Condition", e -> new LevelCauseWindow(model, endLevel));
 		addCond.setDisable(start == null || end == null);
 		container = new VBox();
 		container.getChildren().addAll(makeRow(new CustomText("Start:", FontWeight.BOLD), new CustomText(startLevel)),
 									   makeRow(new CustomText("End:"  , FontWeight.BOLD), new CustomText(endLevel)),
-									   addCond);
-		Scene scene = new VoogaScene(container);
+									   makeRow(addCond));
+		Scene scene = new VoogaScene(container, 300, 300);
 		this.setScene(scene);
 		this.show();
 	}

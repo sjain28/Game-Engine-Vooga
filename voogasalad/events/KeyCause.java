@@ -56,6 +56,6 @@ public class KeyCause extends Cause {
 	}
 
 	public String getMyPressed() {
-		return myPressed;
+		return (myPressed == null) ? "release" : "press";
 	}
 }
