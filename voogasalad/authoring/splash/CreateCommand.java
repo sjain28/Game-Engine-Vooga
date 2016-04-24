@@ -1,8 +1,11 @@
-package authoring;
+package authoring.splash;
 
 import java.io.File;
 import java.io.FileOutputStream;
 
+import authoring.Command;
+import authoring.UIManager;
+import authoring.VoogaScene;
 import authoring.model.ElementManager;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,11 +28,6 @@ public class CreateCommand implements Command {
 			primaryStage.setScene(scene);
 			primaryStage.setMaximized(true);
 			primaryStage.show();
-			try {
-				VoogaBundles.preferences.storeToXML(new FileOutputStream(new File("LevelConnection.xml")), "Level Connection");
-			} catch (Exception eee) {
-				eee.printStackTrace();
-			}
 		});
 		prompt.show();
 	}

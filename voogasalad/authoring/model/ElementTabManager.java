@@ -25,6 +25,11 @@ public class ElementTabManager {
 		this.currentManagerIndex.set(this.currentManagerIndex.get() + 1);
 	}
 	
+	public void removeManager(ElementManager manager) {
+		this.myManagers.remove(manager);
+		this.currentManagerIndex.set(this.currentManagerIndex.get() - 1);
+	}
+	
 	public ElementManager getCurrentManager() {
 		return myCurrentManager;
 	}

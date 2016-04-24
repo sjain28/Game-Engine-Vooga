@@ -1,5 +1,7 @@
-package authoring;
+package authoring.splash;
 
+import authoring.CustomText;
+import authoring.VoogaScene;
 import authoring.resourceutility.ButtonMaker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,52 +17,49 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class ProjectOpenPrompt extends Stage {
-	
-	private static final double SPACING = 10;
-	private static final double HEADER_SIZE = 30;
+public class ProjectInitializationPrompt extends StarterPrompt {
 	
 	private static final double WINDOW_WIDTH = 400;
 	private static final double WINDOW_HEIGHT = 200;
 	
 	private VBox container;
 	private TextField name;
+	private TextField description;
 	
 	private EventHandler<ActionEvent> e;
 	
-	public ProjectOpenPrompt() {
-		initializeContainer();
-		setTheScene();
+	public ProjectInitializationPrompt() {
+		super();
 	}
 	
+	@Override
 	public void setProceedEvent(EventHandler<ActionEvent> proceedEvent) {
 		this.e = proceedEvent;
 		Button proceed = new ButtonMaker().makeButton("OK", e);
 		container.getChildren().add(makeRow(proceed));
 	}
 	
-	private void initializeContainer() {
+	@Override
+	protected void initializeContainer() {
 		container = new VBox();
 		container.setSpacing(SPACING);
 		container.setPadding(new Insets(SPACING));
 		name = new TextField();
-		container.getChildren().addAll(makeRow(new CustomText("Still working on this!", FontWeight.BOLD, HEADER_SIZE)),
-									   makeRow(new CustomText("Coming soon.", FontWeight.BOLD)),
-							  	       makeRow(name));
+		name.setPromptText("E.g. Zombie Apocalypse II");
+		description = new TextField();
+		description.setPromptText("E.g. Survive against waves of terrifying zombies!");
+		container.getChildren().addAll(makeRow(new CustomText("Welcome!", FontWeight.BOLD, HEADER_SIZE)),
+									   makeRow(new CustomText("Build a new game.", FontWeight.BOLD)),
+							  	       makeRow(new CustomText("Name:"), name),
+							  	       makeRow(new CustomText("Description:"), description));
 	}
 	
-	private void setTheScene() {
+	@Override
+	protected void setTheScene() {
 		Scene scene = new VoogaScene(container, WINDOW_WIDTH, WINDOW_HEIGHT);
 		this.setScene(scene);
 	}
 	
-	private HBox makeRow(Node... nodes) {
-		HBox container = new HBox(SPACING);
-		container.setAlignment(Pos.CENTER);
-		container.getChildren().addAll(nodes);
-		return container;
-	}
-
 	public String getName() {
 		return name.getText();
 	}
