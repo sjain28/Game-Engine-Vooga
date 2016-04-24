@@ -8,6 +8,7 @@ import java.util.Observer;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.model.GameObject;
+import authoring.UIGridHousing;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.Elementable;
 import authoring.resourceutility.ResourceDecipherer;
@@ -173,14 +174,10 @@ public class DesignBoard extends Tab implements Observer {
 			}
 			elementManager.addElementId(elementPath);
 		}
-
-//		System.out.println(elementManager.getIds());
-
 	}
 
 	private void moveElement(String id, DragEvent e) {
 		Node element = elementManager.getElement(id);
-//		System.out.println("" + e.getX() + " " + e.getY());
 		element.setTranslateX(e.getX() - x_offset);
 		element.setTranslateY(e.getY() - y_offset);
 

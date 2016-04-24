@@ -35,6 +35,7 @@ public class PropertiesTabManager implements Observer {
 
 	/**
 	 * Returns list of tabs managed by the properties tab manager.
+	 * 
 	 * @return
 	 */
 	public ArrayList<Tab> getTabList() {
@@ -48,11 +49,11 @@ public class PropertiesTabManager implements Observer {
 	
 		myPropertyTabs.add(SPT);
 		myPropertyTabs.add(GPT);
-		System.out.println("Here we go");
 	}
 
 	/**
 	 * Returns the Sprite Properties Tab.
+	 * 
 	 * @return
 	 */
 	public SpritePropertiesTab getSpritePropertiesTab() {
@@ -61,6 +62,7 @@ public class PropertiesTabManager implements Observer {
 
 	/**
 	 * Returns the Global Properties Tab.
+	 * 
 	 * @return
 	 */
 	public GlobalPropertiesTab getGlobalPropertiesTab() {
@@ -68,16 +70,19 @@ public class PropertiesTabManager implements Observer {
 	}
 
 	/**
-	 * Updates the sprite properties tab based on observing elementals in the 
+	 * Updates the sprite properties tab based on observing elementals in the
 	 * Design Board.
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		Elementable tabInfo = (Elementable) arg;
-		if ( (o instanceof CompleteAuthoringModelable) ){
-			GPT.getPropertiesMap(tabInfo);
-		} else {
-			SPT.getPropertiesMap(tabInfo);
+
+		if (arg instanceof Elementable) {
+			Elementable tabInfo = (Elementable) arg;
+			if ((o instanceof CompleteAuthoringModelable)) {
+				GPT.getPropertiesMap(tabInfo);
+			} else {
+				SPT.getPropertiesMap(tabInfo);
+			}
 		}
 	}
 

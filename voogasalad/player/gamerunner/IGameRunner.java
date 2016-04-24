@@ -1,8 +1,5 @@
 package player.gamerunner;
 
-import java.io.File;
-import java.util.Collections;
-
 import player.gamedisplay.Menuable;
 
 /**
@@ -12,6 +9,8 @@ import player.gamedisplay.Menuable;
  */
 public interface IGameRunner extends Menuable {
 
+	IGameRunner getSelf();
+	
 	void stop();
 
 	void start();
@@ -23,24 +22,14 @@ public interface IGameRunner extends Menuable {
 	void speedDown();
 
 	void mute();
-
-	IGameRunner getSelf();
-
-	void playLevel(String teststring, boolean debugMode);
-	
+		
 	void playGame(String xmlList);
 	
-	void replayGame();
+	void testLevel(String levelName);
 	
+	void playNextLevel();
+		
 	void replayLevel();
 
-	// Methods below only called by LevelDataManager
-
-	//List<?> getKeyEvents();
-
-	@Deprecated
-	void read(Collections nodesToDisplay);
-
-	void playNextLevel();
-
+	void saveGameProgress(String playerName);
 }

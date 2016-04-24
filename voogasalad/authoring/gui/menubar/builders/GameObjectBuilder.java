@@ -9,9 +9,12 @@ import authoring.resourceutility.ButtonMaker;
 import gameengine.Sprite;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class GameObjectBuilder extends Builder {
 
@@ -39,6 +42,7 @@ public class GameObjectBuilder extends Builder {
 	private HBox makeAddNewArchetypeButton() {
 		HBox container = new HBox();
 		Button button = new ButtonMaker().makeButton("Add a new archetype", e -> {
+			archetypeBuilder = new ArchetypeBuilder(editor);
 			archetypeBuilder.showAndWait();
 			archetypes.getItems().add(archetypeBuilder.getArchetypeName());
 			archetypes.setValue(archetypeBuilder.getArchetypeName());
@@ -50,7 +54,8 @@ public class GameObjectBuilder extends Builder {
 	public void compile() {
 		try {
 			Sprite sprite = mySpriteFactory.createSprite(archetypes.getValue());
-			myManager.addGameElements(new GameObject(sprite, myName.getText()));
+			GameObject object = new GameObject(sprite, myName.getText());
+			myManager.addGameElements(object);
 			quit();
 		} catch (Exception e) {
 			e.printStackTrace();

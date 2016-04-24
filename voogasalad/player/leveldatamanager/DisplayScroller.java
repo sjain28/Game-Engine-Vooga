@@ -18,6 +18,8 @@ public class DisplayScroller implements IDisplayScroller {
 	private int myAdjustFactorX;
 	//	private int myAdjustFactorY;
 	private int myConstantScrollCenter;
+	
+//	private boolean DEBUG = false;
 
 	/**
 	 * Default constructor that sets the screen size to be used
@@ -80,10 +82,14 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @param allNodes, rightEdgeLocation
 	 * @return
 	 */
-	public <E> List<Node> centerScroll(List<E> allNodes, double mainCharXPos) {
+	public <E> List<Node> centerScroll(List<E> allNodes, double ceneteredCharXPos) {
 		//double mainCharXPos = mainCharLocation.getX();
+		
+//		if (DEBUG) (ArrayListList<Nodes>) allNodes;
+		
+		
 		List<Node> nodesToDisplay;
-		if (mainCharXPos <= myAdjustFactorX) {
+		if (ceneteredCharXPos <= myAdjustFactorX) {
 			nodesToDisplay = allNodes.stream()
 					.map(n -> (Node) n)
 					.filter(n -> n.getLayoutX() <= myScreenSizeX)
@@ -92,8 +98,8 @@ public class DisplayScroller implements IDisplayScroller {
 		else {
 			nodesToDisplay = allNodes.stream()
 					.map(n -> (Node) n)
-					.filter(n -> n.getLayoutX() <= mainCharXPos + myAdjustFactorX)
-					.filter(n -> n.getLayoutX() >= mainCharXPos - myAdjustFactorX)
+					.filter(n -> n.getLayoutX() <= ceneteredCharXPos + myAdjustFactorX)
+					.filter(n -> n.getLayoutX() >= ceneteredCharXPos - myAdjustFactorX)
 					.collect(Collectors.toList());
 		}
 		return nodesToDisplay;

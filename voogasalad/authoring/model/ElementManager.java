@@ -40,27 +40,29 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     private GlobalPropertiesManager GPM;
 
-    private File myXmlDataFile;
+    //private File myXmlDataFile;
     private SpriteFactory spriteFactory;
 
     private Set<String> myIds;
+    
+    private String myManagerName;
 
-    private String filePath = "games/levels/Test.xml";
+    private String filePath;
 
-    public ElementManager () {
+    public ElementManager () {;
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
         GPM = new GlobalPropertiesManager();
-        myXmlDataFile = null;
+        //myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
-        myXmlDataFile = new File(filePath);
+        //myXmlDataFile = new File(filePath);
         initGlobalVariablesPane();
     }
 
     public ElementManager (File xmlDataFile) {
         this();
-        this.myXmlDataFile = xmlDataFile;
+        //this.myXmlDataFile = xmlDataFile;
     }
 
     public void addGameElements (Node ... elements) {
@@ -140,7 +142,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                     new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
                                              spriteFactory.getArchetypeMap());
 //            System.out.println(myXmlDataFile.getPath());
-            FileWriterFromGameObjects.saveGameObjects(data, filePath);
+            FileWriterFromGameObjects.saveGameObjects(data, "games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/" + getName() + ".xml");
             System.out.println("I'm done saving in element manager");
             //System.out.println(GPM.getVoogaProperties().toString().toString());
 
@@ -232,6 +234,22 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             throw new VoogaException();
         }
         GPM.setVoogaProperties(globalPropertiesMap);
+    }
+    
+    /**
+     * Used to populate preferences
+     */
+    
+    @Override
+    public String getName() {
+    	return this.myManagerName;
+    }
+    
+    @Override
+    public void setName(String name) {
+    	this.myManagerName = name;
+    	this.filePath = "games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/" + myManagerName + ".xml";
+    	System.out.println("The file path here is " + filePath);
     }
 
 }

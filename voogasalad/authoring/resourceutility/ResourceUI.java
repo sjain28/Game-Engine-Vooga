@@ -4,6 +4,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -40,11 +41,9 @@ public class ResourceUI extends Tab {
     public ResourceUI () {
         container = new VBox(SPACING);
         buttonContainer = new HBox(SPACING);
-
-        rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, DEFAULT_PROJECT_NAME));
-
+        
+        rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, VoogaBundles.preferences.getProperty("GameName")));
         container.getChildren().addAll(rtv, buttonContainer);
-
         makeAddButtons();
 
         this.setText(WINDOW_NAME);

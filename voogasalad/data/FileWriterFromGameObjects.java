@@ -21,6 +21,7 @@ public class FileWriterFromGameObjects {
                                         String fileName) throws ParserConfigurationException,
                                                          TransformerException, IOException,
                                                          SAXException {
+    	System.out.println("What is the filename here? " + fileName);
         File file = new File(fileName);
         if (!file.exists()) {
 
@@ -30,9 +31,9 @@ public class FileWriterFromGameObjects {
              * this name does not exist in given abstract pathname.
              */
             System.out.println("The file name here is " + fileName);
-            file.createNewFile();
+            file.getParentFile().mkdir();
         }
         
-       Serializer.serialize(lists, fileName);
+       Serializer.serializeLevel(lists, fileName);
     }
 }

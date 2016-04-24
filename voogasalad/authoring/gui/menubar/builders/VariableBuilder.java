@@ -1,13 +1,6 @@
 package authoring.gui.menubar.builders;
 
 import authoring.interfaces.model.EditElementable;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import tools.VoogaNumber;
-import tools.interfaces.VoogaData;
 
 public class VariableBuilder extends PropertyBuilder {
     
