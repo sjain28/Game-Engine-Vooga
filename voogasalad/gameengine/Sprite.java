@@ -33,8 +33,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String GRAVITY = "Gravity";
     protected static final String WIDTH = "Width";
     protected static final String HEIGHT = "Height";
-    protected static final String X_POS = "X Position";
-    protected static final String Y_POS = "Y Position";
+    protected static final String X_POS = "X_Position";
+    protected static final String Y_POS = "Y_Position";
     protected static final String IMAGE_PATH = "Image";
 
     private boolean isMainCharacter;

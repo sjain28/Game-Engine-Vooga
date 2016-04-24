@@ -3,6 +3,8 @@ package player.leveldatamanager;
 import java.util.List;
 import gameengine.Sprite;
 import physics.IPhysicsEngine;
+import tools.VoogaBoolean;
+import tools.interfaces.VoogaData;
 
 /**In charge of taking in a Map of Sprite's and updating them
  * on each step, according to present physics effects
@@ -21,6 +23,13 @@ public class SpriteManager {
 	public void update(List<Sprite> sprites, IPhysicsEngine physics) {
 		for(Sprite s: sprites){
 			//Clean up all dead Sprites
+			System.out.println(s.getPropertiesMap());
+			for(String key : s.getPropertiesMap().keySet()){
+				System.out.println(key);
+				VoogaData data = s.getProperty(key);
+				Object obj = data.getValue();
+				System.out.println(obj.toString());
+			}
 			if((Boolean) s.getProperty(ALIVE).getValue() == false){
 				System.out.println("removing sprite");
 				sprites.remove(s);
