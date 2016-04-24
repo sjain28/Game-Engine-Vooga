@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.ResourceBundle;
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
@@ -53,6 +52,7 @@ public class LevelData implements ILevelData {
 	/** Event Information**/
 	private List<VoogaEvent> myEvents;
 	private List<List<String>> keyPressedCombos;
+	private List<List<String>> keyReleasedCombos;
 	private Map<List<String>, KeyCause> myKeyCauses;
 	
 	/**Important Static Variables**/
@@ -61,7 +61,8 @@ public class LevelData implements ILevelData {
 	private static final String CONTINIOUS_CHAR = "MainCharacterID";
 	
 	private IDisplayScroller myScroller;
-
+	private ResourceBundle methods = ResourceBundle.getBundle("EventMethods");
+	
 	public LevelData(IPhysicsEngine physicsengine) {
 		myPhysics = physicsengine;
 		myContinuousSpriteIDs = new ArrayList<String>();
@@ -69,7 +70,8 @@ public class LevelData implements ILevelData {
 		myElements = new HashMap<String, Elementable>();		
 		myGlobalVariables = new HashMap<String, VoogaData>();
 		myEvents = new ArrayList<VoogaEvent>();
-		keyPressedCombos = new ArrayList<List<String>>();
+		keyPressedCombos = new ArrayList<>();
+		keyReleasedCombos = new ArrayList<>();
 		myKeyCauses = new HashMap<List<String>, KeyCause>();	
 	}
 
@@ -174,7 +176,7 @@ public class LevelData implements ILevelData {
 	 * 
 	 * @return
 	 */
-	public List<List<String>> getKeyCombos(){
+	public List<List<String>> getKeyPressCombos(){
 		return Collections.unmodifiableList(keyPressedCombos);
 	}
 	/**
@@ -204,10 +206,17 @@ public class LevelData implements ILevelData {
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
 				myKeyCauses.put(keyc.getKeys(), keyc); 
-				keyPressedCombos.add(keyc.getKeys()); 
-				keyPressedCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
+				
+				if(((KeyCause) c).getMyPressed().equals(methods.getString("Press"))){
+					keyPressedCombos.add(keyc.getKeys()); 
+				}else{
+					keyReleasedCombos.add(keyc.getKeys());
+				}
 			}
 		}
+		
+		keyReleasedCombos.sort((List<String> a, List<String> b) -> -(a.size() - b.size()));
+		keyPressedCombos.sort((List<String> a, List<String> b) -> -(a.size() - b.size()));
 	}
 	/**
 	 * refreshes LevelData with the data from a specified level
@@ -313,5 +322,9 @@ public class LevelData implements ILevelData {
 	@Override
 	public IPhysicsEngine getPhysicsEngine() {
 		return myPhysics;
+	}
+
+	public List<List<String>> getKeyReleasedCombos() {
+		return keyReleasedCombos;
 	}
 }

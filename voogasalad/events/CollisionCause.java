@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import gameengine.Sprite;
 import physics.IPhysicsEngine;
 import player.leveldatamanager.ILevelData;
