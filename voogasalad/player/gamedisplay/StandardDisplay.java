@@ -63,7 +63,6 @@ public class StandardDisplay implements IGameDisplay {
 		myKeyEvents = new ArrayList<>();
 		myKeyPresses = new ArrayList<>();
 		myKeyReleases = new ArrayList<>();
-
 	}
 
 	/**
@@ -73,9 +72,9 @@ public class StandardDisplay implements IGameDisplay {
 		@Override
 		public void handle(KeyEvent event) {
 			myKeyEvents.add(event);
-			if(event.getEventType().equals(KeyEvent.KEY_PRESSED)){
+			if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
 				myKeyPresses.add(event);
-			}else{
+			} else {
 				myKeyReleases.add(event);
 			}
 		}
@@ -198,5 +197,4 @@ public class StandardDisplay implements IGameDisplay {
 	public Stage getStage() {
 		return myStage;
 	}
-
 }

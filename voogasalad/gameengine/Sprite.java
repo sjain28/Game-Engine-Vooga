@@ -46,6 +46,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private Map<String, VoogaData> myProperties;
     private String myArchetype;
     private String previousImage;
+    private String myImagePath;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
@@ -98,6 +99,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     private void initializeImage (String path) {
         VoogaString imagePathString = new VoogaString(path);
+        myImagePath = path;
         previousImage = path;
         myImagePathProperty = new SimpleStringProperty(path);
         myProperties.put(IMAGE_PATH, imagePathString);

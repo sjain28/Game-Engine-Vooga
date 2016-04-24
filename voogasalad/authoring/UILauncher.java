@@ -5,6 +5,10 @@ import java.io.FileOutputStream;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
+import authoring.splash.CreateCommand;
+import authoring.splash.LearnCommand;
+import authoring.splash.OpenCommand;
+import authoring.splash.Splash;
 import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

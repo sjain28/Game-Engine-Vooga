@@ -1,5 +1,7 @@
-package authoring;
+package authoring.splash;
 
+import authoring.Command;
+import authoring.VoogaScene;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;

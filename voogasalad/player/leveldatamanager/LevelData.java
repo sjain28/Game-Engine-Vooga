@@ -202,16 +202,14 @@ public class LevelData implements ILevelData {
 	 * @param voogaEvent
 	 */
 	public void addEventAndPopulateKeyCombos(VoogaEvent voogaEvent){
-
 		myEvents.add(voogaEvent);
-		for(Cause c: voogaEvent.getCauses()){
-			if(c instanceof KeyCause){
+		for (Cause c: voogaEvent.getCauses()) {
+			if (c instanceof KeyCause) {
 				KeyCause keyc = (KeyCause) c;
 				myKeyCauses.put(keyc.getKeys(), keyc); 
-				
-				if(((KeyCause) c).getMyPressed().equals(methods.getString("Press"))){
+				if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
 					keyPressedCombos.add(keyc.getKeys()); 
-				}else{
+				} else {
 					keyReleasedCombos.add(keyc.getKeys());
 				}
 			}
