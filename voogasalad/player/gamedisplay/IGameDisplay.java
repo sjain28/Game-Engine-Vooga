@@ -9,7 +9,6 @@ import javafx.stage.Stage;
  * Interface for GameDisplay
  * 
  * @author Hunter Lee
- * @param <E>
  *
  */
 public interface IGameDisplay {
@@ -17,6 +16,8 @@ public interface IGameDisplay {
 	void read(List<Node> listToDisplay);
 	
 	void display();
+	
+	void displayTestMode();
 	
 	void populateGameScreen();
 	
@@ -29,11 +30,9 @@ public interface IGameDisplay {
 	List<KeyEvent> getMyKeyReleases();
 	
 	void clearKeyEvents();
-	
-	boolean stageIsShowing();
-	
+		
 	Stage getStage();
 	
 	void exit();
-	
+
 }

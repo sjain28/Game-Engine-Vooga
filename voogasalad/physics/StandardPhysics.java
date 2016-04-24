@@ -19,8 +19,9 @@ public class StandardPhysics implements IPhysicsEngine{
 	
 	private static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
-	private static final double LIFT = 0.00001;
-	private static final double ERROR = 0.005;
+	private static final double LIFT = 0.1;
+	private static final double ERROR = 0.01;
+	private static final double JUMP_FACTOR = 0.05;
 	
 	
 	/**
@@ -101,7 +102,7 @@ public class StandardPhysics implements IPhysicsEngine{
 			// Set velocity to 0--stop the bounce
 			sprite.getVelocity().setY(0.0);
 			// Set the Y position to a little higher so there is no collision
-			sprite.getPosition().setY(sprite.getPosition().getY() - 0.1);
+			sprite.getPosition().setY(sprite.getPosition().getY() - LIFT);
 		}
 		
 		else {
@@ -138,19 +139,19 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * 
 	 * @param spriteA
 	 * @param spriteB
-	 * @return
+	 * @return 1 if there is a collision, 0 if no collision
 	 */
-	public boolean checkCollisionX(Sprite spriteA, Sprite spriteB) {
+	public int checkCollisionX(Sprite spriteA, Sprite spriteB) {
 		Bounds boundA = spriteA.getImage().getBoundsInLocal();
 		Bounds boundB = spriteB.getImage().getBoundsInLocal();
-        boolean atRightBorder = boundA.getMaxX() >= boundB.getMaxX();
-        boolean atLeftBorder = boundA.getMinX() <= boundB.getMinX();
+        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
+        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
         
         if (atRightBorder || atLeftBorder) {
-        	return true;
+        	return 1;
         }
         else {
-        	return false;
+        	return 0;
         }
 	}
 	
@@ -159,19 +160,22 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * 
 	 * @param spriteA
 	 * @param spriteB
-	 * @return
+	 * @return -1 if A is on top, 1 if B is top, and 0 if no collision
 	 */
-	public boolean checkCollisionY(Sprite spriteA, Sprite spriteB) {
+	public int checkCollisionY(Sprite spriteA, Sprite spriteB) {
 		Bounds boundA = spriteA.getImage().getBoundsInLocal();
 		Bounds boundB = spriteB.getImage().getBoundsInLocal();
-        boolean atTopBorder = boundA.getMaxY() >= boundB.getMaxY();
-        boolean atBottomBorder = boundA.getMinY() <= boundB.getMinY();
+        boolean atTopBorder = boundA.getMaxY() >= boundB.getMinY();
+        boolean atBottomBorder = boundA.getMinY() <= boundB.getMaxY();
         
-        if (atTopBorder || atBottomBorder) {
-        	return true;
+        if (atTopBorder) {
+        	return 1;
+        }
+        else if (atBottomBorder) {
+        	return -1;
         }
         else {
-        	return false;
+        	return 0;
         }
 	}
 
@@ -190,12 +194,12 @@ public class StandardPhysics implements IPhysicsEngine{
 	@Override
 	public void jump(Sprite sprite, Double jumpMagnitude) {
 		
-		System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
-		System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
+		//System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
+		//System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
 		// Check if the main character is on the ground, not in the air to be able to jump
 		if (isZero(sprite.getVelocity().getY())) {
 			// Apply change to the velocity so that the character has upward velocity
-			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude / 20);
+			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude * JUMP_FACTOR);
 		}
 	}
 
