@@ -57,6 +57,7 @@ public class VariableEffect extends Effect {
 			}
 			
 		}catch (Exception e){
+			System.out.println("THROWING THIS EXCEPTION OVA HERE");
 			//throw new VoogaException(String.format(format, args));
 		}
 	}

@@ -1,8 +1,5 @@
 package resources;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -20,13 +17,12 @@ public class VoogaBundles {
 	public final static OrderedProperties menubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/menunames.properties"));
 	public final static OrderedProperties playerMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playermenunames.properties"));
 	public final static OrderedProperties playerTesterMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playertestermenu.properties"));
-	public final static ResourceBundle toolbarProperties = ResourceBundle.getBundle("resources/toolbarbuttons");
+	public final static OrderedProperties toolbarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/toolbarbuttons.properties"));
 	public final static ResourceBundle backendToGUIProperties = ResourceBundle.getBundle("resources/GUIClassMap");
 	public final static ResourceBundle imageProperties = ResourceBundle.getBundle("resources/imageproperties");
         public final static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
         public final static ResourceBundle physicsEffectsToGUI = ResourceBundle.getBundle("resources/PhysicsEffectsToGUI");
 	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
-	public final static ResourceBundle eventMethodsToGUI = ResourceBundle.getBundle("resources/EventMethods");
 	public final static Properties preferences = makeProperties("preferences.properties");
 	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
 
