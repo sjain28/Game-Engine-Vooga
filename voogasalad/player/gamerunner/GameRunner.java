@@ -60,6 +60,7 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);		
 	}
+	
 	/**
 	 * createLevelList reads a text file and creates a list of levels
 	 */

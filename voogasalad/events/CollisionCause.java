@@ -19,12 +19,13 @@ public class CollisionCause extends Cause{
 	private String archB;
 	private String myDirection; //Can be the Strings Horizontal, Above, or Below
 	private Map<String, Integer> collisionDirections;
-	private ResourceBundle directions = VoogaBundles.EventMethods;
+	private transient ResourceBundle directions;
 	
 	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Simple Collision
 		super(voogaEvent);
 		archA = archetypeA;
 		archB = archetypeB;
+		directions = VoogaBundles.EventMethods;
 		initMap();
 	}
 	
