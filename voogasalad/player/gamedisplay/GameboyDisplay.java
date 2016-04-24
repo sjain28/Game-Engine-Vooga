@@ -3,21 +3,13 @@ package player.gamedisplay;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.VoogaScene;
-import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -51,6 +43,8 @@ public class GameboyDisplay implements IGameDisplay {
 	private PromptFactory myPrompt;
 	private List<Node> myListToDisplay;
 	private List<KeyEvent> myKeyEvents;
+	private List<KeyEvent> myKeyPresses;
+	private List<KeyEvent> myKeyReleases;
 	
 	// BGM
 	private Media myBGM;
@@ -110,9 +104,15 @@ public class GameboyDisplay implements IGameDisplay {
 	 * 
 	 */
 	private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
+
 		@Override
 		public void handle(KeyEvent event) {
 			myKeyEvents.add(event);
+			if(event.getEventType().equals(KeyEvent.KEY_PRESSED)){
+				myKeyPresses.add(event);
+			}else{
+				myKeyReleases.add(event);
+			}
 		}
 	};
 
@@ -340,5 +340,13 @@ public class GameboyDisplay implements IGameDisplay {
 		// TODO Auto-generated method stub
 		myMediaPlayer.stop();
 		myStage.close();
+	}
+	
+	public List<KeyEvent> getMyKeyPresses() {
+		return myKeyPresses;
+	}
+
+	public List<KeyEvent> getMyKeyReleases() {
+		return myKeyReleases;
 	}
 }

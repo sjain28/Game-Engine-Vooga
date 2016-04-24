@@ -52,7 +52,7 @@ public class LevelData implements ILevelData {
 	
 	/** Event Information**/
 	private List<VoogaEvent> myEvents;
-	private List<List<String>> myKeyCombos;
+	private List<List<String>> keyPressedCombos;
 	private Map<List<String>, KeyCause> myKeyCauses;
 	
 	/**Important Static Variables**/
@@ -69,7 +69,7 @@ public class LevelData implements ILevelData {
 		myElements = new HashMap<String, Elementable>();		
 		myGlobalVariables = new HashMap<String, VoogaData>();
 		myEvents = new ArrayList<VoogaEvent>();
-		myKeyCombos = new ArrayList<List<String>>();
+		keyPressedCombos = new ArrayList<List<String>>();
 		myKeyCauses = new HashMap<List<String>, KeyCause>();	
 	}
 
@@ -175,7 +175,7 @@ public class LevelData implements ILevelData {
 	 * @return
 	 */
 	public List<List<String>> getKeyCombos(){
-		return Collections.unmodifiableList(myKeyCombos);
+		return Collections.unmodifiableList(keyPressedCombos);
 	}
 	/**
 	 * Returns unmodifiable map of key causes
@@ -204,8 +204,8 @@ public class LevelData implements ILevelData {
 			if(c instanceof KeyCause){
 				KeyCause keyc = (KeyCause) c;
 				myKeyCauses.put(keyc.getKeys(), keyc); 
-				myKeyCombos.add(keyc.getKeys()); 
-				myKeyCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
+				keyPressedCombos.add(keyc.getKeys()); 
+				keyPressedCombos.sort((List<String> a, List<String> b) -> -a.size() - b.size());
 			}
 		}
 	}
@@ -232,7 +232,7 @@ public class LevelData implements ILevelData {
 		myElements.clear();
 		myEvents.clear();
 		myKeyCauses.clear();
-		myKeyCombos.clear();
+		keyPressedCombos.clear();
 		
 		//add elements to map 
 	    for (Elementable el : elementObjects) {

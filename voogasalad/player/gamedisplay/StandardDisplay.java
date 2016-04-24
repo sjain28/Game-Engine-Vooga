@@ -45,6 +45,9 @@ public class StandardDisplay implements IGameDisplay {
 	//	private EventHandler<KeyEvent> myKeyListener;
 	private List<KeyEvent> myKeyEvents;
 
+	private List<KeyEvent> myKeyPresses;
+	private List<KeyEvent> myKeyReleases;
+
 	// BGM
 	private Media myBGM;
 	private MediaPlayer myMediaPlayer;
@@ -85,10 +88,12 @@ public class StandardDisplay implements IGameDisplay {
 		myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
+		myKeyPresses = new ArrayList<>();
+		myKeyReleases = new ArrayList<>();
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
 		myMediaPlayer = new MediaPlayer(myBGM);
 	}
-	
+
 	/**
 	 * Creates a keyListener for listening in on key inputs
 	 * Adds each event to the list
@@ -98,6 +103,11 @@ public class StandardDisplay implements IGameDisplay {
 		@Override
 		public void handle(KeyEvent event) {
 			myKeyEvents.add(event);
+			if(event.getEventType().equals(KeyEvent.KEY_PRESSED)){
+				myKeyPresses.add(event);
+			}else{
+				myKeyReleases.add(event);
+			}
 		}
 	};
 
@@ -300,6 +310,14 @@ public class StandardDisplay implements IGameDisplay {
 		// TODO Auto-generated method stub
 		myMediaPlayer.stop();
 		myStage.close();
+	}
+	
+	public List<KeyEvent> getMyKeyPresses() {
+		return myKeyPresses;
+	}
+
+	public List<KeyEvent> getMyKeyReleases() {
+		return myKeyReleases;
 	}
 
 

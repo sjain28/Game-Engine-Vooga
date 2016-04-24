@@ -139,7 +139,7 @@ public class GameRunner implements IGameRunner {
 		mySpriteManager.update(myLevelData.getAllSprites(),myPhysicsEngine);
 		
 		//update all Sprite's with Cause and Effect logic
-		myEventManager.update(myLevelData, myGameDisplay.getKeyEvents());
+		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		
 		//send these updated Nodes to the GameDisplay
 		myGameDisplay.read(myLevelData.getDisplayableNodes());
