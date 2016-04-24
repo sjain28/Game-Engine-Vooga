@@ -66,7 +66,6 @@ public class LevelData implements ILevelData {
 	
 	public LevelData(IPhysicsEngine physicsengine) {
 		methods = VoogaBundles.EventMethods;
-		System.out.println(methods);
 		myPhysics = physicsengine;
 		myContinuousSpriteIDs = new ArrayList<String>();
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
@@ -99,7 +98,6 @@ public class LevelData implements ILevelData {
 				sprites.add((Sprite) myElements.get(id));
 			}
 		}
-		System.out.println("Size of all sprites: "+ sprites.size());
 		return sprites;
 	}
 	/**

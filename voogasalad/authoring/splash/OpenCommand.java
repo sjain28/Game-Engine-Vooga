@@ -43,7 +43,6 @@ public class OpenCommand implements Command {
 			Scene scene = new VoogaScene(manager);
 			Stage primaryStage = new Stage();
 			primaryStage.setScene(scene);
-			//primaryStage.setMaximized(true);
 			primaryStage.show();
 			} catch(VoogaException eee) {
 				
