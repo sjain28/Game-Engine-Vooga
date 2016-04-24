@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import resources.VoogaBundles;
@@ -30,6 +31,7 @@ public class ToolPanel extends ToolBar {
             Button btn = maker.makeButton("", toolbarEvent);
             btn.setGraphic(graphic);
             btn.setId(key);
+            btn.setTooltip(new Tooltip(key));
             this.getItems().add(btn);
         }
     }
