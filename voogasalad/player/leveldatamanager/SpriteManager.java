@@ -25,7 +25,6 @@ public class SpriteManager {
 		for(int i = 0; i < sprites.size(); i++){
 			Sprite s = sprites.get(i);
 			//Clean up all dead Sprites
-			System.out.println(s.getPropertiesMap());
 			for(String key : s.getPropertiesMap().keySet()){
 				System.out.println(key);
 				VoogaData data = s.getProperty(key);
