@@ -1,10 +1,11 @@
-package authoring;
+package authoring.splash;
 
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URI;
 
+import authoring.Command;
 import authoring.model.ElementManager;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
