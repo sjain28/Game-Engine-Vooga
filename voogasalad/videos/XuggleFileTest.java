@@ -14,13 +14,15 @@ import com.xuggle.xuggler.Global;
 
 public class XuggleFileTest {
 	public static final double SECONDS_BETWEEN_FRAMES = 10;
-
-	private static final String inputFileName = "Darude - Sandstorm.mp4";
-	private static final String outputFilePrefix = "Downloads:/newDarude";
+	
+	private static final String inputFileName = "voogasalad/videos/helloWorld.mp4";
+	private static final String outputFilePrefix = "voogasalad/videos/newDarude";
 	
 	private static int myVideoStreamIndex = -1;
 	private static long mLastPtsWrite = Global.NO_PTS;
 	public static final long MICRO_SECONDS_BETWEEN_FRAMES = (long) (Global.DEFAULT_PTS_PER_SECOND*SECONDS_BETWEEN_FRAMES);
+	//private String path "voogasalad/videos/" + inputFileName + ".mp4";
+	//String inputFileName = "Darude - Sandstorm.mp4";
 	
 	public static void main(String[] args) {
 		
