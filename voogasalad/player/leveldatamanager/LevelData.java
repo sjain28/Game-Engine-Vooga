@@ -132,7 +132,7 @@ public class LevelData implements ILevelData {
 	 * 
 	 * @param id
 	 */
-	public void removeSprite(Object id){
+	public void removeSprite(String id){
 		myElements.remove(id);
 	}
 	/**

@@ -20,8 +20,10 @@ public class SpriteManager {
 	 * before Events (causes and effects) are applied
 	 * 
 	 */
-	public void update(List<Sprite> sprites, IPhysicsEngine physics) {
-		for(Sprite s: sprites){
+	public void update(ILevelData myLevelData, IPhysicsEngine physics) {
+		List<Sprite> sprites = myLevelData.getAllSprites();
+		for(int i = 0; i < sprites.size(); i++){
+			Sprite s = sprites.get(i);
 			//Clean up all dead Sprites
 			System.out.println(s.getPropertiesMap());
 			for(String key : s.getPropertiesMap().keySet()){
@@ -32,7 +34,7 @@ public class SpriteManager {
 			}
 			if((Boolean) s.getProperty(ALIVE).getValue() == false){
 				System.out.println("removing sprite");
-				sprites.remove(s);
+				myLevelData.removeSprite(s.getId());
 			}
 			else{
 				//Apply gravity to all Sprites

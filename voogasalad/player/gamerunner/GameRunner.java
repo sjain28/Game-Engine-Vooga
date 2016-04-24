@@ -86,7 +86,7 @@ public class GameRunner implements IGameRunner {
 		if (!myLevelData.getNextLevelName().equals("")) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
-		mySpriteManager.update(myLevelData.getAllSprites(), myPhysicsEngine);
+		mySpriteManager.update(myLevelData, myPhysicsEngine);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();	
