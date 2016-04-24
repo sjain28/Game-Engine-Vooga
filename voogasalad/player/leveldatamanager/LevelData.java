@@ -18,6 +18,7 @@ import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
+import resources.VoogaBundles;
 import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
@@ -61,7 +62,7 @@ public class LevelData implements ILevelData {
 	private static final String CONTINIOUS_CHAR = "MainCharacterID";
 	
 	private IDisplayScroller myScroller;
-	private ResourceBundle methods = ResourceBundle.getBundle("EventMethods");
+	private ResourceBundle methods = VoogaBundles.EventMethods;
 	
 	public LevelData(IPhysicsEngine physicsengine) {
 		myPhysics = physicsengine;

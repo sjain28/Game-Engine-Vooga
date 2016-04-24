@@ -40,7 +40,6 @@ public class VoogaEvent {
 
 		for(Effect e: myEffects){
 			e.execute(data);
-			System.out.println("Effect executing");
 		}
 	}
 

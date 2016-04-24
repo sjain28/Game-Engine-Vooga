@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import gameengine.Sprite;
 import physics.IPhysicsEngine;
 import player.leveldatamanager.ILevelData;
+import resources.VoogaBundles;
 
 public class CollisionCause extends Cause{
 
@@ -18,7 +19,7 @@ public class CollisionCause extends Cause{
 	private String archB;
 	private String myDirection; //Can be the Strings Horizontal, Above, or Below
 	private Map<String, Integer> collisionDirections;
-	private ResourceBundle directions = ResourceBundle.getBundle("EventMethods");
+	private ResourceBundle directions = VoogaBundles.EventMethods;
 	
 	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Simple Collision
 		super(voogaEvent);
