@@ -50,8 +50,10 @@ public class VoogaBoolean implements VoogaData{
     }
 
     @Override
-    public void setValue (Object o) {
-        if (!(o instanceof Boolean)) return;
+    public void setValue(Object o) {
+    	System.out.println("telling me to set value of boolean");
+        if (!(o instanceof Boolean)){return;}
+        System.out.println("setting boolean to : " + (Boolean) o);
         myValue = (Boolean) o;
         
     }
@@ -71,6 +73,7 @@ public class VoogaBoolean implements VoogaData{
 
 	@Override
 	public <T> void setProperty(T newVal) {
+    	System.out.println("telling me to set value of property to: " +(boolean) newVal);
 		this.valueProperty.set((boolean) newVal);
 	}
     

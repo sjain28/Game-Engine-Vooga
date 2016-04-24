@@ -131,7 +131,7 @@ public class VariableEffectGUI implements EventGUI {
             result += "events.SpriteEffect "+name.getSpriteId() + " ";
         }
         result+=variables.getValue()+
-                " "+VoogaBundles.eventMethodsToGUI.getString(actions.getValue())+" ";
+                " "+VoogaBundles.EventMethods.getString(actions.getValue())+" ";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();

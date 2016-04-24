@@ -27,6 +27,8 @@ import tools.VoogaException;
  * @author Hunter, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
+	//TODO: was changed to 1 for debugging purposes
+    //private static final double INIT_SPEED = 1;
     private static final double INIT_SPEED = 60;
     private static final double SEC_PER_MIN = 60;
     private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
@@ -62,6 +64,7 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);		
 	}
+	
 	/**
 	 * createLevelList reads a text file and creates a list of levels
 	 */
@@ -88,7 +91,7 @@ public class GameRunner implements IGameRunner {
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
-		mySpriteManager.update(myLevelData.getAllSprites(), myPhysicsEngine);
+		mySpriteManager.update(myLevelData, myPhysicsEngine);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();	
@@ -169,7 +172,7 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void playNextLevel() {
 		stop();
-		myLevelData.setNextLevelName(myLevelList.get(myLevelList.indexOf(myCurrentLevelString) + 1));
+		myLevelData.setNextLevelName("Lvl2");
 		myTimeline.play();
 	}
 	

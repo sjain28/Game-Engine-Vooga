@@ -65,9 +65,11 @@ public class LevelData implements ILevelData {
 	private static final String CONTINIOUS_CHAR = "MainCharacterID";
 	
 	private IDisplayScroller myScroller;
-	private ResourceBundle methods = VoogaBundles.EventMethods;
+	private ResourceBundle methods;
 	
 	public LevelData(IPhysicsEngine physicsengine) {
+		methods = VoogaBundles.EventMethods;
+		System.out.println(methods);
 		myPhysics = physicsengine;
 		myContinuousSpriteIDs = new ArrayList<String>();
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
@@ -100,6 +102,7 @@ public class LevelData implements ILevelData {
 				sprites.add((Sprite) myElements.get(id));
 			}
 		}
+		System.out.println("Size of all sprites: "+ sprites.size());
 		return sprites;
 	}
 	/**
@@ -134,7 +137,7 @@ public class LevelData implements ILevelData {
 	 * 
 	 * @param id
 	 */
-	public void removeSprite(Object id){
+	public void removeSprite(String id){
 		myElements.remove(id);
 	}
 	/**
@@ -208,7 +211,7 @@ public class LevelData implements ILevelData {
 		for (Cause c: voogaEvent.getCauses()) {
 			if (c instanceof KeyCause) {
 				KeyCause keyc = (KeyCause) c;
-				myKeyCauses.put(keyc.getKeys(), keyc); 
+				myKeyCauses.put(keyc.getKeys(), keyc);
 				if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
 					keyPressedCombos.add(keyc.getKeys()); 
 				} else {
@@ -232,7 +235,7 @@ public class LevelData implements ILevelData {
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
-      
+		
 		List<Elementable> spriteObjects = data.getElementableList();
 //		System.out.println("All the sprites here are" + spriteObjects);
 

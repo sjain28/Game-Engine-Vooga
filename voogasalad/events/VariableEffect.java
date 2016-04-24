@@ -40,23 +40,29 @@ public class VariableEffect extends Effect {
 	
 	@Override
 	public void execute(ILevelData data) {
+		System.out.println("variable effect executing");
 		VoogaData variableData = data.getGlobalVar(myVariable);
 		callEffectMethod(variableData);
 	}
 
 	protected void callEffectMethod(VoogaData variable){
 		Class dataType = variable.getClass();
+		System.out.println("datatype: "+ dataType);
 		try{
+			System.out.println("myParameter: "+myParameter);
 			if (myParameter != null){
 				Method variableMethod = dataType.getMethod(myMethod, new Class[]{myParameter.getClass()});
+				System.out.println("variable method "+ variableMethod+" called with "+myParameter);
 				variableMethod.invoke(variable, myParameter);
 			}
 			else {
 				Method variableMethod = dataType.getMethod(myMethod, null);
+				System.out.println("variable method called with null: "+ variableMethod);
 				variableMethod.invoke(variable);
 			}
 			
 		}catch (Exception e){
+			System.out.println("THROWING THIS EXCEPTION OVA HERE");
 			//throw new VoogaException(String.format(format, args));
 		}
 	}
