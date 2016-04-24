@@ -23,6 +23,7 @@ public class StandardControl implements IControl {
 	private static final String SPEED_UP_KEY = "SpeedUp";
 	private static final String SLOW_DOWN_KEY = "SlowDown";
 	private static final String PLAYNEXTLEVEL_BUTTON_KEY = "PlayNextLevel";
+	private static final String SNAPSHOT_KEY = "Snapshot";
 	private static final int TOP_PADDING = 15;
 	private static final int LEFT_PADDING = 12;
 	private static final int RIGHT_PADDING = 15;
@@ -70,6 +71,7 @@ public class StandardControl implements IControl {
 		Button speedUp = maker.makeButton((gameDisplayProperties.getString(SPEED_UP_KEY)), e -> getGameRunner().speedUp());
 		Button speedDown = maker.makeButton((gameDisplayProperties.getString(SLOW_DOWN_KEY)), e -> getGameRunner().speedDown());
 		Button playNext = maker.makeButton((gameDisplayProperties.getString(PLAYNEXTLEVEL_BUTTON_KEY)), e -> getGameRunner().playNextLevel());
+		Button snapshot = maker.makeButton((gameDisplayProperties.getString(SNAPSHOT_KEY)), e -> getGameRunner().takeSnapShot());
 		myControl.getChildren().addAll(start, pause, speedUp, speedDown, playNext);
 		return myControl;
 	}

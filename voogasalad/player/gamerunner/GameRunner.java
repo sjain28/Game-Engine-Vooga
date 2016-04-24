@@ -188,8 +188,14 @@ public class GameRunner implements IGameRunner {
 		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), playerName);
 	}
 	
+	@Override 
+	public void takeSnapShot() {
+		//TODO call xuggleFileCreator to properly take snapshot and store as new file.
+	}
+	
 	@Override
 	public IGameRunner getSelf() {
 		return this;
 	}
+	
 }
