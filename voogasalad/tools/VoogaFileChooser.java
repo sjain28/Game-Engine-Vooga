@@ -32,6 +32,10 @@ public class VoogaFileChooser{
         }
     }
     
+    public void setInitialDirectory(File file){
+        fileChooser.setInitialDirectory(file);
+    }
+    
     public void addFilters(ExtensionFilter... filters){
         fileChooser.getExtensionFilters().addAll(filters); 
     }

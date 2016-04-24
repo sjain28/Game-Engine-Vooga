@@ -22,7 +22,7 @@ public class TestForGamesConsecLevels extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
 
-        IGameRunner gameRunner = new GameRunner(false);
+        IGameRunner gameRunner = new GameRunner();
         gameRunner.playGame(TESTXML_PATH);
         
     }
