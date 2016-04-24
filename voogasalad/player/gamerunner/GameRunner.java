@@ -165,7 +165,7 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void playNextLevel() {
 		stop();
-		myLevelData.setNextLevelName(myLevelList.get(myLevelList.indexOf(myCurrentLevelString) + 1));
+		myLevelData.setNextLevelName("Lvl2");
 		myTimeline.play();
 	}
 	
