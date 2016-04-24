@@ -111,6 +111,8 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	public void read(List<Node> listToDisplay) {
 		myListToDisplay = listToDisplay;
+//		getGameScreen().getChildren().clear();
+//		getListToDisplay().forEach(n -> getGameScreen().getChildren().add(n));
 	}
 
 	/**
