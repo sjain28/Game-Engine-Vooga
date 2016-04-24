@@ -49,7 +49,7 @@ public class CollisionCause extends Cause{
 	@Override
 	public boolean check(ILevelData data) {
 		
-		collidedSprites.clear();
+		collidedSprites = new ArrayList<>();
 		boolean myVal = false;
 		IPhysicsEngine physics = data.getPhysicsEngine();
 
