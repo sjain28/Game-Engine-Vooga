@@ -37,7 +37,7 @@ public class XuggleFileTest {
 		public void onVideoPicture(IVideoPictureEvent event) {
 			
 			if (event.getStreamIndex() != myVideoStreamIndex) {
-				
+					
 				if (myVideoStreamIndex == -1)
 					myVideoStreamIndex = event.getStreamIndex();
 				
