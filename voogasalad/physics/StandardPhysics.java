@@ -166,6 +166,14 @@ public class StandardPhysics implements IPhysicsEngine{
 		Bounds boundA = spriteA.getImage().getBoundsInLocal();
 		Bounds boundB = spriteB.getImage().getBoundsInLocal();
 		
+		// CollisionX and collisionY are checked mutually exclusively
+        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
+        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
+        // X collision happening--return false
+        if (atRightBorder || atLeftBorder) {
+        	return 0;
+        }
+		
 		//The following assumes JavaFX Pane style coordinates
 		boolean atTopBorder = boundA.getMinY() <= boundB.getMaxY();
 		boolean atBottomBorder = boundA.getMaxY() >= boundB.getMinY();
