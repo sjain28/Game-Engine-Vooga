@@ -42,7 +42,7 @@ public interface IPhysicsEngine {
 	 * @param sprite
 	 * @param bounceCoefficient
 	 */
-	void bounce(Sprite sprite, Double bounceCoefficient);
+	void elasticBounceY(Sprite sprite, Double bounceCoefficient);
 
 	/**
 	 * Produce an acceleration vector in the same direction per sprite motion
@@ -72,4 +72,10 @@ public interface IPhysicsEngine {
 	void gravity(Sprite sprite, Double gravityAcceleration);
 
 	void translateX(Sprite sprite, Double change);	
+	
+	int checkCollisionY(Sprite spriteA, Sprite spriteB);
+	
+	int checkCollisionX(Sprite spriteA, Sprite spriteB);
+
+
 }

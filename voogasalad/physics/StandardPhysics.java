@@ -22,6 +22,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	private static final double LIFT = 0.1;
 	private static final double ERROR = 0.01;
 	private static final double JUMP_FACTOR = 0.05;
+	private static final double PADDING = 10;
 	
 	
 	/**
@@ -94,7 +95,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * 
 	 */
 	@Override
-	public void bounce(Sprite sprite, Double bounceCoefficient) {
+	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
 		//System.out.println("Bounce is called");
 		
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
@@ -142,17 +143,46 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * @return 1 if there is a collision, 0 if no collision
 	 */
 	public int checkCollisionX(Sprite spriteA, Sprite spriteB) {
-		Bounds boundA = spriteA.getImage().getBoundsInLocal();
-		Bounds boundB = spriteB.getImage().getBoundsInLocal();
-        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
-        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
-        
-        if (atRightBorder || atLeftBorder) {
-        	return 1;
-        }
-        else {
-        	return 0;
-        }
+		Bounds boundA = spriteA.getImage().getBoundsInParent();
+		Bounds boundB = spriteB.getImage().getBoundsInParent();
+		if (boundA.intersects(boundB)) {
+			if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
+				return 1;
+			}
+		}
+		return 0;
+		
+		
+		
+		
+//		if (checkOverlapY(spriteA, spriteB) != 0) {
+//			if (checkOverlapX(spriteA, spriteB) == 1) {
+//				return 1;
+//			}
+//			else {
+//				return 0;
+//			}
+//		}
+//		else {
+//			return 0;
+//		}
+		//---------------------
+//		Bounds boundA = spriteA.getImage().getBoundsInParent();
+//		Bounds boundB = spriteB.getImage().getBoundsInParent();
+//        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
+//        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
+//        
+//        // If Y collision is happening, return false
+//        if (checkCollisionY(spriteA, spriteB) == 1 || checkCollisionY(spriteA, spriteB) == -1) {
+//        	return 0;
+//        }
+//        
+//        if (atRightBorder || atLeftBorder) {
+//        	return 1;
+//        }
+//        else {
+//        	return 0;
+//        }
 	}
 	
 	/**
@@ -160,25 +190,141 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * 
 	 * @param spriteA
 	 * @param spriteB
-	 * @return -1 if A is on top, 1 if B is top, and 0 if no collision
+	 * @return -1 if A is below B, 1 if A is above B, and 0 if no collision
 	 */
 	public int checkCollisionY(Sprite spriteA, Sprite spriteB) {
-		Bounds boundA = spriteA.getImage().getBoundsInLocal();
-		Bounds boundB = spriteB.getImage().getBoundsInLocal();
-        boolean atTopBorder = boundA.getMaxY() >= boundB.getMinY();
-        boolean atBottomBorder = boundA.getMinY() <= boundB.getMaxY();
-        
-        if (atTopBorder) {
-        	return 1;
-        }
-        else if (atBottomBorder) {
-        	return -1;
-        }
-        else {
-        	return 0;
-        }
+		
+		Bounds boundA = spriteA.getImage().getBoundsInParent();
+		Bounds boundB = spriteB.getImage().getBoundsInParent();
+//		if (boundA.intersects(boundB)) {
+//			if (checkOverlapX(spriteA, spriteB) == 1) {
+//				if (checkOverlapY(spriteA, spriteB) == )
+//			}
+//		}
+
+		if (boundA.intersects(boundB)) {
+
+			if (checkOverlapX(spriteA, spriteB, false) == 1) {
+				if (checkOverlapY(spriteA, spriteB) == 1) {
+					return -1;
+				}
+				if (checkOverlapY(spriteA, spriteB) == 2) {
+					return 1;
+				}
+				else {
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		}
+		return 0;
+		
+		
+//		Bounds boundA = spriteA.getImage().getBoundsInParent();
+//		Bounds boundB = spriteB.getImage().getBoundsInParent();
+//		
+//		// CollisionX and collisionY are checked mutually exclusively
+//        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
+//        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
+//        // X collision happening--return false
+//        if (atRightBorder || atLeftBorder) {
+//        	return 0;
+//        }
+//		
+//		//The following assumes JavaFX Pane style coordinates
+//		boolean atTopBorder = boundA.getMinY() <= boundB.getMaxY();
+//		boolean atBottomBorder = boundA.getMaxY() >= boundB.getMinY();
+//
+//		//		// The following assumes the Cartesian coordinates
+//		//        boolean atTopBorder = boundA.getMaxY() >= boundB.getMinY();
+//		//        boolean atBottomBorder = boundA.getMinY() <= boundB.getMaxY();
+//
+//        if (atTopBorder) {
+//        	return 1;
+//        }
+//        else if (atBottomBorder) {
+//        	return -1;
+//        }
+//        else {
+//        	return 0;
+//        }
 	}
 
+	/**
+	 * Check overlap for X
+	 * @param spriteA
+	 * @param spriteB
+	 * @return 0 if there is no overlap, 1 if X overlap, 
+	 * -1 if Y overlap at Top (A is below), -2 if Y overlap at Bottom (A is above)
+	 */
+	private int checkOverlapX(Sprite spriteA, Sprite spriteB, boolean pad) {
+		Bounds boundA = spriteA.getImage().getBoundsInParent();
+		Bounds boundB = spriteB.getImage().getBoundsInParent();
+		boolean atRightBorder;
+		boolean atLeftBorder;
+		if (pad) {
+	        atRightBorder = boundA.getMaxX() >= boundB.getMinX() - PADDING;
+	        atLeftBorder = boundA.getMinX() <= boundB.getMaxX() + PADDING;
+		}
+		else {
+	        atRightBorder = boundA.getMaxX() >= boundB.getMinX();
+	        atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
+		}
+
+       if(boundA.intersects(boundB)){ 
+	        // If A left B right
+	        if (boundA.getMinX() <= boundB.getMinX()) {
+	        	if (atRightBorder) {
+	        		return 1;
+	        	}
+	        }
+	        // If A right B left
+	        if (boundA.getMinX() > boundB.getMinX()) {
+	        	if (atLeftBorder) {
+	        		return 1;
+	        	}
+	        }
+        }     
+        return 0;
+
+//        if (atRightBorder || atLeftBorder) {
+//        	return 1;
+//        } else {
+//        	return 0;
+//        }
+	}
+
+	/**
+	 * Check overlap for Y
+	 * 
+	 * @param spriteA
+	 * @param spriteB
+	 * @return 1 if Y overlap at Top (A is below), 2 if Y overlap at Bottom (A is above)
+	 * 0 if no overlap
+	 */
+	private int checkOverlapY(Sprite spriteA, Sprite spriteB) {
+		Bounds boundA = spriteA.getImage().getBoundsInParent();
+		Bounds boundB = spriteB.getImage().getBoundsInParent();
+		boolean atTopBorder = boundA.getMinY() <= boundB.getMaxY();
+		boolean atBottomBorder = boundA.getMaxY() >= boundB.getMinY();
+		
+		// If A is above B
+		if (boundA.getMinY() >= boundB.getMinY()) {
+			if (atBottomBorder) {
+				return 2;
+			}
+		}
+		// If A is below B
+		if (boundA.getMinY() < boundB.getMinY()) {
+			if (atTopBorder) {
+				return 1;
+			}
+		}
+		return 0;
+	}
+	
+		
 	@Override
 	public void friction(Sprite sprite, Double frictionCoefficient) {
 		Acceleration curr = new Acceleration(sprite.getVelocity().getX(), sprite.getVelocity().getY());

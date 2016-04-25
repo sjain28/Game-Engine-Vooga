@@ -34,7 +34,6 @@ public class SpriteEffect extends VariableEffect{
 		setNeedsSprites(false);
 	}
 	
-
 	// constructor with archetype, boolean true- apply to all of archetype
 	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
 

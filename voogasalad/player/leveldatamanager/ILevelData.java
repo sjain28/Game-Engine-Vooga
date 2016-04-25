@@ -38,8 +38,10 @@ public interface ILevelData {
 	Sprite getSpriteByID(String id);
 
 	List<Sprite> getSpritesByArch(String archA);
+	
+	void removeSprite(String id);
 
-	List<List<String>> getKeyCombos();
+	List<List<String>> getKeyPressCombos();
 	
 	VoogaData getGlobalVar(String myVarName);
 	
@@ -50,4 +52,6 @@ public interface ILevelData {
 	IPhysicsEngine getPhysicsEngine();
 
 	void saveProgress(String playerName, String filePath);
+
+	List<List<String>> getKeyReleasedCombos();
 }

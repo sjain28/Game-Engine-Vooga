@@ -33,8 +33,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String GRAVITY = "Gravity";
     protected static final String WIDTH = "Width";
     protected static final String HEIGHT = "Height";
-    protected static final String X_POS = "X Position";
-    protected static final String Y_POS = "Y Position";
+    protected static final String X_POS = "X_Position";
+    protected static final String Y_POS = "Y_Position";
     protected static final String IMAGE_PATH = "Image";
 
     private boolean isMainCharacter;
@@ -46,6 +46,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private Map<String, VoogaData> myProperties;
     private String myArchetype;
     private String previousImage;
+    private String myImagePath;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
@@ -98,6 +99,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     private void initializeImage (String path) {
         VoogaString imagePathString = new VoogaString(path);
+        myImagePath = path;
         previousImage = path;
         myImagePathProperty = new SimpleStringProperty(path);
         myProperties.put(IMAGE_PATH, imagePathString);
@@ -158,7 +160,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Velocity in m/s >> Each step is one s, so the number of meters u should increment
         // System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
         // "velocityX" + myVelocity.getX());
-
+    	//TODO: IF IMAGE PATH UPDATES, ACTUALLY UPDATE THE IMAGE
+    	
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
 
@@ -175,7 +178,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
             myImage.setImage(newImage);
             previousImage = myProperties.get(IMAGE_PATH).getValue().toString();
         }
-
         // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
 
     }

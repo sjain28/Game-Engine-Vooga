@@ -1,4 +1,3 @@
-
 package player.gamerunner;
 
 import javafx.application.Application;
@@ -12,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class TestForGamesConsecLevels extends Application {
 
-    private static final String TESTXML_PATH = "a";
+    private static final String TESTXML_PATH = "Game";
 
     public static void main (String[] args) {
         launch(args);
