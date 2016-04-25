@@ -18,7 +18,14 @@ import data.Deserializer;
 import data.Serializer;
 import resources.VoogaBundles;
 import tools.VoogaException;
-
+/**
+ * Class that generates tags for a given game based on uploaded images
+ * These tags are serialized in a game specific xml file, and can be
+ * reloaded when the user chooses to sort through Games by Tags.
+ * 
+ * @author Krista
+ *
+ */
 public class GameTagManager {
 	/**Application information**/
 	private static final String APP_ID = "2vnxrkiitf-p42_fNF6-cv0HxqRUvZgeC06pK0bJ";
@@ -26,18 +33,27 @@ public class GameTagManager {
 	private ClarifaiClient clarifai;
 
 	/**Tag information**/
-	private static final String TAG_LIST_LOCATION = "Tags.xml";
+	private static final String TAGS_FOLDER_LOCATION = "tags/";
+	private static final String TAGS_SUFFIX = "_tags.xml";
 	private List<Tag> myTags;
 	
+	/**
+	 * Constructor for GameTagManager
+	 */
 	public GameTagManager(){
 		clarifai = new ClarifaiClient(APP_ID, APP_SECRET);
 		myTags = new ArrayList<Tag>();
-		
-		//read in the serialized map of objects
-		loadTags();
 	}
-	
+	/**
+	 * Save tags to a game based on uploaded image
+	 * adds these tags to the current game
+	 * 
+	 * @param filename
+	 */
 	public void addTagsFromImage(String filename){
+		//set tags from current game
+		loadCurrentGameTags();
+		
 		//Retrieve recognition results
 		List<RecognitionResult> results = clarifai.recognize(new RecognitionRequest(new File(filename)));
 		
@@ -50,16 +66,14 @@ public class GameTagManager {
 		myTags.addAll(results.get(0).getTags());
 		
 		//save Tags
-		saveTags();
+		saveCurrentGameTags();
 	}
-	
 	/**
 	 * Serialize Tag list
 	 */
-	private void saveTags(){
+	private void saveCurrentGameTags(){
 		try {
-			String gamename = VoogaBundles.preferences.getProperty("GameName");
-			Serializer.serialize(myTags, gamename+TAG_LIST_LOCATION);
+			Serializer.serialize(myTags,getTagLocation());
 		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
 		}
@@ -68,20 +82,24 @@ public class GameTagManager {
 	/**
 	 * De-serialize Tag list
 	 */
-	private void loadTags(){
-		String gamename = VoogaBundles.preferences.getProperty("GameName");
-		Path path = Paths.get(gamename+TAG_LIST_LOCATION);
+	@SuppressWarnings("unchecked")
+	private void loadCurrentGameTags(){
+		Path path = Paths.get(getTagLocation());
 		try {
-			Path filepath = Paths.get(gamename+TAG_LIST_LOCATION);
-			if (Files.notExists(path)) {
-				System.out.println("save tags in load tags");
-				saveTags();
-			}
-			List<Object> objects = Deserializer.deserialize(1, gamename+TAG_LIST_LOCATION);
+			if (Files.notExists(path)) {saveCurrentGameTags();}
+			List<Object> objects = Deserializer.deserialize(1,getTagLocation());
 			myTags = (List<Tag>) objects.get(0);
 		} catch (VoogaException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * Get tag location based on current Game
+	 * @return
+	 */
+	private String getTagLocation(){
+		String gamename = VoogaBundles.preferences.getProperty("GameName");
+		return TAGS_FOLDER_LOCATION+gamename+TAGS_SUFFIX;
 	}
 	
 }
