@@ -275,6 +275,7 @@ public class LevelData implements ILevelData {
 
 
 		myGlobalVariables = data.getVariableMap();
+		System.out.println(myGlobalVariables.get("MAIN_CHARACTER"));
 		//initialize timer to zero here as well as level index
 		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
 		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));

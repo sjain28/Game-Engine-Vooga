@@ -9,6 +9,7 @@ import authoring.CustomText;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
 import authoring.resourceutility.ButtonMaker;
+import gameengine.Sprite;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +28,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
 import resources.VoogaBundles;
+import tools.interfaces.VoogaData;
 
 public class DesignBoardPreferences extends Tab {
 
@@ -43,7 +45,7 @@ public class DesignBoardPreferences extends Tab {
 	private RadioButton tracking;
 
 	private Slider scrollSpeed;
-	private ComboBox<String> sprites;
+	private ComboBox<SpriteNameIDPair> sprites;
 
 	private HBox buttons;
 
@@ -52,7 +54,6 @@ public class DesignBoardPreferences extends Tab {
 	private EventHandler<ActionEvent> e;
 
 	public DesignBoardPreferences(CompleteAuthoringModelable model) {
-		
 		gameObjects = model.getElements();
 		container = new VBox();
 		container.setSpacing(SPACING);
@@ -111,15 +112,16 @@ public class DesignBoardPreferences extends Tab {
 	private void initializeSpecifics() {
 		scrollSpeed = new Slider();
 		scrollSpeed.setMaxWidth(WIDTH);
-		sprites = new ComboBox<String>();
+		sprites = new ComboBox<SpriteNameIDPair>();
 		if (this.gameObjects.size() > 0) {
 			for (Node node : this.gameObjects) {
 				if (node instanceof GameObject) {
-					sprites.getItems().add(((GameObject) node).getSprite().getName());
+					Sprite sprite = ((GameObject) node).getSprite();
+					sprites.getItems().add(new SpriteNameIDPair(sprite.getName(), sprite.getId()));
 				}
 			}
 		} else {
-			sprites.getItems().add("<No game objects created yet to track>");
+			sprites.getItems().add(new SpriteNameIDPair("<No game objects created yet to track>", ""));
 		}
 	}
 
@@ -149,6 +151,14 @@ public class DesignBoardPreferences extends Tab {
 
 	public String getName() {
 		return this.levelName.getText();
+	}
+	
+	public boolean isContinuous() {
+		return this.continuous.isSelected();
+	}
+
+	public String getSpriteIDtoTrack() {
+		return sprites.getValue().getID();
 	}
 
 }
