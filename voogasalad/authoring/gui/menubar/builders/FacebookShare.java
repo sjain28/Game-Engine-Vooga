@@ -16,7 +16,7 @@ public class FacebookShare extends Stage{
         Facebook fbook = new FacebookFactory().getInstance();
         fbook.setOAuthAppId(APP_ID, APP_SECRET);
         fbook.setOAuthPermissions(PERMISSIONS);
-        fbook.setOAuthAccessToken(new AccessToken());
+        //fbook.setOAuthAccessToken();
         
     }
 
