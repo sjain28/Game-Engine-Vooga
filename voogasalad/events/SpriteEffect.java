@@ -75,6 +75,9 @@ public class SpriteEffect extends VariableEffect{
 	public SpriteEffect(String method, Double parameter, VoogaEvent event){
 		super(method, parameter, event);
 	}
+	public SpriteEffect(VoogaEvent event){
+		super(event);
+	}
 
 	@Override
 	public void execute(ILevelData data) {
@@ -162,5 +165,8 @@ public class SpriteEffect extends VariableEffect{
 
 	protected Boolean getNeedsSprites() {
 		return needsSprites;
+	}
+	protected void clearSprites(){
+		mySprites.clear();
 	}
 }
