@@ -38,9 +38,7 @@ public class GameTagManager {
 	 */
 	public GameTagManager(){		
 		String Id = VoogaBundles.secrets.getProperty("clarifaiId");
-		System.out.println(Id);
 		String Secret = VoogaBundles.secrets.getProperty("clarifaiSecret");
-		System.out.println(Secret);
 		clarifai = new ClarifaiClient(Id,Secret);
 		myTags = new ArrayList<Tag>();
 	}
