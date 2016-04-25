@@ -128,7 +128,7 @@ public class DesignBoard extends Tab implements Observer {
             success = true;
         }
         if (db.hasString()) {
-            GameObject object = (GameObject) elementManager.getElement(db.getString());
+            Node object = (Node) elementManager.getElement(db.getString());
             object.setTranslateX(event.getX() - x_offset);
             object.setTranslateY(event.getY() - y_offset);
         }

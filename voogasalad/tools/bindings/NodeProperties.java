@@ -29,7 +29,7 @@ public abstract class NodeProperties {
         for (Field field : this.getClass().getDeclaredFields()) {
             Method method =
                     getMethodName(node, getResourceBundle().getString(field.getName()), "get");
-//            System.out.println("Method: " + method.toString());
+           System.out.println("Method: " + method.toString());
 
             if (method.getParameters().length == 0) {
                 try {
@@ -52,6 +52,9 @@ public abstract class NodeProperties {
 //            System.out.println("field name: " + field);
             Method method =
                     getMethodName(node, getResourceBundle().getString(field), "set");
+            if (method == null){
+                method = getMethodName(node, getResourceBundle().getString(field),"");
+            }
             try {
                 method.invoke(node, nodeProperties.get(field));
             }

@@ -11,6 +11,7 @@ import tools.Position;
 import tools.Velocity;
 import tools.VoogaException;
 import tools.VoogaString;
+import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
 
 
@@ -48,7 +49,6 @@ public class BackEndText implements Elementable {
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -91,7 +91,9 @@ public class BackEndText implements Elementable {
     
     @Override
     public void init () throws VoogaException {
-        // TODO Auto-generated method stub
+        text = new Text();
+        TextProperties tp = new TextProperties();
+        tp.loadData(text, initializationProperties);
 
     }
     
