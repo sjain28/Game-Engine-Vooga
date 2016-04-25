@@ -361,5 +361,11 @@ public class GameboyDisplay implements IGameDisplay {
 		
 	}
 
+	@Override
+	public Pane getScreen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
