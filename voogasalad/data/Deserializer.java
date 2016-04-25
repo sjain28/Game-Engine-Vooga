@@ -21,7 +21,6 @@ public final class Deserializer {
     private final static String COMMAND_PATH = "data";
 
     public static List<Object> deserialize (int objectNum, String fileName) throws VoogaException {
-//        System.out.println("What is the fileName" + fileName);
         XStream unSerializer = new XStream(new DomDriver());
         List<Object> objectsCreated = new ArrayList<Object>();
         try {
@@ -31,7 +30,6 @@ public final class Deserializer {
                 try {
                     Object object = null;
                     object = (Object) objectInputStream.readObject();
-//                    System.out.println("The objects created here were" + object);
                     objectsCreated.add(object);
                 }
                 catch (ClassNotFoundException e) {
