@@ -17,6 +17,11 @@ public class TextObjectBuilder extends Builder {
 		populate();
 		load(this.container);
 	}
+	
+	public TextObjectBuilder(EditElementable editor, VoogaFrontEndText text){
+	    this(editor);
+	    this.text = text;
+	}
 
 	private void populate() {
 		this.container = new VBox();

@@ -146,8 +146,8 @@ public class VoogaFrontEndText extends TextField implements FrontEndElementable 
         this.backEndText.setName(name);
     }
     
-    public void setBackEndText(BackEndText text){
-        this.backEndText=text;
+    public void setVoogaData(VoogaData data){
+        backEndText.setDisplayedData(data);
     }
     
     @Override
