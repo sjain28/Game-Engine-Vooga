@@ -42,7 +42,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     private GlobalPropertiesManager GPM;
 
-    // private File myXmlDataFile;
     private SpriteFactory spriteFactory;
 
     private Set<String> myIds;
@@ -56,10 +55,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
         GPM = new GlobalPropertiesManager();
-        // myXmlDataFile = null;
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
-        // myXmlDataFile = new File(filePath);
         initGlobalVariablesPane();
     }
 

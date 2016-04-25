@@ -174,21 +174,18 @@ public class DesignBoard extends Tab implements Observer {
                     }
                     builder.showAndWait();
 
-                }
-                else if (ResourceDecipherer.isAudio(elementPath)) {
-                    // node = new
-                    // GameObject(elementManager.getSpriteFactory().createSprite(""));
-                    node =
-                            new MediaView(new MediaPlayer(new Media(Paths.get(elementPath).toUri()
-                                    .toString())));
-                }
-            }
-            catch (VoogaException e) {
-                new VoogaAlert(e.getMessage());
-            }
-            elementManager.addElementId(elementPath);
-        }
-    }
+				} else if (ResourceDecipherer.isAudio(elementPath)) {
+					// node = new
+					// GameObject(elementManager.getSpriteFactory().createSprite(""));
+					AudioObject sound = new AudioObject(new MediaPlayer(new Media(Paths.get(elementPath).toUri().toString())));
+					elementManager.addGameElements(sound);
+				}
+			} catch (VoogaException e) {
+				new VoogaAlert(e.getMessage());
+			}
+			elementManager.addElementId(elementPath);
+		}
+	}
 
     private void moveElement (String id, DragEvent e) {
         Node element = elementManager.getElement(id);

@@ -26,26 +26,26 @@ public class OpenCommand implements Command {
 		ProjectOpenPrompt prompt = new ProjectOpenPrompt();
 		prompt.setProceedEvent(ee -> {
 			try {
-			prompt.close();
-			String name = ((Button) ee.getSource()).getId();
-			List<CompleteAuthoringModelable> models = new ArrayList<CompleteAuthoringModelable>();
-			VoogaBundles.preferences.setProperty("GameName", name);
-			String prefixPath = "games/" + name + "/levels/";
-			File levelsFolder = new File(prefixPath);
-			for(File level : levelsFolder.listFiles()) {
-				String levelPath = prefixPath + level.getName();
-				ElementManagerUnserializer unserializer = new ElementManagerUnserializer(levelPath);
-				ElementManager em = unserializer.unserialize();
-				em.setName(level.getName().replace(".xml", ""));
-				models.add(em);
-			}
-			UIManager manager = new UIManager(models);
-			Scene scene = new VoogaScene(manager);
-			Stage primaryStage = new Stage();
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			} catch(VoogaException eee) {
-				
+				prompt.close();
+				String name = ((Button) ee.getSource()).getId();
+				List<CompleteAuthoringModelable> models = new ArrayList<CompleteAuthoringModelable>();
+				VoogaBundles.preferences.setProperty("GameName", name);
+				String prefixPath = "games/" + name + "/levels/";
+				File levelsFolder = new File(prefixPath);
+				for (File level : levelsFolder.listFiles()) {
+					String levelPath = prefixPath + level.getName();
+					ElementManagerUnserializer unserializer = new ElementManagerUnserializer(levelPath);
+					ElementManager em = unserializer.unserialize();
+					em.setName(level.getName().replace(".xml", ""));
+					models.add(em);
+				}
+				UIManager manager = new UIManager(models);
+				Scene scene = new VoogaScene(manager);
+				Stage primaryStage = new Stage();
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch (VoogaException eee) {
+
 			}
 		});
 		prompt.show();
