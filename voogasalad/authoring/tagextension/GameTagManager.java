@@ -27,12 +27,8 @@ import tools.VoogaException;
  *
  */
 public class GameTagManager {
-	/**Application information**/
-	private static final String APP_ID = "2vnxrkiitf-p42_fNF6-cv0HxqRUvZgeC06pK0bJ";
-	private static final String APP_SECRET = "5ziUKgQzECfVpaa4C-DCOUspwhC2JMNaDXSfJ-u7";
-	private ClarifaiClient clarifai;
 
-	/**Tag information**/
+	private ClarifaiClient clarifai;
 	private static final String TAGS_FOLDER_LOCATION = "tags/";
 	private static final String TAGS_SUFFIX = "_tags.xml";
 	private List<Tag> myTags;
@@ -40,8 +36,12 @@ public class GameTagManager {
 	/**
 	 * Constructor for GameTagManager
 	 */
-	public GameTagManager(){
-		clarifai = new ClarifaiClient(APP_ID, APP_SECRET);
+	public GameTagManager(){		
+		String Id = VoogaBundles.secrets.getProperty("clarifaiId");
+		System.out.println(Id);
+		String Secret = VoogaBundles.secrets.getProperty("clarifaiSecret");
+		System.out.println(Secret);
+		clarifai = new ClarifaiClient(Id,Secret);
 		myTags = new ArrayList<Tag>();
 	}
 	/**
@@ -65,6 +65,7 @@ public class GameTagManager {
 		//add all of the Tags to a list
 		myTags.addAll(results.get(0).getTags());
 		
+		System.out.println("about to save: "+myTags);
 		//save Tags
 		saveCurrentGameTags();
 	}
@@ -73,6 +74,7 @@ public class GameTagManager {
 	 */
 	private void saveCurrentGameTags(){
 		try {
+			System.out.println("tags saved to :"+getTagLocation());
 			Serializer.serialize(myTags,getTagLocation());
 		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
@@ -84,11 +86,13 @@ public class GameTagManager {
 	 */
 	@SuppressWarnings("unchecked")
 	private void loadCurrentGameTags(){
+		System.out.println("loading");
 		Path path = Paths.get(getTagLocation());
 		try {
 			if (Files.notExists(path)) {saveCurrentGameTags();}
 			List<Object> objects = Deserializer.deserialize(1,getTagLocation());
 			myTags = (List<Tag>) objects.get(0);
+			System.out.println("my tags: "+myTags);
 		} catch (VoogaException e) {
 			e.printStackTrace();
 		}
