@@ -16,9 +16,7 @@ public class TextProperties extends NodeProperties{
      Double height;
      Double opacity;
     
-     Font font;
      String text;
-     Paint stroke;
      
     public TextProperties () {
         super(VoogaBundles.textProperties);
