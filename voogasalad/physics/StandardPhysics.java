@@ -146,6 +146,9 @@ public class StandardPhysics implements IPhysicsEngine{
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
 		if (boundA.intersects(boundB)) {
+			System.out.println("intersecting");
+			System.out.println(checkOverlapY(spriteA,spriteB));
+			System.out.println();
 			if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
 				return 1;
 			}

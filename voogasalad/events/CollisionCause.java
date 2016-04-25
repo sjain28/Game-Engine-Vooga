@@ -94,8 +94,8 @@ public class CollisionCause extends Cause{
 	
 	private void initMap(){
 		collisionDirections = new HashMap<>();
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), 1);
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), -1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), -1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), 1);
 	}
 	
 	public List<Sprite> getAllCollidedSprites(){
