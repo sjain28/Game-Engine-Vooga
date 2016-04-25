@@ -38,6 +38,11 @@
             <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
             <scope>system</scope>
         </dependency>
+        <dependency>
+            <groupId>com.clarifai</groupId>
+            <artifactId>clarifai-api-java</artifactId>
+            <version>1.2.0</version>
+        </dependency>
     </dependencies>
  	
     <build>

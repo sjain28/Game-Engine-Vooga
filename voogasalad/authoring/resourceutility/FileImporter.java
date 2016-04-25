@@ -2,7 +2,7 @@ package authoring.resourceutility;
 
 import java.io.File;
 import java.util.List;
-
+import authoring.tagextension.GameTagManager;
 import tools.VoogaException;
 import tools.VoogaFileChooser;
 
@@ -28,7 +28,7 @@ public class FileImporter {
      */
     public FileImporter (ResourceTreeView rtv) throws VoogaException {
         this.rtv = rtv;
-
+   
         VoogaFileChooser chooser = new VoogaFileChooser();
         String path = chooser.launch();
         fileToImport = new File(path);

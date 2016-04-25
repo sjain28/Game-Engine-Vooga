@@ -8,8 +8,6 @@ import player.gamedisplay.Menuable;
  * @author mykuryshev, Hunter
  */
 public interface IGameRunner extends Menuable {
-
-	IGameRunner getSelf();
 	
 	void stop();
 

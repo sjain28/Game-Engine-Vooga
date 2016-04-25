@@ -5,31 +5,36 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+import authoring.tagextension.GameTagManager;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class VoogaFileChooser{
     private static final String USER_RESOURCES_PATH = "user_resources/";
     private static final String LOCAL_PATH= "voogasalad_DoovalSalad";
-    
+    private GameTagManager tagManager;
     private FileChooser fileChooser;
     
     public VoogaFileChooser(){
+    	tagManager = new GameTagManager();
         fileChooser = new FileChooser();
     }
     
     public String launch() throws VoogaException{
+    	String path = "";
         File file = fileChooser.showOpenDialog(null);
         if (isLocal(file)){
-            String path = file.getPath().split(LOCAL_PATH)[1];
+            path = file.getPath().split(LOCAL_PATH)[1];
             path=path.substring(1);
+            
 //            System.out.println("local: "+path);
-            return path;
+           // return path;
         } else {
-//            System.out.println("Not local: "+ file.getPath());
-            String path= moveToLocalPath(file);
-            return path;
+            path= moveToLocalPath(file);
+            //return path;
         }
+        tagManager.addTagsFromImage(path);
+        return path;
     }
     
     public void setInitialDirectory(File file){
@@ -60,6 +65,8 @@ public class VoogaFileChooser{
             throw new VoogaException("Could not import file");
         }
 
+        
+        
         return path;
     }
     

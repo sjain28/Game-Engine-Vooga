@@ -3,7 +3,6 @@ package tools;
 import authoring.gui.items.SwitchButton;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
@@ -74,7 +73,7 @@ public class VoogaBoolean implements VoogaData{
 	@Override
 	public <T> void setProperty(T newVal) {
     	System.out.println("telling me to set value of property to: " +(boolean) newVal);
-		this.valueProperty.set((boolean) newVal);
+		this.valueProperty.set((boolean) (Object) newVal);
 	}
     
 }
