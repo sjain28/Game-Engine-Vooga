@@ -25,10 +25,10 @@ public class PropertiesTab extends VBox {
             PropertyBuilder pBuilder = new PropertyBuilder();
             pBuilder.showAndWait();
             System.out.println(pBuilder.getStatus());
-            if(pBuilder.compile){
-            System.out.println(pBuilder.getName() + "  jk  " + pBuilder.getValue());
-            pTable.addVariableToTable(pBuilder.getName(), pBuilder.getValue());
-            }
+//            if(pBuilder.compile){
+//            System.out.println(pBuilder.getName() + "  jk  " + pBuilder.getValue());
+//            pTable.addVariableToTable(pBuilder.getName(), pBuilder.getValue());
+//            }
         });
         Button remove = new ButtonMaker().makeButton("-", e -> {
             Property toRemove = pTable.getSelectionModel().getSelectedItem();
