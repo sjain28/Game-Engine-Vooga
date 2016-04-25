@@ -1,9 +1,12 @@
 package authoring.gui.cartography;
 
+import java.util.List;
+
 import authoring.VoogaScene;
 import authoring.gui.eventpane.EventAccoridion;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.resourceutility.ButtonMaker;
+import events.Cause;
 import events.CauseAndEffectFactory;
 import events.Effect;
 import events.LevelTransitionEffect;
@@ -40,7 +43,6 @@ public class LevelCauseWindow extends Stage {
         TabPane tabPane = new TabPane();
         tabPane.getTabs().addAll(causeAccoridion);
         this.setScene(new VoogaScene(tabPane));
-        this.show();
 	}
 	
 	/**
@@ -72,5 +74,9 @@ public class LevelCauseWindow extends Stage {
 	private void cancel(){
         this.close();
     }
+	
+	public List<Cause> getCauseDetails() {
+		return event.getCauses();
+	}
 
 }

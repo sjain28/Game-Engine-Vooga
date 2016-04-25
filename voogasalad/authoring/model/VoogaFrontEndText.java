@@ -3,30 +3,36 @@ package authoring.model;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import authoring.gui.Selector;
 import authoring.interfaces.Elementable;
+import authoring.interfaces.FrontEndElementable;
+import gameengine.BackEndText;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
 import tools.VoogaDataText;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
-public class VoogaFrontEndText extends TextField implements Elementable {
+public class VoogaFrontEndText extends TextField implements FrontEndElementable {
 
-    Map<String, VoogaData> myProperties = new HashMap<String, VoogaData>();
-
+    private Map<String, VoogaData> myProperties = new HashMap<String, VoogaData>();
+    private BackEndText backEndText;
+    
     public VoogaFrontEndText () {
-        init();
+        create();
     }
 
     // stroke, color, font, text, size, name/group, position (x,y,z),
     public VoogaFrontEndText (double x, double y, String text) {
-        
-        init();
+        create();
         this.setTranslateX(x);
         this.setTranslateY(y);
         this.setText(text);
@@ -35,13 +41,22 @@ public class VoogaFrontEndText extends TextField implements Elementable {
     public VoogaFrontEndText (String text) {
         this(0, 0, text);
     }
-
-    private void init () {
+    
+    private void create(){
         setId(UUID.randomUUID().toString());
         setBackground(Background.EMPTY);
         this.setOnDragDetected( (MouseEvent e) -> onDrag(e));
     }
-
+    
+    public void init () throws VoogaException{
+        setId(UUID.randomUUID().toString());
+        setBackground(Background.EMPTY);
+        this.setOnDragDetected( (MouseEvent e) -> onDrag(e));
+    }
+    
+    private void initializeMap(){
+        
+    }
     // TODO:
     // This method is repeated in all Elements, we should use some form of inheritance
     // hierarchy to determine this
@@ -81,23 +96,39 @@ public class VoogaFrontEndText extends TextField implements Elementable {
         // TODO Auto-generated method stub
         return this;
     }
-    
+
     @Override
     public String getName () {
         // TODO Auto-generated method stub
         return null;
     }
 
-	@Override
-	public void setVoogaProperties(Map<String, VoogaData> newVoogaProperties) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
+        // TODO Auto-generated method stub
+
+    }
 
     @Override
     public void setName (String name) {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public Elementable getElementable () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void select (Selector selector) {
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(selector.getLightness());
+
+        this.setEffect(colorAdjust);
+        this.setEffect(new Glow(selector.getGlow()));
+
     }
 
 }
