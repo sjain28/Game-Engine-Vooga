@@ -170,7 +170,8 @@ public class LevelData implements ILevelData {
 //			return myScroller.centerScroll(displayablenodes, 5);
 //		}
 		//centers on first main character in list TODO: If passed something different, change this
-		Sprite centeredCharacter = getSpriteByID((String) myGlobalVariables.get("Main_Character").getValue());
+		//TODO: this is commented out bc MAINCHARACTER has not yet been added to global variables
+		//Sprite centeredCharacter = getSpriteByID((String) myGlobalVariables.get("Main_Character").getValue());
 		return displayablenodes;
 		//myScroller.centerScroll(displayablenodes, centeredCharacter.getPosition().getX());
 	}
