@@ -2,6 +2,7 @@ package authoring.interfaces;
 
 import java.util.Map;
 import javafx.scene.Node;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
@@ -31,6 +32,8 @@ public interface Elementable extends Updatable {
     public String getId ();
 
     public Node getNodeObject ();
+    
+    public void init() throws VoogaException;
     
 
 }
