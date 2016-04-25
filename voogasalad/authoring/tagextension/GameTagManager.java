@@ -73,7 +73,7 @@ public class GameTagManager {
 	private void saveCurrentGameTags(){
 		try {
 			System.out.println("tags saved to :"+getTagLocation());
-			Serializer.serialize(myTags,getTagLocation());
+			Serializer.serializeLevel(myTags,getTagLocation());
 		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
 		}

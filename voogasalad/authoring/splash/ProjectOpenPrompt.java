@@ -1,6 +1,8 @@
 package authoring.splash;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import authoring.CustomText;
 import authoring.VoogaScene;
@@ -25,15 +27,10 @@ public class ProjectOpenPrompt extends StarterPrompt {
 	private static final double WINDOW_WIDTH = 600;
 	private static final double WINDOW_HEIGHT = 300;
 	
-	private static final double WIDTH = 400;
-	
 	private static final String GAMES_FOLDER_PATH = "games";
 	
 	private VBox container;
-	private ScrollPane scrollPane;
-	private VBox gamesList;
-	
-	private EventHandler<ActionEvent> e;
+	private GamesListing gamesListing;
 	
 	public ProjectOpenPrompt() {
 		super();
@@ -41,8 +38,7 @@ public class ProjectOpenPrompt extends StarterPrompt {
 	
 	@Override
 	public void setProceedEvent(EventHandler<ActionEvent> proceedEvent) {
-		this.e = proceedEvent;
-		populateGamesList();
+		gamesListing.populateGamesList(getGamesList(), proceedEvent);
 	}
 	
 	@Override
@@ -50,28 +46,19 @@ public class ProjectOpenPrompt extends StarterPrompt {
 		container = new VBox();
 		container.setSpacing(SPACING);
 		container.setPadding(new Insets(SPACING));
-		gamesList = new VBox();
-		gamesList.setSpacing(SPACING);
-		container.setPadding(new Insets(SPACING));
-		scrollPane = new ScrollPane();
-		scrollPane.setContent(gamesList);
-		scrollPane.setPrefWidth(WIDTH);
+		gamesListing = new GamesListing();
 		container.getChildren().addAll(makeRow(new CustomText("Welcome back!", FontWeight.BOLD, HEADER_SIZE)),
 									   makeRow(new CustomText("Load a game.", FontWeight.BOLD)),
-							  	       makeRow(scrollPane));
+							  	       makeRow(gamesListing));
 	}
 	
-	private void populateGamesList() {
-		ButtonMaker maker = new ButtonMaker();
+	private List<String> getGamesList() {
+		List<String> myGames = new ArrayList<String>();
 		File gamesFolder = new File(GAMES_FOLDER_PATH);
-		int gameIndex = 0;
 		for(File game : gamesFolder.listFiles()) {
-			Button button = maker.makeButton(null, this.e);
-			button.setGraphic(new GameRowDisplay(game.getName(), gameIndex));
-			button.setId(game.getName());
-			gamesList.getChildren().add(button);
-			gameIndex++;
+			myGames.add(game.getName());
 		}
+		return myGames;
 	}
 	
 	@Override
