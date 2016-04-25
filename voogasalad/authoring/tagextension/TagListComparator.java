@@ -20,11 +20,11 @@ public class TagListComparator implements Comparator<Object> {
 	}
 	@Override
 	public int compare(Object o1, Object o2) {
-		List<Tag> taglist1 = (List<Tag>) o1;
-	    List<Tag> taglist2 = (List<Tag>) o2;
+		GameTagPair pair1 = (GameTagPair) o1;
+		GameTagPair pair2 = (GameTagPair) o2;
 	   	    
-	    double perc1 = generateTotalPercentMatch(taglist1);
-	    double perc2 = generateTotalPercentMatch(taglist2);
+	    double perc1 = generateTotalPercentMatch(pair1.getTagList());
+	    double perc2 = generateTotalPercentMatch(pair2.getTagList());
 
 	    if(perc1 < perc2){return -1;}
 	    if(perc1 > perc2){return 1;}
