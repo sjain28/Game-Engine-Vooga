@@ -82,6 +82,11 @@ public class StandardDisplay implements IGameDisplay {
 			}
 		}
 	};
+	
+	@Override
+	public Pane getScreen() {
+		return this.myGameScreen;
+	}
 
 	/**
 	 * Reads in the list of Nodes to display and populates the screen

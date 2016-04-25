@@ -82,14 +82,14 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @param allNodes, rightEdgeLocation
 	 * @return
 	 */
-	public <E> List<Node> centerScroll(List<E> allNodes, double ceneteredCharXPos) {
+	public <E> List<Node> centerScroll(List<E> allNodes, double centeredCharXPos) {
 		//double mainCharXPos = mainCharLocation.getX();
 		
 //		if (DEBUG) (ArrayListList<Nodes>) allNodes;
-		
+		System.out.println("CENTER SCROLLING");
 		
 		List<Node> nodesToDisplay;
-		if (ceneteredCharXPos <= myAdjustFactorX) {
+		if (centeredCharXPos <= myAdjustFactorX) {
 			nodesToDisplay = allNodes.stream()
 					.map(n -> (Node) n)
 					.filter(n -> n.getLayoutX() <= myScreenSizeX)
@@ -98,8 +98,8 @@ public class DisplayScroller implements IDisplayScroller {
 		else {
 			nodesToDisplay = allNodes.stream()
 					.map(n -> (Node) n)
-					.filter(n -> n.getLayoutX() <= ceneteredCharXPos + myAdjustFactorX)
-					.filter(n -> n.getLayoutX() >= ceneteredCharXPos - myAdjustFactorX)
+					.filter(n -> n.getLayoutX() <= centeredCharXPos + myAdjustFactorX)
+					.filter(n -> n.getLayoutX() >= centeredCharXPos - myAdjustFactorX)
 					.collect(Collectors.toList());
 		}
 		return nodesToDisplay;
