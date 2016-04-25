@@ -4,10 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Scene;
 import javafx.util.Duration;
 import physics.IPhysicsEngine;
 import physics.StandardPhysics;
@@ -19,6 +21,7 @@ import player.leveldatamanager.LevelData;
 import player.leveldatamanager.SpriteManager;
 import tools.VoogaAlert;
 import tools.VoogaException;
+import videos.ScreenProcessor;
 
 /**
  * GameRunner class that runs the game player
@@ -37,6 +40,7 @@ public class GameRunner implements IGameRunner {
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
+	private ScreenProcessor myScreenProcessor;
     private SpriteManager mySpriteManager;
     private EventManager myEventManager;
 	private List<String> myLevelList;
@@ -54,6 +58,7 @@ public class GameRunner implements IGameRunner {
 		myPhysicsEngine = new StandardPhysics();
 		mySpriteManager = new SpriteManager();
 		myEventManager = new EventManager();
+		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
@@ -151,6 +156,7 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void mute() {
 	}
+	
 	@Override
 	public void replayLevel() {
 		myLevelData.setNextLevelName(myCurrentLevelString);
@@ -194,6 +200,9 @@ public class GameRunner implements IGameRunner {
 	@Override 
 	public void takeSnapShot() {
 		//TODO call xuggleFileCreator to properly take snapshot and store as new file.
+		Scene myScene = myGameDisplay.getMyScene();
+		String fileName = myCurrentLevelString;
+		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
 	
 	@Override

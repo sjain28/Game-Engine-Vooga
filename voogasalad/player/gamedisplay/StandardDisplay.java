@@ -193,6 +193,10 @@ public class StandardDisplay implements IGameDisplay {
 	public List<KeyEvent> getMyKeyReleases() {
 		return myKeyReleases;
 	}
+	
+	public Scene getMyScene() {
+		return myScene;
+	}
 
 	/**
 	 * Returns the current Stage
