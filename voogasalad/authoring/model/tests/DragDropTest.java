@@ -13,7 +13,7 @@ public class DragDropTest extends Application{
     public void start (Stage primaryStage) throws Exception {
         DesignBoardHousing designBoard = new DesignBoardHousing(new ElementManager(), false);
         Scene scene = new Scene (designBoard);
-        VoogaFrontEndText vt = new VoogaFrontEndText();
+        VoogaFrontEndText vt = new VoogaFrontEndText("hello");
         vt.setMaxWidth(100);
         vt.setMaxHeight(100);
         vt.setTranslateX(100);

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import gameengine.Sprite;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -116,6 +117,14 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
+		Sprite main = myLevelData.getSpriteByID((String) myLevelData.getGlobalVar("Main_Character").getValue());
+		main.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+			int offset = n.intValue();
+			// TODO: remove hardcoding
+    		if (offset > 200 && offset < 400) {
+    			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
+    		}
+		});
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**

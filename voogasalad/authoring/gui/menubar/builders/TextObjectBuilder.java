@@ -11,30 +11,31 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tools.Vector;
 
+
 public class TextObjectBuilder extends Builder {
 
-	private VBox container;
-	private TextField text;
+    private VBox container;
+    private TextField text;
 
-	public TextObjectBuilder(EditElementable editor) {
-		super(editor);
-		this.text = new TextField();
-		populate();
-		load(this.container);
-	}
+    public TextObjectBuilder (EditElementable editor) {
+        super(editor);
+        this.text = new TextField();
+        populate();
+        load(this.container);
+    }
 
-	private void populate() {
-		this.container = new VBox();
-		container.setSpacing(SPACING);
-		container.getChildren().addAll(makeInfo("Text:", "Enter text...", text), 
-									   makeButtons());
-	}
+    private void populate () {
+        this.container = new VBox();
+        container.setSpacing(SPACING);
+        container.getChildren().addAll(makeInfo("Text:", "Enter text...", text),
+                                       makeButtons());
+    }
 
-	@Override
-	public void compile() {
-		VoogaFrontEndText text = new VoogaFrontEndText(this.text.getText());
-		myManager.addGameElements(text);
-		quit();
-	}
+    @Override
+    public void compile () {
+        VoogaFrontEndText text = new VoogaFrontEndText(this.text.getText());
+        myManager.addGameElements(text);
+        quit();
+    }
 
 }

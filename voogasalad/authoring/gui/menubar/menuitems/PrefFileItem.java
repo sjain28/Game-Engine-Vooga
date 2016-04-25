@@ -2,16 +2,12 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.VoogaScene;
 import authoring.gui.DesignBoardPreferences;
-import authoring.gui.menubar.MenuItemHandler;
-import authoring.gui.menubar.builders.PreferencesSetter;
+import authoring.gui.menubar.MenuItemHandler;	
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
+import tools.VoogaString;
 
 public class PrefFileItem extends MenuItemHandler { 
     /**
@@ -21,8 +17,10 @@ public class PrefFileItem extends MenuItemHandler {
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
 	
-	private static final double WINDOW_WIDTH = 300;
-	private static final double WINDOW_HEIGHT = 200;
+	private static final double WINDOW_WIDTH = 400;
+	private static final double WINDOW_HEIGHT = 350;
+	
+	private static final String MAIN_CHARACTER = "Main_Character";
 	
 	private CompleteAuthoringModelable model;
 
@@ -40,6 +38,11 @@ public class PrefFileItem extends MenuItemHandler {
 		DesignBoardPreferences preferences = new DesignBoardPreferences(model);
 		preferences.setText("Preferences for \"" + this.model.getName() + "\"");
 		preferences.setName(this.model.getName());
+		preferences.setListener(e -> {
+			if(!preferences.isContinuous()) {
+				model.getGlobalVariables().put(MAIN_CHARACTER, new VoogaString(preferences.getSpriteIDtoTrack()));
+			}
+		});
 		tp.getTabs().add(preferences);
 		stage.setScene(new VoogaScene(tp, WINDOW_WIDTH, WINDOW_HEIGHT));
 		stage.show();

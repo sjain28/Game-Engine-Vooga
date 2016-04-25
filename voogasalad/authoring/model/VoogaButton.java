@@ -8,6 +8,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
@@ -67,6 +68,12 @@ public class VoogaButton extends Button implements Elementable {
 
     @Override
     public void setName (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void init () throws VoogaException {
         // TODO Auto-generated method stub
         
     }

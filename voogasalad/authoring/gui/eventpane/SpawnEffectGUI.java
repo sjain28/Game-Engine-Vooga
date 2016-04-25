@@ -3,6 +3,7 @@ package authoring.gui.eventpane;
 import java.util.ArrayList;
 import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditEventable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
@@ -12,8 +13,8 @@ import tools.VoogaException;
 
 public class SpawnEffectGUI implements EventGUI {
 
-    private ComboBox archetypes;
-    private ComboBox targetDesired;
+    private ComboBox<String> archetypes;
+    private ComboBox<String> targetDesired;
     private SpriteComboBox targetId;
     private NumberTextField x;
     private NumberTextField y;
@@ -36,18 +37,26 @@ public class SpawnEffectGUI implements EventGUI {
 
         targetId = new SpriteComboBox(elementManager);
         x = new NumberTextField();
+        x.setPadding(new Insets(5,5,5,5));
         y = new NumberTextField();
+        y.setPadding(new Insets(5,5,5,5));
 
         targetDesired.setOnAction(e -> {
-            if (targetId.getValue().equals("Relative Position")) {
+            if (targetDesired.getValue().equals("Relative Position")) {
                 removeInactiveNodes(targetId, x, y);
                 addGUIElements(targetId);
             }
-            if (targetId.getValue().equals("Absolute Position")) {
+            if (targetDesired.getValue().equals("Absolute Position")) {
                 removeInactiveNodes(targetId, x, y);
                 addGUIElements(x, y);
             }
         });
+        
+        targetId.setOnAction(e->{
+            removeInactiveNodes(x,y);
+            addGUIElements(x,y);
+        });
+        
         addGUIElements(archetypes, targetDesired);
     }
 
@@ -73,7 +82,7 @@ public class SpawnEffectGUI implements EventGUI {
     public String getDetails () throws VoogaException {
         String result = archetypes.getValue() + " ";
         if (targetDesired.getValue().equals("Relative Position")) {
-            result += targetId.getValue() + " ";
+            result += targetId.getSpriteId() + " ";
         }
         result += x.getText() + " " + y.getText();
         return result;
