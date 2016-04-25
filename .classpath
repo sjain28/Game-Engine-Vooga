@@ -20,5 +20,11 @@
 	<classpathentry kind="lib" path="external_jars/pivot-wtk-terra-2.0.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/mosaic.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="external_jars/xuggle-xuggler-5.4.jar"/>
+	<classpathentry kind="lib" path="external_jars/logback-classic-1.1.7.jar"/>
+	<classpathentry kind="lib" path="external_jars/logback-core-1.1.7.jar"/>
+	<classpathentry kind="lib" path="external_jars/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="lib" path="external_jars/xuggle-utils-1.22.jar"/>
+	<classpathentry kind="lib" path="external_jars/commons-cli-1.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

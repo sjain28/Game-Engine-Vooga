@@ -366,6 +366,12 @@ public class GameboyDisplay implements IGameDisplay {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Scene getMyScene() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

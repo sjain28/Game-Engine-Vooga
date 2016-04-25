@@ -3,6 +3,8 @@ package tools.bindings;
 import java.awt.Font;
 import java.util.ResourceBundle;
 import javafx.scene.layout.Border;
+import javafx.scene.paint.Paint;
+import resources.VoogaBundles;
 
 public class TextProperties extends NodeProperties{
 
@@ -14,12 +16,10 @@ public class TextProperties extends NodeProperties{
      Double height;
      Double opacity;
     
-     Font font;
-     Border border;
      String text;
-    
-    public TextProperties (ResourceBundle bundle) {
-        super(bundle);
+     
+    public TextProperties () {
+        super(VoogaBundles.textProperties);
     }
    
 }

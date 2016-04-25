@@ -2,14 +2,9 @@ package authoring.gui.menubar.builders;
 
 import authoring.interfaces.model.EditElementable;
 import authoring.model.VoogaFrontEndText;
-import gameengine.Sprite;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import tools.Vector;
+
 
 public class TextObjectBuilder extends Builder {
 
@@ -32,9 +27,16 @@ public class TextObjectBuilder extends Builder {
 
 	@Override
 	public void compile() {
+		compile = true;
 		VoogaFrontEndText text = new VoogaFrontEndText(this.text.getText());
 		myManager.addGameElements(text);
 		quit();
 	}
+	
+	@Override
+	public boolean compileStatus() {
+		return compile;
+	}
+
 
 }

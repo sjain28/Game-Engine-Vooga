@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-
 import authoring.interfaces.Elementable;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.Node;
 import tools.VoogaBoolean;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
@@ -22,7 +22,8 @@ public class GlobalPropertiesManager implements Elementable {
     }
 
     @Override
-    public void update () {}
+    public void update () {
+    }
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
@@ -64,5 +65,10 @@ public class GlobalPropertiesManager implements Elementable {
         this.myName = name;
     }
 
+    @Override
+    public void init () throws VoogaException {
+        // TODO Auto-generated method stub
+
+    }
 
 }
