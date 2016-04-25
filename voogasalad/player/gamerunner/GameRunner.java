@@ -55,7 +55,7 @@ public class GameRunner implements IGameRunner {
 	 * Default constructor
 	 */
 	public GameRunner() {
-		myGameDisplay = new StandardDisplay(getSelf());
+		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
 		mySpriteManager = new SpriteManager();
 		myEventManager = new EventManager();
@@ -213,10 +213,4 @@ public class GameRunner implements IGameRunner {
 		String fileName = myCurrentLevelString;
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
-	
-	@Override
-	public IGameRunner getSelf() {
-		return this;
-	}
-	
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package player.gamedisplay;
 
 import javafx.scene.control.Alert;
