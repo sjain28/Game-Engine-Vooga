@@ -15,6 +15,7 @@ public class GameTagTest {
 		List<String> listoftags = new ArrayList<String>();
 		listoftags.add("hi");
 		listoftags.add("cartoon");
+		listoftags.add("vector");
 		listoftags.add("character");
 		List<String> listofgamenames = taglibrary.getListOfGameNamesByTag(listoftags);
 		//System.out.println(listofgamenames);

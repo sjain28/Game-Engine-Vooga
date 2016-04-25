@@ -3,17 +3,11 @@ package authoring.tagextension;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.Tag;
 
 import data.Deserializer;
-import resources.VoogaBundles;
 import tools.VoogaException;
 
 public class GameTagLibrary {
@@ -22,18 +16,7 @@ public class GameTagLibrary {
 	private static final String TAG_SUFFIX = "_tags.xml";
 	private List<String> myDescripList;
 	private List<Tag> myTags;
-	private ClarifaiClient clarifai;
-
-	/**
-	 * Constructor for GameTagManager
-	 */
-	public GameTagLibrary(){
-		myTags = new ArrayList<Tag>();
-		myDescripList = new ArrayList<String>();
-		String Id = VoogaBundles.preferences.getProperty("clarifaiId");
-		String Secret = VoogaBundles.preferences.getProperty("clarifaiSecret");
-		clarifai = new ClarifaiClient(Id,Secret);
-	}
+	
 	/**
 	 * Returns list of GameNames by tag matches
 	 * 
@@ -85,6 +68,7 @@ public class GameTagLibrary {
 		System.out.println(count);
 		System.out.println(gtpairs.size());
 		Collections.sort(gtpairs,comp);
+		//Collections.reverse(gtpairs);
 		return gtpairs;
 	}
 }
