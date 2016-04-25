@@ -4,6 +4,7 @@ import java.util.Map;
 import authoring.interfaces.Elementable;
 import data.Displayable;
 import javafx.scene.Node;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
@@ -59,6 +60,12 @@ public class BackEndButton implements Elementable {
 
     @Override
     public void setName (String name) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void init () throws VoogaException {
         // TODO Auto-generated method stub
 
     }

@@ -169,12 +169,13 @@ public class LevelData implements ILevelData {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 		// IF THE MAIN CHARACTER HASN'T BEEN SET TODO: IF THIS IS HARDCODED, CHANGE
-		if (myContinuousSpriteIDs.size()==0){
-			return myScroller.centerScroll(displayablenodes, 5);
-		}
+//		if (myContinuousSpriteIDs.size()==0){
+//			return myScroller.centerScroll(displayablenodes, 5);
+//		}
 		//centers on first main character in list TODO: If passed something different, change this
-		Sprite centeredCharacter = getSpriteByID(myContinuousSpriteIDs.get(0));
-		return myScroller.centerScroll(displayablenodes,centeredCharacter.getPosition().getX());
+		Sprite centeredCharacter = getSpriteByID((String) myGlobalVariables.get("Main_Character").getValue());
+		return displayablenodes;
+		//myScroller.centerScroll(displayablenodes, centeredCharacter.getPosition().getX());
 	}
 	/**
 	 * Returns unmodifiable list of key combos

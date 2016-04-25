@@ -20,5 +20,7 @@
 	<classpathentry kind="lib" path="external_jars/pivot-wtk-terra-2.0.4.jar"/>
 	<classpathentry kind="lib" path="external_jars/mosaic.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/Users/Nick/Documents/workspace/voogasalad_DoovalSalad/external_jars/facebook4j-core-2.4.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Nick/Documents/workspace/voogasalad_DoovalSalad/external_jars/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

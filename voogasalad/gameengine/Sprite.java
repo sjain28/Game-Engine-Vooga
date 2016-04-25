@@ -172,7 +172,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
-
+        
+        System.out.println("Sprite Position: "+myLoc.getX()+" "+myLoc.getY());
+        System.out.println("Image Position: "+myImage.getTranslateX()+" "+myImage.getTranslateY());
+        
         if (!myProperties.get(IMAGE_PATH).getValue().toString().equals(previousImage)) {
             Image newImage = setNewImage();
             myImage.setImage(newImage);
