@@ -166,12 +166,14 @@ public class LevelData implements ILevelData {
 			displayablenodes.add(myElements.get(key).getNodeObject());
 		}
 		// IF THE MAIN CHARACTER HASN'T BEEN SET TODO: IF THIS IS HARDCODED, CHANGE
-		if (myContinuousSpriteIDs.size()==0){
-			return myScroller.centerScroll(displayablenodes, 5);
-		}
+//		if (myContinuousSpriteIDs.size()==0){
+//			return myScroller.centerScroll(displayablenodes, 5);
+//		}
 		//centers on first main character in list TODO: If passed something different, change this
-		Sprite centeredCharacter = getSpriteByID(myContinuousSpriteIDs.get(0));
-		return myScroller.centerScroll(displayablenodes,centeredCharacter.getPosition().getX());
+		//TODO: this is commented out bc MAINCHARACTER has not yet been added to global variables
+		//Sprite centeredCharacter = getSpriteByID((String) myGlobalVariables.get("Main_Character").getValue());
+		return displayablenodes;
+		//myScroller.centerScroll(displayablenodes, centeredCharacter.getPosition().getX());
 	}
 	/**
 	 * Returns unmodifiable list of key combos
@@ -275,7 +277,6 @@ public class LevelData implements ILevelData {
 
 
 		myGlobalVariables = data.getVariableMap();
-		System.out.println(myGlobalVariables.get("MAIN_CHARACTER"));
 		//initialize timer to zero here as well as level index
 		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
 		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));

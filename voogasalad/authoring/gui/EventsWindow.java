@@ -53,28 +53,26 @@ public class EventsWindow extends TabPane implements Observer{
     
     private void initialize(){
         for(VoogaEvent e: myManager.getEvents()){
-            if(!causes.keySet().contains(e)){
+            if(!causes.keySet().contains(e) && !effects.keySet().contains(e)){
                 ObservableList<String> causesString = FXCollections.observableArrayList();
                 for(Cause cause: e.getCauses()){
                     causesString.addAll(cause.toString());
                 }  
                 causes.put(e, causesString);
-            }
-            if(!effects.keySet().contains(e)){
                 ObservableList<String> effectsString = FXCollections.observableArrayList();
                 for(Effect effect: e.getEffects()){
                     System.out.println(effect.toString());
                     effectsString.addAll(effect.toString());
                 }  
                 effects.put(e, effectsString);
+                HBox info = new HBox();
+                ListView<String> causeList = new ListView<String>(causes.get(e));
+                ListView<String> effectList = new ListView<String>(effects.get(e));
+                Button delete = new Button("X");
+                delete.setOnAction(ee -> delete(e, info));
+                info.getChildren().addAll(causeList, effectList, delete);
+                content.getChildren().add(info);
             }
-            HBox info = new HBox();
-            ListView<String> causeList = new ListView<String>(causes.get(e));
-            ListView<String> effectList = new ListView<String>(effects.get(e));
-            Button delete = new Button("X");
-            delete.setOnAction(ee -> delete(e, info));
-            info.getChildren().addAll(causeList, effectList, delete);
-            content.getChildren().add(info);
         }
         
     }

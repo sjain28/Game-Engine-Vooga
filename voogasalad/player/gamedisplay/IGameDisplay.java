@@ -1,8 +1,11 @@
 package player.gamedisplay;
 
 import java.util.List;
+
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -31,6 +34,10 @@ public interface IGameDisplay {
 		
 	Stage getStage();
 	
+	Pane getScreen();
+	
 	void exit();
+
+	Scene getMyScene();
 
 }
