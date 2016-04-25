@@ -26,13 +26,10 @@ public class SpriteManager {
 			Sprite s = sprites.get(i);
 			//Clean up all dead Sprites
 			for(String key : s.getPropertiesMap().keySet()){
-				System.out.println(key);
 				VoogaData data = s.getProperty(key);
 				Object obj = data.getValue();
-				System.out.println(obj.toString());
 			}
 			if((Boolean) s.getProperty(ALIVE).getValue() == false){
-				System.out.println("removing sprite");
 				myLevelData.removeSprite(s.getId());
 			}
 			else{
