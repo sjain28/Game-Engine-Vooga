@@ -8,8 +8,6 @@ import player.gamedisplay.Menuable;
  * @author mykuryshev, Hunter
  */
 public interface IGameRunner extends Menuable {
-
-	IGameRunner getSelf();
 	
 	void stop();
 
@@ -32,4 +30,6 @@ public interface IGameRunner extends Menuable {
 	void replayLevel();
 
 	void saveGameProgress(String playerName);
+
+	void takeSnapShot();
 }

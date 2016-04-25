@@ -13,7 +13,6 @@ public class NewArchetype extends ToolbarItemHandler{
     @Override
     public void handle () {
         archetypeCreator.handle();
-        
     }
  
 }

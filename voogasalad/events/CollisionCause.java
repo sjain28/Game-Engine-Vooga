@@ -52,15 +52,12 @@ public class CollisionCause extends Cause{
 		collidedSprites = new ArrayList<>();
 		boolean myVal = false;
 		IPhysicsEngine physics = data.getPhysicsEngine();
-
 		for(Sprite a: getSprites(data,archA)){
 			for(Sprite b: getSprites(data,archB)){
 				if(myDirection == null){
 					if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
 						addSprites(a,b);
 						myVal = true;
-						System.out.println("X: " + physics.checkCollisionX(a, b));
-						System.out.println("Y: " + physics.checkCollisionY(a, b));
 					}
 				}else{
 					myVal = handleCollision(a,b,data);
