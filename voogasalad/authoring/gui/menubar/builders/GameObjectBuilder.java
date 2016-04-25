@@ -9,12 +9,9 @@ import authoring.resourceutility.ButtonMaker;
 import gameengine.Sprite;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class GameObjectBuilder extends Builder {
 
@@ -39,7 +36,7 @@ public class GameObjectBuilder extends Builder {
 		container.getChildren().addAll(makeInfo("Name:", "Enter a name...", myName), makeArchetypePicker(), makeAddNewArchetypeButton(),
 				makeButtons());
 	}
-	
+
 	private HBox makeAddNewArchetypeButton() {
 		HBox container = new HBox();
 		Button button = new ButtonMaker().makeButton("Add a new archetype", e -> {
@@ -54,6 +51,7 @@ public class GameObjectBuilder extends Builder {
 	}
 
 	public void compile() {
+		compile = true;
 		try {
 			Sprite sprite = mySpriteFactory.createSprite(archetypes.getValue());
 			GameObject object = new GameObject(sprite, myName.getText());
@@ -75,10 +73,10 @@ public class GameObjectBuilder extends Builder {
 		Collection<String> items = new ArrayList<String>();
 		items = (mySpriteFactory.getAllArchetypeNames().size() > 0) ? mySpriteFactory.getAllArchetypeNames()
 				: new ArrayList<String>() {
-					{
-						add("<No archetypes made yet>");
-					}
-				};
+			{
+				add("<No archetypes made yet>");
+			}
+		};
 		archetypes.getItems().addAll(items);
 		return makeRow(new CustomText("Select an archetype:"), archetypes);
 	}
@@ -86,5 +84,12 @@ public class GameObjectBuilder extends Builder {
 	public void setDraggedImage(String path) {
 		this.path = path;
 	}
+
+	@Override
+	public boolean compileStatus() {
+		return compile;
+	}
+
+
 
 }
