@@ -136,8 +136,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             if (element instanceof VoogaFrontEndText) {
                 VoogaFrontEndText frontText = (VoogaFrontEndText) element;
                 BackEndText text = (BackEndText) frontText.getElementable();
+                System.out.println("Text:" +text);
                 TextProperties tp = new TextProperties();
-                text.setInitializationMap(tp.storeData(frontText));
+                text.setInitializationMap(
+                                          tp.storeData(frontText));
                 elements.add(text);
             }
         }

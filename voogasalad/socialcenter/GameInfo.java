@@ -21,6 +21,10 @@ public class GameInfo {
 		myHighScore = scoreAmount;
 	}
 	
+	public int getHighScore(){
+		return myHighScore;
+	}
+	
 	public void updateCheckpoint(String s){
 		myLastCheckpoint = myLastLevel;
 	}

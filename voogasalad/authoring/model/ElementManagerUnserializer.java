@@ -45,7 +45,9 @@ public class ElementManagerUnserializer {
                 nodeList.add(new GameObject(sprite, e.getName()));
             }
             if (e instanceof BackEndText){
-                
+                BackEndText text = (BackEndText) e;
+                text.init();
+                nodeList.add(new VoogaFrontEndText(text));
             }
         }
         

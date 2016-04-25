@@ -1,11 +1,13 @@
 package socialcenter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class SocialManager implements ISocialManager {
 
 	
-	private Map<String, UserInfo> myLeaderBoardInfo;
+	private List<UserInfo> myPlayers;
 	private LeaderBoardVisual myLeaderBoardVisual;
 	
 	
@@ -25,8 +27,14 @@ public class SocialManager implements ISocialManager {
 		
 	}
 
-	private void sortLeaderBoard(){
-		
+	private List<UserInfo> findTopTenScores(String game){
+		List<UserInfo> topScores = new ArrayList<UserInfo>();
+		for (UserInfo player: myPlayers){
+			if (player.checkIfGameIsPlayed(game)){
+				topScores.add(player);
+			}
+		}
+		return topScores;
 	}
 	
 	@Override
