@@ -22,6 +22,7 @@ import player.leveldatamanager.LevelData;
 import player.leveldatamanager.SpriteManager;
 import tools.VoogaAlert;
 import tools.VoogaException;
+import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
@@ -94,6 +95,9 @@ public class GameRunner implements IGameRunner {
 		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN;
 		myLevelData.updatedGlobalTimer(secondspassed);
 		//check if we need to transition to a different level
+    	if (myLevelData.getSaveNow()){
+    		saveGameProgress("Josh");
+    	}
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
@@ -216,5 +220,11 @@ public class GameRunner implements IGameRunner {
 		Scene myScene = myGameDisplay.getMyScene();
 		String fileName = myCurrentLevelString;
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
+	}
+
+	@Override
+	public IGameRunner getSelf() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

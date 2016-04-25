@@ -19,6 +19,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
+import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
@@ -61,6 +62,8 @@ public class LevelData implements ILevelData {
     private static final String TIMER = "Time";
     private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
     private static final String CONTINIOUS_CHAR = "MainCharacterID";
+    private static final String SAVE_PROGRESS = "SaveProgress";
+
 
     private IDisplayScroller myScroller;
     private ResourceBundle methods;
@@ -299,6 +302,12 @@ public class LevelData implements ILevelData {
         // HARDCODED FOR NOW!!!!
         return ((String) (((VoogaString) myGlobalVariables.get(NEXT_LEVEL_INDEX)).getValue()));
     }
+    
+    public boolean getSaveNow () {
+        // HARDCODED FOR NOW!!!!
+       return (Boolean) (((VoogaString) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
+    }
+    
 
     public void setNextLevelName (String levelName) {
         myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(levelName));
@@ -316,7 +325,8 @@ public class LevelData implements ILevelData {
      */
 
     public void saveProgress (String filePath, String playerName) {
-
+    	
+    	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
         DataContainerOfLists dataContainer =
                 new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
