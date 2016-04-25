@@ -2,6 +2,7 @@ package authoring.tagextension;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -42,10 +43,10 @@ public class GameTagLibrary {
 	public List<String> getListOfGameNamesByTag(List<String> descriptionlist){
 		myDescripList = descriptionlist;
 		List<String> gamenames = new ArrayList<String>();
-		Map<List<Tag>,String> tagmap = deSerializeAllGameTags();
+		List<GameTagPair> gtpairs = deSerializeAllGameTags();
 		
-		for(List<Tag> key : tagmap.keySet()){
-			gamenames.add(tagmap.get(key));
+		for(GameTagPair gtp : gtpairs){
+			gamenames.add(gtp.getGameName());
 		}
 		System.out.println(gamenames);
 		return gamenames;
@@ -56,10 +57,11 @@ public class GameTagLibrary {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private Map<List<Tag>,String> deSerializeAllGameTags(){
+	private List<GameTagPair> deSerializeAllGameTags(){
 		File dir = new File(TAGS_FOLDER_LOCATION);
 		TagListComparator comp = new TagListComparator(myDescripList);
-		Map<List<Tag>,String> tagtogamemap = new TreeMap<List<Tag>,String>(comp);
+		List<GameTagPair> gtpairs = new ArrayList<GameTagPair>();
+		//Map<List<Tag>,String> tagtogamemap = new TreeMap<List<Tag>,String>(comp);
 		
 		int count = 0;
 		
@@ -74,15 +76,16 @@ public class GameTagLibrary {
 					System.out.println("objects: "+objects);
 					myTags = (List<Tag>) objects.get(0);
 					System.out.println("moreobjects: "+myTags);
-					tagtogamemap.put(myTags,gamename);
-					System.out.println(tagtogamemap);
-					System.out.println("getting gamename: "+tagtogamemap.get(myTags));
+					GameTagPair gtp = new GameTagPair(gamename, myTags);
+					gtpairs.add(gtp);
+					System.out.println(gtpairs);
 				} catch (VoogaException e) {e.printStackTrace();}
 			}
 		}
 		System.out.println(count);
-		System.out.println(tagtogamemap.size());
-		return tagtogamemap;
+		System.out.println(gtpairs.size());
+		Collections.sort(gtpairs,comp);
+		return gtpairs;
 	}
 }
 		  
