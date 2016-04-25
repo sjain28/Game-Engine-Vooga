@@ -23,11 +23,16 @@ public class SpriteManager {
 	 * 
 	 */
 	public void update(ILevelData leveldata) {
+		System.out.println("HERE :D");
 		Set<Entry<String, Elementable>> elements = leveldata.getElementables();
-		elements.stream().forEach((elem) -> {
+		elements.stream().forEach((elempair) -> {
+			Elementable elem = elempair.getValue();
 			if(elem instanceof Sprite){
+				System.out.println("here");
 				if((Boolean) ((Sprite) elem).getProperty(ALIVE).getValue() == false){
+					System.out.println("its dead");
 					elements.remove(elem);
+					System.out.println(elements.contains(elem));
 				}
 				else{
 					applyGravity((Sprite) elem,leveldata.getPhysicsEngine());

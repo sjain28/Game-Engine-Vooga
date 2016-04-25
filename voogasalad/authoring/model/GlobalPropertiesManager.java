@@ -11,6 +11,7 @@ import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 
@@ -74,5 +75,6 @@ public class GlobalPropertiesManager implements Elementable {
     	addProperty(VoogaBundles.defaultglobalvars.getProperty("Time"), new VoogaNumber(0.0));
     	addProperty(VoogaBundles.defaultglobalvars.getProperty("Score"), new VoogaNumber(0.0));
     	addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"), new VoogaBoolean(false));
+    	addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"), new VoogaString(""));
     }
 }

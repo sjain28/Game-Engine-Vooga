@@ -94,8 +94,8 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
+    	System.out.println(myElements);
     	return myElements.entrySet();
-        //return Collections.unmodifiableMap(myElements);
     }
     /**
      * Returns a list of sprite IDs given an archetype
