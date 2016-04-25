@@ -25,6 +25,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import tools.VoogaAlert;
 import tools.VoogaBoolean;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -34,14 +35,17 @@ public class GenericPropertiesTab extends Tab {
 
 	private static final double SPACING = 10;
 
-	private VBox box = new VBox(SPACING);
+	private VBox box;
+	private HBox propertiesHBox;
 	protected Map<String, VoogaData> propertiesMap;
-	private HBox propertiesHBox = new HBox(10);
-	protected ScrollPane myScrollPane = new ScrollPane();
+	protected ScrollPane myScrollPane;
 	private Elementable myElementable;
 
 	public GenericPropertiesTab (String tabName) {
+		box = new VBox(SPACING);
+		propertiesHBox = new HBox(10);
 		propertiesMap = new HashMap<String, VoogaData>();
+		myScrollPane = new ScrollPane();
 		this.setText(tabName);
 		this.setClosable(false); 
 		box.getChildren().add(myScrollPane);
@@ -55,38 +59,42 @@ public class GenericPropertiesTab extends Tab {
 	 * @param o
 	 */
 	public void getPropertiesMap(Elementable elem) {
-		//System.out.println("Setting Up Global Properties");
 		myElementable = elem;
 		propertiesMap = myElementable.getVoogaProperties();
 		updateProperties();
 	}
 
+	/**
+	 * Updates the property scrollpane based on the properties of the elementable
+	 */
 	public void updateProperties () {
-		propertiesHBox.getChildren().clear();
+		if (elementablePresent()) {
+			propertiesHBox.getChildren().clear();
 
-		VBox properties = new VBox(SPACING);
-		Text name = null;
-		Node node = null;
+			VBox properties = new VBox(SPACING);
+			Text name = null;
+			Node node = null;
 
-		for (String property : propertiesMap.keySet()) {
-			name = new CustomText(property);
+			for (String property : propertiesMap.keySet()) {
+				name = new CustomText(property);
 
-			ContextMenu menu = new ContextMenu();
-			MenuItem delete = new MenuItem("Delete");
-			delete.setOnAction(e -> removeProperty(property));
-			menu.getItems().add(delete);
+				ContextMenu menu = new ContextMenu();
+				MenuItem delete = new MenuItem("Delete");
+				delete.setOnAction(e -> removeProperty(property));
+				menu.getItems().add(delete);
 
-			name.setOnMouseClicked(e -> {
-				if (e.getButton() == MouseButton.SECONDARY) {
-					menu.show(myScrollPane, e.getScreenX(), e.getScreenY());
-				}
-			});
-			node = propertiesMap.get(property).display();
-			bindDataToMap(property, node, propertiesMap.get(property));  
-			properties.getChildren().add(new PropertyBox(name, node));
+				name.setOnMouseClicked(e -> {
+					if (e.getButton() == MouseButton.SECONDARY) {
+						menu.show(myScrollPane, e.getScreenX(), e.getScreenY());
+					}
+				});
+				node = propertiesMap.get(property).display();
+				bindDataToMap(property, node, propertiesMap.get(property));  
+				properties.getChildren().add(new PropertyBox(name, node));
+			}
+			propertiesHBox.getChildren().addAll(properties);
+			myScrollPane.setContent(propertiesHBox);
 		}
-		propertiesHBox.getChildren().addAll(properties);
-		myScrollPane.setContent(propertiesHBox);
 	}
 
 	/**
@@ -127,10 +135,12 @@ public class GenericPropertiesTab extends Tab {
 	 * Creates the Dialog Box that allows new Properties to be added
 	 */
 	public void addNewPropertyPrompt () {
-		PropertyBuilder pBuilder = new PropertyBuilder();
-		pBuilder.showAndWait();
-		if (pBuilder.compileStatus() && pBuilder.getName() != null && pBuilder.getValue() != null) {
-			addNewProperty(pBuilder.getName(), pBuilder.getValue());
+		if (elementablePresent()) {
+			PropertyBuilder pBuilder = new PropertyBuilder();
+			pBuilder.showAndWait();
+			if (pBuilder.compileStatus() && pBuilder.getName() != null && pBuilder.getValue() != null) {
+				addNewProperty(pBuilder.getName(), pBuilder.getValue());
+			}
 		}
 	}
 
@@ -155,6 +165,18 @@ public class GenericPropertiesTab extends Tab {
 		myElementable.removeProperty(s);
 		propertiesMap.remove(s);
 		updateProperties();
+	}
+
+	/**
+	 * Checks if there is a sprite selected.
+	 * @return
+	 */
+	private boolean elementablePresent(){
+		if (myElementable == null) {
+			new VoogaAlert("No Sprite Selected");
+			return false;
+		}
+		return true;
 	}
 
 }
