@@ -6,6 +6,10 @@ package player.leveldatamanager;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+
+import authoring.interfaces.Elementable;
 import events.KeyCause;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -23,8 +27,8 @@ public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
 
-	List<Sprite> getAllSprites();
-
+	Set<Entry<String, Elementable>> getElementables();
+    
 	List<Node> getDisplayableNodes();
 
 	Map<List<String>, KeyCause> getKeyCauses();

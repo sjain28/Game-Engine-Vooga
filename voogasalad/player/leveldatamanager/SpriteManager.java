@@ -1,10 +1,12 @@
 package player.leveldatamanager;
 
-import java.util.List;
+import java.util.Set;
+import java.util.Map.Entry;
+
+import gameengine.BackEndText;
+import authoring.interfaces.Elementable;
 import gameengine.Sprite;
 import physics.IPhysicsEngine;
-import tools.VoogaBoolean;
-import tools.interfaces.VoogaData;
 
 /**In charge of taking in a Map of Sprite's and updating them
  * on each step, according to present physics effects
@@ -20,24 +22,41 @@ public class SpriteManager {
 	 * before Events (causes and effects) are applied
 	 * 
 	 */
-	public void update(ILevelData myLevelData, IPhysicsEngine physics) {
-		List<Sprite> sprites = myLevelData.getAllSprites();
+	public void update(ILevelData leveldata) {
+		Set<Entry<String, Elementable>> elements = leveldata.getElementables();
+		elements.stream().forEach((elem) -> {
+			if(elem instanceof Sprite){
+				if((Boolean) ((Sprite) elem).getProperty(ALIVE).getValue() == false){
+					elements.remove(elem);
+				}
+				else{
+					applyGravity((Sprite) elem,leveldata.getPhysicsEngine());
+					((Sprite) elem).update();
+				}
+			}
+			if(elem instanceof BackEndText){
+				((BackEndText) elem).update();
+			}
+		});
+		
+		/*
 		for(int i = 0; i < sprites.size(); i++){
 			Sprite s = sprites.get(i);
-			//Clean up all dead Sprites
 			for(String key : s.getPropertiesMap().keySet()){
 				VoogaData data = s.getProperty(key);
 				Object obj = data.getValue();
 			}
+			//Clean up all dead Sprite's
 			if((Boolean) s.getProperty(ALIVE).getValue() == false){
-				myLevelData.removeSprite(s.getId());
+				leveldata.removeSprite(s.getId());
 			}
 			else{
 				//Apply gravity to all Sprites
-				applyGravity(s, physics);
+				applyGravity(s, leveldata.getPhysicsEngine());
 				s.update();
 			}
 		}
+		*/
 	}
 	/**
 	 * Using gravity field of each sprite, updates sprites' velocity
