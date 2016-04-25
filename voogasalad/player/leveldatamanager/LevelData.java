@@ -69,7 +69,6 @@ public class LevelData implements ILevelData {
 	
 	public LevelData(IPhysicsEngine physicsengine) {
 		methods = VoogaBundles.EventMethods;
-		System.out.println(methods);
 		myPhysics = physicsengine;
 		myContinuousSpriteIDs = new ArrayList<String>();
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);

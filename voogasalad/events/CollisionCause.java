@@ -49,7 +49,7 @@ public class CollisionCause extends Cause{
 	@Override
 	public boolean check(ILevelData data) {
 		
-		collidedSprites.clear();
+		collidedSprites = new ArrayList<>();
 		boolean myVal = false;
 		IPhysicsEngine physics = data.getPhysicsEngine();
 
@@ -59,6 +59,8 @@ public class CollisionCause extends Cause{
 					if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
 						addSprites(a,b);
 						myVal = true;
+						System.out.println("X: " + physics.checkCollisionX(a, b));
+						System.out.println("Y: " + physics.checkCollisionY(a, b));
 					}
 				}else{
 					myVal = handleCollision(a,b,data);
@@ -95,8 +97,8 @@ public class CollisionCause extends Cause{
 	
 	private void initMap(){
 		collisionDirections = new HashMap<>();
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), -1);
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), 1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), 1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), -1);
 	}
 	
 	public List<Sprite> getAllCollidedSprites(){
