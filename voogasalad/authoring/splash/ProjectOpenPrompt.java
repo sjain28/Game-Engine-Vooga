@@ -7,6 +7,7 @@ import java.util.List;
 import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.resourceutility.ButtonMaker;
+import authoring.tagextension.GamesListing;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
