@@ -31,7 +31,7 @@ public class VariableEffectGUI implements EventGUI {
         this.elementManager = elementManager;
         node = new VBox();
         activeNodes = new ArrayList<Node>();
-
+        
         initialize(level, name, variables, actions);
     }
 
@@ -47,7 +47,7 @@ public class VariableEffectGUI implements EventGUI {
 
     private void setChangeListeners () {
         level.setOnAction(e -> {
-            // System.out.println("level activated");
+            //System.out.println("level activated");
             resetNode();
             addGUIElements(level);
 
@@ -61,15 +61,14 @@ public class VariableEffectGUI implements EventGUI {
         });
 
         name.setOnAction(e -> {
-            // System.out.println("name activated");
+//            System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
-            variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId())
-                    .getVoogaProperties());
+            variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             addGUIElements(variables);
         });
 
         variables.setOnAction(e -> {
-            // System.out.println("variables activated");
+//            System.out.println("variables activated");
             removeInactiveNodes(actions, amount);
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
@@ -87,10 +86,10 @@ public class VariableEffectGUI implements EventGUI {
                 addGUIElements(actions, amount);
             }
             if (vd instanceof VoogaString) {
-                actions.getItems().addAll("Set");
-                TextField field = new TextField();
-                amount = field;
-                addGUIElements(actions, amount);
+            	actions.getItems().addAll("Set");
+            	TextField field = new TextField();
+            	amount = field;
+            	addGUIElements(actions, amount);
             }
 
             actions.getItems().addAll();
@@ -123,29 +122,27 @@ public class VariableEffectGUI implements EventGUI {
     }
 
     @Override
-    public String getDetails () throws VoogaException {
-        String result = "";
-        if (level.getValue().contains("global")) {
+    public String getDetails () throws VoogaException{
+        String result="";
+        if (level.getValue().contains("global")){
             result += "events.VariableEffect ";
         }
-        if (level.getValue().contains("local")) {
-            result += "events.SpriteEffect " + name.getSpriteId() + " ";
+        if (level.getValue().contains("local")){
+            result += "events.SpriteEffect "+name.getSpriteId() + " ";
         }
-        result += variables.getValue() +
-                  " " + VoogaBundles.EventMethods.getString(actions.getValue()) + " ";
-
-        if (amount instanceof NumberTextField) {
-            result += ((NumberTextField) amount).getText();
-        }
-        else if (amount instanceof ComboBox) {
+        result+=variables.getValue()+
+                " "+VoogaBundles.EventMethods.getString(actions.getValue())+" ";
+        
+        if (amount instanceof NumberTextField){
+            result+=((NumberTextField) amount).getText();
+        } else if (amount instanceof ComboBox){
             result += ((ComboBox) amount).getValue();
+        } else if (amount instanceof TextField) {
+        	result += ((TextField) amount).getText();
         }
-        else if (amount instanceof TextField) {
-            result += ((TextField) amount).getText();
-        }
-
+        
         System.out.println(result);
-
+        
         return result;
     }
 

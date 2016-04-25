@@ -66,7 +66,6 @@ public class LevelData implements ILevelData {
 	
 	public LevelData(IPhysicsEngine physicsengine) {
 		methods = VoogaBundles.EventMethods;
-		System.out.println(methods);
 		myPhysics = physicsengine;
 		myContinuousSpriteIDs = new ArrayList<String>();
 		myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
@@ -133,7 +132,7 @@ public class LevelData implements ILevelData {
 	 * 
 	 * @param id
 	 */
-	public void removeSprite(Object id){
+	public void removeSprite(String id){
 		myElements.remove(id);
 	}
 	/**
@@ -230,13 +229,11 @@ public class LevelData implements ILevelData {
 		DataContainerOfLists data = new DataContainerOfLists();
 		FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
 		data = fileManager.getDataContainer();
-      
+		
 		List<Elementable> spriteObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + spriteObjects);
 
 
 		List<Elementable> elementObjects = data.getElementableList();
-		System.out.println("All the sprites here are" + elementObjects);
 
 		//clear all the instance variables
 		myElements.clear();
@@ -267,24 +264,19 @@ public class LevelData implements ILevelData {
 		}
 
 		List<VoogaEvent> eventObjects = data.getEventList();
-		System.out.println("All the events here are" + eventObjects);
 
 		for(VoogaEvent e : eventObjects){
 			addEventAndPopulateKeyCombos(e);
 		}
 		
 		Map<String,Sprite> archetypeMap = data.getArchetypeMap();
-		System.out.println("All the events here are" + eventObjects);
 		
 		mySpriteFactory = new SpriteFactory(archetypeMap);
 
-		System.out.println("The spriteFactory here is" + mySpriteFactory);
 
 		myGlobalVariables = data.getVariableMap();
-		System.out.println("All the variables here are" + myGlobalVariables);
 		//initialize timer to zero here as well as level index
 		myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
-		System.out.println("Did the timer here happen");
 		myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));
 	}
 

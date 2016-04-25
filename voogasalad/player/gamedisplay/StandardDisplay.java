@@ -14,7 +14,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import tools.IVoogaGameSound;
 import tools.OrderedProperties;
+import tools.VoogaGameSound;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -30,7 +32,7 @@ public class StandardDisplay implements IGameDisplay {
 	private IPromptFactory myPrompt;
 	private IControl myControl;
 	private IHUD myHUD;
-	private IGameSound myGameSound;
+	private IVoogaGameSound myGameSound;
 	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
@@ -55,6 +57,7 @@ public class StandardDisplay implements IGameDisplay {
 	private void initialize() {
 		myControl = new StandardControl(myGameRunner);
 		myHUD = new StandardHUD(myGameRunner);
+		myGameSound = new VoogaGameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
@@ -113,8 +116,11 @@ public class StandardDisplay implements IGameDisplay {
 	private void addEffects() {
 		myStage.show();
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
-		//myGameSound.playBGM();
-		myStage.setOnCloseRequest(e -> myGameSound.stopBGM());
+		myGameSound.playBGM();
+		myStage.setOnCloseRequest(e -> {
+			myGameRunner.stop();
+			myGameSound.stopBGM();
+		});
 	}
 	
 	/**

@@ -199,7 +199,6 @@ public class DesignBoard extends Tab implements Observer {
 
     private void displayElements (Collection<Node> nodeList) {
         for (Node node : nodeList) {
-            System.out.println(((TextField) node).getText());
             if (!contentPane.getChildren().contains(node)) {
                 System.out.println("displaying element"+node);
                 contentPane.getChildren().add(node);

@@ -13,7 +13,7 @@ import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
-public class VariableCauseGUI implements EventGUI {
+public class VariableCauseGUI implements EventGUI{
     private ComboBox<String> level;
     private SpriteComboBox name;
     private VariableComboBox variables;
@@ -23,12 +23,12 @@ public class VariableCauseGUI implements EventGUI {
     private EditEventable elementManager;
     private VBox node;
     private List<Node> activeNodes;
-
+    
     public VariableCauseGUI (EditEventable elementManager) {
         this.elementManager = elementManager;
         node = new VBox();
         activeNodes = new ArrayList<Node>();
-
+        
         initialize(level, name, variables, actions);
     }
 
@@ -44,7 +44,7 @@ public class VariableCauseGUI implements EventGUI {
 
     private void setChangeListeners () {
         level.setOnAction(e -> {
-            // System.out.println("level activated");
+            //System.out.println("level activated");
             resetNode();
             addGUIElements(level);
 
@@ -58,16 +58,15 @@ public class VariableCauseGUI implements EventGUI {
         });
 
         name.setOnAction(e -> {
-            // System.out.println("name activated");
+            //System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
-            // System.out.println(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
-            variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId())
-                    .getVoogaProperties());
+            //System.out.println(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
+            variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
             addGUIElements(variables);
         });
 
         variables.setOnAction(e -> {
-            // System.out.println("variables activated");
+            //System.out.println("variables activated");
             removeInactiveNodes(actions, amount);
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
@@ -87,7 +86,7 @@ public class VariableCauseGUI implements EventGUI {
 
             actions.getItems().addAll();
         });
-
+        
     }
 
     private void addGUIElements (Node ... elements) {
@@ -98,15 +97,15 @@ public class VariableCauseGUI implements EventGUI {
         node.getChildren().clear();
         activeNodes.clear();
     }
-
-    private void removeInactiveNodes (Node ... elements) {
-        for (Node element : elements) {
-            if (node.getChildren().contains(element)) {
+    
+    private void removeInactiveNodes(Node...elements){
+        for (Node element: elements){
+            if (node.getChildren().contains(element)){
                 activeNodes.remove(element);
                 node.getChildren().remove(element);
             }
         }
-
+        
     }
 
     @Override
@@ -115,21 +114,20 @@ public class VariableCauseGUI implements EventGUI {
     }
 
     @Override
-    public String getDetails () {
-        String result = "";
-        if (level.getValue().contains("global")) {
+    public String getDetails(){
+        String result="";
+        if (level.getValue().contains("global")){
             result += "events.VariableCause ";
         }
-        if (level.getValue().contains("local")) {
-            result += "events.SpriteVariableCause " + name.getSpriteId() + " ";
+        if (level.getValue().contains("local")){
+            result += "events.SpriteVariableCause "+name.getSpriteId()+" ";
         }
-        result += variables.getValue() +
-                  " " + VoogaBundles.EventMethods.getString(actions.getValue()) + " ";
-
-        if (amount instanceof NumberTextField) {
-            result += ((NumberTextField) amount).getText();
-        }
-        else {
+        result+=variables.getValue()+
+                " "+VoogaBundles.EventMethods.getString(actions.getValue())+" ";
+        
+        if (amount instanceof NumberTextField){
+            result+=((NumberTextField) amount).getText();
+        } else {
             result += ((ComboBox) amount).getValue();
         }
         return result;

@@ -38,6 +38,8 @@ public interface ILevelData {
 	Sprite getSpriteByID(String id);
 
 	List<Sprite> getSpritesByArch(String archA);
+	
+	void removeSprite(String id);
 
 	List<List<String>> getKeyPressCombos();
 	
