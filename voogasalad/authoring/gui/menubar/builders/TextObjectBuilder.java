@@ -5,6 +5,7 @@ import authoring.model.VoogaFrontEndText;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+
 public class TextObjectBuilder extends Builder {
 
 	private VBox container;
@@ -36,5 +37,6 @@ public class TextObjectBuilder extends Builder {
 	public boolean compileStatus() {
 		return compile;
 	}
+
 
 }
