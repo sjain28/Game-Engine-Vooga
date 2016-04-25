@@ -16,7 +16,7 @@ import authoring.model.ElementSelectionModel;
 import javafx.scene.control.Tab;
 
 public class PropertiesTabManager implements Observer {
-	
+
 	public final static String GLOBAL_PROPERTIES = "Global Variables";
 	public final static String SPRITE_PROPERTIES = "Sprite Properties";
 
@@ -48,7 +48,7 @@ public class PropertiesTabManager implements Observer {
 	 * Populates the tab list.
 	 */
 	private void populateTabList() {
-	
+
 		myPropertyTabs.add(SPT);
 		myPropertyTabs.add(GPT);
 	}
