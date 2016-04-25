@@ -2,20 +2,14 @@ package authoring.gui.menubar.builders;
 
 import authoring.CustomText;
 import authoring.gui.items.SwitchButton;
-import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.EditElementable;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import player.gamedisplay.Menuable;
-import tools.VoogaException;
+import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
@@ -32,6 +26,7 @@ public class PropertyBuilder extends Builder {
 	private HBox buttons;
 	private SwitchButton swtch;
 	private String chosenData;
+	private boolean correctData;
 
 	public PropertyBuilder() {
 		this(null);
@@ -46,6 +41,7 @@ public class PropertyBuilder extends Builder {
 		this.boolSelector = makeRow(new CustomText("Value:"), swtch);
 		this.buttons = makeButtons();
 		this.chosenData = VOOGA_NUMBER;
+		this.correctData = true;
 		populate();
 		load(this.container);
 	}
@@ -82,37 +78,50 @@ public class PropertyBuilder extends Builder {
 	}
 
 	public String getName() {
+		if (variableName.getText().equals("")){
+			new VoogaAlert("Please input a variable name");
+			return null;
+		}
 		return this.variableName.getText();
 	}
 
 	public VoogaData getValue() {
-        VoogaData data;
-        Class<?> clazz;
-        try {
-            clazz = Class.forName("tools." + chosenData);
-            data = (VoogaData) clazz.getConstructor().newInstance();
-            try {
-            	data.setValue(Double.parseDouble(variableValue.getText()));
-            } catch(NumberFormatException e) {
-            	
-            }
-            data.setValue(swtch.switchOnProperty());
-            return data;
-        }
-        catch (Exception ee) {
-            ee.printStackTrace();
-            return null;
-        }
+		VoogaData data;
+		Class<?> clazz;
+		try {
+			clazz = Class.forName("tools." + chosenData);
+			data = (VoogaData) clazz.getConstructor().newInstance();
+			if (data instanceof VoogaNumber){
+				try {
+					data.setValue(Double.parseDouble(variableValue.getText()));
+				} catch(NumberFormatException e) {
+					numberError("Please input a valid number");
+					data = null;
+				}
+			} else {
+				data.setValue(swtch.switchOnProperty());
+			}
+			return data;
+		}
+		catch (Exception ee) {
+			ee.printStackTrace();
+			return null;
+		}
+	}
+
+	public boolean dataCorrect() {
+		return correctData;
 	}
 
 	@Override
 	public void compile() {
-		try {
-			
-		} catch (Exception e) {
-			numberError("Please input a valid number");
-		}
+		compile = true;
 		quit();
+	}
+
+	@Override
+	public boolean compileStatus() {
+		return compile;
 	}
 
 }

@@ -1,5 +1,5 @@
 package authoring.gui.menubar.builders;
-
+/*
 import facebook4j.Facebook;
 import facebook4j.FacebookFactory;
 import facebook4j.auth.AccessToken;
@@ -19,5 +19,5 @@ public class FacebookShare extends Stage{
         //fbook.setOAuthAccessToken();
         
     }
-
 }
+*/

@@ -1,5 +1,5 @@
 package authoring.gui.menubar.menuitems;
-
+/*
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.FacebookShare;
 import player.gamedisplay.Menuable;
@@ -19,3 +19,4 @@ public class FacebookShareItem extends MenuItemHandler {
     }
 
 }
+*/
