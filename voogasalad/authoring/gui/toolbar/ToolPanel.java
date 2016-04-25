@@ -37,9 +37,20 @@ public class ToolPanel extends ToolBar {
             Button btn = maker.makeButton("", toolbarEvent);
             btn.setGraphic(graphic);
             btn.setId(key);
-            btn.setTooltip(new Tooltip(key));
+            btn.setTooltip(new Tooltip(splitCamelCase(key)));
             this.getItems().add(btn);
         }
     }
+    
+    private String splitCamelCase(String s) {
+        return s.replaceAll(
+           String.format("%s|%s|%s",
+              "(?<=[A-Z])(?=[A-Z][a-z])",
+              "(?<=[^A-Z])(?=[A-Z])",
+              "(?<=[A-Za-z])(?=[^A-Za-z])"
+           ),
+           " "
+        );
+     }
 
 }
