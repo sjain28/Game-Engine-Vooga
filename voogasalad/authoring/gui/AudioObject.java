@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
+import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 public class AudioObject extends ImageView implements Elementable {
@@ -67,6 +68,12 @@ public class AudioObject extends ImageView implements Elementable {
 	public Node getNodeObject() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void init() throws VoogaException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
