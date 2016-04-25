@@ -2,7 +2,7 @@ package authoring.resourceutility;
 
 import java.io.File;
 import java.util.List;
-import authoring.tagextension.TagMaker;
+import authoring.tagextension.GameTagManager;
 import tools.VoogaException;
 import tools.VoogaFileChooser;
 
@@ -17,7 +17,7 @@ import tools.VoogaFileChooser;
 public class FileImporter {
 
     private ResourceTreeView rtv;
-    private TagMaker tagmaker;
+    private GameTagManager tagmaker;
     private File fileToImport;
 
     /**
@@ -29,14 +29,14 @@ public class FileImporter {
      */
     public FileImporter (ResourceTreeView rtv) throws VoogaException {
     	System.out.println("here");
-    	tagmaker = new TagMaker();
+    	tagmaker = new GameTagManager();
         this.rtv = rtv;
         
         VoogaFileChooser chooser = new VoogaFileChooser();
         String path = chooser.launch();
         System.out.println("path"+path);
         System.out.println("about to use tag maker");
-        tagmaker.addTagsFromImage(path);
+        //tagmaker.addTagsFromImage(path);
         System.out.println("importing file: "+path);
         fileToImport = new File(path);
         provideToUI();
