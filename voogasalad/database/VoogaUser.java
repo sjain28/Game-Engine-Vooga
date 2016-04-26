@@ -8,12 +8,14 @@ import tools.interfaces.VoogaData;
 
 public class VoogaUser extends VoogaCellUser{
 
+	String myDisplayName;
 	String myUsername;
 	String myPassword;
 	String myProfPicLocation;
 	
-	public VoogaUser(String resourceString, String username, String password, String profPicLocation){
-		super(resourceString);
+	public VoogaUser(String displayname,String username, String password, String profPicLocation){
+		super();
+		myDisplayName = displayname;
 		myUsername = username;
 		myPassword = password;
 		myProfPicLocation = profPicLocation;
@@ -22,5 +24,4 @@ public class VoogaUser extends VoogaCellUser{
 	public ImageView displayProfilePicture(){
 		return new ImageView(new Image(myProfPicLocation));
 	}
-
 }

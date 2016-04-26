@@ -13,8 +13,8 @@ public class VoogaCellUser implements VoogaInfoCell{
 	private ResourceBundle propertyList;  
 	private Map<String, VoogaData> myPropertyMap;
 	
-	public VoogaCellUser(String resourceString){
-		propertyList = ResourceBundle.getBundle(resourceString);
+	public VoogaCellUser(){
+//		propertyList = ResourceBundle.getBundle(resourceString);
 		 myPropertyMap = new HashMap<String, VoogaData>();
 	}
 	

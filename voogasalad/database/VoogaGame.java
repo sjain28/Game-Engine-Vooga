@@ -4,16 +4,19 @@ package database;
 public class VoogaGame extends VoogaCellUser{
 
 
-	private String myDescription;
-
-	public VoogaGame(String resourceString, String description){
-		super(resourceString);
-		myDescription = description;
-	}
+	private String myGameName;
 	
-	public String getDescription(){
-		return myDescription;
+	public VoogaGame(String gameName){
+		myGameName = gameName;
 	}
+//	public VoogaGame(String resourceString, String description){
+//		super(resourceString);
+//		myDescription = description;
+//	}
+//	
+//	public String getDescription(){
+//		return myDescription;
+//	}
 
 
 

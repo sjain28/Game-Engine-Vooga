@@ -1,70 +1,48 @@
 package authoring.splash;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.resourceutility.ButtonMaker;
-import authoring.tagextension.GamesListing;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class ProjectOpenPrompt extends StarterPrompt {
 	
-	private static final double WINDOW_WIDTH = 600;
-	private static final double WINDOW_HEIGHT = 300;
+	private static final double WIDTH = 400;
+	private static final double HEIGHT = 200;
+	private static final double SPACING = 10;
 	
-	private static final String GAMES_FOLDER_PATH = "games";
-	
+	private Button openAll;
+	private Button openBySearch;
 	private VBox container;
-	private GamesListing gamesListing;
 	
 	public ProjectOpenPrompt() {
 		super();
 	}
 	
 	@Override
-	public void setProceedEvent(EventHandler<ActionEvent> proceedEvent) {
-		gamesListing.populateGamesList(getGamesList(), proceedEvent);
+	protected void setProceedEvent(EventHandler<ActionEvent> proceedEvent) {
+		openAll = new ButtonMaker().makeButton("Browse All", proceedEvent);
+		openAll.setId("OpenAll");
+		openBySearch = new ButtonMaker().makeButton("Play By Search", proceedEvent);
+		openBySearch.setId("OpenBySearch");
+		container.getChildren().addAll(openAll, openBySearch);
 	}
 	
 	@Override
 	protected void initializeContainer() {
 		container = new VBox();
 		container.setSpacing(SPACING);
-		container.setPadding(new Insets(SPACING));
-		gamesListing = new GamesListing();
-		container.getChildren().addAll(makeRow(new CustomText("Welcome back!", FontWeight.BOLD, HEADER_SIZE)),
-									   makeRow(new CustomText("Load a game.", FontWeight.BOLD)),
-							  	       makeRow(gamesListing));
-	}
-	
-	private List<String> getGamesList() {
-		List<String> myGames = new ArrayList<String>();
-		File gamesFolder = new File(GAMES_FOLDER_PATH);
-		for(File game : gamesFolder.listFiles()) {
-			myGames.add(game.getName());
-		}
-		return myGames;
+		container.setAlignment(Pos.CENTER);
 	}
 	
 	@Override
 	protected void setTheScene() {
-		Scene scene = new VoogaScene(container, WINDOW_WIDTH, WINDOW_HEIGHT);
+		// TODO Auto-generated method stub
+		Scene scene = new VoogaScene(container, WIDTH, HEIGHT);
 		this.setScene(scene);
 	}
 

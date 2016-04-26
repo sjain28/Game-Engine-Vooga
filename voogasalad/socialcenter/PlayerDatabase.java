@@ -19,15 +19,6 @@ public class PlayerDatabase {
 	public String[][] generateUserGameStats(){
 		return null;
 	}
-	
-	public void createUserProfile(String playerName){
-		UserInfo user = new UserInfo(playerName);
-		myPlayerData.add(user);
-	}
-	
-	public void createGameProfile(String gameName){
-		GameInfo game = new GameInfo(gameName);
-		myGameData.add(game);
-	}
+
 	
 }
