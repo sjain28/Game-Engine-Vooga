@@ -14,7 +14,7 @@ import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
-public class NewVariableFileItem extends MenuItemHandler {
+public class NewVariableNewItem extends MenuItemHandler {
 	private EditElementable myManager;
 
 	/**
@@ -26,7 +26,7 @@ public class NewVariableFileItem extends MenuItemHandler {
 	 *            Unused vestige of previous poor programming. Should soon be
 	 *            phased out.
 	 */
-	public NewVariableFileItem(Menuable model) {
+	public NewVariableNewItem(Menuable model) {
 
 		super();
 		myManager = (EditElementable) model.getManager();
