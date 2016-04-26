@@ -36,7 +36,7 @@ public class CollisionCause extends Cause{
 	private List<Sprite> getSprites(ILevelData data, String arch){
 		List<Sprite> group = new ArrayList<>();
 	        
-		if(arch.contains("-")){		
+		if(arch.matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")){		
 			group.add(data.getSpriteByID(arch)); //If contains dash, it's a Sprite ID
 		}
 		else{
