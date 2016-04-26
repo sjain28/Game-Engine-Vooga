@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.Preferences;
+import data.Deserializer;
 import gameengine.Sprite;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -19,6 +21,7 @@ import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
+import resources.VoogaBundles;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -51,6 +54,7 @@ public class GameRunner implements IGameRunner {
 	private LevelListCreator myLevelListCreator;
 	private Timeline myTimeline;
     private String myCurrentLevelString;
+	private String myName;
     // TODO: Test
 	private int myCurrentStep;
 
@@ -58,6 +62,7 @@ public class GameRunner implements IGameRunner {
 	 * Default constructor
 	 */
 	public GameRunner() {
+		//myGameDisplay = new StandardDisplay(this);
 		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
 		mySpriteManager = new ElementUpdater();
@@ -119,6 +124,10 @@ public class GameRunner implements IGameRunner {
 	 */
 	public void playGame(String gameXmlList) {
 		try {
+			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/"+gameXmlList+"/"+gameXmlList+".xml").get(0);
+			double width = Double.parseDouble(preferences.getWidth());
+			double height = Double.parseDouble(preferences.getHeight());
+			myGameDisplay.setSceneDimensions(width, height);
 			createLevelList(gameXmlList);
 		} catch (Exception e) {
 			new VoogaAlert("Level List Initialization failed");			
@@ -150,6 +159,8 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
+		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
+										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
 		myGameDisplay.displayTestMode();
 		run();
 	}

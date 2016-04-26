@@ -117,13 +117,13 @@ public class VariableCauseGUI implements EventGUI{
     public String getDetails(){
         String result="";
         if (level.getValue().contains("global")){
-            result += "events.VariableCause ";
+            result += "events.VariableCause,";
         }
         if (level.getValue().contains("local")){
-            result += "events.SpriteVariableCause "+name.getSpriteId()+" ";
+            result += "events.SpriteVariableCause,"+name.getSpriteId()+",";
         }
         result+=variables.getValue()+
-                " "+VoogaBundles.EventMethods.getString(actions.getValue())+" ";
+                " "+VoogaBundles.EventMethods.getString(actions.getValue())+",";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();

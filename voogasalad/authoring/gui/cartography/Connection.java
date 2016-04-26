@@ -23,21 +23,27 @@ public class Connection extends Group {
 	private Level end;
 
 	public Connection(CompleteAuthoringModelable model, double startx, double starty, double endx, double endy) {
+		this(startx, starty, endx, endy);
+		initializeModel(model);
+	}
+
+	public Connection(double startx, double starty, double endx, double endy) {
 		this.startx = startx;
 		this.starty = starty;
 		this.endx = endx;
 		this.endy = endy;
-		
-		initializeLine(model);
+		initializeLine();
 		attachAnchors();
-
 		this.getChildren().addAll(connector, anchor1, anchor2);
 	}
-
-	private void initializeLine(CompleteAuthoringModelable model) {
+	
+	private void initializeLine() {
 		connector = new Line(startx, starty, endx, endy);
 		connector.setStrokeWidth(LINE_WIDTH);
 		connector.setStroke(Paint.valueOf("white"));
+	}
+
+	private void initializeModel(CompleteAuthoringModelable model) {
 		connector.setOnMouseClicked(e -> {
 			if(e.getClickCount() == 2) {
 				new ConnectionPrompt(start.getName(), end.getName(), model);

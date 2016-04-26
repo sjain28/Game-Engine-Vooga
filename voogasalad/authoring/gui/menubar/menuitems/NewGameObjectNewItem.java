@@ -1,34 +1,40 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.VoogaScene;
 import authoring.gui.menubar.MenuItemHandler;
+import authoring.gui.menubar.builders.Builder;
+import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.interfaces.model.EditElementable;
 import authoring.interfaces.model.Sceneable;
-import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
-public class NewSceneFileItem extends MenuItemHandler {
-
-    Menuable myUIManager;
+public class NewGameObjectNewItem extends MenuItemHandler {
+        EditElementable myManager;
         /**
          * Initializes the MenuItem
          * 
          * @param model to interface backend interactions with the model
          * @param event: Unused vestige of previous poor programming. Should soon be phased out.
          */
-	public NewSceneFileItem(Menuable model) {
+
+	public NewGameObjectNewItem(Menuable model) {
 
 		super();
-		myUIManager = model;
+		myManager = (EditElementable) model.getManager();
 	}
 	/**
          * Action to be taken on the selection of this menuItem
          */
 	@Override
 	public void handle() {
-		myUIManager.addScene();
+	    Builder popup = new GameObjectBuilder(myManager);
+	    popup.setTitle("New Game Object");
+	    popup.show();
 	}
 
 }

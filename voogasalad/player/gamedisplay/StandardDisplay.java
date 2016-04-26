@@ -62,10 +62,8 @@ public class StandardDisplay implements IGameDisplay {
 		myGameSound = new VoogaGameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
-		myGameScreen = new Pane();
-		
+		myGameScreen = new Pane();		
 		// Made the scene from log in scene creator;
-		
 		// myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
 		myLogInScreen = new LogInSceneCreator(); 
 		myScene = myLogInScreen.createLogInScene(myPane, PANE_SIZE,PANE_SIZE);
@@ -73,6 +71,11 @@ public class StandardDisplay implements IGameDisplay {
 		myKeyEvents = new ArrayList<>();
 		myKeyPresses = new ArrayList<>();
 		myKeyReleases = new ArrayList<>();
+	}
+	
+	@Override
+	public void setSceneDimensions(double width, double height) {
+		myScene = new VoogaScene(myPane, width, height);
 	}
 
 	/**

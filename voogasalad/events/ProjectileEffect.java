@@ -43,7 +43,7 @@ public class ProjectileEffect extends SpawnEffect {
 	public String toString(){
 		String effectString= "Shoots projectile " + getArchetype() + " from ";
 		if (getMyTargetID() != null){
-			effectString += getMyTargetID();
+			effectString += getMyTargetID() + " ";
 		}else{
 			effectString += getMyPosition().getX() + ", " + getMyPosition().getY();
 		}

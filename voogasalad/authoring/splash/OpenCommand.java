@@ -13,6 +13,8 @@ import authoring.VoogaScene;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.ElementManagerUnserializer;
+import authoring.model.Preferences;
+import data.Deserializer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -36,7 +38,11 @@ public class OpenCommand implements Command {
 						openAllPrompt.close();
 						String name = ((Button) ee.getSource()).getId();
 						List<CompleteAuthoringModelable> models = new ArrayList<CompleteAuthoringModelable>();
+						Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
 						VoogaBundles.preferences.setProperty("GameName", name);
+						VoogaBundles.preferences.setProperty("GameDescription", preferences.getDescription());
+						VoogaBundles.preferences.setProperty("GameWidth", preferences.getWidth());
+						VoogaBundles.preferences.setProperty("GameHeight", preferences.getHeight());
 						String prefixPath = "games/" + name + "/levels/";
 						File levelsFolder = new File(prefixPath);
 						for (File level : levelsFolder.listFiles()) {

@@ -15,7 +15,7 @@ import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
-public class NewArchetypeFileItem extends AuthoringMenuItemHandler {
+public class NewArchetypeNewItem extends AuthoringMenuItemHandler {
     EditElementable myManager;
     /**
      * Initializes the MenuItem
@@ -23,7 +23,7 @@ public class NewArchetypeFileItem extends AuthoringMenuItemHandler {
      * @param model to interface backend interactions with the model
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
-    public NewArchetypeFileItem(Menuable model) {
+    public NewArchetypeNewItem(Menuable model) {
 
             super();
             myManager =  (EditElementable) model.getManager();
