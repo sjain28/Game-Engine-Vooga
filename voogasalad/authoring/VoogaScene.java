@@ -5,12 +5,14 @@ import javafx.scene.Scene;
 
 /**
  * A custom extension of JavaFX's Scene, that applies CSS stylings automatically
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Nick Lockett, Arjun Desai
  *
  */
 public class VoogaScene extends Scene {
-	
+
 	private static final String STYLESHEET_PATH = "/application/application.css";
-	
+
 	/**
 	 * Initializes the new scene, automatically incorporating CSS
 	 * 
@@ -20,7 +22,7 @@ public class VoogaScene extends Scene {
 		super(parent);
 		this.getStylesheets().add(STYLESHEET_PATH);
 	}
-	
+
 	/**
 	 * Initializes the new scene, automatically incorporating CSS
 	 * 
@@ -32,7 +34,7 @@ public class VoogaScene extends Scene {
 		super(parent, width, height);
 		this.getStylesheets().add(STYLESHEET_PATH);
 	}
-	
+
 	/**
 	 * Initializes the new scene, custom CSS
 	 * 
@@ -42,8 +44,8 @@ public class VoogaScene extends Scene {
 	 */
 	public VoogaScene(Parent parent, double width, double height, String csspath) {
 		super(parent, width, height);
-		
-        //this.getStylesheets().addAll(this.getClass().getResource(csspath).toExternalForm());
+
+//		this.getStylesheets().addAll(this.getClass().getResource(csspath).toExternalForm());
 		this.getStylesheets().add(csspath);
 //		System.out.println(parent.getId());
 //		System.out.println(this.getClass().getResource(csspath).toExternalForm());

@@ -1,49 +1,29 @@
 package authoring;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
-import com.sun.glass.events.MouseEvent;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
 import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
 import authoring.model.ElementManager;
 import authoring.model.ElementTabManager;
 import authoring.model.Preferences;
 import data.Serializer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import player.gamedisplay.Menuable;
-import tools.VoogaAlert;
-import tools.VoogaException;
 import resources.VoogaBundles;
 import resources.VoogaPaths;
 
 /**
  * The UIManager is responsible for assembling view components, such as the
  * menubar, toolbar, and grid of windows
+ * 
+ * @author Harry Guo, Arjun Desai, Nick Lockett, Aditya Srinivasan
  * 
  */
 public class UIManager extends VBox implements Menuable {
@@ -53,12 +33,11 @@ public class UIManager extends VBox implements Menuable {
 	private ElementTabManager elementTabManager;
 
 	/**
-	 * Initializes the UI Manager
+	 * Initializes the UI Manager given multiple models.
 	 * 
 	 * @param model
 	 *            Interface to mediate interactions with backend
 	 */
-	
 	public UIManager(List<CompleteAuthoringModelable> models) {
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
@@ -73,13 +52,18 @@ public class UIManager extends VBox implements Menuable {
 		grid.removeFirstTab();
 		System.out.println(elementTabManager.getAllManagers().size());
 	}
-	
+
+	/**
+	 * Initializes the UI Manager given a singular model
+	 * 
+	 * @param model
+	 *            Interface to mediate interactions with backend
+	 */
 	public UIManager(CompleteAuthoringModelable model) {
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
 		this.elementTabManager.addManager((ElementManager) model);
 		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
-
 		initializeComponents();
 	}
 
@@ -98,26 +82,40 @@ public class UIManager extends VBox implements Menuable {
 		});
 	}
 
+	/**
+	 * Adds a new scene.
+	 */
 	public void addScene() {
 		addScene(new ElementManager());
 	}
 
+	/**
+	 * Adds a new scene given a manager.
+	 */
 	public void addScene(CompleteAuthoringModelable manager) {
 		elementTabManager.addManager((ElementManager) manager);
 		grid.addScene(elementTabManager.getCurrentManager());
 	}
 
+	/**
+	 * Gets the current authoring model.
+	 */
 	public CompleteAuthoringModelable getManager() {
 		return elementTabManager.getCurrentManager();
 	}
 
+	/**
+	 * @return the list of names of each tab manager
+	 */
 	public List<String> getAllManagerNames() {
 		List<String> names = new ArrayList<String>();
 		elementTabManager.getAllManagers().stream().map(ElementManager::getName).forEach(names::add);
 		return names;
 	}
 
-	// TODO: Format output correctly
+	/**
+	 * Saves the current through serialization.
+	 */
 	public void saveAll() {
 		try {
 			Preferences preferences = new Preferences(VoogaBundles.preferences.getProperty("GameName"),
@@ -129,10 +127,14 @@ public class UIManager extends VBox implements Menuable {
 			for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
 				m.onSave();
 			}} catch (Exception e) {
-			e.printStackTrace();
-		}
+				e.printStackTrace();
+			}
 	}
 
+	/**
+	 * Opens scene dependent on current manager
+	 * @param manager: manager for selected scene
+	 */
 	public void openScene(ElementManager manager) {
 		elementTabManager.addManager(manager);
 		grid.openScene(manager);
