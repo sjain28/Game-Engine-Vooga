@@ -13,17 +13,17 @@ public class VoogaEvent {
 	private List<Sprite> myCauseSprites;
 
 	public VoogaEvent(){
-		myCauses = new ArrayList<>();
-		myEffects = new ArrayList<>();
-		myCauseSprites = new ArrayList<>();
+		setCauses(new ArrayList<>());
+		setEffects(new ArrayList<>());
+		setCauseSprites(new ArrayList<>());
 	}
 
 	public void addCause(Cause cause){
-		myCauses.add(cause);
+		getCauses().add(cause);
 	}
 
 	public void addEffect(Effect effect){
-		myEffects.add(effect);
+		getEffects().add(effect);
 	}
 	
 	/**
@@ -31,14 +31,14 @@ public class VoogaEvent {
 	 * events according to their execute method.
 	 */
 	public void update(ILevelData data){
-		myCauseSprites.clear();
-		for(Cause c: myCauses){
+		getCauseSprites().clear();
+		for(Cause c: getCauses()){
 			if(!c.check(data)){
 				return;
 			}
 		}
 
-		for(Effect e: myEffects){
+		for(Effect e: getEffects()){
 			e.execute(data);
 		}
 	}
@@ -52,10 +52,26 @@ public class VoogaEvent {
 	}
 
 	public void addSpritesFromCause(List<Sprite> sprites){
-		myCauseSprites.addAll(sprites);
+		getCauseSprites().addAll(sprites);
 	}
 
 	public List<Sprite> getSpritesFromCauses(){
+		return getCauseSprites();
+	}
+
+	public List<Sprite> getCauseSprites() {
 		return myCauseSprites;
+	}
+
+	public void setCauseSprites(List<Sprite> myCauseSprites) {
+		this.myCauseSprites = myCauseSprites;
+	}
+
+	public void setCauses(List<Cause> myCauses) {
+		this.myCauses = myCauses;
+	}
+
+	public void setEffects(List<Effect> myEffects) {
+		this.myEffects = myEffects;
 	}
 }

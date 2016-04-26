@@ -129,7 +129,7 @@ public class UIGrid extends GridPane{
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
 
-		propertiesPane = new PropertiesPane();
+		propertiesPane = new PropertiesPane(myManager);
 		myManager.addObserver(propertiesPane.getPropertiesTabManager());
 		ElementManager em = ((ElementManager) myManager);
 		em.initGlobalVariablesPane();
@@ -149,7 +149,7 @@ public class UIGrid extends GridPane{
 		this.add(designBoard, 1, 0);
 		GridPane.setRowSpan(designBoard, REMAINING);
 
-		propertiesPane = new PropertiesPane();
+		propertiesPane = new PropertiesPane(myManager);
 		myManager.addObserver(propertiesPane.getPropertiesTabManager());
 		ElementManager em = ((ElementManager) myManager);
 		em.initGlobalVariablesPane();

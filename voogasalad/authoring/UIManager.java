@@ -10,6 +10,7 @@ import authoring.gui.toolbar.ToolPanelHandlingMirror;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.ElementTabManager;
+import authoring.model.Preferences;
 import data.Serializer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -117,7 +118,12 @@ public class UIManager extends VBox implements Menuable {
 	 */
 	public void saveAll() {
 		try {
-			Serializer.serializeLevel(getAllManagerNames(), VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName") + "/" + VoogaBundles.preferences.getProperty("GameName") + ".xml");
+			Preferences preferences = new Preferences(VoogaBundles.preferences.getProperty("GameName"),
+													  VoogaBundles.preferences.getProperty("GameDescription"),
+													  VoogaBundles.preferences.getProperty("GameWidth"),
+													  VoogaBundles.preferences.getProperty("GameHeight"),
+													  getAllManagerNames());
+			Serializer.serializeLevel(preferences, VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName") + "/" + VoogaBundles.preferences.getProperty("GameName") + ".xml");
 			for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
 				m.onSave();
 			}} catch (Exception e) {

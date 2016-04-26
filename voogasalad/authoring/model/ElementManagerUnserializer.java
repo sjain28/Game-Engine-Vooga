@@ -21,7 +21,7 @@ public class ElementManagerUnserializer {
     
     public ElementManager unserialize() throws VoogaException{
         ElementManager elementManager = new ElementManager();
-        
+
         FileReaderToGameObjects reader = new FileReaderToGameObjects(xmlPath);
         DataContainerOfLists data = reader.getDataContainer();
         
@@ -31,6 +31,7 @@ public class ElementManagerUnserializer {
         elementManager.setSpriteFactory(data.getArchetypeMap());
         elementManager.setEventList(data.getEventList());
         elementManager.setGlobalProperties(data.getVariableMap());
+		
         
         return elementManager;
     }

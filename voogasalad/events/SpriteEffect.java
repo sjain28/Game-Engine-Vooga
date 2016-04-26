@@ -75,6 +75,9 @@ public class SpriteEffect extends VariableEffect{
 	public SpriteEffect(String method, Double parameter, VoogaEvent event){
 		super(method, parameter, event);
 	}
+	public SpriteEffect(VoogaEvent event){
+		super(event);
+	}
 
 	@Override
 	public void execute(ILevelData data) {
@@ -123,15 +126,15 @@ public class SpriteEffect extends VariableEffect{
 		
 		// TODO: MAKE INTO SPRITE NAME, NOT ID
 		if (getSpriteID() != null){
-			effectString += getSpriteID();
+			effectString += " " + getSpriteID();
 		}
 		
 		//TODO: PUT THIS IN RESOURCE BUNDLE
 		if (getNeedsSprites()){
-			effectString += "sprites from causes";
+			effectString += " sprites from causes";
 		}
 		if (getParameter() != null){
-			effectString += "[" + getParameter().toString() + "]";
+			effectString += " [" + getParameter().toString() + "]";
 		}
 		return effectString;
 	}
@@ -162,5 +165,8 @@ public class SpriteEffect extends VariableEffect{
 
 	protected Boolean getNeedsSprites() {
 		return needsSprites;
+	}
+	protected void clearSprites(){
+		mySprites.clear();
 	}
 }

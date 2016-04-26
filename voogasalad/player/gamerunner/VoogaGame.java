@@ -11,6 +11,7 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
+import authoring.model.Preferences;
 import data.Deserializer;
 import data.Serializer;
 import tools.VoogaException;
@@ -22,7 +23,7 @@ public class VoogaGame {
 	
 	public VoogaGame(String xmlFileName){
 		try{
-		levelOrder = (List<String>) Deserializer.deserialize(1, xmlFileName).get(0);
+		levelOrder = ((Preferences) Deserializer.deserialize(1, xmlFileName).get(0)).getManagerNames();
 		}
 		catch(VoogaException e){
 			e.printStackTrace();

@@ -14,8 +14,8 @@ public class DragDropTest extends Application{
         DesignBoardHousing designBoard = new DesignBoardHousing(new ElementManager(), false);
         Scene scene = new Scene (designBoard);
         VoogaFrontEndText vt = new VoogaFrontEndText("hello");
-        vt.setMaxWidth(100);
-        vt.setMaxHeight(100);
+//        vt.setMaxWidth(100);
+//        vt.setMaxHeight(100);
         vt.setTranslateX(100);
         vt.setTranslateY(100);
 //        designBoard.getDesignBoard().addElement(vt);
