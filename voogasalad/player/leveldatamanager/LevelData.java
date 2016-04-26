@@ -101,7 +101,7 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
-    	System.out.println(myElements);
+    	//System.out.println(myElements);
     	return myElements.entrySet();
     }
     /**
