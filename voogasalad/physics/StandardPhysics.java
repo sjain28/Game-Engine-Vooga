@@ -173,10 +173,16 @@ public class StandardPhysics implements IPhysicsEngine {
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
 
+//		System.out.println("boundA getMinY: " + boundA.getMinY() + "boundA getMaxY: " + boundA.getMaxY());
+		
 		double diffTop = Math.abs(boundA.getMinY() - boundB.getMaxY());
 		double diffBottom = Math.abs(boundB.getMinY() - boundA.getMaxY());
 
 	//	System.out.println("DiffBottom " + diffBottom);
+//		System.out.println("DiffBottom " + diffBottom);
+//		System.out.println("DiffTop " + diffTop);
+
+
 		
 		// Collision means they intersect
 		if (boundA.intersects(boundB)) {

@@ -84,7 +84,7 @@ public class CollisionCause extends Cause{
 			return false;
 		}
 		else{
-			System.out.println(physics.checkCollisionY(a, b));
+//			System.out.println(physics.checkCollisionY(a, b));
 //			try {
 //				if (physics.checkCollisionY(a, b) != 0)
 //				Thread.sleep(4000);
