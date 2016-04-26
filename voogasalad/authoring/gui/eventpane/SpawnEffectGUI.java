@@ -80,7 +80,7 @@ public class SpawnEffectGUI implements EventGUI {
 
     @Override
     public String getDetails () throws VoogaException {
-        String result = archetypes.getValue() + " ";
+        String result = "events.SpawnEffect " + archetypes.getValue() + " ";
         if (targetDesired.getValue().equals("Relative Position")) {
             result += targetId.getSpriteId() + " ";
         }
