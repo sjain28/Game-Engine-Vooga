@@ -12,10 +12,10 @@ import tools.Velocity;
  * 
  * A set of methods that provide physics-related functionalities
  * 
- * @author Michael, Hunter
+ * @author  Hunter
  *
  */
-public class StandardPhysics implements IPhysicsEngine {
+public class BuggyPhysics implements IPhysicsEngine {
 	
 	private static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
@@ -26,6 +26,11 @@ public class StandardPhysics implements IPhysicsEngine {
 	
 	
 	/**
+	 * Default constructor for Standard Physics module
+	 * 
+	 */
+
+	/**
 	 * Checks whether a double is same as numToCompare
 	 * 
 	 * @param number
@@ -34,16 +39,47 @@ public class StandardPhysics implements IPhysicsEngine {
 	private boolean isThisNumber(Double number, int numToCompare) {
 		return Math.abs(number.doubleValue()) - numToCompare < ERROR;
 	}
+
 	
+	@Deprecated
+	private double myFrameTime;
+
+
 	@Override
 	public void translateX(Sprite sprite, Double change) {
 		sprite.getVelocity().setX(change * REDUCE_FACTOR);
 		//System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
 	}
+	
 
-	@Override
+	public void translateXwithKeyEvent(Sprite sprite, Double change, KeyEvent event) {
+		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+		if (event.isConsumed()) {
+			sprite.getVelocity().setX(0);
+		}
+		//System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
+	}
+	
+//	@Override
+//	public void translateX(Sprite sprite, Double change) {
+//		sprite.getPosition().addX(change* 5);
+//		
+//	}
+	
 	public void translateY(Sprite sprite, Double change) {
 		sprite.getVelocity().setY(change * REDUCE_FACTOR);
+	}
+	
+	
+		
+	@Override
+	public void setPosition(Sprite sprite, Position newPosition) {
+		sprite.setPosition(newPosition);
+	}
+
+
+	public void setVelocity(Sprite sprite, Velocity newVelocity) {
+		sprite.setVelocity(newVelocity);
 	}
 
 	/**
@@ -61,9 +97,14 @@ public class StandardPhysics implements IPhysicsEngine {
 			// Set the Y position to a little higher so there is no collision
 			sprite.getPosition().setY(sprite.getPosition().getY() - LIFT);
 		}
+		
 		else {
+			
+			//sprite.getImage().getBoundsInParent().
+			//sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
 			sprite.getVelocity().setY(-1 * sprite.getVelocity().getY() * bounceCoefficient);
 		}
+
 	}
 	
 	/**
@@ -74,30 +115,9 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void elasticBounceX(Sprite sprite, Double bounceCoefficient) {
-		if (sprite.getVelocity().getX() > 0) {
-			// Set the X position to a little to the left so there is no collision
-			sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
-		}
-		else {
-			// Set the X position to a little to the right so there is no collision
-			sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
-		}
 		sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
 	}
-
-
-	// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
-
-//if (sprite.getVelocity().getX() < 0.1 && isThisNumber(sprite.getVelocity().getX(), 0)) {
-//
-//	if (sprite.getVelocity().getX() > 0) {
-//		// Set the X position to a little to the left so there is no collision
-//		sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
-//	}
-//	else {
-//		// Set the X position to a little to the right so there is no collision
-//		sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
-//	}
+	
 	/**
 	 * Sets X velocity to zero (stops the movement)
 	 * 
@@ -106,26 +126,20 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
-		if (sprite.getVelocity().getX() > 0) {
-			// Set the X position to a little to the left so there is no collision
-			sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
+		// If velocity is going left
+		System.out.println("Velocity angle: " + sprite.getVelocity().getAngleDegree());
+		System.out.println("Velocity x: " + sprite.getVelocity().getX() + " Velocity y: " + sprite.getVelocity().getY());
+		if (isThisNumber(sprite.getVelocity().getAngleDegree(), 90) || isThisNumber(sprite.getVelocity().getAngleDegree(), 270)) {
+		}
+		else if (sprite.getVelocity().getAngleDegree() > 180 && sprite.getVelocity().getAngleDegree() < 360) {
+			//sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
 		}
 		else {
-			// Set the X position to a little to the right so there is no collision
-			sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
+			//sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
 		}
 		sprite.getVelocity().setX(0);
 
 	}
-	
-//	if (isThisNumber(sprite.getVelocity().getAngleDegree(), 90) || isThisNumber(sprite.getVelocity().getAngleDegree(), 270)) {
-//	}
-//	else if (sprite.getVelocity().getAngleDegree() > 180 && sprite.getVelocity().getAngleDegree() < 360) {
-//		//sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
-//	}
-//	else {
-//		//sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
-//	}
 	
 	/**
 	 * Checks if the collision is happening horizontally
@@ -138,20 +152,53 @@ public class StandardPhysics implements IPhysicsEngine {
 	public int checkCollisionX(Sprite spriteA, Sprite spriteB) {
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
-
-		double diffRight = Math.abs(boundB.getMinX() - boundA.getMaxX());
-		double diffLeft = Math.abs(boundA.getMinX() - boundB.getMaxX());
+//		if (boundA.intersects(boundB)) {
+//			if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
+//				return 1;
+//			}
+//		}
+//		return 0;
 		
-		// Collision means they intersect
+		//if (checkCollisionY(spriteA, spriteB) == 0) {
+//		System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
+//		System.out.println("This is overlap tag: " + checkOverlapY(spriteA, spriteB));
+		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
+		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
+		
 		if (boundA.intersects(boundB)) {
-			if (diffRight < LIFT || diffLeft < LIFT) {
+		
+		if (checkOverlapY(spriteA, spriteB) != 0) {
+			if (checkOverlapX(spriteA, spriteB, true) == 1) {
 				return 1;
 			}
 			else {
-				return 0;	
+				return 0;
 			}
 		}
+		else {
+			return 0;
+		}
+		
+		}
 		return 0;
+
+		//---------------------
+//		Bounds boundA = spriteA.getImage().getBoundsInParent();
+//		Bounds boundB = spriteB.getImage().getBoundsInParent();
+//        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
+//        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
+//        
+//        // If Y collision is happening, return false
+//        if (checkCollisionY(spriteA, spriteB) == 1 || checkCollisionY(spriteA, spriteB) == -1) {
+//        	return 0;
+//        }
+//        
+//        if (atRightBorder || atLeftBorder) {
+//        	return 1;
+//        }
+//        else {
+//        	return 0;
+//        }
 	}
 	
 	/**
@@ -163,31 +210,75 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public int checkCollisionY(Sprite spriteA, Sprite spriteB) {
-
+		
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
+//		if (boundA.intersects(boundB)) {
+//			if (checkOverlapX(spriteA, spriteB) == 1) {
+//				if (checkOverlapY(spriteA, spriteB) == )
+//			}
+//		}
+		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
+		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
 
-		double diffTop = Math.abs(boundA.getMinY() - boundB.getMaxY());
-		double diffBottom = Math.abs(boundB.getMinY() - boundA.getMaxY());
-
-		System.out.println("DiffBottom " + diffBottom);
+		//System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
+		//if (boundA.intersects(boundB)) {
 		
-		// Collision means they intersect
+//		if (boundA.intersects(boundB)) {
+//			System.out.println("we intersected in checkCollisionY");
+//			System.out.println("checkOverlapX value: " + checkOverlapX(spriteA, spriteB, false));
+//			System.out.println("checkOverlapY value: " + checkOverlapY(spriteA, spriteB));
+//			spriteA.getVelocity().setY(0);
+//		}
+		
 		if (boundA.intersects(boundB)) {
-
-			if (diffTop < LIFT) {
-				return -1;
-			}
-			else if (diffBottom < LIFT) {
-				return 1;
-			}
-			else {
+			if (checkOverlapX(spriteA, spriteB, false) == 1) {
+				if (checkOverlapY(spriteA, spriteB) == 1) {
+					return -1;
+				}
+				if (checkOverlapY(spriteA, spriteB) == 2) {
+					return 1;
+				}
+				else {
+					return 0;
+				}
+			} else {
 				return 0;
 			}
 		}
-		else {
-			return 0;
-		}
+		return 0;
+//		}
+//		return 0;
+		
+		
+//		Bounds boundA = spriteA.getImage().getBoundsInParent();
+//		Bounds boundB = spriteB.getImage().getBoundsInParent();
+//		
+//		// CollisionX and collisionY are checked mutually exclusively
+//        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
+//        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
+//        // X collision happening--return false
+//        if (atRightBorder || atLeftBorder) {
+//        	return 0;
+//        }
+//		
+//		//The following assumes JavaFX Pane style coordinates
+//		boolean atTopBorder = boundA.getMinY() <= boundB.getMaxY();
+//		boolean atBottomBorder = boundA.getMaxY() >= boundB.getMinY();
+//
+//		//		// The following assumes the Cartesian coordinates
+//		//        boolean atTopBorder = boundA.getMaxY() >= boundB.getMinY();
+//		//        boolean atBottomBorder = boundA.getMinY() <= boundB.getMaxY();
+//
+//        if (atTopBorder) {
+//        	return 1;
+//        }
+//        else if (atBottomBorder) {
+//        	return -1;
+//        }
+//        else {
+//        	return 0;
+//        }
 	}
 
 	/**
@@ -318,18 +409,6 @@ public class StandardPhysics implements IPhysicsEngine {
 		sprite.getVelocity().setX(sprite.getVelocity().getX() + change.getX() * VELOCITY_FACTOR);
 		sprite.getVelocity().setY(sprite.getVelocity().getY() + change.getY() * VELOCITY_FACTOR);
 
-	}
-
-	@Override
-	public void setPosition(Sprite sprite, Position newPosition) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setVelocity(Sprite sprite, Velocity newVelocity) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -51,7 +51,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private String filePath;
 
     public ElementManager () {
-        ;
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
         GPM = new GlobalPropertiesManager();
@@ -136,10 +135,13 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             if (element instanceof VoogaFrontEndText) {
                 VoogaFrontEndText frontText = (VoogaFrontEndText) element;
                 BackEndText text = (BackEndText) frontText.getElementable();
-                System.out.println("Text:" +text);
+                System.out.println("Text:" +frontText.getText());
                 TextProperties tp = new TextProperties();
-                text.setInitializationMap(
-                                          tp.storeData(frontText));
+                Map<String,Object> map = tp.storeData(frontText);
+                for (String key : map.keySet()){
+                    System.out.println("map entry: "+key+" "+map.get(key));
+                }
+                text.setInitializationMap(map);
                 elements.add(text);
             }
         }

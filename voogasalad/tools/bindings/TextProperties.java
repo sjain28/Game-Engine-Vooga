@@ -6,20 +6,21 @@ import javafx.scene.layout.Border;
 import javafx.scene.paint.Paint;
 import resources.VoogaBundles;
 
-public class TextProperties extends NodeProperties{
 
-     Double positionX;
-     Double positionY;
-     Double positionZ;
+public class TextProperties extends NodeProperties {
+
+    Double opacity;
+
+    String text;
     
-     Double width;
-     Double height;
-     Double opacity;
+    Double positionX;
+    Double positionY;
+    Double positionZ;
     
-     String text;
-     
+    String style;
+
     public TextProperties () {
         super(VoogaBundles.textProperties);
     }
-   
+
 }

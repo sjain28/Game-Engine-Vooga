@@ -73,9 +73,14 @@ public interface IPhysicsEngine {
 
 	void translateX(Sprite sprite, Double change);	
 	
+	void translateY(Sprite sprite, Double change);
+	
 	int checkCollisionY(Sprite spriteA, Sprite spriteB);
 	
 	int checkCollisionX(Sprite spriteA, Sprite spriteB);
 
+	void inelasticBounceX(Sprite sprite, Double bounceCoefficient);
+	
+	void elasticBounceX(Sprite sprite, Double bounceCoefficient);
 
 }
