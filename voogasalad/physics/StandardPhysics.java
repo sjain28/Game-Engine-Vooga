@@ -23,6 +23,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	private static final double ERROR = 0.01;
 	private static final double JUMP_FACTOR = 0.05;
 	private static final double PADDING = 0.1;
+	private static final double COLLISION_CHECK = 1;
 	
 	
 	/**
@@ -53,7 +54,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	@Override
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
 		System.out.println("Bounce is called");
-		
+
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
 		if (sprite.getVelocity().getY() < 0.1 && sprite.getVelocity().getY() != 0.0) {
 			// Set velocity to 0--stop the bounce
@@ -144,7 +145,7 @@ public class StandardPhysics implements IPhysicsEngine {
 		
 		// Collision means they intersect
 		if (boundA.intersects(boundB)) {
-			if (diffRight < LIFT || diffLeft < LIFT) {
+			if (diffRight < COLLISION_CHECK || diffLeft < COLLISION_CHECK) {
 				return 1;
 			}
 			else {
@@ -175,10 +176,10 @@ public class StandardPhysics implements IPhysicsEngine {
 		// Collision means they intersect
 		if (boundA.intersects(boundB)) {
 
-			if (diffTop < LIFT) {
+			if (diffTop < COLLISION_CHECK) {
 				return -1;
 			}
-			else if (diffBottom < LIFT) {
+			else if (diffBottom < COLLISION_CHECK) {
 				return 1;
 			}
 			else {
