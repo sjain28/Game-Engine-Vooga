@@ -77,5 +77,8 @@ public interface IPhysicsEngine {
 	
 	int checkCollisionX(Sprite spriteA, Sprite spriteB);
 
+	void inelasticBounceX(Sprite sprite, Double bounceCoefficient);
+	
+	void elasticBounceX(Sprite sprite, Double bounceCoefficient);
 
 }
