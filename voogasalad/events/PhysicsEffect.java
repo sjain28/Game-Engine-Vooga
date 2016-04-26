@@ -49,7 +49,7 @@ public class PhysicsEffect extends SpriteEffect {
 		String effectString = "Apply " + getMethodString() + " to ";
 
 		if (getMyArchetype() != null){
-			effectString += getMyArchetype();
+			effectString += getMyArchetype() + " ";
 		}
 
 		// TODO: MAKE INTO SPRITE NAME, NOT ID
@@ -60,7 +60,7 @@ public class PhysicsEffect extends SpriteEffect {
 			effectString += " sprites from causes";
 		}
 		if (getParameter() != null){
-			effectString += "[" + getParameter().toString() + "]";
+			effectString += " [" + getParameter().toString() + "]";
 		}
 		return effectString;
 	}

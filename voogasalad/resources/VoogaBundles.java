@@ -27,6 +27,7 @@ public class VoogaBundles {
 	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
 	public final static Properties preferences = makeProperties("preferences.properties");
 	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
+	public final static ResourceBundle designboardProperties = ResourceBundle.getBundle("resources/designboard");
 
 	
 	private static Properties makeProperties(String path) {

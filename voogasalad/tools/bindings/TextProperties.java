@@ -1,9 +1,5 @@
 package tools.bindings;
 
-import java.awt.Font;
-import java.util.ResourceBundle;
-import javafx.scene.layout.Border;
-import javafx.scene.paint.Paint;
 import resources.VoogaBundles;
 
 

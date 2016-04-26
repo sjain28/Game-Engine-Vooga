@@ -84,6 +84,14 @@ public class CollisionCause extends Cause{
 			return false;
 		}
 		else{
+			System.out.println(physics.checkCollisionY(a, b));
+//			try {
+//				if (physics.checkCollisionY(a, b) != 0)
+//				Thread.sleep(4000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			if(physics.checkCollisionY(a, b) == collisionDirections.get(myDirection)){
 				addSprites(a,b);
 				return true;
