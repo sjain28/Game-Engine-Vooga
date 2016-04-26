@@ -101,7 +101,6 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
-    	System.out.println(myElements);
     	return myElements.entrySet();
     }
     /**
@@ -311,7 +310,7 @@ public class LevelData implements ILevelData {
             FileWriterFromGameObjects.saveGameObjects(dataContainer, finalLocation);
         }
         catch (Exception e) {e.printStackTrace();}
-        System.out.println("The file here saved at location " + finalLocation);
+        
     }
     /**
      * Returns the game's physics engine
