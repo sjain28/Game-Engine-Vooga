@@ -18,7 +18,7 @@ public class TimerCause extends Cause {
 	@Override
 	public boolean check(ILevelData data) {
 		Double time = (Double) data.getGlobalVar(VoogaBundles.defaultglobalvars.getProperty("Time")).getValue();
-		return time >= myStartTime && time%myInterval == 0;
+		return time >= myStartTime && (time-myStartTime)%myInterval == 0;
 	}
 
 }
