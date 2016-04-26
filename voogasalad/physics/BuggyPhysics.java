@@ -88,7 +88,6 @@ public class BuggyPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
-		System.out.println("Bounce is called");
 		
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
 		if (sprite.getVelocity().getY() < 0.1 && sprite.getVelocity().getY() != 0.0) {
@@ -127,8 +126,8 @@ public class BuggyPhysics implements IPhysicsEngine {
 	@Override
 	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
 		// If velocity is going left
-		System.out.println("Velocity angle: " + sprite.getVelocity().getAngleDegree());
-		System.out.println("Velocity x: " + sprite.getVelocity().getX() + " Velocity y: " + sprite.getVelocity().getY());
+//		System.out.println("Velocity angle: " + sprite.getVelocity().getAngleDegree());
+//		System.out.println("Velocity x: " + sprite.getVelocity().getX() + " Velocity y: " + sprite.getVelocity().getY());
 		if (isThisNumber(sprite.getVelocity().getAngleDegree(), 90) || isThisNumber(sprite.getVelocity().getAngleDegree(), 270)) {
 		}
 		else if (sprite.getVelocity().getAngleDegree() > 180 && sprite.getVelocity().getAngleDegree() < 360) {
@@ -161,10 +160,10 @@ public class BuggyPhysics implements IPhysicsEngine {
 		
 		//if (checkCollisionY(spriteA, spriteB) == 0) {
 //		System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
-//		System.out.println("This is overlap tag: " + checkOverlapY(spriteA, spriteB));
-		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
-		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
-		
+////		System.out.println("This is overlap tag: " + checkOverlapY(spriteA, spriteB));
+//		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
+//		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
+//		
 		if (boundA.intersects(boundB)) {
 		
 		if (checkOverlapY(spriteA, spriteB) != 0) {
@@ -218,8 +217,7 @@ public class BuggyPhysics implements IPhysicsEngine {
 //				if (checkOverlapY(spriteA, spriteB) == )
 //			}
 //		}
-		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
-		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
+
 
 		//System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
 		//if (boundA.intersects(boundB)) {
