@@ -17,7 +17,7 @@ public class AnimationFactory {
 		List<Double> xCoord = animationPoints.get(0);
 		List<Double> yCoord = animationPoints.get(1);
 	}*/
-	private List<List<Double>> createAnimationPoints(Double velocity, List<List<Double>> mousePoints){
+	/*private List<List<Double>> createAnimationPoints(Double velocity, List<List<Double>> mousePoints){
 		List<Double> animationX = new ArrayList<>();
 		List<Double> animationY = new ArrayList<>();
 		
@@ -42,7 +42,7 @@ public class AnimationFactory {
 		animationCoord.add(animationY);
 		
 		return animationCoord;
-	}
+	}*/
 	// Take in mouse listener coordinates
 	// Take in user defined velocity
 	// Sample coordinates according to velocity

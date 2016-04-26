@@ -1,45 +1,56 @@
 package events;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import player.leveldatamanager.ILevelData;
 
-public class AnimationEffect extends SpriteEffect{
+public class AnimationEffect extends SpriteEffect {
 	
-	private List<Double> xCoord;
-	private List<Double> yCoord;
-	
-	public AnimationEffect(String spriteID, List<Double> xCoord, List<Double> yCoord, VoogaEvent event) {
-		super(event);
+	private AnimationEvent myAnimationEvent;
+	private Double myDuration;
+
+	public AnimationEffect(AnimationEvent animationEvent, String spriteID, Double duration, VoogaEvent voogaEvent) {
+		super(voogaEvent);
+		myAnimationEvent = animationEvent;
 		setSpriteID(spriteID);
 		setNeedsSprites(false);
-		// TODO Auto-generated constructor stub
+		myDuration = duration;
 	}
-	
-	public AnimationEffect(String archetype, Boolean needsSprites, List<Double> xCoord, List<Double> yCoord, VoogaEvent event) {
-		super(event);
+	public AnimationEffect(AnimationEvent animationEvent, String archetype, Boolean needsSprites, Double duration, VoogaEvent voogaEvent) {
+		super(voogaEvent);
+		myAnimationEvent = animationEvent;
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
-		// TODO Auto-generated constructor stub
+		myDuration = duration;
 	}
-	
-	public AnimationEffect(List<Double> xCoord, List<Double> yCoord, VoogaEvent event) {
-		super(event);
+	public AnimationEffect(AnimationEvent animationEvent, Double duration, VoogaEvent voogaEvent) {
+		super(voogaEvent);
+		myAnimationEvent = animationEvent;
 		setNeedsSprites(true);
-		// TODO Auto-generated constructor stub
+		myDuration = duration;
 	}
 
 	@Override
 	public void execute(ILevelData data) {
-		// TODO Auto-generated method stub
-		
+		setSprites(data);
+		myAnimationEvent.addSpritesFromCause(getSprites());
+		myAnimationEvent.setDuration(myDuration);
+		myAnimationEvent.setCauseValue(true);
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		String effectString = "Applies " + myAnimationEvent.toString() + " to ";
+		if (getSpriteID() != null){
+			effectString += getSpriteID();
+		}
+		if (getMyArchetype() != null){
+			effectString += getMyArchetype();
+		}
+		if (getNeedsSprites()){
+			effectString += " sprites from cause";
+		}
+		effectString += " for " + myDuration + " seconds";
+		
+		return effectString;
 	}
 
 }
