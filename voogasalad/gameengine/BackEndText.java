@@ -44,7 +44,7 @@ public class BackEndText implements Elementable {
     public void update () {
         text.setText(myName);
         if (displayedData == null) return;
-        text.setText(myName + " : "+displayedData.getValue());
+        text.setText(myName+" "+displayedData.getValue());
     }
 
     @Override

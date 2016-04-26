@@ -13,7 +13,7 @@ import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
-public class NewTextFileItem extends MenuItemHandler {
+public class NewTextNewItem extends MenuItemHandler {
 	private EditElementable myManager;
 
 	/**
@@ -25,7 +25,7 @@ public class NewTextFileItem extends MenuItemHandler {
 	 *            Unused vestige of previous poor programming. Should soon be
 	 *            phased out.
 	 */
-	public NewTextFileItem(Menuable model) {
+	public NewTextNewItem(Menuable model) {
 
 		super();
 		myManager = (EditElementable) model.getManager();
