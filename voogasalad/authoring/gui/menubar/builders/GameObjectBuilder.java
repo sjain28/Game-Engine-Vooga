@@ -59,12 +59,6 @@ public class GameObjectBuilder extends Builder {
     @Override
     public void compile (){
         
-        
-        if (editor.getSpriteFactory().getAllArchetypeNames().contains(myName.getText()) || editor.getMySpriteNames().contains(myName.getText())){
-            new VoogaAlert("This name already exists");
-            return;
-        }
-        
         compile = true;
         try {
             Sprite sprite = mySpriteFactory.createSprite(archetypes.getValue());

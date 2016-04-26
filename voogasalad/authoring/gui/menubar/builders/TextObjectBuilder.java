@@ -4,6 +4,7 @@ import authoring.interfaces.model.EditElementable;
 import authoring.model.VoogaFrontEndText;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import tools.VoogaAlert;
 
 
 public class TextObjectBuilder extends Builder {
@@ -34,6 +35,7 @@ public class TextObjectBuilder extends Builder {
 
     @Override
     public void compile () {
+        
         returnText.setText(this.text.getText());
         myManager.addGameElements(returnText);
         quit();
