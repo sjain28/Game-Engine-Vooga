@@ -19,6 +19,7 @@ public class VoogaBundles {
 	public final static OrderedProperties playerTesterMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playertestermenu.properties"));
 	public final static OrderedProperties toolbarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/toolbarbuttons.properties"));
 	public final static Properties secrets = makeProperties("secret.properties");
+	public final static Properties defaultglobalvars = makeProperties("defaultglobalvariables.properties");
 	public final static ResourceBundle backendToGUIProperties = ResourceBundle.getBundle("resources/GUIClassMap");
 	public final static ResourceBundle imageProperties = ResourceBundle.getBundle("resources/imageproperties");
     public final static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
