@@ -37,6 +37,6 @@ public class CollisionCauseGUI implements EventGUI{
     @Override
     public String getDetails () throws VoogaException {
         
-        return "events.CollisionCause "+group1.getSpriteId()+" "+group2.getSpriteId()+" "+VoogaBundles.EventMethods.getString(collisionType.getValue());
+        return "events.CollisionCause,"+group1.getSpriteId()+","+group2.getSpriteId()+","+VoogaBundles.EventMethods.getString(collisionType.getValue());
     }
 }

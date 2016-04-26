@@ -39,7 +39,7 @@ public class KeyCauseGUI implements EventGUI{
 
     @Override
     public String getDetails () {
-        return "events.KeyCause "+clicked.toString();
+        return "events.KeyCause,"+clicked.toString();
     }
     
 }
