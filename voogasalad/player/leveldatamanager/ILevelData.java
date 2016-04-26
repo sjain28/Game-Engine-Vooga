@@ -36,6 +36,8 @@ public interface ILevelData {
 	Map<List<String>, KeyCause> getKeyCauses();
 
 	Collection<VoogaEvent> getEvents();
+	
+	boolean getSaveNow();
 
 	String getNextLevelName();
 

@@ -10,4 +10,10 @@ public class VoogaStatInfo implements VoogaInfoCell {
 		return null;
 	}
 
+	@Override
+	public void setProperty(String property, VoogaData value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
