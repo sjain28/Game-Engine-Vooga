@@ -48,8 +48,6 @@ import tools.VoogaException;
 public class DesignBoard extends Tab implements Observer {
 
 	private static final String DESIGN_BOARD = "Design Board";
-	private static final double HEIGHT = 5000;
-	private static final double WIDTH = 5000;
 	private static final double STROKE_WIDTH = 4;
 
 	private VBox container;
@@ -88,7 +86,8 @@ public class DesignBoard extends Tab implements Observer {
 		this.setClosable(false);
 		
 		contentPane = new StackPane();
-		contentPane.setMinSize(WIDTH, HEIGHT);
+		contentPane.setMinSize(Double.parseDouble(VoogaBundles.designboardProperties.getString("Width")),
+							   Double.parseDouble(VoogaBundles.designboardProperties.getString("Height")));
 		
 		scroller = new ScrollPane();
 		scroller.setContent(contentPane);
@@ -98,8 +97,8 @@ public class DesignBoard extends Tab implements Observer {
 		container = new VBox(zoomBar, scroller);
 		this.setContent(container);
 		
-		y_offset = HEIGHT / 2;
-		x_offset = WIDTH / 2;
+		y_offset = Double.parseDouble(VoogaBundles.designboardProperties.getString("Width")) / 2;
+		x_offset = Double.parseDouble(VoogaBundles.designboardProperties.getString("Height")) / 2;
 	}
 	
 	private void initializeZoom() {
