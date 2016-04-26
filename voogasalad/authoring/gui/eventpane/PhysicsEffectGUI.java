@@ -65,11 +65,11 @@ public class PhysicsEffectGUI implements EventGUI{
 
     @Override
     public String getDetails () throws VoogaException{
-        String result = "events.PhysicsEffect ";
+        String result = "events.PhysicsEffect,";
         if (name.getValue()!=null){
-            result+=name.getSpriteId()+ " ";
+            result+=name.getSpriteId()+ ",";
         }
-        result += VoogaBundles.physicsEffectsToGUI.getString(actions.getValue()) +" "+amount.getText();
+        result += VoogaBundles.physicsEffectsToGUI.getString(actions.getValue()) +","+amount.getText();
         return result;
     }
 }

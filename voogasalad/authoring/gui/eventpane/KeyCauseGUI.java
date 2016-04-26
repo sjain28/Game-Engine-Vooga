@@ -2,17 +2,20 @@ package authoring.gui.eventpane;
 
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
+import resources.VoogaBundles;
 
 public class KeyCauseGUI implements EventGUI{
 	
     private HBox holder;
     private TextField textField;
     private KeyCode clicked;
+    private ComboBox<String> keyOptions;
     
     public KeyCauseGUI(EditEventable manager){
     	holder = new HBox();
@@ -30,7 +33,9 @@ public class KeyCauseGUI implements EventGUI{
         		textField.setText("");
         	}
         });
-    	holder.getChildren().addAll(textField, iv);
+        keyOptions = new ComboBox<String>();
+        keyOptions.getItems().addAll(VoogaBundles.EventMethods.getString("Press"),VoogaBundles.EventMethods.getString("Release"));
+    	holder.getChildren().addAll(keyOptions,textField, iv);
     }
     @Override
     public Node display () {
@@ -39,7 +44,7 @@ public class KeyCauseGUI implements EventGUI{
 
     @Override
     public String getDetails () {
-        return "events.KeyCause "+clicked.toString();
+        return "events.KeyCause,"+clicked.toString()+","+keyOptions.getValue();
     }
     
 }
