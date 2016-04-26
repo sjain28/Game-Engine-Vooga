@@ -25,10 +25,10 @@ public class EventManager {
 
 		Map<List<String>, KeyCause> keyPressCauses = myLevelData.getKeyPressCauses();
 		Map<List<String>, KeyCause> keyReleaseCauses = myLevelData.getKeyReleaseCauses();
-
 		
 		checkKeys(myLevelData.getKeyPressCombos(), keyPresses, keyPressCauses);
 		checkKeys(myLevelData.getKeyReleasedCombos(), keyReleases, keyReleaseCauses);
+		
 		for(VoogaEvent e: myLevelData.getEvents()){
 			e.update(myLevelData);
 		}
