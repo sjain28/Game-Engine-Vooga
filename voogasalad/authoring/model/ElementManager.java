@@ -188,6 +188,17 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         }
         throw new VoogaException("Can't get Sprite from the name");
     }
+    
+    public String getSpriteNameFromId (String id) throws VoogaException {
+        System.out.println(id);
+        for (Node e : myGameElements) {
+            System.out.println(e.getId());
+            if (((Elementable) e).getId().equals(id)) {
+                return ((Elementable) e).getName();
+            }
+        }
+        throw new VoogaException("Can't get Sprite from the id");
+    }
 
     public Map<String, VoogaData> getGlobalVariables () {
         return GPM.getVoogaProperties();

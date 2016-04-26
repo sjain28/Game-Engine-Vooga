@@ -123,15 +123,15 @@ public class SpriteEffect extends VariableEffect{
 		
 		// TODO: MAKE INTO SPRITE NAME, NOT ID
 		if (getSpriteID() != null){
-			effectString += getSpriteID();
+			effectString += " " + getSpriteID();
 		}
 		
 		//TODO: PUT THIS IN RESOURCE BUNDLE
 		if (getNeedsSprites()){
-			effectString += "sprites from causes";
+			effectString += " sprites from causes";
 		}
 		if (getParameter() != null){
-			effectString += "[" + getParameter().toString() + "]";
+			effectString += " [" + getParameter().toString() + "]";
 		}
 		return effectString;
 	}

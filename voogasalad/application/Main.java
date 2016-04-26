@@ -18,7 +18,6 @@ public class Main extends Application {
 		System.setProperty("glass.accessible.force", "false"); //This fixes a stupid bug on Saumya's machine - it's harmless. 
 		new Launcher(primaryStage);
 		
-		
 		// Launches Mosaic
 		// new BoundsTester();
 	}
