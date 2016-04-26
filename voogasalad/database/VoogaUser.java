@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.interfaces.VoogaData;
 
-public class VoogaUser extends VoogaCellUser{
+public class VoogaUser extends VoogaEntry{
 
 	String myDisplayName;
 	String myUsername;

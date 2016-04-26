@@ -1,7 +1,7 @@
 package database;
 
 
-public class VoogaGame extends VoogaCellUser{
+public class VoogaGame extends VoogaEntry{
 
 
 	private String myGameName;

@@ -8,12 +8,12 @@ import java.util.ResourceBundle;
 
 import tools.interfaces.VoogaData;
 
-public class VoogaCellUser implements VoogaInfoCell{
+public class VoogaEntry implements VoogaInfoCell{
 	
 	private ResourceBundle propertyList;  
 	private Map<String, VoogaData> myPropertyMap;
 	
-	public VoogaCellUser(){
+	public VoogaEntry(){
 //		propertyList = ResourceBundle.getBundle(resourceString);
 		 myPropertyMap = new HashMap<String, VoogaData>();
 	}
