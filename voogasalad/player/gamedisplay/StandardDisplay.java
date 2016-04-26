@@ -65,8 +65,8 @@ public class StandardDisplay implements IGameDisplay {
 		myGameScreen = new Pane();		
 		// Made the scene from log in scene creator;
 		// myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
-		myLogInScreen = new LogInSceneCreator(); 
-		myScene = myLogInScreen.createLogInScene(myPane, PANE_SIZE,PANE_SIZE);
+//		myLogInScreen = new LogInSceneCreator(); 
+//		myScene = myLogInScreen.createLogInScene(myPane, PANE_SIZE,PANE_SIZE);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myKeyPresses = new ArrayList<>();
