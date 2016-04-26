@@ -57,7 +57,7 @@ public class PhysicsEffect extends SpriteEffect {
 			effectString += getSpriteID();
 		}
 		if (getNeedsSprites()){
-			effectString += "sprites from causes";
+			effectString += " sprites from causes";
 		}
 		if (getParameter() != null){
 			effectString += "[" + getParameter().toString() + "]";

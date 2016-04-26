@@ -91,7 +91,6 @@ public class GameboyDisplay implements IGameDisplay {
 		//myGameScreen.setPrefSize(280, 370);
 //		myGameScreen.setLayoutX(400);
 //		myGameScreen.setLayoutY(200);
-		myScene = new VoogaScene(myPane, PANE_WIDTH, PANE_HEIGHT, CSS_PATH);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
@@ -371,6 +370,11 @@ public class GameboyDisplay implements IGameDisplay {
 	public Scene getMyScene() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setSceneDimensions(double width, double height) {
+		myScene = new VoogaScene(myPane, width, height, CSS_PATH);
 	}
 
 

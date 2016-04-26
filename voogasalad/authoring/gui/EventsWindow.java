@@ -18,6 +18,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 public class EventsWindow extends TabPane implements Observer{
 	
@@ -58,13 +60,12 @@ public class EventsWindow extends TabPane implements Observer{
             if(!causes.keySet().contains(e) && !effects.keySet().contains(e)){
                 ObservableList<String> causesString = FXCollections.observableArrayList();
                 for(Cause cause: e.getCauses()){
-                    causesString.addAll(cause.toString());
+                    causesString.addAll(cleanString(cause.toString()));
                 }  
                 causes.put(e, causesString);
                 ObservableList<String> effectsString = FXCollections.observableArrayList();
                 for(Effect effect: e.getEffects()){
-                    System.out.println(effect.toString());
-                    effectsString.addAll(effect.toString());
+                    effectsString.addAll(cleanString(effect.toString()));
                 }  
                 effects.put(e, effectsString);
                 HBox info = new HBox();
@@ -79,10 +80,25 @@ public class EventsWindow extends TabPane implements Observer{
         
     }
 
-    private void addEvent () {
-      EventWindow popup = new EventWindow(myManager);
-      popup.show();
-    }
+   private String cleanString(String s){
+       String[] components = s.split(" ");
+       StringBuilder ans = new StringBuilder();
+       for(String c : components){
+           if(c.contains("-")){
+               try {
+                c = myManager.getSpriteNameFromId(c);
+            }
+            catch (VoogaException e) {
+                new VoogaAlert("There is no Sprite with That ID");
+                e.printStackTrace();
+            }
+           }
+           ans.append(c);
+           ans.append(" ");
+       }
+       
+       return ans.toString();
+   }
 
     private void delete (VoogaEvent e, HBox info) {
        myManager.getEvents().remove(e);
