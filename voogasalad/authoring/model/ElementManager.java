@@ -49,19 +49,18 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private String myManagerName;
 
     private String filePath;
-
+    private List<String> names;
+    
     public ElementManager () {
         myGameElements = new ArrayList<Node>();
         myEventList = new ArrayList<VoogaEvent>();
         GPM = new GlobalPropertiesManager();
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
+        names = new ArrayList<String>();
+        
         initGlobalVariablesPane();
-    }
-
-    public ElementManager (File xmlDataFile) {
-        this();
-        // this.myXmlDataFile = xmlDataFile;
+       
     }
 
     public void addGameElements (Node ... elements) {
@@ -174,6 +173,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     public Collection<String> getMySpriteNames () {
         Collection<String> mySpriteNames = new HashSet<String>();
+        
         for (Node e : myGameElements) {
             mySpriteNames.add(((Elementable) e).getName());
         }
@@ -277,5 +277,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                         myManagerName + ".xml";
         System.out.println("The file path here is " + filePath);
     }
+
 
 }

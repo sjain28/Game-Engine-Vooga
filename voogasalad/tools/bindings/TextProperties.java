@@ -12,9 +12,10 @@ public class TextProperties extends NodeProperties {
     Double positionX;
     Double positionY;
     Double positionZ;
+    Double rotation;
     
     String style;
-
+    
     public TextProperties () {
         super(VoogaBundles.textProperties);
     }
