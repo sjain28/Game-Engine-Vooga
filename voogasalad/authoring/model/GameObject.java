@@ -47,6 +47,7 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
 
         Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
         Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
+        Bindings.bindBidirectional(this.translateZProperty(), mySprite.getZ());
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
         Bindings.bindBidirectional(imagePath, mySprite.getImagePathProperty());

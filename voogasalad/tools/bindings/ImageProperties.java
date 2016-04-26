@@ -1,6 +1,5 @@
 package tools.bindings;
 
-import java.util.ResourceBundle;
 import resources.VoogaBundles;
 
 
@@ -13,7 +12,8 @@ public class ImageProperties extends NodeProperties {
     Double width;
     Double height;
     Double opacity;
-
+    Double rotation;
+    
     public ImageProperties () {
         super(VoogaBundles.imageProperties);
     }

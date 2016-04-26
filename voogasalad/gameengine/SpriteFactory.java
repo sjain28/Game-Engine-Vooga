@@ -85,6 +85,9 @@ public class SpriteFactory extends Observable{
      * @return
      */
     public Sprite getArchetype (String archetype) {
+        if (!myArchetypes.containsKey(archetype)){
+            return null;
+        }
         return myArchetypes.get(archetype);
     }
 
