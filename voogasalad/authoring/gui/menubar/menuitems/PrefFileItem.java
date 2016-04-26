@@ -41,6 +41,7 @@ public class PrefFileItem extends MenuItemHandler {
 		preferences.setListener(e -> {
 			if(!preferences.isContinuous()) {
 				model.getGlobalVariables().put(MAIN_CHARACTER, new VoogaString(preferences.getSpriteIDtoTrack()));
+				System.out.println(preferences.getSpriteIDtoTrack());
 			}
 		});
 		tp.getTabs().add(preferences);

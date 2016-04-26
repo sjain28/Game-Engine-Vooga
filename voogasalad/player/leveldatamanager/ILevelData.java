@@ -6,13 +6,15 @@ package player.leveldatamanager;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+
+import authoring.interfaces.Elementable;
 import events.KeyCause;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import javafx.scene.Node;
-import physics.IPhysics;
 import physics.IPhysicsEngine;
-import physics.StandardPhysics;
 import tools.interfaces.VoogaData;
 
 /**
@@ -23,8 +25,12 @@ public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
 
-	List<Sprite> getAllSprites();
+    void removeSpriteByID(String id);
+    
+    Sprite getCenteredSprite();
 
+	Set<Entry<String, Elementable>> getElementables();
+    
 	List<Node> getDisplayableNodes();
 
 	Map<List<String>, KeyCause> getKeyCauses();

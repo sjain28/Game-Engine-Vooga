@@ -44,7 +44,7 @@ public class DesignBoard extends Tab implements Observer {
 
     private static final String DESIGN_BOARD = "Design Board";
     private static final double HEIGHT = 2000;
-    private static final double WIDTH = 2000;
+    private static final double WIDTH = 5000;
     private static final double DISPLAY_WIDTH = 600;
     private static final double DISPLAY_HEIGHT = 600;
 

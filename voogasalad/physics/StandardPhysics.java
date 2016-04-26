@@ -75,7 +75,7 @@ public class StandardPhysics implements IPhysicsEngine {
 //	}
 	
 	public void translateY(Sprite sprite, Double change) {
-		sprite.getPosition().addY(change);
+		sprite.getVelocity().setY(change * REDUCE_FACTOR);
 	}
 	
 	

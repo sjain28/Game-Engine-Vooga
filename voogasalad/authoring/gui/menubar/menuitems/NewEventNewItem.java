@@ -8,7 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 
-public class NewEventFileItem extends MenuItemHandler{
+public class NewEventNewItem extends MenuItemHandler{
     private EditEventable myManager;
     
     /**
@@ -18,7 +18,7 @@ public class NewEventFileItem extends MenuItemHandler{
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
 
-    public NewEventFileItem(Menuable model){
+    public NewEventNewItem(Menuable model){
         super();
         myManager = (EditEventable) model.getManager();
     }

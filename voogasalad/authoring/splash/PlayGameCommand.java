@@ -9,7 +9,7 @@ public class PlayGameCommand implements Command {
 
 	@Override
 	public void execute() {
-		ProjectOpenPrompt prompt = new ProjectOpenPrompt();
+		ProjectOpenAllPrompt prompt = new ProjectOpenAllPrompt();
 		prompt.setProceedEvent(ee -> {
 			prompt.close();
 			String name = ((Button) ee.getSource()).getId();
