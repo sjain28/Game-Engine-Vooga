@@ -16,10 +16,8 @@ public class AnimationEvent extends VoogaEvent {
 	private PathEffect myPathEffect;
 	private RotateEffect myRotateEffect;
 	private String myName;
-
-	public AnimationEvent() {
-		
-	}
+	
+	//Got rid of an empty constructor
 	
 	protected void setDuration(Double duration){
 		myDuration = duration;
