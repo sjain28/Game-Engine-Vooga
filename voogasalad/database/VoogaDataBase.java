@@ -2,7 +2,13 @@ package database;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Data base holds all relevant info about Games, Users, and 
+ * Stats about interactions between the Games and the Users
+ * 
+ * @author Krista
+ *
+ */
 public class VoogaDataBase implements IDataBase{
 	private List<VoogaGame> myGames;
 	private List<VoogaUser> myUsers;
@@ -110,19 +116,14 @@ public class VoogaDataBase implements IDataBase{
 	}
 	public void printDataBase(){
 		for(int c = 0; c < myStatInfo.size(); c++){
-			//print USER 1 USER 2 USER 3 across top
 			System.out.print(myUsers.get(c)+" ");
 		}
-		
 		for(int r = 0; r < myStatInfo.get(0).size(); r++)
 		{
 			System.out.println(" ");
 			System.out.print(myGames.get(r)+" ");
-			
 			for(int c = 0; c < myStatInfo.size(); c++){
-				
 				System.out.print(myStatInfo.get(c).get(r));
-				
 			}
 		}
 	}

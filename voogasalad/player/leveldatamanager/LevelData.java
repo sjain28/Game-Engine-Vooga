@@ -89,6 +89,14 @@ public class LevelData implements ILevelData {
         return (Sprite) myElements.get(id);
     }
     /**
+     * Remove sprite by id
+     * 
+     * @param id
+     */
+    public void removeSpriteByID(String id){
+    	myElements.remove(id);
+    }
+    /**
      * returns all Elementable's
      * 
      * @return

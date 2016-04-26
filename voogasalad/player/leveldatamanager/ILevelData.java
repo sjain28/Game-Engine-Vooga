@@ -27,6 +27,8 @@ public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
 
+    void removeSpriteByID(String id);
+
 	Set<Entry<String, Elementable>> getElementables();
     
 	List<Node> getDisplayableNodes();
