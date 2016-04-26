@@ -21,6 +21,7 @@ import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
+import resources.VoogaBundles;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -144,6 +145,8 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
+		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
+										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
 		myGameDisplay.displayTestMode();
 		run();
 	}
