@@ -15,9 +15,13 @@ public class SpriteComboBox extends ComboBox<String> {
         setPadding(new Insets(10,10,10,10));
         
         getItems().addAll(manager.getMySpriteNames());
+        getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
     }
     
     public String getSpriteId(){
+        if (manager.getSpriteFactory().getAllArchetypeNames().contains(this.getValue())) {
+            return this.getValue();
+        }
         try {
             return manager.getSpriteIdFromName(this.getValue());
         }
