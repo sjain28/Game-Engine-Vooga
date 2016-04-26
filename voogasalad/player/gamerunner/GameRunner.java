@@ -19,7 +19,7 @@ import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
-import player.leveldatamanager.SpriteManager;
+import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
 import tools.VoogaString;
@@ -45,7 +45,7 @@ public class GameRunner implements IGameRunner {
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
 	private ScreenProcessor myScreenProcessor;
-    private SpriteManager mySpriteManager;
+    private ElementUpdater mySpriteManager;
     private EventManager myEventManager;
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
@@ -60,7 +60,7 @@ public class GameRunner implements IGameRunner {
 	public GameRunner() {
 		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
-		mySpriteManager = new SpriteManager();
+		mySpriteManager = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
@@ -133,11 +133,11 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		Sprite main = myLevelData.getSpriteByID((String) myLevelData.getGlobalVar("Main_Character").getValue());
-		main.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+		Sprite centered = myLevelData.getCenteredSprite();
+		centered.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
 			int offset = n.intValue();
-			// TODO: remove hardcoding
-    		if (offset > 200 && offset < 400) {
+			// TODO: Link to size of level instead of hardcoding
+    		if (offset > 200 && offset < 3000) {
     			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
     		}
 		});

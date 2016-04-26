@@ -23,7 +23,6 @@ import physics.IPhysicsEngine;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;
-import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
@@ -95,6 +94,14 @@ public class LevelData implements ILevelData {
         return (Sprite) myElements.get(id);
     }
     /**
+     * Remove sprite by id
+     * 
+     * @param id
+     */
+    public void removeSpriteByID(String id){
+    	myElements.remove(id);
+    }
+    /**
      * returns all Elementable's
      * 
      * @return
@@ -151,6 +158,15 @@ public class LevelData implements ILevelData {
     }
     /**
      * Returns a VoogaText by id
+     * 
+     * @param id
+     * @return
+     */
+    public Sprite getCenteredSprite(){
+    	return getSpriteByID(myCenteredCharId);
+    }
+    /**
+     * returns text object
      * 
      * @param id
      * @return
@@ -251,14 +267,11 @@ public class LevelData implements ILevelData {
         //refresh global variables
         myGlobalVariables = data.getVariableMap();
         myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
-    
+        myCenteredCharId = (String) myGlobalVariables.get(myCenteredCharKey).getValue();
+        
         // add elements to map
         for (Elementable el : elementObjects) {
-            try {
-            	el.init();
-            	if(el instanceof Sprite){
-            		if(((Sprite) el).getName().equals(myCenteredCharKey)){
-            			myCenteredCharId = el.getId();}}}
+            try {el.init();}
             catch (VoogaException e1) {e1.printStackTrace();}
             myElements.put(el.getId(), el);
         }

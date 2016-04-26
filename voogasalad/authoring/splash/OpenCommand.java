@@ -28,6 +28,7 @@ public class OpenCommand implements Command {
 		ProjectOpenPrompt prompt = new ProjectOpenPrompt();
 		prompt.setProceedEvent(e -> {
 			prompt.close();
+			//TODO: use reflection to open the correct one instead of if statements
 			if(((Button) e.getSource()).getId().equals("OpenAll")) {
 				ProjectOpenAllPrompt openAllPrompt = new ProjectOpenAllPrompt();
 				openAllPrompt.setProceedEvent(ee -> {

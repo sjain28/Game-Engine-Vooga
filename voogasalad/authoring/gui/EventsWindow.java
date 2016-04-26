@@ -1,12 +1,9 @@
 package authoring.gui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import authoring.CustomText;
 import authoring.gui.eventpane.EventWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import events.Cause;
@@ -14,23 +11,27 @@ import events.Effect;
 import events.VoogaEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class EventsWindow extends TabPane implements Observer{
 	
+	/**
+	 * Constants
+	 */
 	private static final String NAME = "Event Manager";
+	
+	/**
+	 * Private instance variables
+	 */
 	private CompleteAuthoringModelable myManager;
 	private Tab main;
+	private ScrollPane scroller;
 	private VBox content;
 	private Map<VoogaEvent, ObservableList<String>> effects;
 	private Map<VoogaEvent, ObservableList<String>> causes;
@@ -44,10 +45,11 @@ public class EventsWindow extends TabPane implements Observer{
         myManager.addObserver(this);
         main = new Tab(NAME);
         content = new VBox();
+        scroller = new ScrollPane(content);
         causes = new HashMap<VoogaEvent, ObservableList<String>>(); 
         effects = new HashMap<VoogaEvent, ObservableList<String>>(); 
         initialize();
-        main.setContent(new VBox(content, addButton()));
+        main.setContent(scroller);
         this.getTabs().add(main);
     }
     
@@ -75,12 +77,6 @@ public class EventsWindow extends TabPane implements Observer{
             }
         }
         
-    }
-    
-    private Button addButton(){
-        Button add = new Button("Add Event");     
-        add.setOnAction(e -> addEvent());
-        return add;
     }
 
     private void addEvent () {

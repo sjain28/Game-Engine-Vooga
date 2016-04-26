@@ -36,6 +36,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     protected static final String X_POS = "X_Position";
     protected static final String Y_POS = "Y_Position";
     protected static final String IMAGE_PATH = "Image";
+    protected static final String Z_POS = "Z Index";
 
     private boolean isMainCharacter;
     private Velocity myVelocity;
@@ -51,6 +52,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
     private transient SimpleDoubleProperty myY;
+    private transient SimpleDoubleProperty myZ;
     private transient SimpleDoubleProperty myWidth;
     private transient SimpleDoubleProperty myHeight;
     private transient SimpleStringProperty myImagePathProperty;
@@ -132,16 +134,19 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myHeight = new SimpleDoubleProperty();
         Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
         Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
-
+      
     }
 
     private void initializeCoordinates () {
         myProperties.put(X_POS, new VoogaNumber());
         myProperties.put(Y_POS, new VoogaNumber());
+        myProperties.put(Z_POS, new VoogaNumber());
         myX = new SimpleDoubleProperty();
         myY = new SimpleDoubleProperty();
+        myZ = new SimpleDoubleProperty();
         Bindings.bindBidirectional(myX, myProperties.get(X_POS).getProperty());
         Bindings.bindBidirectional(myY, myProperties.get(Y_POS).getProperty());
+        Bindings.bindBidirectional(myZ, myProperties.get(Z_POS).getProperty());
         myX.addListener( (obs, old, n) -> {
             myLoc.setX((double) n);
         });
