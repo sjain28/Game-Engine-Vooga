@@ -7,8 +7,11 @@ import java.util.Observer;
 import authoring.interfaces.Elementable;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.Node;
+import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;
+import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 
@@ -19,12 +22,14 @@ public class GlobalPropertiesManager implements Elementable {
 
     public GlobalPropertiesManager () {
         globalPropertiesMap = new HashMap<String, VoogaData>();
+        try {init();}
+        catch (VoogaException e) {e.printStackTrace();}
     }
 
     @Override
     public void update () {
     }
-
+    
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
         return globalPropertiesMap;
@@ -67,8 +72,9 @@ public class GlobalPropertiesManager implements Elementable {
 
     @Override
     public void init () throws VoogaException {
-        // TODO Auto-generated method stub
-
+    	addProperty(VoogaBundles.defaultglobalvars.getProperty("Time"), new VoogaNumber(0.0));
+    	addProperty(VoogaBundles.defaultglobalvars.getProperty("Score"), new VoogaNumber(0.0));
+    	addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"), new VoogaBoolean(false));
+    	addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"), new VoogaString(""));
     }
-
 }

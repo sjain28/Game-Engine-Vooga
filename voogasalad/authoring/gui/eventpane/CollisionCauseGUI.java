@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import resources.VoogaBundles;
 import tools.VoogaException;
 
 public class CollisionCauseGUI implements EventGUI{
@@ -18,7 +19,7 @@ public class CollisionCauseGUI implements EventGUI{
         group1=new SpriteComboBox(manager);
         group2= new SpriteComboBox(manager);
         collisionType = new ComboBox<String>();
-        collisionType.getItems().addAll("CollisionX","CollisionY");
+        collisionType.getItems().addAll("Horizontal","Above", "Below");
     }
 
     @Override
@@ -36,6 +37,6 @@ public class CollisionCauseGUI implements EventGUI{
     @Override
     public String getDetails () throws VoogaException {
         
-        return "events.CollisionCause "+collisionType.getValue()+" "+group1.getSpriteId()+" "+group2.getSpriteId();
+        return "events.CollisionCause "+group1.getSpriteId()+" "+group2.getSpriteId()+" "+VoogaBundles.EventMethods.getString(collisionType.getValue());
     }
 }
