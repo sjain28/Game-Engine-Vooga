@@ -17,7 +17,9 @@ public class CollisionCauseGUI implements EventGUI{
     
     public CollisionCauseGUI(EditEventable manager){
         group1=new SpriteComboBox(manager);
+        group1.getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
         group2= new SpriteComboBox(manager);
+        group2.getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
         collisionType = new ComboBox<String>();
         collisionType.getItems().addAll("Horizontal","Above", "Below");
     }
@@ -37,6 +39,6 @@ public class CollisionCauseGUI implements EventGUI{
     @Override
     public String getDetails () throws VoogaException {
         
-        return "events.CollisionCause "+group1.getSpriteId()+" "+group2.getSpriteId()+" "+VoogaBundles.EventMethods.getString(collisionType.getValue());
+        return "events.CollisionCause,"+group1.getSpriteId()+","+group2.getSpriteId()+","+VoogaBundles.EventMethods.getString(collisionType.getValue());
     }
 }

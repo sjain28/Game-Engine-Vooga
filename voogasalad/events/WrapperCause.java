@@ -18,6 +18,9 @@ public class WrapperCause extends Cause {
 			setValue(false);
 		}
 		return myValue;
+		//Questions from Saumya: 
+		//Is getDuration() a number of update cycles? If not, then we'll need to scale it for this counter thing. 
+		//should myCounter get set to 0 after myValue gets set to false? 
 	}
 	protected void setValue(Boolean value){
 		myValue = value;
