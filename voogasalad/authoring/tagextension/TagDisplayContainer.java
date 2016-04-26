@@ -32,7 +32,7 @@ public class TagDisplayContainer extends Observable {
 	 */
 	public void addTag(String tag) {
 		TagLabel label = new TagLabel(tag);
-		label.setOnMouseClicked(e -> {
+		label.setOnDeletion(e -> {
 			container.getChildren().remove(label);
 			setChanged();
 			notifyObservers(container.getChildren());
