@@ -6,6 +6,7 @@ package player.gamerunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.Preferences;
 import data.Deserializer;
 import tools.VoogaException;
 
@@ -33,7 +34,7 @@ public class LevelListCreator {
     	myLevelList = new ArrayList<>();
 		myGameFilePath = GAMES_PATH_PREFIX + xmlList + "/";
 		String XMLwithListOfLevels = myGameFilePath + xmlList + ".xml";
-		myLevelList = (List<String>) Deserializer.deserialize(1, XMLwithListOfLevels).get(0);
+		myLevelList = ((Preferences) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getManagerNames();
     }
     
     /**

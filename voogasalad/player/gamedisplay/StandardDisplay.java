@@ -61,11 +61,15 @@ public class StandardDisplay implements IGameDisplay {
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
-		myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myKeyPresses = new ArrayList<>();
 		myKeyReleases = new ArrayList<>();
+	}
+	
+	@Override
+	public void setSceneDimensions(double width, double height) {
+		myScene = new VoogaScene(myPane, width, height);
 	}
 
 	/**
