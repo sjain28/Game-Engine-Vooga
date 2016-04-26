@@ -11,18 +11,24 @@ import javafx.stage.Stage;
  * @author Harry Guo, Nick Lockett, Aditya Srinivasan, Arjun Desai
  */
 public class Main extends Application {
-
+	
+	/**
+	 * Initializes the launcher.
+	 */
 	@Override 
 	public void start(Stage primaryStage) throws Exception {
 		// Launches Main Program
 		System.setProperty("glass.accessible.force", "false"); //This fixes a stupid bug on Saumya's machine - it's harmless. 
 		new Launcher(primaryStage);
-		
-		
+
 		// Launches Mosaic
 		// new BoundsTester();
 	}
-	
+
+	/**
+	 * Launches application.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

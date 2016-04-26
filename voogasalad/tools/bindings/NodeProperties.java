@@ -79,7 +79,7 @@ public abstract class NodeProperties {
         throw new VoogaException("Could not store data");
     }
 
-    private ResourceBundle getResourceBundle () {
+    public ResourceBundle getResourceBundle () {
         return bundle;
     }
 
