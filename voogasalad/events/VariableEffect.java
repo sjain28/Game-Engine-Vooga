@@ -37,6 +37,9 @@ public class VariableEffect extends Effect {
 		myMethod = method;
 		myParameter = parameter;
 	}
+	public VariableEffect(VoogaEvent event){
+		super(event);
+	}
 	
 	@Override
 	public void execute(ILevelData data) {
@@ -64,9 +67,9 @@ public class VariableEffect extends Effect {
 	
 	@Override
 	public String toString() {
-		String effectString = myMethod + myVariable;
+		String effectString = myMethod + " " + myVariable;
 		if (myParameter != null){
-			effectString += "[" + myParameter.toString() + "]";
+			effectString += " [" + myParameter.toString() + "]";
 		}
 		return effectString;
 	}

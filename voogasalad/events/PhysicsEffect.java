@@ -28,11 +28,10 @@ public class PhysicsEffect extends SpriteEffect {
 		setSprites(data);
 		if (getSprites().size() > 0){
 			for (Sprite sprite: getSprites()){
-				System.out.println("METHOD: " + getMethodString());
 				callEffectMethod(sprite, data);
 			}
 		}
-		getSprites().clear();
+		clearSprites();
 	}
 
 	private void callEffectMethod(Sprite sprite, ILevelData data){
@@ -50,7 +49,7 @@ public class PhysicsEffect extends SpriteEffect {
 		String effectString = "Apply " + getMethodString() + " to ";
 
 		if (getMyArchetype() != null){
-			effectString += getMyArchetype();
+			effectString += getMyArchetype() + " ";
 		}
 
 		// TODO: MAKE INTO SPRITE NAME, NOT ID
@@ -58,10 +57,10 @@ public class PhysicsEffect extends SpriteEffect {
 			effectString += getSpriteID();
 		}
 		if (getNeedsSprites()){
-			effectString += "sprites from causes";
+			effectString += " sprites from causes";
 		}
 		if (getParameter() != null){
-			effectString += "[" + getParameter().toString() + "]";
+			effectString += " [" + getParameter().toString() + "]";
 		}
 		return effectString;
 	}

@@ -75,7 +75,7 @@ public class LevelData implements ILevelData {
         keyReleasedCombos = new ArrayList<>();
         myKeyCauses = new HashMap<List<String>, KeyCause>();
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
-        myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter");
+        myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     }
     /**
@@ -101,7 +101,7 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
-    	System.out.println(myElements);
+    	//System.out.println(myElements);
     	return myElements.entrySet();
     }
     /**

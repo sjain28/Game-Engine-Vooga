@@ -125,5 +125,9 @@ public abstract class Vector {
 	public double getyPrev() {
 		return yPrev;
 	}
+	
+	public double getMagnitude(){
+		return Math.sqrt(Math.pow(getX() - getxPrev(), 2) + Math.pow(getY() - getyPrev(), 2));
+	}
 
 }
