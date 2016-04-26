@@ -32,8 +32,6 @@ import videos.ScreenProcessor;
  * @author Hunter, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
-	//TODO: was changed to 1 for debugging purposes
-    //private static final double INIT_SPEED = 1;
     private static final double INIT_SPEED = 60;
     private static final double SEC_PER_MIN = 60;
     private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
@@ -101,10 +99,20 @@ public class GameRunner implements IGameRunner {
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
-		mySpriteManager.update(myLevelData, myPhysicsEngine);
+		checkAndUpdateGlobalVariables();
+		mySpriteManager.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();	
+	}
+	/**
+	 * Checks and updates all LevelData GlobalVariables
+	 */
+	private void checkAndUpdateGlobalVariables(){
+		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / INIT_SPEED) / 60);
+		if (!myLevelData.getNextLevelName().equals("")) {
+			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
+		}
 	}
 	/**
 	 * 	Initializes myLevelList and plays the game
@@ -222,9 +230,4 @@ public class GameRunner implements IGameRunner {
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
 
-	@Override
-	public IGameRunner getSelf() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

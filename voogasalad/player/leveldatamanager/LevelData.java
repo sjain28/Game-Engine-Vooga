@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
@@ -44,8 +46,7 @@ public class LevelData implements ILevelData {
     private IPhysicsEngine myPhysics;
 
     /** Sprite and Text Information **/
-    private String myMainCharID;
-    private List<String> myContinuousSpriteIDs;
+    private String myCenteredCharId;
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
 
@@ -59,11 +60,13 @@ public class LevelData implements ILevelData {
     private Map<List<String>, KeyCause> myKeyCauses;
 
     /** Important Static Variables **/
-    private static final String TIMER = "Time";
-    private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
-    private static final String CONTINIOUS_CHAR = "MainCharacterID";
+//    private static final String TIMER = "Time";
+//    private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
+//    private static final String CONTINIOUS_CHAR = "MainCharacterID";
     private static final String SAVE_PROGRESS = "SaveProgress";
-
+    private String myTimerKey;
+    private String myNextLevelKey;
+    private String myCenteredCharKey;
 
     private IDisplayScroller myScroller;
     private ResourceBundle methods;
@@ -71,7 +74,6 @@ public class LevelData implements ILevelData {
     public LevelData (IPhysicsEngine physicsengine) {
         methods = VoogaBundles.EventMethods;
         myPhysics = physicsengine;
-        myContinuousSpriteIDs = new ArrayList<String>();
         myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
         myElements = new HashMap<String, Elementable>();
         myGlobalVariables = new HashMap<String, VoogaData>();
@@ -79,8 +81,10 @@ public class LevelData implements ILevelData {
         keyPressedCombos = new ArrayList<>();
         keyReleasedCombos = new ArrayList<>();
         myKeyCauses = new HashMap<List<String>, KeyCause>();
+        myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
+        myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter");
+        myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     }
-
     /**
      * Returns a sprite by id
      * 
@@ -90,22 +94,15 @@ public class LevelData implements ILevelData {
     public Sprite getSpriteByID (String id) {
         return (Sprite) myElements.get(id);
     }
-
     /**
-     * returns all Sprite's
+     * returns all Elementable's
      * 
      * @return
      */
-    public List<Sprite> getAllSprites () {
-        List<Sprite> sprites = new ArrayList<Sprite>();
-        for (String id : myElements.keySet()) {
-            if (myElements.get(id) instanceof Sprite) {
-                sprites.add((Sprite) myElements.get(id));
-            }
-        }
-        return sprites;
+    public Set<Entry<String, Elementable>> getElementables () {
+    	System.out.println(myElements);
+    	return myElements.entrySet();
     }
-
     /**
      * Returns a list of sprite IDs given an archetype
      * 
@@ -123,20 +120,17 @@ public class LevelData implements ILevelData {
         }
         return list;
     }
-
     /**
      * Adds a sprite given an archetype
      * 
      * @param archetype
      * @return
      */
-    @Override
     public Sprite addSprite (String archetype) {
         Elementable newSprite = mySpriteFactory.createSprite(archetype);
         myElements.put(newSprite.getId(), newSprite);
         return (Sprite) newSprite;
     }
-
     /**
      * Removes sprite given an id
      * 
@@ -145,7 +139,6 @@ public class LevelData implements ILevelData {
     public void removeSprite (String id) {
         myElements.remove(id);
     }
-
     /**
      * Returns a Global Variable (VoogaData) as specified
      * by it's variable name
@@ -156,7 +149,6 @@ public class LevelData implements ILevelData {
     public VoogaData getGlobalVar (String variable) {
         return myGlobalVariables.get(variable);
     }
-
     /**
      * Returns a VoogaText by id
      * 
@@ -166,7 +158,6 @@ public class LevelData implements ILevelData {
     public VoogaFrontEndText getText (Object id) {
         return (VoogaFrontEndText) myElements.get(id);
     }
-
     /**
      * put all objects into a generic list of display-able objects
      * to be accessed by the GameRunner after every update cycle.
@@ -175,22 +166,11 @@ public class LevelData implements ILevelData {
      */
     public List<Node> getDisplayableNodes () {
         List<Node> displayablenodes = new ArrayList<Node>();
-
         for (Object key : myElements.keySet()) {
             displayablenodes.add(myElements.get(key).getNodeObject());
         }
-        // IF THE MAIN CHARACTER HASN'T BEEN SET TODO: IF THIS IS HARDCODED, CHANGE
-        // if (myContinuousSpriteIDs.size()==0){
-        // return myScroller.centerScroll(displayablenodes, 5);
-        // }
-        // centers on first main character in list TODO: If passed something different, change this
-        // TODO: this is commented out bc MAINCHARACTER has not yet been added to global variables
-        // Sprite centeredCharacter = getSpriteByID((String)
-        // myGlobalVariables.get("Main_Character").getValue());
         return displayablenodes;
-        // myScroller.centerScroll(displayablenodes, centeredCharacter.getPosition().getX());
     }
-
     /**
      * Returns unmodifiable list of key combos
      * 
@@ -199,7 +179,6 @@ public class LevelData implements ILevelData {
     public List<List<String>> getKeyPressCombos () {
         return Collections.unmodifiableList(keyPressedCombos);
     }
-
     /**
      * Returns unmodifiable map of key causes
      * 
@@ -208,7 +187,6 @@ public class LevelData implements ILevelData {
     public Map<List<String>, KeyCause> getKeyCauses () {
         return Collections.unmodifiableMap(myKeyCauses);
     }
-
     /**
      * Returns unmodifiable list of key events
      * 
@@ -217,8 +195,9 @@ public class LevelData implements ILevelData {
     public List<VoogaEvent> getEvents () {
         return Collections.unmodifiableList(myEvents);
     }
-
     /**
+     * add a given event and populate the pressed and released key
+     * combo's while doing so
      * 
      * @param voogaEvent
      */
@@ -231,12 +210,9 @@ public class LevelData implements ILevelData {
                 if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
                     keyPressedCombos.add(keyc.getKeys());
                 }
-                else {
-                    keyReleasedCombos.add(keyc.getKeys());
-                }
+                else { keyReleasedCombos.add(keyc.getKeys());}
             }
         }
-
         keyReleasedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
         keyPressedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
     }
@@ -253,8 +229,7 @@ public class LevelData implements ILevelData {
         FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
         data = fileManager.getDataContainer();
 
-        List<Elementable> spriteObjects = data.getElementableList();
-
+        //refresh elements objects
         List<Elementable> elementObjects = data.getElementableList();
 
         // clear all the instance variables
@@ -263,44 +238,38 @@ public class LevelData implements ILevelData {
         myKeyCauses.clear();
         keyPressedCombos.clear();
 
-        // add elements to map
-        for (Elementable el : elementObjects) {
-            try {
-                el.init();
-            }
-            catch (VoogaException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            myElements.put(el.getId(), el);
-        }
-        // TODO: HARDCODED IN, CHECK BACK LATER. SETTING MAIN CHARACTER TO BE FIRST SPRITE IN LIST
-        for (Elementable el : elementObjects) {
-            if (el instanceof Sprite) {
-                myMainCharID = el.getId();
-                break;
-            }
-        }
-
+        //refresh event objects
         List<VoogaEvent> eventObjects = data.getEventList();
-
         for (VoogaEvent e : eventObjects) {
             addEventAndPopulateKeyCombos(e);
         }
 
+        //refresh sprite factory
         Map<String, Sprite> archetypeMap = data.getArchetypeMap();
-
         mySpriteFactory = new SpriteFactory(archetypeMap);
 
+        //refresh global variables
         myGlobalVariables = data.getVariableMap();
-        // initialize timer to zero here as well as level index
-        myGlobalVariables.put(TIMER, new VoogaNumber(0.0));
-        myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(""));
+        myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
+    
+        // add elements to map
+        for (Elementable el : elementObjects) {
+            try {
+            	el.init();
+            	if(el instanceof Sprite){
+            		if(((Sprite) el).getName().equals(myCenteredCharKey)){
+            			myCenteredCharId = el.getId();}}}
+            catch (VoogaException e1) {e1.printStackTrace();}
+            myElements.put(el.getId(), el);
+        }
     }
-
+    /**
+     * Fetch the level name
+     * 
+     * @return
+     */
     public String getNextLevelName () {
-        // HARDCODED FOR NOW!!!!
-        return ((String) (((VoogaString) myGlobalVariables.get(NEXT_LEVEL_INDEX)).getValue()));
+        return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }
     
     public boolean getSaveNow () {
@@ -309,23 +278,29 @@ public class LevelData implements ILevelData {
     }
     
 
+    /**
+     * Set the next level name in order to transition levels
+     * 
+     * @param levelName
+     */
     public void setNextLevelName (String levelName) {
-        myGlobalVariables.put(NEXT_LEVEL_INDEX, new VoogaString(levelName));
+        myGlobalVariables.put(myNextLevelKey, new VoogaString(levelName));
     }
-
+    /**
+     * Update the global timer double
+     * 
+     * @param time
+     */
     public void updatedGlobalTimer (double time) {
-        myGlobalVariables.get(TIMER).setValue(new Double(time));
+        myGlobalVariables.get(myTimerKey).setValue(new Double(time));
     }
-
-    /*
+    /**
      * Save progress saves the currently existing data to a data container. Then, everything is
      * saved to the location
      * 
      * filePath, which is specified in the function, along with the players name"
-     */
-
+     **/
     public void saveProgress (String filePath, String playerName) {
-    	
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
         DataContainerOfLists dataContainer =
@@ -335,17 +310,23 @@ public class LevelData implements ILevelData {
         try {
             FileWriterFromGameObjects.saveGameObjects(dataContainer, finalLocation);
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) {e.printStackTrace();}
         System.out.println("The file here saved at location " + finalLocation);
     }
-
+    /**
+     * Returns the game's physics engine
+     * 
+     * @return
+     */
     @Override
     public IPhysicsEngine getPhysicsEngine () {
         return myPhysics;
     }
-
+    /**
+     * Returns all key release combos
+     * 
+     * @return
+     */
     public List<List<String>> getKeyReleasedCombos () {
         return keyReleasedCombos;
     }
