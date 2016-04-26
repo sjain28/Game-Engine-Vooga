@@ -18,6 +18,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
+import javafx.scene.text.Text;
 import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
@@ -25,7 +26,7 @@ import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
 
 
-public class VoogaFrontEndText extends TextField implements FrontEndElementable {
+public class VoogaFrontEndText extends Text implements FrontEndElementable {
 
     private Map<String, VoogaData> propertiesMap = new HashMap<String, VoogaData>();
     private BackEndText backEndText;
@@ -39,9 +40,13 @@ public class VoogaFrontEndText extends TextField implements FrontEndElementable 
     }
     
     public VoogaFrontEndText(BackEndText backtext) throws VoogaException{
+        
         this();
+        System.out.println("initializeing voogafronttext");
         TextProperties tp = new TextProperties();
-        Map<String, Object> properties = tp.storeData(backtext.getNodeObject());
+        Text text = new Text();
+        Map<String, Object> properties = tp.storeData((Text) backtext.getNodeObject());
+        System.out.println("finished loading propertiees");
         tp.loadData(this, properties);
     }
     
@@ -59,12 +64,11 @@ public class VoogaFrontEndText extends TextField implements FrontEndElementable 
 
     private void create () {
         setId(UUID.randomUUID().toString());
-        setBackground(Background.EMPTY);
-        this.setMaxSize(100, 100);
         
         backEndText = new BackEndText(getId());
         
         this.textProperty().addListener((o,oldVal,newVal)->{
+            System.out.println(newVal);
             backEndText.setName(newVal);
         });
         
@@ -79,23 +83,20 @@ public class VoogaFrontEndText extends TextField implements FrontEndElementable 
 
     private void initializeMap () {
         propertiesMap = new TreeMap<String, VoogaData>();
-
-        propertiesMap.put("Width", new VoogaNumber());
-        propertiesMap.put("Height", new VoogaNumber());
+        
+        propertiesMap.put("Name", new VoogaString());
         propertiesMap.put("X", new VoogaNumber());
         propertiesMap.put("Y", new VoogaNumber());
         propertiesMap.put("Opacity", new VoogaNumber());
         propertiesMap.put("Style", new VoogaString());
-
-        Bindings.bindBidirectional(this.maxWidthProperty(),
-                                   propertiesMap.get("Width").getProperty());
-        Bindings.bindBidirectional(this.maxHeightProperty(),
-                                   propertiesMap.get("Height").getProperty());
+        
+        Bindings.bindBidirectional(this.textProperty(), propertiesMap.get("Name").getProperty());
         Bindings.bindBidirectional(this.translateXProperty(), propertiesMap.get("X").getProperty());
         Bindings.bindBidirectional(this.translateYProperty(), propertiesMap.get("Y").getProperty());
         Bindings.bindBidirectional(this.opacityProperty(),
                                    propertiesMap.get("Opacity").getProperty());
         Bindings.bindBidirectional(this.styleProperty(), propertiesMap.get("Style").getProperty());
+        this.setStyle("-fx-fill: red;");
     }
     // TODO:
     // This method is repeated in all Elements, we should use some form of inheritance
