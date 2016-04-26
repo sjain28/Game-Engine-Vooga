@@ -145,6 +145,11 @@ public class StandardPhysics implements IPhysicsEngine {
 		
 		// Collision means they intersect
 		if (boundA.intersects(boundB)) {
+			System.out.println("intersecting");
+			System.out.println(checkOverlapY(spriteA,spriteB));
+			System.out.println();
+		//	if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
+			//if (diffRight < LIFT || diffLeft < LIFT) {
 			if (diffRight < COLLISION_CHECK || diffLeft < COLLISION_CHECK) {
 				return 1;
 			}
