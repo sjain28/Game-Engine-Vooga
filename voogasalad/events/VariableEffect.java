@@ -37,6 +37,9 @@ public class VariableEffect extends Effect {
 		myMethod = method;
 		myParameter = parameter;
 	}
+	public VariableEffect(VoogaEvent event){
+		super(event);
+	}
 	
 	@Override
 	public void execute(ILevelData data) {

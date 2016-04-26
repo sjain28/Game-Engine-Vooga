@@ -32,7 +32,7 @@ public class PhysicsEffect extends SpriteEffect {
 				callEffectMethod(sprite, data);
 			}
 		}
-		getSprites().clear();
+		clearSprites();
 	}
 
 	private void callEffectMethod(Sprite sprite, ILevelData data){
