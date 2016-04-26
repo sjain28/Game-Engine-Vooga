@@ -51,7 +51,8 @@ public class ProjectInitializationPrompt extends StarterPrompt {
 		container.getChildren().addAll(makeRow(new CustomText("Welcome!", FontWeight.BOLD, HEADER_SIZE)),
 									   makeRow(new CustomText("Build a new game.", FontWeight.BOLD)),
 							  	       makeRow(new CustomText("Name:"), name),
-							  	       makeRow(new CustomText("Description:"), description));
+							  	       makeRow(new CustomText("Description:"), description),
+							  	       makeRow(new CustomText("Game Screen Width:")));
 	}
 	
 	@Override

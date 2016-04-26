@@ -25,6 +25,7 @@ public class ProjectOpenPrompt extends StarterPrompt {
 	
 	@Override
 	protected void setProceedEvent(EventHandler<ActionEvent> proceedEvent) {
+		//TODO: name IDs the same as the classname and then use reflection in openCommand
 		openAll = new ButtonMaker().makeButton("Browse All", proceedEvent);
 		openAll.setId("OpenAll");
 		openBySearch = new ButtonMaker().makeButton("Play By Search", proceedEvent);
@@ -41,7 +42,6 @@ public class ProjectOpenPrompt extends StarterPrompt {
 	
 	@Override
 	protected void setTheScene() {
-		// TODO Auto-generated method stub
 		Scene scene = new VoogaScene(container, WIDTH, HEIGHT);
 		this.setScene(scene);
 	}
