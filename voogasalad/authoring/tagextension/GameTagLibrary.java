@@ -27,7 +27,6 @@ public class GameTagLibrary {
 		myDescripList = descriptionlist;
 		List<String> gamenames = new ArrayList<String>();
 		List<GameTagPair> gtpairs = deSerializeAllGameTags();
-		
 		for(GameTagPair gtp : gtpairs){
 			gamenames.add(gtp.getGameName());
 		}

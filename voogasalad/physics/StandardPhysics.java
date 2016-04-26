@@ -15,14 +15,14 @@ import tools.Velocity;
  * @author Michael, Hunter
  *
  */
-public class StandardPhysics implements IPhysicsEngine{
+public class StandardPhysics implements IPhysicsEngine {
 	
 	private static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
 	private static final double LIFT = 0.1;
 	private static final double ERROR = 0.01;
 	private static final double JUMP_FACTOR = 0.05;
-	private static final double PADDING = 10;
+	private static final double PADDING = 0.1;
 	
 	
 	/**
@@ -34,13 +34,13 @@ public class StandardPhysics implements IPhysicsEngine{
 	}
 	
 	/**
-	 * Checks whether a double is zero
+	 * Checks whether a double is same as numToCompare
 	 * 
 	 * @param number
 	 * @return
 	 */
-	private boolean isZero(Double number) {
-		return Math.abs(number.doubleValue()) < ERROR;
+	private boolean isThisNumber(Double number, int numToCompare) {
+		return Math.abs(number.doubleValue()) - numToCompare < ERROR;
 	}
 
 	
@@ -75,7 +75,7 @@ public class StandardPhysics implements IPhysicsEngine{
 //	}
 	
 	public void translateY(Sprite sprite, Double change) {
-		sprite.getPosition().addY(change);
+		sprite.getVelocity().setY(change * REDUCE_FACTOR);
 	}
 	
 	
@@ -96,7 +96,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	 */
 	@Override
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
-		//System.out.println("Bounce is called");
+		System.out.println("Bounce is called");
 		
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
 		if (sprite.getVelocity().getY() < 0.1 && sprite.getVelocity().getY() != 0.0) {
@@ -121,6 +121,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * @param sprite
 	 * @param bounceCoefficient
 	 */
+	@Override
 	public void elasticBounceX(Sprite sprite, Double bounceCoefficient) {
 		sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
 	}
@@ -131,8 +132,21 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * @param sprite
 	 * @param bounceCoefficient
 	 */
+	@Override
 	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
+		// If velocity is going left
+		System.out.println("Velocity angle: " + sprite.getVelocity().getAngleDegree());
+		System.out.println("Velocity x: " + sprite.getVelocity().getX() + " Velocity y: " + sprite.getVelocity().getY());
+		if (isThisNumber(sprite.getVelocity().getAngleDegree(), 90) || isThisNumber(sprite.getVelocity().getAngleDegree(), 270)) {
+		}
+		else if (sprite.getVelocity().getAngleDegree() > 180 && sprite.getVelocity().getAngleDegree() < 360) {
+			//sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
+		}
+		else {
+			//sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
+		}
 		sprite.getVelocity().setX(0);
+
 	}
 	
 	/**
@@ -142,30 +156,40 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * @param spriteB
 	 * @return 1 if there is a collision, 0 if no collision
 	 */
+	@Override
 	public int checkCollisionX(Sprite spriteA, Sprite spriteB) {
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
-		if (boundA.intersects(boundB)) {
-			if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
-				return 1;
-			}
-		}
-		return 0;
-		
-		
-		
-		
-//		if (checkOverlapY(spriteA, spriteB) != 0) {
-//			if (checkOverlapX(spriteA, spriteB) == 1) {
+//		if (boundA.intersects(boundB)) {
+//			if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
 //				return 1;
 //			}
-//			else {
-//				return 0;
-//			}
 //		}
-//		else {
-//			return 0;
-//		}
+//		return 0;
+		
+		//if (checkCollisionY(spriteA, spriteB) == 0) {
+//		System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
+//		System.out.println("This is overlap tag: " + checkOverlapY(spriteA, spriteB));
+		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
+		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
+		
+		if (boundA.intersects(boundB)) {
+		
+		if (checkOverlapY(spriteA, spriteB) != 0) {
+			if (checkOverlapX(spriteA, spriteB, true) == 1) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
+		}
+		else {
+			return 0;
+		}
+		
+		}
+		return 0;
+
 		//---------------------
 //		Bounds boundA = spriteA.getImage().getBoundsInParent();
 //		Bounds boundB = spriteB.getImage().getBoundsInParent();
@@ -192,6 +216,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	 * @param spriteB
 	 * @return -1 if A is below B, 1 if A is above B, and 0 if no collision
 	 */
+	@Override
 	public int checkCollisionY(Sprite spriteA, Sprite spriteB) {
 		
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
@@ -201,9 +226,20 @@ public class StandardPhysics implements IPhysicsEngine{
 //				if (checkOverlapY(spriteA, spriteB) == )
 //			}
 //		}
+		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
+		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
 
+		//System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
+		//if (boundA.intersects(boundB)) {
+		
+//		if (boundA.intersects(boundB)) {
+//			System.out.println("we intersected in checkCollisionY");
+//			System.out.println("checkOverlapX value: " + checkOverlapX(spriteA, spriteB, false));
+//			System.out.println("checkOverlapY value: " + checkOverlapY(spriteA, spriteB));
+//			spriteA.getVelocity().setY(0);
+//		}
+		
 		if (boundA.intersects(boundB)) {
-
 			if (checkOverlapX(spriteA, spriteB, false) == 1) {
 				if (checkOverlapY(spriteA, spriteB) == 1) {
 					return -1;
@@ -219,6 +255,8 @@ public class StandardPhysics implements IPhysicsEngine{
 			}
 		}
 		return 0;
+//		}
+//		return 0;
 		
 		
 //		Bounds boundA = spriteA.getImage().getBoundsInParent();
@@ -272,7 +310,7 @@ public class StandardPhysics implements IPhysicsEngine{
 	        atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
 		}
 
-       if(boundA.intersects(boundB)){ 
+        //if(boundA.intersects(boundB)){ 
 	        // If A left B right
 	        if (boundA.getMinX() <= boundB.getMinX()) {
 	        	if (atRightBorder) {
@@ -285,15 +323,16 @@ public class StandardPhysics implements IPhysicsEngine{
 	        		return 1;
 	        	}
 	        }
-        }     
-        return 0;
+	        return 0;
+	}
+        //return 0;
 
 //        if (atRightBorder || atLeftBorder) {
 //        	return 1;
 //        } else {
 //        	return 0;
 //        }
-	}
+//	}
 
 	/**
 	 * Check overlap for Y
@@ -308,19 +347,23 @@ public class StandardPhysics implements IPhysicsEngine{
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
 		boolean atTopBorder = boundA.getMinY() <= boundB.getMaxY();
 		boolean atBottomBorder = boundA.getMaxY() >= boundB.getMinY();
-		
-		// If A is above B
-		if (boundA.getMinY() >= boundB.getMinY()) {
+//boundA.getM
+//		if (boundA.intersects(boundB)){
+		//If A is above B
+		//System.out.println(boundA.getMaxX() + " " + boundB.getMinY());
+		if (boundA.getMinY() <= boundB.getMinY()) {
 			if (atBottomBorder) {
 				return 2;
-			}
+			} 
 		}
-		// If A is below B
-		if (boundA.getMinY() < boundB.getMinY()) {
+		// If A is below B..
+		if (boundA.getMinY() > boundB.getMinY()) {
 			if (atTopBorder) {
 				return 1;
 			}
 		}
+		
+//		}
 		return 0;
 	}
 	
@@ -343,7 +386,7 @@ public class StandardPhysics implements IPhysicsEngine{
 		//System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
 		//System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
 		// Check if the main character is on the ground, not in the air to be able to jump
-		if (isZero(sprite.getVelocity().getY())) {
+		if (isThisNumber(sprite.getVelocity().getY(), 0)) {
 			// Apply change to the velocity so that the character has upward velocity
 			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude * JUMP_FACTOR);
 		}
