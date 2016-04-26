@@ -40,7 +40,7 @@ public class GameRunner implements IGameRunner {
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
 	private ScreenProcessor myScreenProcessor;
-    private ElementUpdater mySpriteManager;
+    private ElementUpdater myElementUpdater;
     private EventManager myEventManager;
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
@@ -55,7 +55,7 @@ public class GameRunner implements IGameRunner {
 	public GameRunner() {
 		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
-		mySpriteManager = new ElementUpdater();
+		myElementUpdater = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
@@ -86,7 +86,7 @@ public class GameRunner implements IGameRunner {
 	private void step() {	
 		myCurrentStep++;
 		checkAndUpdateGlobalVariables();
-		mySpriteManager.update(myLevelData);
+		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();	
