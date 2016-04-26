@@ -253,9 +253,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void setGlobalProperties (Map<String, VoogaData> globalPropertiesMap) throws VoogaException {
-        if (!GPM.getVoogaProperties().isEmpty()) {
-            throw new VoogaException();
-        }
+
+//        if (!GPM.getVoogaProperties().isEmpty()) {
+//            throw new VoogaException();
+//        }
         GPM.setVoogaProperties(globalPropertiesMap);
     }
 
