@@ -190,9 +190,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
     
     public String getSpriteNameFromId (String id) throws VoogaException {
-        System.out.println(id);
         for (Node e : myGameElements) {
-            System.out.println(e.getId());
             if (((Elementable) e).getId().equals(id)) {
                 return ((Elementable) e).getName();
             }
