@@ -13,7 +13,7 @@ import physics.IPhysicsEngine;
  * @author Krista
  *
  */
-public class ElementManager {
+public class ElementUpdater {
 	private static final String ALIVE = "Alive";
 	/**
 	 * This method updates each sprite's Position

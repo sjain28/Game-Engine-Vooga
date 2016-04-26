@@ -19,7 +19,7 @@ import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
-import player.leveldatamanager.ElementManager;
+import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
 import videos.ScreenProcessor;
@@ -40,7 +40,7 @@ public class GameRunner implements IGameRunner {
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
 	private ScreenProcessor myScreenProcessor;
-    private ElementManager mySpriteManager;
+    private ElementUpdater mySpriteManager;
     private EventManager myEventManager;
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
@@ -55,7 +55,7 @@ public class GameRunner implements IGameRunner {
 	public GameRunner() {
 		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
-		mySpriteManager = new ElementManager();
+		mySpriteManager = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
