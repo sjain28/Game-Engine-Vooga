@@ -122,8 +122,8 @@ public class GameRunner implements IGameRunner {
 		Sprite centered = myLevelData.getCenteredSprite();
 		centered.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
 			int offset = n.intValue();
-			// TODO: remove hardcoding
-    		if (offset > 200 && offset < 400) {
+			// TODO: Link to size of level instead of hardcoding
+    		if (offset > 200 && offset < 3000) {
     			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
     		}
 		});

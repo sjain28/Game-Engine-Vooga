@@ -1,8 +1,11 @@
 package authoring.tagextension;
 
 import authoring.CustomText;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -27,6 +30,7 @@ public class TagLabel extends HBox {
 	private static final String DELETE = "x";
 	
 	private String tag;
+	private CustomText delete;
 	
 	/**
 	 * Constructs the tag, placing the name of the tag and a symbol for deletion inside
@@ -35,10 +39,15 @@ public class TagLabel extends HBox {
 	 */
 	public TagLabel(String tag) {
 		this.tag = tag;
-		this.getChildren().addAll(new CustomText(tag), new CustomText(DELETE));
+		delete = new CustomText(DELETE);
+		this.getChildren().addAll(new CustomText(tag), delete);
 		this.setPadding(new Insets(INSETS));
 		this.setSpacing(SPACING);
 		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(RADIUS), Insets.EMPTY)));
+	}
+	
+	public void setOnDeletion(EventHandler<MouseEvent> e) {
+		this.delete.setOnMouseClicked(e);
 	}
 	
 	/**
