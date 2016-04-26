@@ -1,4 +1,4 @@
-package authoring.tagextension;
+package authoring.splash;
 
 import java.util.List;
 import java.util.Observable;
@@ -6,7 +6,10 @@ import java.util.Observer;
 
 import authoring.CustomText;
 import authoring.VoogaScene;
-import authoring.splash.StarterPrompt;
+import authoring.tagextension.GameTagLibrary;
+import authoring.tagextension.GamesListing;
+import authoring.tagextension.TagDisplayContainer;
+import authoring.tagextension.TagLabel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +27,7 @@ import javafx.scene.text.FontWeight;
  * @author adityasrinivasan
  *
  */
-public class GameTagSearcher extends StarterPrompt implements Observer {
+public class ProjectOpenBySearchPrompt extends StarterPrompt implements Observer {
 	
 	/**
 	 * Constants
@@ -49,7 +52,7 @@ public class GameTagSearcher extends StarterPrompt implements Observer {
 	private GamesListing gamesListing;
 	private EventHandler<ActionEvent> e;
 	
-	public GameTagSearcher() {
+	public ProjectOpenBySearchPrompt() {
 		super();
 	}
 	
