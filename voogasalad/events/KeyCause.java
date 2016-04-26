@@ -18,7 +18,7 @@ public class KeyCause extends Cause {
 
 	private List<String> myKeys;
 	private boolean myValue;
-	private String myPressed = "press"; //can be the strings press or release
+	private String myPressed; //can be the strings press or release
 	
 	public KeyCause(String allKeyInputs, String pressStatus, VoogaEvent voogaEvent) {
 		super(voogaEvent);
@@ -33,8 +33,6 @@ public class KeyCause extends Cause {
 
 	@Override
 	public boolean check(ILevelData data) {
-		if(myValue)
-			System.out.println("KEY: " + myKeys.get(0));
 		return myValue;
 	}
 	
@@ -48,7 +46,7 @@ public class KeyCause extends Cause {
 	
 	@Override
 	public String toString(){
-		String result = "Checking if the following keys have been pressed: ";
+		String result = "Checking if the following keys have been " + myPressed + ": ";
 		for(String a: myKeys){
 			result += " "+a;
 		}
@@ -56,6 +54,6 @@ public class KeyCause extends Cause {
 	}
 
 	public String getMyPressed() {
-		return (myPressed == null) ? "release" : "press";
+		return myPressed;
 	}
 }
