@@ -1,8 +1,5 @@
 package authoring.splash;
 
-import java.io.File;
-import java.io.FileOutputStream;
-
 import authoring.Command;
 import authoring.UIManager;
 import authoring.VoogaScene;
