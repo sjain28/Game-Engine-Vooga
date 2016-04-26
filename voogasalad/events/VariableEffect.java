@@ -67,9 +67,9 @@ public class VariableEffect extends Effect {
 	
 	@Override
 	public String toString() {
-		String effectString = myMethod + myVariable;
+		String effectString = myMethod + " " + myVariable;
 		if (myParameter != null){
-			effectString += "[" + myParameter.toString() + "]";
+			effectString += " [" + myParameter.toString() + "]";
 		}
 		return effectString;
 	}
