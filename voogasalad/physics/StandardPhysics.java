@@ -53,7 +53,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
-		System.out.println("Bounce is called");
+		//System.out.println("Bounce is called");
 
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
 		if (sprite.getVelocity().getY() < 0.1 && sprite.getVelocity().getY() != 0.0) {
@@ -145,9 +145,9 @@ public class StandardPhysics implements IPhysicsEngine {
 		
 		// Collision means they intersect
 		if (boundA.intersects(boundB)) {
-			System.out.println("intersecting");
-			System.out.println(checkOverlapY(spriteA,spriteB));
-			System.out.println();
+//			System.out.println("intersecting");
+//			System.out.println(checkOverlapY(spriteA,spriteB));
+//			System.out.println();
 		//	if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
 			//if (diffRight < LIFT || diffLeft < LIFT) {
 			if (diffRight < COLLISION_CHECK || diffLeft < COLLISION_CHECK) {
@@ -176,7 +176,7 @@ public class StandardPhysics implements IPhysicsEngine {
 		double diffTop = Math.abs(boundA.getMinY() - boundB.getMaxY());
 		double diffBottom = Math.abs(boundB.getMinY() - boundA.getMaxY());
 
-		System.out.println("DiffBottom " + diffBottom);
+	//	System.out.println("DiffBottom " + diffBottom);
 		
 		// Collision means they intersect
 		if (boundA.intersects(boundB)) {

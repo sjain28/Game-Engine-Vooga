@@ -54,7 +54,8 @@ public class LevelData implements ILevelData {
     private List<VoogaEvent> myEvents;
     private List<List<String>> keyPressedCombos;
     private List<List<String>> keyReleasedCombos;
-    private Map<List<String>, KeyCause> myKeyCauses;
+    private Map<List<String>, KeyCause> myKeyPressCauses;
+    private Map<List<String>, KeyCause> myKeyReleaseCauses;
 
     /** Important Static Variables **/
     private String myTimerKey;
@@ -68,12 +69,13 @@ public class LevelData implements ILevelData {
         methods = VoogaBundles.EventMethods;
         myPhysics = physicsengine;
         myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
-        myElements = new HashMap<String, Elementable>();
-        myGlobalVariables = new HashMap<String, VoogaData>();
-        myEvents = new ArrayList<VoogaEvent>();
+        myElements = new HashMap<>();
+        myGlobalVariables = new HashMap<>();
+        myEvents = new ArrayList<>();
         keyPressedCombos = new ArrayList<>();
         keyReleasedCombos = new ArrayList<>();
-        myKeyCauses = new HashMap<List<String>, KeyCause>();
+        myKeyPressCauses = new HashMap<>();
+        myKeyReleaseCauses = new HashMap<>();
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
         myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
@@ -101,7 +103,7 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
-    	System.out.println(myElements);
+    	//System.out.println(myElements);
     	return myElements.entrySet();
     }
     /**
@@ -194,9 +196,14 @@ public class LevelData implements ILevelData {
      * 
      * @return
      */
-    public Map<List<String>, KeyCause> getKeyCauses () {
-        return Collections.unmodifiableMap(myKeyCauses);
+    public Map<List<String>, KeyCause> getKeyPressCauses () {
+        return Collections.unmodifiableMap(myKeyPressCauses);
     }
+    
+    public Map<List<String>, KeyCause> getKeyReleaseCauses () {
+        return Collections.unmodifiableMap(myKeyReleaseCauses);
+    }
+    
     /**
      * Returns unmodifiable list of key events
      * 
@@ -216,11 +223,14 @@ public class LevelData implements ILevelData {
         for (Cause c : voogaEvent.getCauses()) {
             if (c instanceof KeyCause) {
                 KeyCause keyc = (KeyCause) c;
-                myKeyCauses.put(keyc.getKeys(), keyc);
                 if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
                     keyPressedCombos.add(keyc.getKeys());
+                    this.myKeyPressCauses.put(keyc.getKeys(), keyc);
                 }
-                else { keyReleasedCombos.add(keyc.getKeys());}
+                else { 
+                	keyReleasedCombos.add(keyc.getKeys());
+                	this.myKeyReleaseCauses.put(keyc.getKeys(), keyc);
+                }
             }
         }
         keyReleasedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
@@ -245,7 +255,8 @@ public class LevelData implements ILevelData {
         // clear all the instance variables
         myElements.clear();
         myEvents.clear();
-        myKeyCauses.clear();
+        myKeyPressCauses.clear();
+        myKeyReleaseCauses.clear();
         keyPressedCombos.clear();
 
         //refresh event objects
