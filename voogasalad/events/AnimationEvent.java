@@ -1,5 +1,14 @@
 package events;
 
+//Process: 
+//VoogaEvent has some outside Cause paired to an AnimationEffect
+//AnimationEffect has an AnimationEvent in it
+//AnimationEvent has a WrapperCause and RorateEffects/PathEffects
+//Outside cause triggers animationeffect. animationeffect sets WrapperCause() to true
+//As long as wrappercause is true, path/rotation effects execute.
+//Once duration of the path/rotation effects is over, wrappercause gets set back to false. 
+
+
 public class AnimationEvent extends VoogaEvent {
 
 	private Double myDuration;
@@ -7,10 +16,8 @@ public class AnimationEvent extends VoogaEvent {
 	private PathEffect myPathEffect;
 	private RotateEffect myRotateEffect;
 	private String myName;
-
-	public AnimationEvent() {
-		
-	}
+	
+	//Got rid of an empty constructor
 	
 	protected void setDuration(Double duration){
 		myDuration = duration;

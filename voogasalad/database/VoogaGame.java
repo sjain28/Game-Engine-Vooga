@@ -1,16 +1,23 @@
 package database;
 
-import tools.interfaces.VoogaData;
 
-public class VoogaGame implements VoogaInfoCell{
+public class VoogaGame extends VoogaEntry{
 
-	public VoogaGame(String gamename){
-		//TODO: add gamename to map here
+
+	private String myGameName;
+	
+	public VoogaGame(String gameName){
+		myGameName = gameName;
 	}
-	@Override
-	public VoogaData getProperty(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public VoogaGame(String resourceString, String description){
+//		super(resourceString);
+//		myDescription = description;
+//	}
+//	
+//	public String getDescription(){
+//		return myDescription;
+//	}
+
+
 
 }

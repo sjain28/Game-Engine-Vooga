@@ -29,7 +29,7 @@ public class VoogaGame {
 			e.printStackTrace();
 		}
 //		userProgress = (Map<String,String>) Deserializer.deserialize(2, xmlFileName).get(1);
-		System.out.println(levelOrder);
+		//System.out.println(levelOrder);
 	}
 	
 	public VoogaGame(List<String> initialLevels){

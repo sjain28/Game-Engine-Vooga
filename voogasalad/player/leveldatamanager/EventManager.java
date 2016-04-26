@@ -18,19 +18,26 @@ public class EventManager {
 	 * @param leveldata
 	 * @param keyclicks
 	 */
+	
+	//release getting triggered by press
+	//release not getting triggered by release
 	public void update(ILevelData myLevelData, List<KeyEvent> keyPresses, List<KeyEvent> keyReleases){
 
-		Map<List<String>, KeyCause> keyCauses = myLevelData.getKeyCauses();
+		Map<List<String>, KeyCause> keyPressCauses = myLevelData.getKeyPressCauses();
+		Map<List<String>, KeyCause> keyReleaseCauses = myLevelData.getKeyReleaseCauses();
 		
-		checkKeys(myLevelData.getKeyPressCombos(), keyPresses, keyCauses);
-		checkKeys(myLevelData.getKeyReleasedCombos(), keyReleases, keyCauses);
+		checkKeys(myLevelData.getKeyPressCombos(), keyPresses, keyPressCauses);
+		checkKeys(myLevelData.getKeyReleasedCombos(), keyReleases, keyReleaseCauses);
 		
 		for(VoogaEvent e: myLevelData.getEvents()){
 			e.update(myLevelData);
 		}
 						
-		for(List<String> cause: keyCauses.keySet()){
-			keyCauses.get(cause).setValue(false);
+		for(List<String> cause: keyReleaseCauses.keySet()){
+			keyReleaseCauses.get(cause).setValue(false);
+		}
+		for(List<String> cause: keyPressCauses.keySet()){
+			keyPressCauses.get(cause).setValue(false);
 		}
 		
 	} 
@@ -38,7 +45,7 @@ public class EventManager {
 	 * Checks the list of keyStrokes to see if any of the keycombos we're interested in have occurred
 	 */
 	private void checkKeys(List<List<String>> keyCo, List<KeyEvent> keyClicks, Map<List<String>, KeyCause> keyCauses){
-		
+				
 		for (List<String> eventCombo : keyCo){ //Check all tuples
 			if(keyClicks.size() < eventCombo.size()){
 				continue;

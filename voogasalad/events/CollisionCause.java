@@ -36,7 +36,7 @@ public class CollisionCause extends Cause{
 	private List<Sprite> getSprites(ILevelData data, String arch){
 		List<Sprite> group = new ArrayList<>();
 	        
-		if(arch.contains("-")){		
+		if(arch.matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")){		
 			group.add(data.getSpriteByID(arch)); //If contains dash, it's a Sprite ID
 		}
 		else{
@@ -84,7 +84,7 @@ public class CollisionCause extends Cause{
 			return false;
 		}
 		else{
-			System.out.println(physics.checkCollisionY(a, b));
+//			System.out.println(physics.checkCollisionY(a, b));
 //			try {
 //				if (physics.checkCollisionY(a, b) != 0)
 //				Thread.sleep(4000);
@@ -102,8 +102,8 @@ public class CollisionCause extends Cause{
 	
 	private void initMap(){
 		collisionDirections = new HashMap<>();
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), 1);
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), -1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), -1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), 1);
 	}
 	
 	public List<Sprite> getAllCollidedSprites(){

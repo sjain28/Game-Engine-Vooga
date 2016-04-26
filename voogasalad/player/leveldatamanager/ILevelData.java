@@ -33,9 +33,13 @@ public interface ILevelData {
     
 	List<Node> getDisplayableNodes();
 
-	Map<List<String>, KeyCause> getKeyCauses();
+	Map<List<String>, KeyCause> getKeyPressCauses();
+	Map<List<String>, KeyCause> getKeyReleaseCauses();
+
 
 	Collection<VoogaEvent> getEvents();
+	
+	boolean getSaveNow();
 
 	String getNextLevelName();
 
