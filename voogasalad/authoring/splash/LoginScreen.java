@@ -91,6 +91,7 @@ public class LoginScreen extends Stage{
     }
 
     private void login () {
+        database.printDataBase();
        if(database.getUser(myUsername.getText()).verifyLoginInfo(myUsername.getText(), myPassword.getText())){
            VoogaBundles.preferences.setProperty("Username", myUsername.getText());
            System.out.println("this is working");
@@ -100,6 +101,7 @@ public class LoginScreen extends Stage{
 
     private void newUser () {
         database.addUser(myDisplayname.getText(), myUsername.getText(), myPassword.getText(), null);
+        database.printDataBase();
         login();
     }
 
