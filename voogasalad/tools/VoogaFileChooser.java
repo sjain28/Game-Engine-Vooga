@@ -43,7 +43,6 @@ public class VoogaFileChooser {
 	}
 
 	private boolean isLocal(File file) {
-		// System.out.println(file.getPath());
 		return file.getPath().contains(LOCAL_PATH);
 	}
 

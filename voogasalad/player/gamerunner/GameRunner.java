@@ -48,7 +48,7 @@ public class GameRunner implements IGameRunner {
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
 	private ScreenProcessor myScreenProcessor;
-    private ElementUpdater mySpriteManager;
+    private ElementUpdater myElementUpdater;
     private EventManager myEventManager;
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
@@ -65,7 +65,7 @@ public class GameRunner implements IGameRunner {
 		//myGameDisplay = new StandardDisplay(this);
 		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
-		mySpriteManager = new ElementUpdater();
+		myElementUpdater = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
@@ -105,7 +105,7 @@ public class GameRunner implements IGameRunner {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
 		checkAndUpdateGlobalVariables();
-		mySpriteManager.update(myLevelData);
+		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();	
@@ -130,7 +130,7 @@ public class GameRunner implements IGameRunner {
 			myGameDisplay.setSceneDimensions(width, height);
 			createLevelList(gameXmlList);
 		} catch (Exception e) {
-			new VoogaAlert("Level List Initialization failed");			
+			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
 		myGameDisplay.display();
 		playLevel(myLevelList.get(0));

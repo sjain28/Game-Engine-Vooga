@@ -13,12 +13,12 @@ public class PathEffect extends SpriteEffect{
 
 	private List<Double> xCoord;
 	private List<Double> yCoord;
-	private List<Double> xMousePoints;
-	private List<Double> yMousePoints;
+	private Double[] xMousePoints;
+	private Double[] yMousePoints;
 	private Double myVelocity;
 	private Integer myCounter;
 
-	public PathEffect(List<Double> xMousePoints, List<Double> yMousePoints, VoogaEvent event) {
+	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, AnimationEvent event) {
 		super(event);
 		setNeedsSprites(true);
 		this.xMousePoints = xMousePoints;
@@ -48,8 +48,8 @@ public class PathEffect extends SpriteEffect{
 
 	protected Double getVelocity(Double duration){
 		Double distance = 0.0;
-		for (int i = 0; i < xMousePoints.size(); i++){
-			distance += getDistance(xCoord.get(i-1), xCoord.get(i), yCoord.get(i-1), yCoord.get(i));
+		for (int i = 1; i < xMousePoints.length; i++){
+			distance += getDistance(xMousePoints[i - 1], xMousePoints[i], yMousePoints[i - 1], yMousePoints[i]);
 		}
 
 		return distance/duration;
@@ -59,15 +59,15 @@ public class PathEffect extends SpriteEffect{
 
 		myVelocity = getVelocity(duration);
 		
-		xCoord.add(xMousePoints.get(0));
-		yCoord.add(yMousePoints.get(0));
+		xCoord.add(xMousePoints[0]);
+		yCoord.add(yMousePoints[0]);
 
 		Double distance = 0.0;
 		for (int i = 1; i < xCoord.size(); i++){
 			distance += getDistance(xCoord.get(i-1), xCoord.get(i), yCoord.get(i-1), yCoord.get(i));
 			if (distance >= myVelocity){
-				xCoord.add(xMousePoints.get(i));
-				yCoord.add(yMousePoints.get(i));
+				xCoord.add(xMousePoints[i]);
+				yCoord.add(yMousePoints[i]);
 				distance = 0.0;
 			}
 		}
