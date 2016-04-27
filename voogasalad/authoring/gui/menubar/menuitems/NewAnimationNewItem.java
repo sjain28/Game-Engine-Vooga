@@ -1,7 +1,7 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.PlayerMenuItemHandler;
-import authoring.gui.menubar.builders.AnimationEventBuilder;
+import authoring.gui.animation.AnimationEventBuilder;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.Sceneable;

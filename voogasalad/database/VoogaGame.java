@@ -1,23 +1,19 @@
 package database;
 
+import tools.VoogaString;
 
 public class VoogaGame extends VoogaEntry{
-
-
-	private String myGameName;
 	
-	public VoogaGame(String gameName){
-		myGameName = gameName;
+	public static final String GAME_NAME = "GameName";
+	public static final String GAME_DESCRIPTION = "UserName";
+	
+	public VoogaGame(String gameName, String gameDescrip){
+		super();
+		setProperty(GAME_NAME, new VoogaString(gameName));
+		setProperty(GAME_DESCRIPTION, new VoogaString(gameDescrip));
 	}
-//	public VoogaGame(String resourceString, String description){
-//		super(resourceString);
-//		myDescription = description;
-//	}
-//	
-//	public String getDescription(){
-//		return myDescription;
-//	}
 
-
-
+	public String toString(){
+		return getProperty(GAME_NAME).getValue().toString();
+	}
 }
