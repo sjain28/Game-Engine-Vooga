@@ -1,0 +1,19 @@
+package database;
+
+import java.util.Date;
+
+import tools.VoogaString;
+
+public class VoogaPlaySession extends VoogaEntry{
+	private Date myDatePlayed;
+	public static final String PLAY_DURATION = "play duration";
+	public static final String SCORE = "score";
+	public static final String LEVEL_REACHED = "level reached";
+	public VoogaPlaySession(Date dateplayed, double playduration, double score, double levelreached){
+		super();
+		myDatePlayed = dateplayed;
+		setProperty(PLAY_DURATION, new VoogaString(""));
+		setProperty(SCORE, new VoogaString(""));
+		setProperty(LEVEL_REACHED, new VoogaString(""));
+	}
+}
