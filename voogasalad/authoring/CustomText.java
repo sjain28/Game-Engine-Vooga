@@ -43,8 +43,6 @@ public class CustomText extends Text {
 	 */
 	public CustomText(String text) {
 		super(text);
-		TextProperties tp = new TextProperties();
-		tpBundle = tp.getResourceBundle();
 		COLOR = BASIC_COLOR;
 		FONT = BASIC_FONT;
 		FONT_SIZE = Double.parseDouble(BASIC_FONT_SIZE);
