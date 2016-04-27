@@ -177,6 +177,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
+        myImage.setTranslateZ(myZ.doubleValue());
         
 //        System.out.println("Sprite Position: "+myLoc.getX()+" "+myLoc.getY());
 //        System.out.println("Image Position: "+myImage.getTranslateX()+" "+myImage.getTranslateY());
@@ -303,6 +304,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public Property<Number> getY () {
         return this.myY;
+    }
+    
+    public Property<Number> getZ (){
+        return this.myZ;
     }
 
     public Property<Number> getWidth () {

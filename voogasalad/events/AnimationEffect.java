@@ -5,34 +5,41 @@ import player.leveldatamanager.ILevelData;
 public class AnimationEffect extends SpriteEffect {
 	
 	private AnimationEvent myAnimationEvent;
+	private String myAnimationName;
 	private Double myDuration;
+	private Boolean reverse;
 
-	public AnimationEffect(AnimationEvent animationEvent, String spriteID, Double duration, VoogaEvent voogaEvent) {
+	public AnimationEffect(String animationEvent, Double duration, Boolean reverse, String spriteID, VoogaEvent voogaEvent) {
 		super(voogaEvent);
-		myAnimationEvent = animationEvent;
+		myAnimationName = animationEvent;
 		setSpriteID(spriteID);
 		setNeedsSprites(false);
 		myDuration = duration;
+		this.reverse = reverse;
 	}
-	public AnimationEffect(AnimationEvent animationEvent, String archetype, Boolean needsSprites, Double duration, VoogaEvent voogaEvent) {
+	public AnimationEffect(String animationEvent, Double duration, Boolean reverse, String archetype, Boolean needsSprites, VoogaEvent voogaEvent) {
 		super(voogaEvent);
-		myAnimationEvent = animationEvent;
+		myAnimationName = animationEvent;
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
 		myDuration = duration;
+		this.reverse = reverse;
 	}
-	public AnimationEffect(AnimationEvent animationEvent, Double duration, VoogaEvent voogaEvent) {
+	public AnimationEffect(String animationEvent, Double duration, Boolean reverse, VoogaEvent voogaEvent) {
 		super(voogaEvent);
-		myAnimationEvent = animationEvent;
+		myAnimationName = animationEvent;
 		setNeedsSprites(true);
 		myDuration = duration;
+		this.reverse = reverse;
 	}
 
 	@Override
 	public void execute(ILevelData data) {
 		setSprites(data);
+		//myAnimationEvent = data.getAnimationEvent(myAnimationName)
 		myAnimationEvent.addSpritesFromCause(getSprites());
 		myAnimationEvent.setDuration(myDuration);
+		myAnimationEvent.setReverse(reverse);
 		myAnimationEvent.setCauseValue(true);
 	}
 

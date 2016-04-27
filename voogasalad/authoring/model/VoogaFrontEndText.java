@@ -87,12 +87,14 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
         propertiesMap.put("Name", new VoogaString());
         propertiesMap.put("X", new VoogaNumber());
         propertiesMap.put("Y", new VoogaNumber());
+        propertiesMap.put("Z",new VoogaNumber());
         propertiesMap.put("Opacity", new VoogaNumber());
         propertiesMap.put("Style", new VoogaString());
         
         Bindings.bindBidirectional(this.textProperty(), propertiesMap.get("Name").getProperty());
         Bindings.bindBidirectional(this.translateXProperty(), propertiesMap.get("X").getProperty());
         Bindings.bindBidirectional(this.translateYProperty(), propertiesMap.get("Y").getProperty());
+        Bindings.bindBidirectional(this.translateZProperty(), propertiesMap.get("Z").getProperty());
         Bindings.bindBidirectional(this.opacityProperty(),
                                    propertiesMap.get("Opacity").getProperty());
         Bindings.bindBidirectional(this.styleProperty(), propertiesMap.get("Style").getProperty());

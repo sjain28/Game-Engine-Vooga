@@ -22,8 +22,8 @@ public class VoogaBundles {
 	public final static Properties defaultglobalvars = makeProperties("defaultglobalvariables.properties");
 	public final static ResourceBundle backendToGUIProperties = ResourceBundle.getBundle("resources/GUIClassMap");
 	public final static ResourceBundle imageProperties = ResourceBundle.getBundle("resources/imageproperties");
-    public final static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
-    public final static ResourceBundle physicsEffectsToGUI = ResourceBundle.getBundle("resources/PhysicsEffectsToGUI");
+	public final static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
+	public final static ResourceBundle physicsEffectsToGUI = ResourceBundle.getBundle("resources/PhysicsEffectsToGUI");
 	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
 	public final static Properties preferences = makeProperties("preferences.properties");
 	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
@@ -33,6 +33,7 @@ public class VoogaBundles {
 	private static Properties makeProperties(String path) {
 		try {
 			Properties props = new Properties();
+			System.out.println(path);
 			props.load(VoogaBundles.class.getResourceAsStream(path));
 			return props;
 		} catch (IOException e) {

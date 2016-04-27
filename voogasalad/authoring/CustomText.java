@@ -24,11 +24,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import resources.VoogaBundles;
-import tools.bindings.TextProperties;
 
 public class CustomText extends Text {
+//	private static final String BASIC_COLOR = "WHITE";
+//	private static final String BASIC_FONT = "Segoe UI Semibold";
+//	private static final String BASIC_FONT_SIZE = "13d";
 	
-	private ResourceBundle tpBundle;
+	private ResourceBundle textProperties;
 	
 	private String COLOR;
 	private String FONT;
@@ -41,10 +43,10 @@ public class CustomText extends Text {
 	 */
 	public CustomText(String text) {
 		super(text);
-		tpBundle = VoogaBundles.textProperties;
-		COLOR = tpBundle.getString("color");
-		FONT = tpBundle.getString("font");
-		FONT_SIZE = Double.parseDouble(tpBundle.getString("fontSize"));
+		textProperties = VoogaBundles.textProperties;
+		COLOR = textProperties.getString("color");
+		FONT = textProperties.getString("font");
+		FONT_SIZE = Double.parseDouble(textProperties.getString("fontSize"));
 		this.setFill(Paint.valueOf(COLOR));
 	}
 	
