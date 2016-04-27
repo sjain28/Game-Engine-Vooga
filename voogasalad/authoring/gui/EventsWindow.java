@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import authoring.gui.eventpane.EventWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import events.Cause;
 import events.Effect;

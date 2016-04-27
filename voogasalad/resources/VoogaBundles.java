@@ -28,6 +28,7 @@ public class VoogaBundles {
 	public final static Properties preferences = makeProperties("preferences.properties");
 	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
 	public final static ResourceBundle designboardProperties = ResourceBundle.getBundle("resources/designboard");
+	public final static ResourceBundle designboardPreferencesProperties = ResourceBundle.getBundle("resources/designboardpreferences");
 
 	
 	private static Properties makeProperties(String path) {
