@@ -1,9 +1,7 @@
 package authoring.gui.levelpreferences;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 import authoring.CustomText;
 import authoring.gui.SpriteNameIDPair;
@@ -11,11 +9,9 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
 import authoring.resourceutility.ButtonMaker;
 import gameengine.Sprite;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -26,16 +22,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
 import resources.VoogaBundles;
-import tools.interfaces.VoogaData;
+
+/**
+ * Tab that allows the user to define their preferences for the design board in terms of
+ * level name, type of scrolling, and physics module.
+ * 
+ * @author Harry Guo, Nick Lockett, Aditya Srinivasan, Arjun Desai
+ *
+ */
 
 public class DesignBoardPreferences extends Tab {
-
-	private static final double SPACING = 10;
-	private static final double WIDTH = 500;
+	
+	private double SPACING;
+	private double WIDTH;
 
 	private VBox container;
 
@@ -60,12 +62,24 @@ public class DesignBoardPreferences extends Tab {
 	private CustomText speedLabel;
 
 	private List<Node> gameObjects;
-	
+
 	private EventHandler<ActionEvent> e;
 
+	private ResourceBundle dbfProperties;
+
+	/**
+	 * Constructor to build the pop up for the user to specify preferences.
+	 * 
+	 * @param model: interface for back end and contains information when loading design board
+	 */
 	public DesignBoardPreferences(CompleteAuthoringModelable model) {
 		gameObjects = model.getElements();
 		container = new VBox();
+		
+		dbfProperties = VoogaBundles.designboardPreferencesProperties;
+		SPACING = Double.parseDouble(dbfProperties.getString("Spacing"));
+		WIDTH = Double.parseDouble(dbfProperties.getString("Width"));
+
 		container.setSpacing(SPACING);
 		container.setAlignment(Pos.CENTER);
 		this.setContent(container);
@@ -75,25 +89,52 @@ public class DesignBoardPreferences extends Tab {
 		chooseSpecificTrackingMode();
 		makeContinuousControl();
 	}
-	
+
+	/**
+	 * Sets the name of the level.
+	 * 
+	 * @param name: name of leve
+	 */
 	public void setName(String name) {
 		this.levelName.setText(name);
 	}
-	
+
+	/**
+	 * Sets the listener for the Design Board Preferences.
+	 * Connects to other parts of the GUI such as Design Board Housing and Pref File Item.
+	 * 
+	 * @param proceed: event
+	 */
 	public void setListener(EventHandler<ActionEvent> proceed) {
 		this.e = proceed;
 		container.getChildren().add(buttonRow());
 	}
 
+	/**
+	 * Title for pop up box
+	 * 
+	 * @return: title 
+	 */
 	private HBox header() {
-		return makeRow(new CustomText("Define your level.", FontWeight.BOLD, 20));
+		return makeRow(new CustomText(dbfProperties.getString("DefineLevelName"), FontWeight.BOLD, 
+				Integer.parseInt(dbfProperties.getString("HeaderSpacing"))));
 	}
 
+	/**
+	 * Choose name prompt.
+	 * 
+	 * @return: level name prompt
+	 */
 	private HBox chooseName() {
 		levelName = new TextField();
-		return makeRow(new CustomText("Level name:"), levelName);
+		return makeRow(new CustomText(dbfProperties.getString("LevelNamePrompt")), levelName);
 	}
 
+	/**
+	 * Choose physics module prompt.
+	 * 
+	 * @return: physics prompt
+	 */
 	private HBox choosePhysicsModule() {
 		realistic = new RadioButton("Realistic");
 		cartoon = new RadioButton("Cartoon");
@@ -101,6 +142,11 @@ public class DesignBoardPreferences extends Tab {
 		return createToggleGroup(physicsType, "Physics Module:", realistic, cartoon);
 	}
 
+	/**
+	 * Choose tracking mode prompt.
+	 * 
+	 * @return: tracking prompt
+	 */
 	private HBox chooseTrackingMode() {
 		continuous = new RadioButton("Continuous");
 		tracking = new RadioButton("Tracking");
@@ -108,6 +154,9 @@ public class DesignBoardPreferences extends Tab {
 		return createToggleGroup(trackingMode, "Scrolling Mode:", continuous, tracking);
 	}
 
+	/**
+	 * Generates specific tracking speed based on user selection.
+	 */
 	private void chooseSpecificTrackingMode() {
 		trackingMode.selectedToggleProperty().addListener((obs, old, n) -> {
 			container.getChildren().remove(buttons);
@@ -135,6 +184,9 @@ public class DesignBoardPreferences extends Tab {
 		return continuousControl;
 	}
 
+	/**
+	 * Initializes slider for scroll speed (if continuous)
+	 */
 	private void initializeSpecifics() {
 		scrollSpeed = new Slider();
 		scrollSpeed.setMaxWidth(WIDTH);
@@ -147,16 +199,29 @@ public class DesignBoardPreferences extends Tab {
 				}
 			}
 		} else {
-			sprites.getItems().add(new SpriteNameIDPair("<No game objects created yet to track>", ""));
+			sprites.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
 		}
 	}
 
+	/**
+	 * Creates utton row at bottom of selection panel.
+	 * 
+	 * @return
+	 */
 	private HBox buttonRow() {
-		Button ok = new ButtonMaker().makeButton("OK", this.e);
+		Button ok = new ButtonMaker().makeButton(dbfProperties.getString("Ok"), this.e);
 		buttons = makeRow(ok);
 		return buttons;
 	}
 
+
+	/**
+	 * Helper method to create radio buttons
+	 * 
+	 * @param label: button name
+	 * @param toggles: options for radio buttons
+	 * @return
+	 */
 	private HBox createToggleGroup(ToggleGroup group, String label, RadioButton... toggles) {
 		HBox row = makeRow(new CustomText(label));
 		for (RadioButton toggle : toggles) {
@@ -166,6 +231,11 @@ public class DesignBoardPreferences extends Tab {
 		return row;
 	}
 
+	/**
+	 * Helper function to make an HBox row
+	 * @param nodes
+	 * @return
+	 */
 	private HBox makeRow(Node... nodes) {
 		HBox row = new HBox();
 		row.setSpacing(SPACING);
@@ -174,10 +244,16 @@ public class DesignBoardPreferences extends Tab {
 		return row;
 	}
 
+	/**
+	 * @return level name
+	 */
 	public String getName() {
 		return this.levelName.getText();
 	}
 
+	/**
+	 * @return the sprite to track based on ID
+	 */
 	public String getMainSpriteID() {
 		return (sprites.getValue() == null) ? "" : sprites.getValue().getID();
 	}

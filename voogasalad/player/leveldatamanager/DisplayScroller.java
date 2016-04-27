@@ -2,7 +2,10 @@ package player.leveldatamanager;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import gameengine.Sprite;
 import javafx.scene.Node;
+import player.gamedisplay.IGameDisplay;
 
 /**
  * DisplayScroller provides public methods that choose Nodes to display
@@ -16,10 +19,39 @@ public class DisplayScroller implements IDisplayScroller {
 	private int myScreenSizeX;
 	private int myScreenSizeY;
 	private int myAdjustFactorX;
-	//	private int myAdjustFactorY;
 	private int myConstantScrollCenter;
 	
-//	private boolean DEBUG = false;
+	private IGameDisplay myGameDisplay;
+	
+	public DisplayScroller(IGameDisplay gamedisplay) {
+		this.myGameDisplay = gamedisplay;
+	}
+	
+	public void scroll(Sprite scrollsprite) {
+		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+			int offset = n.intValue();
+			// TODO: Link to size of level instead of hardcoding
+    		if (offset > 200 && offset < 3000) {
+    			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
+    		}
+		});
+	}
+	
+	public void constantScroll(Sprite scrollsprite) {
+		centersprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+			int offset = n.intValue();
+			// TODO: Link to size of level instead of hardcoding
+    		if (offset > 200 && offset < 3000) {
+    			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
+    		}
+		});
+	}
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Default constructor that sets the screen size to be used

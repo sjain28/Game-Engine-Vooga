@@ -140,6 +140,7 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	private void load(){
 		if(!(new File(FILE_LOCATION)).exists()){
+			System.out.println("loading, and file location does not yet exist.");
 			totalrows = 0;
 			totalcols = 0;
 			myGames = new ArrayList<VoogaGame>();
@@ -155,6 +156,13 @@ public class VoogaDataBase implements IDataBase{
 		} catch (VoogaException e) {e.printStackTrace();}
 	}
 	/**
+	 * Verifies a username in password
+	 */
+	public boolean verifyLoginInfo(String username, String password){
+		if(getUser(username)!=null&&getUser(username).verifyPassword(password)){return true;}
+		return false;
+	}
+	/**
 	 * Saves all information
 	 */
 	public void save(){
@@ -162,6 +170,17 @@ public class VoogaDataBase implements IDataBase{
 		catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * Clears the database
+	 */
+	public void clear(){
+		myGames.clear();
+		myUsers.clear();
+		totalrows = 0;
+		totalcols = 0;
+		myStatInfo.clear();
+		save();
 	}
 	/**
 	 * Method to print out all data in data base in matrix form
