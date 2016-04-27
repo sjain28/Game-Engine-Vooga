@@ -10,7 +10,7 @@ public abstract class AnimationPath {
 		this.myShape = shape;
 	}
 	
-	public abstract double[] getXControls();
-	public abstract double[] getYControls();
+	public abstract Double[] getXControls();
+	public abstract Double[] getYControls();
 	
 }

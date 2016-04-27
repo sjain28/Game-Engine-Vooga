@@ -10,13 +10,13 @@ public class LinePath extends AnimationPath {
 	}
 
 	@Override
-	public double[] getXControls() {
-		return new double[] {((Line) myShape).getStartX(), ((Line) myShape).getStartX(), ((Line) myShape).getEndX(), ((Line) myShape).getEndX()};
+	public Double[] getXControls() {
+		return new Double[] {((Line) myShape).getStartX(), ((Line) myShape).getStartX(), ((Line) myShape).getEndX(), ((Line) myShape).getEndX()};
 	}
 
 	@Override
-	public double[] getYControls() {
-		return new double[] {((Line) myShape).getStartY(), ((Line) myShape).getStartY(), ((Line) myShape).getEndY(), ((Line) myShape).getEndY()};
+	public Double[] getYControls() {
+		return new Double[] {((Line) myShape).getStartY(), ((Line) myShape).getStartY(), ((Line) myShape).getEndY(), ((Line) myShape).getEndY()};
 	}
 
 }

@@ -7,6 +7,7 @@ import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
 import authoring.resourceutility.ButtonMaker;
+import events.AnimationFactory;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -14,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -100,7 +102,9 @@ public class AnimationEventBuilder extends Stage {
 
 	private HBox controls() {
 		HBox row = new HBox();
-		row.getChildren().add(new ButtonMaker().makeButton("OK", e -> {
+		TextField name = new TextField();
+		name.setPromptText("Name your path");
+		row.getChildren().addAll(name, new ButtonMaker().makeButton("OK", e -> {
 			// TODO:
 			// Use animation factory to make the animation
 			String pathType = myShape.getClass().getSimpleName();
@@ -110,8 +114,8 @@ public class AnimationEventBuilder extends Stage {
 				clazz = Class.forName("authoring.gui.animation." + pathType + "Path");
 	            animationPath = (AnimationPath) clazz.getConstructor(Shape.class).newInstance(myShape);
 	            interpolator.interpolate(animationPath.getXControls(), animationPath.getYControls());
+	            AnimationFactory.getInstance().addPath(name.getText(), interpolator.getXInterpolation(), interpolator.getYInterpolation());
 				this.close();
-				//interpolator.interpolate();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
