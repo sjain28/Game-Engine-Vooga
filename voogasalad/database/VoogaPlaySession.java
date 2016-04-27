@@ -1,8 +1,7 @@
 package database;
 
 import java.util.Date;
-
-import tools.VoogaString;
+import tools.VoogaNumber;
 
 public class VoogaPlaySession extends VoogaEntry{
 	private Date myDatePlayed;
@@ -12,8 +11,11 @@ public class VoogaPlaySession extends VoogaEntry{
 	public VoogaPlaySession(Date dateplayed, double playduration, double score, double levelreached){
 		super();
 		myDatePlayed = dateplayed;
-		setProperty(PLAY_DURATION, new VoogaString(""));
-		setProperty(SCORE, new VoogaString(""));
-		setProperty(LEVEL_REACHED, new VoogaString(""));
+		setProperty(PLAY_DURATION, new VoogaNumber(playduration));
+		setProperty(SCORE, new VoogaNumber(score));
+		setProperty(LEVEL_REACHED, new VoogaNumber(levelreached));
+	}
+	public Date getDatePlayed(){
+	    return myDatePlayed;
 	}
 }

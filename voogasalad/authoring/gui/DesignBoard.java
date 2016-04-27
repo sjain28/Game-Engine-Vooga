@@ -7,12 +7,8 @@ import java.util.Observable;
 import java.util.Observer;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
-import authoring.model.GameObject;
-import authoring.UIGridHousing;
 import authoring.gui.menubar.builders.GameObjectBuilder;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.FrontEndElementable;
-import authoring.resourceutility.ButtonMaker;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
@@ -21,17 +17,14 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import resources.VoogaBundles;
@@ -81,6 +74,9 @@ public class DesignBoard extends Tab implements Observer {
 		displayElements(elem.getElements());
 	}
 	
+	/**
+	 * Initializes the container which contains all the contents of the design board.
+	 */
 	private void initializeContainers() {
 		this.setText(DESIGN_BOARD);
 		this.setClosable(false);
@@ -101,6 +97,9 @@ public class DesignBoard extends Tab implements Observer {
 		x_offset = Double.parseDouble(VoogaBundles.designboardProperties.getString("Height")) / 2;
 	}
 	
+	/**
+	 * Initializes the zoom slider which affects the magnification of the authoring environment.
+	 */
 	private void initializeZoom() {
 		Slider zoomControl = new Slider(0.1, 10, 1);
 		zoomBar.getItems().add(zoomControl);
@@ -110,10 +109,12 @@ public class DesignBoard extends Tab implements Observer {
 		});
 	}
 	
+	/**
+	 * Initializes the observables connected to this observer class.
+	 */
 	private void initializeObservables() {
 		selectionModel = ElementSelectionModel.getInstance();
 		selectionModel.addObserver(this);
-		
 		elementManager.addObserver(this);
 	}
 

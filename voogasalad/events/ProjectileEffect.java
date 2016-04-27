@@ -35,7 +35,7 @@ public class ProjectileEffect extends SpawnEffect {
 		}
 		
 		super.execute(data);
-		getNewSprite().setVelocity(myVelocity);
+		getNewSprite().setVelocity(new Velocity(myVelocity.getX(), myVelocity.getY()));
 
 	}
 

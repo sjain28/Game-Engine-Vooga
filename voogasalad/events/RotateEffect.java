@@ -8,11 +8,9 @@ public class RotateEffect extends SpriteEffect {
 	private Double myRotation;
 	private Double myCycleRotation;
 	
-	public RotateEffect(String spriteID, Double rotation, VoogaEvent event) {
+	public RotateEffect(Double rotation, VoogaEvent event) {
 		super(event);
-		setSpriteID(spriteID);
-		setNeedsSprites(false);
-		// TODO Auto-generated constructor stub
+		setNeedsSprites(true);
 	}
 	
 	protected void setCycleRotation(Double duration){
