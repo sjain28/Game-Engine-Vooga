@@ -22,6 +22,7 @@ import player.leveldatamanager.EventManager;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
+import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -40,8 +41,6 @@ public class GameRunner implements IGameRunner {
     private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
     private static final double SPEEDCONTROL = 10;
     private static final String LEVELS_PATH = "levels/";
-    private static final String GAMES_PATH_PREFIX = "games/";
-    private static final String SLASH_STRING = "/";
     private static final String XML_EXTENSION_SUFFIX = ".xml";
     private static final String NULL_STRING = "";
     private IPhysicsEngine myPhysicsEngine;
@@ -54,7 +53,7 @@ public class GameRunner implements IGameRunner {
 	private LevelListCreator myLevelListCreator;
 	private Timeline myTimeline;
     private String myCurrentLevelString;
-	private String myName;
+    private DisplayScroller myScroller;
     // TODO: Test
 	private int myCurrentStep;
 
@@ -62,19 +61,18 @@ public class GameRunner implements IGameRunner {
 	 * Default constructor
 	 */
 	public GameRunner() {
-		//myGameDisplay = new StandardDisplay(this);
 		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
 		myElementUpdater = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
+		myScroller = new DisplayScroller(myGameDisplay);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);		
 	}
-	
 	/**
 	 * createLevelList reads a text file and creates a list of levels
 	 */
@@ -142,14 +140,7 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		Sprite centered = myLevelData.getCenteredSprite();
-		centered.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
-			int offset = n.intValue();
-			// TODO: Link to size of level instead of hardcoding
-    		if (offset > 200 && offset < 3000) {
-    			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
-    		}
-		});
+		myScroller.centerScroll(myLevelData.getCenteredSprite());
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**

@@ -11,8 +11,8 @@ import javafx.stage.Stage;
  */
 public class TestForGamesConsecLevels extends Application {
 
-    private static final String TESTXML_PATH = "games/a/levels/Josh/JoshLEVEl1.xml";
-    private static final String TESTXML_PATH1 = "April 25";
+    private static final String TESTXML_PATH = "demo";
+    private static final String TESTXML_PATH1 = "demo";
 //    private static final String TESTXML_PATH = "My Game";
 
     public static void main (String[] args) {
