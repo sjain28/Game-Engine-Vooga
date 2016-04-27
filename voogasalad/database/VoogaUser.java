@@ -22,7 +22,7 @@ public class VoogaUser extends VoogaEntry{
 		return new ImageView(new Image(getProperty(PROF_PIC_LOC).getValue().toString()));
 	}
 	public boolean verifyLoginInfo(String username, String password){
-		if(username.equals(getProperty(USER_NAME))&&password.equals(myPassword)){return true;}
+		if(username.equals(getProperty(USER_NAME).toString())&&password.equals(myPassword)){return true;}
 		return false;
 	}
 	public String toString(){

@@ -60,13 +60,15 @@ public class VoogaDataBase implements IDataBase{
 	 * @param gamename
 	 */
 	public void addGame(String gamename, String gamedescrip){
-		totalrows++;
-		//initialize game
-		myGames.add(new VoogaGame(gamename, gamedescrip));
-		//initialize stat-info for game for every user
-		for(int col = 0; col < totalcols; col++){
-			String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
-			myStatInfo.get(col).add(new VoogaStatInfo(gamename,username));
+		if(!myGames.contains(gamename)){
+			totalrows++;
+			//initialize game
+			myGames.add(new VoogaGame(gamename, gamedescrip));
+			//initialize stat-info for game for every user
+			for(int col = 0; col < totalcols; col++){
+				String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
+				myStatInfo.get(col).add(new VoogaStatInfo(gamename,username));
+			}
 		}
 	}
 	/**
@@ -89,14 +91,16 @@ public class VoogaDataBase implements IDataBase{
 	 * @param password
 	 */
 	public void addUser(String displayname, String username, String password, String profpiclocation){
-		totalcols++;
-		myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));
-		List<VoogaStatInfo> userstatinfo = new ArrayList<VoogaStatInfo>();
-		for(int row = 0; row < totalrows; row++){
-			String gamename = myGames.get(row).getProperty(VoogaGame.GAME_NAME).toString();
-			userstatinfo.add(row, new VoogaStatInfo(gamename,username));
+		if(!myUsers.contains(username)){
+			totalcols++;
+			myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));
+			List<VoogaStatInfo> userstatinfo = new ArrayList<VoogaStatInfo>();
+			for(int row = 0; row < totalrows; row++){
+				String gamename = myGames.get(row).getProperty(VoogaGame.GAME_NAME).toString();
+				userstatinfo.add(row, new VoogaStatInfo(gamename,username));
+			}
+			myStatInfo.add(userstatinfo);
 		}
-		myStatInfo.add(userstatinfo);
 	}
 	/**
 	 * Returns StatInfo block for a particular Game and User

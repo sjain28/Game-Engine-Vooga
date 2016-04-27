@@ -18,16 +18,17 @@ public class VoogaBundles {
 	public final static OrderedProperties playerMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playermenunames.properties"));
 	public final static OrderedProperties playerTesterMenubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/playertestermenu.properties"));
 	public final static OrderedProperties toolbarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/toolbarbuttons.properties"));
-	public final static Properties secrets = makeProperties("resources/ssecret.properties");
-	public final static Properties userstats = makeProperties("resources/userstat.properties");
-	public final static Properties gamestats = makeProperties("resources/gamestat.properties");
-	public final static Properties defaultglobalvars = makeProperties("resources/defaultglobalvariables.properties");
+<<<<<<< HEAD
+=======
+	public final static Properties secrets = makeProperties("secret.properties");
+>>>>>>> master
+	public final static Properties defaultglobalvars = makeProperties("defaultglobalvariables.properties");
 	public final static ResourceBundle backendToGUIProperties = ResourceBundle.getBundle("resources/GUIClassMap");
 	public final static ResourceBundle imageProperties = ResourceBundle.getBundle("resources/imageproperties");
 	public final static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
 	public final static ResourceBundle physicsEffectsToGUI = ResourceBundle.getBundle("resources/PhysicsEffectsToGUI");
 	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
-	public final static Properties preferences = makeProperties("resources/preferences.properties");
+	public final static Properties preferences = makeProperties("preferences.properties");
 	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
 	public final static ResourceBundle designboardProperties = ResourceBundle.getBundle("resources/designboard");
 
@@ -35,6 +36,7 @@ public class VoogaBundles {
 	private static Properties makeProperties(String path) {
 		try {
 			Properties props = new Properties();
+			System.out.println(path);
 			props.load(VoogaBundles.class.getResourceAsStream(path));
 			return props;
 		} catch (IOException e) {

@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class VoogaDataBaseTest {
-
+	@Test
 	public void testAddingUsers() {
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		
@@ -18,6 +18,7 @@ public class VoogaDataBaseTest {
 		database.addGame("game 3", "scary game with dinosaurs");
 		database.addUser("Krista", "klo14", "password1", "mario.png");
 		database.addUser("Jacob", "jb8902", "thisshouldbesecret", "mario.png");
+		System.out.println(database.getUser("klo14").verifyLoginInfo("klo14", "password1"));
 		database.printDataBase();
 		
 		//get basic user and game information
@@ -46,5 +47,4 @@ public class VoogaDataBaseTest {
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		database.printDataBase();
 	}
-
 }

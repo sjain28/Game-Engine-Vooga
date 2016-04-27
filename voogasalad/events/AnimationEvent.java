@@ -11,13 +11,19 @@ package events;
 
 public class AnimationEvent extends VoogaEvent {
 
-	private Double myDuration;
 	private WrapperCause myCause;
+	
 	private PathEffect myPathEffect;
 	private RotateEffect myRotateEffect;
 	private String myName;
 	
-	//Got rid of an empty constructor
+	private Double myDuration;
+	private Boolean reverse;
+	
+	public AnimationEvent(String name){
+		myName = name;
+		myCause = new WrapperCause(this);
+	}
 	
 	protected void setDuration(Double duration){
 		myDuration = duration;
@@ -40,5 +46,35 @@ public class AnimationEvent extends VoogaEvent {
 	
 	protected void setCauseValue(Boolean value){
 		myCause.setValue(value);
+	}
+	protected void setReverse(Boolean reverse){
+		this.reverse = reverse;
+		if (reverse){
+			//path needs to get reversed and appended
+			//rotation needs to get reversed and appended
+		}
+	}
+	public void addPathEffect(PathEffect pathEffect){
+		if (myPathEffect != null){
+			getEffects().remove(myPathEffect);
+		}
+		myPathEffect = pathEffect;
+		addEffect(pathEffect);
+	}
+	public void addRotateEffect(RotateEffect rotateEffect){
+		if (myRotateEffect != null){
+			getEffects().remove(myRotateEffect);
+		}
+		myRotateEffect = rotateEffect;
+		addEffect(rotateEffect);
+	}
+	public RotateEffect getRotateEffect(){
+		return myRotateEffect;
+	}
+	public PathEffect getPathEffect(){
+		return myPathEffect;
+	}
+	public String getName(){
+		return myName;
 	}
 }
