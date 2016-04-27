@@ -16,12 +16,12 @@ import tools.VoogaFileChooser;
 
 
 public class SoundEffectGUI implements EventGUI {
-    Text file;
-    Button browse;
-    VoogaFileChooser fileChooser;
+    private Text file;
+    private Button browse;
+    private VoogaFileChooser fileChooser;
 
-    EditEventable manager;
-    HBox node;
+    private EditEventable manager;
+    private HBox node;
     
     public SoundEffectGUI (EditEventable manager) {
         this.manager = manager;
