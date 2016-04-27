@@ -23,6 +23,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import resources.VoogaBundles;
 import tools.bindings.TextProperties;
 
 public class CustomText extends Text {
@@ -40,8 +41,7 @@ public class CustomText extends Text {
 	 */
 	public CustomText(String text) {
 		super(text);
-		TextProperties tp = new TextProperties();
-		tpBundle = tp.getResourceBundle();
+		tpBundle = VoogaBundles.textProperties;
 		COLOR = tpBundle.getString("color");
 		FONT = tpBundle.getString("font");
 		FONT_SIZE = Double.parseDouble(tpBundle.getString("fontSize"));
