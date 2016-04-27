@@ -11,15 +11,15 @@ import javafx.scene.shape.Shape;
  */
 public class PathInterpolator {
 	
-	private double[] xInterpolation;
-	private double[] yInterpolation;
+	private Double[] xInterpolation;
+	private Double[] yInterpolation;
 	
 	public PathInterpolator() {
-		xInterpolation = new double[1000];
-		yInterpolation = new double[1000];
+		xInterpolation = new Double[1000];
+		yInterpolation = new Double[1000];
 	}
 	
-	public void interpolate(double[] xRaw, double[] yRaw) {
+	public void interpolate(Double[] xRaw, Double[] yRaw) {
 		int i = 0;
 		for (double t = 0.00; t < 1.000; t = t + .001) {
 	         xInterpolation[i] = Math.pow((1-t), 3) * xRaw[0] + 3 * Math.pow((1-t), 2) * t * xRaw[1] + 3 * (1-t) * Math.pow(t, 2) * xRaw[2] + Math.pow(t, 3) * xRaw[3];
@@ -28,11 +28,11 @@ public class PathInterpolator {
 		}
 	}
 	
-	public double[] getXInterpolation() {
+	public Double[] getXInterpolation() {
 		return this.xInterpolation;
 	}
 	
-	public double[] getYInterpolation() {
+	public Double[] getYInterpolation() {
 		return this.yInterpolation;
 	}
 
