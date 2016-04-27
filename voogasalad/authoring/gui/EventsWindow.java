@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import authoring.gui.eventpane.EventWindow;
+import java.util.ResourceBundle;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import events.Cause;
 import events.Effect;
@@ -18,26 +19,34 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
+/**
+ * Events Window GUI component class. 
+ * 
+ * @author HarryGuo
+ *
+ */
+
 public class EventsWindow extends TabPane implements Observer {
 
-	/**
-	 * Constants
-	 */
-	private static final String NAME = "Event Manager";
-	private static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
+	//private static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
 
 	/**
 	 * Private instance variables
 	 */
+	private String UUID_REGEX;
+
 	private CompleteAuthoringModelable myManager;
 	private Tab main;
 	private ScrollPane scroller;
 	private VBox content;
 	private Map<VoogaEvent, ObservableList<String>> effects;
 	private Map<VoogaEvent, ObservableList<String>> causes;
+
+	private ResourceBundle eventsWindowProperties;
 
 	/**
 	 * Initialized the Events Window, responsible for displaying all the
@@ -47,7 +56,10 @@ public class EventsWindow extends TabPane implements Observer {
 	public EventsWindow(CompleteAuthoringModelable manager) {
 		myManager = manager;
 		myManager.addObserver(this);
-		main = new Tab(NAME);
+		eventsWindowProperties = VoogaBundles.eventswindowProperties;
+		main = new Tab(eventsWindowProperties.getString("EventsWindowName"));
+		UUID_REGEX = eventsWindowProperties.getString("UUIDregex");
+		System.out.println(UUID_REGEX);
 		content = new VBox();
 		scroller = new ScrollPane(content);
 		causes = new HashMap<VoogaEvent, ObservableList<String>>();
@@ -57,6 +69,9 @@ public class EventsWindow extends TabPane implements Observer {
 		this.getTabs().add(main);
 	}
 
+	/**
+	 * Initializes the causes and effects in the window.
+	 */
 	private void initialize() {
 		for (VoogaEvent e : myManager.getEvents()) {
 			if (!causes.keySet().contains(e) && !effects.keySet().contains(e)) {
@@ -73,7 +88,7 @@ public class EventsWindow extends TabPane implements Observer {
 				HBox info = new HBox();
 				ListView<String> causeList = new ListView<String>(causes.get(e));
 				ListView<String> effectList = new ListView<String>(effects.get(e));
-				Button delete = new Button("X");
+				Button delete = new Button(eventsWindowProperties.getString("Delete"));
 				delete.setOnAction(ee -> delete(e, info));
 				info.getChildren().addAll(causeList, effectList, delete);
 				content.getChildren().add(info);
@@ -82,6 +97,11 @@ public class EventsWindow extends TabPane implements Observer {
 
 	}
 
+	/**
+	 * Cleans the string to match UUID regex.
+	 * @param s
+	 * @return
+	 */
 	private String cleanString(String s) {
 		String[] components = s.split(" ");
 		StringBuilder ans = new StringBuilder();
@@ -90,7 +110,7 @@ public class EventsWindow extends TabPane implements Observer {
 				try {
 					c = myManager.getSpriteNameFromId(c);
 				} catch (VoogaException e) {
-					new VoogaAlert("There is no Sprite with That ID");
+					new VoogaAlert(eventsWindowProperties.getString("NoSpriteError"));
 					e.printStackTrace();
 				}
 			}
@@ -101,6 +121,11 @@ public class EventsWindow extends TabPane implements Observer {
 		return ans.toString();
 	}
 
+	/**
+	 * Removes a VoogaEvent
+	 * @param e: event to remove
+	 * @param info: info to remove from display
+	 */
 	private void delete(VoogaEvent e, HBox info) {
 		myManager.getEvents().remove(e);
 		content.getChildren().remove(info);
