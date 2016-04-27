@@ -124,5 +124,9 @@ public class Connection extends Group {
 		return this.end;
 	}
 	
+	public Line getLine() {
+		return this.connector;
+	}
+	
 
 }

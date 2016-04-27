@@ -54,7 +54,7 @@ public class LevelCauseWindow extends Stage {
 				populateEvent(eventDetails);
 			}
 			new LevelTransitionEffect(endLevel, event);
-			populateEvent("events.LevelTransitionEffect " + endLevel);
+			populateEvent("events.LevelTransitionEffect," + endLevel);
 			model.addEvents(event);
 			this.close();
 		} catch (Exception e) {

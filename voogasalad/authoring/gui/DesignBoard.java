@@ -9,6 +9,9 @@ import java.util.ResourceBundle;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
+import authoring.model.GameObject;
+import authoring.CustomText;
+import authoring.UIGridHousing;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.FrontEndElementable;
 import authoring.resourceutility.ResourceDecipherer;
@@ -29,6 +32,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -37,7 +41,7 @@ import tools.VoogaException;
  * This class handles the display of all objects on the Authoring Environment
  * GUI. This is the board on which the author can build the game.
  * 
- * @author Aditya Srinivasan, Nick Lockett, Harry Guo, Arjun Desai
+ * @author Aditya Srinivasan, Arjun Desai
  *
  */
 public class DesignBoard extends Tab implements Observer {
@@ -46,6 +50,8 @@ public class DesignBoard extends Tab implements Observer {
 	private ToolBar zoomBar;
 	private ScrollPane scroller;
 	private StackPane contentPane;
+	private double width;
+	private double height;
 
 	private CompleteAuthoringModelable elementManager;
 	private ElementSelectionModel selectionModel;
@@ -66,6 +72,9 @@ public class DesignBoard extends Tab implements Observer {
 		this.elementManager = elem;
 		this.designboardProperties = VoogaBundles.designboardProperties;
 
+		this.width = Double.parseDouble(designboardProperties.getString("Width"));
+		this.height = Double.parseDouble(designboardProperties.getString("Height"));
+		
 		initializeContainers();
 		initializeZoom();
 		initializeObservables();
@@ -84,9 +93,7 @@ public class DesignBoard extends Tab implements Observer {
 		this.setClosable(false);
 
 		contentPane = new StackPane();
-		contentPane.setMinSize(Double.parseDouble(designboardProperties.getString("Width")),
-				Double.parseDouble(designboardProperties.getString("Height")));
-
+		contentPane.setMinSize(width, height);
 		scroller = new ScrollPane();
 		scroller.setContent(contentPane);
 
@@ -94,9 +101,9 @@ public class DesignBoard extends Tab implements Observer {
 
 		container = new VBox(zoomBar, scroller);
 		this.setContent(container);
-
-		y_offset = Double.parseDouble(designboardProperties.getString("Width")) / 2;
-		x_offset = Double.parseDouble(designboardProperties.getString("Height")) / 2;
+		
+		y_offset = width / 2;
+		x_offset = height / 2;
 	}
 
 	/**
@@ -104,7 +111,11 @@ public class DesignBoard extends Tab implements Observer {
 	 */
 	private void initializeZoom() {
 		Slider zoomControl = new Slider(0.1, 10, 1);
-		zoomBar.getItems().add(zoomControl);
+		Text coordinateDisplay = new CustomText("");
+		contentPane.setOnMouseMoved(e -> {
+			coordinateDisplay.setText("X: " + (e.getX() - width/2) + " Y: " + (e.getY() - height/2));
+		});
+		zoomBar.getItems().addAll(zoomControl, coordinateDisplay);
 		zoomControl.valueProperty().addListener((obs, old, n) -> {
 			contentPane.setScaleX((double) n);
 			contentPane.setScaleY((double) n);
@@ -220,12 +231,6 @@ public class DesignBoard extends Tab implements Observer {
 					}
 					builder.showAndWait();
 
-				} else if (ResourceDecipherer.isAudio(elementPath)) {
-					// node = new
-					// GameObject(elementManager.getSpriteFactory().createSprite(""));
-					AudioObject sound = new AudioObject(
-							new MediaPlayer(new Media(Paths.get(elementPath).toUri().toString())));
-					elementManager.addGameElements(sound);
 				}
 			} catch (VoogaException e) {
 				new VoogaAlert(e.getMessage());

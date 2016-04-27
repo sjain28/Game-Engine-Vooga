@@ -1,4 +1,4 @@
-package authoring.gui.menubar.builders;
+package authoring.gui.animation;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.paint.Color;

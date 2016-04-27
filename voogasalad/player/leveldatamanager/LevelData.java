@@ -27,20 +27,15 @@ import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
-
 /**
  * A centralized class to contain and access data relevant to a level
  * This includes Sprite's, Text, Global Variables, and Events
- * 
- * 
+
  * @author Krista
- *
  */
 public class LevelData implements ILevelData {
 
-
     private static final int SCREENSIZE = 600;
-    private static final String UNDERSCORE = "_";
     private static final String XML_SUFFIX = ".xml";
 
     private IPhysicsEngine myPhysics;
@@ -62,9 +57,6 @@ public class LevelData implements ILevelData {
     private Map<List<String>, KeyCause> myKeyReleaseCauses;
 
     /** Important Static Variables **/
-//    private static final String TIMER = "Time";
-//    private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
-//    private static final String CONTINIOUS_CHAR = "MainCharacterID";
     private static final String SAVE_PROGRESS = "SaveProgress";
     private String myTimerKey;
     private String myNextLevelKey;
@@ -279,6 +271,7 @@ public class LevelData implements ILevelData {
         //refresh global variables
         myGlobalVariables = data.getVariableMap();
         myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
+        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         myCenteredCharId = (String) myGlobalVariables.get(myCenteredCharKey).getValue();
         
         // add elements to map
@@ -299,7 +292,8 @@ public class LevelData implements ILevelData {
     
     public boolean getSaveNow () {
         // HARDCODED FOR NOW!!!!
-       return (Boolean) (((VoogaString) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
+
+       return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
     }
     
 

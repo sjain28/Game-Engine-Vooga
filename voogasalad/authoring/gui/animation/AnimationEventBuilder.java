@@ -1,11 +1,13 @@
-package authoring.gui.menubar.builders;
+package authoring.gui.animation;
 
 import authoring.UIManager;
 import authoring.VoogaScene;
 import authoring.gui.cartography.Connection;
+import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
 import authoring.resourceutility.ButtonMaker;
+import events.AnimationFactory;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -13,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
@@ -38,8 +42,12 @@ public class AnimationEventBuilder extends Stage {
 
 	private BorderPane border;
 	private Group stack;
+	
+	private PathInterpolator interpolator;
+	private Shape myShape;
 
 	public AnimationEventBuilder(Menuable model) {
+		interpolator = new PathInterpolator();
 		elManager = ((UIManager) model).getManager();
 		curve = new BezierCurve();
 		line = new Connection(0, 0, 100, 100);
@@ -74,16 +82,18 @@ public class AnimationEventBuilder extends Stage {
 
 	private ToolBar toolbar() {
 		ToolBar toolbar = new ToolBar();
-		Button spline = new ButtonMaker().makeButton("Add Spline", e -> {
+		Button spline = new ButtonMaker().makeButton("Add Curve", e -> {
 			stack.getChildren().remove(line);
 			if (!stack.getChildren().contains(curve)) {
-				stack.getChildren().addAll(curve);
+				stack.getChildren().add(curve);
+				myShape = curve.getCurve();
 			}
 		});
 		Button linear = new ButtonMaker().makeButton("Add Line", e -> {
 			stack.getChildren().remove(curve);
 			if (!stack.getChildren().contains(line)) {
-				stack.getChildren().addAll(line);
+				stack.getChildren().add(line);
+				myShape = line.getLine();
 			}
 		});
 		toolbar.getItems().addAll(spline, linear);
@@ -92,10 +102,23 @@ public class AnimationEventBuilder extends Stage {
 
 	private HBox controls() {
 		HBox row = new HBox();
-		row.getChildren().add(new ButtonMaker().makeButton("OK", e -> {
+		TextField name = new TextField();
+		name.setPromptText("Name your path");
+		row.getChildren().addAll(name, new ButtonMaker().makeButton("OK", e -> {
 			// TODO:
 			// Use animation factory to make the animation
-			this.close();
+			String pathType = myShape.getClass().getSimpleName();
+			Class<?> clazz;
+			AnimationPath animationPath;
+			try {
+				clazz = Class.forName("authoring.gui.animation." + pathType + "Path");
+	            animationPath = (AnimationPath) clazz.getConstructor(Shape.class).newInstance(myShape);
+	            interpolator.interpolate(animationPath.getXControls(), animationPath.getYControls());
+	            AnimationFactory.getInstance().addPath(name.getText(), interpolator.getXInterpolation(), interpolator.getYInterpolation());
+				this.close();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}));
 		return row;
 	}
