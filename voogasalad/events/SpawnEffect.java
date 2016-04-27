@@ -31,15 +31,13 @@ public class SpawnEffect extends Effect {
 
 	@Override
 	public void execute(ILevelData data) {
-		if (getMyTargetID() != null){
-			getMyPosition().addVector(data.getSpriteByID(getMyTargetID()).getPosition());
-		}
 		Sprite newSprite = data.addSprite(myArchetype);
-		newSprite.setPosition(getMyPosition());
+		newSprite.setPosition(new Position(getMyPosition().getX(), getMyPosition().getY()));
+		
+		if (getMyTargetID() != null){
+			newSprite.getPosition().addVector(data.getSpriteByID(getMyTargetID()).getPosition());
+		}
 		setNewSprite(newSprite);
-		// make new copy of sprite of that archetype
-		// set position to x, y
-
 	}
 
 	@Override

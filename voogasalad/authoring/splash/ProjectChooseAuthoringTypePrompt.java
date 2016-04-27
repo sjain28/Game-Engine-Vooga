@@ -9,28 +9,28 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class ProjectOpenPrompt extends StarterPrompt {
+public class ProjectChooseAuthoringTypePrompt extends StarterPrompt {
 	
 	private static final double WIDTH = 400;
 	private static final double HEIGHT = 200;
 	private static final double SPACING = 10;
 	
-	private Button openAll;
-	private Button openBySearch;
+	private Button newGame;
+	private Button openGame;
 	private VBox container;
 	
-	public ProjectOpenPrompt() {
+	public ProjectChooseAuthoringTypePrompt() {
 		super();
 	}
 	
 	@Override
 	protected void setProceedEvent(EventHandler<ActionEvent> proceedEvent) {
 		//TODO: name IDs the same as the classname and then use reflection in openCommand
-		openAll = new ButtonMaker().makeButton("Browse All", proceedEvent);
-		openAll.setId("OpenAll");
-		openBySearch = new ButtonMaker().makeButton("Play By Search", proceedEvent);
-		openBySearch.setId("OpenBySearch");
-		container.getChildren().addAll(openAll, openBySearch);
+		newGame = new ButtonMaker().makeButton("Start a new game", proceedEvent);
+		newGame.setId("NewGame");
+		openGame = new ButtonMaker().makeButton("Open an existing game", proceedEvent);
+		openGame.setId("OpenGame");
+		container.getChildren().addAll(newGame, openGame);
 	}
 	
 	@Override
