@@ -176,7 +176,7 @@ public class LevelData implements ILevelData {
      * @return
      */
     public List<Node> getDisplayableNodes () {
-        List<Node> displayablenodes = new ArrayList<Node>();
+        List<Node> displayablenodes = new ArrayList<>();
         for (Object key : myElements.keySet()) {
             displayablenodes.add(myElements.get(key).getNodeObject());
         }
@@ -225,8 +225,7 @@ public class LevelData implements ILevelData {
                 if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
                     keyPressedCombos.add(keyc.getKeys());
                     this.myKeyPressCauses.put(keyc.getKeys(), keyc);
-                }
-                else { 
+                } else { 
                 	keyReleasedCombos.add(keyc.getKeys());
                 	this.myKeyReleaseCauses.put(keyc.getKeys(), keyc);
                 }
@@ -240,6 +239,8 @@ public class LevelData implements ILevelData {
      * refreshes LevelData with the data from a specified level
      * also restarts timer in global variable
      * and sets level path
+     * 
+     * TODO: Break this up. and add the scrolling sprite
      * 
      * @param levelfilename
      */
@@ -321,7 +322,7 @@ public class LevelData implements ILevelData {
      **/
     public void saveProgress (String filePath, String playerName) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-        List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
+        List<Elementable> elementList = new ArrayList<>(myElements.values());
         DataContainerOfLists dataContainer =
                 new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                                          mySpriteFactory.getArchetypeMap());
