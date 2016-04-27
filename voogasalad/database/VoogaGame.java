@@ -1,16 +1,19 @@
 package database;
 
-import tools.interfaces.VoogaData;
+import tools.VoogaString;
 
-public class VoogaGame implements VoogaInfoCell{
-
-	public VoogaGame(String gamename){
-		//TODO: add gamename to map here
+public class VoogaGame extends VoogaEntry{
+	
+	public static final String GAME_NAME = "GameName";
+	public static final String GAME_DESCRIPTION = "UserName";
+	
+	public VoogaGame(String gameName, String gameDescrip){
+		super();
+		setProperty(GAME_NAME, new VoogaString(gameName));
+		setProperty(GAME_DESCRIPTION, new VoogaString(gameDescrip));
 	}
-	@Override
-	public VoogaData getProperty(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	public String toString(){
+		return getProperty(GAME_NAME).getValue().toString();
+	}
 }

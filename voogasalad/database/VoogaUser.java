@@ -1,17 +1,31 @@
 package database;
 
-import tools.interfaces.VoogaData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import tools.VoogaString;
 
-public class VoogaUser implements VoogaInfoCell{
+public class VoogaUser extends VoogaEntry{
 	private String myPassword;
-	public VoogaUser(String displayname, String username, String password){
-		//TODO: add in the displayname and username here
-		myPassword = password;
-	}
-	@Override
-	public VoogaData getProperty(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public static final String DISPLAY_NAME = "DisplayName";
+	public static final String USER_NAME = "UserName";
+	public static final String PROF_PIC_LOC = "ProfPicLoc";
 
+	
+	public VoogaUser(String displayname,String username, String password, String profPicLocation){
+		super();
+		myPassword = password;
+		setProperty(DISPLAY_NAME, new VoogaString(displayname));
+		setProperty(USER_NAME, new VoogaString(username));
+		setProperty(PROF_PIC_LOC, new VoogaString(profPicLocation));
+	}
+	public ImageView displayProfilePicture(){
+		return new ImageView(new Image(getProperty(PROF_PIC_LOC).getValue().toString()));
+	}
+	public boolean verifyLoginInfo(String username, String password){
+		if(username.equals(getProperty(USER_NAME).toString())&&password.equals(myPassword)){return true;}
+		return false;
+	}
+	public String toString(){
+		return getProperty(USER_NAME).getValue().toString();
+	}
 }

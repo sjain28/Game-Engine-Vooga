@@ -33,7 +33,6 @@ public class Serializer {
 		if (!file.exists()) {
 			System.out.println("creating directory: " + file.getParent());
 			boolean result = false;
-
 			try {
 				file.getParentFile().mkdir();
 				result = true;

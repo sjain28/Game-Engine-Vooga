@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import socialcenter.LogInSceneCreator;
 import tools.IVoogaGameSound;
 import tools.OrderedProperties;
 import tools.VoogaGameSound;
@@ -37,6 +38,7 @@ public class StandardDisplay implements IGameDisplay {
 	private Stage myStage;
 	private Scene myScene;
 	private BorderPane myPane;
+	private LogInSceneCreator myLogInScreen;
 	private Pane myGameScreen;
 	private List<Node> myListToDisplay;
 	private List<KeyEvent> myKeyEvents;
@@ -60,7 +62,11 @@ public class StandardDisplay implements IGameDisplay {
 		myGameSound = new VoogaGameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
-		myGameScreen = new Pane();
+		myGameScreen = new Pane();		
+		// Made the scene from log in scene creator;
+		// myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
+//		myLogInScreen = new LogInSceneCreator(); 
+//		myScene = myLogInScreen.createLogInScene(myPane, PANE_SIZE,PANE_SIZE);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myKeyPresses = new ArrayList<>();

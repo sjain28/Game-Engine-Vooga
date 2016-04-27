@@ -38,7 +38,7 @@ public class VariableEffectGUI implements EventGUI {
     private void initialize (ComboBox ... cbs) {
         level = new ComboBox<String>();
         name = new SpriteComboBox(elementManager);
-        variables = new VariableComboBox();
+        variables = new VariableComboBox(elementManager);
         actions = new ComboBox<String>();
         level.getItems().addAll("global", "local");
         addGUIElements(level);
@@ -52,7 +52,7 @@ public class VariableEffectGUI implements EventGUI {
             addGUIElements(level);
 
             if (level.getValue().equals("global")) {
-                variables.onParentChanged(elementManager.getGlobalVariables());
+                variables.resetVariables(elementManager.getGlobalVariables());
                 addGUIElements(variables);
             }
             if (level.getValue().equals("local")) {
@@ -63,7 +63,7 @@ public class VariableEffectGUI implements EventGUI {
         name.setOnAction(e -> {
 //            System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
-            variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
+            variables.resetVariables(name.getSpriteId());
             addGUIElements(variables);
         });
 
@@ -125,13 +125,13 @@ public class VariableEffectGUI implements EventGUI {
     public String getDetails () throws VoogaException{
         String result="";
         if (level.getValue().contains("global")){
-            result += "events.VariableEffect ";
+            result += "events.VariableEffect,";
         }
         if (level.getValue().contains("local")){
-            result += "events.SpriteEffect "+name.getSpriteId() + " ";
+            result += "events.SpriteEffect,"+name.getSpriteId() + ",";
         }
         result+=variables.getValue()+
-                " "+VoogaBundles.EventMethods.getString(actions.getValue())+" ";
+                ","+VoogaBundles.EventMethods.getString(actions.getValue())+",";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();

@@ -35,7 +35,7 @@ public class VariableCauseGUI implements EventGUI{
     private void initialize (ComboBox ... cbs) {
         level = new ComboBox<String>();
         name = new SpriteComboBox(elementManager);
-        variables = new VariableComboBox();
+        variables = new VariableComboBox(elementManager);
         actions = new ComboBox<String>();
         level.getItems().addAll("global", "local");
         addGUIElements(level);
@@ -49,7 +49,7 @@ public class VariableCauseGUI implements EventGUI{
             addGUIElements(level);
 
             if (level.getValue().equals("global")) {
-                variables.onParentChanged(elementManager.getGlobalVariables());
+                variables.resetVariables(elementManager.getGlobalVariables());
                 addGUIElements(variables);
             }
             if (level.getValue().equals("local")) {
@@ -61,7 +61,7 @@ public class VariableCauseGUI implements EventGUI{
             //System.out.println("name activated");
             removeInactiveNodes(variables, actions, amount);
             //System.out.println(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
-            variables.onParentChanged(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
+            variables.resetVariables(name.getSpriteId());
             addGUIElements(variables);
         });
 
@@ -117,13 +117,13 @@ public class VariableCauseGUI implements EventGUI{
     public String getDetails(){
         String result="";
         if (level.getValue().contains("global")){
-            result += "events.VariableCause ";
+            result += "events.VariableCause,";
         }
         if (level.getValue().contains("local")){
-            result += "events.SpriteVariableCause "+name.getSpriteId()+" ";
+            result += "events.SpriteVariableCause,"+name.getSpriteId()+",";
         }
         result+=variables.getValue()+
-                " "+VoogaBundles.EventMethods.getString(actions.getValue())+" ";
+                " "+VoogaBundles.EventMethods.getString(actions.getValue())+",";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();

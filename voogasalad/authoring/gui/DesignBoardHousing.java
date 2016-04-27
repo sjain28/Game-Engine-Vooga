@@ -3,9 +3,7 @@ package authoring.gui;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import resources.VoogaBundles;
 
 public class DesignBoardHousing extends TabPane {
 
@@ -55,7 +53,7 @@ public class DesignBoardHousing extends TabPane {
 		DesignBoard design = new DesignBoard(elem);
 		this.getTabs().add(design);
 	}
-
+	
 	public Property<String> getName() {
 		return this.mySceneName;
 	}

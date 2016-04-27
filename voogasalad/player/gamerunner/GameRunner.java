@@ -25,6 +25,7 @@ import resources.VoogaBundles;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
+import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
@@ -35,15 +36,19 @@ import videos.ScreenProcessor;
  */
 public class GameRunner implements IGameRunner {
     private static final double INIT_SPEED = 60;
+    private static final double SEC_PER_MIN = 60;
     private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
     private static final double SPEEDCONTROL = 10;
     private static final String LEVELS_PATH = "levels/";
+    private static final String GAMES_PATH_PREFIX = "games/";
+    private static final String SLASH_STRING = "/";
     private static final String XML_EXTENSION_SUFFIX = ".xml";
+    private static final String NULL_STRING = "";
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
 	private ScreenProcessor myScreenProcessor;
-    private ElementUpdater mySpriteManager;
+    private ElementUpdater myElementUpdater;
     private EventManager myEventManager;
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
@@ -60,7 +65,7 @@ public class GameRunner implements IGameRunner {
 		//myGameDisplay = new StandardDisplay(this);
 		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
-		mySpriteManager = new ElementUpdater();
+		myElementUpdater = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
@@ -90,8 +95,17 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void step() {	
 		myCurrentStep++;
+		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN;
+		myLevelData.updatedGlobalTimer(secondspassed);
+		//check if we need to transition to a different level
+    	if (myLevelData.getSaveNow()){
+    		saveGameProgress("Josh");
+    	}
+		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
+			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
+		}
 		checkAndUpdateGlobalVariables();
-		mySpriteManager.update(myLevelData);
+		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();	
@@ -226,4 +240,5 @@ public class GameRunner implements IGameRunner {
 		String fileName = myCurrentLevelString;
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
+
 }

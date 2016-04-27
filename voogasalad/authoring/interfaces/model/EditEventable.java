@@ -13,12 +13,9 @@ public interface EditEventable extends EditSpritable,EditElementable{
     public void removeEvents (VoogaEvent ... events);
 
     public Map<String, VoogaData> getGlobalVariables ();
-
-    public Collection<String> getMySpriteNames ();
     
     public void addObserver (Observer o);
     
     public List<VoogaEvent> getEvents();
 
-   
 }

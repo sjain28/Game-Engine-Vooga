@@ -28,7 +28,6 @@ public class PhysicsEffect extends SpriteEffect {
 		setSprites(data);
 		if (getSprites().size() > 0){
 			for (Sprite sprite: getSprites()){
-				System.out.println("METHOD: " + getMethodString());
 				callEffectMethod(sprite, data);
 			}
 		}

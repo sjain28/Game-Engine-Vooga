@@ -13,6 +13,7 @@ import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import data.FileWriterFromGameObjects;
+import events.AnimationFactory;
 import events.Cause;
 import events.KeyCause;
 import events.VoogaEvent;
@@ -21,6 +22,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
+import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -36,6 +38,7 @@ import tools.interfaces.VoogaData;
  */
 public class LevelData implements ILevelData {
 
+
     private static final int SCREENSIZE = 600;
     private static final String UNDERSCORE = "_";
     private static final String XML_SUFFIX = ".xml";
@@ -46,6 +49,7 @@ public class LevelData implements ILevelData {
     private String myCenteredCharId;
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
+    private AnimationFactory myAnimationFactory;
 
     /** Global Variable Information **/
     private Map<String, VoogaData> myGlobalVariables;
@@ -54,26 +58,32 @@ public class LevelData implements ILevelData {
     private List<VoogaEvent> myEvents;
     private List<List<String>> keyPressedCombos;
     private List<List<String>> keyReleasedCombos;
-    private Map<List<String>, KeyCause> myKeyCauses;
+    private Map<List<String>, KeyCause> myKeyPressCauses;
+    private Map<List<String>, KeyCause> myKeyReleaseCauses;
 
     /** Important Static Variables **/
+//    private static final String TIMER = "Time";
+//    private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
+//    private static final String CONTINIOUS_CHAR = "MainCharacterID";
+    private static final String SAVE_PROGRESS = "SaveProgress";
     private String myTimerKey;
     private String myNextLevelKey;
     private String myCenteredCharKey;
 
     private IDisplayScroller myScroller;
     private ResourceBundle methods;
-
+    
     public LevelData (IPhysicsEngine physicsengine) {
         methods = VoogaBundles.EventMethods;
         myPhysics = physicsengine;
         myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
-        myElements = new HashMap<String, Elementable>();
-        myGlobalVariables = new HashMap<String, VoogaData>();
-        myEvents = new ArrayList<VoogaEvent>();
+        myElements = new HashMap<>();
+        myGlobalVariables = new HashMap<>();
+        myEvents = new ArrayList<>();
         keyPressedCombos = new ArrayList<>();
         keyReleasedCombos = new ArrayList<>();
-        myKeyCauses = new HashMap<List<String>, KeyCause>();
+        myKeyPressCauses = new HashMap<>();
+        myKeyReleaseCauses = new HashMap<>();
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
         myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
@@ -101,7 +111,6 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
-    	System.out.println(myElements);
     	return myElements.entrySet();
     }
     /**
@@ -194,9 +203,14 @@ public class LevelData implements ILevelData {
      * 
      * @return
      */
-    public Map<List<String>, KeyCause> getKeyCauses () {
-        return Collections.unmodifiableMap(myKeyCauses);
+    public Map<List<String>, KeyCause> getKeyPressCauses () {
+        return Collections.unmodifiableMap(myKeyPressCauses);
     }
+    
+    public Map<List<String>, KeyCause> getKeyReleaseCauses () {
+        return Collections.unmodifiableMap(myKeyReleaseCauses);
+    }
+    
     /**
      * Returns unmodifiable list of key events
      * 
@@ -216,11 +230,14 @@ public class LevelData implements ILevelData {
         for (Cause c : voogaEvent.getCauses()) {
             if (c instanceof KeyCause) {
                 KeyCause keyc = (KeyCause) c;
-                myKeyCauses.put(keyc.getKeys(), keyc);
                 if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
                     keyPressedCombos.add(keyc.getKeys());
+                    this.myKeyPressCauses.put(keyc.getKeys(), keyc);
                 }
-                else { keyReleasedCombos.add(keyc.getKeys());}
+                else { 
+                	keyReleasedCombos.add(keyc.getKeys());
+                	this.myKeyReleaseCauses.put(keyc.getKeys(), keyc);
+                }
             }
         }
         keyReleasedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
@@ -245,7 +262,8 @@ public class LevelData implements ILevelData {
         // clear all the instance variables
         myElements.clear();
         myEvents.clear();
-        myKeyCauses.clear();
+        myKeyPressCauses.clear();
+        myKeyReleaseCauses.clear();
         keyPressedCombos.clear();
 
         //refresh event objects
@@ -261,6 +279,7 @@ public class LevelData implements ILevelData {
         //refresh global variables
         myGlobalVariables = data.getVariableMap();
         myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
+        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         myCenteredCharId = (String) myGlobalVariables.get(myCenteredCharKey).getValue();
         
         // add elements to map
@@ -278,6 +297,14 @@ public class LevelData implements ILevelData {
     public String getNextLevelName () {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }
+    
+    public boolean getSaveNow () {
+        // HARDCODED FOR NOW!!!!
+
+       return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
+    }
+    
+
     /**
      * Set the next level name in order to transition levels
      * 
@@ -301,17 +328,17 @@ public class LevelData implements ILevelData {
      * filePath, which is specified in the function, along with the players name"
      **/
     public void saveProgress (String filePath, String playerName) {
+    	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
         DataContainerOfLists dataContainer =
                 new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                                          mySpriteFactory.getArchetypeMap());
-        String newFileName = playerName + XML_SUFFIX;
-        String finalLocation = filePath + newFileName;
+        String finalLocation = filePath + XML_SUFFIX;
         try {
             FileWriterFromGameObjects.saveGameObjects(dataContainer, finalLocation);
         }
         catch (Exception e) {e.printStackTrace();}
-        System.out.println("The file here saved at location " + finalLocation);
+        
     }
     /**
      * Returns the game's physics engine
@@ -331,3 +358,4 @@ public class LevelData implements ILevelData {
         return keyReleasedCombos;
     }
 }
+

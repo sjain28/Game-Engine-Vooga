@@ -102,5 +102,4 @@ public class VoogaNumber implements VoogaData {
         }
         this.valueProperty.set(Double.parseDouble((String) newVal));
     }
-
 }
