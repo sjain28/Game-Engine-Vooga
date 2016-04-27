@@ -130,7 +130,7 @@ public class GameRunner implements IGameRunner {
 			myGameDisplay.setSceneDimensions(width, height);
 			createLevelList(gameXmlList);
 		} catch (Exception e) {
-			new VoogaAlert("Level List Initialization failed");			
+			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
 		myGameDisplay.display();
 		playLevel(myLevelList.get(0));

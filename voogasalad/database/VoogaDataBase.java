@@ -60,13 +60,15 @@ public class VoogaDataBase implements IDataBase{
 	 * @param gamename
 	 */
 	public void addGame(String gamename, String gamedescrip){
-		totalrows++;
-		//initialize game
-		myGames.add(new VoogaGame(gamename, gamedescrip));
-		//initialize stat-info for game for every user
-		for(int col = 0; col < totalcols; col++){
-			String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
-			myStatInfo.get(col).add(new VoogaStatInfo(gamename,username));
+		if(!myGames.contains(gamename)){
+			totalrows++;
+			//initialize game
+			myGames.add(new VoogaGame(gamename, gamedescrip));
+			//initialize stat-info for game for every user
+			for(int col = 0; col < totalcols; col++){
+				String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
+				myStatInfo.get(col).add(new VoogaStatInfo(gamename,username));
+			}
 		}
 	}
 	/**
@@ -89,14 +91,16 @@ public class VoogaDataBase implements IDataBase{
 	 * @param password
 	 */
 	public void addUser(String displayname, String username, String password, String profpiclocation){
-		totalcols++;
-		myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));
-		List<VoogaStatInfo> userstatinfo = new ArrayList<VoogaStatInfo>();
-		for(int row = 0; row < totalrows; row++){
-			String gamename = myGames.get(row).getProperty(VoogaGame.GAME_NAME).toString();
-			userstatinfo.add(row, new VoogaStatInfo(gamename,username));
+		if(!myUsers.contains(username)){
+			totalcols++;
+			myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));
+			List<VoogaStatInfo> userstatinfo = new ArrayList<VoogaStatInfo>();
+			for(int row = 0; row < totalrows; row++){
+				String gamename = myGames.get(row).getProperty(VoogaGame.GAME_NAME).toString();
+				userstatinfo.add(row, new VoogaStatInfo(gamename,username));
+			}
+			myStatInfo.add(userstatinfo);
 		}
-		myStatInfo.add(userstatinfo);
 	}
 	/**
 	 * Returns StatInfo block for a particular Game and User
@@ -136,6 +140,7 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	private void load(){
 		if(!(new File(FILE_LOCATION)).exists()){
+			System.out.println("loading, and file location does not yet exist.");
 			totalrows = 0;
 			totalcols = 0;
 			myGames = new ArrayList<VoogaGame>();
@@ -151,6 +156,13 @@ public class VoogaDataBase implements IDataBase{
 		} catch (VoogaException e) {e.printStackTrace();}
 	}
 	/**
+	 * Verifies a username in password
+	 */
+	public boolean verifyLoginInfo(String username, String password){
+		if(getUser(username)!=null&&getUser(username).verifyPassword(password)){return true;}
+		return false;
+	}
+	/**
 	 * Saves all information
 	 */
 	public void save(){
@@ -158,6 +170,17 @@ public class VoogaDataBase implements IDataBase{
 		catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * Clears the database
+	 */
+	public void clear(){
+		myGames.clear();
+		myUsers.clear();
+		totalrows = 0;
+		totalcols = 0;
+		myStatInfo.clear();
+		save();
 	}
 	/**
 	 * Method to print out all data in data base in matrix form

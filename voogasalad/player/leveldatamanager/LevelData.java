@@ -279,6 +279,7 @@ public class LevelData implements ILevelData {
         //refresh global variables
         myGlobalVariables = data.getVariableMap();
         myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
+        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         myCenteredCharId = (String) myGlobalVariables.get(myCenteredCharKey).getValue();
         
         // add elements to map
@@ -299,7 +300,8 @@ public class LevelData implements ILevelData {
     
     public boolean getSaveNow () {
         // HARDCODED FOR NOW!!!!
-       return (Boolean) (((VoogaString) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
+
+       return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
     }
     
 
