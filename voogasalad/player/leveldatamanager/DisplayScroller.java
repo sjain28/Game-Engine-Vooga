@@ -20,14 +20,15 @@ public class DisplayScroller implements IDisplayScroller {
 	private int myScreenSizeY;
 	private int myAdjustFactorX;
 	private int myConstantScrollCenter;
+	
 	private IGameDisplay myGameDisplay;
 	
 	public DisplayScroller(IGameDisplay gamedisplay) {
 		this.myGameDisplay = gamedisplay;
 	}
 	
-	public void centerScroll(Sprite centersprite) {
-		centersprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+	public void scroll(Sprite scrollsprite) {
+		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
 			int offset = n.intValue();
 			// TODO: Link to size of level instead of hardcoding
     		if (offset > 200 && offset < 3000) {
@@ -36,8 +37,14 @@ public class DisplayScroller implements IDisplayScroller {
 		});
 	}
 	
-	public void constantScroll(Double scrollspeed) {
-		
+	public void constantScroll(Sprite scrollsprite) {
+		centersprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+			int offset = n.intValue();
+			// TODO: Link to size of level instead of hardcoding
+    		if (offset > 200 && offset < 3000) {
+    			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
+    		}
+		});
 	}
 	
 	
