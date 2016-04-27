@@ -1,4 +1,4 @@
-package authoring.gui;
+package authoring.gui.levelpreferences;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Properties;
 
 import authoring.CustomText;
+import authoring.gui.SpriteNameIDPair;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.GameObject;
 import authoring.resourceutility.ButtonMaker;
@@ -22,6 +23,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -33,7 +35,7 @@ import tools.interfaces.VoogaData;
 public class DesignBoardPreferences extends Tab {
 
 	private static final double SPACING = 10;
-	private static final double WIDTH = 300;
+	private static final double WIDTH = 500;
 
 	private VBox container;
 
@@ -43,11 +45,19 @@ public class DesignBoardPreferences extends Tab {
 	private RadioButton cartoon;
 	private RadioButton continuous;
 	private RadioButton tracking;
+	
+	private ToggleGroup trackingMode;
+	private ToggleGroup physicsType;
 
 	private Slider scrollSpeed;
 	private ComboBox<SpriteNameIDPair> sprites;
+	private ComboBox<String> continuousScrollType;
+	private TextField angle;
 
 	private HBox buttons;
+	private HBox continuousControl;
+	
+	private CustomText speedLabel;
 
 	private List<Node> gameObjects;
 	
@@ -60,9 +70,10 @@ public class DesignBoardPreferences extends Tab {
 		container.setAlignment(Pos.CENTER);
 		this.setContent(container);
 		container.getChildren().addAll(header(), chooseName(), choosePhysicsModule(), chooseTrackingMode());
-
+		
 		initializeSpecifics();
 		chooseSpecificTrackingMode();
+		makeContinuousControl();
 	}
 	
 	public void setName(String name) {
@@ -86,27 +97,42 @@ public class DesignBoardPreferences extends Tab {
 	private HBox choosePhysicsModule() {
 		realistic = new RadioButton("Realistic");
 		cartoon = new RadioButton("Cartoon");
-		return createToggleGroup("Physics Module:", realistic, cartoon);
+		physicsType = new ToggleGroup();
+		return createToggleGroup(physicsType, "Physics Module:", realistic, cartoon);
 	}
 
 	private HBox chooseTrackingMode() {
 		continuous = new RadioButton("Continuous");
 		tracking = new RadioButton("Tracking");
-		return createToggleGroup("Scrolling Mode:", continuous, tracking);
+		trackingMode = new ToggleGroup();
+		return createToggleGroup(trackingMode, "Scrolling Mode:", continuous, tracking);
 	}
 
 	private void chooseSpecificTrackingMode() {
-		continuous.selectedProperty().addListener((obs, old, n) -> {
+		trackingMode.selectedToggleProperty().addListener((obs, old, n) -> {
 			container.getChildren().remove(buttons);
-			if (n) {
-				container.getChildren().add(scrollSpeed);
+			if(n == continuous) {
+				container.getChildren().add(continuousControl);
 				container.getChildren().remove(sprites);
 			} else {
+				container.getChildren().remove(continuousControl);
 				container.getChildren().add(sprites);
-				container.getChildren().remove(scrollSpeed);
 			}
 			container.getChildren().add(buttons);
 		});
+	}
+	
+	private HBox makeContinuousControl() {
+		speedLabel = new CustomText("0");
+		angle = new TextField();
+		angle.setPromptText("Enter an angle, 0: right, 90: down, ...");
+		scrollSpeed.valueProperty().addListener((obs, old, n) -> {
+			speedLabel.setText(Double.toString((double) n));
+		});
+		continuousScrollType = new ComboBox<String>();
+		continuousScrollType.getItems().addAll("Linear", "Exponential");
+		continuousControl = makeRow(angle, continuousScrollType, scrollSpeed, speedLabel);
+		return continuousControl;
 	}
 
 	private void initializeSpecifics() {
@@ -131,8 +157,7 @@ public class DesignBoardPreferences extends Tab {
 		return buttons;
 	}
 
-	private HBox createToggleGroup(String label, RadioButton... toggles) {
-		ToggleGroup group = new ToggleGroup();
+	private HBox createToggleGroup(ToggleGroup group, String label, RadioButton... toggles) {
 		HBox row = makeRow(new CustomText(label));
 		for (RadioButton toggle : toggles) {
 			toggle.setToggleGroup(group);
@@ -152,13 +177,53 @@ public class DesignBoardPreferences extends Tab {
 	public String getName() {
 		return this.levelName.getText();
 	}
-	
-	public boolean isContinuous() {
-		return this.continuous.isSelected();
+
+	public String getMainSpriteID() {
+		return (sprites.getValue() == null) ? "" : sprites.getValue().getID();
 	}
 
-	public String getSpriteIDtoTrack() {
-		return sprites.getValue().getID();
+	public String getScrollingType() {
+		return ((RadioButton) trackingMode.getSelectedToggle()).getText();
+	}
+	
+	public Double getContinuousScrollSpeed() {
+		return scrollSpeed.getValue();
+	}
+	
+	public Double getScrollAngle() {
+		return Double.parseDouble(this.angle.getText());
+	}
+	
+	public String getContinuousScrollType() {
+		return continuousScrollType.getValue();
+	}
+	
+	public void setPhysics(String name) {
+		for(Toggle toggle : physicsType.getToggles()) {
+			if(((RadioButton) toggle).getText().equals(name)) {
+				physicsType.selectToggle(toggle);
+			}
+		}
+	}
+	
+	public void setScrolling(String name) {
+		for(Toggle toggle : trackingMode.getToggles()) {
+			if(((RadioButton) toggle).getText().equals(name)) {
+				trackingMode.selectToggle(toggle);
+			}
+		}
+	}
+
+	public void setAngle(String value) {
+		this.angle.setText(value);
+	}
+	
+	public void setSpeed(Double value) {
+		this.scrollSpeed.setValue(value);
+	}
+	
+	public void setContinuousScrollType(String type) {
+		this.continuousScrollType.getSelectionModel().select(type);
 	}
 
 }
