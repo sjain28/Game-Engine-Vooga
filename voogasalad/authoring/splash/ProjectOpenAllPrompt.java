@@ -48,8 +48,8 @@ public class ProjectOpenAllPrompt extends StarterPrompt {
 		container.setSpacing(SPACING);
 		container.setPadding(new Insets(SPACING));
 		gamesListing = new GamesListing();
-		container.getChildren().addAll(makeRow(new CustomText("Welcome back!", FontWeight.BOLD, HEADER_SIZE)),
-									   makeRow(new CustomText("Load a game.", FontWeight.BOLD)),
+		container.getChildren().addAll(makeRow(new CustomText("Welcome!", FontWeight.BOLD, HEADER_SIZE)),
+									   makeRow(new CustomText("Choose from all these games.", FontWeight.BOLD)),
 							  	       makeRow(gamesListing));
 	}
 	
