@@ -88,12 +88,10 @@ public class StandardPhysics implements IPhysicsEngine {
 				return -1;
 			} else if (diffBottom < COLLISION_CHECK) {
 				return 1;
-			} else {
-				return 0;
-			}
-		} else {
+			} 
 			return 0;
-		}
+		} 
+		return 0;
 	}
 	
 	/**
