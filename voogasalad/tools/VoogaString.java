@@ -75,4 +75,7 @@ public class VoogaString implements VoogaData {
 		// TODO Auto-generated method stub
 		this.myTextProperty.set((String) newVal);
 	}
+	public String toString(){
+		return myValue;
+	}
 }
