@@ -9,9 +9,8 @@ import org.junit.Test;
 
 public class VoogaDataBaseTest {
 
-	@Test
 	public void testAddingUsers() {
-		VoogaDataBase database = new VoogaDataBase();
+		VoogaDataBase database = VoogaDataBase.getInstance();
 		
 		//add games and users
 		database.addGame("game 1", "fun game for friends to play");
@@ -39,6 +38,13 @@ public class VoogaDataBaseTest {
 			
 			System.out.println(info.getProperty(VoogaStatInfo.MY_GAME)+" : "+info.getPlayStats());
 		}
+		
+		database.save();
+	}
+	@Test
+	public void testLoading(){
+		VoogaDataBase database = VoogaDataBase.getInstance();
+		database.printDataBase();
 	}
 
 }
