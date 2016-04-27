@@ -26,9 +26,6 @@ import javafx.scene.text.Text;
 import resources.VoogaBundles;
 
 public class CustomText extends Text {
-//	private static final String BASIC_COLOR = "WHITE";
-//	private static final String BASIC_FONT = "Segoe UI Semibold";
-//	private static final String BASIC_FONT_SIZE = "13d";
 	
 	private ResourceBundle textProperties;
 	

@@ -9,7 +9,7 @@ public class LoginTest {
 	@Test
 	public void test() {
 		VoogaDataBase database = VoogaDataBase.getInstance();
-		System.out.println("logged in: " + database.getUser("hp67").verifyLoginInfo("hp67", "hello"));
+		System.out.println("logged in: " + database.verifyLoginInfo("hp67", "hello"));
 	}
 
 }

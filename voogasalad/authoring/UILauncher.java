@@ -3,6 +3,7 @@ package authoring;
 
 import authoring.splash.CreateCommand;
 import authoring.splash.LearnCommand;
+import authoring.splash.LoginScreen;
 import authoring.splash.OpenCommand;
 import authoring.splash.Splash;
 import javafx.stage.Stage;
@@ -23,7 +24,10 @@ public class UILauncher {
 	 * @param primaryStage: to hold splash screen
 	 */
 	public UILauncher(Stage primaryStage) {
-		new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
+	        Stage login = new LoginScreen();
+	        login.show();
+	        
+		//new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
 	}
 
 }

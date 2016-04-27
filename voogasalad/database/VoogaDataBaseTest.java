@@ -18,7 +18,7 @@ public class VoogaDataBaseTest {
 		database.addGame("game 3", "scary game with dinosaurs");
 		database.addUser("Krista", "klo14", "password1", "mario.png");
 		database.addUser("Jacob", "jb8902", "thisshouldbesecret", "mario.png");
-		System.out.println(database.getUser("klo14").verifyLoginInfo("klo14", "password1"));
+		System.out.println(database.verifyLoginInfo("klo14", "password1"));
 		database.printDataBase();
 		
 		//get basic user and game information
@@ -52,6 +52,6 @@ public class VoogaDataBaseTest {
 		database.clear();
 		database.addUser("Harry Potter", "hp67", "hello", null);
 		database.save();
-		System.out.println("logged in: " + database.getUser("hp67").verifyLoginInfo("hp67", "hello"));
+		System.out.println("logged in: " + database.verifyLoginInfo("hp67", "hello"));
 	}
 }

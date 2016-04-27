@@ -1,6 +1,7 @@
 package authoring.splash;
 
 import authoring.VoogaScene;
+import database.VoogaDataBase;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -17,6 +18,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import resources.VoogaBundles;
+import tools.VoogaAlert;
 
 public class LoginScreen extends Stage{
     private static final double WIDTH = 500;
@@ -25,10 +28,14 @@ public class LoginScreen extends Stage{
     private static final int BUTTON_SPACING = 15;
     private static final String LOGIN_PROMPT = "Please enter your Username and Password...";
     private static final String USER_PROMPT = "Please enter New Account Information...";
+    private VoogaDataBase database = VoogaDataBase.getInstance();
+    
     private TabPane myHouse;
-    private TextField myUsername;
-    private TextField myDisplayname;
-    private TextField myPassword;
+    private TextField myMakeUsername;
+    private TextField myMakeDisplayname;
+    private TextField myMakePassword;
+    private TextField myLoginUsername;
+    private TextField myLoginPassword;
 
     public LoginScreen () {
        myHouse = new TabPane();
@@ -65,7 +72,7 @@ public class LoginScreen extends Stage{
         HBox confirm = new HBox(BUTTON_SPACING);
         Button login = new Button("Login");
        
-        login.setOnAction(e -> login());
+        login.setOnAction(e -> login(myLoginUsername.getText(), myLoginPassword.getText()));
         
         confirm.getChildren().addAll(login);
         confirm.setPrefHeight(HEIGHT / 4);
@@ -86,23 +93,31 @@ public class LoginScreen extends Stage{
         return confirm;
     }
 
-    private void login () {
-        // TODO Auto-generated method stud
+    private void login (String user, String pass) {
+        database.printDataBase();
+       if(database.verifyLoginInfo(user, pass)){
+            VoogaBundles.preferences.setProperty("Username", user);
+           new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
+       }
+       else{
+           new VoogaAlert("UserName or Password is Incorrect!");
+       }
     }
 
     private void newUser () {
-        // TODO Auto-generated method stub
+        database.addUser(myMakeDisplayname.getText(), myMakeUsername.getText(), myMakePassword.getText(), null);
+        login(myMakeUsername.getText(), myMakePassword.getText());
     }
 
     private HBox loginInput () {
         HBox input = new HBox(TEXT_SPACING);
         
-        myUsername = new TextField();
-        myUsername.setPromptText("Username");
-        myPassword = new PasswordField();
-        myPassword.setPromptText("Password");
+        myLoginUsername = new TextField();
+        myLoginUsername.setPromptText("Username");
+        myLoginPassword = new PasswordField();
+        myLoginPassword.setPromptText("Password");
         
-        input.getChildren().addAll(myUsername, myPassword);
+        input.getChildren().addAll(myLoginUsername, myLoginPassword);
         input.setAlignment(Pos.CENTER);
         input.setPrefHeight(HEIGHT / 2);
         
@@ -112,14 +127,14 @@ public class LoginScreen extends Stage{
     private HBox userInput () {
         HBox input = new HBox(TEXT_SPACING);
         
-        myUsername = new TextField();
-        myUsername.setPromptText("Username");
-        myDisplayname = new TextField();
-        myDisplayname.setPromptText("Display Name");
-        myPassword = new PasswordField();
-        myPassword.setPromptText("Password");
+        myMakeUsername = new TextField();
+        myMakeUsername.setPromptText("Username");
+        myMakeDisplayname = new TextField();
+        myMakeDisplayname.setPromptText("Display Name");
+        myMakePassword = new PasswordField();
+        myMakePassword.setPromptText("Password");
         
-        input.getChildren().addAll(myUsername, myDisplayname, myPassword);
+        input.getChildren().addAll(myMakeUsername, myMakeDisplayname, myMakePassword);
         input.setAlignment(Pos.CENTER);
         input.setPrefHeight(HEIGHT / 2);
         
