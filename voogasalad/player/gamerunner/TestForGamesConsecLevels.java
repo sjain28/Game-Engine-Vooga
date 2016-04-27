@@ -11,7 +11,11 @@ import javafx.stage.Stage;
  */
 public class TestForGamesConsecLevels extends Application {
 
-    public static final String TESTXML_PATH = "saumyaTester";
+
+    private static final String TESTXML_PATH = "demo";
+    private static final String TESTXML_PATH1 = "demo";
+//    private static final String TESTXML_PATH = "My Game";
+
 
     public static void main (String[] args) {
         launch(args);
