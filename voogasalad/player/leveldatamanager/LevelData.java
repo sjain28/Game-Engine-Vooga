@@ -13,6 +13,7 @@ import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import data.FileWriterFromGameObjects;
+import events.AnimationFactory;
 import events.Cause;
 import events.KeyCause;
 import events.VoogaEvent;
@@ -48,6 +49,7 @@ public class LevelData implements ILevelData {
     private String myCenteredCharId;
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
+    private AnimationFactory myAnimationFactory;
 
     /** Global Variable Information **/
     private Map<String, VoogaData> myGlobalVariables;
