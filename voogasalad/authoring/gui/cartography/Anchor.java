@@ -1,8 +1,6 @@
 package authoring.gui.cartography;
 
 import javafx.beans.property.DoubleProperty;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 
