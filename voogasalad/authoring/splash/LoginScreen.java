@@ -19,6 +19,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
+import tools.VoogaAlert;
 
 public class LoginScreen extends Stage{
     private static final double WIDTH = 500;
@@ -97,6 +98,9 @@ public class LoginScreen extends Stage{
        if(database.verifyLoginInfo(user, pass)){
             VoogaBundles.preferences.setProperty("Username", user);
            new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
+       }
+       else{
+           new VoogaAlert("UserName or Password is Incorrect!");
        }
     }
 
