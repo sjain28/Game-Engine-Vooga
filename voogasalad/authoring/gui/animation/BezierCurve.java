@@ -1,5 +1,6 @@
-package authoring.gui.menubar.builders;
+package authoring.gui.animation;
 
+import authoring.gui.menubar.builders.Anchor;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -11,7 +12,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeType;
 
 public class BezierCurve extends Group {
-
+	
 	private CubicCurve curve;
 
 	public BezierCurve() {
@@ -51,6 +52,16 @@ public class BezierCurve extends Group {
 	
 	public CubicCurve getCurve() {
 		return this.curve;
+	}
+	
+	public double[] getXPoints() {
+		System.out.println(curve.getEndX());
+		return new double[]{curve.getStartX(), curve.getControlX1(), curve.getControlX2(), curve.getEndX()};
+	}
+	
+	public double[] getYPoints() {
+		System.out.println(curve.getEndY());
+		return new double[]{curve.getStartY(), curve.getControlY1(), curve.getControlY2(), curve.getEndY()};
 	}
 
 }

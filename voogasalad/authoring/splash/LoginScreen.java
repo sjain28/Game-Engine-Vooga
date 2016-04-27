@@ -30,9 +30,11 @@ public class LoginScreen extends Stage{
     private VoogaDataBase database = VoogaDataBase.getInstance();
     
     private TabPane myHouse;
-    private TextField myUsername;
-    private TextField myDisplayname;
-    private TextField myPassword;
+    private TextField myMakeUsername;
+    private TextField myMakeDisplayname;
+    private TextField myMakePassword;
+    private TextField myLoginUsername;
+    private TextField myLoginPassword;
 
     public LoginScreen () {
        myHouse = new TabPane();
@@ -69,7 +71,7 @@ public class LoginScreen extends Stage{
         HBox confirm = new HBox(BUTTON_SPACING);
         Button login = new Button("Login");
        
-        login.setOnAction(e -> login());
+        login.setOnAction(e -> login(myLoginUsername.getText(), myLoginPassword.getText()));
         
         confirm.getChildren().addAll(login);
         confirm.setPrefHeight(HEIGHT / 4);
@@ -90,30 +92,28 @@ public class LoginScreen extends Stage{
         return confirm;
     }
 
-    private void login () {
+    private void login (String user, String pass) {
         database.printDataBase();
-       if(database.getUser(myUsername.getText()).verifyLoginInfo(myUsername.getText(), myPassword.getText())){
-           VoogaBundles.preferences.setProperty("Username", myUsername.getText());
-           System.out.println("this is working");
+       if(database.verifyLoginInfo(user, pass)){
+            VoogaBundles.preferences.setProperty("Username", user);
            new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
        }
     }
 
     private void newUser () {
-        database.addUser(myDisplayname.getText(), myUsername.getText(), myPassword.getText(), null);
-        database.printDataBase();
-        login();
+        database.addUser(myMakeDisplayname.getText(), myMakeUsername.getText(), myMakePassword.getText(), null);
+        login(myMakeUsername.getText(), myMakePassword.getText());
     }
 
     private HBox loginInput () {
         HBox input = new HBox(TEXT_SPACING);
         
-        myUsername = new TextField();
-        myUsername.setPromptText("Username");
-        myPassword = new PasswordField();
-        myPassword.setPromptText("Password");
+        myLoginUsername = new TextField();
+        myLoginUsername.setPromptText("Username");
+        myLoginPassword = new PasswordField();
+        myLoginPassword.setPromptText("Password");
         
-        input.getChildren().addAll(myUsername, myPassword);
+        input.getChildren().addAll(myLoginUsername, myLoginPassword);
         input.setAlignment(Pos.CENTER);
         input.setPrefHeight(HEIGHT / 2);
         
@@ -123,14 +123,14 @@ public class LoginScreen extends Stage{
     private HBox userInput () {
         HBox input = new HBox(TEXT_SPACING);
         
-        myUsername = new TextField();
-        myUsername.setPromptText("Username");
-        myDisplayname = new TextField();
-        myDisplayname.setPromptText("Display Name");
-        myPassword = new PasswordField();
-        myPassword.setPromptText("Password");
+        myMakeUsername = new TextField();
+        myMakeUsername.setPromptText("Username");
+        myMakeDisplayname = new TextField();
+        myMakeDisplayname.setPromptText("Display Name");
+        myMakePassword = new PasswordField();
+        myMakePassword.setPromptText("Password");
         
-        input.getChildren().addAll(myUsername, myDisplayname, myPassword);
+        input.getChildren().addAll(myMakeUsername, myMakeDisplayname, myMakePassword);
         input.setAlignment(Pos.CENTER);
         input.setPrefHeight(HEIGHT / 2);
         

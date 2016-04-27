@@ -117,6 +117,7 @@ public class CreateCommand implements Command {
             }
             catch (VoogaException ex) {
 
+
             }
         });
         prompt.show();
