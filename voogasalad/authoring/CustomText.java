@@ -26,6 +26,9 @@ import javafx.scene.text.Text;
 import tools.bindings.TextProperties;
 
 public class CustomText extends Text {
+	private static final String BASIC_COLOR = "WHITE";
+	private static final String BASIC_FONT = "Segoe UI Semibold";
+	private static final String BASIC_FONT_SIZE = "13d";
 	
 	private ResourceBundle tpBundle;
 	
@@ -42,9 +45,9 @@ public class CustomText extends Text {
 		super(text);
 		TextProperties tp = new TextProperties();
 		tpBundle = tp.getResourceBundle();
-		COLOR = tpBundle.getString("color");
-		FONT = tpBundle.getString("font");
-		FONT_SIZE = Double.parseDouble(tpBundle.getString("fontSize"));
+		COLOR = BASIC_COLOR;
+		FONT = BASIC_FONT;
+		FONT_SIZE = Double.parseDouble(BASIC_FONT_SIZE);
 		this.setFill(Paint.valueOf(COLOR));
 	}
 	

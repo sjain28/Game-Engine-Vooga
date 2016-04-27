@@ -38,6 +38,8 @@ public interface ILevelData {
 
 
 	Collection<VoogaEvent> getEvents();
+	
+	boolean getSaveNow();
 
 	String getNextLevelName();
 

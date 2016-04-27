@@ -17,9 +17,7 @@ public class CollisionCauseGUI implements EventGUI{
     
     public CollisionCauseGUI(EditEventable manager){
         group1=new SpriteComboBox(manager);
-        group1.getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
         group2= new SpriteComboBox(manager);
-        group2.getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
         collisionType = new ComboBox<String>();
         collisionType.getItems().addAll("Horizontal","Above", "Below");
     }

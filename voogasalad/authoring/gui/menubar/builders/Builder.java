@@ -18,58 +18,64 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tools.VoogaAlert;
+import tools.VoogaException;
+
 
 public abstract class Builder extends Stage {
 
-	protected SpriteFactory mySpriteFactory;
-	protected EditElementable myManager;
-	protected static final double SPACING = 10;
-	protected boolean compile;
+    protected SpriteFactory mySpriteFactory;
+    protected EditElementable myManager;
+    protected static final double SPACING = 10;
+    protected boolean compile;
 
-	protected Builder(EditElementable editor) {
-		if (editor != null) {
-			mySpriteFactory = editor.getSpriteFactory();
-			myManager = editor;
-		}
-	}
+    protected Builder (EditElementable editor) {
+        if (editor != null) {
+            mySpriteFactory = editor.getSpriteFactory();
+            myManager = editor;
+        }
+    }
 
-	protected void load(Parent region) {
-		Scene scene = new VoogaScene(region);
-		this.setScene(scene);
-	}
+    protected void load (Parent region) {
+        Scene scene = new VoogaScene(region);
+        this.setScene(scene);
+    }
 
-	protected HBox makeButtons() {
-		HBox buttons = new HBox();
-		Button create = new ButtonMaker().makeButton("OK", e -> compile());
-		Button cancel = new ButtonMaker().makeButton("Cancel", e -> quit());
-		buttons.getChildren().addAll(create, cancel);
-		return buttons;
-	}
+    protected HBox makeButtons () {
+        HBox buttons = new HBox();
+        Button create;
+        
+        create = new ButtonMaker().makeButton("OK", e -> compile());
+        
+        Button cancel = new ButtonMaker().makeButton("Cancel", e -> quit());
+        buttons.getChildren().addAll(create, cancel);
+        return buttons;
 
-	protected HBox makeInfo(String label, String prompt, TextField tf) {
-		tf.setPromptText(prompt);
-		return makeRow(new CustomText(label), tf);
-	}
+    }
 
-	protected void quit() {
-		this.close();
-	}
+    protected HBox makeInfo (String label, String prompt, TextField tf) {
+        tf.setPromptText(prompt);
+        return makeRow(new CustomText(label), tf);
+    }
 
-	protected HBox makeRow(Node... items) {
-		HBox row = new HBox();
-		for (Node node : items) {
-			row.getChildren().add(node);
-		}
-		row.setSpacing(10);
-		return row;
-	}
+    protected void quit () {
+        this.close();
+    }
 
-	protected void numberError(String s) {
-		new VoogaAlert(s);
-	}
+    protected HBox makeRow (Node ... items) {
+        HBox row = new HBox();
+        for (Node node : items) {
+            row.getChildren().add(node);
+        }
+        row.setSpacing(10);
+        return row;
+    }
 
-	public abstract void compile();
-	
-	public abstract boolean compileStatus();
+    protected void numberError (String s) {
+        new VoogaAlert(s);
+    }
+
+    public abstract void compile ();
+
+    public abstract boolean compileStatus ();
 
 }

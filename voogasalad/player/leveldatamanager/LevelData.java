@@ -21,6 +21,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
+import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -35,6 +36,7 @@ import tools.interfaces.VoogaData;
  *
  */
 public class LevelData implements ILevelData {
+
 
     private static final int SCREENSIZE = 600;
     private static final String UNDERSCORE = "_";
@@ -58,13 +60,17 @@ public class LevelData implements ILevelData {
     private Map<List<String>, KeyCause> myKeyReleaseCauses;
 
     /** Important Static Variables **/
+//    private static final String TIMER = "Time";
+//    private static final String NEXT_LEVEL_INDEX = "NextLevelIndex";
+//    private static final String CONTINIOUS_CHAR = "MainCharacterID";
+    private static final String SAVE_PROGRESS = "SaveProgress";
     private String myTimerKey;
     private String myNextLevelKey;
     private String myCenteredCharKey;
 
     private IDisplayScroller myScroller;
     private ResourceBundle methods;
-
+    
     public LevelData (IPhysicsEngine physicsengine) {
         methods = VoogaBundles.EventMethods;
         myPhysics = physicsengine;
@@ -103,7 +109,6 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
-    	//System.out.println(myElements);
     	return myElements.entrySet();
     }
     /**
@@ -289,6 +294,13 @@ public class LevelData implements ILevelData {
     public String getNextLevelName () {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }
+    
+    public boolean getSaveNow () {
+        // HARDCODED FOR NOW!!!!
+       return (Boolean) (((VoogaString) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
+    }
+    
+
     /**
      * Set the next level name in order to transition levels
      * 
@@ -312,17 +324,17 @@ public class LevelData implements ILevelData {
      * filePath, which is specified in the function, along with the players name"
      **/
     public void saveProgress (String filePath, String playerName) {
+    	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         List<Elementable> elementList = new ArrayList<Elementable>(myElements.values());
         DataContainerOfLists dataContainer =
                 new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
                                          mySpriteFactory.getArchetypeMap());
-        String newFileName = playerName + XML_SUFFIX;
-        String finalLocation = filePath + newFileName;
+        String finalLocation = filePath + XML_SUFFIX;
         try {
             FileWriterFromGameObjects.saveGameObjects(dataContainer, finalLocation);
         }
         catch (Exception e) {e.printStackTrace();}
-        System.out.println("The file here saved at location " + finalLocation);
+        
     }
     /**
      * Returns the game's physics engine
@@ -342,3 +354,4 @@ public class LevelData implements ILevelData {
         return keyReleasedCombos;
     }
 }
+
