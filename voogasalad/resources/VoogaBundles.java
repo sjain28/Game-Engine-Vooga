@@ -32,7 +32,7 @@ public class VoogaBundles {
 	public final static ResourceBundle designboardProperties = ResourceBundle.getBundle("resources/designboard");
 	public final static ResourceBundle designboardPreferencesProperties = ResourceBundle.getBundle("resources/designboardpreferences");
 	public final static ResourceBundle eventswindowProperties = ResourceBundle.getBundle("resources/eventswindow");
-
+	public final static ResourceBundle propertiesPaneProperties = ResourceBundle.getBundle("resources/propertiesPane");
 	
 	private static Properties makeProperties(String path) {
 		try {
