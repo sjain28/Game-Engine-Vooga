@@ -9,6 +9,8 @@ import tools.OrderedProperties;
  * A class to contain public static references to resource bundles,
  * so that multiple classes requiring access to these properties do
  * not need to independently and repeatedly instantiate them.
+ * 
+ * @author DoovalSalad
  *
  */
 public class VoogaBundles {
@@ -28,7 +30,9 @@ public class VoogaBundles {
 	public final static Properties preferences = makeProperties("preferences.properties");
 	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
 	public final static ResourceBundle designboardProperties = ResourceBundle.getBundle("resources/designboard");
-
+	public final static ResourceBundle designboardPreferencesProperties = ResourceBundle.getBundle("resources/designboardpreferences");
+	public final static ResourceBundle eventswindowProperties = ResourceBundle.getBundle("resources/eventswindow");
+	public final static ResourceBundle propertiesPaneProperties = ResourceBundle.getBundle("resources/propertiesPane");
 	
 	private static Properties makeProperties(String path) {
 		try {
