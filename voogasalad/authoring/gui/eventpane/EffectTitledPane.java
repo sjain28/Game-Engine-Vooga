@@ -10,6 +10,6 @@ public class EffectTitledPane extends EventTitledPane{
     @Override
     protected void initialize(){
         super.initialize();
-        addOptions("VariableEffect","PhysicsEffect","SpawnEffect");
+        addOptions("VariableEffect","PhysicsEffect","SpawnEffect","ProjectileEffect","SoundEffect");
     }
 }

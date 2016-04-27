@@ -56,7 +56,7 @@ public class TimerCauseGUI implements EventGUI {
 
     @Override
     public String getDetails () throws VoogaException {
-        return "events.TimerCause," + "," + startingTime.getText() + "," +
+        return "events.TimerCause,"+ startingTime.getText() + "," +
                (Double.parseDouble(control.getText())+Double.parseDouble((String) decimalPlace.getValue()));
     }
 
