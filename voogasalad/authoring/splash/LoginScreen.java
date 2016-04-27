@@ -1,6 +1,7 @@
 package authoring.splash;
 
 import authoring.VoogaScene;
+import database.VoogaDataBase;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -17,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import resources.VoogaBundles;
 
 public class LoginScreen extends Stage{
     private static final double WIDTH = 500;
@@ -25,6 +27,8 @@ public class LoginScreen extends Stage{
     private static final int BUTTON_SPACING = 15;
     private static final String LOGIN_PROMPT = "Please enter your Username and Password...";
     private static final String USER_PROMPT = "Please enter New Account Information...";
+    private VoogaDataBase database = VoogaDataBase.getInstance();
+    
     private TabPane myHouse;
     private TextField myUsername;
     private TextField myDisplayname;
@@ -87,11 +91,16 @@ public class LoginScreen extends Stage{
     }
 
     private void login () {
-        // TODO Auto-generated method stud
+       if(database.getUser(myUsername.getText()).verifyLoginInfo(myUsername.getText(), myPassword.getText())){
+           VoogaBundles.preferences.setProperty("Username", myUsername.getText());
+           System.out.println("this is working");
+           new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
+       }
     }
 
     private void newUser () {
-        // TODO Auto-generated method stub
+        database.addUser(myDisplayname.getText(), myUsername.getText(), myPassword.getText(), null);
+        login();
     }
 
     private HBox loginInput () {
