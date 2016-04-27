@@ -55,9 +55,15 @@ public class GameObjectBuilder extends Builder {
         container.getChildren().add(button);
         return container;
     }
-    
+
     @Override
-    public void compile (){
+    public void compile () {
+        
+        if (editor.getSpriteFactory().getAllArchetypeNames().contains(myName.getText()) ||
+            editor.getMySpriteNames().contains(myName.getText())) {
+            new VoogaAlert("This name already exists");
+            return;
+        }
         
         compile = true;
         try {
