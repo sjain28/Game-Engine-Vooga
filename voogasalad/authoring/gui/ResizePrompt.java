@@ -3,13 +3,10 @@ package authoring.gui;
 import authoring.VoogaScene;
 import authoring.gui.items.NumberTextField;
 import authoring.resourceutility.ButtonMaker;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 

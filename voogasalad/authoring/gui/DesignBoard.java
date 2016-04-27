@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.model.GameObject;
@@ -44,9 +46,6 @@ import tools.VoogaException;
  */
 public class DesignBoard extends Tab implements Observer {
 
-	private static final String DESIGN_BOARD = "Design Board";
-	private static final double STROKE_WIDTH = 4;
-
 	private VBox container;
 	private ToolBar zoomBar;
 	private ScrollPane scroller;
@@ -56,6 +55,8 @@ public class DesignBoard extends Tab implements Observer {
 
 	private CompleteAuthoringModelable elementManager;
 	private ElementSelectionModel selectionModel;
+
+	private ResourceBundle designboardProperties;
 
 	private double y_offset, x_offset;
 
@@ -69,42 +70,42 @@ public class DesignBoard extends Tab implements Observer {
 	 */
 	public DesignBoard(CompleteAuthoringModelable elem) {
 		this.elementManager = elem;
-		this.width = Double.parseDouble(VoogaBundles.designboardProperties.getString("Width"));
-		this.height = Double.parseDouble(VoogaBundles.designboardProperties.getString("Height"));
-		
+		this.designboardProperties = VoogaBundles.designboardProperties;
+
+		this.width = Double.parseDouble(designboardProperties.getString("Width"));
+		this.height = Double.parseDouble(designboardProperties.getString("Height"));
 		
 		initializeContainers();
 		initializeZoom();
 		initializeObservables();
 
 		initializeDragAndDrop();
-		
+
 		addGuides();
 		displayElements(elem.getElements());
 	}
-	
+
 	/**
 	 * Initializes the container which contains all the contents of the design board.
 	 */
 	private void initializeContainers() {
-		this.setText(DESIGN_BOARD);
+		this.setText(designboardProperties.getString("DesignBoardName"));
 		this.setClosable(false);
-		
+
 		contentPane = new StackPane();
 		contentPane.setMinSize(width, height);
-		
 		scroller = new ScrollPane();
 		scroller.setContent(contentPane);
-		
+
 		zoomBar = new ToolBar();
-		
+
 		container = new VBox(zoomBar, scroller);
 		this.setContent(container);
 		
 		y_offset = width / 2;
 		x_offset = height / 2;
 	}
-	
+
 	/**
 	 * Initializes the zoom slider which affects the magnification of the authoring environment.
 	 */
@@ -120,7 +121,7 @@ public class DesignBoard extends Tab implements Observer {
 			contentPane.setScaleY((double) n);
 		});
 	}
-	
+
 	/**
 	 * Initializes the observables connected to this observer class.
 	 */
@@ -130,24 +131,32 @@ public class DesignBoard extends Tab implements Observer {
 		elementManager.addObserver(this);
 	}
 
+	/**
+	 * Adds Guide rectangle on the design board so the user can see the dimensions of the game 
+	 * window as the user authors in the environment.
+	 */
 	private void addGuides() {
 		double width = Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth"));
 		double height = Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight"));
 		Rectangle guide = new Rectangle(width, height);
-		guide.setStroke(Paint.valueOf("white"));
-		guide.setStrokeWidth(STROKE_WIDTH);
-		guide.setFill(Paint.valueOf("transparent"));
+		guide.setStroke(Paint.valueOf(designboardProperties.getString("RecStrokeColor")));
+		guide.setStrokeWidth(Integer.parseInt(designboardProperties.getString("StrokeWidth")));
+		guide.setFill(Paint.valueOf(designboardProperties.getString("RecFill")));
 		this.contentPane.getChildren().add(guide);
 		guide.setTranslateX(width/2);
 		guide.setTranslateY(height/2);
-		this.scroller.setVvalue(0.5);
-		this.scroller.setHvalue(0.5);
+		this.scroller.setVvalue(Double.parseDouble(designboardProperties.getString("ScrollerVValue")));
+		this.scroller.setHvalue(Double.parseDouble(designboardProperties.getString("ScrollerHValue")));
 	}
 
+	/**
+	 * Initializes the drag and drop feature for the design board.
+	 */
 	private void initializeDragAndDrop() {
 		contentPane.setOnDragOver(e -> mouseDragOver(e));
 		contentPane.setOnDragDropped(e -> mouseDragDropped(e));
-		contentPane.setOnDragExited(e -> contentPane.setStyle("-fx-border-color: transparent;"));
+		contentPane.setOnDragExited(e -> 
+			contentPane.setStyle(designboardProperties.getString("ContentPaneStyle")));
 	}
 
 	private void mouseDragDropped(final DragEvent event) {
@@ -179,17 +188,21 @@ public class DesignBoard extends Tab implements Observer {
 		event.setDropCompleted(success);
 	}
 
+	/**
+	 * Mouse dragover event.
+	 * @param event
+	 */
 	private void mouseDragOver(final DragEvent event) {
 		if (event.getGestureSource() != contentPane
 				&& (event.getDragboard().hasContent(VoogaFileFormat.getInstance()))) {
 			VoogaFile content = (VoogaFile) event.getDragboard().getContent(VoogaFileFormat.getInstance());
 			String color = "";
 			if (content.getType() != VoogaFileType.FOLDER) {
-				color = "#64B5F6";
+				color = designboardProperties.getString("NonVoogaFileColor");
 			} else {
-				color = "red";
+				color = designboardProperties.getString("VoogaFileColor");
 			}
-			contentPane.setStyle(String.format("-fx-border-color: %s", color));
+			contentPane.setStyle(String.format(designboardProperties.getString("ContentPaneStringStyle"), color));
 			event.acceptTransferModes(TransferMode.ANY);
 		} else if (event.getDragboard().hasString()) {
 			event.acceptTransferModes(TransferMode.ANY);
@@ -198,6 +211,12 @@ public class DesignBoard extends Tab implements Observer {
 		event.consume();
 	}
 
+	/**
+	 * Method to add new element to the design board
+	 * @param file: file to add
+	 * @param event: drag and drop feature
+	 * @param archetype: archetype (if element has one)
+	 */
 	private void addElement(VoogaFile file, DragEvent event, String archetype) {
 		String elementPath = file.getPath();
 		if (elementPath != null) {
@@ -220,13 +239,21 @@ public class DesignBoard extends Tab implements Observer {
 		}
 	}
 
+	/**
+	 * Method to move the element around on the design board.
+	 * @param id: sprite ID
+	 * @param e: dragevent
+	 */
 	private void moveElement(String id, DragEvent e) {
 		Node element = elementManager.getElement(id);
 		element.setTranslateX(e.getX() - x_offset);
 		element.setTranslateY(e.getY() - y_offset);
-
 	}
 
+	/**
+	 * Displays the collection of the elements on the content pane
+	 * @param nodeList: list of nodes
+	 */
 	private void displayElements(Collection<Node> nodeList) {
 		for (Node node : nodeList) {
 			if (!contentPane.getChildren().contains(node)) {
