@@ -11,9 +11,17 @@ public class AnimationFactory {
 	private Map<String, AnimationEvent> myAnimationEvents;
 	private Map<String, List<Double[]>> myPaths;
 
-	public AnimationFactory() {
+	private AnimationFactory() {
 		myAnimationEvents = new HashMap<String, AnimationEvent>();
 		myPaths = new HashMap<String, List<Double[]>>();
+	}
+	
+	private static class SingletonHolder {
+		private static final AnimationFactory INSTANCE = new AnimationFactory();
+	}
+	
+	public static AnimationFactory getInstance() {
+		return SingletonHolder.INSTANCE;
 	}
 	
 	public void makeAnimationEvent(String name){

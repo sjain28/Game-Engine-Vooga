@@ -36,7 +36,6 @@ public class VoogaDataBaseTest {
 		//get stats from the play session
 		List<VoogaStatInfo> stats = database.getStatsbyUser("klo14");
 		for(VoogaStatInfo info : stats){
-			
 			System.out.println(info.getProperty(VoogaStatInfo.MY_GAME)+" : "+info.getPlayStats());
 		}
 		
@@ -46,5 +45,13 @@ public class VoogaDataBaseTest {
 	public void testLoading(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		database.printDataBase();
+	}
+	@Test
+	public void testSingleUserSignIn(){
+		VoogaDataBase database = VoogaDataBase.getInstance();
+		database.clear();
+		database.addUser("Harry Potter", "hp67", "hello", null);
+		database.save();
+		System.out.println("logged in: " + database.getUser("hp67").verifyLoginInfo("hp67", "hello"));
 	}
 }
