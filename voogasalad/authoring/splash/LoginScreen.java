@@ -1,6 +1,7 @@
 package authoring.splash;
 
 import authoring.VoogaScene;
+import authoring.resourceutility.ButtonMaker;
 import database.VoogaDataBase;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,10 +23,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
 import tools.VoogaAlert;
+import tools.VoogaFileChooser;
 
 public class LoginScreen extends Stage{
     private static final double WIDTH = 500;
-    private static final double HEIGHT = 200;
+    private static final double HEIGHT = 250;
     private static final int TEXT_SPACING = 30;
     private static final int BUTTON_SPACING = 15;
     private static final String LOGIN_PROMPT = "Please enter your Username and Password...";
@@ -36,6 +40,7 @@ public class LoginScreen extends Stage{
     private TextField myMakePassword;
     private TextField myLoginUsername;
     private TextField myLoginPassword;
+    private String myImagePath;
 
     public LoginScreen () {
        myHouse = new TabPane();
@@ -46,7 +51,7 @@ public class LoginScreen extends Stage{
        login.setContent(loginContent);
        Tab user = new Tab("New User");
        VBox userContent = new VBox();
-       userContent.getChildren().addAll(buildText(USER_PROMPT), userInput(), userConfirm() );
+       userContent.getChildren().addAll(buildText(USER_PROMPT), userInput(), imageSelect(), userConfirm());
        user.setContent(userContent);
        myHouse.getTabs().addAll(login, user);
        myHouse.setPrefSize(WIDTH, HEIGHT);
@@ -139,6 +144,31 @@ public class LoginScreen extends Stage{
         input.setPrefHeight(HEIGHT / 2);
         
         return input;
+    }
+    
+    private HBox imageSelect(){
+        HBox box = new HBox(TEXT_SPACING);
+        box.setAlignment(Pos.CENTER);
+        
+        ImageView image = new ImageView();
+        image.setPreserveRatio(true);
+        image.setFitWidth(50);
+        
+        Button imageChooser = new ButtonMaker().makeButton("Picture", e -> {
+            VoogaFileChooser fileChooser = new VoogaFileChooser();
+            try {
+                myImagePath = fileChooser.launch();
+                image.setImage(new Image("file:" + myImagePath));
+                
+            }
+            catch (Exception e1) {
+                new VoogaAlert(e1.getMessage());
+            }
+
+        });
+        
+        box.getChildren().addAll(image, imageChooser);
+        return box;
     }
 
 }
