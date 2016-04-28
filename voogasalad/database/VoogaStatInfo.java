@@ -32,6 +32,9 @@ public class VoogaStatInfo extends VoogaEntry {
 		return Collections.unmodifiableList(myPlayStats);
 	}
 	public VoogaPlaySession getLatestPlaySession(){
+		if (myPlayStats.empty()){
+			return null;
+		}
 		return myPlayStats.peek();
 	}
 	
