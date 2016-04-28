@@ -38,8 +38,12 @@ public class ArchetypeBuilder extends Builder {
     private VBox creation;
     private CheckBox infiniteMass;
 
+    private EditElementable editor;
+
     public ArchetypeBuilder (EditElementable editor) {
         super(editor);
+        this.editor = editor;
+
         this.setMinWidth(WIDTH);
         this.setMinHeight(HEIGHT);
         this.tabpane = new TabPane();
@@ -114,6 +118,12 @@ public class ArchetypeBuilder extends Builder {
 
     @Override
     public void compile () {
+
+        if (editor.getSpriteFactory().getAllArchetypeNames().contains(archetypeName.getText()) ||
+            editor.getMySpriteNames().contains(archetypeName.getText())) {
+            new VoogaAlert("This name already exists");
+            return;
+        }
         compile = true;
         VoogaNumber mass = new VoogaNumber();
         try {

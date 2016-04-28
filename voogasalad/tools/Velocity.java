@@ -55,6 +55,19 @@ public class Velocity extends Vector {
 	}
 	
 	/**
+	 * Computes X and Y values given magnitude and angle and sets them
+	 * 
+	 * Angle is in degrees (0-360)
+	 * 
+	 * @param magnitude
+	 * @param angle
+	 */
+	public void setVelocity(Double magnitude, Double angle) {
+		setX(Math.cos(angle) * magnitude);
+		setY(Math.sin(angle) * magnitude);
+	}
+	
+	/**
 	 * For unit testing only
 	 * 
 	 */

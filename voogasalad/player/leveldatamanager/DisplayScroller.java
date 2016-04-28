@@ -20,26 +20,52 @@ public class DisplayScroller implements IDisplayScroller {
 	private int myScreenSizeY;
 	private int myAdjustFactorX;
 	private int myConstantScrollCenter;
+	
 	private IGameDisplay myGameDisplay;
 	
 	public DisplayScroller(IGameDisplay gamedisplay) {
 		this.myGameDisplay = gamedisplay;
 	}
 	
-	public void centerScroll(Sprite centersprite) {
-		centersprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
-			int offset = n.intValue();
+	/**
+	 * Stub scroll method that scrolls the display both horizontally and vertically
+	 * 
+	 * @param scrollsprite
+	 */
+	public void scroll(Sprite scrollsprite) {
+		scrollX(scrollsprite);
+		//scrollY(scrollsprite);
+	}
+	
+	
+	/**
+	 * Scrolls the display horizontally using addListener method and by translatingX
+	 * 
+	 * @param scrollsprite
+	 */
+	public void scrollX(Sprite scrollsprite) {
+		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
 			// TODO: Link to size of level instead of hardcoding
-    		if (offset > 200 && offset < 3000) {
-    			myGameDisplay.getScreen().setTranslateX(-(offset - 200));
+    		if (n.intValue() > 200 && n.intValue() < 3000) {
+    			myGameDisplay.getScreen().setTranslateX(-(n.intValue() - 200));
     		}
 		});
 	}
 	
-	public void constantScroll(Double scrollspeed) {
-		
+	/**
+	 * Scrolls the display vertically using addListener method and by translatingY
+	 * 
+	 * @param scrollsprite
+	 */
+	public void scrollY(Sprite scrollsprite) {
+		scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
+			// TODO: Link to size of level instead of hardcoding
+    		if (n.intValue() > 200 && n.intValue() < 3000) {
+    			myGameDisplay.getScreen().setTranslateY(-(n.intValue() - 200));
+    		}
+		});
 	}
-	
+
 	
 	
 	
