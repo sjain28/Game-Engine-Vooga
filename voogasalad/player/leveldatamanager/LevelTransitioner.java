@@ -38,11 +38,21 @@ public class LevelTransitioner {
 
     private ResourceBundle myEventMethods;
     private String myLevelFileName;
+    //TODO: Remove if not needed
     private String myTimerKey;
     private String myNextLevelKey;
     private String myCenteredCharKey;
     
-    
+    /**
+     * Default constructor that stores all game data that needed to be renewed to transition
+     * into a new level.
+     * 
+     * @param levelfilename
+     * @param elements
+     * @param container
+     * @param globals
+     * @param nextlevelkey
+     */
     public LevelTransitioner(String levelfilename, Map<String, Elementable> elements, KeyEventContainer container, 
     						 Map<String, VoogaData> globals, String nextlevelkey) {
     	myData = new DataContainerOfLists();
@@ -61,7 +71,7 @@ public class LevelTransitioner {
      * also restarts timer in global variable
      * and sets level path
      * 
-     * TODO: Break this up. and add the scrolling sprite
+     * TODO: Create a scrolling sprite
      * 
      * @param levelfilename
      */
@@ -81,6 +91,11 @@ public class LevelTransitioner {
         return myElements;
     }
 
+    /**
+     * Returns a newly-populated myKeyEventContainer (Events, KeyEvents and Inputs)
+     * 
+     * @return KeyEventContainer
+     */
     public KeyEventContainer populateNewEvents() {
         myKeyEventContainer.clearAll();
         List<VoogaEvent> eventObjects = myData.getEventList();
@@ -90,6 +105,11 @@ public class LevelTransitioner {
         return myKeyEventContainer;
     }
     
+    /**
+     * Returns a newly-populated myGlobalVariables
+     * 
+     * @return Map<String, VoogaData>
+     */
     public Map<String, VoogaData> populateNewGlobals() {
         myGlobalVariables = myData.getVariableMap();
         myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
@@ -97,13 +117,37 @@ public class LevelTransitioner {
         return myGlobalVariables;
     }
 
+    /**
+     * Returns a newly-populated SpriteFactory
+     * 
+     * @return SpriteFactory
+     */
     public SpriteFactory getNewSpriteFactory() {
         Map<String, Sprite> archetypeMap = myData.getArchetypeMap();
         return new SpriteFactory(archetypeMap);
     }
     
+    /**
+     * Returns ID of the sprite the display is being scrolled on
+     * 
+     * @return String centerScroll sprite ID
+     */
     public String getCenteredCharID() {
         return (String) myGlobalVariables.get(myCenteredCharKey).getValue();
     }
+    
+    //TODO: Implement
+    public String getScrollSpriteID() {
+    	return "";
+    }
+    
+    //TODO: Implement
+    public String getMainSpriteID() {
+    	return "";
+    }
 
+    //TODO: implement
+    public Sprite createScrollSprite() {
+    	return null;
+    }
 }

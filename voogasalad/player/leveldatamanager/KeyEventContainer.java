@@ -69,8 +69,6 @@ public class KeyEventContainer {
         myKeyPressedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
     }
 
-	
-	
 	/**
 	 * Clears and resets the contents of all lists and maps
 	 * To be called during level transition
