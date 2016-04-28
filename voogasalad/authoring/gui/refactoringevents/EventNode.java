@@ -8,6 +8,8 @@ public class EventNode {
     private EditEventable manager;
     private String name;
     private Node node;
+
+    private Object data;
     
     public EventNode(){
         node = new ComboBox();

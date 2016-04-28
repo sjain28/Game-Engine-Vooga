@@ -35,6 +35,7 @@ public class VariableComboBox extends ComboBox<String> implements VoogaNode{
     public VoogaData getProperty(String key){
         return variables.get(key);
     }
+    
 
     @Override
     public String getData () {
