@@ -128,11 +128,19 @@ public class GameRunner implements IGameRunner {
 	public void playGame(String gameXmlList) {
 		myCurrentGame = gameXmlList;
 		//check if the user already has progress or not.
+		
+		//Hard coded!! Need to add the user earlier than this but put this here.
 		VoogaDataBase.getInstance().addUser("displayname", "Josh", "Monsters", "Joshs");
+		
+		//NEED TO CHANGE addGame to addGameIFNOTADDED!!!!
 		VoogaDataBase.getInstance().addGame(gameXmlList, "Monsters");
+		
 		System.out.println("What is my game here, this can only be shown if a game was added 2 list from game runner " + gameXmlList);
 		VoogaStatInfo playerGameInfo = VoogaDataBase.getInstance().getStatByGameAndUser(gameXmlList, "Josh");
-		String latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty("level reached"))).getValue());
+		String latestLevelReached="";
+		if (playerGameInfo.getLatestPlaySession()!=null){
+			latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty("level reached"))).getValue());
+		}
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/"+gameXmlList+"/"+gameXmlList+".xml").get(0);
 			double width = Double.parseDouble(preferences.getWidth());

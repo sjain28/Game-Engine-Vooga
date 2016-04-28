@@ -68,9 +68,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
         
-        System.out.println("path from constructor: "+imagePath);
-        System.out.println("image from properties: "+properties.get(IMAGE_PATH).getValue());
-        
         initializeCoordinates();
 
         myLoc = new Position(myX.get(), myY.get());
