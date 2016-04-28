@@ -29,14 +29,15 @@ public class VoogaDataBaseTest {
 		
 		//add in two play sessions
 		VoogaPlaySession playsesh1 = new VoogaPlaySession(new Date(), 153, 4000, 3);
-		database.getStatByGameAndUser("game 2", "klo14").addPlaySession(playsesh1);
+		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh1);
 		VoogaPlaySession playsesh2 = new VoogaPlaySession(new Date(), 324, 2000, 2);
-		database.getStatByGameAndUser("game 2", "klo14").addPlaySession(playsesh2);
+		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh2);
 
 		//get stats from the play session
-		List<VoogaStatInfo> stats = database.getStatsbyUser("klo14");
-		for(VoogaStatInfo info : stats){
-			System.out.println(info.getProperty(VoogaStatInfo.MY_GAME)+" : "+info.getPlayStats());
+		List<VoogaEntry> stats = database.getStatsbyUser("klo14");
+		for(VoogaEntry info : stats){
+			VoogaStatInfo statinfo = (VoogaStatInfo) info;
+			System.out.println(info.getProperty(VoogaStatInfo.MY_GAME)+" : "+statinfo.getPlayStats());
 		}
 		
 		database.save();
@@ -49,9 +50,22 @@ public class VoogaDataBaseTest {
 	@Test
 	public void testSingleUserSignIn(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
-		database.clear();
 		database.addUser("Harry Potter", "hp67", "hello", null);
+		//database.clear();
 		database.save();
 		System.out.println("logged in: " + database.verifyLoginInfo("hp67", "hello"));
+	}
+	@Test
+	public void addPlaySession(){
+		VoogaDataBase database = VoogaDataBase.getInstance();
+
+		VoogaPlaySession playsesh1 =new VoogaPlaySession(new Date(), 290, 4500, 3);
+		VoogaPlaySession playsesh2 = new VoogaPlaySession(new Date(), 300, 2000, 2);
+		VoogaPlaySession playsesh3 = new VoogaPlaySession(new Date(), 140, 1500, 1);
+		
+		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh1);
+		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh2);
+		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh3);
+		
 	}
 }
