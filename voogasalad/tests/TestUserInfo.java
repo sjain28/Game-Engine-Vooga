@@ -4,7 +4,6 @@ import java.io.File;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import socialcenter.UserInfo;
 
 
 /**
@@ -23,8 +22,8 @@ public class TestUserInfo extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
     	File newFile = new File("images/mario.png");
-        UserInfo user = new UserInfo("Jimmy","mario.png");
-        user.savePlayerInfo();
+//        UserInfo user = new UserInfo("Jimmy","mario.png");
+//        user.savePlayerInfo();
     }
 
 }
