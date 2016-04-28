@@ -1,6 +1,7 @@
 package player.leveldatamanager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -182,35 +183,7 @@ public class LevelData implements ILevelData {
         }
         return displayablenodes;
     }
-    /**
-     * Returns unmodifiable list of key combos
-     * 
-     * @return
-     */
-    public List<List<String>> getKeyPressCombos () {
-        return Collections.unmodifiableList(myKeyPressedCombos);
-    }
-    /**
-     * Returns unmodifiable map of key causes
-     * 
-     * @return
-     */
-    public Map<List<String>, KeyCause> getKeyPressCauses () {
-        return Collections.unmodifiableMap(myKeyPressCauses);
-    }
-    
-    public Map<List<String>, KeyCause> getKeyReleaseCauses () {
-        return Collections.unmodifiableMap(myKeyReleaseCauses);
-    }
-    
-    /**
-     * Returns unmodifiable list of key events
-     * 
-     * @return
-     */
-    public List<VoogaEvent> getEvents () {
-        return Collections.unmodifiableList(myEvents);
-    }
+
     /**
      * add a given event and populate the pressed and released key
      * combo's while doing so
@@ -350,5 +323,25 @@ public class LevelData implements ILevelData {
     public List<List<String>> getKeyReleasedCombos () {
         return myKeyReleasedCombos;
     }
+	@Override
+	public Map<List<String>, KeyCause> getKeyPressCauses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Map<List<String>, KeyCause> getKeyReleaseCauses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Collection<VoogaEvent> getEvents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<List<String>> getKeyPressCombos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
