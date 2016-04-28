@@ -36,5 +36,7 @@ public class StatsVisualizer {
 			xparams.add(info.getProperty(xparam));
 			yparams.add(info.getProperty(yparam));
 		}
+		
+		
 	}
 }

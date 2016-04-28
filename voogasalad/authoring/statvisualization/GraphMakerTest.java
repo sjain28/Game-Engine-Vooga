@@ -8,6 +8,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import database.VoogaDataBase;
+import database.VoogaEntry;
+import database.VoogaPlaySession;
+import database.VoogaStatInfo;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
@@ -25,7 +29,7 @@ public class GraphMakerTest extends Application {
 		List<Object> yparams = new ArrayList<Object>();
 		
 		//fill up the x-params and y-params
-		fillArrays2(xparams,yparams);
+		fillArrays4(xparams,yparams);
 
 		
 		GraphMaker statsvisualizer = new GraphMaker();
@@ -61,6 +65,24 @@ public class GraphMakerTest extends Application {
 		yparams.add(new VoogaNumber(5.0));
 		yparams.add(new VoogaNumber(2.0));
 		yparams.add(new VoogaNumber(3.0));
+	}
+	//duration of play
+	public void fillArrays4(List<Object> xparams, List<Object> yparams){
+		//vooga entry
+		VoogaDataBase database = VoogaDataBase.getInstance();
+		String xparam = VoogaPlaySession.DATE_PLAYED;
+		String yparam = VoogaPlaySession.PLAY_DURATION;
+		
+		String username = "klo14";
+		String gamename = "game 2";
+		
+		VoogaEntry statinfo = database.getStatByGameAndUser(gamename, username);
+		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getPlayStats();
+		
+		for(VoogaEntry entry : list){
+			xparams.add(entry.getProperty(xparam));
+			yparams.add(entry.getProperty(yparam));
+		}
 	}
 	public static void main(String[] args){
 		launch(args);
