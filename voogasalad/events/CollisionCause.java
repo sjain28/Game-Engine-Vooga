@@ -16,9 +16,6 @@ public class CollisionCause extends Cause{
 	private String archB;
 	private String myDirection; //Can be the Strings Horizontal, Above, or Below
 	private Map<String, Integer> collisionDirections;
-	private List<Sprite> groupA;
-	private List<Sprite> groupB;
-
 	
 	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Simple Collision
 		super(voogaEvent);
@@ -37,10 +34,10 @@ public class CollisionCause extends Cause{
 		List<Sprite> group = new ArrayList<>();
 	        
 		if(arch.matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")){		
-			group.add(data.getSpriteByID(arch)); //If contains dash, it's a Sprite ID
+			group.add(data.getSpriteByID(arch)); 
 		}
 		else{
-			group.addAll(data.getSpritesByArch(arch));//Else, it's an arch name
+			group.addAll(data.getSpritesByArch(arch));
 		}
 		return group;
 	}
@@ -65,7 +62,6 @@ public class CollisionCause extends Cause{
 				}
 			}
 		}
-		System.out.println();
 
 		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
@@ -86,10 +82,7 @@ public class CollisionCause extends Cause{
 			}
 			return false;
 		}
-		else{
-			
-			System.out.println(physics.checkCollisionY(a, b));
-			
+		else{			
 			if(physics.checkCollisionY(a, b) == collisionDirections.get(myDirection)){
 				addSprites(a,b);
 				return true;
@@ -110,6 +103,6 @@ public class CollisionCause extends Cause{
 	
 	@Override
 	public String toString(){
-		return archA + " is colliding with " + archB;
+		return archA + " is colliding with " + archB + " from " + myDirection;
 	}
 }
