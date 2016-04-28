@@ -19,10 +19,8 @@ public class PrefFileItem extends MenuItemHandler {
      * @param event: Unused vestige of previous poor programming. Should soon be phased out.
      */
 	
-	private static final double WINDOW_WIDTH = 400;
+	private static final double WINDOW_WIDTH = 600;
 	private static final double WINDOW_HEIGHT = 350;
-	
-	private static final String MAIN_CHARACTER = "Main_Character";
 	
 	private CompleteAuthoringModelable model;
 
@@ -42,10 +40,10 @@ public class PrefFileItem extends MenuItemHandler {
 		preferences.setName(this.model.getName());
 		preferences.setScrolling((String) model.getGlobalVariables().get(this.model.getName()+"Scrolling").getValue());
 		preferences.setSpeed((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollSpeed").getValue());
+		preferences.setMainSprite((String) model.getGlobalVariables().get(this.model.getName()+"MainUUID").getValue());
 		preferences.setAngle(Double.toString((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollAngle").getValue()));
 		preferences.setContinuousScrollType((String) model.getGlobalVariables().get(this.model.getName()+"ContinuousScrollType").getValue());
 		preferences.setListener(e -> {
-			System.out.println(preferences.getMainSpriteID());
 			model.getGlobalVariables().put(preferences.getName()+"Scrolling", new VoogaString(preferences.getScrollingType()));
 			model.getGlobalVariables().put(preferences.getName()+"MainUUID", new VoogaString(preferences.getMainSpriteID()));
 			model.getGlobalVariables().put(preferences.getName()+"ScrollSpeed", new VoogaNumber(preferences.getContinuousScrollSpeed()));
