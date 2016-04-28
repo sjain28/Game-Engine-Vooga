@@ -1,5 +1,7 @@
 package events;
 
+import java.nio.file.Paths;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import player.leveldatamanager.ILevelData;
@@ -18,8 +20,8 @@ public class SoundEffect extends Effect {
 	@Override
 	public void execute(ILevelData data) {
 		if (!soundAdded){
-//			MediaPlayer player = new MediaPlayer(new Media(mySound));
-//			player.play();
+			MediaPlayer player = new MediaPlayer(new Media(Paths.get(mySound).toUri().toString()));
+			player.play();
 		// data.getGameSound().createMediaPlayer(mySound);
 			soundAdded = true;
 		}

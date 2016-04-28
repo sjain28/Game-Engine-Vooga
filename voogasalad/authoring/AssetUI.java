@@ -6,7 +6,7 @@ package authoring;
  * Game Object. This class manages adding the path and the folder both in the computers resources
  * and the UI Game Assets tab.
  * 
- * @author Harry Guo, Arjun Desai, Aditya Srinivasan, Nick Lockett
+ * @author Aditya Srinivasan
  * 
  */
 

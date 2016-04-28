@@ -3,7 +3,7 @@ package authoring;
 /**
  * Command interface for creating commands.
  * 
- * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ * @author Aditya Srinivasan
  *
  */
 

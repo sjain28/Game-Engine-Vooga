@@ -3,6 +3,8 @@
  */
 package player.leveldatamanager;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -133,7 +135,9 @@ public class LevelTransitioner {
      * @return String centerScroll sprite ID
      */
     public String getCenteredCharID() {
-        return (String) myGlobalVariables.get(myCenteredCharKey).getValue();
+        Path p = Paths.get(this.myLevelFileName);
+        String rawLevelName = p.getFileName().toString().replace(".xml", "");
+        return (String) myGlobalVariables.get(rawLevelName + myCenteredCharKey).getValue();
     }
     
     //TODO: Implement
