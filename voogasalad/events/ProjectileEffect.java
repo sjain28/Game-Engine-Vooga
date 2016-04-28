@@ -9,19 +9,19 @@ public class ProjectileEffect extends SpawnEffect {
 	private String myShooterID;
 	private Double myVelocityScale;
 
-	public ProjectileEffect(String archetype, Double x, Double y, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
-		super(archetype, x, y, voogaEvent);
+	public ProjectileEffect(String archetype, Double xPos, Double yPos, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
+		super(archetype, xPos, yPos, voogaEvent);
 		myVelocity = new Velocity(xVelocity, yVelocity);
 	}
-	public ProjectileEffect(String archetype, String shooterID, Double x, Double y, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
-		super(archetype, shooterID, x, y, voogaEvent);
-		myShooterID = shooterID;
+	public ProjectileEffect(String archetype, String targetID, Double xPos, Double yPos, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
+		super(archetype, targetID, xPos, yPos, voogaEvent);
+		myShooterID = targetID;
 		myVelocity = new Velocity(xVelocity, yVelocity);
 	}
 
-	public ProjectileEffect(String archetype, String shooterID, Double x, Double y, Double velocityScaleFactor, VoogaEvent voogaEvent) {
-		super(archetype, shooterID, x, y, voogaEvent);
-		myShooterID = shooterID;
+	public ProjectileEffect(String archetype, String targetID, Double xPos, Double yPos, Double velocityScaleFactor, VoogaEvent voogaEvent) {
+		super(archetype, targetID, xPos, yPos, voogaEvent);
+		myShooterID = targetID;
 		myVelocityScale = velocityScaleFactor;
 	}
 

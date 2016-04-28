@@ -36,9 +36,9 @@ import videos.ScreenProcessor;
  * TODO: Just get rid of Timeline related one line methods
  */
 public class GameRunner implements IGameRunner {
-    private static final double INIT_SPEED = 60;
+    public static final double FRAME_RATE = 60;
     private static final double SEC_PER_MIN = 60;
-    private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
+    private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
     private static final double SPEEDCONTROL = 10;
     private static final String LEVELS_PATH = "levels/";
     private static final String XML_EXTENSION_SUFFIX = ".xml";
@@ -85,7 +85,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	public void run() {
 		myCurrentStep = 0;
-		myTimeline.setRate(INIT_SPEED);
+		myTimeline.setRate(FRAME_RATE);
 		myTimeline.play();
 	}
 	/**
@@ -93,7 +93,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void step() {	
 		myCurrentStep++;
-		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN;
+		double secondspassed = myCurrentStep * (1 / FRAME_RATE) / SEC_PER_MIN;
 		myLevelData.updatedGlobalTimer(secondspassed);
 		//check if we need to transition to a different level
     	if (myLevelData.getSaveNow()){
@@ -112,7 +112,7 @@ public class GameRunner implements IGameRunner {
 	 * Checks and updates all LevelData GlobalVariables
 	 */
 	private void checkAndUpdateGlobalVariables(){
-		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / INIT_SPEED) / 60);
+		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / 60);
 		if (!myLevelData.getNextLevelName().equals("")) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}

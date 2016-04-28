@@ -1,5 +1,7 @@
 package events;
 
+import player.gamerunner.GameRunner;
+
 //Process: 
 //VoogaEvent has some outside Cause paired to an AnimationEffect
 //AnimationEffect has an AnimationEvent in it
@@ -12,6 +14,7 @@ package events;
 public class AnimationEvent extends VoogaEvent {
 
 	private WrapperCause myCause;
+	private String myNextEvent;
 	
 	private PathEffect myPathEffect;
 	private RotateEffect myRotateEffect;
@@ -26,10 +29,10 @@ public class AnimationEvent extends VoogaEvent {
 	}
 	
 	protected void setDuration(Double duration){
-		myDuration = duration;
+		myDuration = GameRunner.FRAME_RATE * duration;
 		myCause = new WrapperCause(this);
 		if (myPathEffect != null){
-			myPathEffect.createAnimationPoints(duration);
+			myPathEffect.createAnimationPoints(myDuration);
 		}
 		if (myRotateEffect != null){
 			myRotateEffect.setCycleRotation(myDuration);
