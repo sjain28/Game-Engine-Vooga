@@ -5,6 +5,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TabPane;
+import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.VoogaString;
 
@@ -25,6 +26,7 @@ public class DesignBoardHousing extends TabPane {
 			DesignBoardPreferences preferences = new DesignBoardPreferences(elem);
 			preferences.setClosable(false);
 			preferences.setListener(e -> {
+				try {
 				mySceneName.set(preferences.getName());
 				elem.getGlobalVariables().put(preferences.getName()+"Scrolling", new VoogaString(preferences.getScrollingType()));
 				elem.getGlobalVariables().put(preferences.getName()+"MainUUID", new VoogaString(preferences.getMainSpriteID()));
@@ -34,6 +36,9 @@ public class DesignBoardHousing extends TabPane {
 				this.getTabs().remove(preferences);
 				this.getTabs().add(new DesignBoard(elem));
 				elem.setName(preferences.getName());
+				} catch(Exception ee) {
+					new VoogaAlert("Please enter all preference values.");
+				}
 			});
 			this.getTabs().add(preferences);
 		} else {

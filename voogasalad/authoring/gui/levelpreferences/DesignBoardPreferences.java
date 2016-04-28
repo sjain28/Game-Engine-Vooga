@@ -93,7 +93,7 @@ public class DesignBoardPreferences extends Tab {
 	/**
 	 * Sets the name of the level.
 	 * 
-	 * @param name: name of leve
+	 * @param name: name of level
 	 */
 	public void setName(String name) {
 		this.levelName.setText(name);
@@ -267,7 +267,7 @@ public class DesignBoardPreferences extends Tab {
 	}
 	
 	public Double getScrollAngle() {
-		return Double.parseDouble(this.angle.getText());
+		return (this.angle.getText().isEmpty()) ? 0 : Double.parseDouble(this.angle.getText());
 	}
 	
 	public String getContinuousScrollType() {

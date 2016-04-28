@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  * Class to launch the Program Initializes both the UIComponents through
  * UILauncher and the Model, or "Backend" of the project
  * 
- * @author Nick Lockett, Harry Guo, Arjun Desai, Aditya Srinivasan
+ * @author Arjun Desai, Aditya Srinivasan, Nick Lockett, Harry Guo
  *
  */
 public class Launcher {
