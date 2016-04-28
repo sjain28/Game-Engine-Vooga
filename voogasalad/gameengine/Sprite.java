@@ -64,15 +64,12 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    String archetype,
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
-        
-        System.out.println("Sprite image path: "+imagePath);
-        
+
         myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
         
-        for (String key :properties.keySet()){
-            System.out.println(key);
-        }
+        System.out.println("path from constructor: "+imagePath);
+        System.out.println("image from properties: "+properties.get(IMAGE_PATH).getValue());
         
         initializeCoordinates();
 
@@ -81,9 +78,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myAcceleration = new Acceleration(0, 0);
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
-        
-        System.out.println(imagePath);
-        
+
         initializeImage(imagePath);
 
         // TODO: use properties file to put these
@@ -92,7 +87,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
         initializeAlive();
         initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
-
+        System.out.println("image path after initialization: "+properties.get(IMAGE_PATH).getValue());
     }
 
     private void initializeAlive () {
@@ -113,6 +108,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myProperties.put(IMAGE_PATH, imagePathString);
         Image newImage = setNewImage();
         
+        System.out.println(path);
         Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
 
         myImage = new ImageView(newImage);
@@ -156,27 +152,16 @@ public class Sprite implements Moveable, Effectable, Elementable {
         Bindings.bindBidirectional(myX, myProperties.get(X_POS).getProperty());
         Bindings.bindBidirectional(myY, myProperties.get(Y_POS).getProperty());
         Bindings.bindBidirectional(myZ, myProperties.get(Z_POS).getProperty());
+        
         myX.addListener( (obs, old, n) -> {
             myLoc.setX((double) n);
-            System.out.println("X changed");
         });
         myY.addListener( (obs, old, n) -> {
             myLoc.setY((double) n);
-            System.out.println("Y changed");
         });
     }
 
     public void update () {
-        // Still needed: Apply physics to myVelocity
-
-        // Velocity in m/s >> Each step is one s, so the number of meters u should increment
-        // System.out.println("Archetype: "+myArchetype+"
-        // "+"velocityY"+myVelocity.getY()+"velocityX"+myVelocity.getX());
-
-        // Velocity in m/s >> Each step is one s, so the number of meters u should increment
-        // System.out.println("Archetype: " + myArchetype + " " + "velocityY" + myVelocity.getY() +
-        // "velocityX" + myVelocity.getX());
-        // TODO: IF IMAGE PATH UPDATES, ACTUALLY UPDATE THE IMAGE
 
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
@@ -190,16 +175,11 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
         myImage.setTranslateZ(myZ.doubleValue());
 
-        // System.out.println("Sprite Position: "+myLoc.getX()+" "+myLoc.getY());
-        // System.out.println("Image Position: "+myImage.getTranslateX()+"
-        // "+myImage.getTranslateY());
-        //
         if (!myProperties.get(IMAGE_PATH).getValue().toString().equals(previousImage)) {
             Image newImage = setNewImage();
             myImage.setImage(newImage);
             previousImage = myProperties.get(IMAGE_PATH).getValue().toString();
         }
-        // System.out.println(myArchetype +" Location: " + myLoc.getX() + ", "+myLoc.getY());
 
     }
 

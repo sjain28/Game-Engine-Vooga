@@ -51,12 +51,8 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
         Bindings.bindBidirectional(this.imagePath,mySprite.getImagePathProperty());
-        System.out.println(this.imagePath+" "+mySprite.getImagePathProperty());
         Bindings.bindBidirectional(this.visibleProperty(), mySprite.isAlive());
-
         Bindings.bindBidirectional(this.imageProperty(),sprite.getImage().imageProperty());
-        
-        this.setOnMouseClicked(e->ElementSelectionModel.getInstance().setSelected(this));
         
         this.translateZProperty().addListener((obs,old,n)->{
             ElementSelectionModel.getInstance().setSelected(this);

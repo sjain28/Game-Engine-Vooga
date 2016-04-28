@@ -1,7 +1,6 @@
 package tools;
 
 import authoring.gui.items.NumberTextField;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
