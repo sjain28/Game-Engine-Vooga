@@ -1,15 +1,17 @@
 package authoring.gui;
 
-import java.nio.file.Paths;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
-import authoring.model.GameObject;
 import authoring.CustomText;
-import authoring.UIGridHousing;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.FrontEndElementable;
 import authoring.resourceutility.ResourceDecipherer;
@@ -35,6 +37,7 @@ import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
+
 /**
  * This class handles the display of all objects on the Authoring Environment
  * GUI. This is the board on which the author can build the game.
@@ -44,220 +47,270 @@ import tools.VoogaException;
  */
 public class DesignBoard extends Tab implements Observer {
 
-	private static final String DESIGN_BOARD = "Design Board";
-	private static final double STROKE_WIDTH = 4;
+    private VBox container;
+    private ToolBar zoomBar;
+    private ScrollPane scroller;
+    private StackPane contentPane;
+    private double width;
+    private double height;
 
-	private VBox container;
-	private ToolBar zoomBar;
-	private ScrollPane scroller;
-	private StackPane contentPane;
-	private double width;
-	private double height;
+    private CompleteAuthoringModelable elementManager;
+    private ElementSelectionModel selectionModel;
 
-	private CompleteAuthoringModelable elementManager;
-	private ElementSelectionModel selectionModel;
+    private ResourceBundle designboardProperties;
 
-	private double y_offset, x_offset;
+    private double y_offset, x_offset;
 
-	/**
-	 * Constructs DesignBoard with object that has the functionality described
-	 * by CompleteAuthoringModelable interface
-	 * 
-	 * @param elem:
-	 *            functionality described by CompleteAuthoringModelable
-	 *            interface
-	 */
-	public DesignBoard(CompleteAuthoringModelable elem) {
-		this.elementManager = elem;
-		this.width = Double.parseDouble(VoogaBundles.designboardProperties.getString("Width"));
-		this.height = Double.parseDouble(VoogaBundles.designboardProperties.getString("Height"));
-		
-		
-		initializeContainers();
-		initializeZoom();
-		initializeObservables();
+    /**
+     * Constructs DesignBoard with object that has the functionality described
+     * by CompleteAuthoringModelable interface
+     * 
+     * @param elem:
+     *        functionality described by CompleteAuthoringModelable
+     *        interface
+     */
+    public DesignBoard (CompleteAuthoringModelable elem) {
+        this.elementManager = elem;
+        this.designboardProperties = VoogaBundles.designboardProperties;
 
-		initializeDragAndDrop();
-		
-		addGuides();
-		displayElements(elem.getElements());
-	}
-	
-	/**
-	 * Initializes the container which contains all the contents of the design board.
-	 */
-	private void initializeContainers() {
-		this.setText(DESIGN_BOARD);
-		this.setClosable(false);
-		
-		contentPane = new StackPane();
-		contentPane.setMinSize(width, height);
-		
-		scroller = new ScrollPane();
-		scroller.setContent(contentPane);
-		
-		zoomBar = new ToolBar();
-		
-		container = new VBox(zoomBar, scroller);
-		this.setContent(container);
-		
-		y_offset = width / 2;
-		x_offset = height / 2;
-	}
-	
-	/**
-	 * Initializes the zoom slider which affects the magnification of the authoring environment.
-	 */
-	private void initializeZoom() {
-		Slider zoomControl = new Slider(0.1, 10, 1);
-		Text coordinateDisplay = new CustomText("");
-		contentPane.setOnMouseMoved(e -> {
-			coordinateDisplay.setText("X: " + (e.getX() - width/2) + " Y: " + (e.getY() - height/2));
-		});
-		zoomBar.getItems().addAll(zoomControl, coordinateDisplay);
-		zoomControl.valueProperty().addListener((obs, old, n) -> {
-			contentPane.setScaleX((double) n);
-			contentPane.setScaleY((double) n);
-		});
-	}
-	
-	/**
-	 * Initializes the observables connected to this observer class.
-	 */
-	private void initializeObservables() {
-		selectionModel = ElementSelectionModel.getInstance();
-		selectionModel.addObserver(this);
-		elementManager.addObserver(this);
-	}
+        this.width = Double.parseDouble(designboardProperties.getString("Width"));
+        this.height = Double.parseDouble(designboardProperties.getString("Height"));
 
-	private void addGuides() {
-		double width = Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth"));
-		double height = Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight"));
-		Rectangle guide = new Rectangle(width, height);
-		guide.setStroke(Paint.valueOf("white"));
-		guide.setStrokeWidth(STROKE_WIDTH);
-		guide.setFill(Paint.valueOf("transparent"));
-		this.contentPane.getChildren().add(guide);
-		guide.setTranslateX(width/2);
-		guide.setTranslateY(height/2);
-		this.scroller.setVvalue(0.5);
-		this.scroller.setHvalue(0.5);
-	}
+        initializeContainers();
+        initializeZoom();
+        initializeObservables();
 
-	private void initializeDragAndDrop() {
-		contentPane.setOnDragOver(e -> mouseDragOver(e));
-		contentPane.setOnDragDropped(e -> mouseDragDropped(e));
-		contentPane.setOnDragExited(e -> contentPane.setStyle("-fx-border-color: transparent;"));
-	}
+        initializeDragAndDrop();
 
-	private void mouseDragDropped(final DragEvent event) {
-		Dragboard db = event.getDragboard();
-		boolean success = false;
-		if (db.hasContent(VoogaFileFormat.getInstance())) {
-			VoogaFile node = (VoogaFile) db.getContent(VoogaFileFormat.getInstance());
-			if (node.getType() != VoogaFileType.FOLDER) {
-				if (node.getType() != VoogaFileType.ARCHETYPE && node.getType() != VoogaFileType.GAME_OBJECT) {
-					if (elementManager.hasElement(node.getPath())) {
-						moveElement(node.getPath(), event);
-					} else {
-						addElement(node, event, "");
-					}
-				} else {
-					if (node.getType() == VoogaFileType.ARCHETYPE) {
-						addElement(node, event, node.toString());
-					}
-				}
-			}
-			success = true;
-		}
-		if (db.hasString()) {
-			Node object = (Node) elementManager.getElement(db.getString());
-			object.setTranslateX(event.getX() - x_offset);
-			object.setTranslateY(event.getY() - y_offset);
-		}
+        addGuides();
+        displayElements(elem.getElements());
+    }
 
-		event.setDropCompleted(success);
-	}
+    /**
+     * Initializes the container which contains all the contents of the design board.
+     */
+    private void initializeContainers () {
+        this.setText(designboardProperties.getString("DesignBoardName"));
+        this.setClosable(false);
 
-	private void mouseDragOver(final DragEvent event) {
-		if (event.getGestureSource() != contentPane
-				&& (event.getDragboard().hasContent(VoogaFileFormat.getInstance()))) {
-			VoogaFile content = (VoogaFile) event.getDragboard().getContent(VoogaFileFormat.getInstance());
-			String color = "";
-			if (content.getType() != VoogaFileType.FOLDER) {
-				color = "#64B5F6";
-			} else {
-				color = "red";
-			}
-			contentPane.setStyle(String.format("-fx-border-color: %s", color));
-			event.acceptTransferModes(TransferMode.ANY);
-		} else if (event.getDragboard().hasString()) {
-			event.acceptTransferModes(TransferMode.ANY);
-		}
+        contentPane = new StackPane();
+        contentPane.setMinSize(width, height);
+        scroller = new ScrollPane();
+        scroller.setContent(contentPane);
 
-		event.consume();
-	}
+        zoomBar = new ToolBar();
 
-	private void addElement(VoogaFile file, DragEvent event, String archetype) {
-		String elementPath = file.getPath();
-		if (elementPath != null) {
-			try {
-				if (ResourceDecipherer.isImage(elementPath)) {
+        container = new VBox(zoomBar, scroller);
+        this.setContent(container);
 
-					GameObjectBuilder builder = new GameObjectBuilder(elementManager);
-					if (!archetype.isEmpty()) {
-						builder.setArchetype(archetype);
-					} else {
-						builder.setDraggedImage(file.getPath());
-					}
-					builder.showAndWait();
+        y_offset = width / 2;
+        x_offset = height / 2;
+    }
 
-				}
-			} catch (VoogaException e) {
-				new VoogaAlert(e.getMessage());
-			}
-			elementManager.addElementId(elementPath);
-		}
-	}
+    /**
+     * Initializes the zoom slider which affects the magnification of the authoring environment.
+     */
+    private void initializeZoom () {
+        Slider zoomControl = new Slider(0.1, 10, 1);
+        Text coordinateDisplay = new CustomText("");
+        contentPane.setOnMouseMoved(e -> {
+            String xCoordinate =
+                    new BigDecimal(e.getX() - width / 2).setScale(2, RoundingMode.HALF_UP)
+                            .toString();
+            String yCoordinate =
+                    new BigDecimal(e.getY() - height / 2).setScale(2, RoundingMode.HALF_UP)
+                            .toString();
+            coordinateDisplay.setText(String.format("X: %s   Y: %s", xCoordinate, yCoordinate));
+        });
+        zoomBar.getItems().addAll(zoomControl, coordinateDisplay);
+        zoomControl.valueProperty().addListener( (obs, old, n) -> {
+            contentPane.setScaleX((double) n);
+            contentPane.setScaleY((double) n);
+        });
+    }
 
-	private void moveElement(String id, DragEvent e) {
-		Node element = elementManager.getElement(id);
-		element.setTranslateX(e.getX() - x_offset);
-		element.setTranslateY(e.getY() - y_offset);
+    /**
+     * Initializes the observables connected to this observer class.
+     */
+    private void initializeObservables () {
+        selectionModel = ElementSelectionModel.getInstance();
+        selectionModel.addObserver(this);
+        elementManager.addObserver(this);
+    }
 
-	}
+    /**
+     * Adds Guide rectangle on the design board so the user can see the dimensions of the game
+     * window as the user authors in the environment.
+     */
+    private void addGuides () {
+        double width = Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth"));
+        double height = Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight"));
+        Rectangle guide = new Rectangle(width, height);
+        guide.setStroke(Paint.valueOf(designboardProperties.getString("RecStrokeColor")));
+        guide.setStrokeWidth(Integer.parseInt(designboardProperties.getString("StrokeWidth")));
+        guide.setFill(Paint.valueOf(designboardProperties.getString("RecFill")));
+        this.contentPane.getChildren().add(guide);
+        guide.setTranslateX(width / 2);
+        guide.setTranslateY(height / 2);
+        this.scroller
+                .setVvalue(Double.parseDouble(designboardProperties.getString("ScrollerVValue")));
+        this.scroller
+                .setHvalue(Double.parseDouble(designboardProperties.getString("ScrollerHValue")));
+    }
 
-	private void displayElements(Collection<Node> nodeList) {
-		for (Node node : nodeList) {
-			if (!contentPane.getChildren().contains(node)) {
-				System.out.println("displaying element" + node);
-				contentPane.getChildren().add(node);
-			}
-		}
-	}
+    /**
+     * Initializes the drag and drop feature for the design board.
+     */
+    private void initializeDragAndDrop () {
+        contentPane.setOnDragOver(e -> mouseDragOver(e));
+        contentPane.setOnDragDropped(e -> mouseDragDropped(e));
+        contentPane.setOnDragExited(e -> contentPane
+                .setStyle(designboardProperties.getString("ContentPaneStyle")));
+    }
 
-	/**
-	 * Updates changes to the class based on the observation from the Model,
-	 * Specifically the ElementManager
-	 */
-	@Override
-	public void update(Observable o, Object arg) {
-		if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)) {
-			System.out.println("updatign eelments");
-			displayElements(((CompleteAuthoringModelable) o).getElements());
-		}
+    private void mouseDragDropped (final DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasContent(VoogaFileFormat.getInstance())) {
+            VoogaFile node = (VoogaFile) db.getContent(VoogaFileFormat.getInstance());
+            if (node.getType() != VoogaFileType.FOLDER) {
+                if (node.getType() != VoogaFileType.ARCHETYPE &&
+                    node.getType() != VoogaFileType.GAME_OBJECT) {
+                    if (elementManager.hasElement(node.getPath())) {
+                        moveElement(node.getPath(), event);
+                    }
+                    else {
+                        addElement(node, event, "");
+                    }
+                }
+                else {
+                    if (node.getType() == VoogaFileType.ARCHETYPE) {
+                        addElement(node, event, node.toString());
+                    }
+                }
+            }
+            success = true;
+        }
+        if (db.hasString()) {
+            Node object = (Node) elementManager.getElement(db.getString());
+            object.setTranslateX(event.getX() - x_offset);
+            object.setTranslateY(event.getY() - y_offset);
+        }
 
-		if ((o instanceof ElementSelectionModel) && (arg instanceof FrontEndElementable)) {
-			for (Node object : contentPane.getChildren()) {
-				if (object instanceof FrontEndElementable) {
-					if (arg == object) {
-						((FrontEndElementable) object).select(Selector.HIGHLIGHTED);
-					} else {
-						((FrontEndElementable) object).select(Selector.UNHIGHLIGHTED);
-					}
-				}
-			}
-		}
-	}
+        event.setDropCompleted(success);
+    }
+
+    /**
+     * Mouse dragover event.
+     * 
+     * @param event
+     */
+    private void mouseDragOver (final DragEvent event) {
+        if (event.getGestureSource() != contentPane &&
+            (event.getDragboard().hasContent(VoogaFileFormat.getInstance()))) {
+            VoogaFile content =
+                    (VoogaFile) event.getDragboard().getContent(VoogaFileFormat.getInstance());
+            String color = "";
+            if (content.getType() != VoogaFileType.FOLDER) {
+                color = designboardProperties.getString("NonVoogaFileColor");
+            }
+            else {
+                color = designboardProperties.getString("VoogaFileColor");
+            }
+            contentPane.setStyle(String
+                    .format(designboardProperties.getString("ContentPaneStringStyle"), color));
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+        else if (event.getDragboard().hasString()) {
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+
+        event.consume();
+    }
+
+    /**
+     * Method to add new element to the design board
+     * 
+     * @param file: file to add
+     * @param event: drag and drop feature
+     * @param archetype: archetype (if element has one)
+     */
+    private void addElement (VoogaFile file, DragEvent event, String archetype) {
+        String elementPath = file.getPath();
+        if (elementPath != null) {
+            try {
+                if (ResourceDecipherer.isImage(elementPath)) {
+
+                    GameObjectBuilder builder = new GameObjectBuilder(elementManager);
+                    if (!archetype.isEmpty()) {
+                        builder.setArchetype(archetype);
+                    }
+                    else {
+                        builder.setDraggedImage(file.getPath());
+                    }
+                    builder.showAndWait();
+
+                }
+            }
+            catch (VoogaException e) {
+                new VoogaAlert(e.getMessage());
+            }
+            elementManager.addElementId(elementPath);
+        }
+    }
+
+    /**
+     * Method to move the element around on the design board.
+     * 
+     * @param id: sprite ID
+     * @param e: dragevent
+     */
+    private void moveElement (String id, DragEvent e) {
+        Node element = elementManager.getElement(id);
+        element.setTranslateX(e.getX() - x_offset);
+        element.setTranslateY(e.getY() - y_offset);
+    }
+
+    /**
+     * Displays the collection of the elements on the content pane
+     * 
+     * @param nodeList: list of nodes
+     */
+    private void displayElements (Collection<Node> nodeList) {
+        for (Node node : nodeList) {
+            if (!contentPane.getChildren().contains(node)) {
+                System.out.println("displaying element" + node);
+                contentPane.getChildren().add(node);
+            }
+        }
+    }
+
+    /**
+     * Updates changes to the class based on the observation from the Model,
+     * Specifically the ElementManager
+     */
+    @Override
+    public void update (Observable o, Object arg) {
+        if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)) {
+            System.out.println("updatign eelments");
+            displayElements(((CompleteAuthoringModelable) o).getElements());
+        }
+
+        if ((o instanceof ElementSelectionModel) && (arg instanceof FrontEndElementable)) {
+            Comparator<Node> comparator = new Comparator<Node>() {
+                public int compare (Node o1, Node o2) {
+                    return ((Double) o1.getTranslateZ()).compareTo(o2.getTranslateZ());
+                }
+
+            };
+            for (Node e : contentPane.getChildren()) {
+                System.out.println(e);
+            }
+            List<Node> newChildren = new ArrayList<Node>(contentPane.getChildren());
+            newChildren.sort(comparator);
+            contentPane.getChildren().clear();
+            contentPane.getChildren().addAll(newChildren);
+        }
+    }
 
 }

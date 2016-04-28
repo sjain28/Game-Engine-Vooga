@@ -24,7 +24,7 @@ import tools.VoogaException;
  * 
  * Specifically: The DesignBoardHousing, EventWindow, PropertiesPane, and Explorer
  * 
- * @author Nick Lockett, Harry Guo, Aditya Srinivasan, Arjun Desai
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
  *
  */
 

@@ -42,7 +42,6 @@ public class CollisionCause extends Cause{
 		else{
 			group.addAll(data.getSpritesByArch(arch));//Else, it's an arch name
 		}
-		
 		return group;
 	}
 	
@@ -60,10 +59,14 @@ public class CollisionCause extends Cause{
 						myVal = true;
 					}
 				}else{
-					myVal = handleCollision(a,b,data);
+					if(handleCollision(a,b,data)){
+						myVal = true;
+					}
 				}
 			}
 		}
+		System.out.println();
+
 		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
 	}
@@ -84,14 +87,9 @@ public class CollisionCause extends Cause{
 			return false;
 		}
 		else{
-//			System.out.println(physics.checkCollisionY(a, b));
-//			try {
-//				if (physics.checkCollisionY(a, b) != 0)
-//				Thread.sleep(4000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			
+			System.out.println(physics.checkCollisionY(a, b));
+			
 			if(physics.checkCollisionY(a, b) == collisionDirections.get(myDirection)){
 				addSprites(a,b);
 				return true;
@@ -102,8 +100,8 @@ public class CollisionCause extends Cause{
 	
 	private void initMap(){
 		collisionDirections = new HashMap<>();
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), -1);
-		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), 1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), 1);
+		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), -1);
 	}
 	
 	public List<Sprite> getAllCollidedSprites(){

@@ -16,6 +16,7 @@ import data.Serializer;
 import data.Deserializer;
 import tools.VoogaException;
 import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 
 /**
@@ -49,10 +50,14 @@ public class SpriteFactory extends Observable{
      * @return Sprite
      */
     public Sprite createSprite (String archetype) {
+        System.out.println("creating sprite in SpriteFactory");
         Sprite original = myArchetypes.get(archetype);
+        
+        Map<String,VoogaData> map = new HashMap<String,VoogaData>(original.getParameterMap());
+        
         Sprite clone = new Sprite(original.getImagePath(), original.getArchetype(),
-                                  original.getParameterMap(),
-                                  (VoogaNumber) original.getParameterMap().get(Sprite.MASS));
+                                  map,
+                                  (VoogaNumber) map.get(Sprite.MASS));
         return clone;
     }
 

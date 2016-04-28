@@ -1,6 +1,5 @@
 package authoring.model;
 
-import java.util.HashMap;
 import java.util.Map;
 import authoring.gui.Selector;
 import authoring.interfaces.Elementable;
@@ -32,7 +31,7 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
     private transient SimpleStringProperty imagePath;
 
     public GameObject (Sprite sprite, String name) {
-        imagePath = new SimpleStringProperty(sprite.getImagePath());
+        System.out.println("image path property: "+sprite.getImagePathProperty());
         initializeSprite(sprite);
         sprite.setName(name);
         this.name = name;
@@ -44,27 +43,21 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
 
     private void initializeSprite (Sprite sprite) {
         mySprite = sprite;
-
+        imagePath = new SimpleStringProperty();
+        
         Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
         Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
         Bindings.bindBidirectional(this.translateZProperty(), mySprite.getZ());
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
-        Bindings.bindBidirectional(imagePath, mySprite.getImagePathProperty());
+        Bindings.bindBidirectional(this.imagePath,mySprite.getImagePathProperty());
         Bindings.bindBidirectional(this.visibleProperty(), mySprite.isAlive());
-
-        mySprite.getImagePathProperty().addListener( (obs, old, n) -> {
-            this.setImage(new Image(n));
-        });
-
-        this.translateXProperty().addListener( (obs, old, n) -> {
-            mySprite.getX().setValue(n);
+        Bindings.bindBidirectional(this.imageProperty(),sprite.getImage().imageProperty());
+        
+        this.translateZProperty().addListener((obs,old,n)->{
             ElementSelectionModel.getInstance().setSelected(this);
         });
-        this.translateYProperty().addListener( (obs, old, n) -> {
-            mySprite.getY().setValue(n);
-            ElementSelectionModel.getInstance().setSelected(this);
-        });
+
     }
 
     // TODO: Send back immutable sprite
@@ -97,9 +90,7 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
-        Map<String, VoogaData> propertiesMap = new HashMap<String, VoogaData>();
-        propertiesMap.putAll(mySprite.getParameterMap());
-        return propertiesMap;
+        return mySprite.getParameterMap();
     }
 
     @Override
@@ -121,12 +112,7 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
     public String getName () {
         return name;
     }
-
-    @Override
-    public void update () {
-
-    }
-
+    
     public void select (Selector selector) {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(selector.getLightness());
@@ -137,6 +123,16 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
 
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
+    }
+    
+    @Override
+    public Elementable getElementable () {
+        return mySprite;
+    }
+
+    @Override
+    public void update () {
+
     }
 
     @Override
@@ -155,11 +151,6 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
     public void init () throws VoogaException {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public Elementable getElementable () {
-        return mySprite;
     }
 
 }

@@ -13,14 +13,14 @@ public class NewPropertyFactory {
 
 	private final String COMMAND_PATH = "tools.";
 	private ArrayList<String> myChoices = new ArrayList<String>();
-	
+
 	/**
 	 * Constructor to populate list of choices
 	 */
 	public NewPropertyFactory() {
 		populateChoices();
 	}
-	
+
 	/**
 	 * Method to populate choices for user to pick from (all forms of VoogaData)
 	 */
@@ -28,14 +28,14 @@ public class NewPropertyFactory {
 		myChoices.add("VoogaNumber");
 		myChoices.add("VoogaBoolean");
 	}
-	
+
 	/**
 	 * @return list of choices
 	 */
 	public ArrayList<String> getChoices() {
 		return myChoices;
 	}
-	
+
 	/**
 	 * Given the String of the type of Vooga Data they want a certain variable to be, instantiates the new property.
 	 * @param s (String of type of Vooga Data)
@@ -51,6 +51,6 @@ public class NewPropertyFactory {
 		}
 		return vgData;
 	}
-	
+
 }
 

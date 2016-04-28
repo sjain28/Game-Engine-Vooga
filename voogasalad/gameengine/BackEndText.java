@@ -3,14 +3,10 @@ package gameengine;
 import java.util.HashMap;
 import java.util.Map;
 import authoring.interfaces.Elementable;
-import data.Displayable;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
-import tools.Acceleration;
 import tools.Position;
-import tools.Velocity;
 import tools.VoogaException;
-import tools.VoogaString;
 import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
 

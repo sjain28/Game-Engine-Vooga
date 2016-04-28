@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  * It is purely boiler-plate code delegating responsibility
  * of launching to other classes.
  *
- * @author Harry Guo, Nick Lockett, Aditya Srinivasan, Arjun Desai
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
  */
 public class Main extends Application {
 	
@@ -20,6 +20,7 @@ public class Main extends Application {
 		// Launches Main Program
 		System.setProperty("glass.accessible.force", "false"); //This fixes a stupid bug on Saumya's machine - it's harmless. 
 		new Launcher(primaryStage);
+		
 		// Launches Mosaic
 		// new BoundsTester();
 	}

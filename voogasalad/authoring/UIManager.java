@@ -23,7 +23,7 @@ import resources.VoogaPaths;
  * The UIManager is responsible for assembling view components, such as the
  * menubar, toolbar, and grid of windows
  * 
- * @author Harry Guo, Arjun Desai, Nick Lockett, Aditya Srinivasan
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
  * 
  */
 public class UIManager extends VBox implements Menuable {

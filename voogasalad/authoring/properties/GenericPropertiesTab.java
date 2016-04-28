@@ -1,12 +1,8 @@
 package authoring.properties;
 
-/**
- * Abstract Properties Tab that includes shared characteristics between tabs.
- * 
- * @author Harry Guo, Nick Lockett, Arjun Desai, Aditya Srinivasan
- */
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SwitchButton;
@@ -26,15 +22,22 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaBoolean;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 
+/**
+ * Generic Properties Tab to display properties on the GUI.
+ * 
+ * @author Harry Guo, Nick Lockett, Arjun Desai, Aditya Srinivasan
+ */
+
 public class GenericPropertiesTab extends Tab {
 
-    private static final double SPACING = 10;
+    private double SPACING;
 
     private VBox box;
     private HBox propertiesHBox;
@@ -42,11 +45,15 @@ public class GenericPropertiesTab extends Tab {
     protected ScrollPane myScrollPane;
     private Elementable myElementable;
     private CompleteAuthoringModelable manager;
-    
-    public GenericPropertiesTab (String tabName,CompleteAuthoringModelable manager) {
-        this.manager=manager;
+
+    private ResourceBundle ppProperties;
+
+    public GenericPropertiesTab (String tabName, CompleteAuthoringModelable manager) {
+        this.manager = manager;
+        ppProperties = VoogaBundles.propertiesPaneProperties;
+        SPACING = Double.parseDouble(ppProperties.getString("Spacing"));
         box = new VBox(SPACING);
-        propertiesHBox = new HBox(10);
+        propertiesHBox = new HBox(SPACING);
         propertiesMap = new HashMap<String, VoogaData>();
         myScrollPane = new ScrollPane();
         this.setText(tabName);
@@ -59,7 +66,7 @@ public class GenericPropertiesTab extends Tab {
     /**
      * Gets the properties map based off the Elementable
      * 
-     * @param o
+     * @param elem: elmenta
      */
     public void getPropertiesMap (Elementable elem) {
         myElementable = elem;
@@ -82,12 +89,12 @@ public class GenericPropertiesTab extends Tab {
                 name = new CustomText(property);
 
                 ContextMenu menu = new ContextMenu();
-                MenuItem delete = new MenuItem("Delete");
+                MenuItem delete = new MenuItem(ppProperties.getString("Delete"));
                 delete.setOnAction(e -> removeProperty(property));
-                MenuItem display = new MenuItem("Display on Screen");
-                display.setOnAction(e->createDisplayedText(property));
-                
-                menu.getItems().addAll(delete,display);
+                MenuItem display = new MenuItem(ppProperties.getString("DisplayOnScreen"));
+                display.setOnAction(e -> createDisplayedText(property));
+
+                menu.getItems().addAll(delete, display);
 
                 name.setOnMouseClicked(e -> {
                     if (e.getButton() == MouseButton.SECONDARY) {
@@ -106,7 +113,7 @@ public class GenericPropertiesTab extends Tab {
     private void createDisplayedText (String s) {
         VoogaFrontEndText text = new VoogaFrontEndText(s);
         text.setVoogaData(propertiesMap.get(s));
-        TextObjectBuilder builder = new TextObjectBuilder(manager,text);
+        TextObjectBuilder builder = new TextObjectBuilder(manager, text);
         builder.showAndWait();
     }
 
@@ -139,8 +146,11 @@ public class GenericPropertiesTab extends Tab {
      */
     public void createButtons () {
         Button addProperty =
-                new ButtonMaker().makeButton("Add Property", e -> addNewPropertyPrompt());
-        Button apply = new ButtonMaker().makeButton("Apply Changes", e -> updateProperties());
+                new ButtonMaker().makeButton(ppProperties.getString("Add"),
+                                             e -> addNewPropertyPrompt());
+        Button apply =
+                new ButtonMaker().makeButton(ppProperties.getString("Apply"),
+                                             e -> updateProperties());
         HBox buttonsPanel = new HBox(SPACING);
         buttonsPanel.getChildren().addAll(apply, addProperty);
         this.box.getChildren().addAll(buttonsPanel);
@@ -190,7 +200,7 @@ public class GenericPropertiesTab extends Tab {
      */
     private boolean elementablePresent () {
         if (myElementable == null) {
-            new VoogaAlert("No Sprite Selected");
+            new VoogaAlert(ppProperties.getString("NoSpriteError"));
             return false;
         }
         return true;

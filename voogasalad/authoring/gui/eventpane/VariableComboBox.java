@@ -26,6 +26,7 @@ public class VariableComboBox extends ComboBox<String>{
     }
     
     public void resetVariables(Map<String,VoogaData> data){
+        variables = data;
         getItems().clear();
         getItems().addAll(data.keySet());
     }
