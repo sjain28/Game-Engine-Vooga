@@ -12,19 +12,19 @@ public class SpriteVariableCause extends VariableCause {
 	private String myVarName;
 	private Object targetValue;
 	
-	public SpriteVariableCause(String spriteID, String varName, String predicate, Double target, VoogaEvent voogaEvent) {
-		super(predicate, voogaEvent);
+	public SpriteVariableCause(String spriteID, String variable, String doublepredicate, Double target, VoogaEvent voogaEvent) {
+		super(doublepredicate, voogaEvent);
 		super.setTarget(target);
 		mySpriteID = spriteID;
-		myVarName = varName;
+		myVarName = variable;
 		targetValue = target;
 	}
 	
-	public SpriteVariableCause(String spriteID, String varName, String predicate, Boolean target, VoogaEvent voogaEvent) {
-		super(predicate, voogaEvent);
+	public SpriteVariableCause(String spriteID, String variable, String booleanprediccate, Boolean target, VoogaEvent voogaEvent) {
+		super(booleanprediccate, voogaEvent);
 		super.setTarget(target);
 		mySpriteID = spriteID;
-		myVarName = varName;
+		myVarName = variable;
 		targetValue = target;
 	}
 

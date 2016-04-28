@@ -7,8 +7,6 @@ import tools.VoogaException;
 
 public class CauseAndEffectFactory {
 
-//	private ResourceBundle errorMessages = ResourceBundle.getBundle("./resources/ErrorMessages.properties");
-
     @SuppressWarnings("rawtypes")
 /**
  * Takes in a string stating what kind of cause/effect is being made as well as all of its parameters. Also takes in the
@@ -23,7 +21,7 @@ public class CauseAndEffectFactory {
         Class<?> c = null;
         
         try {
-            c = Class.forName(parameters[0]); //Find Cause class using reflection
+            c = Class.forName(parameters[0]); 
         }catch (ClassNotFoundException ee) {
             ee.printStackTrace();
             throw ee;
@@ -46,97 +44,36 @@ public class CauseAndEffectFactory {
 
         try {
             Constructor<?> causeConstructor = c.getConstructor(paramClasses);
-            Object result = causeConstructor.newInstance(allParams);
+            causeConstructor.newInstance(allParams);
         }
-        catch (NoSuchMethodException ee) {
-            ee.printStackTrace();
-            throw ee;
-        }
-        catch (InstantiationException e) {
+        catch (Exception e) {
             e.printStackTrace();
             throw e;
-        }
-        catch (IllegalAccessException e) {
-            e.printStackTrace();
-            throw e;
-        }
-        catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            throw e;
-        }
-        catch (InvocationTargetException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        }    
     }
+    
 /**
  * Parses the input string from the user stating conditions for cause/effect in order to use as separate constructor
  * type/parameters
  * @param input
- * @return
+ * @return double if input is a double
+ * 		   boolean if input is a boolean
+ * 		   the input string otherwise
  */
     private Object parseString (String input) {
-        if (input.equalsIgnoreCase("true"))
-            return new Boolean(true);
-
-        if (input.equalsIgnoreCase("false"))
-            return new Boolean("false");
-        try {
-        	Double d = Double.parseDouble(input);
-            return d;
+        try{
+        	Boolean b = new Boolean(input);
+        	return b;
         }
-        catch (Exception e) {
-            return input;
+        catch(Exception e){
+            try {
+            	Double d = Double.parseDouble(input);
+                return d;
+            }
+            catch (Exception ee) {
+                return input;
+            }
         }
-    }
-    /**
-	 * Main method was used for testing purposes
-	 * @param args
-	 */
-    public static void main (String args[]) {
-        CauseAndEffectFactory cf = new CauseAndEffectFactory();
-        VoogaEvent e = new VoogaEvent();
-
-//    	public VariableCause(String variableName, Double targetValue, String predicate, VoogaEvent voogaEvent) {		
-//        String variableCauseParams = "events.VariableCause Score 500 greaterThan";
-//        cf.create(e, variableCauseParams);
-       
-//        String cause = "events.SpriteVariableCause ID Health 25.0 greaterThan";
-//        Map<String, VoogaData> params = new HashMap<>();
-//        params.put("Health", new VoogaNumber(100.0));
-//        params.put("Score", new VoogaNumber(500.0));
-//        
-//        Sprite tester = new Sprite("dummypath", "Character", params, new VoogaNumber(50.0));
-//        String ID = tester.getID();
-//        VoogaEvent event = new VoogaEvent();
-//        
-//        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", "greaterThan", 50.0, event);
-//        SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
-//        
-//        event.update();
-//        //	public SpriteVariableCause(Sprite sprite, String varName, Double targetValue, String predicate, VoogaEvent event){
-//        
-//        cf.create(e, cause);
-//        
-//        String effect = "events.SpriteEffect ID increaseValue Health 50.0";
-//        cf.create(e, effect);
-        //	public SpriteVariableCause(String spriteID, String varName, Double targetValue, String predicate, VoogaEvent voogaEvent) {
-//    	public SpriteEffect(String spriteID, String method, String variable, Double parameter, VoogaEvent event) {
-
-        
-//		  TESTING CAUSES AND EFFECTS, NO FACTORY STUFF HERE        
-//        Map<String, VoogaData> params = new HashMap<>();
-//        params.put("Health", new VoogaNumber(100.0));
-//        params.put("Score", new VoogaNumber(500.0));
-//        
-//        Sprite tester = new Sprite("dummypath", "Character", params, new VoogaNumber(50.0));
-//        String ID = tester.getID();
-//        VoogaEvent event = new VoogaEvent();
-//        
-//        SpriteVariableCause cause = new SpriteVariableCause(tester, "Health", 50.0, "greaterThan", event);
-//        SpriteEffect effect = new SpriteEffect("increaseValue", "Score", new Double(2), event);
-//        
-//        event.update();
 
     }
 }
