@@ -30,14 +30,11 @@ import tools.interfaces.VoogaData;
 public class LevelTransitioner {
 	
     private static final String SAVE_PROGRESS = "SaveProgress";
-
     private DataContainerOfLists myData;
     private FileReaderToGameObjects myFileManager;
-    
     private Map<String, Elementable> myElements;
     private KeyEventContainer myKeyEventContainer;
     private Map<String, VoogaData> myGlobalVariables;
-
     private ResourceBundle myEventMethods;
     private String myLevelFileName;
     //TODO: Remove if not needed
@@ -48,7 +45,6 @@ public class LevelTransitioner {
     /**
      * Default constructor that stores all game data that needed to be renewed to transition
      * into a new level.
-     * 
      * @param levelfilename
      * @param elements
      * @param container
@@ -69,12 +65,8 @@ public class LevelTransitioner {
     }
 	
     /**
-     * refreshes LevelData with the data from a specified level
-     * also restarts timer in global variable
-     * and sets level path
-     * 
+     * Populate myElements with new sprites pertinent to a new level
      * TODO: Create a scrolling sprite
-     * 
      * @param levelfilename
      */
     public Map<String, Elementable> populateNewSprites () {
@@ -95,7 +87,6 @@ public class LevelTransitioner {
 
     /**
      * Returns a newly-populated myKeyEventContainer (Events, KeyEvents and Inputs)
-     * 
      * @return KeyEventContainer
      */
     public KeyEventContainer populateNewEvents() {
@@ -109,7 +100,6 @@ public class LevelTransitioner {
     
     /**
      * Returns a newly-populated myGlobalVariables
-     * 
      * @return Map<String, VoogaData>
      */
     public Map<String, VoogaData> populateNewGlobals() {
@@ -121,7 +111,6 @@ public class LevelTransitioner {
 
     /**
      * Returns a newly-populated SpriteFactory
-     * 
      * @return SpriteFactory
      */
     public SpriteFactory getNewSpriteFactory() {
@@ -131,7 +120,6 @@ public class LevelTransitioner {
     
     /**
      * Returns ID of the sprite the display is being scrolled on
-     * 
      * @return String centerScroll sprite ID
      */
     public String getCenteredCharID() {

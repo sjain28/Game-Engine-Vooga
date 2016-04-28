@@ -28,12 +28,11 @@ import tools.interfaces.VoogaData;
  */
 public class LevelData implements ILevelData {
     private static final String SAVE_PROGRESS = "SaveProgress";
-    private static final int SCREENSIZE = 600;
-    private static final String XML_SUFFIX = ".xml";
     private IPhysicsEngine myPhysics;
     private String myCenteredCharID;
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
+    //TODO: Implement AnimationFactory
     private AnimationFactory myAnimationFactory;
     private Map<String, VoogaData> myGlobalVariables;
     private KeyEventContainer myKeyEventContainer;
