@@ -9,8 +9,6 @@ import java.util.Set;
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
-import data.DataContainerOfLists;
-import data.FileWriterFromGameObjects;
 import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -42,14 +40,12 @@ public class LevelData implements ILevelData {
     private String myTimerKey;
     private String myNextLevelKey;
     private LevelTransitioner myTransitioner;
-    private IDisplayScroller myScroller;
     private ResourceBundle myEventMethods;
     
     public LevelData (IPhysicsEngine physicsengine) {
         myEventMethods = VoogaBundles.EventMethods;
         myKeyEventContainer = new KeyEventContainer();
         myPhysics = physicsengine;
-        myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
         myElements = new HashMap<>();
         myGlobalVariables = new HashMap<>();
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
@@ -151,7 +147,6 @@ public class LevelData implements ILevelData {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }
     public boolean getSaveNow() {
-        // HARDCODED FOR NOW!!!!
        return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
     }
     /**
@@ -169,17 +164,12 @@ public class LevelData implements ILevelData {
         myGlobalVariables.get(myTimerKey).setValue(new Double(time));
     }
     /**
-     * Save progress saves the currently existing data to a data container. Then, everything is
-     * saved to the location filePath, which is specified in the function, along with the players name
-     **/
+     * Saves current game progress into a XML file
+     */
     public void saveProgress(String filePath, String playerName) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-        DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
-        		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
-        try {
-            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath + XML_SUFFIX);
-        }
-        catch (Exception e) {e.printStackTrace();}
+    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory);
+    	saver.saveCurrentProgress(filePath, playerName);
     }
     /**
      * Returns the game's physics engine
