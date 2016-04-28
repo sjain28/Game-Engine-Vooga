@@ -46,7 +46,7 @@ public interface ILevelData {
 
 	IPhysicsEngine getPhysicsEngine();
 
-	void saveProgress(String playerName, String filePath);
+	void saveProgress(String playerName, String filePath, String gameName);
 	
 	KeyEventContainer getKeyEventContainer();
 
