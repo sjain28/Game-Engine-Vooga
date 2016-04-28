@@ -1,81 +1,71 @@
 package tools;
 
-import authoring.gui.items.NumberTextField;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import tools.interfaces.VoogaData;
 
+
 public class VoogaString implements VoogaData {
-	private String myValue;
-	private transient SimpleStringProperty myTextProperty;
+    private String myValue;
+    private transient SimpleStringProperty valueProperty;
 
-	public VoogaString() {
-		this("");
-	}
+    public VoogaString () {
+        this("");
+    }
 
-	public VoogaString(String value) {
-		initialize(value);
-	}
+    public VoogaString (String value) {
+        myValue = value;
+        initializeProperty();
+    }
 
-	private void initialize(String value) {
-		this.myTextProperty = new SimpleStringProperty();
-		this.myTextProperty.setValue(value);
-		this.myTextProperty.addListener((obs, old, n) -> {
-			this.myValue = (String) n;
-		});
-		this.myValue = value;
-	}
+    private void initializeProperty () {
+        if (valueProperty != null) return;
+        
+        this.valueProperty = new SimpleStringProperty();
+        this.valueProperty.setValue(myValue);
 
-	@Override
-	public Object getValue() {
-		// TODO Auto-generated method stub
-		return myValue;
-	}
-
-	public void setValue(String value) {
-		this.myValue = value;
-	}
-
-	@Override
-	public void setValue(Object o) {
-		// TODO Auto-generated method stub
-		if (!(o instanceof String))
-			return;
-		myValue = (String) o;
-	}
-
-	@Override
-	public Node display() {
-		// TODO Auto-generated method stub
-		TextField field = new TextField();
-        field.textProperty().addListener( (obs, old, n) -> {
-            try {
-                this.myTextProperty.set(n);
-            }
-            catch (Exception e) {
-
-            }
+        this.valueProperty.addListener( (obs, old, n) -> {
+            this.myValue = (String) n;
         });
+    }
+
+    @Override
+    public Node display () {
+        // TODO Auto-generated method stub
+        TextField field = new TextField();
+        Bindings.bindBidirectional(getProperty(), field.textProperty());
         field.setText("" + myValue);
         return field;
-	}
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public SimpleStringProperty getProperty() {
-		// TODO Auto-generated method stub
-		return this.myTextProperty;
-	}
+    @Override
+    public Property<String> getProperty () {
+        initializeProperty();
+        return this.valueProperty;
+    }
 
-	@Override
-	public <T> void setProperty(T newVal) {
-		// TODO Auto-generated method stub
-		this.myTextProperty.set((String) newVal);
-	}
-	public String toString(){
-		return myValue;
-	}
+    @Override
+    public <T> void setProperty (T newVal) {
+        initializeProperty();
+        this.valueProperty.set((String) newVal);
+    }
+    
+    @Override
+    public Object getValue () {
+        return myValue;
+    }
+
+    @Override
+    public void setValue (Object o) {
+        if (!(o instanceof String))
+            return;
+        myValue = (String) o;
+    }
+    
+    public String toString () {
+        return myValue;
+    }
 }
