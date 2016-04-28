@@ -17,4 +17,8 @@ public class VoogaPlaySession extends VoogaEntry{
 		setProperty(SCORE, new VoogaNumber(score));
 		setProperty(LEVEL_REACHED, new VoogaNumber(levelreached));
 	}
+	
+	public String toString(){
+		return getProperty(DATE_PLAYED).toString()+" "+getProperty(PLAY_DURATION).toString()+" "+getProperty(SCORE);
+	}
 }

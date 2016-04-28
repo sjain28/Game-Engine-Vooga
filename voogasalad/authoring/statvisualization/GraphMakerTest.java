@@ -33,8 +33,14 @@ public class GraphMakerTest extends Application {
 
 		
 		GraphMaker statsvisualizer = new GraphMaker();
-		ScatterChart<?,?> sc = statsvisualizer.createScatterPlot("tester plot", "xparam", "yparam", xparams, yparams);
+		VisualizeStats visualizer = new VisualizeStats();
+		VoogaEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("game 2", "klo14");
+		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getPlayStats();
+		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
+		ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
 
+		
+		
 		Scene scene = new Scene(sc,500,500);
 		stage.setScene(scene);
 		stage.show();
@@ -66,7 +72,7 @@ public class GraphMakerTest extends Application {
 		yparams.add(new VoogaNumber(2.0));
 		yparams.add(new VoogaNumber(3.0));
 	}
-	//duration of play
+	//x axis : authoring time, y axis: duration of play
 	public void fillArrays4(List<Object> xparams, List<Object> yparams){
 		//vooga entry
 		VoogaDataBase database = VoogaDataBase.getInstance();
