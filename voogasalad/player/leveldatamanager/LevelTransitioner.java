@@ -29,11 +29,12 @@ public class LevelTransitioner {
 	
     private static final String SAVE_PROGRESS = "SaveProgress";
 
+    private DataContainerOfLists myData;
+    private FileReaderToGameObjects myFileManager;
+    
     private Map<String, Elementable> myElements;
     private KeyEventContainer myKeyEventContainer;
-    private SpriteFactory mySpriteFactory;
     private Map<String, VoogaData> myGlobalVariables;
-
 
     private ResourceBundle myEventMethods;
     private String myTimerKey;
@@ -41,15 +42,14 @@ public class LevelTransitioner {
     private String myCenteredCharKey;
     
     
-    public LevelTransitioner(Map<String, Elementable> elements, KeyEventContainer container,
-    						 SpriteFactory spritefactory, Map<String, VoogaData> globals) {
-    	
+    public LevelTransitioner(Map<String, Elementable> elements, KeyEventContainer container, 
+    						 Map<String, VoogaData> globals, String nextlevelkey) {
+    	myData = new DataContainerOfLists();
     	myElements = elements;
     	myKeyEventContainer = container;
-    	mySpriteFactory = spritefactory;
     	myGlobalVariables = globals;
         myEventMethods = VoogaBundles.EventMethods;
-        myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
+        myNextLevelKey = nextlevelkey;
         myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     }
@@ -63,43 +63,48 @@ public class LevelTransitioner {
      * 
      * @param levelfilename
      */
-    public void refreshLevelData (String levelfilename, Map<String, Elementable> elements,
-    		KeyEventContainer eventcontainer) {
-        DataContainerOfLists data = new DataContainerOfLists();
-        FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
-        data = fileManager.getDataContainer();
+    public void repopulateData (String levelfilename) {
+        //DataContainerOfLists data = new DataContainerOfLists();
+        myFileManager = new FileReaderToGameObjects(levelfilename);
+        myData = myFileManager.getDataContainer();
 
         //refresh elements objects
-        List<Elementable> elementObjects = data.getElementableList();
+        List<Elementable> elementObjects = myData.getElementableList();
 
         // clear all the instance variables
-        elements.clear();
-        eventcontainer.clearAll();
+        myElements.clear();
+        myKeyEventContainer.clearAll();
 
-        //refresh event objects
-        List<VoogaEvent> eventObjects = data.getEventList();
-        for (VoogaEvent event : eventObjects) {
-            eventcontainer.addEventAndPopulateKeyCombos(event, myEventMethods);
-        }
-
-        //refresh sprite factory
-        Map<String, Sprite> archetypeMap = data.getArchetypeMap();
-        mySpriteFactory = new SpriteFactory(archetypeMap);
-
-        //refresh global variables
-        myGlobalVariables = data.getVariableMap();
-        myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
-        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-        
-        // add elements to map
+        populateNewEvents();
+        populateNewGlobals();
+                
         for (Elementable elementable : elementObjects) {
             try {elementable.init();}
             catch (VoogaException e1) {e1.printStackTrace();}
-            elements.put(elementable.getId(), elementable);
+            myElements.put(elementable.getId(), elementable);
         }
+    }
+
+    private void populateNewEvents() {
+        List<VoogaEvent> eventObjects = myData.getEventList();
+        for (VoogaEvent event : eventObjects) {
+            myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
+        }
+    }
+    
+    private void populateNewGlobals() {
+        myGlobalVariables = myData.getVariableMap();
+        myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
+        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
+    }
+
+    public SpriteFactory getNewSpriteFactory() {
+        Map<String, Sprite> archetypeMap = myData.getArchetypeMap();
+        return new SpriteFactory(archetypeMap);
     }
     
     public String getCenteredCharID() {
         return (String) myGlobalVariables.get(myCenteredCharKey).getValue();
     }
+
 }

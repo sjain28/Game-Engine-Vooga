@@ -19,8 +19,6 @@ import tools.interfaces.VoogaData;
 public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
-
-    void removeSpriteByID(String id);
     
     Sprite getCenteredSprite();
 
@@ -38,7 +36,7 @@ public interface ILevelData {
 
 	List<Sprite> getSpritesByArch(String archA);
 	
-	void removeSprite(String id);
+    void removeSpriteByID(String id);
 	
 	VoogaData getGlobalVar(String myVarName);
 	

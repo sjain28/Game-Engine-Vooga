@@ -10,7 +10,6 @@ import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import data.DataContainerOfLists;
-import data.FileReaderToGameObjects;
 import data.FileWriterFromGameObjects;
 import events.AnimationFactory;
 import events.VoogaEvent;
@@ -20,41 +19,29 @@ import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
-import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
  * A centralized class to contain and access data relevant to a level
  * This includes Sprite's, Text, Global Variables, and Events
-
+ * 
  * @author Krista, Hunter
  */
 public class LevelData implements ILevelData {
-
+    private static final String SAVE_PROGRESS = "SaveProgress";
     private static final int SCREENSIZE = 600;
     private static final String XML_SUFFIX = ".xml";
-
     private IPhysicsEngine myPhysics;
-
-    /** Sprite and Text Information **/
-    private String myCenteredCharId;
+    private String myCenteredCharID;
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
     private AnimationFactory myAnimationFactory;
-
-    /** Global Variable Information **/
     private Map<String, VoogaData> myGlobalVariables;
-
-    /** Event Information **/
     private KeyEventContainer myKeyEventContainer;
-
-    /** Important Static Variables **/
-    private static final String SAVE_PROGRESS = "SaveProgress";
     private String myTimerKey;
     private String myNextLevelKey;
-    private String myCenteredCharKey;
-
+    private LevelTransitioner myTransitioner;
     private IDisplayScroller myScroller;
     private ResourceBundle myEventMethods;
     
@@ -65,29 +52,18 @@ public class LevelData implements ILevelData {
         myElements = new HashMap<>();
         myGlobalVariables = new HashMap<>();
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
-        myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
-    }
-    /**
-     * Returns a sprite by ID
-     * 
-     * @param id
-     * @return Sprite
-     */
+    } 
+    @Override
     public Sprite getSpriteByID (String id) {
         return (Sprite) myElements.get(id);
     }
-    /**
-     * Remove sprite by ID
-     * 
-     * @param id
-     */
+    @Override
     public void removeSpriteByID(String id){
     	myElements.remove(id);
     }
     /**
      * returns all Elementables
-     * 
      * @return
      */
     public Set<Entry<String, Elementable>> getElementables () {
@@ -95,7 +71,6 @@ public class LevelData implements ILevelData {
     }
     /**
      * Returns a list of sprite IDs given an archetype
-     * 
      * @param archetype
      * @return
      */
@@ -111,8 +86,7 @@ public class LevelData implements ILevelData {
         return list;
     }
     /**
-     * Adds a sprite given an archetype
-     * 
+     * Adds a sprite as a member of the given archetype
      * @param archetype
      * @return
      */
@@ -122,16 +96,7 @@ public class LevelData implements ILevelData {
         return (Sprite) newSprite;
     }
     /**
-     * Removes sprite with a given ID
-     * 
-     * @param id
-     */
-    public void removeSprite (String id) {
-        myElements.remove(id);
-    }
-    /**
      * Returns a Global Variable (VoogaData) as specified by its variable name
-     * 
      * @param variable
      * @return
      */
@@ -140,16 +105,14 @@ public class LevelData implements ILevelData {
     }
     /**
      * Returns a sprite on which scrolling is centered
-     * 
      * @param id
      * @return
      */
     public Sprite getCenteredSprite(){
-    	return getSpriteByID(myCenteredCharId);
+    	return getSpriteByID(myCenteredCharID);
     }
     /**
-     * Returns a text object
-     * 
+     * Returns a text object by ID
      * @param id
      * @return
      */
@@ -157,9 +120,7 @@ public class LevelData implements ILevelData {
         return (VoogaFrontEndText) myElements.get(id);
     }
     /**
-     * Put all objects into a generic list of display-able objects
-     * to be accessed by GameRunner after every update cycle.
-     * 
+     * Put all objects into a generic list of displayable objects
      * @return
      */
     public List<Node> getDisplayableNodes () {
@@ -169,78 +130,35 @@ public class LevelData implements ILevelData {
         }
         return displayablenodes;
     }
-
     /**
      * Add a given event and populate the pressed and released KeyCombos
-     * 
      * @param VoogaEvent
      */
     public void addEventAndPopulateKeyCombos (VoogaEvent event) {
     	myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
     }
-
     /**
-     * refreshes LevelData with the data from a specified level
-     * also restarts timer in global variable
-     * and sets level path
-     * 
-     * TODO: Break this up. and add the scrolling sprite
-     * 
+     * Refreshes the data and restarts timer in global variable and sets level path TODO: where??
      * @param levelfilename
      */
     public void refreshLevelData (String levelfilename) {
-        DataContainerOfLists data = new DataContainerOfLists();
-        FileReaderToGameObjects fileManager = new FileReaderToGameObjects(levelfilename);
-        data = fileManager.getDataContainer();
-
-        //refresh elements objects
-        List<Elementable> elementObjects = data.getElementableList();
-
-        // clear all the instance variables
-        myElements.clear();
-        myKeyEventContainer.clearAll();
-
-        //refresh event objects
-        List<VoogaEvent> eventObjects = data.getEventList();
-        for (VoogaEvent e : eventObjects) {
-            addEventAndPopulateKeyCombos(e);
-        }
-
-        //refresh sprite factory
-        Map<String, Sprite> archetypeMap = data.getArchetypeMap();
-        mySpriteFactory = new SpriteFactory(archetypeMap);
-
-        //refresh global variables
-        myGlobalVariables = data.getVariableMap();
-        myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
-        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-        myCenteredCharId = (String) myGlobalVariables.get(myCenteredCharKey).getValue();
-        
-        // add elements to map
-        for (Elementable el : elementObjects) {
-            try {el.init();}
-            catch (VoogaException e1) {e1.printStackTrace();}
-            myElements.put(el.getId(), el);
-        }
+    	myTransitioner = new LevelTransitioner(myElements, myKeyEventContainer, myGlobalVariables, myNextLevelKey);
+    	myTransitioner.repopulateData(levelfilename);
+    	mySpriteFactory = myTransitioner.getNewSpriteFactory();
+    	myCenteredCharID = myTransitioner.getCenteredCharID();
     }
     /**
      * Fetch the level name
-     * 
-     * @return
      */
     public String getNextLevelName () {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }
-    
     public boolean getSaveNow () {
         // HARDCODED FOR NOW!!!!
        return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
     }
-    
-
     /**
      * Set the next level name in order to transition levels
-     * 
      * @param levelName
      */
     public void setNextLevelName (String levelName) {
@@ -248,7 +166,6 @@ public class LevelData implements ILevelData {
     }
     /**
      * Update the global timer double
-     * 
      * @param time
      */
     public void updatedGlobalTimer (double time) {
@@ -256,9 +173,7 @@ public class LevelData implements ILevelData {
     }
     /**
      * Save progress saves the currently existing data to a data container. Then, everything is
-     * saved to the location
-     * 
-     * filePath, which is specified in the function, along with the players name"
+     * saved to the location filePath, which is specified in the function, along with the players name
      **/
     public void saveProgress (String filePath, String playerName) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
@@ -268,12 +183,9 @@ public class LevelData implements ILevelData {
             FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath + XML_SUFFIX);
         }
         catch (Exception e) {e.printStackTrace();}
-        
     }
     /**
      * Returns the game's physics engine
-     * 
-     * @return
      */
     @Override
     public IPhysicsEngine getPhysicsEngine () {
@@ -286,4 +198,3 @@ public class LevelData implements ILevelData {
 		return myKeyEventContainer;
 	}
 }
-
