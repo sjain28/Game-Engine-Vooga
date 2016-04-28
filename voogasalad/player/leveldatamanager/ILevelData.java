@@ -3,15 +3,10 @@
  */
 package player.leveldatamanager;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
-
 import authoring.interfaces.Elementable;
-import events.KeyCause;
-import events.VoogaEvent;
 import gameengine.Sprite;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
@@ -32,12 +27,6 @@ public interface ILevelData {
 	Set<Entry<String, Elementable>> getElementables();
     
 	List<Node> getDisplayableNodes();
-
-	Map<List<String>, KeyCause> getKeyPressCauses();
-	Map<List<String>, KeyCause> getKeyReleaseCauses();
-
-
-	Collection<VoogaEvent> getEvents();
 	
 	boolean getSaveNow();
 
@@ -50,8 +39,6 @@ public interface ILevelData {
 	List<Sprite> getSpritesByArch(String archA);
 	
 	void removeSprite(String id);
-
-	List<List<String>> getKeyPressCombos();
 	
 	VoogaData getGlobalVar(String myVarName);
 	
@@ -62,6 +49,7 @@ public interface ILevelData {
 	IPhysicsEngine getPhysicsEngine();
 
 	void saveProgress(String playerName, String filePath);
+	
+	KeyEventContainer getKeyEventContainer();
 
-	List<List<String>> getKeyReleasedCombos();
 }

@@ -1,8 +1,6 @@
 package player.leveldatamanager;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,8 +13,6 @@ import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import data.FileWriterFromGameObjects;
 import events.AnimationFactory;
-import events.Cause;
-import events.KeyCause;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
@@ -32,7 +28,7 @@ import tools.interfaces.VoogaData;
  * A centralized class to contain and access data relevant to a level
  * This includes Sprite's, Text, Global Variables, and Events
 
- * @author Krista
+ * @author Krista, Hunter
  */
 public class LevelData implements ILevelData {
 
@@ -51,11 +47,7 @@ public class LevelData implements ILevelData {
     private Map<String, VoogaData> myGlobalVariables;
 
     /** Event Information **/
-    private List<VoogaEvent> myEvents;
-    private List<List<String>> myKeyPressedCombos;
-    private List<List<String>> myKeyReleasedCombos;
-    private Map<List<String>, KeyCause> myKeyPressCauses;
-    private Map<List<String>, KeyCause> myKeyReleaseCauses;
+    private KeyEventContainer myKeyEventContainer;
 
     /** Important Static Variables **/
     private static final String SAVE_PROGRESS = "SaveProgress";
@@ -64,25 +56,20 @@ public class LevelData implements ILevelData {
     private String myCenteredCharKey;
 
     private IDisplayScroller myScroller;
-    private ResourceBundle methods;
+    private ResourceBundle myEventMethods;
     
     public LevelData (IPhysicsEngine physicsengine) {
-        methods = VoogaBundles.EventMethods;
+        myEventMethods = VoogaBundles.EventMethods;
         myPhysics = physicsengine;
         myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
         myElements = new HashMap<>();
         myGlobalVariables = new HashMap<>();
-        myEvents = new ArrayList<>();
-        myKeyPressedCombos = new ArrayList<>();
-        myKeyReleasedCombos = new ArrayList<>();
-        myKeyPressCauses = new HashMap<>();
-        myKeyReleaseCauses = new HashMap<>();
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
         myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     }
     /**
-     * Returns a sprite by id
+     * Returns a sprite by ID
      * 
      * @param id
      * @return Sprite
@@ -91,7 +78,7 @@ public class LevelData implements ILevelData {
         return (Sprite) myElements.get(id);
     }
     /**
-     * Remove sprite by id
+     * Remove sprite by ID
      * 
      * @param id
      */
@@ -99,7 +86,7 @@ public class LevelData implements ILevelData {
     	myElements.remove(id);
     }
     /**
-     * returns all Elementable's
+     * returns all Elementables
      * 
      * @return
      */
@@ -135,7 +122,7 @@ public class LevelData implements ILevelData {
         return (Sprite) newSprite;
     }
     /**
-     * Removes sprite given an id
+     * Removes sprite with a given ID
      * 
      * @param id
      */
@@ -143,8 +130,7 @@ public class LevelData implements ILevelData {
         myElements.remove(id);
     }
     /**
-     * Returns a Global Variable (VoogaData) as specified
-     * by it's variable name
+     * Returns a Global Variable (VoogaData) as specified by its variable name
      * 
      * @param variable
      * @return
@@ -153,7 +139,7 @@ public class LevelData implements ILevelData {
         return myGlobalVariables.get(variable);
     }
     /**
-     * Returns a VoogaText by id
+     * Returns a sprite on which scrolling is centered
      * 
      * @param id
      * @return
@@ -162,7 +148,7 @@ public class LevelData implements ILevelData {
     	return getSpriteByID(myCenteredCharId);
     }
     /**
-     * returns text object
+     * Returns a text object
      * 
      * @param id
      * @return
@@ -171,8 +157,8 @@ public class LevelData implements ILevelData {
         return (VoogaFrontEndText) myElements.get(id);
     }
     /**
-     * put all objects into a generic list of display-able objects
-     * to be accessed by the GameRunner after every update cycle.
+     * Put all objects into a generic list of display-able objects
+     * to be accessed by GameRunner after every update cycle.
      * 
      * @return
      */
@@ -185,27 +171,12 @@ public class LevelData implements ILevelData {
     }
 
     /**
-     * add a given event and populate the pressed and released key
-     * combo's while doing so
+     * Add a given event and populate the pressed and released KeyCombos
      * 
-     * @param voogaEvent
+     * @param VoogaEvent
      */
-    public void addEventAndPopulateKeyCombos (VoogaEvent voogaEvent) {
-        myEvents.add(voogaEvent);
-        for (Cause c : voogaEvent.getCauses()) {
-            if (c instanceof KeyCause) {
-                KeyCause keyc = (KeyCause) c;
-                if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
-                    myKeyPressedCombos.add(keyc.getKeys());
-                    this.myKeyPressCauses.put(keyc.getKeys(), keyc);
-                } else { 
-                	myKeyReleasedCombos.add(keyc.getKeys());
-                	this.myKeyReleaseCauses.put(keyc.getKeys(), keyc);
-                }
-            }
-        }
-        myKeyReleasedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
-        myKeyPressedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
+    public void addEventAndPopulateKeyCombos (VoogaEvent event) {
+    	myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
     }
 
     /**
@@ -227,10 +198,7 @@ public class LevelData implements ILevelData {
 
         // clear all the instance variables
         myElements.clear();
-        myEvents.clear();
-        myKeyPressCauses.clear();
-        myKeyReleaseCauses.clear();
-        myKeyPressedCombos.clear();
+        myKeyEventContainer.clearAll();
 
         //refresh event objects
         List<VoogaEvent> eventObjects = data.getEventList();
@@ -266,7 +234,6 @@ public class LevelData implements ILevelData {
     
     public boolean getSaveNow () {
         // HARDCODED FOR NOW!!!!
-
        return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
     }
     
@@ -295,13 +262,10 @@ public class LevelData implements ILevelData {
      **/
     public void saveProgress (String filePath, String playerName) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-        List<Elementable> elementList = new ArrayList<>(myElements.values());
-        DataContainerOfLists dataContainer =
-                new DataContainerOfLists(elementList, myGlobalVariables, myEvents,
-                                         mySpriteFactory.getArchetypeMap());
-        String finalLocation = filePath + XML_SUFFIX;
+        DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
+        		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
         try {
-            FileWriterFromGameObjects.saveGameObjects(dataContainer, finalLocation);
+            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath + XML_SUFFIX);
         }
         catch (Exception e) {e.printStackTrace();}
         
@@ -315,33 +279,11 @@ public class LevelData implements ILevelData {
     public IPhysicsEngine getPhysicsEngine () {
         return myPhysics;
     }
-    /**
-     * Returns all key release combos
-     * 
-     * @return
-     */
-    public List<List<String>> getKeyReleasedCombos () {
-        return myKeyReleasedCombos;
-    }
-	@Override
-	public Map<List<String>, KeyCause> getKeyPressCauses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Map<List<String>, KeyCause> getKeyReleaseCauses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Collection<VoogaEvent> getEvents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<List<String>> getKeyPressCombos() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @return the myKeyEventContainer
+	 */
+	public KeyEventContainer getKeyEventContainer() {
+		return myKeyEventContainer;
 	}
 }
 
