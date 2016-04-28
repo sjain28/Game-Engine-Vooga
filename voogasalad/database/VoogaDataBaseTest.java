@@ -27,12 +27,6 @@ public class VoogaDataBaseTest {
 		System.out.println(database.getStatsbyUser("klo14"));
 		System.out.println(database.getStatsbyGame("game 1"));
 		
-		//add in two play sessions
-		VoogaPlaySession playsesh1 = new VoogaPlaySession(new Date(), 153, 4000, 3);
-		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh1);
-		VoogaPlaySession playsesh2 = new VoogaPlaySession(new Date(), 324, 2000, 2);
-		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh2);
-
 		//get stats from the play session
 		List<VoogaEntry> stats = database.getStatsbyUser("klo14");
 		for(VoogaEntry info : stats){
@@ -58,14 +52,13 @@ public class VoogaDataBaseTest {
 	@Test
 	public void addPlaySession(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
-
-		VoogaPlaySession playsesh1 =new VoogaPlaySession(new Date(), 290, 4500, 3);
-		VoogaPlaySession playsesh2 = new VoogaPlaySession(new Date(), 300, 2000, 2);
-		VoogaPlaySession playsesh3 = new VoogaPlaySession(new Date(), 140, 1500, 1);
+		//database.clear();
 		
-		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh1);
-		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh2);
-		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh3);
+		VoogaPlaySession playsesh5 =new VoogaPlaySession(new Date(),400, 7300, 4);
+		System.out.println("here");
+		System.out.println(((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).getPlayStats());
 		
+		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh5);
+		database.save();
 	}
 }
