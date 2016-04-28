@@ -13,18 +13,18 @@ public class VariableCause extends Cause{
 	private String myVarName;
 	private Class<?> variableClass;
 	
-	public VariableCause(String variable, String doublepredicate, Double target, VoogaEvent voogaEvent) {		
+	public VariableCause(String variableName, String predicate, Double targetValue, VoogaEvent voogaEvent) {		
 		super(voogaEvent);
-		myTarget = target;
-		myOperation = doublepredicate;
-		myVarName = variable;
+		myTarget = targetValue;
+		myOperation = predicate;
+		myVarName = variableName;
 	}
 	
-	public VariableCause(String variable, String booleanpredicate, Boolean target, VoogaEvent voogaEvent) {		
+	public VariableCause(String variableName, String predicate, Boolean targetValue, VoogaEvent voogaEvent) {		
 		super(voogaEvent);
-		myTarget = target;
-		myOperation = booleanpredicate;
-		myVarName = variable;
+		myTarget = targetValue;
+		myOperation = predicate;
+		myVarName = variableName;
 	}
 	
 	public VariableCause(String predicate, VoogaEvent event){
