@@ -8,10 +8,8 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.resourceutility.ButtonMaker;
 import events.Cause;
 import events.CauseAndEffectFactory;
-import events.Effect;
 import events.LevelTransitionEffect;
 import events.VoogaEvent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
@@ -54,7 +52,7 @@ public class LevelCauseWindow extends Stage {
 				populateEvent(eventDetails);
 			}
 			new LevelTransitionEffect(endLevel, event);
-			populateEvent("events.LevelTransitionEffect " + endLevel);
+			populateEvent("events.LevelTransitionEffect," + endLevel);
 			model.addEvents(event);
 			this.close();
 		} catch (Exception e) {

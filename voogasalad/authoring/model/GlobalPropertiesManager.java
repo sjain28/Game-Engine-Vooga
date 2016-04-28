@@ -75,6 +75,7 @@ public class GlobalPropertiesManager implements Elementable {
     	addProperty(VoogaBundles.defaultglobalvars.getProperty("Time"), new VoogaNumber(0.0));
     	addProperty(VoogaBundles.defaultglobalvars.getProperty("Score"), new VoogaNumber(0.0));
     	addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"), new VoogaBoolean(false));
+    	// wat is dhis???
     	addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"), new VoogaString(""));
     }
 }

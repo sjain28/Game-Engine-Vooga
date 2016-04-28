@@ -2,7 +2,10 @@ package player.leveldatamanager;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import gameengine.Sprite;
 import javafx.scene.Node;
+import player.gamedisplay.IGameDisplay;
 
 /**
  * DisplayScroller provides public methods that choose Nodes to display
@@ -16,10 +19,58 @@ public class DisplayScroller implements IDisplayScroller {
 	private int myScreenSizeX;
 	private int myScreenSizeY;
 	private int myAdjustFactorX;
-	//	private int myAdjustFactorY;
 	private int myConstantScrollCenter;
 	
-//	private boolean DEBUG = false;
+	private IGameDisplay myGameDisplay;
+	
+	public DisplayScroller(IGameDisplay gamedisplay) {
+		this.myGameDisplay = gamedisplay;
+	}
+	
+	/**
+	 * Stub scroll method that scrolls the display both horizontally and vertically
+	 * 
+	 * @param scrollsprite
+	 */
+	public void scroll(Sprite scrollsprite) {
+		scrollX(scrollsprite);
+		//scrollY(scrollsprite);
+	}
+	
+	
+	/**
+	 * Scrolls the display horizontally using addListener method and by translatingX
+	 * 
+	 * @param scrollsprite
+	 */
+	public void scrollX(Sprite scrollsprite) {
+		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+			// TODO: Link to size of level instead of hardcoding
+    		if (n.intValue() > 200 && n.intValue() < 3000) {
+    			myGameDisplay.getScreen().setTranslateX(-(n.intValue() - 200));
+    		}
+		});
+	}
+	
+	/**
+	 * Scrolls the display vertically using addListener method and by translatingY
+	 * 
+	 * @param scrollsprite
+	 */
+	public void scrollY(Sprite scrollsprite) {
+		scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
+			// TODO: Link to size of level instead of hardcoding
+    		if (n.intValue() > 200 && n.intValue() < 3000) {
+    			myGameDisplay.getScreen().setTranslateY(-(n.intValue() - 200));
+    		}
+		});
+	}
+
+	
+	
+	
+	
+	
 
 	/**
 	 * Default constructor that sets the screen size to be used

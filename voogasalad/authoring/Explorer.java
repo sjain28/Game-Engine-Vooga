@@ -3,7 +3,7 @@ package authoring;
 /**
  * Explorer pane that contains the resource explorer tab and game assets tab.
  * 
- * @author Arjun Desai, Harry Guo, Nick Lockett, Aditya Srinivasan
+ * @author Aditya Srinivasan
  */
 
 import authoring.interfaces.model.CompleteAuthoringModelable;

@@ -1,12 +1,14 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.VoogaScene;
-import authoring.gui.DesignBoardPreferences;
+import authoring.gui.levelpreferences.DesignBoardPreferences;
 import authoring.gui.menubar.MenuItemHandler;	
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
+import resources.VoogaBundles;
+import tools.VoogaNumber;
 import tools.VoogaString;
 
 public class PrefFileItem extends MenuItemHandler { 
@@ -38,11 +40,18 @@ public class PrefFileItem extends MenuItemHandler {
 		DesignBoardPreferences preferences = new DesignBoardPreferences(model);
 		preferences.setText("Preferences for \"" + this.model.getName() + "\"");
 		preferences.setName(this.model.getName());
+		preferences.setScrolling((String) model.getGlobalVariables().get(this.model.getName()+"Scrolling").getValue());
+		preferences.setSpeed((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollSpeed").getValue());
+		preferences.setAngle(Double.toString((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollAngle").getValue()));
+		preferences.setContinuousScrollType((String) model.getGlobalVariables().get(this.model.getName()+"ContinuousScrollType").getValue());
 		preferences.setListener(e -> {
-			if(!preferences.isContinuous()) {
-				model.getGlobalVariables().put(MAIN_CHARACTER, new VoogaString(preferences.getSpriteIDtoTrack()));
-				System.out.println(preferences.getSpriteIDtoTrack());
-			}
+			System.out.println(preferences.getMainSpriteID());
+			model.getGlobalVariables().put(preferences.getName()+"Scrolling", new VoogaString(preferences.getScrollingType()));
+			model.getGlobalVariables().put(preferences.getName()+"MainUUID", new VoogaString(preferences.getMainSpriteID()));
+			model.getGlobalVariables().put(preferences.getName()+"ScrollSpeed", new VoogaNumber(preferences.getContinuousScrollSpeed()));
+			model.getGlobalVariables().put(preferences.getName()+"ScrollAngle", new VoogaNumber(preferences.getScrollAngle()));
+			model.getGlobalVariables().put(preferences.getName()+"ContinuousScrollType", new VoogaString(preferences.getContinuousScrollType()));
+			stage.close();
 		});
 		tp.getTabs().add(preferences);
 		stage.setScene(new VoogaScene(tp, WINDOW_WIDTH, WINDOW_HEIGHT));

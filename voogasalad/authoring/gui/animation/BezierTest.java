@@ -1,4 +1,4 @@
-package authoring.gui.menubar.builders;
+package authoring.gui.animation;
 
 import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
