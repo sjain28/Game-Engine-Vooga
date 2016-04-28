@@ -1,5 +1,7 @@
 package authoring.gui;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
@@ -113,7 +115,9 @@ public class DesignBoard extends Tab implements Observer {
 		Slider zoomControl = new Slider(0.1, 10, 1);
 		Text coordinateDisplay = new CustomText("");
 		contentPane.setOnMouseMoved(e -> {
-			coordinateDisplay.setText("X: " + (e.getX() - width/2) + " Y: " + (e.getY() - height/2));
+			String xCoordinate = new BigDecimal(e.getX() - width/2).setScale(2, RoundingMode.HALF_UP).toString();
+			String yCoordinate = new BigDecimal(e.getY() - height/2).setScale(2, RoundingMode.HALF_UP).toString();
+			coordinateDisplay.setText(String.format("X: %s   Y: %s", xCoordinate, yCoordinate));
 		});
 		zoomBar.getItems().addAll(zoomControl, coordinateDisplay);
 		zoomControl.valueProperty().addListener((obs, old, n) -> {
