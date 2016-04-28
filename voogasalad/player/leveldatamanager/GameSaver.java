@@ -9,8 +9,12 @@ import java.util.Map;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
+import database.VoogaDataBase;
+import database.VoogaPlaySession;
+import database.VoogaStatInfo;
 import gameengine.SpriteFactory;
 import tools.VoogaException;
+import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
@@ -50,7 +54,7 @@ public class GameSaver implements IGameSaver {
 	 * @param filePath
 	 * @param playerName
 	 */
-	public void saveCurrentProgress(String filePath, String playerName) {
+	public void saveCurrentProgress(String filePath, String playerName, String gameName) {
         DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
         		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
         try {
@@ -58,5 +62,7 @@ public class GameSaver implements IGameSaver {
         } catch (Exception e) {
         	new VoogaException("Saving current progress failed");
         }
+        VoogaPlaySession latestSession =  VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName).getLatestPlaySession();
+        latestSession.setProperty("level reached" ,new VoogaString(filePath));
 	}
 }
