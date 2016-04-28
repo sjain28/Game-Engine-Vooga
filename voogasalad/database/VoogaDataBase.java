@@ -69,6 +69,7 @@ public class VoogaDataBase implements IDataBase{
 				String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
 				myStatInfo.get(col).add(new VoogaStatInfo(gamename,username));
 			}
+			System.out.println("What is my game here, this can only be shown if a game was added 2 list " + myGames);
 		}
 	}
 	/**
@@ -111,6 +112,7 @@ public class VoogaDataBase implements IDataBase{
 	public VoogaStatInfo getStatByGameAndUser(String gamename, String username){
 		int row = myGames.indexOf(getGame(gamename));
 		int col = myUsers.indexOf(getUser(username));
+		System.out.println("the row here is " + row + "and the column is" + col);
 		return myStatInfo.get(col).get(row);
 	}
 	/**
