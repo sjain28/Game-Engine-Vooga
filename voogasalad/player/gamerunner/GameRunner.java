@@ -174,7 +174,7 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
-		myScroller.scroll(myLevelData.getCenteredSprite());
+//		myScroller.scroll(myLevelData.getCenteredSprite());
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
 										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
 		myGameDisplay.displayTestMode();
