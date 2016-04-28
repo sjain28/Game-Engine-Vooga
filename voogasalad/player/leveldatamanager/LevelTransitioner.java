@@ -37,18 +37,20 @@ public class LevelTransitioner {
     private Map<String, VoogaData> myGlobalVariables;
 
     private ResourceBundle myEventMethods;
+    private String myLevelFileName;
     private String myTimerKey;
     private String myNextLevelKey;
     private String myCenteredCharKey;
     
     
-    public LevelTransitioner(Map<String, Elementable> elements, KeyEventContainer container, 
+    public LevelTransitioner(String levelfilename, Map<String, Elementable> elements, KeyEventContainer container, 
     						 Map<String, VoogaData> globals, String nextlevelkey) {
     	myData = new DataContainerOfLists();
     	myElements = elements;
     	myKeyEventContainer = container;
     	myGlobalVariables = globals;
         myEventMethods = VoogaBundles.EventMethods;
+        myLevelFileName = levelfilename;
         myNextLevelKey = nextlevelkey;
         myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
@@ -63,39 +65,36 @@ public class LevelTransitioner {
      * 
      * @param levelfilename
      */
-    public void repopulateData (String levelfilename) {
+    public Map<String, Elementable> populateNewSprites () {
         //DataContainerOfLists data = new DataContainerOfLists();
-        myFileManager = new FileReaderToGameObjects(levelfilename);
+        myFileManager = new FileReaderToGameObjects(myLevelFileName);
         myData = myFileManager.getDataContainer();
-
         //refresh elements objects
         List<Elementable> elementObjects = myData.getElementableList();
-
         // clear all the instance variables
         myElements.clear();
-        myKeyEventContainer.clearAll();
-
-        populateNewEvents();
-        populateNewGlobals();
-                
         for (Elementable elementable : elementObjects) {
             try {elementable.init();}
             catch (VoogaException e1) {e1.printStackTrace();}
             myElements.put(elementable.getId(), elementable);
         }
+        return myElements;
     }
 
-    private void populateNewEvents() {
+    public KeyEventContainer populateNewEvents() {
+        myKeyEventContainer.clearAll();
         List<VoogaEvent> eventObjects = myData.getEventList();
         for (VoogaEvent event : eventObjects) {
             myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
         }
+        return myKeyEventContainer;
     }
     
-    private void populateNewGlobals() {
+    public Map<String, VoogaData> populateNewGlobals() {
         myGlobalVariables = myData.getVariableMap();
         myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
         myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
+        return myGlobalVariables;
     }
 
     public SpriteFactory getNewSpriteFactory() {

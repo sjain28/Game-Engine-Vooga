@@ -47,6 +47,7 @@ public class LevelData implements ILevelData {
     
     public LevelData (IPhysicsEngine physicsengine) {
         myEventMethods = VoogaBundles.EventMethods;
+        myKeyEventContainer = new KeyEventContainer();
         myPhysics = physicsengine;
         myScroller = new DisplayScroller(SCREENSIZE, SCREENSIZE);
         myElements = new HashMap<>();
@@ -59,14 +60,14 @@ public class LevelData implements ILevelData {
         return (Sprite) myElements.get(id);
     }
     @Override
-    public void removeSpriteByID(String id){
+    public void removeSpriteByID(String id) {
     	myElements.remove(id);
     }
     /**
      * returns all Elementables
      * @return
      */
-    public Set<Entry<String, Elementable>> getElementables () {
+    public Set<Entry<String, Elementable>> getElementables() {
     	return myElements.entrySet();
     }
     /**
@@ -74,7 +75,7 @@ public class LevelData implements ILevelData {
      * @param archetype
      * @return
      */
-    public List<Sprite> getSpritesByArch (String archetype) {
+    public List<Sprite> getSpritesByArch(String archetype) {
         List<Sprite> list = new ArrayList<>();
         for (String id : myElements.keySet()) {
             if (myElements.get(id) instanceof Sprite) {
@@ -90,7 +91,7 @@ public class LevelData implements ILevelData {
      * @param archetype
      * @return
      */
-    public Sprite addSprite (String archetype) {
+    public Sprite addSprite(String archetype) {
         Elementable newSprite = mySpriteFactory.createSprite(archetype);
         myElements.put(newSprite.getId(), newSprite);
         return (Sprite) newSprite;
@@ -100,15 +101,11 @@ public class LevelData implements ILevelData {
      * @param variable
      * @return
      */
-    public VoogaData getGlobalVar (String variable) {
+    public VoogaData getGlobalVar(String variable) {
         return myGlobalVariables.get(variable);
     }
-    /**
-     * Returns a sprite on which scrolling is centered
-     * @param id
-     * @return
-     */
-    public Sprite getCenteredSprite(){
+
+    public Sprite getCenteredSprite() {
     	return getSpriteByID(myCenteredCharID);
     }
     /**
@@ -116,14 +113,14 @@ public class LevelData implements ILevelData {
      * @param id
      * @return
      */
-    public VoogaFrontEndText getText (Object id) {
+    public VoogaFrontEndText getText(Object id) {
         return (VoogaFrontEndText) myElements.get(id);
     }
     /**
      * Put all objects into a generic list of displayable objects
      * @return
      */
-    public List<Node> getDisplayableNodes () {
+    public List<Node> getDisplayableNodes() {
         List<Node> displayablenodes = new ArrayList<>();
         for (Object key : myElements.keySet()) {
             displayablenodes.add(myElements.get(key).getNodeObject());
@@ -134,26 +131,26 @@ public class LevelData implements ILevelData {
      * Add a given event and populate the pressed and released KeyCombos
      * @param VoogaEvent
      */
-    public void addEventAndPopulateKeyCombos (VoogaEvent event) {
+    public void addEventAndPopulateKeyCombos(VoogaEvent event) {
     	myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
     }
     /**
      * Refreshes the data and restarts timer in global variable and sets level path TODO: where??
      * @param levelfilename
      */
-    public void refreshLevelData (String levelfilename) {
-    	myTransitioner = new LevelTransitioner(myElements, myKeyEventContainer, myGlobalVariables, myNextLevelKey);
-    	myTransitioner.repopulateData(levelfilename);
+    public void refreshLevelData(String levelfilename) {
+    	myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, 
+    										   myGlobalVariables, myNextLevelKey);
+    	myElements = myTransitioner.populateNewSprites();
+    	myKeyEventContainer = myTransitioner.populateNewEvents();
+    	myGlobalVariables = myTransitioner.populateNewGlobals();
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
     	myCenteredCharID = myTransitioner.getCenteredCharID();
     }
-    /**
-     * Fetch the level name
-     */
-    public String getNextLevelName () {
+    public String getNextLevelName() {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }
-    public boolean getSaveNow () {
+    public boolean getSaveNow() {
         // HARDCODED FOR NOW!!!!
        return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
     }
@@ -161,21 +158,21 @@ public class LevelData implements ILevelData {
      * Set the next level name in order to transition levels
      * @param levelName
      */
-    public void setNextLevelName (String levelName) {
+    public void setNextLevelName(String levelName) {
         myGlobalVariables.put(myNextLevelKey, new VoogaString(levelName));
     }
     /**
      * Update the global timer double
      * @param time
      */
-    public void updatedGlobalTimer (double time) {
+    public void updatedGlobalTimer(double time) {
         myGlobalVariables.get(myTimerKey).setValue(new Double(time));
     }
     /**
      * Save progress saves the currently existing data to a data container. Then, everything is
      * saved to the location filePath, which is specified in the function, along with the players name
      **/
-    public void saveProgress (String filePath, String playerName) {
+    public void saveProgress(String filePath, String playerName) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
         DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
         		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
@@ -188,7 +185,7 @@ public class LevelData implements ILevelData {
      * Returns the game's physics engine
      */
     @Override
-    public IPhysicsEngine getPhysicsEngine () {
+    public IPhysicsEngine getPhysicsEngine() {
         return myPhysics;
     }
 	/**
