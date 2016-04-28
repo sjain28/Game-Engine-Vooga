@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -43,8 +44,9 @@ public class DataBaseDisplay extends Stage {
     }
 
     private HBox makeHeader () {
-        HBox ans = new HBox();
+        HBox ans = new HBox(20);
         ImageView pict = new ImageView();
+        pict.setImage(new Image("file:" + user.getProperty(user.PROF_PIC_LOC)));
         pict.setFitHeight(HEADER_HEIGHT);
         pict.setPreserveRatio(true);
         Text t = new Text(user.getProperty(user.DISPLAY_NAME).toString());
