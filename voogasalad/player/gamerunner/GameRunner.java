@@ -1,8 +1,12 @@
 package player.gamerunner;
 
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -58,6 +62,7 @@ public class GameRunner implements IGameRunner {
 	private String myCurrentGame;
     private String myCurrentLevelString;
     private DisplayScroller myScroller;
+    private List<BufferedImage> videoScreenshots;
     // TODO: Test
 	private int myCurrentStep;
 
@@ -72,6 +77,7 @@ public class GameRunner implements IGameRunner {
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
 		myScroller = new DisplayScroller(myGameDisplay);
+		videoScreenshots = new ArrayList<BufferedImage>();
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		myTimeline.setCycleCount(Animation.INDEFINITE);
@@ -239,9 +245,28 @@ public class GameRunner implements IGameRunner {
 	
 	@Override 
 	public void takeSnapShot() {
-		//TODO call xuggleFileCreator to properly take snapshot and store as new file.
 		Scene myScene = myGameDisplay.getMyScene();
-		String fileName = myCurrentLevelString;
+		String currentLevel = myCurrentLevelString;
+		//TODO add in the playerName
+		//String playerName = playerName;
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat(VoogaBundles.preferences.getProperty("timeStamp"));
+		String formattedDate = sdf.format(date);
+		String fileName = currentLevel + " " + formattedDate; //TODO add playerName
+		
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
+	
+	@Override 
+	public void startVideoCapture(){
+		//TODO output file Name, remove hard code
+		String outputFileName = "games/" + myCurrentGame + "/videos.mp4";
+		myScreenProcessor.encodeScreenshots(outputFileName, INIT_SPEED);
+	}
+	
+	@Override 
+	public void endVideoCapture() {
+		videoScreenshots.clear();
+	}
+	//TODO when to encode the images to a video?
 }

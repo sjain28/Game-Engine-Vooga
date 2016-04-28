@@ -32,4 +32,8 @@ public interface IGameRunner extends Menuable {
 	void saveGameProgress(String playerName);
 
 	void takeSnapShot();
+
+	void startVideoCapture();
+
+	void endVideoCapture();
 }
