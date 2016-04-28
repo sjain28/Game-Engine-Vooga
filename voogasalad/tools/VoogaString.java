@@ -35,8 +35,6 @@ public class VoogaString implements VoogaData {
     @Override
     public Node display () {
         // TODO Auto-generated method stub
-        System.out.println("Value before display: "+myValue);
-        System.out.println("Value of property before display: "+valueProperty.get());
         TextField field = new TextField();
         
         Bindings.bindBidirectional(field.textProperty(),getProperty());
