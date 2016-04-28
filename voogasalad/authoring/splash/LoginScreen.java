@@ -110,7 +110,7 @@ public class LoginScreen extends Stage{
     }
 
     private void newUser () {
-        database.addUser(myMakeDisplayname.getText(), myMakeUsername.getText(), myMakePassword.getText(), null);
+        database.addUser(myMakeDisplayname.getText(), myMakeUsername.getText(), myMakePassword.getText(), myImagePath);
         login(myMakeUsername.getText(), myMakePassword.getText());
     }
 

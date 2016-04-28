@@ -3,7 +3,7 @@ package authoring;
 /**
  * Command that handles the creation of new scene/workspace.
  * 
- * @author Harry Guo, Arjun Desai, Nick Lockett, Aditya Srinivasan
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
  * 
  */
 

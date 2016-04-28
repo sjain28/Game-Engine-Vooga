@@ -11,7 +11,7 @@ public class CauseTitledPane extends EventTitledPane{
     @Override
     protected void initialize(){
         super.initialize();
-        addOptions("VariableCause","KeyCause","CollisionCause");
+        addOptions("VariableCause","KeyCause","CollisionCause","TimerCause");
     }
     
    

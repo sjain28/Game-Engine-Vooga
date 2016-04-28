@@ -41,7 +41,4 @@ public class NumberTextField extends TextField {
         return text.matches("[-0-9.]*");
     }
 
-    
-    
-
 }
