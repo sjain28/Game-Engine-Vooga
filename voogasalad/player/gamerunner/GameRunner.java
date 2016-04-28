@@ -8,7 +8,6 @@ import java.util.List;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
 import data.Deserializer;
-import gameengine.Sprite;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,7 +25,6 @@ import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
-import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
@@ -34,6 +32,8 @@ import videos.ScreenProcessor;
  * Uses composition to contain interface instances of LevelDataManager and GameDisplay
  * 
  * @author Hunter, Michael, Josh
+ * 
+ * TODO: Just get rid of Timeline related one line methods
  */
 public class GameRunner implements IGameRunner {
     private static final double INIT_SPEED = 60;
@@ -140,7 +140,7 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		myScroller.centerScroll(myLevelData.getCenteredSprite());
+		myScroller.scroll(myLevelData.getCenteredSprite());
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**

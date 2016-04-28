@@ -29,7 +29,6 @@ public class ElementSelectionModel extends Observable {
     }
 
     public void setSelected (FrontEndElementable e) {
-        if (selected == e) return;
         
         if (this.selected!=null){
             this.selected.select(Selector.UNHIGHLIGHTED);

@@ -1,6 +1,7 @@
 package authoring.gui;
 
-import java.nio.file.Paths;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -10,9 +11,7 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
-import authoring.model.GameObject;
 import authoring.CustomText;
-import authoring.UIGridHousing;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.FrontEndElementable;
 import authoring.resourceutility.ResourceDecipherer;
@@ -115,8 +114,13 @@ public class DesignBoard extends Tab implements Observer {
         Slider zoomControl = new Slider(0.1, 10, 1);
         Text coordinateDisplay = new CustomText("");
         contentPane.setOnMouseMoved(e -> {
-            coordinateDisplay
-                    .setText("X: " + (e.getX() - width / 2) + " Y: " + (e.getY() - height / 2));
+            String xCoordinate =
+                    new BigDecimal(e.getX() - width / 2).setScale(2, RoundingMode.HALF_UP)
+                            .toString();
+            String yCoordinate =
+                    new BigDecimal(e.getY() - height / 2).setScale(2, RoundingMode.HALF_UP)
+                            .toString();
+            coordinateDisplay.setText(String.format("X: %s   Y: %s", xCoordinate, yCoordinate));
         });
         zoomBar.getItems().addAll(zoomControl, coordinateDisplay);
         zoomControl.valueProperty().addListener( (obs, old, n) -> {
@@ -291,18 +295,18 @@ public class DesignBoard extends Tab implements Observer {
             System.out.println("updatign eelments");
             displayElements(((CompleteAuthoringModelable) o).getElements());
         }
-        
-        if ((o instanceof ElementSelectionModel) && (arg instanceof FrontEndElementable)){
-            Comparator<Node> comparator = new Comparator<Node>(){
+
+        if ((o instanceof ElementSelectionModel) && (arg instanceof FrontEndElementable)) {
+            Comparator<Node> comparator = new Comparator<Node>() {
                 public int compare (Node o1, Node o2) {
                     return ((Double) o1.getTranslateZ()).compareTo(o2.getTranslateZ());
                 }
-                
+
             };
-            for (Node e : contentPane.getChildren()){
+            for (Node e : contentPane.getChildren()) {
                 System.out.println(e);
             }
-            List <Node> newChildren = new ArrayList<Node>(contentPane.getChildren());
+            List<Node> newChildren = new ArrayList<Node>(contentPane.getChildren());
             newChildren.sort(comparator);
             contentPane.getChildren().clear();
             contentPane.getChildren().addAll(newChildren);
