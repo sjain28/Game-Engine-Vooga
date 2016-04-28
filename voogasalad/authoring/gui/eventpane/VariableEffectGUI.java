@@ -3,6 +3,8 @@ package authoring.gui.eventpane;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.gui.items.NumberTextField;
+import authoring.gui.items.SpriteComboBox;
+import authoring.gui.items.VariableComboBox;
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;

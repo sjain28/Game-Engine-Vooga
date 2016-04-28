@@ -1,6 +1,7 @@
 package authoring.gui.eventpane;
 
 import authoring.gui.items.NumberTextField;
+import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

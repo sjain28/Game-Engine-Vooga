@@ -1,6 +1,7 @@
-package authoring.gui.eventpane;
+package authoring.gui.items;
 
 import java.util.Map;
+import authoring.gui.refactoringevents.VoogaNode;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.model.EditEventable;
 import authoring.model.ElementManager;
@@ -8,7 +9,7 @@ import gameengine.Sprite;
 import javafx.scene.control.ComboBox;
 import tools.interfaces.VoogaData;
 
-public class VariableComboBox extends ComboBox<String>{
+public class VariableComboBox extends ComboBox<String> implements VoogaNode{
     private Map<String,VoogaData> variables;
     private EditEventable manager;
     
@@ -33,6 +34,11 @@ public class VariableComboBox extends ComboBox<String>{
     
     public VoogaData getProperty(String key){
         return variables.get(key);
+    }
+
+    @Override
+    public String getData () {
+        return this.getData();
     }
     
 }

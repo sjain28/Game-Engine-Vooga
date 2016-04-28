@@ -1,5 +1,6 @@
 package authoring.gui.items;
 
+import authoring.gui.refactoringevents.VoogaNode;
 import javafx.scene.control.TextField;
 
 
@@ -9,7 +10,7 @@ import javafx.scene.control.TextField;
  * @author Aditya Srinivasan, Arjun Desai
  *
  */
-public class NumberTextField extends TextField {
+public class NumberTextField extends TextField implements VoogaNode{
 
     /**
      * Replaces unwanted text with a desired text.
@@ -39,6 +40,11 @@ public class NumberTextField extends TextField {
      */
     private boolean validate (String text) {
         return text.matches("[-0-9.]*");
+    }
+
+    @Override
+    public String getData () {
+        return this.getText();
     }
 
 }

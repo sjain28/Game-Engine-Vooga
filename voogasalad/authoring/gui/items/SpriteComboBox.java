@@ -1,13 +1,14 @@
-package authoring.gui.eventpane;
+package authoring.gui.items;
 
 
+import authoring.gui.refactoringevents.VoogaNode;
 import authoring.interfaces.model.EditEventable;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
-public class SpriteComboBox extends ComboBox<String> {
+public class SpriteComboBox extends ComboBox<String> implements VoogaNode{
     EditEventable manager;
     
     public SpriteComboBox(EditEventable manager,String... loadings){
@@ -44,5 +45,10 @@ public class SpriteComboBox extends ComboBox<String> {
             new VoogaAlert(e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public String getData () {
+        return getSpriteId();
     }
 }
