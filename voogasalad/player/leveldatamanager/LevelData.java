@@ -51,8 +51,8 @@ public class LevelData implements ILevelData {
 
     /** Event Information **/
     private List<VoogaEvent> myEvents;
-    private List<List<String>> keyPressedCombos;
-    private List<List<String>> keyReleasedCombos;
+    private List<List<String>> myKeyPressedCombos;
+    private List<List<String>> myKeyReleasedCombos;
     private Map<List<String>, KeyCause> myKeyPressCauses;
     private Map<List<String>, KeyCause> myKeyReleaseCauses;
 
@@ -72,8 +72,8 @@ public class LevelData implements ILevelData {
         myElements = new HashMap<>();
         myGlobalVariables = new HashMap<>();
         myEvents = new ArrayList<>();
-        keyPressedCombos = new ArrayList<>();
-        keyReleasedCombos = new ArrayList<>();
+        myKeyPressedCombos = new ArrayList<>();
+        myKeyReleasedCombos = new ArrayList<>();
         myKeyPressCauses = new HashMap<>();
         myKeyReleaseCauses = new HashMap<>();
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
@@ -188,7 +188,7 @@ public class LevelData implements ILevelData {
      * @return
      */
     public List<List<String>> getKeyPressCombos () {
-        return Collections.unmodifiableList(keyPressedCombos);
+        return Collections.unmodifiableList(myKeyPressedCombos);
     }
     /**
      * Returns unmodifiable map of key causes
@@ -223,16 +223,16 @@ public class LevelData implements ILevelData {
             if (c instanceof KeyCause) {
                 KeyCause keyc = (KeyCause) c;
                 if (((KeyCause) c).getMyPressed().equals(methods.getString("Press"))) {
-                    keyPressedCombos.add(keyc.getKeys());
+                    myKeyPressedCombos.add(keyc.getKeys());
                     this.myKeyPressCauses.put(keyc.getKeys(), keyc);
                 } else { 
-                	keyReleasedCombos.add(keyc.getKeys());
+                	myKeyReleasedCombos.add(keyc.getKeys());
                 	this.myKeyReleaseCauses.put(keyc.getKeys(), keyc);
                 }
             }
         }
-        keyReleasedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
-        keyPressedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
+        myKeyReleasedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
+        myKeyPressedCombos.sort( (List<String> a, List<String> b) -> -(a.size() - b.size()));
     }
 
     /**
@@ -257,7 +257,7 @@ public class LevelData implements ILevelData {
         myEvents.clear();
         myKeyPressCauses.clear();
         myKeyReleaseCauses.clear();
-        keyPressedCombos.clear();
+        myKeyPressedCombos.clear();
 
         //refresh event objects
         List<VoogaEvent> eventObjects = data.getEventList();
@@ -348,7 +348,7 @@ public class LevelData implements ILevelData {
      * @return
      */
     public List<List<String>> getKeyReleasedCombos () {
-        return keyReleasedCombos;
+        return myKeyReleasedCombos;
     }
 }
 

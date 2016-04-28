@@ -34,7 +34,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	public void scroll(Sprite scrollsprite) {
 		scrollX(scrollsprite);
-		scrollY(scrollsprite);
+		//scrollY(scrollsprite);
 	}
 	
 	
