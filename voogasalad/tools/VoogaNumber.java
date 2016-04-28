@@ -10,24 +10,86 @@ import tools.interfaces.VoogaData;
 public class VoogaNumber implements VoogaData {
     private Double myValue;
     private transient SimpleDoubleProperty valueProperty;
-
-    public VoogaNumber () {
-        this(0d);
-    }
-
+    
     public VoogaNumber (Double number) {
-        initialize(number);
+        myValue = number;
+        initializeProperty();
     }
     
-    private void initialize(Double number){
+    public VoogaNumber () {
+        myValue = 0d;
+        initializeProperty();
+    }
+ 
+    private void initializeProperty(){
+        if (valueProperty != null) return;
+        
         this.valueProperty = new SimpleDoubleProperty();
         this.valueProperty.setValue(myValue);
-        this.myValue = number;
+
         this.valueProperty.addListener( (obs, old, n) -> {
             this.myValue = (Double) n;
         });
-        this.myValue = number;
+
     }
+    
+    @Override
+    public Property<Number> getProperty () {
+        initializeProperty();
+        return this.valueProperty;
+    }
+
+    @Override
+    public <T> void setProperty (T newVal) {
+        initializeProperty();
+        this.valueProperty.set(Double.parseDouble((String) newVal));
+    }
+
+    public Node display () {
+        initializeProperty();
+        
+        NumberTextField field = new NumberTextField();
+        field.textProperty().addListener( (obs, old, n) -> {
+            try {
+                this.valueProperty.set(Double.parseDouble(n));
+            }
+            catch (Exception e) {
+
+            }
+        });
+        
+        valueProperty.addListener((obs,old,n)->{
+            if (!field.isFocused()){
+                field.textProperty().set(n.toString());
+            }
+        });
+        
+        field.focusedProperty().addListener((obs,old,n)->{
+            if (!n){
+               field.textProperty().set(valueProperty.getValue().toString()); 
+            }
+        });
+        
+        field.setText("" + myValue);
+        return field;
+    }
+
+    @Override
+    public void setValue (Object o) {
+        if (!(o instanceof Number))
+            return;
+        myValue = (double) o;
+    }
+    
+    @Override
+    public Object getValue () {
+        if (myValue == ((double) myValue)) {
+            double number = (double) myValue;
+            return number;
+        }
+        return myValue;
+    }
+    
     public void decreaseValue (Double dx) {
         myValue -= dx;
     }
@@ -52,54 +114,8 @@ public class VoogaNumber implements VoogaData {
     public boolean greaterThan (Double num) {
         return myValue > num;
     }
-
-    @Override
-    public Object getValue () {
-        if (myValue == ((double) myValue)) {
-            double number = (double) myValue;
-            return number;
-        }
-        return myValue;
-    }
-
+    
     public String toString () {
         return "" + myValue;
-    }
-
-    public Node display () {
-        NumberTextField field = new NumberTextField();
-        field.textProperty().addListener( (obs, old, n) -> {
-            try {
-                this.valueProperty.set(Double.parseDouble(n));
-            }
-            catch (Exception e) {
-
-            }
-        });
-        field.setText("" + myValue);
-        return field;
-    }
-
-    @Override
-    public void setValue (Object o) {
-        if (!(o instanceof Number))
-            return;
-        myValue = (double) o;
-    }
-
-    @Override
-    public Property<Number> getProperty () {
-        if (this.valueProperty==null) {
-            initialize(myValue);
-        }
-        return this.valueProperty;
-    }
-
-    @Override
-    public <T> void setProperty (T newVal) {
-        if (this.valueProperty==null) {
-            initialize(myValue);
-        }
-        this.valueProperty.set(Double.parseDouble((String) newVal));
     }
 }

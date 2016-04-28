@@ -15,5 +15,4 @@ public interface VoogaData {
     public <T> Property<T> getProperty ();
 
     public <T> void setProperty (T newVal);
-
 }
