@@ -41,6 +41,12 @@ public class GraphMakerTest extends Application {
 		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
 		ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, AuthorSession.DATE_AUTHORED, AuthorSession.AUTHOR_DURATION);
 
+		//to graph all the games and their durations
+		
+		VoogaDataBase database = VoogaDataBase.getInstance();
+		
+		
+		
 		Scene scene = new Scene(sc,500,500);
 		stage.setScene(scene);
 		stage.show();

@@ -26,9 +26,7 @@ public interface IGameRunner extends Menuable {
 		
 	void replayLevel();
 
-	void saveGameProgress(String playerName);
-
 	void takeSnapShot();
 
-	void finishPlaySession();
+	void saveGameProgress();
 }

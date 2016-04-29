@@ -7,11 +7,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import stats.interaction.CurrentSessionStats;
+
 public class DataBaseTest {
 	@Test
 	public void testAddingUsers() {
 		VoogaDataBase database = VoogaDataBase.getInstance();
-
+		
 		//add games and users
 		database.addGame("game 1", "fun game for friends to play");
 		database.addGame("game 2", "cool game with sharks");
@@ -53,6 +55,10 @@ public class DataBaseTest {
 	public void addPlaySession(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		//database.clear();
+
+		CurrentSessionStats stats = new CurrentSessionStats();
+		stats.startAuthoringSession();
+		stats.endCurrentAuthoringSession();
 		
 		PlaySession playsesh5 =new PlaySession(new Date());
 		System.out.println("here");

@@ -22,4 +22,8 @@ public class PlaySession extends VoogaSession{
 	public String toString(){
 		return getProperty(DATE_PLAYED).toString()+" "+getProperty(PLAY_DURATION).toString()+" "+getProperty(SCORE);
 	}
+	public void endSession(VoogaNumber score, VoogaNumber levelreached) {
+		setProperty(PlaySession.SCORE, score);
+		setProperty(PlaySession.LEVEL_REACHED, levelreached);
+	}
 }

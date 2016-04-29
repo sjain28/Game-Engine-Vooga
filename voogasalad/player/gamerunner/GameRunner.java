@@ -26,6 +26,7 @@ import resources.VoogaBundles;
 import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import stats.interaction.CurrentSessionStats;
 import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
@@ -59,9 +60,7 @@ public class GameRunner implements IGameRunner {
     private String myCurrentLevelString;
     private IDisplayScroller myScroller;
 	private int myCurrentStep;
-	private String myCurrentUser;
-	private String myCurrentGame;
-	private VoogaDataBase myDataBase;
+	private CurrentSessionStats myStats;
 	private double myLevelReached;
 	/**
 	 * Default constructor
@@ -79,7 +78,7 @@ public class GameRunner implements IGameRunner {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
-		myDataBase = VoogaDataBase.getInstance();
+		myStats = new CurrentSessionStats();
 	}
 	/**
 	 * createLevelList reads a text file and creates a list of levels
@@ -106,7 +105,7 @@ public class GameRunner implements IGameRunner {
 		//check if we need to transition to a different level
     	if (myLevelData.getSaveNow()) {
     		//Change to the right player.
-    		saveGameProgress(VoogaBundles.preferences.getProperty("UserName"));
+    		saveGameProgress();
     	}
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
@@ -131,16 +130,13 @@ public class GameRunner implements IGameRunner {
 	 * 	Initializes myLevelList and plays the game
 	 */
 	public void playGame(String gameXmlList) {
-		myCurrentGame = VoogaBundles.preferences.getProperty("GameName");
-		myCurrentUser = VoogaBundles.preferences.getProperty("UserName");
 		//start new game playing session
-		PlaySession playsession = new PlaySession(new Date());
-		((StatCell) myDataBase.getStatByGameAndUser(myCurrentGame, myCurrentUser)).addPlaySession(playsession);
-		StatCell playerGameInfo = ((StatCell) myDataBase.getStatByGameAndUser(myCurrentGame,myCurrentUser));
-		String latestLevelReached="";
-		if (playerGameInfo.getLatestPlaySession() != null) {
-			latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty(PlaySession.LEVEL_REACHED))).getValue());
-		}
+		myStats.startPlaySession();
+				
+		//get the last level reached if it exists
+		PlaySession playsesh = myStats.getCurrentStatCell().getLatestPlaySession();
+		String latestLevelReached = playsesh.getProperty(PlaySession.LEVEL_REACHED).toString();
+		
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/" + gameXmlList + "/" + gameXmlList + ".xml").get(0);
 			double width = Double.parseDouble(preferences.getWidth());
@@ -150,9 +146,9 @@ public class GameRunner implements IGameRunner {
 		} catch (Exception e) {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
-		if (latestLevelReached.equals("")) {
-			latestLevelReached = myLevelList.get(0);
-		}
+		//if the 
+		if (latestLevelReached.equals("")) {latestLevelReached = myLevelList.get(0);}
+		
 		myGameDisplay.display();
 		playLevel(latestLevelReached);
 		run();
@@ -235,8 +231,10 @@ public class GameRunner implements IGameRunner {
     }
     
 	@Override
-	public void saveGameProgress(String playerName) {
-		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), playerName,myCurrentGame);
+	public void saveGameProgress() {
+		String myCurrentGame = VoogaBundles.preferences.getProperty("GameName");
+		String myCurrentUser = VoogaBundles.preferences.getProperty("UserName");
+		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), myCurrentUser,myCurrentGame);
 	}
 	
     @Override
@@ -258,14 +256,5 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public Timeline getTimeline() {
 		return myTimeline;
-	}
-	@Override
-	public void finishPlaySession() {
-		myCurrentGame = VoogaBundles.preferences.getProperty("GameName");
-		myCurrentUser = VoogaBundles.preferences.getProperty("UserName");
-		StatCell statinfo = ((StatCell) myDataBase.getStatByGameAndUser(myCurrentGame,myCurrentUser));
-		statinfo.getLatestPlaySession().endSession();
-		statinfo.getLatestPlaySession().setProperty(PlaySession.SCORE, myLevelData.getGlobalVar("Score"));
-		statinfo.getLatestPlaySession().setProperty(PlaySession.LEVEL_REACHED, new VoogaNumber(myLevelReached));
 	}
 }

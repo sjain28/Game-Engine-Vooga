@@ -43,10 +43,6 @@ public class UIManager extends VBox implements Menuable {
 	 *            Interface to mediate interactions with backend
 	 */
 	public UIManager(List<CompleteAuthoringModelable> models) {
-		String gamename = VoogaBundles.preferences.getProperty("GameName");
-		String username = VoogaBundles.preferences.getProperty("UserName");
-    	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
-    	statinfo.addAuthoringSession(new AuthorSession(new Date()));
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
 		ElementManager temp = new ElementManager();
