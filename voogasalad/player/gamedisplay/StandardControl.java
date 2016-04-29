@@ -24,8 +24,8 @@ public class StandardControl implements IControl {
 	private static final String SLOW_DOWN_KEY = "SlowDown";
 	private static final String PLAYNEXTLEVEL_BUTTON_KEY = "PlayNextLevel";
 	private static final String SNAPSHOT_KEY = "Snapshot";
-	private static final String START_VIDEO_KEY = "Start Video";
-	private static final String STOP_VIDEO_KEY = "Stop Video";
+	private static final String START_VIDEO_KEY = "StartVideo";
+	private static final String STOP_VIDEO_KEY = "StopVideo";
 	private static final int TOP_PADDING = 15;
 	private static final int LEFT_PADDING = 12;
 	private static final int RIGHT_PADDING = 15;

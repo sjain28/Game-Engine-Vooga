@@ -36,8 +36,7 @@ public class ScreenProcessor implements IScreenProcessor{
 		try {
 			robot = new Robot();
 		} catch (AWTException e) {
-			//TODO remove hard code
-			new VoogaAlert("Video recording disabled");
+			new VoogaAlert(VoogaBundles.exceptionProperties.getString("VideoFail"));
 			return;
 		}
 	}
@@ -46,8 +45,8 @@ public class ScreenProcessor implements IScreenProcessor{
 	public String dumpImageToFile(BufferedImage image, String outputFilePrefix) {
         try {
             String outputFilename = outputFilePrefix +
-                 System.currentTimeMillis() + VoogaBundles.preferences.getProperty("dotpng");
-            ImageIO.write(image, VoogaBundles.preferences.getProperty("png"), new File(outputFilename));
+                 System.currentTimeMillis() + VoogaBundles.imageProperties.getString("dotpng");
+            ImageIO.write(image, VoogaBundles.imageProperties.getString("png"), new File(outputFilename));
             return outputFilename;
         }
         catch (IOException e) {
@@ -74,17 +73,16 @@ public class ScreenProcessor implements IScreenProcessor{
 	@Override 
 	public void createSceneScreenshotPNG(Scene screenshotZone, String imageName) {
 		WritableImage screenshot = screenshotZone.snapshot(null);
-
+//TODO where to save?
 		File file = new File(
-				VoogaBundles.preferences.getProperty("saveLocation")
+						VoogaBundles.imageProperties.getString("saveLocation")
 						+ imageName
-						+ VoogaBundles.preferences.getProperty("dotpng"));
+						+ VoogaBundles.imageProperties.getString("dotpng"));
 		try {
 			ImageIO.write(SwingFXUtils.fromFXImage(screenshot, null),
-					VoogaBundles.preferences.getProperty("png"), file);
+					VoogaBundles.imageProperties.getString("png"), file);
 		} catch (IOException e) {
-			//TODO remove hard code
-			new VoogaAlert("Failed to save image");
+			new VoogaAlert(VoogaBundles.exceptionProperties.getString("SnapshotFail"));
 		}
 	}
 	
@@ -98,14 +96,16 @@ public class ScreenProcessor implements IScreenProcessor{
         writer.addVideoStream(0, 0, ICodec.ID.CODEC_ID_MPEG4, screenBounds.width/2, screenBounds.height/2);
        
         while(checkIfStillRecording()) { 
+System.out.println("Recording");
             BufferedImage screen = createDesktopScreenshotForVideo();
             BufferedImage bgrScreen = convertImageToType(screen, BufferedImage.TYPE_3BYTE_BGR);
             writer.encodeVideo(0, bgrScreen, System.nanoTime() - startTime, TimeUnit.NANOSECONDS);
             	
 			try {
 				Thread.sleep((long) (1 / frameRate));
+System.out.println("Next frame for video");
 			} catch (InterruptedException e) {
-				//TODO error catching for video recording
+				new VoogaAlert(VoogaBundles.exceptionProperties.getString("VideoFail"));
 			}
         }
         writer.close();
