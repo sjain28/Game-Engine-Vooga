@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.VoogaString;
 
-public class VoogaUser extends VoogaEntry{
+public class VoogaUser extends CellEntry{
 	private String myPassword;
 	public static final String DISPLAY_NAME = "display_name";
 	public static final String USER_NAME = "user_name";

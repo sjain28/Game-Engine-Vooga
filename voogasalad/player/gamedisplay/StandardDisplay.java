@@ -5,16 +5,12 @@ import java.util.List;
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
-import database.VoogaDataBase;
-import database.VoogaPlaySession;
-import database.VoogaStatInfo;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
@@ -27,12 +23,8 @@ import tools.VoogaGameSound;
  * Uses composition to contain elements of the display
  * 
  * @author Hunter Lee
- *
  */
 public class StandardDisplay implements IGameDisplay {
-
-	private static final int PANE_SIZE = 600;
-
 	private IPromptFactory myPrompt;
 	private IControl myControl;
 	private IHUD myHUD;
@@ -168,9 +160,6 @@ public class StandardDisplay implements IGameDisplay {
 		this.myListToDisplay = myListToDisplay;
 	}
 
-	/**
-	 * @return the myKeyEvents
-	 */
 	@Override
 	public List<KeyEvent> getKeyEvents() {
 		return myKeyEvents;
@@ -189,9 +178,6 @@ public class StandardDisplay implements IGameDisplay {
 	public IControl getControl() {
 		return myControl;
 	}
-	/**
-	 * @return the myHUD
-	 */
 	public IHUD getHUD() {
 		return myHUD;
 	}
@@ -216,9 +202,6 @@ public class StandardDisplay implements IGameDisplay {
 		return myScene;
 	}
 
-	/**
-	 * Returns the current Stage
-	 */
 	@Override
 	public Stage getStage() {
 		return myStage;

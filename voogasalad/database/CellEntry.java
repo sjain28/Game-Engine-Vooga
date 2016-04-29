@@ -5,10 +5,10 @@ import java.util.Map;
 
 import tools.interfaces.VoogaData;
 
-public class VoogaEntry implements VoogaInfoCell{
+public class CellEntry implements PropertiesCell{
 	private Map<String, VoogaData> myPropertyMap;
 	
-	public VoogaEntry(){
+	public CellEntry(){
 		myPropertyMap = new HashMap<String, VoogaData>();
 	}
 	public void setProperty(String property, VoogaData value){

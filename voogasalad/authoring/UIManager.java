@@ -13,9 +13,9 @@ import authoring.model.ElementManager;
 import authoring.model.ElementTabManager;
 import authoring.model.Preferences;
 import data.Serializer;
-import database.VoogaAuthorSession;
+import database.AuthorSession;
 import database.VoogaDataBase;
-import database.VoogaStatInfo;
+import database.StatCell;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.VBox;
@@ -45,8 +45,8 @@ public class UIManager extends VBox implements Menuable {
 	public UIManager(List<CompleteAuthoringModelable> models) {
 		String gamename = VoogaBundles.preferences.getProperty("GameName");
 		String username = VoogaBundles.preferences.getProperty("UserName");
-    	VoogaStatInfo statinfo = (VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
-    	statinfo.addAuthoringSession(new VoogaAuthorSession(new Date()));
+    	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
+    	statinfo.addAuthoringSession(new AuthorSession(new Date()));
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
 		ElementManager temp = new ElementManager();

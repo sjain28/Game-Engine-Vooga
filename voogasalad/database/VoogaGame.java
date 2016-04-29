@@ -2,7 +2,7 @@ package database;
 
 import tools.VoogaString;
 
-public class VoogaGame extends VoogaEntry{
+public class VoogaGame extends CellEntry{
 	
 	public static final String GAME_NAME = "game_name";
 	public static final String GAME_DESCRIPTION = "game_description";

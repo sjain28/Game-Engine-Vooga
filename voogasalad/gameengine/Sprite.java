@@ -108,7 +108,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
             image =
                     new Image(this.getClass().getResourceAsStream(myProperties.get(IMAGE_PATH)
                             .getValue().toString()));
-
         }
         return image;
     }

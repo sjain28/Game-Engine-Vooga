@@ -11,9 +11,9 @@ import authoring.model.ElementManager;
 import authoring.model.ElementManagerUnserializer;
 import authoring.model.Preferences;
 import data.Deserializer;
-import database.VoogaAuthorSession;
+import database.AuthorSession;
 import database.VoogaDataBase;
-import database.VoogaStatInfo;
+import database.StatCell;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -88,7 +88,7 @@ public class CreateCommand implements Command {
     private void promptForSave () {
     	String gamename = VoogaBundles.preferences.getProperty("GameName");
     	String username = VoogaBundles.preferences.getProperty("UserName");
-    	VoogaStatInfo statinfo = (VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
+    	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
         statinfo.getLatestAuthoringSession().endSession();
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();

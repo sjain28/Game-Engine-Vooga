@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 import tools.VoogaNumber;
 
-public abstract class VoogaSession extends VoogaEntry{
+public abstract class VoogaSession extends CellEntry{
 	private Instant startInstant;
 	private Instant endInstant;
 	private double gap;

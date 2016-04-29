@@ -1,22 +1,22 @@
-package authoring.statvisualization;
+package stats.visualization;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import database.VoogaEntry;
+import database.CellEntry;
 import javafx.scene.chart.ScatterChart;
 import resources.VoogaBundles;
 
 public class StatsVisualizer {
-	public ScatterChart<?,?> getVoogaStatsScatterPlot(List<VoogaEntry> xlist, List<VoogaEntry> ylist, String xparam, String yparam){
+	public ScatterChart<?,?> getVoogaStatsScatterPlot(List<CellEntry> xlist, List<CellEntry> ylist, String xparam, String yparam){
 		
 		List<Object> xparams = new ArrayList<Object>();
 		List<Object> yparams = new ArrayList<Object>();
 		
-		for(VoogaEntry entry : xlist){
+		for(CellEntry entry : xlist){
 			xparams.add(entry.getProperty(xparam));
 		}
-		for(VoogaEntry entry : ylist){
+		for(CellEntry entry : ylist){
 			yparams.add(entry.getProperty(yparam));
 		}
 		

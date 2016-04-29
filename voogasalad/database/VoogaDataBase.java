@@ -27,7 +27,7 @@ public class VoogaDataBase implements IDataBase{
 	private static VoogaDataBase myInstance;
 	int totalrows;
 	int totalcols;
-	List<List<VoogaEntry>> myStatInfo;
+	List<List<CellEntry>> myStatInfo;
 	/**
 	 * Private DataBase Constructor
 	 */
@@ -67,7 +67,7 @@ public class VoogaDataBase implements IDataBase{
 			//initialize stat-info for game for every user
 			for(int col = 0; col < totalcols; col++){
 				String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
-				myStatInfo.get(col).add(new VoogaStatInfo(gamename,username));
+				myStatInfo.get(col).add(new StatCell(gamename,username));
 			}
 			System.out.println("What is my game here, this can only be shown if a game was added 2 list " + myGames);
 		}
@@ -97,10 +97,10 @@ public class VoogaDataBase implements IDataBase{
 			System.out.println("actually adding in the user");
 			totalcols++;
 			myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));
-			List<VoogaEntry> userstatinfo = new ArrayList<VoogaEntry>();
+			List<CellEntry> userstatinfo = new ArrayList<CellEntry>();
 			for(int row = 0; row < totalrows; row++){
 				String gamename = myGames.get(row).getProperty(VoogaGame.GAME_NAME).toString();
-				userstatinfo.add(row, new VoogaStatInfo(gamename,username));
+				userstatinfo.add(row, new StatCell(gamename,username));
 			}
 			myStatInfo.add(userstatinfo);
 		}
@@ -111,7 +111,7 @@ public class VoogaDataBase implements IDataBase{
 	 * @param username
 	 * @return
 	 */
-	public VoogaEntry getStatByGameAndUser(String gamename, String username){
+	public CellEntry getStatByGameAndUser(String gamename, String username){
 		this.printDataBase();
 		int row = myGames.indexOf(getGame(gamename));
 		int col = myUsers.indexOf(getUser(username));
@@ -123,8 +123,8 @@ public class VoogaDataBase implements IDataBase{
 	 * @param gamename
 	 * @return
 	 */
-	public List<VoogaEntry> getStatsbyGame(String gamename){
-		List<VoogaEntry> gamestats = new ArrayList<VoogaEntry>();
+	public List<CellEntry> getStatsbyGame(String gamename){
+		List<CellEntry> gamestats = new ArrayList<CellEntry>();
 		int row = myGames.indexOf(getGame(gamename));
 		for(int col = 0; col < myStatInfo.size(); col++){
 			gamestats.add(col, myStatInfo.get(col).get(row));
@@ -136,7 +136,7 @@ public class VoogaDataBase implements IDataBase{
 	 * @param username
 	 * @return
 	 */
-	public List<VoogaEntry> getStatsbyUser(String username){
+	public List<CellEntry> getStatsbyUser(String username){
 		int col = myUsers.indexOf(getUser(username));
 		return myStatInfo.get(col);
 	}
@@ -150,7 +150,7 @@ public class VoogaDataBase implements IDataBase{
 			totalcols = 0;
 			myGames = new ArrayList<VoogaGame>();
 			myUsers = new ArrayList<VoogaUser>();
-			myStatInfo = new ArrayList<List<VoogaEntry>>();
+			myStatInfo = new ArrayList<List<CellEntry>>();
 			save();
 		}
 		try {

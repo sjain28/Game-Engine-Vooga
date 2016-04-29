@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
-import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
@@ -34,7 +33,7 @@ public class LevelData implements ILevelData {
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
     //TODO: Implement AnimationFactory
-    private AnimationFactory myAnimationFactory;
+    //private AnimationFactory myAnimationFactory;
     private Map<String, VoogaData> myGlobalVariables;
     private KeyEventContainer myKeyEventContainer;
     private String myTimerKey;
