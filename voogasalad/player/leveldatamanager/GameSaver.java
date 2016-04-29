@@ -63,6 +63,7 @@ public class GameSaver implements IGameSaver {
         } catch (Exception e) {
         	new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
         }
+        System.out.println("What is filePath " + filePath +LEVELS +  playerName + XML_SUFFIX);
         CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
         PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
         latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(filePath));
