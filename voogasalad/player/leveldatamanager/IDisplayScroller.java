@@ -3,11 +3,8 @@
  */
 package player.leveldatamanager;
 
-import java.util.List;
 import java.util.Map;
-
 import gameengine.Sprite;
-import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
 /**
@@ -22,23 +19,8 @@ public interface IDisplayScroller {
 	
 	Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite);
 	
-	void increateScrollingSpeed(Sprite scrollingSprite);
+	void increaseScrollingSpeed(Sprite scrollingSprite);
 	
 	Sprite getScrollingSprite();
-
-
-	
-	
-//	<E> List<Node> centerScroll(List<E> allNodes, double mainCharXPos);
-//
-//	<E> List<Node> constantScroll(List<E> allNodes, int speed);
-
-//	int getScreenSizeX();
-//
-//	int getScreenSizeY();
-//
-//	void setScreenSizeX();
-//
-//	void setScreenSizeY();
 
 }

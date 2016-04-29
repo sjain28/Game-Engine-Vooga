@@ -9,17 +9,11 @@ import player.gamedisplay.Menuable;
  */
 public interface IGameRunner extends Menuable {
 	
-	void stop();
-
-	void start();
-	
 	void exit();
 
 	void speedUp();
 
 	void speedDown();
-
-	void mute();
 		
 	void playGame(String xmlList);
 	
