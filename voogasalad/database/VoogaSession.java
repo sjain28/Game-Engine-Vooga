@@ -1,9 +1,6 @@
 package database;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-
-import tools.VoogaNumber;
 
 public abstract class VoogaSession extends VoogaEntry{
 	private Instant startInstant;

@@ -1,26 +1,19 @@
-package data;
+package tests;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
+import data.Serializer;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import player.gamerunner.GameRunner;
-import player.gamerunner.IGameRunner;
-import player.gamerunner.VoogaGame;
 
 public class LevelSaveTest extends Application{
-
-    private static final String TESTXML_PATH = "JoshGame";
 	
 	public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 		// TODO Auto-generated method stub
@@ -44,7 +37,6 @@ public class LevelSaveTest extends Application{
 		
 		String filePath = "games/JoshGame/";
 		String fileName = filePath + "asasdfasdfasdfasdfdfasdf.xml";
-		File file = new File(fileName);
 		List<String> stringofLevels = new ArrayList<String>();
 		
 		//

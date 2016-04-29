@@ -4,22 +4,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import authoring.interfaces.Elementable;
 import resources.VoogaBundles;
 import tools.VoogaException;
-import tools.interfaces.VoogaData;
 
-/* DeSerializer is a general tool that can be utilized by any class. It is a tool that can be used to generate 
+/* Deserializer is a general tool that can be utilized by any class. It is a tool that can be used to generate 
  * a list of objects from an xml file. For now, it has a single method: deserialize.
  */
 
 public final class Deserializer {
-    private final static String COMMAND_PATH = "data";
 
     public static List<Object> deserialize (int objectNum, String fileName) throws VoogaException {
         XStream unSerializer = new XStream(new DomDriver());
