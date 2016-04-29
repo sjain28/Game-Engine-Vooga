@@ -2,11 +2,8 @@ package authoring.splash;
 
 import authoring.VoogaScene;
 import database.VoogaDataBase;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -15,7 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
@@ -102,9 +98,9 @@ public class LoginScreen extends Stage {
 	}
 
 	private void login(String user, String pass) {
-		database.printDataBase();
 		if (database.verifyLoginInfo(user, pass)) {
 			VoogaBundles.preferences.setProperty("Username", user);
+			database.save();
 			new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
 		} else {
 			new VoogaAlert("UserName or Password is Incorrect!");
