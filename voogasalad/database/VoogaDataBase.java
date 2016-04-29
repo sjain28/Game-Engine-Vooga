@@ -59,7 +59,7 @@ public class VoogaDataBase implements IDataBase{
 	 * Adds a new game to the DataBase
 	 * @param gamename
 	 */
-	public void addGame(String gamename, String gamedescrip){
+	public void checkThenAddIfNewGame(String gamename, String gamedescrip){
 		if(!myGames.contains(gamename)){
 			totalrows++;
 			//initialize game
@@ -91,7 +91,7 @@ public class VoogaDataBase implements IDataBase{
 	 * @param username
 	 * @param password
 	 */
-	public void addUser(String displayname, String username, String password, String profpiclocation){
+	public void checkThenAddIfNewUser(String displayname, String username, String password, String profpiclocation){
 		if(!myUsers.contains(username)){
 			totalcols++;
 			myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));

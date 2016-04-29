@@ -5,6 +5,7 @@ import java.util.List;
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
+import database.VoogaDataBase;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -130,6 +131,9 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	private void addEffects() {
 		myStage.show();
+        myStage.setOnCloseRequest(e -> {
+            promptForSave();
+        });
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
@@ -137,6 +141,11 @@ public class StandardDisplay implements IGameDisplay {
 			myGameSound.stopBGM();
 		});
 	}
+	
+    private void promptForSave () {
+        VoogaDataBase.getInstance().printDataBase();
+        VoogaDataBase.getInstance().save();
+    }
 	
 	/**
 	 * Creates the game display, adding all components

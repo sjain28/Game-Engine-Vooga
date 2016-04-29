@@ -27,7 +27,7 @@ import tools.interfaces.VoogaData;
  * @author Krista, Hunter
  */
 public class LevelData implements ILevelData {
-    private static final String SAVE_PROGRESS = "SaveProgress";
+    private static final String SAVE_PROGRESS = VoogaBundles.defaultglobalvars.getProperty("SaveProgress");
     private IPhysicsEngine myPhysics;
     private String myCenteredCharID;
     private Map<String, Elementable> myElements;

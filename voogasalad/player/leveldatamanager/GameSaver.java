@@ -26,7 +26,7 @@ import tools.interfaces.VoogaData;
 public class GameSaver implements IGameSaver {
 	
     private static final String XML_SUFFIX = ".xml";
-	
+    private static final String LEVELS = "levels/";
 	private Map<String, Elementable> myElements;
 	private KeyEventContainer myKeyEventContainer;
 	private Map<String, VoogaData> myGlobalVariables;
@@ -58,11 +58,11 @@ public class GameSaver implements IGameSaver {
         DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
         		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
         try {
-            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath + XML_SUFFIX);
+            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath +LEVELS +  playerName + XML_SUFFIX);
         } catch (Exception e) {
         	new VoogaException("Saving current progress failed");
         }
-        VoogaPlaySession latestSession =  VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName).getLatestPlaySession();
-        latestSession.setProperty("level reached" ,new VoogaString(filePath));
+
+       
 	}
 }

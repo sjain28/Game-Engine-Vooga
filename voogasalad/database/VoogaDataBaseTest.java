@@ -13,11 +13,11 @@ public class VoogaDataBaseTest {
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		
 		//add games and users
-		database.addGame("game 1", "fun game for friends to play");
-		database.addGame("game 2", "cool game with sharks");
-		database.addGame("game 3", "scary game with dinosaurs");
-		database.addUser("Krista", "klo14", "password1", "mario.png");
-		database.addUser("Jacob", "jb8902", "thisshouldbesecret", "mario.png");
+		database.checkThenAddIfNewGame("game 1", "fun game for friends to play");
+		database.checkThenAddIfNewGame("game 2", "cool game with sharks");
+		database.checkThenAddIfNewGame("game 3", "scary game with dinosaurs");
+		database.checkThenAddIfNewUser("Krista", "klo14", "password1", "mario.png");
+		database.checkThenAddIfNewUser("Jacob", "jb8902", "thisshouldbesecret", "mario.png");
 		System.out.println(database.verifyLoginInfo("klo14", "password1"));
 		database.printDataBase();
 		
@@ -50,7 +50,7 @@ public class VoogaDataBaseTest {
 	public void testSingleUserSignIn(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		database.clear();
-		database.addUser("Harry Potter", "hp67", "hello", null);
+		database.checkThenAddIfNewUser("Harry Potter", "hp67", "hello", null);
 		database.save();
 		System.out.println("logged in: " + database.verifyLoginInfo("hp67", "hello"));
 	}
