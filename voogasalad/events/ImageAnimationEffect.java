@@ -38,6 +38,7 @@ public class ImageAnimationEffect extends SpriteEffect {
 		if(myCurrentImageInt >= myImages.size()){
 			myCurrentImageInt = 0;
 		}
+		clearSprites();
 	}
 
 	@Override

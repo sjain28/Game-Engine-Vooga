@@ -1,6 +1,8 @@
 package events;
 
 import java.util.List;
+import java.util.Map;
+
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
 import tools.Position;
@@ -16,6 +18,7 @@ public class PathEffect extends SpriteEffect{
 	private Double myVelocity;
 	private Integer myCounter;
 	private Boolean reverse;
+	private Map<Sprite, Velocity> spritePastVelocities;
 
 	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, Boolean reverse, AnimationEvent event) {
 		super(event);
@@ -28,14 +31,15 @@ public class PathEffect extends SpriteEffect{
 
 	@Override
 	public void execute(ILevelData data) {
+		checkPastVelocities();
 		setSprites(data);
 		for (Sprite sprite : getSprites()){
-			// TODO: What if other interaction occurs? (for example, collision)
 			Vector nextVector = createSpline(((AnimationEvent) getEvent()).getCounter());
 			sprite.setVelocity(
 					new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), nextVector.getY()/nextVector.getMagnitude() * getMyVelocity()));
 			sprite.getPosition().addVector(createSpline(myCounter));
 		}
+		setPastVelocities();
 		clearSprites();
 	}
 
@@ -44,7 +48,18 @@ public class PathEffect extends SpriteEffect{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	private void setPastVelocities(){
+		for (Sprite sprite : getSprites()){
+			spritePastVelocities.put(sprite, sprite.getVelocity());
+		}
+	}
+	private void checkPastVelocities(){
+		for (Sprite sprite : getSprites()){
+			if (!sprite.getVelocity().equals(spritePastVelocities.get(sprite))){
+				((AnimationEvent) getEvent()).removeSprite(sprite);
+			}
+		}
+	}
 	protected Double getVelocity(Double duration){
 		Double distance = 0.0;
 		for (int i = 1; i < xMousePoints.length; i++){
@@ -57,7 +72,7 @@ public class PathEffect extends SpriteEffect{
 	protected void createAnimationPoints(Double duration){	
 
 		myVelocity = getVelocity(duration);
-		
+
 		xCoord.add(xMousePoints[0]);
 		yCoord.add(yMousePoints[0]);
 
@@ -71,11 +86,11 @@ public class PathEffect extends SpriteEffect{
 			}
 		}
 	}
-	
+
 	private Double getDistance(Double x1, Double x2, Double y1, Double y2){
 		return Math.sqrt(Math.pow((x2-x1), 2) + Math.pow((y2-y1), 2));
 	}
-	
+
 	protected Double getMyVelocity(){
 		return myVelocity;
 	}
@@ -83,6 +98,6 @@ public class PathEffect extends SpriteEffect{
 		return new Position(xCoord.get(counter) - xCoord.get(counter - 1), yCoord.get(counter) - yCoord.get(counter-1));
 	}
 	protected PathEffect clone(AnimationEvent event){
-        return new PathEffect(xMousePoints, yMousePoints, reverse, event);
+		return new PathEffect(xMousePoints, yMousePoints, reverse, event);
 	}
 }

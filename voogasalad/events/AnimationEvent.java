@@ -1,5 +1,6 @@
 package events;
 
+import gameengine.Sprite;
 import player.gamerunner.GameRunner;
 import player.leveldatamanager.ILevelData;
 
@@ -33,8 +34,15 @@ public class AnimationEvent extends VoogaEvent {
 	
 	@Override
 	public void update(ILevelData data){
+		for (Sprite sprite : getCauseSprites()){
+			if (!data.containsSprite(sprite.getId())){
+				removeSprite(sprite);
+			}
+		}
 		if(myCause.getValue()){
-			super.update(data);
+			for(Effect e: getEffects()){
+				e.execute(data);
+			}
 			myCounter++;
 			if (myCounter > myDuration){
 				if(myNextEvent != null)
@@ -52,7 +60,11 @@ public class AnimationEvent extends VoogaEvent {
 	protected Double getDuration(){
 		return myDuration;
 	}
-	
+	private void checkSprites(){
+		for (Sprite sprite : getCauseSprites()){
+			
+		}
+	}
 	protected void setCauseValue(Boolean value){
 		myCause.setValue(value);
 	}
@@ -90,7 +102,9 @@ public class AnimationEvent extends VoogaEvent {
         clone.addImageAnimationEffect(getImageAnimationEffect().clone(clone));
         return clone;
 	}
-	
+	protected void removeSprite(Sprite sprite){
+		getCauseSprites().remove(sprite);
+	}
 	protected ImageAnimationEffect getImageAnimationEffect() {
 		return myImageEffect;
 	}

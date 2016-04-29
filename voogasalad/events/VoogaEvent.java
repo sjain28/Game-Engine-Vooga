@@ -54,10 +54,6 @@ public class VoogaEvent {
 		getCauseSprites().addAll(sprites);
 	}
 
-	public List<Sprite> getSpritesFromCauses(){
-		return getCauseSprites();
-	}
-
 	public List<Sprite> getCauseSprites() {
 		return myCauseSprites;
 	}

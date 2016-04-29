@@ -60,4 +60,6 @@ public interface ILevelData {
 
 	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
+	Boolean containsSprite(String id);
+
 }

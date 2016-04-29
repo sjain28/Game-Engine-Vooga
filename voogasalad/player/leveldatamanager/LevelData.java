@@ -57,6 +57,9 @@ public class LevelData implements ILevelData {
     public Sprite getSpriteByID (String id) {
         return (Sprite) myElements.get(id);
     }
+    public Boolean containsSprite(String id){
+    	return myElements.containsKey(id);
+    }
     /**
      * Removes sprite by it's ID
      */
@@ -155,8 +158,12 @@ public class LevelData implements ILevelData {
     	myElements = myTransitioner.populateNewSprites();
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
+    	//mySpriteFactory.clearMap();
+    	//mySpriteFactory.setMap(myTransitioner.getSpriteMap());
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
     	myMainCharID = myTransitioner.getMainCharID();
+    	//myAnimationFactory.clearMaps();
+    	//myAnimationFactory.populateMaps();
     	myAnimationFactory = myTransitioner.getNewAnimationFactory();
     }
     
