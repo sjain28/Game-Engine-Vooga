@@ -11,6 +11,9 @@ import javafx.scene.control.TextField;
  * @author Aditya Srinivasan, Arjun Desai
  *
  */
+<<<<<<< HEAD
+public class NumberTextField extends TextField implements VoogaNode{
+=======
 public class NumberTextField extends TextField {
 	
 	/**
@@ -23,6 +26,7 @@ public class NumberTextField extends TextField {
 			}
 		});
 	}
+>>>>>>> master
 
     /**
      * Replaces unwanted text with a desired text.
@@ -52,6 +56,11 @@ public class NumberTextField extends TextField {
      */
     private boolean validate (String text) {
         return text.matches("[-0-9.]*");
+    }
+
+    @Override
+    public String getData () {
+        return this.textProperty().get();
     }
 
 }

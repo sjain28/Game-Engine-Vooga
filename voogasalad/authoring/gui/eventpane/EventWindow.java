@@ -5,14 +5,11 @@ import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
 import events.CauseAndEffectFactory;
 import events.VoogaEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import tools.VoogaAlert;
-import tools.VoogaException;
 
 public class EventWindow extends Stage{
     private TabPane tabPane;

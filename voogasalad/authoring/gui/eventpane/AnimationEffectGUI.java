@@ -1,5 +1,6 @@
 package authoring.gui.eventpane;
 
+import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditEventable;
 import events.AnimationFactory;
@@ -10,9 +11,10 @@ import javafx.scene.layout.VBox;
 import tools.VoogaException;
 
 public class AnimationEffectGUI implements EventGUI{
-    private NumberTextField rotation;
-    private ComboBox paths;
-
+    
+    private ArchetypeSpriteCombo names;
+    private ComboBox animations;
+    
     private EditEventable manager;
     private VBox node;
     
@@ -22,9 +24,19 @@ public class AnimationEffectGUI implements EventGUI{
     }
 
     private void initialize () {
-        rotation = new NumberTextField();
-        paths = new ComboBox();
-        paths.getItems().addAll(AnimationFactory.getInstance().getPathNames());
+        node = new VBox();
+        animations = new ComboBox();
+        animations.getItems().addAll(AnimationFactory.getInstance().getMyAnimationEvents().keySet());
+        names = new ArchetypeSpriteCombo(manager,node,e->onNameSelected(),true);
+        names.display();
+    }
+    
+    private void onNameSelected () {
+        addGUIElements(animations);
+    }
+    
+    private void addGUIElements (Node ... elements) {
+        node.getChildren().addAll(elements);
     }
 
     @Override
@@ -43,6 +55,6 @@ public class AnimationEffectGUI implements EventGUI{
 
     @Override
     public String getDetails () throws VoogaException {
-        return "events.AnimationEffect,"+rotation.getText()+","+paths.getValue();
+        return "events.AnimationEffect,"+animations.getValue()+","+names.getDetails();
     }
 }

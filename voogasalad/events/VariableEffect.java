@@ -49,6 +49,7 @@ public class VariableEffect extends Effect {
 
 	protected void callEffectMethod(VoogaData variable){
 		Class dataType = variable.getClass();
+		System.out.println(variable.getValue());
 		try{
 			if (myParameter != null){
 				Method variableMethod = dataType.getMethod(myMethod, new Class[]{myParameter.getClass()});
@@ -60,7 +61,7 @@ public class VariableEffect extends Effect {
 			}
 			
 		}catch (Exception e){
-			System.out.println("THROWING THIS EXCEPTION OVA HERE");
+			e.printStackTrace();
 			//throw new VoogaException(String.format(format, args));
 		}
 	}

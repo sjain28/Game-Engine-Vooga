@@ -88,7 +88,7 @@ public class AnimationEventGUI extends Tab {
 	private HBox buttonRow() {
 		OK = new ButtonMaker().makeButton("OK", e -> {
 			//TODO: implement once animation factory has been finalized.
-			AnimationEvent animationEvent = factory.makeAnimationEvent("Event Name", Integer.parseInt(duration.getText()));
+			AnimationEvent animationEvent = factory.makeAnimationEvent(name.getText(), Integer.parseInt(duration.getText()));
 			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
 			if(pathSelector.selectEffect.isSelected()) {
 				factory.makePathEffect((String) pathSelector.getValue(), pathSelector.isReverse(), animationEvent);
