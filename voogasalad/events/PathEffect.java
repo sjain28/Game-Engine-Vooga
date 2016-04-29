@@ -1,5 +1,7 @@
 package events;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,22 +18,25 @@ public class PathEffect extends SpriteEffect{
 	private Double[] xMousePoints;
 	private Double[] yMousePoints;
 	private Double myVelocity;
-	private Integer myCounter;
 	private Boolean reverse;
 	private Map<Sprite, Velocity> spritePastVelocities;
 
 	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, Boolean reverse, AnimationEvent event) {
 		super(event);
 		setNeedsSprites(true);
+		xCoord = new ArrayList<Double>();
+		yCoord = new ArrayList<Double>();
 		this.xMousePoints = xMousePoints;
 		this.yMousePoints = yMousePoints;
 		this.reverse = reverse;
-		myCounter = 0;
+		spritePastVelocities = new HashMap<>();
 	}
 
 	@Override
 	public void execute(ILevelData data) {
-		checkPastVelocities();
+		if (((AnimationEvent) getEvent()).getCounter() > 0){
+			checkPastVelocities();
+		}
 		setSprites(data);
 		for (Sprite sprite : getSprites()){
 			Vector nextVector = createSpline(((AnimationEvent) getEvent()).getCounter());

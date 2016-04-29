@@ -20,7 +20,7 @@ public class ImageAnimationEffect extends SpriteEffect {
 		setNeedsSprites(true);
 		myCycles = numCycles;
 		myImages = images;
-		
+		myCurrentImageInt = 0;
 		myCounter = myCycleTime;
 	}
 	protected void setCycleTime(Integer duration){

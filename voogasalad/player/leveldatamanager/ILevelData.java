@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 import authoring.interfaces.Elementable;
 import events.AnimationEvent;
+import events.VoogaEvent;
 import gameengine.Sprite;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
@@ -61,5 +62,7 @@ public interface ILevelData {
 	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
 	Boolean containsSprite(String id);
+
+	void addEventAndPopulateKeyCombos(VoogaEvent event);
 
 }

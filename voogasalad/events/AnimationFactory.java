@@ -13,81 +13,80 @@ public class AnimationFactory {
 
 	private Map<String, AnimationEvent> myAnimationEvents;
 	private Map<String, List<Double[]>> myPaths;
-    private Map<String, List<AnimationEvent>> myAnimationSequences;
+	private Map<String, List<AnimationEvent>> myAnimationSequences;
 
-    public AnimationFactory () {
-        myAnimationEvents = new HashMap<String, AnimationEvent>();
-        myPaths = new HashMap<String, List<Double[]>>();
-    }
+	public AnimationFactory () {
+		myAnimationEvents = new HashMap<String, AnimationEvent>();
+		myPaths = new HashMap<String, List<Double[]>>();
+	}
 
-    private static class SingletonHolder {
-        private static final AnimationFactory INSTANCE = new AnimationFactory();
-    }
+	private static class SingletonHolder {
+		private static final AnimationFactory INSTANCE = new AnimationFactory();
+	}
 
-    public static AnimationFactory getInstance () {
-        return SingletonHolder.INSTANCE;
-    }
+	public static AnimationFactory getInstance () {
+		return SingletonHolder.INSTANCE;
+	}
 
-    public AnimationEvent makeAnimationEvent (String name, Integer duration) {
-        AnimationEvent newEvent = new AnimationEvent(name, duration);
-        myAnimationEvents.put(name, newEvent);
-        return newEvent;
-    }
+	public AnimationEvent makeAnimationEvent (String name, Integer duration) {
+		System.out.println("making animation event");
+		AnimationEvent newEvent = new AnimationEvent(name, duration);
+		myAnimationEvents.put(name, newEvent);
+		return newEvent;
+	}
 
-    public void makePathEffect (String pathName, Boolean reverse, AnimationEvent event) {
-        myAnimationEvents.get(event).addPathEffect(
-                                                   new PathEffect(myPaths.get(pathName).get(0),
-                                                                  myPaths.get(pathName).get(1),
-                                                                  reverse, event));
-    }
+	public void makePathEffect (String pathName, Boolean reverse, AnimationEvent event) {
+		System.out.println("Size of path points " + myPaths.get(pathName).get(0).length + ", " + myPaths.get(pathName).get(1).length);
+		event.addPathEffect(
+				new PathEffect(myPaths.get(pathName).get(0),
+						myPaths.get(pathName).get(1),
+						reverse, event));
+	}
 
-    public void makeRotateEffect (Double rotation, AnimationEvent event) {
-        myAnimationEvents.get(event)
-                .addRotateEffect(new RotateEffect(rotation, event));
-    }
-    public void makeScaleAnimationEffect(Double scale, AnimationEvent event){
-    	myAnimationEvents.get(event)
-    	.addScaleAnimationEffect(new ScaleAnimationEffect(scale, event));
-    }
-    public void makeImageAnimationEffect(List<String> images, Integer cycles, AnimationEvent event){
-    	myAnimationEvents.get(event)
-    	.addImageAnimationEffect(new ImageAnimationEffect(images, cycles, event));
-    	
-    }
+	public void makeRotateEffect (Double rotation, AnimationEvent event) {
+		event.addRotateEffect(new RotateEffect(rotation, event));
+	}
+	public void makeScaleAnimationEffect(Double scale, AnimationEvent event){
+		event.addScaleAnimationEffect(new ScaleAnimationEffect(scale, event));
+	}
+	public void makeImageAnimationEffect(List<String> images, Integer cycles, AnimationEvent event){
+		event.addImageAnimationEffect(new ImageAnimationEffect(images, cycles, event));
 
-    public void addPath (String name, Double[] xCoord, Double[] yCoord) {
-        myPaths.put(name, new ArrayList<Double[]>(Arrays.asList(xCoord, yCoord)));
-    }
-// TODO: make image animation effect
-    // TODO: make scale animation effect
-    public AnimationEvent cloneAnimationEvent (String eventName) {
-        return myAnimationEvents.get(eventName).clone();
-    }
-    
-    public List<AnimationEvent> cloneAnimationSequence (String sequenceName){
-    	List<AnimationEvent> sequence = myAnimationSequences.get(sequenceName);
-    	List<AnimationEvent> clonedSequence = new ArrayList<>();
-    	
-    	for (AnimationEvent event: sequence){
-    		clonedSequence.add(event.clone());
-    	}
-    	for(int i = 0; i < clonedSequence.size()-1; i++){
-    		clonedSequence.get(i).setNextEvent(clonedSequence.get(i+1));
-    	}
-    	return clonedSequence;
-    }
-    
-    public void makeAnimationSequence(String sequenceName, List<AnimationEvent> eventsList){
-    	for (int i = 0; i < eventsList.size() - 1; i++){
-    		eventsList.get(i).setNextEvent(eventsList.get(i + 1));
-    	}
-    	myAnimationSequences.put(sequenceName, eventsList);
-    }
-    public Collection<String> getPathNames(){
-        return Collections.unmodifiableCollection(myPaths.keySet());
-    }
-    
-    public Map<String, AnimationEvent> getMyAnimationEvents() {
+	}
+
+	public void addPath (String name, Double[] xCoord, Double[] yCoord) {
+		myPaths.put(name, new ArrayList<Double[]>(Arrays.asList(xCoord, yCoord)));
+	}
+	// TODO: make image animation effect
+	// TODO: make scale animation effect
+	public AnimationEvent cloneAnimationEvent (String eventName) {
+		return myAnimationEvents.get(eventName).clone();
+	}
+
+	public List<AnimationEvent> cloneAnimationSequence (String sequenceName){
+		List<AnimationEvent> sequence = myAnimationSequences.get(sequenceName);
+		List<AnimationEvent> clonedSequence = new ArrayList<>();
+
+		for (AnimationEvent event: sequence){
+			clonedSequence.add(event.clone());
+		}
+		for(int i = 0; i < clonedSequence.size()-1; i++){
+			clonedSequence.get(i).setNextEvent(clonedSequence.get(i+1));
+		}
+		return clonedSequence;
+	}
+
+	public void makeAnimationSequence(String sequenceName, List<AnimationEvent> eventsList){
+		for (int i = 0; i < eventsList.size() - 1; i++){
+			eventsList.get(i).setNextEvent(eventsList.get(i + 1));
+		}
+		myAnimationSequences.put(sequenceName, eventsList);
+	}
+	public Collection<String> getPathNames(){
+		return Collections.unmodifiableCollection(myPaths.keySet());
+	}
+
+	public Map<String, AnimationEvent> getMyAnimationEvents() {
 		return myAnimationEvents;
 	}
 
@@ -98,10 +97,10 @@ public class AnimationFactory {
 	public Map<String, List<AnimationEvent>> getMyAnimationSequences() {
 		return myAnimationSequences;
 	}
-    public void setMyPaths(Map<String, List<Double[]>> myPaths) {
+	public void setMyPaths(Map<String, List<Double[]>> myPaths) {
 		this.myPaths = myPaths;
 	}
-    public void setMyAnimationSequences(Map<String, List<AnimationEvent>> myAnimationSequences) {
+	public void setMyAnimationSequences(Map<String, List<AnimationEvent>> myAnimationSequences) {
 		this.myAnimationSequences = myAnimationSequences;
 	}
 

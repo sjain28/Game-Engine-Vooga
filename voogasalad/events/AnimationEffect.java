@@ -30,7 +30,7 @@ public class AnimationEffect extends SpriteEffect {
 		setSprites(data);
 		myAnimationEvent = data.getAnimationFromFactory(myAnimationName);
 		myAnimationEvent.addSpritesFromCause(getSprites());
-		//data.getEventManager().addEvent(myAnimationEvent);
+		data.addEventAndPopulateKeyCombos(myAnimationEvent);
 		myAnimationEvent.setCauseValue(true);
 	}
 

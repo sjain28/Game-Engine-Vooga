@@ -84,8 +84,8 @@ public class AnimationEventGUI extends Tab {
 	private HBox buttonRow() {
 		OK = new ButtonMaker().makeButton("OK", e -> {
 			//TODO: implement once animation factory has been finalized.
-			
-			AnimationEvent animationEvent = factory.makeAnimationEvent((String) pathSelector.getValue(), Integer.parseInt(duration.getText()));
+			System.out.println("intializing event");
+			AnimationEvent animationEvent = factory.makeAnimationEvent("Event Name", Integer.parseInt(duration.getText()));
 			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
 			if(pathSelector.selectEffect.isSelected()) {
 				factory.makePathEffect((String) pathSelector.getValue(), pathSelector.isReverse(), animationEvent);
@@ -96,9 +96,9 @@ public class AnimationEventGUI extends Tab {
 			if(scaleSelector.selectEffect.isSelected()) {
 				factory.makeScaleAnimationEffect((Double)scaleSelector.getValue(), animationEvent);
 			}
-			if(imageSelector.selectEffect.isSelected()) {
-				factory.makeImageAnimationEffect((List<String>)imageSelector.getValue(), animationEvent);
-			}
+			//if(imageSelector.selectEffect.isSelected()) {
+				//factory.makeImageAnimationEffect((List<String>)imageSelector.getValue(), animationEvent);
+			//}
 		});
 		preview = new ButtonMaker().makeButton("Preview", e -> {
 			//TODO: allow users to preview their animation
