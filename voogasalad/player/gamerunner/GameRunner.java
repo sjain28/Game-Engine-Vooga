@@ -55,7 +55,7 @@ public class GameRunner implements IGameRunner {
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
 	private Timeline myTimeline;
-	private String myCurrentGame;
+	private boolean playSessionActive;
     private String myCurrentLevelString;
     private IDisplayScroller myScroller;
 	private int myCurrentStep;
@@ -127,18 +127,9 @@ public class GameRunner implements IGameRunner {
 	 * 	Initializes myLevelList and plays the game
 	 */
 	public void playGame(String gameXmlList) {
-		String gamename = VoogaBundles.preferences.getProperty("GameName");
-		String username = VoogaBundles.preferences.getProperty("UserName");
-		
-		
-//		myCurrentGame = gameXmlList;
-//		//check if the user already has progress or not.
-//		//Hard coded!! Need to add the user earlier than this but put this here.
-//		VoogaDataBase.getInstance().checkThenAddIfNewUser("displayname", username, "Monsters", "Joshs");
-//		
-//		//NEED TO CHANGE addGame to addGameIFNOTADDED!!!!
-//		VoogaDataBase.getInstance().checkThenAddIfNewGame(gameXmlList, "Monsters");
-//		System.out.println("The game here is and the player here is " + username);
+		//start new game playing session
+		myStats.startPlaySession();
+		playSessionActive = true;
 
 		String latestLevelReached="";
 		//get the last level reached if it exists
@@ -147,12 +138,6 @@ public class GameRunner implements IGameRunner {
 			latestLevelReached = (String) (((VoogaString) (playsesh.getProperty(PlaySession.LEVEL_REACHED))).getValue());
 			System.out.println("ChECKING TO SEE IF LATEST PLAY SESSION IS NULL HERE" + latestLevelReached);
 		}
-		
-		//start new game playing session
-		myStats.startPlaySession();
-
-		
-
 		
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/" + gameXmlList + "/" + gameXmlList + ".xml").get(0);
@@ -163,6 +148,7 @@ public class GameRunner implements IGameRunner {
 		} catch (Exception e) {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
+		
 		//if the 
 		if (latestLevelReached.equals("")) {latestLevelReached = myLevelList.get(0);}
 		
@@ -233,15 +219,11 @@ public class GameRunner implements IGameRunner {
     
     //PUT THIS CODE HERE ONLY FOR TESTING PURPOSES!!!!!!!!
     private void promptForSave () {
-    	String gamename = VoogaBundles.preferences.getProperty("GameName");
-    	String username = VoogaBundles.preferences.getProperty("UserName");
-    	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
+    	StatCell statinfo = myStats.getCurrentStatCell();
         statinfo.getLatestPlaySession().endSession();
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }
-
-    
 //    //Should EVENTUALLY BE TAKEN OUT!!!
 //	@Override
 //	public void playNextLevel() {
@@ -268,7 +250,11 @@ public class GameRunner implements IGameRunner {
 	}
 	@Override
 	public void finishPlaySession() {
-		myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
+		System.out.println((Double) myLevelData.getGlobalVar("Score").getValue());
+		System.out.println(myLevelReached);
+		if(playSessionActive){
+			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);			
+		}
 	}
 	@Override
 	public void addScene() {
