@@ -104,7 +104,7 @@ public class DisplayScroller implements IDisplayScroller {
 //            catch (VoogaException e1) {
 //                e1.printStackTrace();
 //            }
-			System.out.println("This is mainsprite: " + mainsprite);
+			//System.out.println("This is mainsprite: " + mainsprite);
 			try {
                 Thread.sleep(2000);
             }
