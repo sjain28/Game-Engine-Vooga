@@ -100,16 +100,6 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void step() {	
 		myCurrentStep++;
-		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN;
-		myLevelData.updatedGlobalTimer(secondspassed);
-		//check if we need to transition to a different level
-    	if (myLevelData.getSaveNow()) {
-    		//Change to the right player.
-    		saveGameProgress();
-    	}
-		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
-			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
-		}
 		checkAndUpdateGlobalVariables();
 		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
@@ -121,8 +111,14 @@ public class GameRunner implements IGameRunner {
 	 * Checks and updates all LevelData GlobalVariables
 	 */
 	private void checkAndUpdateGlobalVariables() {
+		//update global timer
 		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN);
-		if (!myLevelData.getNextLevelName().equals("")) {
+		
+		//save progress if at checkpoint
+    	if (myLevelData.getSaveNow()) {myStats.saveGameProgress(myLevelListCreator.getGameFilePath());}
+    	
+		//check if a level transition effect has been triggered
+		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
 	}
@@ -225,26 +221,6 @@ public class GameRunner implements IGameRunner {
 		myTimeline.stop();
 		myGameDisplay.exit();
 	}
-	
-    @Override
-    public void saveAll () {        
-    }
-    
-	@Override
-	public void saveGameProgress() {
-		String myCurrentGame = VoogaBundles.preferences.getProperty("GameName");
-		String myCurrentUser = VoogaBundles.preferences.getProperty("UserName");
-		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), myCurrentUser,myCurrentGame);
-	}
-	
-    @Override
-    public void addScene () {        
-    }
-
-    @Override
-    public void addScene (CompleteAuthoringModelable manager) {        
-    }
-    
 	@Override 
 	public void takeSnapShot() {
 		//TODO call xuggleFileCreator to properly take snapshot and store as new file.
@@ -252,9 +228,12 @@ public class GameRunner implements IGameRunner {
 		String fileName = myCurrentLevelString;
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
-	
 	@Override
 	public Timeline getTimeline() {
 		return myTimeline;
+	}
+	@Override
+	public void finishPlaySession() {
+		myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
 	}
 }

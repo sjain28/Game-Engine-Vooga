@@ -28,5 +28,5 @@ public interface IGameRunner extends Menuable {
 
 	void takeSnapShot();
 
-	void saveGameProgress();
+	void finishPlaySession();
 }
