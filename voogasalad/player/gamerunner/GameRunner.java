@@ -231,13 +231,13 @@ public class GameRunner implements IGameRunner {
     }
 
     
-    //Should EVENTUALLY BE TAKEN OUT!!!
-	@Override
-	public void playNextLevel() {
-		myTimeline.stop();
-		myLevelData.setNextLevelName("Lvl2");
-		myTimeline.play();
-	}
+//    //Should EVENTUALLY BE TAKEN OUT!!!
+//	@Override
+//	public void playNextLevel() {
+//		myTimeline.stop();
+//		myLevelData.setNextLevelName("Lvl2");
+//		myTimeline.play();
+//	}
 
 	@Override
 	public void exit() {
