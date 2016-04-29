@@ -1,4 +1,4 @@
-package database;
+package stats.database;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -9,13 +9,13 @@ import java.util.Timer;
 import tools.VoogaDate;
 import tools.VoogaNumber;
 
-public class VoogaAuthorSession extends VoogaSession{
+public class AuthorSession extends VoogaSession{
 	private Instant startInstant;
 	private Instant endInstant;
 	public static final String DATE_AUTHORED = "date_authored";
 	public static final String AUTHOR_DURATION = "author_duration";
 	public static final String SPRITES_ADDED = "sprites_added";
-	public VoogaAuthorSession(Date dateauthored){
+	public AuthorSession(Date dateauthored){
 		setProperty(DATE_AUTHORED, new VoogaDate(dateauthored));
 		super.startSession();
 	}
