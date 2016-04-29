@@ -166,7 +166,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	@Override
 	public void jump(Sprite sprite, Double jumpMagnitude) {
 		// Check if the main character is on the ground, not in the air to be able to jump
-		if (isThisNumber(sprite.getVelocity().getY(), 0)) {
+        if (isThisNumber(sprite.getVelocity().getY(), 0)) {
 			// Apply change to the velocity so that the character has upward velocity
 			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude * JUMP_FACTOR);
 		}

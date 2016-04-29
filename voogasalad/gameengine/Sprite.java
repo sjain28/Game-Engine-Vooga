@@ -26,8 +26,8 @@ import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.interfaces.*;
 
-public class Sprite implements Moveable, Effectable, Elementable {
 
+public class Sprite implements Moveable, Effectable, Elementable {
 	private boolean isMainCharacter;
 	private Velocity myVelocity;
 	private Acceleration myAcceleration;
@@ -54,39 +54,74 @@ public class Sprite implements Moveable, Effectable, Elementable {
 			String archetype,
 			Map<String, VoogaData> properties,
 			VoogaNumber mass) {
+
 		myProperties = properties;
+
+
+		initializeImage(imagePath);        
 		initializeCoordinates();
+
 		myLoc = new Position(myX.get(), myY.get());
 		myVelocity = new Velocity(0, 0);
 		myAcceleration = new Acceleration(0, 0);
 		myID = UUID.randomUUID().toString();
 		myArchetype = archetype;
-		initializeImage(imagePath);
+
+		// TODO: use properties file to put these
 		myProperties.put(VoogaBundles.spriteProperties.getString("MASS"), new VoogaNumber((Double) mass.getValue()));
 		myProperties.put(VoogaBundles.spriteProperties.getString("GRAVITY"), new VoogaNumber(0.0));
+
 		initializeAlive();
 		initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
+		System.out.println("image path after initialization: "+properties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue());
 	}
 
 	private void initializeAlive () {
 		myProperties.put(VoogaBundles.spriteProperties.getString("ALIVE"), new VoogaBoolean(true));
-		myAlive =
-				new SimpleBooleanProperty((boolean) myProperties.get(VoogaBundles.spriteProperties.getString("ALIVE")).getProperty()
-						.getValue());
+		reloadAlive();
+	}
+
+	private void reloadAlive(){
+		myAlive = new SimpleBooleanProperty();
 		Bindings.bindBidirectional(myAlive, myProperties.get(VoogaBundles.spriteProperties.getString("ALIVE")).getProperty());
 	}
 
 	private void initializeImage (String path) {
 		VoogaString imagePathString = new VoogaString(path);
+
 		myImagePath = path;
 		previousImage = path;
-		myImagePathProperty = new SimpleStringProperty(path);
+
 		myProperties.put(VoogaBundles.spriteProperties.getString("IMAGE_PATH"), imagePathString);
-		Image newImage = setNewImage();
+		reloadImage();
+	}
+
+	private void reloadImage(){
+
+		if (myImagePathProperty==null){
+			myImagePathProperty = new SimpleStringProperty();
+		}
 		Bindings.bindBidirectional(myImagePathProperty, myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getProperty());
-		myImage = new ImageView(newImage);
-		myImage.setFitHeight(newImage.getHeight());
-		myImage.setFitWidth(newImage.getWidth());
+		System.out.println("reload image- path property: "+myImagePathProperty.get());
+		setImagePath((String) myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getProperty().getValue());
+	}
+
+
+	public void setImagePath (String path) {
+		myImagePathProperty.set(path);
+		Image image=null;
+
+		if (myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString().contains("file:")){
+			image = new Image(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString());
+		} else {
+			image =
+					new Image(this.getClass()
+							.getResourceAsStream(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString()));
+		}
+
+		myImage= new ImageView(image);
+		myImage.setFitWidth(image.getWidth());
+		myImage.setFitHeight(image.getHeight());
 	}
 
 	private Image setNewImage () {
@@ -103,23 +138,43 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		return image;
 	}
 
-	private void initializeDimensions (double width, double height) {
-		myProperties.put(VoogaBundles.spriteProperties.getString("WIDTH"), new VoogaNumber(width));
-		myProperties.put(VoogaBundles.spriteProperties.getString("HEIGHT"), new VoogaNumber(height));
+	private void initializeDimensions (double widthValue, double heightValue) {
+		VoogaNumber width = new VoogaNumber(widthValue);
+		VoogaNumber height = new VoogaNumber(heightValue);
+		myProperties.put(VoogaBundles.spriteProperties.getString("WIDTH"), width);
+		myProperties.put(VoogaBundles.spriteProperties.getString("HEIGHT"), height);
+
+		reloadDimensions();
+	}
+
+	private void reloadDimensions(){
 		myWidth = new SimpleDoubleProperty();
 		myHeight = new SimpleDoubleProperty();
+
+		System.out.println("Image width before : "+myImage.fitWidthProperty().get());
+		System.out.println("Image height before: "+myImage.fitHeightProperty().get());
+
+		Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).getProperty(), myImage.fitWidthProperty());
+		Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).getProperty(), myImage.fitHeightProperty());
 		Bindings.bindBidirectional(myWidth, myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).getProperty());
 		Bindings.bindBidirectional(myHeight, myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).getProperty());
 
+		System.out.println("Image width before after : "+myImage.fitWidthProperty().get());
+		System.out.println("Image height before after: "+myImage.fitHeightProperty().get());
 	}
 
 	private void initializeCoordinates () {
 		myProperties.put(VoogaBundles.spriteProperties.getString("X_POS"), new VoogaNumber());
 		myProperties.put(VoogaBundles.spriteProperties.getString("Y_POS"), new VoogaNumber());
 		myProperties.put(VoogaBundles.spriteProperties.getString("Z_POS"), new VoogaNumber());
+		reloadCoordinates();
+	}
+
+	private void reloadCoordinates(){
 		myX = new SimpleDoubleProperty();
 		myY = new SimpleDoubleProperty();
 		myZ = new SimpleDoubleProperty();
+
 		Bindings.bindBidirectional(myX, myProperties.get(VoogaBundles.spriteProperties.getString("X_POS")).getProperty());
 		Bindings.bindBidirectional(myY, myProperties.get(VoogaBundles.spriteProperties.getString("Y_POS")).getProperty());
 		Bindings.bindBidirectional(myZ, myProperties.get(VoogaBundles.spriteProperties.getString("Z_POS")).getProperty());
@@ -132,6 +187,28 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		});
 	}
 
+	public void update () {
+
+		myLoc.addX(myVelocity.getX());
+		myLoc.addY(myVelocity.getY());
+
+		// Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
+		myVelocity.addX(myAcceleration.getX());
+		myVelocity.addY(myAcceleration.getY());
+
+		// Convert the Sprite's Cartesian Coordinates to display-able x and y's
+		myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
+		myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
+		myImage.setTranslateZ(myZ.doubleValue());
+
+		if (!myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString().equals(previousImage)) {
+			Image newImage = setNewImage();
+			myImage.setImage(newImage);
+			previousImage = myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString();
+		}
+
+	}
+
 	/**
 	 * Initializes JavaFX objects that can't be serialized
 	 * Need to call this before using the Sprite in the game engine!
@@ -141,42 +218,27 @@ public class Sprite implements Moveable, Effectable, Elementable {
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
+
 	public void init () throws VoogaException {
 		if (myImage != null)
 			return;
+		System.out.println("Initializing:");
 		ImageProperties imageProperties = new ImageProperties();
-		initializeImage(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString());
-		Image image = new Image(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString());
-		myImage = new ImageView(image);
-		imageProperties.loadData(myImage, initializationProperties);
-		initializeCoordinates();
-		initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
-		initializeAlive();
-		myX.set(myImage.getTranslateX());
-		myY.set(myImage.getTranslateY());
-
-		myWidth.set(myImage.getFitWidth());
-		myHeight.set(myImage.getFitHeight());
-		myAlive.set(true);
-	}
-	
-	public void update () {
-		myLoc.addX(myVelocity.getX());
-		myLoc.addY(myVelocity.getY());
-		// Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
-		myVelocity.addX(myAcceleration.getX());
-		myVelocity.addY(myAcceleration.getY());
-		// Convert the Sprite's Cartesian Coordinates to display-able x and y's
-		myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
-		myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
-		myImage.setTranslateZ(myZ.doubleValue());
-		if (!myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString().equals(previousImage)) {
-			Image newImage = setNewImage();
-			myImage.setImage(newImage);
-			previousImage = myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString();
+		for (String key :myProperties.keySet()){
+			System.out.println(key+" "+myProperties.get(key).getValue().toString());
 		}
+		reloadImage();
+		imageProperties.loadData(myImage, initializationProperties);
+		reloadCoordinates();
+		reloadDimensions();
+		reloadAlive();/*
+        System.out.println("");
+        System.out.println("After reloading: ");
+        System.out.println("Fit Width:" +myImage.getFitWidth());
+        System.out.println("Fit height:" +myImage.getFitHeight());
+        System.out.println("ImagePath: "+myImage.getImage());
+        System.out.println("");*/
 	}
-
 	public void setName (String name) {
 		myName = name;
 	}
@@ -229,16 +291,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
 	public String getArchetype () {
 		return myArchetype;
-	}
-
-	public void setImagePath (String path) {
-		myProperties.put(VoogaBundles.spriteProperties.getString("IMAGE_PATH"), new VoogaString(path));
-		Image image =
-				new Image(this.getClass()
-						.getResourceAsStream(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString()));
-		myImage = new ImageView(image);
-		myImage.setLayoutX(myLoc.getX());
-		myImage.setLayoutY(myLoc.getY());
 	}
 
 	public String getImagePath () {

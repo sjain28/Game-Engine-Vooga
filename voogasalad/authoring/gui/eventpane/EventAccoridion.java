@@ -1,14 +1,10 @@
 package authoring.gui.eventpane;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
-import events.VoogaEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
