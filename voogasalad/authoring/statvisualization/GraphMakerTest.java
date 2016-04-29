@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import database.VoogaAuthorSession;
 import database.VoogaDataBase;
 import database.VoogaEntry;
 import database.VoogaPlaySession;
@@ -34,11 +35,12 @@ public class GraphMakerTest extends Application {
 		
 		GraphMaker statsvisualizer = new GraphMaker();
 		StatsVisualizer visualizer = new StatsVisualizer();
-		VoogaEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("game 2", "klo14");
-		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getPlayStats();
+		VoogaEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("game5", "klo14");
+		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getAuthorStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
-		ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
-		
+		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
+		ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaAuthorSession.DATE_AUTHORED, VoogaAuthorSession.AUTHOR_DURATION);
+
 		Scene scene = new Scene(sc,500,500);
 		stage.setScene(scene);
 		stage.show();

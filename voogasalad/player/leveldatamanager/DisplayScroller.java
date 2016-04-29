@@ -88,6 +88,13 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, 
 										 String currentlevel, Sprite mainsprite) {
+		System.out.println(globals.keySet());
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		String scrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 

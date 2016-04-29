@@ -22,10 +22,11 @@ public class VoogaStatInfo extends VoogaEntry {
 		setProperty(MY_USER, new VoogaString(username));
 		setProperty(LAST_SAVED_LEVEL_LOC, new VoogaString(""));
 	}
-	public List<VoogaAuthorSession> getAuthorStats(){
+	public List<VoogaEntry> getAuthorStats(){
 		return Collections.unmodifiableList(myAuthorStats);
 	}
 	public void addAuthoringSession(VoogaAuthorSession authorsesh){
+		System.out.println("adding authoring session: "+myAuthorStats.size());
 		myAuthorStats.add(authorsesh);
 	}
 	public List<VoogaEntry> getPlayStats(){

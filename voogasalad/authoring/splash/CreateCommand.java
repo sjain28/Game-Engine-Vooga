@@ -71,9 +71,7 @@ public class CreateCommand implements Command {
             VoogaBundles.preferences.setProperty("GameDescription", description);
             VoogaBundles.preferences.setProperty("GameWidth", width);
             VoogaBundles.preferences.setProperty("GameHeight", height);
-        	String username = VoogaBundles.preferences.getProperty("UserName");
-        	VoogaStatInfo statinfo = (VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(name, username);
-        	statinfo.addAuthoringSession(new VoogaAuthorSession(new Date()));
+       
             UIManager manager = new UIManager(new ElementManager());
             Scene scene = new VoogaScene(manager);
             Stage primaryStage = new Stage();
@@ -120,6 +118,7 @@ public class CreateCommand implements Command {
                     em.setName(level.getName().replace(".xml", ""));
                     models.add(em);
                 }
+            	
                 UIManager manager = new UIManager(models);
                 Scene scene = new VoogaScene(manager);
                 Stage primaryStage = new Stage();

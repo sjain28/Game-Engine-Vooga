@@ -112,6 +112,7 @@ public class VoogaDataBase implements IDataBase{
 	 * @return
 	 */
 	public VoogaEntry getStatByGameAndUser(String gamename, String username){
+		this.printDataBase();
 		int row = myGames.indexOf(getGame(gamename));
 		int col = myUsers.indexOf(getUser(username));
 		System.out.println("the row here is " + row + "and the column is" + col);

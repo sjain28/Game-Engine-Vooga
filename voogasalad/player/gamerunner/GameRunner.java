@@ -3,6 +3,7 @@ package player.gamerunner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -133,15 +134,10 @@ public class GameRunner implements IGameRunner {
 	public void playGame(String gameXmlList) {
 		String gamename = VoogaBundles.preferences.getProperty("GameName");
 		String username = VoogaBundles.preferences.getProperty("UserName");
-
-		myCurrentGame = gameXmlList;
-		//check if the user already has progress or not.
 		
-		//Hard coded!! Need to add the user earlier than this but put this here.
-		VoogaDataBase.getInstance().addUser("displayname", "Josh", "Monsters", "Joshs");
-		
-		//NEED TO CHANGE addGame to addGameIFNOTADDED!!!!
-		VoogaDataBase.getInstance().addGame(gameXmlList, "Monsters");
+		//start new game playing session
+		VoogaDataBase database = VoogaDataBase.getInstance();
+		((VoogaStatInfo) database.getStatByGameAndUser(gamename, username)).addPlaySession(new VoogaPlaySession(new Date()));
 		
 		System.out.println("What is my game here, this can only be shown if a game was added 2 list from game runner " + gamename);
 		VoogaStatInfo playerGameInfo = ((VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename,username));
