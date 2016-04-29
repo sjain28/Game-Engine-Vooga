@@ -1,4 +1,4 @@
-package authoring.statvisualization;
+package stats.visualization;
 
 import java.util.List;
 

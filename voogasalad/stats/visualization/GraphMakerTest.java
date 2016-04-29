@@ -1,4 +1,4 @@
-package authoring.statvisualization;
+package stats.visualization;
 
 import static org.junit.Assert.*;
 
@@ -8,15 +8,16 @@ import java.util.List;
 
 import org.junit.Test;
 
-import database.VoogaDataBase;
-import database.VoogaEntry;
-import database.VoogaPlaySession;
-import database.VoogaStatInfo;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
 import javafx.scene.chart.ScatterChart;
 import javafx.stage.Stage;
+import stats.database.AuthorSession;
+import stats.database.CellEntry;
+import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import tools.VoogaBoolean;
 import tools.VoogaDate;
 import tools.VoogaNumber;
@@ -34,10 +35,17 @@ public class GraphMakerTest extends Application {
 		
 		GraphMaker statsvisualizer = new GraphMaker();
 		StatsVisualizer visualizer = new StatsVisualizer();
-		VoogaEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("game 2", "klo14");
-		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getPlayStats();
+		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("game5", "klo14");
+		List<CellEntry> list = ((StatCell) statinfo).getAuthorStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
-		ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
+		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
+		ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, AuthorSession.DATE_AUTHORED, AuthorSession.AUTHOR_DURATION);
+
+		//to graph all the games and their durations
+		
+		VoogaDataBase database = VoogaDataBase.getInstance();
+		
+		
 		
 		Scene scene = new Scene(sc,500,500);
 		stage.setScene(scene);
@@ -74,16 +82,16 @@ public class GraphMakerTest extends Application {
 	public void fillArrays4(List<Object> xparams, List<Object> yparams){
 		//vooga entry
 		VoogaDataBase database = VoogaDataBase.getInstance();
-		String xparam = VoogaPlaySession.DATE_PLAYED;
-		String yparam = VoogaPlaySession.PLAY_DURATION;
+		String xparam = PlaySession.DATE_PLAYED;
+		String yparam = PlaySession.PLAY_DURATION;
 		
 		String username = "klo14";
 		String gamename = "game 2";
 		
-		VoogaEntry statinfo = database.getStatByGameAndUser(gamename, username);
-		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getPlayStats();
+		CellEntry statinfo = database.getStatByGameAndUser(gamename, username);
+		List<CellEntry> list = ((StatCell) statinfo).getPlayStats();
 		
-		for(VoogaEntry entry : list){
+		for(CellEntry entry : list){
 			xparams.add(entry.getProperty(xparam));
 			yparams.add(entry.getProperty(yparam));
 		}

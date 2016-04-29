@@ -1,15 +1,17 @@
-package database;
+package stats.database;
 
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
 
-public class VoogaDataBaseTest {
+import stats.interaction.CurrentSessionStats;
+
+public class DataBaseTest {
 	@Test
 	public void testAddingUsers() {
 		VoogaDataBase database = VoogaDataBase.getInstance();
-
+		
 		//add games and users
 		database.checkThenAddIfNewGame("game 1", "fun game for friends to play");
 		database.checkThenAddIfNewGame("game 2", "cool game with sharks");
@@ -26,10 +28,10 @@ public class VoogaDataBaseTest {
 		System.out.println(database.getStatsbyGame("game 1"));
 		
 		//get stats from the play session
-		List<VoogaEntry> stats = database.getStatsbyUser("klo14");
-		for(VoogaEntry info : stats){
-			VoogaStatInfo statinfo = (VoogaStatInfo) info;
-			System.out.println(info.getProperty(VoogaStatInfo.MY_GAME)+" : "+statinfo.getPlayStats());
+		List<CellEntry> stats = database.getStatsbyUser("klo14");
+		for(CellEntry info : stats){
+			StatCell statinfo = (StatCell) info;
+			System.out.println(info.getProperty(StatCell.MY_GAME)+" : "+statinfo.getPlayStats());
 		}
 		
 		database.save();
@@ -51,12 +53,16 @@ public class VoogaDataBaseTest {
 	public void addPlaySession(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		//database.clear();
+
+		CurrentSessionStats stats = new CurrentSessionStats();
+		stats.startAuthoringSession();
+		stats.endCurrentAuthoringSession();
 		
-		VoogaPlaySession playsesh5 =new VoogaPlaySession(new Date(),400, 7300, 4);
+		PlaySession playsesh5 =new PlaySession(new Date());
 		System.out.println("here");
-		System.out.println(((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).getPlayStats());
+		System.out.println(((StatCell) database.getStatByGameAndUser("game 2", "klo14")).getPlayStats());
 		
-		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh5);
+		((StatCell) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh5);
 		database.save();
 	}
 }

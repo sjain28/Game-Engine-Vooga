@@ -1,8 +1,8 @@
-package database;
+package stats.database;
 
 import java.time.Instant;
 
-public abstract class VoogaSession extends VoogaEntry{
+public abstract class VoogaSession extends CellEntry{
 	private Instant startInstant;
 	private Instant endInstant;
 	private double gap;

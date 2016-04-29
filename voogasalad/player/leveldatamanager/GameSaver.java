@@ -5,16 +5,15 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Map;
-
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
-import database.VoogaDataBase;
-import database.VoogaEntry;
-import database.VoogaPlaySession;
-import database.VoogaStatInfo;
 import gameengine.SpriteFactory;
 import resources.VoogaBundles;
+import stats.database.CellEntry;
+import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -64,9 +63,8 @@ public class GameSaver implements IGameSaver {
         } catch (Exception e) {
         	new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
         }
-        VoogaEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
-        VoogaPlaySession latestSession =  ((VoogaStatInfo) entry).getLatestPlaySession();
-//        latestSession.setProperty(VoogaPlaySession.LEVEL_REACHED,new VoogaString( filePath +LEVELS +  playerName + XML_SUFFIX));
-        latestSession.setProperty(VoogaPlaySession.LEVEL_REACHED,new VoogaString(playerName));
+        CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
+        PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
+        latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(filePath));
 	}
 }
