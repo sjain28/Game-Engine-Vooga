@@ -4,6 +4,7 @@
 package player.leveldatamanager;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import authoring.interfaces.Elementable;
@@ -20,7 +21,7 @@ public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
     
-    Sprite getCenteredSprite();
+    Sprite getMainSprite();
 
 	Set<Entry<String, Elementable>> getElementables();
     
@@ -49,5 +50,9 @@ public interface ILevelData {
 	void saveProgress(String playerName, String filePath, String gameName);
 	
 	KeyEventContainer getKeyEventContainer();
+	
+	Map<String, VoogaData> getGlobalVariables();
+
+	Map<String, Elementable> getElements();
 
 }

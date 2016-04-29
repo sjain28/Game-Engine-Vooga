@@ -10,6 +10,7 @@ import authoring.model.Preferences;
 import data.Deserializer;
 import database.VoogaDataBase;
 import database.VoogaStatInfo;
+import gameengine.Sprite;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -111,7 +112,9 @@ public class GameRunner implements IGameRunner {
 		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
-		myGameDisplay.clearKeyEvents();	
+		myGameDisplay.clearKeyEvents();
+		//Update scrolling sprite velocity
+		myScroller.increateScrollingSpeed(myScroller.getScrollingSprite());
 	}
 	/**
 	 * Checks and updates all LevelData GlobalVariables
@@ -164,7 +167,9 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		myScroller.scroll(myLevelData.getCenteredSprite());
+		//TODO: Why is this being called?
+		//myLevelData.getElementables();
+		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**
@@ -174,11 +179,19 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
-//		myScroller.scroll(myLevelData.getCenteredSprite());
+		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
 										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
 		myGameDisplay.displayTestMode();
 		run();
+	}
+
+	private void addScrolling() {
+		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
+				myCurrentLevelString, myLevelData.getMainSprite());
+		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
+		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, 
+				myLevelData.getSpriteByID(scrollingSprite.getId()));
 	}
 
 	public IGameDisplay getGameDisplay() {

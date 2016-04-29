@@ -65,7 +65,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
 
-        myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
         
         initializeCoordinates();
