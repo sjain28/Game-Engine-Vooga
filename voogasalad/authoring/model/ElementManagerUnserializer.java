@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
-import data.Deserializer;
 import data.FileReaderToGameObjects;
 import gameengine.BackEndText;
 import gameengine.Sprite;

@@ -5,11 +5,11 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Map;
-
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
 import gameengine.SpriteFactory;
+import resources.VoogaBundles;
 import stats.database.CellEntry;
 import stats.database.PlaySession;
 import stats.database.StatCell;
@@ -27,7 +27,7 @@ import tools.interfaces.VoogaData;
 public class GameSaver implements IGameSaver {
 	
     private static final String XML_SUFFIX = ".xml";
-	
+    private static final String LEVELS = "levels/";
 	private Map<String, Elementable> myElements;
 	private KeyEventContainer myKeyEventContainer;
 	private Map<String, VoogaData> myGlobalVariables;
@@ -59,9 +59,9 @@ public class GameSaver implements IGameSaver {
         DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
         		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
         try {
-            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath + XML_SUFFIX);
+            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath +LEVELS +  playerName + XML_SUFFIX);
         } catch (Exception e) {
-        	new VoogaException("Saving current progress failed");
+        	new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
         }
         CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
         PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();

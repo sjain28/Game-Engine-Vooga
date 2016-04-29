@@ -9,7 +9,7 @@ public class PlaySession extends VoogaSession{
 	public static final String DATE_PLAYED = "date_played";
 	public static final String PLAY_DURATION = "play_duration";
 	public static final String SCORE = "score";
-	public static final String LEVEL_REACHED = "level_reached";
+	public static final String LEVEL_REACHED = "level reached";
 	public PlaySession(Date dateplayed){
 		super();
 		super.startSession();
