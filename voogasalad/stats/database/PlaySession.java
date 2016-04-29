@@ -2,10 +2,12 @@ package stats.database;
 
 import java.util.Date;
 
+import tools.VoogaBoolean;
 import tools.VoogaDate;
 import tools.VoogaNumber;
 
 public class PlaySession extends VoogaSession{
+	public static final String IN_ACTION = "in_action";
 	public static final String DATE_PLAYED = "date_played";
 	public static final String PLAY_DURATION = "play_duration";
 	public static final String SCORE = "score";
@@ -14,6 +16,7 @@ public class PlaySession extends VoogaSession{
 		super();
 		super.startSession();
 		setProperty(DATE_PLAYED, new VoogaDate(dateplayed));
+		setProperty(IN_ACTION, new VoogaBoolean(true));
 	}
 	@Override
 	protected void setDurationProperty(double gap) {
@@ -24,6 +27,7 @@ public class PlaySession extends VoogaSession{
 	}
 	public void endSession(VoogaNumber score, VoogaNumber levelreached) {
 		System.out.println("ending sesion");
+		setProperty(PlaySession.IN_ACTION, new VoogaBoolean(false));
 		setProperty(PlaySession.SCORE, score);
 		setProperty(PlaySession.LEVEL_REACHED, levelreached);
 	}

@@ -52,6 +52,7 @@ public class GameRunner implements IGameRunner {
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
 	private Timeline myTimeline;
+	private boolean playSessionActive;
     private String myCurrentLevelString;
     private IDisplayScroller myScroller;
 	private int myCurrentStep;
@@ -123,7 +124,8 @@ public class GameRunner implements IGameRunner {
 	public void playGame(String gameXmlList) {
 		//start new game playing session
 		myStats.startPlaySession();
-				
+		playSessionActive = true;
+		
 		//get the last level reached if it exists
 		PlaySession playsesh = myStats.getCurrentStatCell().getLatestPlaySession();
 		String latestLevelReached = playsesh.getProperty(PlaySession.LEVEL_REACHED).toString();
@@ -231,7 +233,9 @@ public class GameRunner implements IGameRunner {
 	public void finishPlaySession() {
 		System.out.println((Double) myLevelData.getGlobalVar("Score").getValue());
 		System.out.println(myLevelReached);
-		myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
+		if(playSessionActive){
+			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);			
+		}
 	}
 	@Override
 	public void addScene() {
