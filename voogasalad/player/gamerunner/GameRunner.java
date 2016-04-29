@@ -173,32 +173,9 @@ public class GameRunner implements IGameRunner {
 	 */
 	@Override
 	public void testLevel(String levelName) {
-		String level = levelName.replace('\\', '/');
-		
-		String pathToRemove = "games/" + myCurrentGame + "/levels/";
-		System.out.println("this is pathtoremove: " + pathToRemove);
-		int beginIndex = level.lastIndexOf('/');
-		int endIndex = levelName.indexOf(XML_EXTENSION_SUFFIX);
-		System.out.println("Begin and endindex: " + beginIndex + " " + endIndex);
-		myCurrentLevelString = levelName.substring(beginIndex + 1, endIndex);
-		System.out.println("This is currentlevelstring: " + myCurrentLevelString);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/').lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
-		
-		System.out.println("This is globalvariables: " + myLevelData.getGlobalVariables());
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
 										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
