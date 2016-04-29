@@ -11,6 +11,7 @@ import events.VoogaEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import player.gamedisplay.Menuable;
@@ -43,6 +44,7 @@ public class AnimationEventGUI extends Tab {
 	private RotationEffectSelector rotationSelector;
 	private ImageAnimationEffectSelector imageSelector;
 	private NumberTextField duration;
+	private TextField name;
 	private AnimationFactory factory;
 	private Button OK;
 	private Button preview;
@@ -58,11 +60,13 @@ public class AnimationEventGUI extends Tab {
 		duration = new NumberTextField();
 		duration.setPromptText("Duration in seconds");
 		duration.sanitizeForInteger();
+		name = new TextField();
 		container.getChildren().addAll(pathSelector,
 									   scaleSelector,
 									   rotationSelector,
 									   imageSelector,
 									   GUIUtils.makeRow(new CustomText("Duration: "), duration),
+									   GUIUtils.makeRow(new CustomText("Name: "), name),
 									   buttonRow());
 		this.setContent(container);
 	}
@@ -84,7 +88,6 @@ public class AnimationEventGUI extends Tab {
 	private HBox buttonRow() {
 		OK = new ButtonMaker().makeButton("OK", e -> {
 			//TODO: implement once animation factory has been finalized.
-			System.out.println("intializing event");
 			AnimationEvent animationEvent = factory.makeAnimationEvent("Event Name", Integer.parseInt(duration.getText()));
 			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
 			if(pathSelector.selectEffect.isSelected()) {
@@ -96,9 +99,9 @@ public class AnimationEventGUI extends Tab {
 			if(scaleSelector.selectEffect.isSelected()) {
 				factory.makeScaleAnimationEffect((Double)scaleSelector.getValue(), animationEvent);
 			}
-			//if(imageSelector.selectEffect.isSelected()) {
-				//factory.makeImageAnimationEffect((List<String>)imageSelector.getValue(), animationEvent);
-			//}
+			if(imageSelector.selectEffect.isSelected()) {
+				factory.makeImageAnimationEffect((List<String>)imageSelector.getValue(), imageSelector.getNumberOfCycles(), animationEvent);
+			}
 		});
 		preview = new ButtonMaker().makeButton("Preview", e -> {
 			//TODO: allow users to preview their animation
