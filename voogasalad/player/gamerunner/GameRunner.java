@@ -148,7 +148,6 @@ public class GameRunner implements IGameRunner {
 	 */
 	@Override
 	public void testLevel(String levelName) {
-		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
 										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
