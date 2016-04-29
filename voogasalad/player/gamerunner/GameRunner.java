@@ -3,7 +3,6 @@ package player.gamerunner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
@@ -24,15 +23,11 @@ import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
 import stats.database.PlaySession;
-import stats.database.StatCell;
-import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
-import tools.VoogaNumber;
-import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
@@ -235,5 +230,20 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void finishPlaySession() {
 		myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
+	}
+	@Override
+	public void addScene() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void addScene(CompleteAuthoringModelable manager) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void saveAll() {
+		// TODO Auto-generated method stub
+		
 	}
 }
