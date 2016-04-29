@@ -13,11 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
+import stats.database.VoogaDataBase;
 import tools.VoogaAlert;
 import tools.VoogaFileChooser;
 
@@ -26,8 +24,6 @@ public class LoginScreen extends Stage {
 	private static final double HEIGHT = 200;
 	private static final int TEXT_SPACING = 30;
 	private static final int BUTTON_SPACING = 15;
-	private static final String LOGIN_PROMPT = "Please enter your Username and Password...";
-	private static final String USER_PROMPT = "Please enter New Account Information...";
 	private VoogaDataBase database = VoogaDataBase.getInstance();
 
 	private TabPane myHouse;
@@ -42,30 +38,15 @@ public class LoginScreen extends Stage {
 		VoogaScene scene = new VoogaScene(myHouse);
 		Tab login = new Tab("Login");
 		VBox loginContent = new VBox();
-		loginContent.getChildren().addAll(buildText(LOGIN_PROMPT), loginInput(), loginConfirm());
+		loginContent.getChildren().addAll(loginInput(), loginConfirm());
 		login.setContent(loginContent);
 		Tab user = new Tab("New User");
 		VBox userContent = new VBox();
-		userContent.getChildren().addAll(buildText(USER_PROMPT), userInput(), userConfirm());
+		userContent.getChildren().addAll(userInput(), userConfirm());
 		user.setContent(userContent);
 		myHouse.getTabs().addAll(login, user);
 		myHouse.setPrefSize(WIDTH, HEIGHT);
 		this.setScene(scene);
-	}
-
-	private Text buildText(String text) {
-		HBox h = new HBox(TEXT_SPACING);
-		Text l = new Text();
-
-		l.setFont(Font.font(20));
-		l.setFill(Color.WHITE);
-		l.setText(text);
-
-		h.getChildren().add(l);
-		h.setPrefHeight(HEIGHT / 3);
-		h.setAlignment(Pos.BASELINE_CENTER);
-
-		return l;
 	}
 
 	private HBox loginConfirm() {
@@ -120,7 +101,7 @@ public class LoginScreen extends Stage {
 		HBox input = new HBox(TEXT_SPACING);
 
 		myLoginUsername = new TextField();
-		myLoginUsername.setPromptText("Username");
+		myLoginUsername.setPromptText("UserName");
 		myLoginPassword = new PasswordField();
 		myLoginPassword.setPromptText("Password");
 
@@ -135,7 +116,7 @@ public class LoginScreen extends Stage {
 		HBox input = new HBox(TEXT_SPACING);
 
 		myMakeUsername = new TextField();
-		myMakeUsername.setPromptText("Username");
+		myMakeUsername.setPromptText("UserName");
 		myMakeDisplayname = new TextField();
 		myMakeDisplayname.setPromptText("Display Name");
 		myMakePassword = new PasswordField();

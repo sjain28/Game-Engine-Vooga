@@ -129,6 +129,7 @@ public class StandardDisplay implements IGameDisplay {
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
 			myGameRunner.getTimeline().stop();
+			myGameRunner.finishPlaySession();
 			myGameSound.stopBGM();
 		});
 	}
@@ -171,15 +172,15 @@ public class StandardDisplay implements IGameDisplay {
 	public void clearKeyEvents() {
 		myKeyEvents.clear();
 	}
-
+	/**
+	 * @return the myControl
+	 */
 	public IControl getControl() {
 		return myControl;
 	}
-
 	public IHUD getHUD() {
 		return myHUD;
 	}
-	
 	/**
 	 * Stops the background music and close the stages
 	 */
