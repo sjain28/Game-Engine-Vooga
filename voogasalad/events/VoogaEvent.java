@@ -2,7 +2,6 @@ package events;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import player.leveldatamanager.ILevelData;
 import gameengine.Sprite;
 

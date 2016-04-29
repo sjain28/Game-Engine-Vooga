@@ -31,6 +31,7 @@ public class EventManager {
 				  										      myKeyEventContainer.getKeyReleaseCauses());
 		
 		for(VoogaEvent e : myKeyEventContainer.getEvents()) {
+			System.out.println(e.toString());
 			e.update(myLevelData);
 		}
 						
