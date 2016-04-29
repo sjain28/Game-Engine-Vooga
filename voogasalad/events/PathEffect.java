@@ -1,8 +1,6 @@
 package events;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
 import tools.Position;
@@ -17,22 +15,23 @@ public class PathEffect extends SpriteEffect{
 	private Double[] yMousePoints;
 	private Double myVelocity;
 	private Integer myCounter;
+	private Boolean reverse;
 
-	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, AnimationEvent event) {
+	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, Boolean reverse, AnimationEvent event) {
 		super(event);
 		setNeedsSprites(true);
 		this.xMousePoints = xMousePoints;
 		this.yMousePoints = yMousePoints;
+		this.reverse = reverse;
 		myCounter = 0;
 	}
 
 	@Override
 	public void execute(ILevelData data) {
 		setSprites(data);
-		myCounter++;
 		for (Sprite sprite : getSprites()){
 			// TODO: What if other interaction occurs? (for example, collision)
-			Vector nextVector = createSpline(myCounter);
+			Vector nextVector = createSpline(((AnimationEvent) getEvent()).getCounter());
 			sprite.setVelocity(
 					new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), nextVector.getY()/nextVector.getMagnitude() * getMyVelocity()));
 			sprite.getPosition().addVector(createSpline(myCounter));
@@ -82,5 +81,8 @@ public class PathEffect extends SpriteEffect{
 	}
 	protected Vector createSpline(Integer counter){
 		return new Position(xCoord.get(counter) - xCoord.get(counter - 1), yCoord.get(counter) - yCoord.get(counter-1));
+	}
+	protected PathEffect clone(AnimationEvent event){
+        return new PathEffect(xMousePoints, yMousePoints, reverse, event);
 	}
 }

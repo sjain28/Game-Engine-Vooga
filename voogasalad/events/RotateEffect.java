@@ -25,4 +25,10 @@ public class RotateEffect extends SpriteEffect {
 		}
 		clearSprites();
 	}
+	protected Double getRotation(){
+		return myRotation;
+	}
+	protected RotateEffect clone(AnimationEvent event){
+       return new RotateEffect(myRotation, event);
+	}
 }

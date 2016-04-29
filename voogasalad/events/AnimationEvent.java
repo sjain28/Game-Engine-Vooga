@@ -1,6 +1,7 @@
 package events;
 
 import player.gamerunner.GameRunner;
+import player.leveldatamanager.ILevelData;
 
 //Process: 
 //VoogaEvent has some outside Cause paired to an AnimationEffect
@@ -14,31 +15,36 @@ import player.gamerunner.GameRunner;
 public class AnimationEvent extends VoogaEvent {
 
 	private WrapperCause myCause;
-	private String myNextEvent;
-	
+	private AnimationEvent myNextEvent;
 	private PathEffect myPathEffect;
 	private RotateEffect myRotateEffect;
+	private ImageAnimationEffect myImageEffect;
 	private String myName;
+	private Integer myCounter;
 	
 	private Double myDuration;
-	private Boolean reverse;
 	
-	public AnimationEvent(String name){
+	public AnimationEvent(String name, Double duration){
 		myName = name;
 		myCause = new WrapperCause(this);
-	}
-	
-	protected void setDuration(Double duration){
 		myDuration = GameRunner.FRAME_RATE * duration;
-		myCause = new WrapperCause(this);
-		if (myPathEffect != null){
-			myPathEffect.createAnimationPoints(myDuration);
-		}
-		if (myRotateEffect != null){
-			myRotateEffect.setCycleRotation(myDuration);
-		}
+		myCounter = 0;
 	}
 	
+	@Override
+	public void update(ILevelData data){
+		if(myCause.getValue()){
+			super.update(data);
+			myCounter++;
+			if (myCounter > myDuration){
+				if(myNextEvent != null)
+					myNextEvent.setCauseValue(true);
+				
+				setCauseValue(false);
+				myCounter = 0;
+			}
+		}
+	}
 	protected WrapperCause getCause(){
 		return myCause;
 	}
@@ -50,34 +56,57 @@ public class AnimationEvent extends VoogaEvent {
 	protected void setCauseValue(Boolean value){
 		myCause.setValue(value);
 	}
-	protected void setReverse(Boolean reverse){
-		this.reverse = reverse;
-		if (reverse){
-			//path needs to get reversed and appended
-			//rotation needs to get reversed and appended
-		}
-	}
 	public void addPathEffect(PathEffect pathEffect){
 		if (myPathEffect != null){
 			getEffects().remove(myPathEffect);
 		}
 		myPathEffect = pathEffect;
+		myPathEffect.createAnimationPoints(myDuration);
 		addEffect(pathEffect);
 	}
+	
 	public void addRotateEffect(RotateEffect rotateEffect){
 		if (myRotateEffect != null){
 			getEffects().remove(myRotateEffect);
 		}
 		myRotateEffect = rotateEffect;
+		myRotateEffect.setCycleRotation(myDuration);
 		addEffect(rotateEffect);
 	}
-	public RotateEffect getRotateEffect(){
+	
+	public void addImageAnimationEffect(ImageAnimationEffect imageEffect){
+		if (myImageEffect != null){
+			getEffects().remove(myImageEffect);
+		}
+		myImageEffect = imageEffect;
+		//myImageEffect.set
+		addEffect(myImageEffect);
+	}
+
+	protected AnimationEvent clone(){
+		AnimationEvent clone = new AnimationEvent(myName, myDuration);
+        clone.addRotateEffect(getRotateEffect().clone(clone));
+        clone.addPathEffect(getPathEffect().clone(clone));
+        clone.addImageAnimationEffect(getImageAnimationEffect().clone(clone));
+        return clone;
+	}
+	
+	protected ImageAnimationEffect getImageAnimationEffect() {
+		return myImageEffect;
+	}
+	protected RotateEffect getRotateEffect(){
 		return myRotateEffect;
 	}
-	public PathEffect getPathEffect(){
+	protected PathEffect getPathEffect(){
 		return myPathEffect;
 	}
 	public String getName(){
 		return myName;
+	}
+	public void setNextEvent(AnimationEvent event){
+		myNextEvent = event;
+	}
+	protected Integer getCounter(){
+		return myCounter;
 	}
 }

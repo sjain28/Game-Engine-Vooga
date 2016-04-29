@@ -117,11 +117,7 @@ public class GameRunner implements IGameRunner {
 	 * Checks and updates all LevelData GlobalVariables
 	 */
 	private void checkAndUpdateGlobalVariables(){
-<<<<<<< HEAD
 		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / 60);
-=======
-		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN);
->>>>>>> master
 		if (!myLevelData.getNextLevelName().equals("")) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
