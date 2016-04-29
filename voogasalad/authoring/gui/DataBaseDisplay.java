@@ -2,9 +2,6 @@ package authoring.gui;
 
 import authoring.VoogaScene;
 import authoring.model.VoogaFrontEndText;
-import database.VoogaDataBase;
-import database.VoogaGame;
-import database.VoogaUser;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -22,6 +19,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
+import stats.database.VoogaDataBase;
+import stats.database.VoogaGame;
+import stats.database.VoogaUser;
 
 public class DataBaseDisplay extends Stage {
     private static final double HEADER_HEIGHT = 50;

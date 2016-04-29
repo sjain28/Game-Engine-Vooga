@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.List;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
@@ -31,7 +29,6 @@ public class Serializer {
 			throws ParserConfigurationException, TransformerException, IOException, SAXException {
 		File file = new File(fileName);
 		if (!file.exists()) {
-			System.out.println("creating directory: " + file.getParent());
 			boolean result = false;
 			try {
 				file.getParentFile().mkdir();
@@ -40,7 +37,6 @@ public class Serializer {
 				throw e;
 			}
 			if (result) {
-				System.out.println("DIR created");
 			}
 		}
 		serialize(object, fileName);

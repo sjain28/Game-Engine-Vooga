@@ -1,7 +1,6 @@
 package authoring.interfaces.model;
 
 import authoring.interfaces.gui.Saveable;
-import player.gamedisplay.Menuable;
 import tools.VoogaException;
 
 public interface CompleteAuthoringModelable extends EditElementable, EditEventable, Saveable, Observable {

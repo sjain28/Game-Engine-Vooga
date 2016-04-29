@@ -22,11 +22,11 @@ public interface IGameRunner extends Menuable {
 	
 	void testLevel(String levelName);
 	
-	void playNextLevel();
+//	void playNextLevel();
 		
 	void replayLevel();
 
-	void saveGameProgress(String playerName);
-
 	void takeSnapShot();
+
+	void finishPlaySession();
 }

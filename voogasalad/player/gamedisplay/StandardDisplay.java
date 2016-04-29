@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import stats.database.VoogaDataBase;
 import tools.IVoogaGameSound;
 import tools.OrderedProperties;
 import tools.VoogaGameSound;
@@ -125,13 +126,22 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	private void addEffects() {
 		myStage.show();
+        myStage.setOnCloseRequest(e -> {
+            promptForSave();
+        });
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
 			myGameRunner.getTimeline().stop();
+			myGameRunner.finishPlaySession();
 			myGameSound.stopBGM();
 		});
 	}
+	
+    private void promptForSave () {
+    	VoogaDataBase.getInstance().printDataBase();
+        VoogaDataBase.getInstance().save();
+    }
 	
 	/**
 	 * Creates the game display, adding all components
@@ -171,15 +181,15 @@ public class StandardDisplay implements IGameDisplay {
 	public void clearKeyEvents() {
 		myKeyEvents.clear();
 	}
-
+	/**
+	 * @return the myControl
+	 */
 	public IControl getControl() {
 		return myControl;
 	}
-
 	public IHUD getHUD() {
 		return myHUD;
 	}
-	
 	/**
 	 * Stops the background music and close the stages
 	 */

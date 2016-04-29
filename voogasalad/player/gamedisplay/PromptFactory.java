@@ -11,6 +11,8 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class PromptFactory implements IPromptFactory {
 
+	private static final String TITLE = "VoogaSalad Dialog";
+	
 	/**
 	 * Takes in a string and displays it as a message the user can view
 	 * 
@@ -18,7 +20,7 @@ public class PromptFactory implements IPromptFactory {
 	public void prompt(String message) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("VoogaSalad Dialog"); //TODO: String to from ResourceLoader
+		alert.setTitle(TITLE); //TODO: String to from ResourceLoader
 		alert.setHeaderText(null); //If needed
 		alert.setContentText(message);
 		alert.showAndWait();

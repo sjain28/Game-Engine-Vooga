@@ -2,7 +2,6 @@ package authoring.model;
 
 import java.util.Observable;
 import authoring.gui.Selector;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.FrontEndElementable;
 
 

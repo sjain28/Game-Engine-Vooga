@@ -46,7 +46,6 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
         this.setOpacity(1);
 
         TextProperties tp = new TextProperties();
-        Text text = new Text();
         Map<String, Object> properties = tp.storeData((Text) backtext.getNodeObject());
         tp.loadData(this, properties);
     }
