@@ -164,7 +164,7 @@ public class GameRunner implements IGameRunner {
 		myLevelReached++;
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-//		addScrolling();
+		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**
@@ -224,14 +224,6 @@ public class GameRunner implements IGameRunner {
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }
-//    //Should EVENTUALLY BE TAKEN OUT!!!
-//	@Override
-//	public void playNextLevel() {
-//		myTimeline.stop();
-//		myLevelData.setNextLevelName("Lvl2");
-//		myTimeline.play();
-//	}
-
 	@Override
 	public void exit() {
 		myTimeline.stop();
