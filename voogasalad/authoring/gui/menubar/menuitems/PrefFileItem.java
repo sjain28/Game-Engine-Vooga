@@ -38,6 +38,7 @@ public class PrefFileItem extends MenuItemHandler {
 		DesignBoardPreferences preferences = new DesignBoardPreferences(model);
 		preferences.setText("Preferences for \"" + this.model.getName() + "\"");
 		preferences.setName(this.model.getName());
+		System.out.println("printing size" + model.getGlobalVariables().size());
 		preferences.setScrolling((String) model.getGlobalVariables().get(this.model.getName()+"Scrolling").getValue());
 		preferences.setSpeed((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollSpeed").getValue());
 		preferences.setMainSprite((String) model.getGlobalVariables().get(this.model.getName()+"MainUUID").getValue());

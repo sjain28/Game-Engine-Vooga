@@ -104,7 +104,7 @@ public class LoginScreen extends Stage {
 	private void login(String user, String pass) {
 		database.printDataBase();
 		if (database.verifyLoginInfo(user, pass)) {
-			VoogaBundles.preferences.setProperty("Username", user);
+			VoogaBundles.preferences.setProperty("UserName", user);
 			new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
 		} else {
 			new VoogaAlert("UserName or Password is Incorrect!");

@@ -1,7 +1,9 @@
-package player.gamerunner;
+package tests;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import player.gamerunner.GameRunner;
+import player.gamerunner.IGameRunner;
 
 
 /**

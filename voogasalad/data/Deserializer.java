@@ -10,6 +10,7 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.interfaces.Elementable;
+import resources.VoogaBundles;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
@@ -33,7 +34,7 @@ public final class Deserializer {
                     objectsCreated.add(object);
                 }
                 catch (ClassNotFoundException e) {
-                    throw new VoogaException("Can't Locate File");
+                    throw new VoogaException(VoogaBundles.exceptionProperties.getString("ClassNotFound"));
                 }
             }
         }

@@ -137,11 +137,12 @@ public class GameRunner implements IGameRunner {
 		
 		//NEED TO CHANGE addGame to addGameIFNOTADDED!!!!
 		VoogaDataBase.getInstance().checkThenAddIfNewGame(gameXmlList, "Monsters");
-		
-		VoogaStatInfo playerGameInfo = ((VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename,username));
+		System.out.println("The game here is and the player here is " + username);
+		VoogaStatInfo playerGameInfo = ((VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gameXmlList,username));
 		String latestLevelReached="";
 		if (playerGameInfo.getLatestPlaySession()!=null){
 			latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty(VoogaPlaySession.LEVEL_REACHED))).getValue());
+			System.out.println("ChECKING TO SEE IF LATEST PLAY SESSION IS NULL HERE" + latestLevelReached);
 		}
 		
 		playerGameInfo.addPlaySession(new VoogaPlaySession());
@@ -169,7 +170,7 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		addScrolling();
+//		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**
@@ -212,11 +213,22 @@ public class GameRunner implements IGameRunner {
         if (myTimeline.getRate() - SPEEDCONTROL > 0) {
         	myTimeline.setRate(myTimeline.getRate() - SPEEDCONTROL);
         }
+        promptForSave();
 	}
 
     @Override
     public CompleteAuthoringModelable getManager () {
         return null;
+    }
+    
+    //PUT THIS CODE HERE ONLY FOR TESTING PURPOSES!!!!!!!!
+    private void promptForSave () {
+    	String gamename = VoogaBundles.preferences.getProperty("GameName");
+    	String username = VoogaBundles.preferences.getProperty("UserName");
+    	VoogaStatInfo statinfo = (VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
+        statinfo.getLatestPlaySession().endSession();
+    	VoogaDataBase.getInstance().printDataBase();
+        VoogaDataBase.getInstance().save();
     }
 
     

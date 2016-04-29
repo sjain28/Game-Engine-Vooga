@@ -14,8 +14,11 @@ public abstract class VoogaSession extends VoogaEntry{
 	}
 	public void endSession(){
 		endInstant = Instant.now();
-		gap = ChronoUnit.MINUTES.between(startInstant,endInstant);
-		setDurationProperty(gap);
+		
+		// COMMENT for now 
+//		gap = ChronoUnit.MINUTES.between(startInstant,endInstant);
+//		System.out.println("The gap here is " + gap);
+//		setDurationProperty(gap);
 	}
 	protected abstract void setDurationProperty(double gap);
 }

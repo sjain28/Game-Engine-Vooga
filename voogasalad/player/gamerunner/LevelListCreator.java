@@ -40,8 +40,6 @@ public class LevelListCreator {
 		myLevelList = ((Preferences) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getManagerNames();
     }
     
-
-    
     /**
      * Returns the level list
      * @return

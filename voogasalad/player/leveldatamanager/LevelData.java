@@ -148,6 +148,7 @@ public class LevelData implements ILevelData {
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
+		System.out.println(myElements);
     	myMainCharID = myTransitioner.getMainCharID();
     }
     public String getNextLevelName() {
