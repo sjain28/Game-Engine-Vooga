@@ -11,7 +11,7 @@ public class VoogaDataBaseTest {
 	@Test
 	public void testAddingUsers() {
 		VoogaDataBase database = VoogaDataBase.getInstance();
-		
+
 		//add games and users
 		database.addGame("game 1", "fun game for friends to play");
 		database.addGame("game 2", "cool game with sharks");
@@ -27,16 +27,11 @@ public class VoogaDataBaseTest {
 		System.out.println(database.getStatsbyUser("klo14"));
 		System.out.println(database.getStatsbyGame("game 1"));
 		
-		//add in two play sessions
-		VoogaPlaySession playsesh1 = new VoogaPlaySession(new Date(), 153, 4000, 3);
-		database.getStatByGameAndUser("game 2", "klo14").addPlaySession(playsesh1);
-		VoogaPlaySession playsesh2 = new VoogaPlaySession(new Date(), 324, 2000, 2);
-		database.getStatByGameAndUser("game 2", "klo14").addPlaySession(playsesh2);
-
 		//get stats from the play session
-		List<VoogaStatInfo> stats = database.getStatsbyUser("klo14");
-		for(VoogaStatInfo info : stats){
-			System.out.println(info.getProperty(VoogaStatInfo.MY_GAME)+" : "+info.getPlayStats());
+		List<VoogaEntry> stats = database.getStatsbyUser("klo14");
+		for(VoogaEntry info : stats){
+			VoogaStatInfo statinfo = (VoogaStatInfo) info;
+			System.out.println(info.getProperty(VoogaStatInfo.MY_GAME)+" : "+statinfo.getPlayStats());
 		}
 		
 		database.save();
@@ -49,9 +44,21 @@ public class VoogaDataBaseTest {
 	@Test
 	public void testSingleUserSignIn(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
-		database.clear();
 		database.addUser("Harry Potter", "hp67", "hello", null);
+		//database.clear();
 		database.save();
 		System.out.println("logged in: " + database.verifyLoginInfo("hp67", "hello"));
+	}
+	@Test
+	public void addPlaySession(){
+		VoogaDataBase database = VoogaDataBase.getInstance();
+		//database.clear();
+		
+		VoogaPlaySession playsesh5 =new VoogaPlaySession(new Date(),400, 7300, 4);
+		System.out.println("here");
+		System.out.println(((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).getPlayStats());
+		
+		((VoogaStatInfo) database.getStatByGameAndUser("game 2", "klo14")).addPlaySession(playsesh5);
+		database.save();
 	}
 }

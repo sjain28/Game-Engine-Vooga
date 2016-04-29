@@ -25,7 +25,7 @@ public class NewAnimationNewItem extends PlayerMenuItemHandler {
 	 */
 	public NewAnimationNewItem(Menuable model) {
 		super();
-		animationBuilder = new AnimationEventBuilder(model);
+		animationBuilder = new AnimationEventBuilder();
 	}
 	
 	/**
