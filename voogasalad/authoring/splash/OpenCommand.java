@@ -5,6 +5,7 @@ import authoring.Command;
 import javafx.scene.control.Button;
 import player.gamerunner.GameRunner;
 import player.gamerunner.IGameRunner;
+import resources.VoogaBundles;
 
 public class OpenCommand implements Command {
 
@@ -27,6 +28,8 @@ public class OpenCommand implements Command {
 		projectPrompt.setProceedEvent(ee -> {
 			projectPrompt.close();
 			String name = ((Button) ee.getSource()).getId();
+			//set the current gamename to the game being played
+			VoogaBundles.preferences.setProperty("GameName", name);
 			IGameRunner gameRunner = new GameRunner();
 	        gameRunner.playGame(name);
 		});

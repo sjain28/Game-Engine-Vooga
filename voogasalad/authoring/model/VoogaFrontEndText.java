@@ -33,7 +33,6 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
 
     public VoogaFrontEndText () {
         create();
-        
         initializeMap();
         this.setOpacity(1);
 

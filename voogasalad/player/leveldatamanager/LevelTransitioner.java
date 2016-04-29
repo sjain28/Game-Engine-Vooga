@@ -30,25 +30,19 @@ import tools.interfaces.VoogaData;
 public class LevelTransitioner {
 	
     private static final String SAVE_PROGRESS = "SaveProgress";
-
     private DataContainerOfLists myData;
     private FileReaderToGameObjects myFileManager;
-    
     private Map<String, Elementable> myElements;
     private KeyEventContainer myKeyEventContainer;
     private Map<String, VoogaData> myGlobalVariables;
-
     private ResourceBundle myEventMethods;
     private String myLevelFileName;
-    //TODO: Remove if not needed
-    private String myTimerKey;
     private String myNextLevelKey;
-    private String myCenteredCharKey;
+    private String myMainCharKey;
     
     /**
      * Default constructor that stores all game data that needed to be renewed to transition
      * into a new level.
-     * 
      * @param levelfilename
      * @param elements
      * @param container
@@ -64,26 +58,18 @@ public class LevelTransitioner {
         myEventMethods = VoogaBundles.EventMethods;
         myLevelFileName = levelfilename;
         myNextLevelKey = nextlevelkey;
-        myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
-        myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
+        myMainCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
     }
 	
     /**
-     * refreshes LevelData with the data from a specified level
-     * also restarts timer in global variable
-     * and sets level path
-     * 
+     * Populate myElements with new sprites pertinent to a new level
      * TODO: Create a scrolling sprite
-     * 
      * @param levelfilename
      */
     public Map<String, Elementable> populateNewSprites () {
-        //DataContainerOfLists data = new DataContainerOfLists();
         myFileManager = new FileReaderToGameObjects(myLevelFileName);
         myData = myFileManager.getDataContainer();
-        //refresh elements objects
         List<Elementable> elementObjects = myData.getElementableList();
-        // clear all the instance variables
         myElements.clear();
         for (Elementable elementable : elementObjects) {
             try {elementable.init();}
@@ -95,7 +81,6 @@ public class LevelTransitioner {
 
     /**
      * Returns a newly-populated myKeyEventContainer (Events, KeyEvents and Inputs)
-     * 
      * @return KeyEventContainer
      */
     public KeyEventContainer populateNewEvents() {
@@ -109,7 +94,6 @@ public class LevelTransitioner {
     
     /**
      * Returns a newly-populated myGlobalVariables
-     * 
      * @return Map<String, VoogaData>
      */
     public Map<String, VoogaData> populateNewGlobals() {
@@ -121,7 +105,6 @@ public class LevelTransitioner {
 
     /**
      * Returns a newly-populated SpriteFactory
-     * 
      * @return SpriteFactory
      */
     public SpriteFactory getNewSpriteFactory() {
@@ -131,27 +114,11 @@ public class LevelTransitioner {
     
     /**
      * Returns ID of the sprite the display is being scrolled on
-     * 
      * @return String centerScroll sprite ID
      */
-    public String getCenteredCharID() {
-        Path p = Paths.get(this.myLevelFileName);
-        String rawLevelName = p.getFileName().toString().replace(".xml", "");
-        return (String) myGlobalVariables.get(rawLevelName + myCenteredCharKey).getValue();
-    }
-    
-    //TODO: Implement
-    public String getScrollSpriteID() {
-    	return "";
-    }
-    
-    //TODO: Implement
-    public String getMainSpriteID() {
-    	return "";
-    }
-
-    //TODO: implement
-    public Sprite createScrollSprite() {
-    	return null;
+    public String getMainCharID() {
+        Path path = Paths.get(this.myLevelFileName);
+        String rawLevelName = path.getFileName().toString().replace(".xml", "");
+        return (String) myGlobalVariables.get(rawLevelName + myMainCharKey).getValue();
     }
 }

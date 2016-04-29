@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
 import data.Deserializer;
 import database.VoogaDataBase;
+import database.VoogaPlaySession;
 import database.VoogaStatInfo;
+import gameengine.Sprite;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,6 +25,7 @@ import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
+import player.leveldatamanager.IDisplayScroller;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
@@ -117,7 +119,8 @@ public class GameRunner implements IGameRunner {
 		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
-		myGameDisplay.clearKeyEvents();	
+		myGameDisplay.clearKeyEvents();
+		myScroller.increaseScrollingSpeed(myScroller.getScrollingSprite());
 	}
 	/**
 	 * Checks and updates all LevelData GlobalVariables
@@ -132,10 +135,20 @@ public class GameRunner implements IGameRunner {
 	 * 	Initializes myLevelList and plays the game
 	 */
 	public void playGame(String gameXmlList) {
+		String gamename = VoogaBundles.preferences.getProperty("GameName");
+		String username = VoogaBundles.preferences.getProperty("UserName");
 		myCurrentGame = gameXmlList;
 		//check if the user already has progress or not.
-		VoogaStatInfo playerGameInfo = VoogaDataBase.getInstance().getStatByGameAndUser(gameXmlList, "Josh");
-		String latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty("LEVELREACHED"))).getValue());
+		//Hard coded!! Need to add the user earlier than this but put this here.
+		VoogaDataBase.getInstance().addUser("displayname", "Josh", "Monsters", "Joshs");
+		//NEED TO CHANGE addGame to addGameIFNOTADDED!!!!
+		VoogaDataBase.getInstance().addGame(gameXmlList, "Monsters");
+		System.out.println("What is my game here, this can only be shown if a game was added 2 list from game runner " + gamename);
+		VoogaStatInfo playerGameInfo = ((VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename,username));
+		String latestLevelReached="";
+		if (playerGameInfo.getLatestPlaySession()!=null){
+			latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty(VoogaPlaySession.LEVEL_REACHED))).getValue());
+		}
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/"+gameXmlList+"/"+gameXmlList+".xml").get(0);
 			double width = Double.parseDouble(preferences.getWidth());
@@ -159,7 +172,7 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName){
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		myScroller.scroll(myLevelData.getCenteredSprite());
+		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**
@@ -169,24 +182,28 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
+		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
 										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
 		myGameDisplay.displayTestMode();
 		run();
 	}
 
+	@Override
+	public void replayLevel() {
+		myLevelData.setNextLevelName(myCurrentLevelString);
+	}
+
+	private void addScrolling() {
+		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
+				myCurrentLevelString, myLevelData.getMainSprite());
+		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
+		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, 
+				myLevelData.getSpriteByID(scrollingSprite.getId()));
+	}
+
 	public IGameDisplay getGameDisplay() {
 		return myGameDisplay;
-	}
-
-	@Override
-	public void stop() {
-		myTimeline.stop();
-	}
-
-	@Override
-	public void start() {
-		myTimeline.play();
 	}
 
 	@Override
@@ -199,29 +216,32 @@ public class GameRunner implements IGameRunner {
         	myTimeline.setRate(myTimeline.getRate() - SPEEDCONTROL);
         }
 	}
-	@Override
-	public void mute() {
-	}
-	
-	@Override
-	public void replayLevel() {
-		myLevelData.setNextLevelName(myCurrentLevelString);
-	}
 
     @Override
     public CompleteAuthoringModelable getManager () {
         return null;
     }
 
+	@Override
+	public void playNextLevel() {
+		myTimeline.stop();
+		myLevelData.setNextLevelName("Lvl2");
+		myTimeline.play();
+	}
+
+	@Override
+	public void exit() {
+		myTimeline.stop();
+		myGameDisplay.exit();
+	}
+	
     @Override
     public void saveAll () {        
     }
-
+    
 	@Override
-	public void playNextLevel() {
-		stop();
-		myLevelData.setNextLevelName("Lvl2");
-		myTimeline.play();
+	public void saveGameProgress(String playerName) {
+		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), playerName,myCurrentGame);
 	}
 	
     @Override
@@ -232,17 +252,6 @@ public class GameRunner implements IGameRunner {
     public void addScene (CompleteAuthoringModelable manager) {        
     }
     
-	@Override
-	public void exit() {
-		myTimeline.stop();
-		myGameDisplay.exit();
-	}
-
-	@Override
-	public void saveGameProgress(String playerName) {
-		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), playerName,myCurrentGame);
-	}
-	
 	@Override 
 	public void takeSnapShot() {
 		Scene myScene = myGameDisplay.getMyScene();
@@ -268,5 +277,10 @@ public class GameRunner implements IGameRunner {
 	public void endVideoCapture() {
 		videoScreenshots.clear();
 	}
+	
 	//TODO when to encode the images to a video?
+	@Override
+	public Timeline getTimeline() {
+		return myTimeline;
+	}
 }
