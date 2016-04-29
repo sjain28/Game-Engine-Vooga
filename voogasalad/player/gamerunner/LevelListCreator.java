@@ -18,7 +18,7 @@ import tools.VoogaException;
 public class LevelListCreator {
 	
     private static final String GAMES_PATH_PREFIX = "games/";
-    private static final String SLASH = "games/";
+    private static final String SLASH = "/";
     private static final String XML_EXTENSION = ".xml";
 
     
@@ -34,7 +34,7 @@ public class LevelListCreator {
     public LevelListCreator(String xmlList) throws VoogaException {
     	myLevelList = new ArrayList<>();
 		myGameFilePath = GAMES_PATH_PREFIX + xmlList + SLASH;
-		String XMLwithListOfLevels = myGameFilePath + xmlList + XML_EXTENSION;
+		String XMLwithListOfLevels =myGameFilePath + xmlList + XML_EXTENSION;
 		myLevelList = ((Preferences) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getManagerNames();
     }
     

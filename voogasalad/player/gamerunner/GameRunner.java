@@ -139,7 +139,7 @@ public class GameRunner implements IGameRunner {
 //		//NEED TO CHANGE addGame to addGameIFNOTADDED!!!!
 //		VoogaDataBase.getInstance().checkThenAddIfNewGame(gameXmlList, "Monsters");
 //		System.out.println("The game here is and the player here is " + username);
-		myStats.startPlaySession();
+
 		String latestLevelReached="";
 		//get the last level reached if it exists
 		PlaySession playsesh = myStats.getCurrentStatCell().getLatestPlaySession();
@@ -149,7 +149,7 @@ public class GameRunner implements IGameRunner {
 		}
 		
 		//start new game playing session
-		
+		myStats.startPlaySession();
 
 		
 

@@ -89,7 +89,7 @@ public class CreateCommand implements Command {
     	String gamename = VoogaBundles.preferences.getProperty("GameName");
     	String username = VoogaBundles.preferences.getProperty("UserName");
     	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
-        statinfo.getLatestAuthoringSession().endSession();
+//        statinfo.getLatestAuthoringSession().endSession();
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }
