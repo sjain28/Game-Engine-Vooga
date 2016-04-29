@@ -192,6 +192,7 @@ public class DesignBoard extends Tab implements Observer {
             }
             success = true;
         }
+        
         if (db.hasString()) {
             Node object = (Node) elementManager.getElement(db.getString());
             object.setTranslateX(event.getX() - x_offset);
