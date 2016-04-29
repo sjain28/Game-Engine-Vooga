@@ -104,16 +104,16 @@ public class DisplayScroller implements IDisplayScroller {
 //            catch (VoogaException e1) {
 //                e1.printStackTrace();
 //            }
-			System.out.println("This is mainsprite: " + mainsprite);
-			try {
-                Thread.sleep(2000);
-            }
-            catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+//			System.out.println("This is mainsprite: " + mainsprite);
+//			try {
+//                Thread.sleep(2000);
+//            }
+//            catch (InterruptedException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
 			scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
-			scrollSprite.getVelocity().setVelocity(scrollSpeed, scrollAngle);
+			scrollSprite.getVelocity().setVelocity(scrollSpeed * 0.01, scrollAngle);
 			myScrollingSprite = scrollSprite;
 			return scrollSprite;			
 		}

@@ -26,17 +26,6 @@ public class ElementUpdater {
 		elements.stream().forEach((elempair) -> {
 			Elementable elem = elempair.getValue();
 			if(elem instanceof Sprite){
-			    System.out.println(elem);
-			    System.out.println(((Sprite) elem).getArchetype());
-			    System.out.println("Print isalive: " + ((Sprite) elem).isAlive());
-			    System.out.println("This is alive property: " + ((Sprite) elem).getProperty(ALIVE));
-			    try {
-                    Thread.sleep(2000);
-                }
-                catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
 				if((Boolean) ((Sprite) elem).getProperty(ALIVE).getValue() == false){
 					leveldata.removeSpriteByID(elem.getId());
 				}
