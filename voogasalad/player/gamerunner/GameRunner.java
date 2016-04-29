@@ -229,6 +229,8 @@ public class GameRunner implements IGameRunner {
 	}
 	@Override
 	public void finishPlaySession() {
+		System.out.println((Double) myLevelData.getGlobalVar("Score").getValue());
+		System.out.println(myLevelReached);
 		myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
 	}
 	@Override

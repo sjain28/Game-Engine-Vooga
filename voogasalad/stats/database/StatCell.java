@@ -33,6 +33,7 @@ public class StatCell extends CellEntry {
 		return Collections.unmodifiableList(myPlayStats);
 	}
 	public PlaySession getLatestPlaySession(){
+		System.out.println(myPlayStats.size());
 		if (myPlayStats.empty()){
 			return null;
 		}

@@ -36,6 +36,7 @@ public class CurrentSessionStats {
 	}
 	public void endCurrentPlaySession(double score, double myLevelReached){
 		PlaySession playsession = getCurrentStatCell().getLatestPlaySession();
+		System.out.println(playsession);
 		playsession.endSession(new VoogaNumber(score), new VoogaNumber(myLevelReached));
 	}
 	public StatCell getCurrentStatCell(){
