@@ -192,8 +192,7 @@ public class GameRunner implements IGameRunner {
 				myCurrentLevelString, myLevelData.getMainSprite());
 		System.out.println("This is scrollingSprite: " + scrollingSprite);
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
-		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, 
-				myLevelData.getSpriteByID(scrollingSprite.getId()));
+		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}
 
 	public IGameDisplay getGameDisplay() {
