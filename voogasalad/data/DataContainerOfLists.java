@@ -3,6 +3,7 @@ package data;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
+import events.AnimationEvent;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import tools.interfaces.VoogaData;
@@ -20,18 +21,27 @@ public class DataContainerOfLists {
     private List<Elementable> elementableList;
     private Map<String, VoogaData> variableMap;
     private Map<String, Sprite> archetypeMap;
+    private Map<String, AnimationEvent> myAnimationEvents;
+    private Map<String, List<Double[]>> myPaths;
+    private Map<String, List<AnimationEvent>> myAnimationSequences;
     
     public DataContainerOfLists () {
     }
 
     public DataContainerOfLists (List<Elementable> ElementableList,
                                  Map<String, VoogaData> variableMap,
-                                 List<VoogaEvent> eventList,Map<String,Sprite> archetypeToFactory) {
+                                 List<VoogaEvent> eventList,Map<String,Sprite> archetypeToFactory,
+                                  Map<String, AnimationEvent> animationEvents,
+                                  Map<String, List<Double[]>> paths,
+                                  Map<String, List<AnimationEvent>> animationSequences) {
         this.eventList = eventList;
         System.out.println(this.eventList);
         this.elementableList = ElementableList;
         this.variableMap = variableMap;
         this.archetypeMap = archetypeToFactory;
+        myAnimationEvents = animationEvents;
+        myPaths = paths;
+        myAnimationSequences = animationSequences;
     }
 
     public List<Elementable> getElementableList () {
@@ -49,5 +59,17 @@ public class DataContainerOfLists {
 
     public Map<String, VoogaData> getVariableMap () {
         return this.variableMap;
+    }
+    
+    public Map<String, AnimationEvent> getAnimations(){
+    	return this.myAnimationEvents;
+    }
+    
+    public Map<String, List<Double[]>> getPaths(){
+    	return this.myPaths;
+    }
+    
+    public Map<String, List<AnimationEvent>> getSequences(){
+    	return this.myAnimationSequences;
     }
 }

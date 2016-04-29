@@ -1,8 +1,11 @@
 package authoring.gui.animation;
 
+import java.util.List;
+
 import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
 import authoring.resourceutility.ButtonMaker;
+import events.AnimationEvent;
 import events.AnimationFactory;
 import events.VoogaEvent;
 import javafx.geometry.Insets;
@@ -81,21 +84,21 @@ public class AnimationEventGUI extends Tab {
 	private HBox buttonRow() {
 		OK = new ButtonMaker().makeButton("OK", e -> {
 			//TODO: implement once animation factory has been finalized.
-			
-//			VoogaEvent animationEvent = factory.makeAnimationEvent((String) pathSelector.getValue(), Double.parseDouble(duration.getText()));
-//			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
-//			if(pathSelector.selectEffect.isSelected()) {
-//				factory.makePathEffect((String) pathSelector.getValue(), pathSelector.isReverse(), animationEvent);
-//			}
-//			if(rotationSelector.selectEffect.isSelected()) {
-//				factory.makeRotateEffect(rotationSelector.getValue(), animationEvent);
-//			}
-//			if(scaleSelector.selectEffect.isSelected()) {
-//				factory.makeScaleEffect(scaleSelector.getValue(), animationEvent);
-//			}
-//			if(imageSelector.selectEffect.isSelected()) {
-//				factory.makeImageAnimationEffect(imageSelector.getValue(), animationEvent);
-//			}
+			System.out.println("intializing event");
+			AnimationEvent animationEvent = factory.makeAnimationEvent("Event Name", Integer.parseInt(duration.getText()));
+			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
+			if(pathSelector.selectEffect.isSelected()) {
+				factory.makePathEffect((String) pathSelector.getValue(), pathSelector.isReverse(), animationEvent);
+			}
+			if(rotationSelector.selectEffect.isSelected()) {
+				factory.makeRotateEffect((Double)rotationSelector.getValue(), animationEvent);
+			}
+			if(scaleSelector.selectEffect.isSelected()) {
+				factory.makeScaleAnimationEffect((Double)scaleSelector.getValue(), animationEvent);
+			}
+			//if(imageSelector.selectEffect.isSelected()) {
+				//factory.makeImageAnimationEffect((List<String>)imageSelector.getValue(), animationEvent);
+			//}
 		});
 		preview = new ButtonMaker().makeButton("Preview", e -> {
 			//TODO: allow users to preview their animation

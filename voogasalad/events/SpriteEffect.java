@@ -99,7 +99,7 @@ public class SpriteEffect extends VariableEffect{
 			mySprites.add(data.getSpriteByID(getSpriteID()));
 		}
 		if (getNeedsSprites()){
-			mySprites = getEvent().getSpritesFromCauses();
+			mySprites = getEvent().getCauseSprites();
 		}
 		if (getMyArchetype() != null){
 			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());

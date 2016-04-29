@@ -23,11 +23,14 @@ import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
 import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
+import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
@@ -36,9 +39,9 @@ import videos.ScreenProcessor;
  * @author Hunter, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
-    private static final double INIT_SPEED = 60;
+    public static final double FRAME_RATE = 60;
     private static final double SEC_PER_MIN = 60;
-    private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
+    private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
     private static final double SPEEDCONTROL = 10;
     private static final String LEVELS_PATH = "levels/";
     private static final String XML_EXTENSION_SUFFIX = ".xml";
@@ -88,7 +91,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	public void run() {
 		myCurrentStep = 0;
-		myTimeline.setRate(INIT_SPEED);
+		myTimeline.setRate(FRAME_RATE);
 		myTimeline.play();
 	}
 	/**
@@ -96,6 +99,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void step() {	
 		myCurrentStep++;
+
 		checkAndUpdateGlobalVariables();
 		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
@@ -106,9 +110,10 @@ public class GameRunner implements IGameRunner {
 	/**
 	 * Checks and updates all LevelData GlobalVariables
 	 */
+
 	private void checkAndUpdateGlobalVariables() {
 		//update global timer
-		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN);
+		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / SEC_PER_MIN);
 		
 		//save progress if at checkpoint
     	if (myLevelData.getSaveNow()) {myStats.saveGameProgress(myLevelListCreator.getGameFilePath());}
