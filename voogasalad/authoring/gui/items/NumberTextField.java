@@ -1,6 +1,7 @@
 package authoring.gui.items;
 
 import authoring.gui.refactoringevents.VoogaNode;
+import javafx.beans.property.Property;
 import javafx.scene.control.TextField;
 
 
@@ -44,7 +45,7 @@ public class NumberTextField extends TextField implements VoogaNode{
 
     @Override
     public String getData () {
-        return this.getText();
+        return this.textProperty().get();
     }
 
 }

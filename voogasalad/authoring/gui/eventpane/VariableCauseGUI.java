@@ -2,22 +2,26 @@ package authoring.gui.eventpane;
 
 import java.util.ArrayList;
 import java.util.List;
+import authoring.gui.items.ArchetypeComboBox;
+import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SpriteComboBox;
 import authoring.gui.items.VariableComboBox;
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaNumber;
+import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 
 public class VariableCauseGUI implements EventGUI{
     private ComboBox<String> level;
-    private SpriteComboBox name;
+    private ArchetypeSpriteCombo name;
     private VariableComboBox variables;
     private ComboBox<String> actions;
     private Node amount;
@@ -31,19 +35,25 @@ public class VariableCauseGUI implements EventGUI{
         node = new VBox();
         activeNodes = new ArrayList<Node>();
         
-        initialize(level, name, variables, actions);
+        initialize();
     }
 
-    private void initialize (ComboBox ... cbs) {
+    private void initialize () {
         level = new ComboBox<String>();
-        name = new SpriteComboBox(elementManager);
+        name = new ArchetypeSpriteCombo(elementManager,node,e->onNameSelected(),false);
         variables = new VariableComboBox(elementManager);
         actions = new ComboBox<String>();
         level.getItems().addAll("global", "local");
         addGUIElements(level);
         setChangeListeners();
     }
-
+    
+    private void onNameSelected () {
+        removeInactiveNodes(variables, actions, amount);
+        variables.resetVariables(name.getSpriteComboBox().getSpriteId());
+        addGUIElements(variables);
+    }
+    
     private void setChangeListeners () {
         level.setOnAction(e -> {
             //System.out.println("level activated");
@@ -55,16 +65,8 @@ public class VariableCauseGUI implements EventGUI{
                 addGUIElements(variables);
             }
             if (level.getValue().equals("local")) {
-                addGUIElements(name);
+                name.display();
             }
-        });
-
-        name.setOnAction(e -> {
-            //System.out.println("name activated");
-            removeInactiveNodes(variables, actions, amount);
-            //System.out.println(elementManager.getVoogaElement(name.getSpriteId()).getVoogaProperties());
-            variables.resetVariables(name.getSpriteId());
-            addGUIElements(variables);
         });
 
         variables.setOnAction(e -> {
@@ -83,6 +85,12 @@ public class VariableCauseGUI implements EventGUI{
                 ComboBox<String> cb = new ComboBox<String>();
                 cb.getItems().addAll("true", "false");
                 amount = cb;
+                addGUIElements(actions, amount);
+            }
+            if (vd instanceof VoogaString) {
+                actions.getItems().addAll("Equals");
+                TextField field = new TextField();
+                amount = field;
                 addGUIElements(actions, amount);
             }
 
@@ -122,10 +130,10 @@ public class VariableCauseGUI implements EventGUI{
             result += "events.VariableCause,";
         }
         if (level.getValue().contains("local")){
-            result += "events.SpriteVariableCause,"+name.getSpriteId()+",";
+            result += "events.SpriteVariableCause,"+name.getDetails()+",";
         }
         result+=variables.getValue()+
-                " "+VoogaBundles.EventMethods.getString(actions.getValue())+",";
+                ","+VoogaBundles.EventMethods.getString(actions.getValue())+",";
         
         if (amount instanceof NumberTextField){
             result+=((NumberTextField) amount).getText();

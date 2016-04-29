@@ -2,17 +2,31 @@ package authoring.gui.refactoringevents;
 
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
+import java.util.List;
 
 public class EventNode {
+    private VoogaNode node;
     private EditEventable manager;
     private String name;
-    private Node node;
-
+    
+    
+    private List<EventNode> nextEventNodes;
     private Object data;
     
     public EventNode(){
-        node = new ComboBox();
+        
     }
     
+    public Object data(){
+        return data;
+    }
+    
+    public Node getNode(){
+        return (Node) node;
+    }
+    
+    
+    public void repopulate(){
+        
+    }
 }

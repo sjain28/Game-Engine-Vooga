@@ -1,5 +1,6 @@
 package authoring.gui.eventpane;
 
+import authoring.gui.items.ArchetypeComboBox;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
@@ -29,17 +30,16 @@ public class ProjectileEffectGUI implements EventGUI {
     public ProjectileEffectGUI (EditEventable elementManager) {
         this.elementManager = elementManager;
         node = new VBox();
-
         initialize();
     }
 
     private void createObjects () {
-        archetypes = new SpriteComboBox(elementManager, "Archetype");
+        archetypes = new ArchetypeComboBox(elementManager);
         archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
         targetDesired = new ComboBox();
         targetDesired.getItems().addAll("Relative Position", "Absolute Position");
 
-        targetId = new SpriteComboBox(elementManager, "Sprite");
+        targetId = new SpriteComboBox(elementManager);
         posx = new NumberTextField();
         posx.setPadding(new Insets(5, 5, 5, 5));
         posy = new NumberTextField();

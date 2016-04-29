@@ -1,6 +1,5 @@
 package authoring.gui.items;
 
-
 import authoring.gui.refactoringevents.VoogaNode;
 import authoring.interfaces.model.EditEventable;
 import javafx.geometry.Insets;
@@ -8,36 +7,21 @@ import javafx.scene.control.ComboBox;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
-public class SpriteComboBox extends ComboBox<String> implements VoogaNode{
-    EditEventable manager;
-    
-    public SpriteComboBox(EditEventable manager,String... loadings){
-        this.manager=manager;
-        setPadding(new Insets(10,10,10,10));
-        
-        loadData(loadings);
+
+public class SpriteComboBox extends ComboBox<String> implements VoogaNode {
+    private EditEventable manager;
+
+    public SpriteComboBox (EditEventable manager) {
+        this.manager = manager;
+        setPadding(new Insets(10, 10, 10, 10));
+        loadData();
     }
-    
-    private void loadData (String[] loadings){
-        if (loadings.length==0){
-            getItems().addAll(manager.getMySpriteNames());
-            getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
-            return;
-        }
-        
-        for (String load : loadings){
-            if (load.equals("Sprite")){
-                getItems().addAll(manager.getMySpriteNames());
-            }
-            if (load.equals("Archetype")){
-                getItems().addAll(manager.getSpriteFactory().getAllArchetypeNames());
-            }
-        }
+
+    protected void loadData () {
+        getItems().addAll(manager.getMySpriteNames());
     }
-    public String getSpriteId(){
-        if (manager.getSpriteFactory().getAllArchetypeNames().contains(this.getValue())) {
-            return this.getValue();
-        }
+
+    public String getSpriteId () {
         try {
             return manager.getSpriteIdFromName(this.getValue());
         }
@@ -45,6 +29,10 @@ public class SpriteComboBox extends ComboBox<String> implements VoogaNode{
             new VoogaAlert(e.getMessage());
         }
         return null;
+    }
+    
+    protected EditEventable getManager(){
+        return manager;
     }
 
     @Override

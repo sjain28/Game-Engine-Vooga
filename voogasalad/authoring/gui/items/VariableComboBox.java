@@ -15,6 +15,7 @@ public class VariableComboBox extends ComboBox<String> implements VoogaNode{
     
     public VariableComboBox(EditEventable manager){
         this.manager=manager;
+        this.setPromptText("Select a Variable");
     }
     
     public void resetVariables(String name){
@@ -36,10 +37,13 @@ public class VariableComboBox extends ComboBox<String> implements VoogaNode{
         return variables.get(key);
     }
     
+    public void initialize (Object data){
+        resetVariables((Map<String,VoogaData>) data);
+    }
 
     @Override
     public String getData () {
-        return this.getData();
+        return variables.get(this.getValue()).getClass().toString();
     }
     
 }
