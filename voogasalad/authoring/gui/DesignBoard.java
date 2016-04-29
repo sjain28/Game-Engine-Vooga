@@ -34,6 +34,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import resources.VoogaBundles;
+import tools.NodeZAxisComparator;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -297,17 +298,11 @@ public class DesignBoard extends Tab implements Observer {
         }
 
         if ((o instanceof ElementSelectionModel) && (arg instanceof FrontEndElementable)) {
-            Comparator<Node> comparator = new Comparator<Node>() {
-                public int compare (Node o1, Node o2) {
-                    return ((Double) o1.getTranslateZ()).compareTo(o2.getTranslateZ());
-                }
-
-            };
             for (Node e : contentPane.getChildren()) {
                 System.out.println(e);
             }
             List<Node> newChildren = new ArrayList<Node>(contentPane.getChildren());
-            newChildren.sort(comparator);
+            newChildren.sort(new NodeZAxisComparator());
             contentPane.getChildren().clear();
             contentPane.getChildren().addAll(newChildren);
         }

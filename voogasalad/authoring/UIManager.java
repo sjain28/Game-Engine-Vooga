@@ -1,6 +1,7 @@
 package authoring;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import authoring.gui.menubar.MenuPanel;
@@ -12,6 +13,9 @@ import authoring.model.ElementManager;
 import authoring.model.ElementTabManager;
 import authoring.model.Preferences;
 import data.Serializer;
+import database.VoogaAuthorSession;
+import database.VoogaDataBase;
+import database.VoogaStatInfo;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.VBox;
