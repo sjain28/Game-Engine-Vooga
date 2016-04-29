@@ -62,7 +62,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		myID = UUID.randomUUID().toString();
 		myArchetype = archetype;
 		initializeImage(imagePath);
-		// TODO: use properties file to put these
 		myProperties.put(VoogaBundles.spriteProperties.getString("MASS"), new VoogaNumber((Double) mass.getValue()));
 		myProperties.put(VoogaBundles.spriteProperties.getString("GRAVITY"), new VoogaNumber(0.0));
 		initializeAlive();

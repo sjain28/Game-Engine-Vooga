@@ -15,6 +15,7 @@ import physics.IPhysicsEngine;
  */
 public class ElementUpdater {
 	private static final String ALIVE = "Alive";
+	private static final String GRAVITY = "Gravity";
 	/**
 	 * This method updates each sprite's Position
 	 * before Events (causes and effects) are applied
@@ -25,6 +26,17 @@ public class ElementUpdater {
 		elements.stream().forEach((elempair) -> {
 			Elementable elem = elempair.getValue();
 			if(elem instanceof Sprite){
+			    System.out.println(elem);
+			    System.out.println(((Sprite) elem).getArchetype());
+			    System.out.println("Print isalive: " + ((Sprite) elem).isAlive());
+			    System.out.println("This is alive property: " + ((Sprite) elem).getProperty(ALIVE));
+			    try {
+                    Thread.sleep(2000);
+                }
+                catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 				if((Boolean) ((Sprite) elem).getProperty(ALIVE).getValue() == false){
 					leveldata.removeSpriteByID(elem.getId());
 				}
@@ -38,7 +50,7 @@ public class ElementUpdater {
 	 * 
 	 */
 	private void applyGravity(Sprite e, IPhysicsEngine physics) {
-		double gravityMagnitude = (double) ((Sprite) e).getProperty("Gravity").getValue();
+		double gravityMagnitude = (double) ((Sprite) e).getProperty(GRAVITY).getValue();
 		physics.gravity((Sprite) e, gravityMagnitude);
 	}
 }
