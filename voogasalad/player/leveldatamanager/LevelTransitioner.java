@@ -37,8 +37,6 @@ public class LevelTransitioner {
     private Map<String, VoogaData> myGlobalVariables;
     private ResourceBundle myEventMethods;
     private String myLevelFileName;
-    //TODO: Remove if not needed
-    private String myTimerKey;
     private String myNextLevelKey;
     private String myMainCharKey;
     
@@ -61,7 +59,6 @@ public class LevelTransitioner {
         myLevelFileName = levelfilename;
         myNextLevelKey = nextlevelkey;
         myMainCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
-        myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     }
 	
     /**
@@ -70,12 +67,9 @@ public class LevelTransitioner {
      * @param levelfilename
      */
     public Map<String, Elementable> populateNewSprites () {
-        //DataContainerOfLists data = new DataContainerOfLists();
         myFileManager = new FileReaderToGameObjects(myLevelFileName);
         myData = myFileManager.getDataContainer();
-        //refresh elements objects
         List<Elementable> elementObjects = myData.getElementableList();
-        // clear all the instance variables
         myElements.clear();
         for (Elementable elementable : elementObjects) {
             try {elementable.init();}
@@ -126,20 +120,5 @@ public class LevelTransitioner {
         Path path = Paths.get(this.myLevelFileName);
         String rawLevelName = path.getFileName().toString().replace(".xml", "");
         return (String) myGlobalVariables.get(rawLevelName + myMainCharKey).getValue();
-    }
-    
-    //TODO: Implement
-    public String getScrollSpriteID() {
-    	return "";
-    }
-    
-    //TODO: Implement
-    public String getMainSpriteID() {
-    	return "";
-    }
-
-    //TODO: implement
-    public Sprite createScrollSprite() {
-    	return null;
     }
 }

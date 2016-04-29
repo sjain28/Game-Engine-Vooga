@@ -1,25 +1,22 @@
 package player.gamerunner;
 
+import javafx.animation.Timeline;
 import player.gamedisplay.Menuable;
 
 /**
  * Main control interface for player runner
  * 
- * @author mykuryshev, Hunter
+ * @author Hunter, Michael
  */
 public interface IGameRunner extends Menuable {
 	
-	void stop();
-
-	void start();
-	
 	void exit();
+	
+	Timeline getTimeline();
 
 	void speedUp();
 
 	void speedDown();
-
-	void mute();
 		
 	void playGame(String xmlList);
 	
@@ -32,4 +29,6 @@ public interface IGameRunner extends Menuable {
 	void saveGameProgress(String playerName);
 
 	void takeSnapShot();
+
+	void finishPlaySession();
 }
