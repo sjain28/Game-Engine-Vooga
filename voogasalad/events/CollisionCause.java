@@ -65,7 +65,6 @@ public class CollisionCause extends Cause{
 				}
 			}
 		}
-		System.out.println();
 
 		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
@@ -86,10 +85,7 @@ public class CollisionCause extends Cause{
 			}
 			return false;
 		}
-		else{
-			
-			System.out.println(physics.checkCollisionY(a, b));
-			
+		else{			
 			if(physics.checkCollisionY(a, b) == collisionDirections.get(myDirection)){
 				addSprites(a,b);
 				return true;

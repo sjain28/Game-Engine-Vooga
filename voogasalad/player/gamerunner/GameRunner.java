@@ -136,7 +136,7 @@ public class GameRunner implements IGameRunner {
 		PlaySession playsesh = myStats.getCurrentStatCell().getLatestPlaySession();
 		if (playsesh != null) {
 			latestLevelReached = (String) (((VoogaString) (playsesh.getProperty(PlaySession.LEVEL_REACHED))).getValue());
-			System.out.println("ChECKING TO SEE IF LATEST PLAY SESSION IS NULL HERE" + latestLevelReached);
+			//System.out.println("ChECKING TO SEE IF LATEST PLAY SESSION IS NULL HERE" + latestLevelReached);
 		}
 		
 		try {
@@ -190,10 +190,9 @@ public class GameRunner implements IGameRunner {
 	private void addScrolling() {
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
-		System.out.println("This is scrollingSprite: " + scrollingSprite);
+		//System.out.println("This is scrollingSprite: " + scrollingSprite);
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
-		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, 
-				myLevelData.getSpriteByID(scrollingSprite.getId()));
+		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}
 
 	public IGameDisplay getGameDisplay() {
@@ -242,8 +241,8 @@ public class GameRunner implements IGameRunner {
 	}
 	@Override
 	public void finishPlaySession() {
-		System.out.println((Double) myLevelData.getGlobalVar("Score").getValue());
-		System.out.println(myLevelReached);
+//		System.out.println((Double) myLevelData.getGlobalVar("Score").getValue());
+//		System.out.println(myLevelReached);
 		if(playSessionActive){
 			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);			
 		}

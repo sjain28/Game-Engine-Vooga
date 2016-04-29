@@ -1,13 +1,13 @@
 package authoring.gui.eventpane;
 
-import java.util.ArrayList;
+
 import authoring.gui.items.NumberTextField;
+import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
-import resources.VoogaBundles;
 import tools.VoogaException;
 
 
@@ -30,12 +30,12 @@ public class SpawnEffectGUI implements EventGUI {
 
     private void initialize () {
 
-        archetypes = new SpriteComboBox(elementManager,"Archetype");
+        archetypes = new SpriteComboBox(elementManager);
         archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
         targetDesired = new ComboBox();
         targetDesired.getItems().addAll("Relative Position", "Absolute Position");
 
-        targetId = new SpriteComboBox(elementManager,"Sprite");
+        targetId = new SpriteComboBox(elementManager);
         x = new NumberTextField();
         x.setPadding(new Insets(5,5,5,5));
         y = new NumberTextField();

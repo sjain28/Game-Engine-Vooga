@@ -37,6 +37,8 @@ public class VoogaBundles {
 	public final static ResourceBundle propertiesPaneProperties = ResourceBundle.getBundle("resources/propertiesPane");
 	public final static ResourceBundle spriteProperties = ResourceBundle.getBundle("resources/spritepropertiesmaptags");
 	
+	public final static ResourceBundle causeNames = ResourceBundle.getBundle("resources/causes");
+	public final static ResourceBundle effectNames = ResourceBundle.getBundle("resources/effects");
 	private static Properties makeProperties(String path) {
 		try {
 			Properties props = new Properties();
