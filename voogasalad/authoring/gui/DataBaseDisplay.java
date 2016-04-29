@@ -2,6 +2,7 @@ package authoring.gui;
 
 import authoring.VoogaScene;
 import authoring.model.VoogaFrontEndText;
+import authoring.statvisualization.GraphMaker;
 import database.VoogaDataBase;
 import database.VoogaGame;
 import database.VoogaUser;
@@ -29,6 +30,7 @@ public class DataBaseDisplay extends Stage {
     private static final double HEADER_WIDTH = 700;
     private static final double DATA_WIDTH = 700;
     private static final double DATA_HEIGHT = 400;
+    
     private VoogaDataBase database = VoogaDataBase.getInstance();
     private VoogaUser user;
     private VoogaGame selectedGame;
@@ -67,8 +69,10 @@ public class DataBaseDisplay extends Stage {
 
     private Node makeTabs () {
         TabPane ans = new TabPane();
+        GraphMaker graphMaker = new GraphMaker();
         Tab playsScore = new Tab("Score on Game");
         //TODO: add in playsScore content
+        playsScore.setContent(graphMaker.createScatterPlot("Score on Game", "Game" , "Score", database.getStatByGameAndUser(selectedGame.getProperty(selectedGame.GAME_NAME).toString(), user.getProperty(user.USER_NAME).toString())) , yparam));
         Tab playsTime = new Tab("Time Lasted on Game");
         //TODO: add in playsScore content
         Tab highScore = new Tab("High Scores");

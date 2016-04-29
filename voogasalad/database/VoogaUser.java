@@ -6,9 +6,9 @@ import tools.VoogaString;
 
 public class VoogaUser extends VoogaEntry{
 	private String myPassword;
-	public static final String DISPLAY_NAME = "DisplayName";
-	public static final String USER_NAME = "UserName";
-	public static final String PROF_PIC_LOC = "ProfPicLoc";
+	public static final String DISPLAY_NAME = "display_name";
+	public static final String USER_NAME = "user_name";
+	public static final String PROF_PIC_LOC = "prof_pic_loc";
 
 	
 	public VoogaUser(String displayname,String username, String password, String profPicLocation){
