@@ -28,13 +28,15 @@ public class VoogaStatInfo extends VoogaEntry {
 	public void addAuthoringSession(VoogaAuthorSession authorsesh){
 		myAuthorStats.add(authorsesh);
 	}
-	public List<VoogaPlaySession> getPlayStats(){
+	public List<VoogaEntry> getPlayStats(){
 		return Collections.unmodifiableList(myPlayStats);
 	}
-	public VoogaPlaySession getLatestPlaySession(){
+	public VoogaEntry getLatestPlaySession(){
+		if (myPlayStats.empty()){
+			return null;
+		}
 		return myPlayStats.peek();
 	}
-	
 	public void addPlaySession(VoogaPlaySession voogaplaysesh){
 		myPlayStats.add(voogaplaysesh);
 	}
