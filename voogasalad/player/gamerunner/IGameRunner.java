@@ -1,5 +1,6 @@
 package player.gamerunner;
 
+import javafx.animation.Timeline;
 import player.gamedisplay.Menuable;
 
 /**
@@ -10,6 +11,8 @@ import player.gamedisplay.Menuable;
 public interface IGameRunner extends Menuable {
 	
 	void exit();
+	
+	Timeline getTimeline();
 
 	void speedUp();
 

@@ -258,4 +258,9 @@ public class GameRunner implements IGameRunner {
 		String fileName = myCurrentLevelString;
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
+	
+	@Override
+	public Timeline getTimeline() {
+		return myTimeline;
+	}
 }

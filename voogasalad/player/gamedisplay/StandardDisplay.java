@@ -137,7 +137,7 @@ public class StandardDisplay implements IGameDisplay {
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
-			myGameRunner.stop();
+			myGameRunner.getTimeline().stop();
 			myGameSound.stopBGM();
 		});
 	}
