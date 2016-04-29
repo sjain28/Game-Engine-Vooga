@@ -10,9 +10,9 @@ import tools.VoogaString;
 public class VoogaStatInfo extends VoogaEntry {
 	private Stack<VoogaAuthorSession> myAuthorStats;
 	private Stack<VoogaPlaySession> myPlayStats;
-	public static final String MY_USER = "stat user";
-	public static final String MY_GAME = "games stat";
-	public static final String LAST_SAVED_LEVEL_LOC = "LastSavedLevelLoc";
+	public static final String MY_USER = "my_user";
+	public static final String MY_GAME = "my_game";
+	public static final String LAST_SAVED_LEVEL_LOC = "last_saved_level_loc";
 	
 	public VoogaStatInfo(String gamename, String username){
 		super();

@@ -6,10 +6,10 @@ import tools.VoogaDate;
 import tools.VoogaNumber;
 
 public class VoogaPlaySession extends VoogaEntry{
-	public static final String DATE_PLAYED = "date";
-	public static final String PLAY_DURATION = "play duration";
+	public static final String DATE_PLAYED = "date_played";
+	public static final String PLAY_DURATION = "play_duration";
 	public static final String SCORE = "score";
-	public static final String LEVEL_REACHED = "level reached";
+	public static final String LEVEL_REACHED = "level_reached";
 	public VoogaPlaySession(Date dateplayed, double playduration, double score, double levelreached){
 		super();
 		setProperty(DATE_PLAYED, new VoogaDate(dateplayed));

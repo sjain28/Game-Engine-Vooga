@@ -11,7 +11,7 @@ public class VoogaDataBaseTest {
 	@Test
 	public void testAddingUsers() {
 		VoogaDataBase database = VoogaDataBase.getInstance();
-		
+
 		//add games and users
 		database.addGame("game 1", "fun game for friends to play");
 		database.addGame("game 2", "cool game with sharks");
