@@ -21,6 +21,7 @@ import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
+import player.leveldatamanager.IDisplayScroller;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
@@ -58,7 +59,7 @@ public class GameRunner implements IGameRunner {
 	private Timeline myTimeline;
 	private String myCurrentGame;
     private String myCurrentLevelString;
-    private DisplayScroller myScroller;
+    private IDisplayScroller myScroller;
     // TODO: Test
 	private int myCurrentStep;
 
@@ -113,7 +114,7 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
 		myGameDisplay.clearKeyEvents();
-		//Update scrolling sprite velocity
+		//Update scrolling sprite velocity if Exponential scrolling
 		myScroller.increateScrollingSpeed(myScroller.getScrollingSprite());
 	}
 	/**
