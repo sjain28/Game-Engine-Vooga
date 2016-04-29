@@ -64,7 +64,7 @@ public class CreateCommand implements Command {
             String description =
                     getFieldOrDefault(newGamePrompt.getDescription(), DEFAULT_DESCRIPTION);
             //add game to database if it's a new game
-            database.addGame(name, description);
+            database.checkThenAddIfNewGame(name, description);
             String width = newGamePrompt.getDimension().getFirst();
             String height = newGamePrompt.getDimension().getLast();
             VoogaBundles.preferences.setProperty("GameName", name);
@@ -89,7 +89,7 @@ public class CreateCommand implements Command {
     	String gamename = VoogaBundles.preferences.getProperty("GameName");
     	String username = VoogaBundles.preferences.getProperty("UserName");
     	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
-        statinfo.getLatestAuthoringSession().endSession();
+//        statinfo.getLatestAuthoringSession().endSession();
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }

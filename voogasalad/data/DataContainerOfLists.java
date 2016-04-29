@@ -6,8 +6,6 @@ import authoring.interfaces.Elementable;
 import events.AnimationEvent;
 import events.VoogaEvent;
 import gameengine.Sprite;
-import gameengine.SpriteFactory;
-import javafx.scene.control.Button;
 import tools.interfaces.VoogaData;
 
 
@@ -45,15 +43,6 @@ public class DataContainerOfLists {
         myPaths = paths;
         myAnimationSequences = animationSequences;
     }
-    
-//    public void addButton(List<Button> ButtonList){
-//    	this.ButtonList = ButtonList;
-//    }
-//    
-//    public List<Button> getButtonList () {
-//
-//        return this.ButtonList;
-//    }
 
     public List<Elementable> getElementableList () {
 
