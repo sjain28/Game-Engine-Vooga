@@ -1,11 +1,15 @@
 package player.leveldatamanager;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import gameengine.Sprite;
 import javafx.scene.Node;
 import player.gamedisplay.IGameDisplay;
+import tools.VoogaNumber;
+import tools.interfaces.VoogaData;
 
 /**
  * DisplayScroller provides public methods that choose Nodes to display
@@ -15,7 +19,12 @@ import player.gamedisplay.IGameDisplay;
  *
  */
 public class DisplayScroller implements IDisplayScroller {
-
+	private static final double INCREASE_FACTOR = 1;
+	
+	private Sprite myScrollingSprite;
+	private boolean isExponentialScroll;
+	private String myScrollingSpriteID;
+	
 	private int myScreenSizeX;
 	private int myScreenSizeY;
 	private int myAdjustFactorX;
@@ -32,10 +41,12 @@ public class DisplayScroller implements IDisplayScroller {
 	 * 
 	 * @param scrollsprite
 	 */
-	public void scroll(Sprite scrollsprite) {
-		scrollX(scrollsprite);
-		//scrollY(scrollsprite);
-	}
+	public void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite) {
+		
+		setContinuousScrollType(globals, currentlevel);
+		scrollX(scrollingsprite);
+		scrollY(scrollingsprite);
+	} 
 	
 	
 	/**
@@ -43,7 +54,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 * 
 	 * @param scrollsprite
 	 */
-	public void scrollX(Sprite scrollsprite) {
+	private void scrollX(Sprite scrollsprite) {
 		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
 			// TODO: Link to size of level instead of hardcoding
     		if (n.intValue() > 200 && n.intValue() < 3000) {
@@ -57,7 +68,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 * 
 	 * @param scrollsprite
 	 */
-	public void scrollY(Sprite scrollsprite) {
+	private void scrollY(Sprite scrollsprite) {
 		scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
 			// TODO: Link to size of level instead of hardcoding
     		if (n.intValue() > 200 && n.intValue() < 3000) {
@@ -66,7 +77,87 @@ public class DisplayScroller implements IDisplayScroller {
 		});
 	}
 
+	/**
+	 * Creates a scrolling sprite per specification
+	 * 
+	 * @param scrollingType
+	 * @param globals
+	 * @param currentlevel
+	 * @param mainsprite
+	 * @return
+	 */
+	public Sprite createScrollingSprite(Map<String, VoogaData> globals, 
+										 String currentlevel, Sprite mainsprite) {
+		
+		String scrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
+
+		// Scrolling is centered on the main character
+		if (scrollingType.equals("Tracking")) {
+			// set main character equal to scrolling sprite
+			return mainsprite;
+			// only scroll in X direction
+		} else {
+//			(scrollingType.equals("Continuous")) { // Scrolling is centered on the new scrolling sprite
+			
+			// create a sprite based on scrollAngle and scrollSpeed
+			//Get scroll angle
+			double scrollAngle = (double) globals.get(currentlevel + "ScrollAngle").getValue();
+			double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
+			//create a sprite
+			Sprite scrollSprite = new Sprite("A.png", "ScrollingSprite", new HashMap<String, VoogaData>(), new VoogaNumber());
+			scrollSprite.getImage().setOpacity(0);
+			scrollSprite.getVelocity().setVelocity(scrollSpeed, scrollAngle);
+			myScrollingSprite = scrollSprite;
+			return scrollSprite;			
+		}
+		
+	}
 	
+	private void setContinuousScrollType(Map<String, VoogaData> globals, String currentlevel) {
+		String scrollType = (String) globals.get(currentlevel + "ContinuousScrollType").getValue();
+		if (scrollType.equals("Exponential")) {
+			isExponentialScroll = true;
+		} else {
+			isExponentialScroll = false;
+		}
+	}
+
+	/**
+	 * To be called right after scroll method in GameRunner
+	 * 
+	 * @param scrollingSprite
+	 * @return
+	 */
+	public void increateScrollingSpeed(Sprite scrollingSprite) {
+		if (isExponentialScroll) {
+			Double prevMagnitude = scrollingSprite.getVelocity().getMagnitude();
+			prevMagnitude = prevMagnitude + INCREASE_FACTOR;
+			scrollingSprite.getVelocity().setVelocity(prevMagnitude, scrollingSprite.getVelocity().getAngleDegree());
+		}
+	}
+	
+//	/**
+//	 * @return the myScrollingSpriteID
+//	 */
+//	public String getMyScrollingSpriteID() {
+//		return myScrollingSpriteID;
+//	}
+	
+
+	/**
+	 * @return the myScrollingSprite
+	 */
+	public Sprite getScrollingSprite() {
+		return myScrollingSprite;
+	}
+//	/**
+//	 * @param myScrollingSprite the myScrollingSprite to set
+//	 */
+//	public void setScrollingSprite(Sprite myScrollingSprite) {
+//		this.myScrollingSprite = myScrollingSprite;
+//	}
+//	
+//	
 	
 	
 	
@@ -217,5 +308,11 @@ public class DisplayScroller implements IDisplayScroller {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
+
+
 
 }

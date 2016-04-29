@@ -40,7 +40,7 @@ public class LevelTransitioner {
     //TODO: Remove if not needed
     private String myTimerKey;
     private String myNextLevelKey;
-    private String myCenteredCharKey;
+    private String myMainCharKey;
     
     /**
      * Default constructor that stores all game data that needed to be renewed to transition
@@ -60,7 +60,7 @@ public class LevelTransitioner {
         myEventMethods = VoogaBundles.EventMethods;
         myLevelFileName = levelfilename;
         myNextLevelKey = nextlevelkey;
-        myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
+        myMainCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     }
 	
@@ -122,10 +122,10 @@ public class LevelTransitioner {
      * Returns ID of the sprite the display is being scrolled on
      * @return String centerScroll sprite ID
      */
-    public String getCenteredCharID() {
-        Path p = Paths.get(this.myLevelFileName);
-        String rawLevelName = p.getFileName().toString().replace(".xml", "");
-        return (String) myGlobalVariables.get(rawLevelName + myCenteredCharKey).getValue();
+    public String getMainCharID() {
+        Path path = Paths.get(this.myLevelFileName);
+        String rawLevelName = path.getFileName().toString().replace(".xml", "");
+        return (String) myGlobalVariables.get(rawLevelName + myMainCharKey).getValue();
     }
     
     //TODO: Implement
