@@ -6,22 +6,13 @@ import authoring.gui.items.NumberTextField;
 import authoring.resourceutility.ButtonMaker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 import tools.Pair;
 
 public class ProjectInitializationPrompt extends StarterPrompt {

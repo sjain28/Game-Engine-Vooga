@@ -2,13 +2,8 @@
  * 
  */
 package player.gamerunner;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.model.Preferences;
 import data.Deserializer;
 import tools.VoogaException;
@@ -23,7 +18,10 @@ import tools.VoogaException;
 public class LevelListCreator {
 	
     private static final String GAMES_PATH_PREFIX = "games/";
+    private static final String SLASH = "/";
+    private static final String XML_EXTENSION = ".xml";
 
+    
     private List<String> myLevelList;
     private String myGameFilePath;
     
@@ -35,12 +33,10 @@ public class LevelListCreator {
      */
     public LevelListCreator(String xmlList) throws VoogaException {
     	myLevelList = new ArrayList<>();
-		myGameFilePath = GAMES_PATH_PREFIX + xmlList + "/";
-		String XMLwithListOfLevels = myGameFilePath + xmlList + ".xml";
+		myGameFilePath = GAMES_PATH_PREFIX + xmlList + SLASH;
+		String XMLwithListOfLevels =myGameFilePath + xmlList + XML_EXTENSION;
 		myLevelList = ((Preferences) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getManagerNames();
     }
-    
-
     
     /**
      * Returns the level list

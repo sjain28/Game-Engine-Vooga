@@ -23,11 +23,14 @@ import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
 import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
+import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
@@ -125,10 +128,14 @@ public class GameRunner implements IGameRunner {
 		//start new game playing session
 		myStats.startPlaySession();
 		playSessionActive = true;
-		
+
+		String latestLevelReached="";
 		//get the last level reached if it exists
 		PlaySession playsesh = myStats.getCurrentStatCell().getLatestPlaySession();
-		String latestLevelReached = playsesh.getProperty(PlaySession.LEVEL_REACHED).toString();
+		if (playsesh != null) {
+			latestLevelReached = (String) (((VoogaString) (playsesh.getProperty(PlaySession.LEVEL_REACHED))).getValue());
+			System.out.println("ChECKING TO SEE IF LATEST PLAY SESSION IS NULL HERE" + latestLevelReached);
+		}
 		
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/" + gameXmlList + "/" + gameXmlList + ".xml").get(0);
@@ -139,6 +146,7 @@ public class GameRunner implements IGameRunner {
 		} catch (Exception e) {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
+		
 		//if the 
 		if (latestLevelReached.equals("")) {latestLevelReached = myLevelList.get(0);}
 		
@@ -154,7 +162,7 @@ public class GameRunner implements IGameRunner {
 		myLevelReached++;
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
-		addScrolling();
+//		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
 	/**
@@ -199,19 +207,28 @@ public class GameRunner implements IGameRunner {
         if (myTimeline.getRate() - SPEEDCONTROL > 0) {
         	myTimeline.setRate(myTimeline.getRate() - SPEEDCONTROL);
         }
+        promptForSave();
 	}
 
     @Override
     public CompleteAuthoringModelable getManager () {
         return null;
     }
-
-	@Override
-	public void playNextLevel() {
-		myTimeline.stop();
-		myLevelData.setNextLevelName("Lvl2");
-		myTimeline.play();
-	}
+    
+    //PUT THIS CODE HERE ONLY FOR TESTING PURPOSES!!!!!!!!
+    private void promptForSave () {
+    	StatCell statinfo = myStats.getCurrentStatCell();
+        statinfo.getLatestPlaySession().endSession();
+    	VoogaDataBase.getInstance().printDataBase();
+        VoogaDataBase.getInstance().save();
+    }
+//    //Should EVENTUALLY BE TAKEN OUT!!!
+//	@Override
+//	public void playNextLevel() {
+//		myTimeline.stop();
+//		myLevelData.setNextLevelName("Lvl2");
+//		myTimeline.play();
+//	}
 
 	@Override
 	public void exit() {

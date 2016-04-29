@@ -57,32 +57,7 @@ public class GameDisplayTester extends Application {
 
     @Override
     public void start (Stage primaryStage) throws Exception {
-
-        // String musicFile = "resources/sound/zelda_theme.mp3"; // For example
-        //
-        // Media sound = new Media(new File(musicFile).toURI().toString());
-        // MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        // mediaPlayer.play();
-        //
-        // primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-        // public void handle(WindowEvent we) {
-        // mediaPlayer.stop();
-        // }
-        // });
-
         IPromptFactory pf = new PromptFactory();
-//        IGameDisplay gd = new StandardDisplay();
-        // IControl c = new StandardControl();
-
-        // FileReaderToGameObjects fileReader = new FileReaderToGameObjects("level2");
-        populate();
-
-        // DisplayScroller scroller = new DisplayScroller(50,50);
-        // fileReader.createNodeList().toString();
-        // scroller.centerScroll(fileReader.createNodeList(), 50);
-//        gd.readAndPopulate(nodes);
-//        gd.display();
-//        pf.prompt("Hi! Prompt worked!");
 
     }
 

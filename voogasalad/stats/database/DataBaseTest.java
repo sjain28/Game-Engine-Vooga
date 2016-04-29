@@ -1,7 +1,5 @@
 package stats.database;
 
-import static org.junit.Assert.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +13,11 @@ public class DataBaseTest {
 		VoogaDataBase database = VoogaDataBase.getInstance();
 		
 		//add games and users
-		database.addGame("game 1", "fun game for friends to play");
-		database.addGame("game 2", "cool game with sharks");
-		database.addGame("game 3", "scary game with dinosaurs");
-		database.addUser("Krista", "klo14", "password1", "mario.png");
-		database.addUser("Jacob", "jb8902", "thisshouldbesecret", "mario.png");
+		database.checkThenAddIfNewGame("game 1", "fun game for friends to play");
+		database.checkThenAddIfNewGame("game 2", "cool game with sharks");
+		database.checkThenAddIfNewGame("game 3", "scary game with dinosaurs");
+		database.checkThenAddIfNewUser("Krista", "klo14", "password1", "mario.png");
+		database.checkThenAddIfNewUser("Jacob", "jb8902", "thisshouldbesecret", "mario.png");
 		System.out.println(database.verifyLoginInfo("klo14", "password1"));
 		database.printDataBase();
 		
@@ -46,8 +44,8 @@ public class DataBaseTest {
 	@Test
 	public void testSingleUserSignIn(){
 		VoogaDataBase database = VoogaDataBase.getInstance();
-		database.addUser("Harry Potter", "hp67", "hello", null);
-		//database.clear();
+		database.clear();
+		database.checkThenAddIfNewUser("Harry Potter", "hp67", "hello", null);
 		database.save();
 		System.out.println("logged in: " + database.verifyLoginInfo("hp67", "hello"));
 	}

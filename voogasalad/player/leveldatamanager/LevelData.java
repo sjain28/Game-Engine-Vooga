@@ -27,7 +27,7 @@ import tools.interfaces.VoogaData;
  * @author Krista, Hunter
  */
 public class LevelData implements ILevelData {
-    private static final String SAVE_PROGRESS = "SaveProgress";
+    private static final String SAVE_PROGRESS = VoogaBundles.defaultglobalvars.getProperty("SaveProgress");
     private IPhysicsEngine myPhysics;
     private String myMainCharID;
     private Map<String, Elementable> myElements;
@@ -147,6 +147,7 @@ public class LevelData implements ILevelData {
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
+		System.out.println(myElements);
     	myMainCharID = myTransitioner.getMainCharID();
     }
     public String getNextLevelName() {

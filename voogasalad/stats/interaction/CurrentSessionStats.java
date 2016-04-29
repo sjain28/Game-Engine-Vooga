@@ -13,8 +13,11 @@ import tools.VoogaString;
 public class CurrentSessionStats {
 	private String myCurrentGame;
 	private String myCurrentUser;
-	private VoogaDataBase myDataBase = VoogaDataBase.getInstance();
+	private VoogaDataBase myDataBase;
 	
+	public CurrentSessionStats(){
+		myDataBase = VoogaDataBase.getInstance();
+	}
 	public void saveGameProgress(String levelurl){
 		getCurrentStatCell().setProperty(StatCell.LAST_SAVED_LEVEL_LOC, new VoogaString(levelurl));
 	}
