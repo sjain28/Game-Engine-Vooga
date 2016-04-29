@@ -8,6 +8,7 @@ import java.util.Map;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
+import events.AnimationFactory;
 import gameengine.SpriteFactory;
 import resources.VoogaBundles;
 import stats.database.CellEntry;
@@ -32,6 +33,7 @@ public class GameSaver implements IGameSaver {
 	private KeyEventContainer myKeyEventContainer;
 	private Map<String, VoogaData> myGlobalVariables;
 	private SpriteFactory mySpriteFactory;
+	private AnimationFactory myAnimationFactory;
 	
 	/**
 	 * Default constructor that saves basic information necessary to save a game state
@@ -57,7 +59,10 @@ public class GameSaver implements IGameSaver {
 	 */
 	public void saveCurrentProgress(String filePath, String playerName, String gameName) {
         DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
-        		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
+        		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap(),
+        		myAnimationFactory.getMyAnimationEvents(),
+        		myAnimationFactory.getMyPaths(), 
+        		myAnimationFactory.getMyAnimationSequences());
         try {
             FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath +LEVELS +  playerName + XML_SUFFIX);
         } catch (Exception e) {

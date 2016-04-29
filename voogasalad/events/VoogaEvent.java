@@ -37,7 +37,6 @@ public class VoogaEvent {
 				return;
 			}
 		}
-		System.out.println("cause was true");
 		for(Effect e: getEffects()){
 			e.execute(data);
 		}
@@ -53,10 +52,6 @@ public class VoogaEvent {
 
 	public void addSpritesFromCause(List<Sprite> sprites){
 		getCauseSprites().addAll(sprites);
-	}
-
-	public List<Sprite> getSpritesFromCauses(){
-		return getCauseSprites();
 	}
 
 	public List<Sprite> getCauseSprites() {

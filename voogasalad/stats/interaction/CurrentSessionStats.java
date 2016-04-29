@@ -18,7 +18,6 @@ public class CurrentSessionStats {
 	public CurrentSessionStats(){
 		myDataBase = VoogaDataBase.getInstance();
 	}
-	
 	public void saveGameProgress(String levelurl){
 		getCurrentStatCell().setProperty(StatCell.LAST_SAVED_LEVEL_LOC, new VoogaString(levelurl));
 	}
@@ -40,6 +39,7 @@ public class CurrentSessionStats {
 	}
 	public void endCurrentPlaySession(double score, double myLevelReached){
 		PlaySession playsession = getCurrentStatCell().getLatestPlaySession();
+		System.out.println(playsession);
 		playsession.endSession(new VoogaNumber(score), new VoogaNumber(myLevelReached));
 	}
 	public StatCell getCurrentStatCell(){
@@ -49,5 +49,7 @@ public class CurrentSessionStats {
 	private void setCurrentGameAndUser(){
 		myCurrentGame = VoogaBundles.preferences.getProperty("GameName");
 		myCurrentUser = VoogaBundles.preferences.getProperty("UserName");
+		System.out.println(myCurrentGame +" "+ myCurrentUser);
+		myDataBase.printDataBase();
 	}
 }
