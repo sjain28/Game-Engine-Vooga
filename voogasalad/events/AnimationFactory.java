@@ -12,10 +12,10 @@ import java.util.Map;
 public class AnimationFactory {
 
 	private Map<String, AnimationEvent> myAnimationEvents;
-    private Map<String, List<Double[]>> myPaths;
+	private Map<String, List<Double[]>> myPaths;
     private Map<String, List<AnimationEvent>> myAnimationSequences;
 
-    private AnimationFactory () {
+    public AnimationFactory () {
         myAnimationEvents = new HashMap<String, AnimationEvent>();
         myPaths = new HashMap<String, List<Double[]>>();
     }
@@ -28,9 +28,10 @@ public class AnimationFactory {
         return SingletonHolder.INSTANCE;
     }
 
-    public void makeAnimationEvent (String name, Double duration) {
+    public AnimationEvent makeAnimationEvent (String name, Double duration) {
         AnimationEvent newEvent = new AnimationEvent(name, duration);
         myAnimationEvents.put(name, newEvent);
+        return newEvent;
     }
 
     public void makePathEffect (String pathName, Boolean reverse, AnimationEvent event) {
@@ -48,7 +49,8 @@ public class AnimationFactory {
     public void addPath (String name, Double[] xCoord, Double[] yCoord) {
         myPaths.put(name, new ArrayList<Double[]>(Arrays.asList(xCoord, yCoord)));
     }
-
+// TODO: make image animation effect
+    // TODO: make scale animation effect
     public AnimationEvent cloneAnimationEvent (String eventName) {
         return myAnimationEvents.get(eventName).clone();
     }
@@ -86,5 +88,15 @@ public class AnimationFactory {
 
 	public Map<String, List<AnimationEvent>> getMyAnimationSequences() {
 		return myAnimationSequences;
+	}
+    public void setMyPaths(Map<String, List<Double[]>> myPaths) {
+		this.myPaths = myPaths;
+	}
+    public void setMyAnimationSequences(Map<String, List<AnimationEvent>> myAnimationSequences) {
+		this.myAnimationSequences = myAnimationSequences;
+	}
+
+	public void setMyAnimationEvents(Map<String, AnimationEvent> myAnimationEvents) {
+		this.myAnimationEvents = myAnimationEvents;
 	}
 }

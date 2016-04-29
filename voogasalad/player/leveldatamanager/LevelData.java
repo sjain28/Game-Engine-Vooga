@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
+import events.AnimationEvent;
 import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -85,6 +86,14 @@ public class LevelData implements ILevelData {
         }
         return list;
     }
+    public AnimationEvent getAnimationFromFactory(String animationString){
+    	if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
+    		List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
+    		return clonedSequence.get(0);
+    	}else{
+    		return myAnimationFactory.cloneAnimationEvent(animationString);
+    	}
+    }
     /**
      * Adds a sprite as a member of the given archetype
      * @param archetype
@@ -148,7 +157,9 @@ public class LevelData implements ILevelData {
     	myGlobalVariables = myTransitioner.populateNewGlobals();
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
     	myMainCharID = myTransitioner.getMainCharID();
+    	myAnimationFactory = myTransitioner.getNewAnimationFactory();
     }
+    
     public String getNextLevelName() {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }

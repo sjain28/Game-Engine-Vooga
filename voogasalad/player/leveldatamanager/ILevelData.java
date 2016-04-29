@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import authoring.interfaces.Elementable;
+import events.AnimationEvent;
 import gameengine.Sprite;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
@@ -56,5 +57,7 @@ public interface ILevelData {
 	Map<String, VoogaData> getGlobalVariables();
 
 	Map<String, Elementable> getElements();
+
+	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
 }

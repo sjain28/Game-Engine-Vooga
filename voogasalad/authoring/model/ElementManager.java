@@ -22,6 +22,7 @@ import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
+import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.BackEndText;
 import gameengine.Sprite;
@@ -43,6 +44,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private GlobalPropertiesManager GPM;
 
     private SpriteFactory spriteFactory;
+    private AnimationFactory animationFactory;
 
     private Set<String> myIds;
 
@@ -57,6 +59,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         GPM = new GlobalPropertiesManager();
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
+        animationFactory = new AnimationFactory();
         names = new ArrayList<String>();
         
         initGlobalVariablesPane();
@@ -148,7 +151,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         try {
             DataContainerOfLists data =
                     new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
-                                             spriteFactory.getArchetypeMap());
+                                             spriteFactory.getArchetypeMap(), 
+                                             animationFactory.getMyAnimationEvents(), 
+                                             animationFactory.getMyPaths(), 
+                                             animationFactory.getMyAnimationSequences());
             // System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data,
                                                       "games/" +

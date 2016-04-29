@@ -71,4 +71,16 @@ public class DataContainerOfLists {
     public Map<String, VoogaData> getVariableMap () {
         return this.variableMap;
     }
+    
+    public Map<String, AnimationEvent> getAnimations(){
+    	return this.myAnimationEvents;
+    }
+    
+    public Map<String, List<Double[]>> getPaths(){
+    	return this.myPaths;
+    }
+    
+    public Map<String, List<AnimationEvent>> getSequences(){
+    	return this.myAnimationSequences;
+    }
 }

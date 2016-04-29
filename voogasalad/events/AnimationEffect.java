@@ -28,12 +28,7 @@ public class AnimationEffect extends SpriteEffect {
 	@Override
 	public void execute(ILevelData data) {
 		setSprites(data);
-		// either have sequence or animation
-		// check which one you have
-		// if myAnimationEvent == null, get a copy using getAnimationEvent() in leveldata
-		//Else, just use myAnimationEvent
-		
-		//myAnimationEvent = data.getAnimationEvent(myAnimationName) --> make this method always return a list<AnimationEvent>
+		myAnimationEvent = data.getAnimationFromFactory(myAnimationName);
 		myAnimationEvent.addSpritesFromCause(getSprites());
 		//data.getEventManager().addEvent(myAnimationEvent);
 		myAnimationEvent.setCauseValue(true);
