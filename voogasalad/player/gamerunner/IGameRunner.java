@@ -5,7 +5,7 @@ import player.gamedisplay.Menuable;
 /**
  * Main control interface for player runner
  * 
- * @author mykuryshev, Hunter
+ * @author Hunter, Michael
  */
 public interface IGameRunner extends Menuable {
 	

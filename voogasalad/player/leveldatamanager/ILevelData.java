@@ -14,6 +14,8 @@ import physics.IPhysicsEngine;
 import tools.interfaces.VoogaData;
 
 /**
+ * LevelData interface that provides public methods related to LevelData
+ * 
  * @author Hunter Lee
  *
  */

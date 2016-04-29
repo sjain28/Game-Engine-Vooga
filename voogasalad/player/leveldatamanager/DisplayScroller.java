@@ -1,12 +1,9 @@
 package player.leveldatamanager;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import gameengine.Sprite;
-import javafx.scene.Node;
 import player.gamedisplay.IGameDisplay;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -95,6 +92,12 @@ public class DisplayScroller implements IDisplayScroller {
 		}
 	}
 	
+	/**
+	 * Set the boolean flag for the case of continuous (constant) scrolling
+	 * 
+	 * @param globals
+	 * @param currentlevel
+	 */
 	private void setContinuousScrollType(Map<String, VoogaData> globals, String currentlevel) {
 		String scrollType = (String) globals.get(currentlevel + "ContinuousScrollType").getValue();
 		if (scrollType.equals("Exponential")) {
