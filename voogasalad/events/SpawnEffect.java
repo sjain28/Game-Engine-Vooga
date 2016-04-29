@@ -11,22 +11,22 @@ public class SpawnEffect extends Effect {
 	private String myTargetID;
 	private Sprite myNewSprite;
 
-	public SpawnEffect(String archetype, Double x, Double y, VoogaEvent voogaEvent) {
+	public SpawnEffect(String archetype, Double xPos, Double yPos, VoogaEvent voogaEvent) {
 		super(voogaEvent);
 		myArchetype = archetype;
-		setMyPosition(new Position(x, y));
+		setMyPosition(new Position(xPos, yPos));
 	}
-	/*public SpawnEffect(String archetype, String targetID, VoogaEvent voogaEvent) {
+	public SpawnEffect(String archetype, String targetID, VoogaEvent voogaEvent) {
 		super(voogaEvent);
 		myArchetype = archetype;
 		setMyTargetID(targetID);
 		setMyPosition(new Position(0, 0));
-	}*/
-	public SpawnEffect(String archetype, String targetID, Double x, Double y, VoogaEvent voogaEvent) {
+	}
+	public SpawnEffect(String archetype, String targetID, Double xPos, Double yPos, VoogaEvent voogaEvent) {
 		super(voogaEvent);
 		myArchetype = archetype;
 		setMyTargetID(targetID);
-		setMyPosition(new Position(x, y));
+		setMyPosition(new Position(xPos, yPos));
 	}
 
 	@Override

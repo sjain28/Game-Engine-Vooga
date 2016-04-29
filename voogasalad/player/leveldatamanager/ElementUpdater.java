@@ -25,6 +25,10 @@ public class ElementUpdater {
 		elements.stream().forEach((elempair) -> {
 			Elementable elem = elempair.getValue();
 			if(elem instanceof Sprite){
+			    for (String key : ((Sprite) elem).getPropertiesMap().keySet()){
+			        System.out.println(((Sprite) elem).getProperty(key));
+			    }
+			        
 				if((Boolean) ((Sprite) elem).getProperty(ALIVE).getValue() == false){
 					leveldata.removeSpriteByID(elem.getId());
 				}
