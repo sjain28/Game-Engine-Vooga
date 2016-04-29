@@ -9,6 +9,8 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
 import data.Deserializer;
 import database.VoogaDataBase;
+import database.VoogaEntry;
+import database.VoogaPlaySession;
 import database.VoogaStatInfo;
 import gameengine.Sprite;
 import javafx.animation.Animation;
@@ -129,6 +131,9 @@ public class GameRunner implements IGameRunner {
 	 * 	Initializes myLevelList and plays the game
 	 */
 	public void playGame(String gameXmlList) {
+		String gamename = VoogaBundles.preferences.getProperty("GameName");
+		String username = VoogaBundles.preferences.getProperty("UserName");
+
 		myCurrentGame = gameXmlList;
 		//check if the user already has progress or not.
 		
@@ -138,11 +143,11 @@ public class GameRunner implements IGameRunner {
 		//NEED TO CHANGE addGame to addGameIFNOTADDED!!!!
 		VoogaDataBase.getInstance().addGame(gameXmlList, "Monsters");
 		
-		System.out.println("What is my game here, this can only be shown if a game was added 2 list from game runner " + gameXmlList);
-		VoogaStatInfo playerGameInfo = VoogaDataBase.getInstance().getStatByGameAndUser(gameXmlList, "Josh");
+		System.out.println("What is my game here, this can only be shown if a game was added 2 list from game runner " + gamename);
+		VoogaStatInfo playerGameInfo = ((VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename,username));
 		String latestLevelReached="";
 		if (playerGameInfo.getLatestPlaySession()!=null){
-			latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty("level reached"))).getValue());
+			latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty(VoogaPlaySession.LEVEL_REACHED))).getValue());
 		}
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/"+gameXmlList+"/"+gameXmlList+".xml").get(0);

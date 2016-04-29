@@ -31,11 +31,17 @@ public class VoogaStatInfo extends VoogaEntry {
 	public List<VoogaEntry> getPlayStats(){
 		return Collections.unmodifiableList(myPlayStats);
 	}
-	public VoogaEntry getLatestPlaySession(){
+	public VoogaPlaySession getLatestPlaySession(){
 		if (myPlayStats.empty()){
 			return null;
 		}
 		return myPlayStats.peek();
+	}
+	public VoogaAuthorSession getLatestAuthoringSession(){
+		if (myAuthorStats.empty()){
+			return null;
+		}
+		return myAuthorStats.peek();
 	}
 	public void addPlaySession(VoogaPlaySession voogaplaysesh){
 		myPlayStats.add(voogaplaysesh);
