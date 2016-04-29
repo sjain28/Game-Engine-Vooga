@@ -8,6 +8,8 @@ import java.util.List;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
 import data.Deserializer;
+import database.VoogaDataBase;
+import database.VoogaStatInfo;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,6 +27,7 @@ import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
+import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
@@ -52,6 +55,7 @@ public class GameRunner implements IGameRunner {
 	private List<String> myLevelList;
 	private LevelListCreator myLevelListCreator;
 	private Timeline myTimeline;
+	private String myCurrentGame;
     private String myCurrentLevelString;
     private DisplayScroller myScroller;
     // TODO: Test
@@ -97,6 +101,7 @@ public class GameRunner implements IGameRunner {
 		myLevelData.updatedGlobalTimer(secondspassed);
 		//check if we need to transition to a different level
     	if (myLevelData.getSaveNow()){
+    		//Change to the right player.
     		saveGameProgress("Josh");
     	}
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
@@ -112,7 +117,11 @@ public class GameRunner implements IGameRunner {
 	 * Checks and updates all LevelData GlobalVariables
 	 */
 	private void checkAndUpdateGlobalVariables(){
+<<<<<<< HEAD
 		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / 60);
+=======
+		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN);
+>>>>>>> master
 		if (!myLevelData.getNextLevelName().equals("")) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 		}
@@ -121,6 +130,10 @@ public class GameRunner implements IGameRunner {
 	 * 	Initializes myLevelList and plays the game
 	 */
 	public void playGame(String gameXmlList) {
+		myCurrentGame = gameXmlList;
+		//check if the user already has progress or not.
+		VoogaStatInfo playerGameInfo = VoogaDataBase.getInstance().getStatByGameAndUser(gameXmlList, "Josh");
+		String latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty("LEVELREACHED"))).getValue());
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/"+gameXmlList+"/"+gameXmlList+".xml").get(0);
 			double width = Double.parseDouble(preferences.getWidth());
@@ -130,10 +143,14 @@ public class GameRunner implements IGameRunner {
 		} catch (Exception e) {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
+		if (latestLevelReached.equals("")){
+			latestLevelReached = myLevelList.get(0);
+		}
 		myGameDisplay.display();
-		playLevel(myLevelList.get(0));
+		playLevel(latestLevelReached);
 		run();
 	}
+	
 	/**
 	 * Play a level, called by playGame
 	 */
@@ -221,7 +238,7 @@ public class GameRunner implements IGameRunner {
 
 	@Override
 	public void saveGameProgress(String playerName) {
-		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), playerName);
+		myLevelData.saveProgress(myLevelListCreator.getGameFilePath(), playerName,myCurrentGame);
 	}
 	
 	@Override 
@@ -231,5 +248,4 @@ public class GameRunner implements IGameRunner {
 		String fileName = myCurrentLevelString;
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
-
 }

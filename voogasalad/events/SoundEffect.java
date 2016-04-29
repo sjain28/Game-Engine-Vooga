@@ -22,12 +22,9 @@ public class SoundEffect extends Effect {
 	@Override
 	public void execute(ILevelData data) {
 		if (!soundAdded){
-			MediaPlayer player = new MediaPlayer(new Media(Paths.get(mySound).toUri().toString()));
-			player.play();
-		// data.getGameSound().createMediaPlayer(mySound);
+			Jukebox.getInstance().play(Paths.get(mySound).toUri().toString());
 			soundAdded = true;
 		}
-		// data.getGameSound().play(mySound);
 
 	}
 

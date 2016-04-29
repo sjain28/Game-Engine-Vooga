@@ -38,6 +38,10 @@ public class DesignBoardPreferences extends Tab {
 	
 	private double SPACING;
 	private double WIDTH;
+	
+	private static final double MIN_SPEED = 0;
+	private static final double MAX_SPEED = 5;
+	private static final double DEF_SPEED = 1;
 
 	private VBox container;
 
@@ -188,7 +192,7 @@ public class DesignBoardPreferences extends Tab {
 	 * Initializes slider for scroll speed (if continuous)
 	 */
 	private void initializeSpecifics() {
-		scrollSpeed = new Slider();
+		scrollSpeed = new Slider(MIN_SPEED, MAX_SPEED, DEF_SPEED);
 		scrollSpeed.setMaxWidth(WIDTH);
 		sprites = new ComboBox<SpriteNameIDPair>();
 		if (this.gameObjects.size() > 0) {
@@ -204,7 +208,7 @@ public class DesignBoardPreferences extends Tab {
 	}
 
 	/**
-	 * Creates utton row at bottom of selection panel.
+	 * Creates button row at bottom of selection panel.
 	 * 
 	 * @return
 	 */
@@ -300,6 +304,15 @@ public class DesignBoardPreferences extends Tab {
 	
 	public void setContinuousScrollType(String type) {
 		this.continuousScrollType.getSelectionModel().select(type);
+	}
+
+	public void setMainSprite(String value) {
+		for(SpriteNameIDPair s : sprites.getItems()) {
+			if(s.getID().equals(value)) {
+				this.sprites.getSelectionModel().select(s);
+				break;
+			}
+		}
 	}
 
 }
