@@ -25,7 +25,6 @@ import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.interfaces.*;
 
-
 public class Sprite implements Moveable, Effectable, Elementable {
 
     protected static final String MASS = "Mass";
@@ -64,27 +63,19 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    String archetype,
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
-
-        myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
-        
         initializeCoordinates();
-
         myLoc = new Position(myX.get(), myY.get());
         myVelocity = new Velocity(0, 0);
         myAcceleration = new Acceleration(0, 0);
         myID = UUID.randomUUID().toString();
         myArchetype = archetype;
-
         initializeImage(imagePath);
-
         // TODO: use properties file to put these
         myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
         myProperties.put(GRAVITY, new VoogaNumber(0.0));
-
         initializeAlive();
         initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
-        System.out.println("image path after initialization: "+properties.get(IMAGE_PATH).getValue());
     }
 
     private void initializeAlive () {
@@ -99,15 +90,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
         VoogaString imagePathString = new VoogaString(path);
         myImagePath = path;
         previousImage = path;
-        
         myImagePathProperty = new SimpleStringProperty(path);
-        
         myProperties.put(IMAGE_PATH, imagePathString);
         Image newImage = setNewImage();
-        
-        System.out.println(path);
         Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
-
         myImage = new ImageView(newImage);
         myImage.setFitHeight(newImage.getHeight());
         myImage.setFitWidth(newImage.getWidth());
@@ -130,10 +116,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private void initializeDimensions (double width, double height) {
         myProperties.put(WIDTH, new VoogaNumber(width));
         myProperties.put(HEIGHT, new VoogaNumber(height));
-        
         myWidth = new SimpleDoubleProperty();
         myHeight = new SimpleDoubleProperty();
-        
         Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
         Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
 
@@ -159,25 +143,20 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     public void update () {
-
         myLoc.addX(myVelocity.getX());
         myLoc.addY(myVelocity.getY());
-
         // Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
         myVelocity.addX(myAcceleration.getX());
         myVelocity.addY(myAcceleration.getY());
-
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
         myImage.setTranslateZ(myZ.doubleValue());
-
         if (!myProperties.get(IMAGE_PATH).getValue().toString().equals(previousImage)) {
             Image newImage = setNewImage();
             myImage.setImage(newImage);
             previousImage = myProperties.get(IMAGE_PATH).getValue().toString();
         }
-
     }
 
     public void setName (String name) {
@@ -334,31 +313,22 @@ public class Sprite implements Moveable, Effectable, Elementable {
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
      */
-
     public void init () throws VoogaException {
         if (myImage != null)
             return;
-
         ImageProperties imageProperties = new ImageProperties();
         initializeImage(myProperties.get(IMAGE_PATH).getValue().toString());
-
-
         Image image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
         myImage = new ImageView(image);
-
         imageProperties.loadData(myImage, initializationProperties);
-
         initializeCoordinates();
         initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
         initializeAlive();
-
         myX.set(myImage.getTranslateX());
         myY.set(myImage.getTranslateY());
-        
+       
         myWidth.set(myImage.getFitWidth());
         myHeight.set(myImage.getFitHeight());
-        
         myAlive.set(true);
-
     }
 }

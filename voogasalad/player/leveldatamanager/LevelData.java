@@ -16,6 +16,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
+import tools.NodeZAxisComparator;
 import tools.VoogaBoolean;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -29,7 +30,7 @@ import tools.interfaces.VoogaData;
 public class LevelData implements ILevelData {
     private static final String SAVE_PROGRESS = "SaveProgress";
     private IPhysicsEngine myPhysics;
-    private String myCenteredCharID;
+    private String myMainCharID;
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
     private AnimationFactory myAnimationFactory;
@@ -49,11 +50,15 @@ public class LevelData implements ILevelData {
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     } 
-    @Override
+    /**
+     * Returns sprite by it's ID
+     */
     public Sprite getSpriteByID (String id) {
         return (Sprite) myElements.get(id);
     }
-    @Override
+    /**
+     * Removes sprite by it's ID
+     */
     public void removeSpriteByID(String id) {
     	myElements.remove(id);
     }
@@ -98,9 +103,11 @@ public class LevelData implements ILevelData {
     public VoogaData getGlobalVar(String variable) {
         return myGlobalVariables.get(variable);
     }
-
-    public Sprite getCenteredSprite() {
-    	return getSpriteByID(myCenteredCharID);
+    /**
+     * Returns the centered sprite
+     */
+    public Sprite getMainSprite() {
+    	return getSpriteByID(myMainCharID);
     }
     /**
      * Returns a text object by ID
@@ -119,6 +126,7 @@ public class LevelData implements ILevelData {
         for (Object key : myElements.keySet()) {
             displayablenodes.add(myElements.get(key).getNodeObject());
         }
+        displayablenodes.sort(new NodeZAxisComparator());
         return displayablenodes;
     }
     /**
@@ -139,7 +147,7 @@ public class LevelData implements ILevelData {
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
-    	myCenteredCharID = myTransitioner.getCenteredCharID();
+    	myMainCharID = myTransitioner.getMainCharID();
     }
     public String getNextLevelName() {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
@@ -172,7 +180,6 @@ public class LevelData implements ILevelData {
     /**
      * Returns the game's physics engine
      */
-    @Override
     public IPhysicsEngine getPhysicsEngine() {
         return myPhysics;
     }
@@ -181,5 +188,18 @@ public class LevelData implements ILevelData {
 	 */
 	public KeyEventContainer getKeyEventContainer() {
 		return myKeyEventContainer;
+	}
+	/**
+	 * @return the myGlobalVariables
+	 */
+	public Map<String, VoogaData> getGlobalVariables() {
+		return myGlobalVariables;
+	}
+	/**
+	 * @return the myElements
+	 */
+	@Override
+	public Map<String, Elementable> getElements() {
+		return myElements;
 	}
 }

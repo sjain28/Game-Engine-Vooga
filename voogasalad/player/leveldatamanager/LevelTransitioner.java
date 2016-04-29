@@ -37,10 +37,8 @@ public class LevelTransitioner {
     private Map<String, VoogaData> myGlobalVariables;
     private ResourceBundle myEventMethods;
     private String myLevelFileName;
-    //TODO: Remove if not needed
-    private String myTimerKey;
     private String myNextLevelKey;
-    private String myCenteredCharKey;
+    private String myMainCharKey;
     
     /**
      * Default constructor that stores all game data that needed to be renewed to transition
@@ -60,8 +58,7 @@ public class LevelTransitioner {
         myEventMethods = VoogaBundles.EventMethods;
         myLevelFileName = levelfilename;
         myNextLevelKey = nextlevelkey;
-        myCenteredCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
-        myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
+        myMainCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
     }
 	
     /**
@@ -70,12 +67,9 @@ public class LevelTransitioner {
      * @param levelfilename
      */
     public Map<String, Elementable> populateNewSprites () {
-        //DataContainerOfLists data = new DataContainerOfLists();
         myFileManager = new FileReaderToGameObjects(myLevelFileName);
         myData = myFileManager.getDataContainer();
-        //refresh elements objects
         List<Elementable> elementObjects = myData.getElementableList();
-        // clear all the instance variables
         myElements.clear();
         for (Elementable elementable : elementObjects) {
             try {elementable.init();}
@@ -122,24 +116,9 @@ public class LevelTransitioner {
      * Returns ID of the sprite the display is being scrolled on
      * @return String centerScroll sprite ID
      */
-    public String getCenteredCharID() {
-        Path p = Paths.get(this.myLevelFileName);
-        String rawLevelName = p.getFileName().toString().replace(".xml", "");
-        return (String) myGlobalVariables.get(rawLevelName + myCenteredCharKey).getValue();
-    }
-    
-    //TODO: Implement
-    public String getScrollSpriteID() {
-    	return "";
-    }
-    
-    //TODO: Implement
-    public String getMainSpriteID() {
-    	return "";
-    }
-
-    //TODO: implement
-    public Sprite createScrollSprite() {
-    	return null;
+    public String getMainCharID() {
+        Path path = Paths.get(this.myLevelFileName);
+        String rawLevelName = path.getFileName().toString().replace(".xml", "");
+        return (String) myGlobalVariables.get(rawLevelName + myMainCharKey).getValue();
     }
 }

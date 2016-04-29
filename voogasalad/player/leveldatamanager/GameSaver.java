@@ -10,6 +10,7 @@ import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
 import database.VoogaDataBase;
+import database.VoogaEntry;
 import database.VoogaPlaySession;
 import database.VoogaStatInfo;
 import events.AnimationFactory;
@@ -67,7 +68,8 @@ public class GameSaver implements IGameSaver {
         } catch (Exception e) {
         	new VoogaException("Saving current progress failed");
         }
-        VoogaPlaySession latestSession =  VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName).getLatestPlaySession();
-        latestSession.setProperty("level reached" ,new VoogaString(filePath));
+        VoogaEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
+        VoogaPlaySession latestSession =  ((VoogaStatInfo) entry).getLatestPlaySession();
+        latestSession.setProperty(VoogaPlaySession.LEVEL_REACHED,new VoogaString(filePath));
 	}
 }

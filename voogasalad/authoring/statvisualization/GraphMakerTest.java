@@ -33,13 +33,11 @@ public class GraphMakerTest extends Application {
 
 		
 		GraphMaker statsvisualizer = new GraphMaker();
-		VisualizeStats visualizer = new VisualizeStats();
+		StatsVisualizer visualizer = new StatsVisualizer();
 		VoogaEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("game 2", "klo14");
 		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getPlayStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
-		ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
-
-		
+		ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
 		
 		Scene scene = new Scene(sc,500,500);
 		stage.setScene(scene);
