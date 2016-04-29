@@ -7,8 +7,6 @@ import tools.VoogaException;
 
 public class CauseAndEffectFactory {
 
-//	private ResourceBundle errorMessages = ResourceBundle.getBundle("./resources/ErrorMessages.properties");
-
     @SuppressWarnings("rawtypes")
 /**
  * Takes in a string stating what kind of cause/effect is being made as well as all of its parameters. Also takes in the
@@ -48,23 +46,7 @@ public class CauseAndEffectFactory {
             Constructor<?> causeConstructor = c.getConstructor(paramClasses);
             Object result = causeConstructor.newInstance(allParams);
         }
-        catch (NoSuchMethodException ee) {
-            ee.printStackTrace();
-            throw ee;
-        }
-        catch (InstantiationException e) {
-            e.printStackTrace();
-            throw e;
-        }
-        catch (IllegalAccessException e) {
-            e.printStackTrace();
-            throw e;
-        }
-        catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            throw e;
-        }
-        catch (InvocationTargetException e) {
+        catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
@@ -80,10 +62,10 @@ public class CauseAndEffectFactory {
             return new Boolean(true);
 
         if (input.equalsIgnoreCase("false"))
-            return new Boolean("false");
+            return new Boolean(false);
+        
         try {
-        	Double d = Double.parseDouble(input);
-            return d;
+        	return Double.parseDouble(input);
         }
         catch (Exception e) {
             return input;

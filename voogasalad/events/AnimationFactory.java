@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class AnimationFactory {
 
     private Map<String, AnimationEvent> myAnimationEvents;
@@ -16,7 +15,7 @@ public class AnimationFactory {
 
     private AnimationFactory () {
         myAnimationEvents = new HashMap<String, AnimationEvent>();
-        myPaths = new HashMap<String, List<Double[]>>();
+        myPaths = new HashMap<>();
     }
 
     private static class SingletonHolder {
@@ -45,7 +44,7 @@ public class AnimationFactory {
     }
 
     public void addPath (String name, Double[] xCoord, Double[] yCoord) {
-        myPaths.put(name, new ArrayList<Double[]>(Arrays.asList(xCoord, yCoord)));
+        myPaths.put(name, new ArrayList<>(Arrays.asList(xCoord, yCoord)));
     }
 
     public AnimationEvent cloneAnimationEvent (String eventName) {
