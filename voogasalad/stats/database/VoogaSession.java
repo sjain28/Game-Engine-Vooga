@@ -1,4 +1,4 @@
-package database;
+package stats.database;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

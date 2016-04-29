@@ -1,7 +1,6 @@
 package authoring.splash;
 
 import authoring.VoogaScene;
-import database.VoogaDataBase;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -12,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
+import stats.database.VoogaDataBase;
 import tools.VoogaAlert;
 
 public class LoginScreen extends Stage {

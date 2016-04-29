@@ -3,9 +3,9 @@ package stats.visualization;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.CellEntry;
 import javafx.scene.chart.ScatterChart;
 import resources.VoogaBundles;
+import stats.database.CellEntry;
 
 public class StatsVisualizer {
 	public ScatterChart<?,?> getVoogaStatsScatterPlot(List<CellEntry> xlist, List<CellEntry> ylist, String xparam, String yparam){

@@ -11,15 +11,15 @@ import authoring.model.ElementManager;
 import authoring.model.ElementManagerUnserializer;
 import authoring.model.Preferences;
 import data.Deserializer;
-import database.AuthorSession;
-import database.VoogaDataBase;
-import database.StatCell;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import player.gamerunner.GameRunner;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import stats.database.AuthorSession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import tools.VoogaException;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 

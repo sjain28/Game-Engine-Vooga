@@ -13,15 +13,15 @@ import authoring.model.ElementManager;
 import authoring.model.ElementTabManager;
 import authoring.model.Preferences;
 import data.Serializer;
-import database.AuthorSession;
-import database.VoogaDataBase;
-import database.StatCell;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.VBox;
 import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 import resources.VoogaPaths;
+import stats.database.AuthorSession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 
 /**
  * The UIManager is responsible for assembling view components, such as the

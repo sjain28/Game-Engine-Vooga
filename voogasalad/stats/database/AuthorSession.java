@@ -1,4 +1,4 @@
-package database;
+package stats.database;
 
 import java.time.Duration;
 import java.time.Instant;

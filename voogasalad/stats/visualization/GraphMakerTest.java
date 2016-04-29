@@ -8,16 +8,16 @@ import java.util.List;
 
 import org.junit.Test;
 
-import database.AuthorSession;
-import database.VoogaDataBase;
-import database.CellEntry;
-import database.PlaySession;
-import database.StatCell;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
 import javafx.scene.chart.ScatterChart;
 import javafx.stage.Stage;
+import stats.database.AuthorSession;
+import stats.database.CellEntry;
+import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import tools.VoogaBoolean;
 import tools.VoogaDate;
 import tools.VoogaNumber;

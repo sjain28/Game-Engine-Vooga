@@ -1,4 +1,4 @@
-package database;
+package stats.database;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
