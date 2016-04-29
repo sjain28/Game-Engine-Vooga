@@ -1,6 +1,10 @@
 package authoring;
 
+import authoring.splash.CreateCommand;
+import authoring.splash.LearnCommand;
 import authoring.splash.LoginScreen;
+import authoring.splash.OpenCommand;
+import authoring.splash.Splash;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
