@@ -6,18 +6,19 @@ import authoring.gui.toolbar.ToolbarItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import player.gamedisplay.Menuable;
 
-public class Map extends ToolbarItemHandler{
-	
-	private UIManager model;
-    
-    public Map(Menuable model){
-    	this.model = (UIManager) model;
+
+public class Map extends ToolbarItemHandler {
+
+    private UIManager model;
+
+    public Map (Menuable model) {
+        this.model = (UIManager) model;
     }
-    
+
     @Override
     public void handle () {
-    	LevelCartographer mapper = new LevelCartographer(model);
-    	mapper.show();
+        LevelCartographer mapper = new LevelCartographer(model);
+        mapper.show();
     }
 
 }

@@ -11,15 +11,15 @@ import authoring.model.ElementManager;
 import authoring.model.ElementManagerUnserializer;
 import authoring.model.Preferences;
 import data.Deserializer;
-import database.VoogaAuthorSession;
-import database.VoogaDataBase;
-import database.VoogaStatInfo;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import player.gamerunner.GameRunner;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import stats.database.AuthorSession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import tools.VoogaException;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 
@@ -64,16 +64,14 @@ public class CreateCommand implements Command {
             String description =
                     getFieldOrDefault(newGamePrompt.getDescription(), DEFAULT_DESCRIPTION);
             //add game to database if it's a new game
-            database.addGame(name, description);
+            database.checkThenAddIfNewGame(name, description);
             String width = newGamePrompt.getDimension().getFirst();
             String height = newGamePrompt.getDimension().getLast();
             VoogaBundles.preferences.setProperty("GameName", name);
             VoogaBundles.preferences.setProperty("GameDescription", description);
             VoogaBundles.preferences.setProperty("GameWidth", width);
             VoogaBundles.preferences.setProperty("GameHeight", height);
-        	String username = VoogaBundles.preferences.getProperty("UserName");
-        	VoogaStatInfo statinfo = (VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(name, username);
-        	statinfo.addAuthoringSession(new VoogaAuthorSession(new Date()));
+       
             UIManager manager = new UIManager(new ElementManager());
             Scene scene = new VoogaScene(manager);
             Stage primaryStage = new Stage();
@@ -90,8 +88,8 @@ public class CreateCommand implements Command {
     private void promptForSave () {
     	String gamename = VoogaBundles.preferences.getProperty("GameName");
     	String username = VoogaBundles.preferences.getProperty("UserName");
-    	VoogaStatInfo statinfo = (VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
-        statinfo.getLatestAuthoringSession().endSession();
+    	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
+//        statinfo.getLatestAuthoringSession().endSession();
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }
@@ -120,6 +118,7 @@ public class CreateCommand implements Command {
                     em.setName(level.getName().replace(".xml", ""));
                     models.add(em);
                 }
+            	
                 UIManager manager = new UIManager(models);
                 Scene scene = new VoogaScene(manager);
                 Stage primaryStage = new Stage();

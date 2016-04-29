@@ -1,18 +1,13 @@
 package authoring.model;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -22,13 +17,13 @@ import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
+import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.BackEndText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import resources.VoogaBundles;
-import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.bindings.ImageProperties;
 import tools.bindings.TextProperties;
@@ -43,6 +38,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private GlobalPropertiesManager GPM;
 
     private SpriteFactory spriteFactory;
+    private AnimationFactory animationFactory;
 
     private Set<String> myIds;
 
@@ -57,6 +53,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         GPM = new GlobalPropertiesManager();
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
+        animationFactory = new AnimationFactory();
         names = new ArrayList<String>();
         
         initGlobalVariablesPane();
@@ -94,7 +91,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
 
     public Node getElement (String id) {
         for (Node node : myGameElements) {
-
             if (node.getId().equals(id)) {
                 return node;
             }
@@ -148,7 +144,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         try {
             DataContainerOfLists data =
                     new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
-                                             spriteFactory.getArchetypeMap());
+                                             spriteFactory.getArchetypeMap(), 
+                                             animationFactory.getMyAnimationEvents(), 
+                                             animationFactory.getMyPaths(), 
+                                             animationFactory.getMyAnimationSequences());
             // System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data,
                                                       "games/" +

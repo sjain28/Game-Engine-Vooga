@@ -5,6 +5,9 @@ import java.util.Map;
 
 import gameengine.Sprite;
 import player.gamedisplay.IGameDisplay;
+import resources.VoogaBundles;
+import tools.VoogaBoolean;
+import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
@@ -21,6 +24,7 @@ public class DisplayScroller implements IDisplayScroller {
 	
 	private Sprite myScrollingSprite;
 	private boolean isExponentialScroll;
+	private String myScrollingType;
 	private IGameDisplay myGameDisplay;
 	
 	public DisplayScroller(IGameDisplay gamedisplay) {
@@ -33,7 +37,11 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @param scrollsprite
 	 */
 	public void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite) {
-		setContinuousScrollType(globals, currentlevel);
+		if (myScrollingType.equals("Tracking")) {
+			isExponentialScroll = false;
+		} else {
+			setContinuousScrollType(globals, currentlevel);
+		}
 		scrollX(scrollingsprite);
 		scrollY(scrollingsprite);
 	} 
@@ -76,17 +84,36 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @return
 	 */
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
-		String scrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
+		myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 		// Scrolling is centered on the main character
-		if (scrollingType.equals("Tracking")) {
+		if (myScrollingType.equals("Tracking")) {
 			return mainsprite;
 		} else {
 			// Create a scrolling sprite
 			double scrollAngle = (double) globals.get(currentlevel + "ScrollAngle").getValue();
 			double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
-			Sprite scrollSprite = new Sprite("A.png", "ScrollingSprite", new HashMap<String, VoogaData>(), new VoogaNumber());
+			Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<String, VoogaData>(), new VoogaNumber());
 			scrollSprite.getImage().setOpacity(0);
-			scrollSprite.getVelocity().setVelocity(scrollSpeed, scrollAngle);
+//			scrollSprite.addProperty("Alive", new VoogaBoolean(true));
+//			scrollSprite.addProperty("Gravity", new VoogaNumber(0.0));
+//                        scrollSprite.addProperty("Mass", new VoogaNumber(0.0));
+//			try {
+//                scrollSprite.init();
+//                System.out.println(scrollSprite.isAlive());
+//            }
+//            catch (VoogaException e1) {
+//                e1.printStackTrace();
+//            }
+//			System.out.println("This is mainsprite: " + mainsprite);
+//			try {
+//                Thread.sleep(2000);
+//            }
+//            catch (InterruptedException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+			scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
+			scrollSprite.getVelocity().setVelocity(scrollSpeed * 0.01, scrollAngle);
 			myScrollingSprite = scrollSprite;
 			return scrollSprite;			
 		}

@@ -5,15 +5,16 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Map;
-
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
-import database.VoogaDataBase;
-import database.VoogaEntry;
-import database.VoogaPlaySession;
-import database.VoogaStatInfo;
+import events.AnimationFactory;
 import gameengine.SpriteFactory;
+import resources.VoogaBundles;
+import stats.database.CellEntry;
+import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -27,11 +28,12 @@ import tools.interfaces.VoogaData;
 public class GameSaver implements IGameSaver {
 	
     private static final String XML_SUFFIX = ".xml";
-	
+    private static final String LEVELS = "levels/";
 	private Map<String, Elementable> myElements;
 	private KeyEventContainer myKeyEventContainer;
 	private Map<String, VoogaData> myGlobalVariables;
 	private SpriteFactory mySpriteFactory;
+	private AnimationFactory myAnimationFactory;
 	
 	/**
 	 * Default constructor that saves basic information necessary to save a game state
@@ -57,14 +59,17 @@ public class GameSaver implements IGameSaver {
 	 */
 	public void saveCurrentProgress(String filePath, String playerName, String gameName) {
         DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
-        		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap());
+        		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap(),
+        		myAnimationFactory.getMyAnimationEvents(),
+        		myAnimationFactory.getMyPaths(), 
+        		myAnimationFactory.getMyAnimationSequences());
         try {
-            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath + XML_SUFFIX);
+            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath +LEVELS +  playerName + XML_SUFFIX);
         } catch (Exception e) {
-        	new VoogaException("Saving current progress failed");
+        	new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
         }
-        VoogaEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
-        VoogaPlaySession latestSession =  ((VoogaStatInfo) entry).getLatestPlaySession();
-        latestSession.setProperty(VoogaPlaySession.LEVEL_REACHED,new VoogaString(filePath));
+        CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
+        PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
+        latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(filePath));
 	}
 }

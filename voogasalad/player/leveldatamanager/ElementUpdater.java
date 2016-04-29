@@ -15,6 +15,7 @@ import physics.IPhysicsEngine;
  */
 public class ElementUpdater {
 	private static final String ALIVE = "Alive";
+	private static final String GRAVITY = "Gravity";
 	/**
 	 * This method updates each sprite's Position
 	 * before Events (causes and effects) are applied
@@ -38,7 +39,7 @@ public class ElementUpdater {
 	 * 
 	 */
 	private void applyGravity(Sprite e, IPhysicsEngine physics) {
-		double gravityMagnitude = (double) ((Sprite) e).getProperty("Gravity").getValue();
+		double gravityMagnitude = (double) ((Sprite) e).getProperty(GRAVITY).getValue();
 		physics.gravity((Sprite) e, gravityMagnitude);
 	}
 }

@@ -1,0 +1,21 @@
+package stats.database;
+
+import java.time.Instant;
+
+public abstract class VoogaSession extends CellEntry{
+	private Instant startInstant;
+	private Instant endInstant;
+	private double gap;
+	public void startSession(){
+		startInstant = Instant.now();
+	}
+	public void endSession(){
+		endInstant = Instant.now();
+		
+		// COMMENT for now 
+//		gap = ChronoUnit.MINUTES.between(startInstant,endInstant);
+//		System.out.println("The gap here is " + gap);
+//		setDurationProperty(gap);
+	}
+	protected abstract void setDurationProperty(double gap);
+}

@@ -3,7 +3,6 @@ package authoring.model;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleIntegerProperty;
-import player.gamedisplay.Menuable;
 
 public class ElementTabManager {
 	

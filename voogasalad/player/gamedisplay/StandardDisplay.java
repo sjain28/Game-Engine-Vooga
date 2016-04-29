@@ -11,10 +11,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import stats.database.VoogaDataBase;
 import tools.IVoogaGameSound;
 import tools.OrderedProperties;
 import tools.VoogaGameSound;
@@ -24,12 +24,8 @@ import tools.VoogaGameSound;
  * Uses composition to contain elements of the display
  * 
  * @author Hunter Lee
- *
  */
 public class StandardDisplay implements IGameDisplay {
-
-	private static final int PANE_SIZE = 600;
-
 	private IPromptFactory myPrompt;
 	private IControl myControl;
 	private IHUD myHUD;
@@ -130,13 +126,22 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	private void addEffects() {
 		myStage.show();
+        myStage.setOnCloseRequest(e -> {
+            promptForSave();
+        });
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
 			myGameRunner.getTimeline().stop();
+			myGameRunner.finishPlaySession();
 			myGameSound.stopBGM();
 		});
 	}
+	
+    private void promptForSave () {
+    	VoogaDataBase.getInstance().printDataBase();
+        VoogaDataBase.getInstance().save();
+    }
 	
 	/**
 	 * Creates the game display, adding all components
@@ -164,9 +169,6 @@ public class StandardDisplay implements IGameDisplay {
 		this.myListToDisplay = myListToDisplay;
 	}
 
-	/**
-	 * @return the myKeyEvents
-	 */
 	@Override
 	public List<KeyEvent> getKeyEvents() {
 		return myKeyEvents;
@@ -179,21 +181,15 @@ public class StandardDisplay implements IGameDisplay {
 	public void clearKeyEvents() {
 		myKeyEvents.clear();
 	}
-
 	/**
 	 * @return the myControl
 	 */
 	public IControl getControl() {
 		return myControl;
 	}
-
-	/**
-	 * @return the myHUD
-	 */
 	public IHUD getHUD() {
 		return myHUD;
 	}
-	
 	/**
 	 * Stops the background music and close the stages
 	 */
@@ -215,9 +211,6 @@ public class StandardDisplay implements IGameDisplay {
 		return myScene;
 	}
 
-	/**
-	 * Returns the current Stage
-	 */
 	@Override
 	public Stage getStage() {
 		return myStage;
