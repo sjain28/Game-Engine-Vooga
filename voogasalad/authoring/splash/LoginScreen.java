@@ -99,7 +99,7 @@ public class LoginScreen extends Stage {
 
 	private void login(String user, String pass) {
 		if (database.verifyLoginInfo(user, pass)) {
-			VoogaBundles.preferences.setProperty("Username", user);
+			VoogaBundles.preferences.setProperty("UserName", user);
 			database.save();
 			new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
 		} else {
