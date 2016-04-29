@@ -4,8 +4,8 @@ import tools.VoogaString;
 
 public class VoogaGame extends VoogaEntry{
 	
-	public static final String GAME_NAME = "GameName";
-	public static final String GAME_DESCRIPTION = "UserName";
+	public static final String GAME_NAME = "game_name";
+	public static final String GAME_DESCRIPTION = "game_description";
 	
 	public VoogaGame(String gameName, String gameDescrip){
 		super();
