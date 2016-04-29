@@ -38,8 +38,6 @@ public class GraphMakerTest extends Application {
 		List<VoogaEntry> list = ((VoogaStatInfo) statinfo).getPlayStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
 		ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
-
-		
 		
 		Scene scene = new Scene(sc,500,500);
 		stage.setScene(scene);
