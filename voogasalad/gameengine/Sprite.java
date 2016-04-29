@@ -65,13 +65,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
                    Map<String, VoogaData> properties,
                    VoogaNumber mass) {
 
-        myProperties = new HashMap<String, VoogaData>();
         myProperties = properties;
       
         
-        initializeImage(imagePath);
-        System.out.println("buballoo: "+myImage.getFitWidth()+" "+myImage.getFitHeight());
-        
+        initializeImage(imagePath);        
         initializeCoordinates();
         
         myLoc = new Position(myX.get(), myY.get());
@@ -110,8 +107,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
     
     private void reloadImage(){
-
-        myImagePathProperty = new SimpleStringProperty();
+        
+        if (myImagePathProperty==null){
+            myImagePathProperty = new SimpleStringProperty();
+        }
         Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
         System.out.println("reload image- path property: "+myImagePathProperty.get());
         setImagePath((String) myProperties.get(IMAGE_PATH).getProperty().getValue());
@@ -120,8 +119,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public void setImagePath (String path) {
         myImagePathProperty.set(path);
-        System.out.println(myProperties.get(IMAGE_PATH).getValue().toString());
         Image image=null;
+        
         if (myProperties.get(IMAGE_PATH).getValue().toString().contains("file:")){
             image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
         } else {

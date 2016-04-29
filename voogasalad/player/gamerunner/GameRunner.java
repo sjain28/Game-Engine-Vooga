@@ -23,11 +23,14 @@ import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
 import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import player.leveldatamanager.DisplayScroller;
 import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
+import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
