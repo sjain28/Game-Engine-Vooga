@@ -173,8 +173,32 @@ public class GameRunner implements IGameRunner {
 	 */
 	@Override
 	public void testLevel(String levelName) {
+		String level = levelName.replace('\\', '/');
+		
+		String pathToRemove = "games/" + myCurrentGame + "/levels/";
+		System.out.println("this is pathtoremove: " + pathToRemove);
+		int beginIndex = level.lastIndexOf('/');
+		int endIndex = levelName.indexOf(XML_EXTENSION_SUFFIX);
+		System.out.println("Begin and endindex: " + beginIndex + " " + endIndex);
+		myCurrentLevelString = levelName.substring(beginIndex + 1, endIndex);
+		System.out.println("This is currentlevelstring: " + myCurrentLevelString);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
+		
+		System.out.println("This is globalvariables: " + myLevelData.getGlobalVariables());
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
 										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
@@ -190,6 +214,7 @@ public class GameRunner implements IGameRunner {
 	private void addScrolling() {
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
+		System.out.println("This is scrollingSprite: " + scrollingSprite);
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
 		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, 
 				myLevelData.getSpriteByID(scrollingSprite.getId()));
