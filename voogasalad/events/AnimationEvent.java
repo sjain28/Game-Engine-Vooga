@@ -20,18 +20,19 @@ public class AnimationEvent extends VoogaEvent {
 	private PathEffect myPathEffect;
 	private RotateEffect myRotateEffect;
 	private ImageAnimationEffect myImageEffect;
+	private ScaleAnimationEffect myScaleEffect;
 	private String myName;
 	private Integer myCounter;
-	
-	private Double myDuration;
-	
-	public AnimationEvent(String name, Double duration){
+
+	private Integer myDuration;
+
+	public AnimationEvent(String name, Integer duration){
 		myName = name;
 		myCause = new WrapperCause(this);
-		myDuration = GameRunner.FRAME_RATE * duration;
+		myDuration = (int) GameRunner.FRAME_RATE * duration;
 		myCounter = 0;
 	}
-	
+
 	@Override
 	public void update(ILevelData data){
 		for (Sprite sprite : getCauseSprites()){
@@ -47,7 +48,7 @@ public class AnimationEvent extends VoogaEvent {
 			if (myCounter > myDuration){
 				if(myNextEvent != null)
 					myNextEvent.setCauseValue(true);
-				
+
 				setCauseValue(false);
 				myCounter = 0;
 			}
@@ -56,13 +57,13 @@ public class AnimationEvent extends VoogaEvent {
 	protected WrapperCause getCause(){
 		return myCause;
 	}
-	
-	protected Double getDuration(){
+
+	protected Integer getDuration(){
 		return myDuration;
 	}
 	private void checkSprites(){
 		for (Sprite sprite : getCauseSprites()){
-			
+
 		}
 	}
 	protected void setCauseValue(Boolean value){
@@ -76,7 +77,7 @@ public class AnimationEvent extends VoogaEvent {
 		myPathEffect.createAnimationPoints(myDuration);
 		addEffect(pathEffect);
 	}
-	
+
 	public void addRotateEffect(RotateEffect rotateEffect){
 		if (myRotateEffect != null){
 			getEffects().remove(myRotateEffect);
@@ -85,22 +86,30 @@ public class AnimationEvent extends VoogaEvent {
 		myRotateEffect.setCycleRotation(myDuration);
 		addEffect(rotateEffect);
 	}
-	
+
 	public void addImageAnimationEffect(ImageAnimationEffect imageEffect){
 		if (myImageEffect != null){
 			getEffects().remove(myImageEffect);
 		}
 		myImageEffect = imageEffect;
-		//myImageEffect.set
+		myImageEffect.setCycleTime(myDuration);
 		addEffect(myImageEffect);
 	}
 
+	public void addScaleAnimationEffect(ScaleAnimationEffect scaleEffect){
+		if (myScaleEffect != null){
+			getEffects().remove(myScaleEffect);
+		}
+		myScaleEffect = scaleEffect;
+		addEffect(myImageEffect);
+	}
+	
 	protected AnimationEvent clone(){
 		AnimationEvent clone = new AnimationEvent(myName, myDuration);
-        clone.addRotateEffect(getRotateEffect().clone(clone));
-        clone.addPathEffect(getPathEffect().clone(clone));
-        clone.addImageAnimationEffect(getImageAnimationEffect().clone(clone));
-        return clone;
+		clone.addRotateEffect(getRotateEffect().clone(clone));
+		clone.addPathEffect(getPathEffect().clone(clone));
+		clone.addImageAnimationEffect(getImageAnimationEffect().clone(clone));
+		return clone;
 	}
 	protected void removeSprite(Sprite sprite){
 		getCauseSprites().remove(sprite);

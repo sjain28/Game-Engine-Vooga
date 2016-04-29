@@ -10,6 +10,17 @@ import javafx.scene.control.TextField;
  *
  */
 public class NumberTextField extends TextField {
+	
+	/**
+	 * Ensures that the text field value is a positive integer.
+	 */
+	public void sanitizeForInteger() {
+		this.textProperty().addListener((obs, old, n) -> {
+			if(!n.matches("\\d+") && !n.isEmpty()) {
+				this.setText(old);
+			}
+		});
+	}
 
     /**
      * Replaces unwanted text with a desired text.

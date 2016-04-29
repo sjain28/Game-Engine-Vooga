@@ -28,7 +28,7 @@ public class AnimationFactory {
         return SingletonHolder.INSTANCE;
     }
 
-    public AnimationEvent makeAnimationEvent (String name, Double duration) {
+    public AnimationEvent makeAnimationEvent (String name, Integer duration) {
         AnimationEvent newEvent = new AnimationEvent(name, duration);
         myAnimationEvents.put(name, newEvent);
         return newEvent;
@@ -43,7 +43,16 @@ public class AnimationFactory {
 
     public void makeRotateEffect (Double rotation, AnimationEvent event) {
         myAnimationEvents.get(event)
-                .addRotateEffect(new RotateEffect(rotation, myAnimationEvents.get(event)));
+                .addRotateEffect(new RotateEffect(rotation, event));
+    }
+    public void makeScaleAnimationEffect(Double scale, AnimationEvent event){
+    	myAnimationEvents.get(event)
+    	.addScaleAnimationEffect(new ScaleAnimationEffect(scale, event));
+    }
+    public void makeImageAnimationEffect(List<String> images, Integer cycles, AnimationEvent event){
+    	myAnimationEvents.get(event)
+    	.addImageAnimationEffect(new ImageAnimationEffect(images, cycles, event));
+    	
     }
 
     public void addPath (String name, Double[] xCoord, Double[] yCoord) {

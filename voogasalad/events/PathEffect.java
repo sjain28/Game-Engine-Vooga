@@ -35,9 +35,11 @@ public class PathEffect extends SpriteEffect{
 		setSprites(data);
 		for (Sprite sprite : getSprites()){
 			Vector nextVector = createSpline(((AnimationEvent) getEvent()).getCounter());
+			//data.getPhysicsEngine().translateX(sprite, nextVector.getX());
+			//data.getPhysicsEngine().translateY(sprite, nextVector.getY());
 			sprite.setVelocity(
-					new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), nextVector.getY()/nextVector.getMagnitude() * getMyVelocity()));
-			sprite.getPosition().addVector(createSpline(myCounter));
+					new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), 
+							nextVector.getY()/nextVector.getMagnitude() * getMyVelocity()));
 		}
 		setPastVelocities();
 		clearSprites();
@@ -60,7 +62,7 @@ public class PathEffect extends SpriteEffect{
 			}
 		}
 	}
-	protected Double getVelocity(Double duration){
+	protected Double getVelocity(Integer duration){
 		Double distance = 0.0;
 		for (int i = 1; i < xMousePoints.length; i++){
 			distance += getDistance(xMousePoints[i - 1], xMousePoints[i], yMousePoints[i - 1], yMousePoints[i]);
@@ -69,7 +71,7 @@ public class PathEffect extends SpriteEffect{
 		return distance/duration;
 	}
 
-	protected void createAnimationPoints(Double duration){	
+	protected void createAnimationPoints(Integer duration){	
 
 		myVelocity = getVelocity(duration);
 

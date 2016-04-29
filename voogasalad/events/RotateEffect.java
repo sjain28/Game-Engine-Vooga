@@ -13,7 +13,7 @@ public class RotateEffect extends SpriteEffect {
 		setNeedsSprites(true);
 	}
 	
-	protected void setCycleRotation(Double duration){
+	protected void setCycleRotation(Integer duration){
 		myCycleRotation = myRotation/duration;
 	}
 

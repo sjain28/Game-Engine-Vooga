@@ -24,10 +24,9 @@ public class UILauncher {
 	 *            to hold splash screen
 	 */
 	public UILauncher(Stage primaryStage) {
-		// Stage login = new LoginScreen();
-		// login.show();
-
-		new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
+		 Stage login = new LoginScreen();
+		 login.show();
+//		new Splash(new CreateCommand(), new LearnCommand(), new OpenCommand());
 	}
 
 }

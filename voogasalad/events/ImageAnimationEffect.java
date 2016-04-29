@@ -20,8 +20,11 @@ public class ImageAnimationEffect extends SpriteEffect {
 		setNeedsSprites(true);
 		myCycles = numCycles;
 		myImages = images;
-		myCycleTime = (int) (((AnimationEvent) getEvent()).getDuration() / myCycles) / images.size();
+		
 		myCounter = myCycleTime;
+	}
+	protected void setCycleTime(Integer duration){
+		myCycleTime = (duration / myCycles) / myImages.size();
 	}
 	// TODO: make image strings into images
 	@Override

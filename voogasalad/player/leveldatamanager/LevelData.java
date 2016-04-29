@@ -35,6 +35,7 @@ public class LevelData implements ILevelData {
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
     private AnimationFactory myAnimationFactory;
+
     private Map<String, VoogaData> myGlobalVariables;
     private KeyEventContainer myKeyEventContainer;
     private String myTimerKey;
