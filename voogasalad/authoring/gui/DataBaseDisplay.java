@@ -72,8 +72,7 @@ public class DataBaseDisplay extends Stage {
         GraphMaker graphMaker = new GraphMaker();
         Tab playsScore = new Tab("Score on Game");
         //TODO: add in playsScore content
-        playsScore.setContent(graphMaker.createScatterPlot("Score on Game", "Game" , "Score", database.getStatByGameAndUser(selectedGame.getProperty(selectedGame.GAME_NAME).toString(), user.getProperty(user.USER_NAME).toString())) , yparam));
-        Tab playsTime = new Tab("Time Lasted on Game");
+        Tab playsTime = new Tab("Time Spent on Game");
         //TODO: add in playsScore content
         Tab highScore = new Tab("High Scores");
         //TODO: add in playsScore content

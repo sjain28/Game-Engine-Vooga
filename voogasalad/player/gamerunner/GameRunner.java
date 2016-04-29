@@ -33,12 +33,9 @@ import tools.VoogaString;
 import videos.ScreenProcessor;
 
 /**
- * GameRunner class that runs the game player
- * Uses composition to contain interface instances of LevelDataManager and GameDisplay
+ * GameRunner runs the game; uses composition to contain LevelData and GameDisplay
  * 
  * @author Hunter, Michael, Josh
- * 
- * TODO: Just get rid of Timeline related one line methods
  */
 public class GameRunner implements IGameRunner {
     private static final double INIT_SPEED = 60;
@@ -101,7 +98,7 @@ public class GameRunner implements IGameRunner {
 		double secondspassed = myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN;
 		myLevelData.updatedGlobalTimer(secondspassed);
 		//check if we need to transition to a different level
-    	if (myLevelData.getSaveNow()){
+    	if (myLevelData.getSaveNow()) {
     		//Change to the right player.
     		saveGameProgress("Josh");
     	}
@@ -118,7 +115,7 @@ public class GameRunner implements IGameRunner {
 	/**
 	 * Checks and updates all LevelData GlobalVariables
 	 */
-	private void checkAndUpdateGlobalVariables(){
+	private void checkAndUpdateGlobalVariables() {
 		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / INIT_SPEED) / SEC_PER_MIN);
 		if (!myLevelData.getNextLevelName().equals("")) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
@@ -139,11 +136,11 @@ public class GameRunner implements IGameRunner {
 		System.out.println("What is my game here, this can only be shown if a game was added 2 list from game runner " + gamename);
 		VoogaStatInfo playerGameInfo = ((VoogaStatInfo) VoogaDataBase.getInstance().getStatByGameAndUser(gamename,username));
 		String latestLevelReached="";
-		if (playerGameInfo.getLatestPlaySession()!=null){
+		if (playerGameInfo.getLatestPlaySession() != null) {
 			latestLevelReached = (String) (((VoogaString) (playerGameInfo.getLatestPlaySession().getProperty(VoogaPlaySession.LEVEL_REACHED))).getValue());
 		}
 		try {
-			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/"+gameXmlList+"/"+gameXmlList+".xml").get(0);
+			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/" + gameXmlList + "/" + gameXmlList + ".xml").get(0);
 			double width = Double.parseDouble(preferences.getWidth());
 			double height = Double.parseDouble(preferences.getHeight());
 			myGameDisplay.setSceneDimensions(width, height);
@@ -151,7 +148,7 @@ public class GameRunner implements IGameRunner {
 		} catch (Exception e) {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
-		if (latestLevelReached.equals("")){
+		if (latestLevelReached.equals("")) {
 			latestLevelReached = myLevelList.get(0);
 		}
 		myGameDisplay.display();
@@ -162,7 +159,7 @@ public class GameRunner implements IGameRunner {
 	/**
 	 * Play a level, called by playGame
 	 */
-	private void playLevel(String fileName){
+	private void playLevel(String fileName) {
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
 		addScrolling();
@@ -173,32 +170,9 @@ public class GameRunner implements IGameRunner {
 	 */
 	@Override
 	public void testLevel(String levelName) {
-		String level = levelName.replace('\\', '/');
-		
-		String pathToRemove = "games/" + myCurrentGame + "/levels/";
-		System.out.println("this is pathtoremove: " + pathToRemove);
-		int beginIndex = level.lastIndexOf('/');
-		int endIndex = levelName.indexOf(XML_EXTENSION_SUFFIX);
-		System.out.println("Begin and endindex: " + beginIndex + " " + endIndex);
-		myCurrentLevelString = levelName.substring(beginIndex + 1, endIndex);
-		System.out.println("This is currentlevelstring: " + myCurrentLevelString);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/').lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
 		myLevelList = Arrays.asList(levelName);
 		myLevelData.refreshLevelData(levelName);
-		
-		System.out.println("This is globalvariables: " + myLevelData.getGlobalVariables());
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
 										 Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));

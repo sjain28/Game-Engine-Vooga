@@ -184,7 +184,7 @@ public class DesignBoardPreferences extends Tab {
 		});
 		continuousScrollType = new ComboBox<String>();
 		continuousScrollType.getItems().addAll("Linear", "Exponential");
-		continuousControl = makeRow(angle, continuousScrollType, scrollSpeed, speedLabel);
+		continuousControl = makeRow(angle, continuousScrollType, scrollSpeed, speedLabel, sprites);
 		return continuousControl;
 	}
 

@@ -44,6 +44,7 @@ public class PrefFileItem extends MenuItemHandler {
 		preferences.setAngle(Double.toString((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollAngle").getValue()));
 		preferences.setContinuousScrollType((String) model.getGlobalVariables().get(this.model.getName()+"ContinuousScrollType").getValue());
 		preferences.setListener(e -> {
+			System.out.println("YO : " + preferences.getMainSpriteID());
 			model.getGlobalVariables().put(preferences.getName()+"Scrolling", new VoogaString(preferences.getScrollingType()));
 			model.getGlobalVariables().put(preferences.getName()+"MainUUID", new VoogaString(preferences.getMainSpriteID()));
 			model.getGlobalVariables().put(preferences.getName()+"ScrollSpeed", new VoogaNumber(preferences.getContinuousScrollSpeed()));

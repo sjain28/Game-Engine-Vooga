@@ -1,5 +1,6 @@
 package events;
 
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,10 +9,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class Jukebox {
 	
-	private Map<String, MediaPlayer> mySounds;
-	
 	public Jukebox () {
-		mySounds = new HashMap<String, MediaPlayer>();
     }
 
     private static class SingletonHolder {
@@ -22,14 +20,10 @@ public class Jukebox {
         return SingletonHolder.INSTANCE;
     }
     
-    public void play(String path) {
-    	MediaPlayer myPlayer;
-    	if(mySounds.containsKey(path)) {
-    		myPlayer = mySounds.get(path);
-    	} else {
-    		myPlayer = new MediaPlayer(new Media(path));
-    		mySounds.put(path, myPlayer);
-    	}
+    public void play(String path, boolean loop) {
+    	MediaPlayer myPlayer = new MediaPlayer(new Media(Paths.get(path).toUri().toString()));
+    	int cycleCount = loop ? Integer.MAX_VALUE : 1;
+    	myPlayer.setCycleCount(cycleCount);
     	myPlayer.play();
     }
 

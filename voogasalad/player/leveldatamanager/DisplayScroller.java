@@ -91,7 +91,6 @@ public class DisplayScroller implements IDisplayScroller {
 			double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
 			Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<String, VoogaData>(), new VoogaNumber());
 			scrollSprite.getImage().setOpacity(0);
-			//DEBUG THIS something is null
 			scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
 			scrollSprite.getVelocity().setVelocity(scrollSpeed, scrollAngle);
 			myScrollingSprite = scrollSprite;
@@ -107,14 +106,6 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	private void setContinuousScrollType(Map<String, VoogaData> globals, String currentlevel) {
 		String scrollType = (String) globals.get(currentlevel + "ContinuousScrollType").getValue();
-		System.out.println("Shit: what about this: " + currentlevel + "ContinuousScrollType");
-		System.out.println("This is scrolltype: " + scrollType);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (scrollType.equals("Exponential")) {
 			isExponentialScroll = true;
 		} else {
