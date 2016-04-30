@@ -10,8 +10,6 @@ import player.gamedisplay.Menuable;
  */
 public interface IGameRunner extends Menuable {
 	
-	Timeline getTimeline();
-
 	void exit();
 
 	void speedUp();
@@ -25,4 +23,6 @@ public interface IGameRunner extends Menuable {
 	void takeSnapShot();
 
 	void finishPlaySession();
+	
+	Timeline getTimeline();
 }

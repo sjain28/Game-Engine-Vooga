@@ -25,45 +25,44 @@ import tools.interfaces.VoogaData;
 public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
-    
-    Sprite getMainSprite();
-
-	Set<Entry<String, Elementable>> getElementables();
-    
-	List<Pair<Node, Boolean>> getDisplayableNodes();
 	
-	boolean getSaveNow();
+	void setNextLevelName(String levelNumber);
 
+    void removeSpriteByID(String id);
+
+	void updatedGlobalTimer(double time);
+
+	void saveProgress(String filePath);
+
+	void addEventAndPopulateKeyCombos(VoogaEvent event);
+
+	boolean getSaveNow();
+	
 	String getNextLevelName();
 
-	void setNextLevelName(String levelNumber);
-	
+	Boolean containsSprite(String id);
+
+    Sprite getMainSprite();
+    
 	Sprite getSpriteByID(String id);
 
-	List<Sprite> getSpritesByArch(String archA);
-	
-    void removeSpriteByID(String id);
-	
-	VoogaData getGlobalVar(String myVarName);
-	
 	Sprite addSprite(String archetype);
-	
-	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
 
-	void saveProgress(String filePath);
+	VoogaData getGlobalVar(String myVarName);
 	
+	AnimationEvent getAnimationFromFactory(String myAnimationName);
+
 	KeyEventContainer getKeyEventContainer();
+
+	List<Pair<Node, Boolean>> getDisplayableNodes();
+	
+	List<Sprite> getSpritesByArch(String archA);
+	
+	Set<Entry<String, Elementable>> getElementables();
 	
 	Map<String, VoogaData> getGlobalVariables();
 
 	Map<String, Elementable> getElements();
-
-	AnimationEvent getAnimationFromFactory(String myAnimationName);
-
-	Boolean containsSprite(String id);
-
-	void addEventAndPopulateKeyCombos(VoogaEvent event);
-
 }
