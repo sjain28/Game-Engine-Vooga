@@ -20,8 +20,6 @@ public interface IGameRunner extends Menuable{
 
 	void testLevel(String levelName);
 			
-	void replayLevel();
-
 	void takeSnapShot();
 	
 	void finishPlaySession();

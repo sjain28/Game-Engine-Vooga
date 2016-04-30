@@ -260,7 +260,4 @@ public class GameRunner implements IGameRunner {
 
 	@Override
 	public void saveAll() {}
-
-	@Override
-	public void replayLevel() {}
 }

@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 import resources.VoogaPaths;
+import stats.interaction.CurrentSessionStats;
 
 /**
  * The UIManager is responsible for assembling view components, such as the
@@ -38,6 +39,7 @@ public class UIManager extends VBox implements Menuable {
 	 *            Interface to mediate interactions with back-end
 	 */
 	public UIManager(List<CompleteAuthoringModelable> models) {
+		
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
 		ElementManager temp = new ElementManager();

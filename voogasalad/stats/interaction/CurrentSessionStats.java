@@ -26,6 +26,7 @@ public class CurrentSessionStats {
 	}
 	public void startAuthoringSession(){
     	StatCell statcell = getCurrentStatCell();
+    	System.out.println("ADDING AUTHORING SESSION NOW");
     	statcell.addAuthoringSession(new AuthorSession(new Date()));
 	}
 	public void endCurrentAuthoringSession(){
