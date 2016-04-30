@@ -19,6 +19,7 @@ public class PrefFileItem extends MenuItemHandler {
 	private static final String CONT_SCROLL = "ContinuousScrollType";
 	private static final String TRACKING_DIR = "TrackingDirection";
 	private static final String SCROLL = "Scrolling";
+	private static final String BGM = "BGM";
 
 	private static final double WINDOW_WIDTH = 600;
 	private static final double WINDOW_HEIGHT = 350;
@@ -49,6 +50,7 @@ public class PrefFileItem extends MenuItemHandler {
 		preferences.setMainSprite((String) model.getGlobalVariables().get(this.model.getName()+ MAINUUID).getValue());
 		preferences.setAngle(Double.toString((Double) model.getGlobalVariables().get(this.model.getName()+ SCROLL_ANGLE).getValue()));
 		preferences.setContinuousScrollType((String) model.getGlobalVariables().get(this.model.getName()+ CONT_SCROLL).getValue());
+		preferences.setTrackingDirection((String) model.getGlobalVariables().get(this.model.getName()+ TRACKING_DIR).getValue());
 		preferences.setListener(e -> {
 			model.getGlobalVariables().put(preferences.getName()+ SCROLL, new VoogaString(preferences.getScrollingType()));
 			model.getGlobalVariables().put(preferences.getName()+ MAINUUID, new VoogaString(preferences.getMainSpriteID()));
@@ -56,6 +58,7 @@ public class PrefFileItem extends MenuItemHandler {
 			model.getGlobalVariables().put(preferences.getName()+ SCROLL_ANGLE, new VoogaNumber(preferences.getScrollAngle()));
 			model.getGlobalVariables().put(preferences.getName()+ CONT_SCROLL, new VoogaString(preferences.getContinuousScrollType()));
 			model.getGlobalVariables().put(preferences.getName()+ TRACKING_DIR, new VoogaString(preferences.getTrackingDirection()));
+			//model.getGlobalVariables().put(preferences.getName()+ BGM, new VoogaString(preferences.getBGM()));
 			stage.close();
 		});
 		tp.getTabs().add(preferences);

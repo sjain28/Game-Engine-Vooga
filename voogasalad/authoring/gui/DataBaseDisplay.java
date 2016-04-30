@@ -47,9 +47,15 @@ public class DataBaseDisplay extends Stage {
 	private double DATA_WIDTH;
 	private String USR;
 
-	private double FONT_SIZE;
-	private double TABPANE_SIZE_FACTOR;
-	private double ACCORDION_SIZE_FACTOR;
+//<<<<<<< HEAD
+//	private double FONT_SIZE;
+//	private double TABPANE_SIZE_FACTOR;
+//	private double ACCORDION_SIZE_FACTOR;
+//=======
+	private static final double FONT_SIZE = 30;
+	private static final double TABPANE_SIZE_FACTOR = 3d / 4d;
+	private static final double ACCORDION_SIZE_FACTOR = 1d / 4d;
+//>>>>>>> 5cd022b7a17ee809cb054e6a76c1928ba0473e6b
 	private VoogaDataBase database = VoogaDataBase.getInstance();
 	private VoogaUser user;
 	private CellEntry selectedCell;
@@ -71,9 +77,9 @@ public class DataBaseDisplay extends Stage {
 		user = database.getUser(VoogaBundles.preferences.getProperty(USR));
 
 
-		FONT_SIZE = Double.parseDouble(databaseProperties.getString("FontSize"));
-		TABPANE_SIZE_FACTOR = Double.parseDouble(databaseProperties.getString("TabPaneSizeFactor"));
-		ACCORDION_SIZE_FACTOR =  Double.parseDouble(databaseProperties.getString("AccordionSizeFactor"));
+//		FONT_SIZE = Double.parseDouble(databaseProperties.getString("FontSize"));
+//		TABPANE_SIZE_FACTOR = Double.parseDouble(databaseProperties.getString("TabPaneSizeFactor"));
+//		ACCORDION_SIZE_FACTOR =  Double.parseDouble(databaseProperties.getString("AccordionSizeFactor"));
 
 
 		VBox content = new VBox();

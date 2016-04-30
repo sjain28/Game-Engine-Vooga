@@ -47,14 +47,12 @@ public class DesignBoardPreferences extends Tab {
 	private VBox container;
 	private HBox buttons;
 	private HBox continuousControl;
+	private HBox trackingControl;
 	private TextField levelName;
 	private TextField angle;
-	private RadioButton realistic;
-	private RadioButton cartoon;
 	private RadioButton continuous;
 	private RadioButton tracking;
 	private ToggleGroup trackingMode;
-	private ToggleGroup physicsType;
 	private Slider scrollSpeed;
 	private ComboBox<SpriteNameIDPair> sprites;
 	private ComboBox<String> continuousScrollType;
@@ -78,8 +76,8 @@ public class DesignBoardPreferences extends Tab {
 
 		container.setSpacing(spacing);
 		container.setAlignment(Pos.CENTER);
+		container.getChildren().addAll(header(), chooseName(), chooseTrackingMode());
 		this.setContent(container);
-		container.getChildren().addAll(header(), chooseName(), choosePhysicsModule(), chooseTrackingMode());
 		
 		initializeSpecifics();
 		chooseSpecificTrackingMode();
@@ -133,18 +131,6 @@ public class DesignBoardPreferences extends Tab {
 	}
 
 	/**
-	 * Choose physics module prompt.
-	 * 
-	 * @return: physics prompt
-	 */
-	private HBox choosePhysicsModule() {
-		realistic = new RadioButton("Realistic");
-		cartoon = new RadioButton("Cartoon");
-		physicsType = new ToggleGroup();
-		return createToggleGroup(physicsType, "Physics Module:", realistic, cartoon);
-	}
-
-	/**
 	 * Choose tracking mode prompt.
 	 * 
 	 * @return: tracking prompt
@@ -164,10 +150,10 @@ public class DesignBoardPreferences extends Tab {
 			container.getChildren().remove(buttons);
 			if(n == continuous) {
 				container.getChildren().add(continuousControl);
-				container.getChildren().remove(makeTrackingControl());
+				container.getChildren().remove(trackingControl);
 			} else {
 				container.getChildren().remove(continuousControl);
-				container.getChildren().add(makeTrackingControl());
+				container.getChildren().add(trackingControl);
 			}
 			container.getChildren().add(buttons);
 		});
@@ -182,14 +168,14 @@ public class DesignBoardPreferences extends Tab {
 		});
 		continuousScrollType = new ComboBox<>();
 		continuousScrollType.getItems().addAll("Linear", "Exponential");
-		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, scrollSpeed, speedLabel, sprites));
+		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, spriteBox(), scrollSpeed, speedLabel));
 		return continuousControl;
 	}
 	
-	private HBox makeTrackingControl() {
+	private void makeTrackingControl() {
 		trackingDirection = new ComboBox<>();
 		trackingDirection.getItems().addAll(Arrays.asList("X", "Y", "Both"));
-		return customHBox(GUIUtils.makeRow(sprites, trackingDirection));
+		trackingControl = customHBox(GUIUtils.makeRow(sprites, trackingDirection));
 	}
 
 	/**
@@ -198,17 +184,22 @@ public class DesignBoardPreferences extends Tab {
 	private void initializeSpecifics() {
 		scrollSpeed = new Slider(MIN_SPEED, MAX_SPEED, DEF_SPEED);
 		scrollSpeed.setMaxWidth(width);
-		sprites = new ComboBox<>();
+		sprites = spriteBox();
+	}
+	
+	private ComboBox<SpriteNameIDPair> spriteBox() {
+		ComboBox<SpriteNameIDPair> cb = new ComboBox<>();
 		if (!gameObjects.isEmpty()) {
 			for (Node node : this.gameObjects) {
 				if (node instanceof GameObject) {
 					Sprite sprite = ((GameObject) node).getSprite();
-					sprites.getItems().add(new SpriteNameIDPair(sprite.getName(), sprite.getId()));
+					cb.getItems().add(new SpriteNameIDPair(sprite.getName(), sprite.getId()));
 				}
 			}
 		} else {
-			sprites.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
+			cb.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
 		}
+		return cb;
 	}
 
 	/**
@@ -269,14 +260,6 @@ public class DesignBoardPreferences extends Tab {
 		return continuousScrollType.getValue();
 	}
 	
-	public void setPhysics(String name) {
-		for(Toggle toggle : physicsType.getToggles()) {
-			if(((RadioButton) toggle).getText().equals(name)) {
-				physicsType.selectToggle(toggle);
-			}
-		}
-	}
-	
 	public void setScrolling(String name) {
 		for(Toggle toggle : trackingMode.getToggles()) {
 			if(((RadioButton) toggle).getText().equals(name)) {
@@ -308,6 +291,10 @@ public class DesignBoardPreferences extends Tab {
 	
 	public String getTrackingDirection() {
 		return (trackingDirection.getValue() == null) ? "" : trackingDirection.getValue();
+	}
+
+	public void setTrackingDirection(String value) {
+		this.trackingDirection.setValue(value);
 	}
 
 }
