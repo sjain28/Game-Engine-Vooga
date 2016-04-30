@@ -26,6 +26,8 @@ public class DisplayScroller implements IDisplayScroller {
 	private IGameDisplay myGameDisplay;
 	private String myScrollingType;
 	private boolean isExponentialScroll;
+	private Double myMinScrollX;
+	private Double myMinScrollY;
 	private Double myMaxScrollX;
 	private Double myMaxScrollY;
 
