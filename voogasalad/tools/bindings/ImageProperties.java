@@ -2,7 +2,9 @@ package tools.bindings;
 
 import resources.VoogaBundles;
 
-
+/**
+ * All properties that nodes can have in VoogaSalad
+ */
 public class ImageProperties extends NodeProperties {
 
     Double positionX;

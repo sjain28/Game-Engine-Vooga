@@ -126,6 +126,9 @@ public abstract class Vector {
 		return yPrev;
 	}
 	
+	/**
+	 * @return the magnitude of a vector
+	 */
 	public double getMagnitude(){
 		return Math.sqrt(Math.pow(getX() - getxPrev(), 2) + Math.pow(getY() - getyPrev(), 2));
 	}

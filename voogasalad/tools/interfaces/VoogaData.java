@@ -3,7 +3,9 @@ package tools.interfaces;
 import javafx.beans.property.Property;
 import javafx.scene.Node;
 
-
+/**
+ * Interface created for passing data in the salad
+ */
 public interface VoogaData {
 
     public Object getValue ();
