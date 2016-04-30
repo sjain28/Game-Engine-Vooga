@@ -31,7 +31,7 @@ public class ElementManagerUnserializer {
         elementManager.setSpriteFactory(data.getArchetypeMap());
         elementManager.setEventList(data.getEventList());
         elementManager.setGlobalProperties(data.getVariableMap());
-		
+		AnimationFactory.setFactory(data.getAnimations());
         
         return elementManager;
     }

@@ -70,9 +70,9 @@ public class LevelCartographer extends Stage {
 		myMap = new Group();
 		myGUI.setCenter(myMap);
 		myGUI.setBottom(buttons());
-		this.levelTypes = new HashMap<String, LevelType>();
-		this.mappings = new HashMap<String, String>();
-		this.connectors = new HashSet<Connection>();
+		this.levelTypes = new HashMap<>();
+		this.mappings = new HashMap<>();
+		this.connectors = new HashSet<>();
 		this.setScene(new VoogaScene(myGUI, WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 
@@ -191,7 +191,7 @@ public class LevelCartographer extends Stage {
 	}
 
 	private void loadLevels() {
-		levels = new HashSet<Level>();
+		levels = new HashSet<>();
 		levelNames = this.manager.getAllManagerNames();
 		levelNames.stream()
 				  .forEach(n -> levelTypes.put(n, LevelType.NORMAL));

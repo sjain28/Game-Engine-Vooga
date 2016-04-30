@@ -41,7 +41,7 @@ public class LeaderBoards extends Stage {
     }
 
     private void makeLeaders () {
-        List<Pair<String, Double>> scores = new ArrayList<Pair<String, Double>>();
+        List<Pair<String, Double>> scores = new ArrayList<>();
         database.getStatsbyGame(game).stream().forEach(e -> ((StatCell) e).getPlayStats()
                 .stream().forEach(ee -> scores.add(new Pair<String, Double>(
                                                                             ee.getProperty(StatCell.MY_USER)
