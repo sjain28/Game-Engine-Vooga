@@ -9,10 +9,8 @@ import data.DataContainerOfLists;
 import data.Deserializer;
 import data.Serializer;
 import events.KeyCause;
-import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
-import gameengine.SpriteFactory;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import tools.Position;
@@ -21,15 +19,14 @@ import tools.interfaces.VoogaData;
 
 public class VoogaTextWritingTest extends Application {
 
-	private static final String TEST_STRING= "levels/VoogaTextWriting.xml";
 	
     @Override
     public void start (Stage primaryStage) throws Exception {
-        DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),
-        			generateGlobalVariables(),generateEvents(), null);
-        
-
-        Serializer.serialize(manager, "levels/Test.xml");
+//        DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),
+//        			generateGlobalVariables(),generateEvents(), null);
+//        
+//
+//        Serializer.serialize(manager, "levels/Test.xml");
         Object o = Deserializer.deserialize(1, "levels/Test.xml").get(0);
         DataContainerOfLists vt2 = (DataContainerOfLists) o;
 //        System.out.println("Unserialized");

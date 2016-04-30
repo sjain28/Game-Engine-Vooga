@@ -18,7 +18,7 @@ import tools.Pair;
 public interface IGameDisplay {
 	
 	void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay);
-	
+
 	void display();
 	
 	void displayTestMode();
