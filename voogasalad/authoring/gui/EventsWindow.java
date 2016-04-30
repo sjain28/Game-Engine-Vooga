@@ -32,111 +32,116 @@ import tools.VoogaException;
 
 public class EventsWindow extends TabPane implements Observer {
 
-	//private static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
+    // private static final String UUID_REGEX =
+    // "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
 
-	/**
-	 * Private instance variables
-	 */
-	private String UUID_REGEX;
+    /**
+     * Private instance variables
+     */
+    private String UUID_REGEX;
 
-	private CompleteAuthoringModelable myManager;
-	private Tab main;
-	private ScrollPane scroller;
-	private VBox content;
-	private Map<VoogaEvent, ObservableList<String>> effects;
-	private Map<VoogaEvent, ObservableList<String>> causes;
+    private CompleteAuthoringModelable myManager;
+    private Tab main;
+    private ScrollPane scroller;
+    private VBox content;
+    private Map<VoogaEvent, ObservableList<String>> effects;
+    private Map<VoogaEvent, ObservableList<String>> causes;
 
-	private ResourceBundle eventsWindowProperties;
+    private ResourceBundle eventsWindowProperties;
 
-	/**
-	 * Initialized the Events Window, responsible for displaying all the
-	 * currently initialized Causes and Events and their links.
-	 * 
-	 */
-	public EventsWindow(CompleteAuthoringModelable manager) {
-		myManager = manager;
-		myManager.addObserver(this);
-		eventsWindowProperties = VoogaBundles.eventswindowProperties;
-		main = new Tab(eventsWindowProperties.getString("EventsWindowName"));
-		UUID_REGEX = eventsWindowProperties.getString("UUIDregex");
-		System.out.println(UUID_REGEX);
-		content = new VBox();
-		scroller = new ScrollPane(content);
-		causes = new HashMap<VoogaEvent, ObservableList<String>>();
-		effects = new HashMap<VoogaEvent, ObservableList<String>>();
-		initialize();
-		main.setContent(scroller);
-		this.getTabs().add(main);
-	}
+    /**
+     * Initialized the Events Window, responsible for displaying all the
+     * currently initialized Causes and Events and their links.
+     * 
+     */
+    public EventsWindow (CompleteAuthoringModelable manager) {
+        myManager = manager;
+        myManager.addObserver(this);
+        eventsWindowProperties = VoogaBundles.eventswindowProperties;
+        main = new Tab(eventsWindowProperties.getString("EventsWindowName"));
+        UUID_REGEX = eventsWindowProperties.getString("UUIDregex");
+        System.out.println(UUID_REGEX);
+        content = new VBox();
+        scroller = new ScrollPane(content);
+        causes = new HashMap<VoogaEvent, ObservableList<String>>();
+        effects = new HashMap<VoogaEvent, ObservableList<String>>();
+        initialize();
+        main.setContent(scroller);
+        this.getTabs().add(main);
+    }
 
-	/**
-	 * Initializes the causes and effects in the window.
-	 */
-	private void initialize() {
-		for (VoogaEvent e : myManager.getEvents()) {
-			if (!causes.keySet().contains(e) && !effects.keySet().contains(e)) {
-				ObservableList<String> causesString = FXCollections.observableArrayList();
-				for (Cause cause : e.getCauses()) {
-					causesString.addAll(cleanString(cause.toString()));
-				}
-				causes.put(e, causesString);
-				ObservableList<String> effectsString = FXCollections.observableArrayList();
-				for (Effect effect : e.getEffects()) {
-					effectsString.addAll(cleanString(effect.toString()));
-				}
-				effects.put(e, effectsString);
-				HBox info = new HBox();
-				ListView<String> causeList = new ListView<String>(causes.get(e));
-				ListView<String> effectList = new ListView<String>(effects.get(e));
-				Button delete = new Button(eventsWindowProperties.getString("Delete"));
-				delete.setOnAction(ee -> delete(e, info));
-				info.getChildren().addAll(causeList, effectList, delete);
-				content.getChildren().add(info);
-			}
-		}
+    /**
+     * Initializes the causes and effects in the window.
+     */
+    private void initialize () {
+        for (VoogaEvent e : myManager.getEvents()) {
+            if (!causes.keySet().contains(e) && !effects.keySet().contains(e)) {
+                ObservableList<String> causesString = FXCollections.observableArrayList();
+                for (Cause cause : e.getCauses()) {
+                    causesString.addAll(cleanString(cause.toString()));
+                }
+                causes.put(e, causesString);
+                ObservableList<String> effectsString = FXCollections.observableArrayList();
+                for (Effect effect : e.getEffects()) {
+                    effectsString.addAll(cleanString(effect.toString()));
+                }
+                effects.put(e, effectsString);
+                HBox info = new HBox();
+                ListView<String> causeList = new ListView<String>(causes.get(e));
+                ListView<String> effectList = new ListView<String>(effects.get(e));
+                Button delete = new Button(eventsWindowProperties.getString("Delete"));
+                delete.setOnAction(ee -> delete(e, info));
+                info.getChildren().addAll(causeList, effectList, delete);
+                content.getChildren().add(info);
+            }
+        }
 
-	}
+    }
 
-	/**
-	 * Cleans the string to match UUID regex.
-	 * @param s
-	 * @return
-	 */
-	private String cleanString(String s) {
-		String[] components = s.split(" ");
-		StringBuilder ans = new StringBuilder();
-		for (String c : components) {
-			if (c.matches(UUID_REGEX)) {
-				try {
-					c = myManager.getSpriteNameFromId(c);
-				} catch (VoogaException e) {
-					VoogaAlert alert = new VoogaAlert(eventsWindowProperties.getString("NoSpriteError"));
-					alert.showAndWait();
-					e.printStackTrace();
-				}
-			}
-			ans.append(c);
-			ans.append(" ");
-		}
+    /**
+     * Cleans the string to match UUID regex.
+     * 
+     * @param s
+     * @return
+     */
+    private String cleanString (String s) {
+        String[] components = s.split(" ");
+        StringBuilder ans = new StringBuilder();
+        for (String c : components) {
+            if (c.matches(UUID_REGEX)) {
+                try {
+                    c = myManager.getSpriteNameFromId(c);
+                }
+                catch (VoogaException e) {
+                    VoogaAlert alert =
+                            new VoogaAlert(eventsWindowProperties.getString("NoSpriteError"));
+                    alert.showAndWait();
+                    e.printStackTrace();
+                }
+            }
+            ans.append(c);
+            ans.append(" ");
+        }
 
-		return ans.toString();
-	}
+        return ans.toString();
+    }
 
-	/**
-	 * Removes a VoogaEvent
-	 * @param e: event to remove
-	 * @param info: info to remove from display
-	 */
-	private void delete(VoogaEvent e, HBox info) {
-		myManager.getEvents().remove(e);
-		content.getChildren().remove(info);
-		causes.remove(e);
-		effects.remove(e);
-	}
+    /**
+     * Removes a VoogaEvent
+     * 
+     * @param e: event to remove
+     * @param info: info to remove from display
+     */
+    private void delete (VoogaEvent e, HBox info) {
+        myManager.getEvents().remove(e);
+        content.getChildren().remove(info);
+        causes.remove(e);
+        effects.remove(e);
+    }
 
-	@Override
-	public void update(Observable o, Object arg) {
-		initialize();
-	}
+    @Override
+    public void update (Observable o, Object arg) {
+        initialize();
+    }
 
 }
