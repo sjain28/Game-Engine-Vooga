@@ -62,7 +62,6 @@ public class DataBaseDisplay extends Stage {
         } 
         catch(Exception IllegalArgumentException){
             //do Nothing
-            System.out.println("error");
         }
         pict.setFitHeight(HEADER_HEIGHT);
         pict.setPreserveRatio(true);
@@ -147,7 +146,6 @@ public class DataBaseDisplay extends Stage {
         
         tab.setContent(gmaker.getVoogaStatsScatterPlot(xlist, ylist, nextX, nextY));
         plots.getTabs().add(tab);
-        System.out.println(plots.getTabs().size());
         
     }
 

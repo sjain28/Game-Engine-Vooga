@@ -149,9 +149,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             DataContainerOfLists data =
                     new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
                                              spriteFactory.getArchetypeMap(), 
-                                             animationFactory.getMyAnimationEvents(), 
-                                             animationFactory.getMyPaths(), 
-                                             animationFactory.getMyAnimationSequences());
+                                             AnimationFactory.getInstance());
             // System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data,
                                                       "games/" +
