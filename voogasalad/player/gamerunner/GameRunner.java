@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import org.codehaus.groovy.runtime.ArrayUtil;
 
+import authoring.gui.cartography.LevelType;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
 import data.Deserializer;
@@ -59,17 +60,14 @@ public class GameRunner implements IGameRunner {
     private static final String XML_EXTENSION_SUFFIX = ".xml";
     private static final String NULL_STRING = "";
     private static final String SLASH = "/";
-    private static final String FIRST_LEVEL = "First Level";
-    private static final String REGULAR_LEVEL = "Regular Level";
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
 	private ScreenProcessor myScreenProcessor;
 	private ElementUpdater myElementUpdater;
 	private EventManager myEventManager;
-	private List<String> myLevelList;
-	private Map<String,String> myLevelMap;
-	private LevelListCreator myLevelListCreator;
+	private Map<String,LevelType> myLevelMap;
+	private LevelMapCreator myLevelMapCreator;
 	private Timeline myTimeline;
 	private boolean playSessionActive;
 	private String myCurrentGameString;
@@ -103,11 +101,12 @@ public class GameRunner implements IGameRunner {
 	/**
 	 * createLevelList reads a text file and creates a list of levels
 	 */
-	private void createLevelList(String xmlList) throws FileNotFoundException,
+	private void createLevelMap(String xmlList) throws FileNotFoundException,
 			IOException, VoogaException {
-		myLevelListCreator = new LevelListCreator(xmlList);
+		myLevelMapCreator = new LevelMapCreator(xmlList);
 		//myLevelMap = myLevelListCreator.getLevelMap();
-		myLevelList = myLevelListCreator.getLevelList();
+		myLevelMap = myLevelMapCreator.getLevelMap();
+		System.out.println("What is the Map here " + myLevelMap);
 	}
 
 	/**
@@ -144,19 +143,19 @@ public class GameRunner implements IGameRunner {
 		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / SEC_PER_MIN);
 		//save progress if at checkpoint
     	if (myLevelData.getSaveNow()) {
-    		myStats.saveGameProgress(myLevelListCreator.getGameFilePath());
+    		myStats.saveGameProgress(myLevelMapCreator.getGameFilePath());
     		myLevelData.saveProgress(myCurrentGameString);}
     	
 		//check if a level transition effect has been triggered
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
-			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
-			//playLevel(myLevelData.getNextLevelName());       TRY THIS!!
+//			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
+			playLevel(myLevelData.getNextLevelName());      // TRY THIS!!
 		}
 		
 		//transition to leaderboard screen if the last level has been won. ADD AFTER MAP IMPLEMENTATION
-//		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
-//			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
-//		}
+		if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
+			// show win screen
+		}
 		
 	}
 
@@ -171,6 +170,7 @@ public class GameRunner implements IGameRunner {
 		String latestLevelReached=NULL_STRING;
 		//get the last level reached if it exists
 		PlaySession playsesh = myStats.getCurrentStatCell().getLatestPlaySession();
+		System.out.println("HI THIS IS LOL " + myStats.getCurrentStatCell());
 		if (myStats.getCurrentStatCell().checkProgress() != null) {
 			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
 		}
@@ -179,24 +179,23 @@ public class GameRunner implements IGameRunner {
 			double width = Double.parseDouble(preferences.getWidth());
 			double height = Double.parseDouble(preferences.getHeight());
 			myGameDisplay.setSceneDimensions(width, height);
-			createLevelList(gameXmlList);
+			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			new VoogaAlert(
 					"Level list initialization failed. Try opening in author and re-saving.");
 		}
 		
-//		if (latestLevelReached.equals(NULL_STRING)){
-//	        for (Entry<String, String> entry : myLevelMap.entrySet()) {
-//	            if (entry.getValue().equals(FIRST_LEVEL)) {
-//	                System.out.println(entry.getKey());
-//	            }
-//	        }
-//		}
+		if (latestLevelReached.equals(NULL_STRING)){
+	        for (Entry<String, LevelType> entry : myLevelMap.entrySet()) {
+	            if (entry.getValue().equals(LevelType.ENTRYPOINT)) {
+	                latestLevelReached = entry.getKey();
+	            }
+	        }
+		}
 		
 		System.out.println("My level is here is called " + latestLevelReached);
 		
 		//if the 
-		if (latestLevelReached.equals(NULL_STRING)) {latestLevelReached = myLevelList.get(0);}	
 		myGameDisplay.display();
 		playLevel(latestLevelReached);
 		run();
@@ -208,7 +207,7 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName) {
 		myLevelReached++;
 		myCurrentLevelString = fileName;
-		myLevelData.refreshLevelData(myLevelListCreator.getGameFilePath()
+		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath()
 				+ LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
 		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
@@ -221,8 +220,8 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/')
 				.lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
-		myLevelList = Arrays.asList(levelName);
-//		myLevelMap.put(levelName, REGULAR_LEVEL);
+//		myLevelList = Arrays.asList(levelName);
+		myLevelMap.put(levelName, LevelType.ENTRYPOINT);
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
 		myGameDisplay.setSceneDimensions(
