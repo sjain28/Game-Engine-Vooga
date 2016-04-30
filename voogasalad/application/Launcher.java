@@ -1,6 +1,5 @@
 package application;
 
-import java.io.File;
 import authoring.UILauncher;
 import javafx.stage.Stage;
 

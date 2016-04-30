@@ -3,12 +3,12 @@ package authoring.properties;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SwitchButton;
 import authoring.gui.menubar.builders.PropertyBuilder;
 import authoring.gui.menubar.builders.TextObjectBuilder;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.VoogaFrontEndText;

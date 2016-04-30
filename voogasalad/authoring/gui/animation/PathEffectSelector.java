@@ -1,6 +1,5 @@
 package authoring.gui.animation;
 
-import events.AnimationEvent;
 import events.AnimationFactory;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;

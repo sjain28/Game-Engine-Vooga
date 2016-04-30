@@ -1,11 +1,10 @@
 package authoring.gui.items;
 
 import java.util.Map;
+
 import authoring.gui.refactoringevents.VoogaNode;
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import authoring.interfaces.model.EditEventable;
-import authoring.model.ElementManager;
-import gameengine.Sprite;
 import javafx.scene.control.ComboBox;
 import tools.interfaces.VoogaData;
 
@@ -19,7 +18,7 @@ public class VariableComboBox extends ComboBox<String> implements VoogaNode{
     }
     
     public void resetVariables(String name){
-        EngineElementable element = manager.getSpriteFactory().getArchetype(name);
+        Elementable element = manager.getSpriteFactory().getArchetype(name);
         if (element== null){
             element = manager.getVoogaElement(name);
         }

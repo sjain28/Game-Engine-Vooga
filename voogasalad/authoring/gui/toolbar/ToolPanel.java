@@ -1,6 +1,7 @@
 package authoring.gui.toolbar;
 
 import java.util.Enumeration;
+
 import authoring.resourceutility.ButtonMaker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

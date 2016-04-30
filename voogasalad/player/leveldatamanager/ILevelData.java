@@ -5,9 +5,10 @@ package player.leveldatamanager;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
-import authoring.interfaces.EngineElementable;
+import java.util.Set;
+
+import authoring.interfaces.Elementable;
 import events.AnimationEvent;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -60,9 +61,9 @@ public interface ILevelData {
 
 	List<Sprite> getSpritesByArch(String archA);
 
-	Set<Entry<String, EngineElementable>> getElementables();
+	Set<Entry<String, Elementable>> getElementables();
 
 	Map<String,VoogaData> getGlobalVariables();
 
-	Map<String, EngineElementable> getElements();
+	Map<String, Elementable> getElements();
 }

@@ -1,13 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
-import java.io.File;
-
-import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.PlayerMenuItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 import player.gamerunner.GameRunner;
 import tools.VoogaException;

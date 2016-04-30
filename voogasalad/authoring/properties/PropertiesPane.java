@@ -1,6 +1,7 @@
 package authoring.properties;
 
 import java.util.ArrayList;
+
 import authoring.interfaces.gui.Windowable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.scene.Node;

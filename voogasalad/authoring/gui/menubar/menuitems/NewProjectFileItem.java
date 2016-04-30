@@ -3,10 +3,6 @@ package authoring.gui.menubar.menuitems;
 import application.Launcher;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.gui.Saveable;
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 

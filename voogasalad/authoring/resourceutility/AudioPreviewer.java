@@ -1,6 +1,7 @@
 package authoring.resourceutility;
 
 import java.nio.file.Paths;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

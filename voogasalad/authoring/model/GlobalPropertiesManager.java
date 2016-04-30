@@ -2,9 +2,10 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import authoring.gui.Selector;
 import authoring.interfaces.AuthoringElementable;
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
@@ -67,13 +68,31 @@ public class GlobalPropertiesManager implements AuthoringElementable {
     }
 
     @Override
-    public EngineElementable getElementable () {
+    public Elementable getElementable () {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void select (Selector selector) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void init () throws VoogaException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update () {
         // TODO Auto-generated method stub
         
     }

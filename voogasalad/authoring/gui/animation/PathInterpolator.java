@@ -1,7 +1,5 @@
 package authoring.gui.animation;
 
-import javafx.scene.shape.Shape;
-
 /**
  * Interpolates a path and determines the coordinates that comprise the shape. Uses an approximation but samples
  * at an extremely high rate in order to minimize uncertainty.

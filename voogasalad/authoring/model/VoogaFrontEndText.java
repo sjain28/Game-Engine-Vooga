@@ -3,9 +3,10 @@ package authoring.model;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
+
 import authoring.gui.Selector;
-import authoring.interfaces.EngineElementable;
 import authoring.interfaces.AuthoringElementable;
+import authoring.interfaces.Elementable;
 import gameengine.BackEndText;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
@@ -115,7 +116,7 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
     }
 
     @Override
-    public EngineElementable getElementable () {
+    public Elementable getElementable () {
         return backEndText;
     }
 
@@ -151,6 +152,24 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
     @Override
     public void removeProperty (String name) {
         backEndText.removeProperty(name);
+    }
+
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void init () throws VoogaException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
     }
     
 }

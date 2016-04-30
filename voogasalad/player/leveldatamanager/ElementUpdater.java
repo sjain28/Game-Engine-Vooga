@@ -1,8 +1,9 @@
 package player.leveldatamanager;
 
-import java.util.Set;
 import java.util.Map.Entry;
-import authoring.interfaces.EngineElementable;
+import java.util.Set;
+
+import authoring.interfaces.Elementable;
 import gameengine.Sprite;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
@@ -21,9 +22,9 @@ public class ElementUpdater {
 	 * 
 	 */
 	public void update(ILevelData leveldata) {
-		Set<Entry<String, EngineElementable>> elements = leveldata.getElementables();
+		Set<Entry<String, Elementable>> elements = leveldata.getElementables();
 		elements.stream().forEach((elempair) -> {
-			EngineElementable elem = elempair.getValue();
+			Elementable elem = elempair.getValue();
 			if(elem instanceof Sprite){
 				if((Boolean) ((Sprite) elem).getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue() == false){
 					leveldata.removeSpriteByID(elem.getId());

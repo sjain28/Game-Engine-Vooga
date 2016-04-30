@@ -1,7 +1,5 @@
 package authoring.gui.items;
 
-import authoring.gui.refactoringevents.VoogaNode;
-import javafx.beans.property.Property;
 import javafx.scene.control.TextField;
 
 

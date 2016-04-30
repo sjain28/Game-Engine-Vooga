@@ -2,8 +2,9 @@ package events;
 
 import java.util.ArrayList;
 import java.util.List;
-import player.leveldatamanager.ILevelData;
+
 import gameengine.Sprite;
+import player.leveldatamanager.ILevelData;
 /**
  * The class for an Event, which executes Effects once certain Causes are triggered. 
  * @author Saumya Jain, Anita Desai

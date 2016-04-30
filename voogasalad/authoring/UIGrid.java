@@ -3,10 +3,10 @@ package authoring;
 import java.util.ResourceBundle;
 
 import authoring.gui.DesignBoardHousing;
-import authoring.properties.PropertiesPane;
 import authoring.gui.EventsWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
+import authoring.properties.PropertiesPane;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
@@ -116,33 +116,12 @@ public class UIGrid extends GridPane{
 	}
 
 	/**
-	 * Populates the UI grid with the various panes
-	 * 
-	 * @throws VoogaException if error is caught
+	 * Populates the grid pane with the appropriate windows, including the resource explorer,
+	 * the design board, properties pane, and events window.
+	 * @param bypass: whether or not to bypass to the designboard preferences display.
+	 * @throws VoogaException
 	 */
-	@Deprecated
-	private void populate () throws VoogaException {
-
-		explorer = new Explorer(myManager);
-		this.add(explorer, 0, 0);
-
-		designBoard = new DesignBoardHousing(myManager, false);
-		Bindings.bindBidirectional(this.mySceneName, designBoard.getName());
-		this.add(designBoard, 1, 0);
-		GridPane.setRowSpan(designBoard, REMAINING);
-
-		propertiesPane = new PropertiesPane(myManager);
-		myManager.addObserver(propertiesPane.getPropertiesTabManager());
-		ElementManager em = ((ElementManager) myManager);
-		em.initGlobalVariablesPane();
-
-		this.add(propertiesPane, 0, 1);
-		EventsWindow events = new EventsWindow(myManager);
-		this.add(events, 0, 2);
-	}
-
 	private void populate (boolean bypass) throws VoogaException {
-
 		explorer = new Explorer(myManager);
 		this.add(explorer, 0, 0);
 

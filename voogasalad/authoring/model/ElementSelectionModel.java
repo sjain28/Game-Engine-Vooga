@@ -1,6 +1,7 @@
 package authoring.model;
 
 import java.util.Observable;
+
 import authoring.gui.Selector;
 import authoring.interfaces.AuthoringElementable;
 

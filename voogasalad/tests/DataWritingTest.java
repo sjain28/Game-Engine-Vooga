@@ -13,11 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
-import events.KeyCause;
-import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import tools.Position;
@@ -38,8 +36,8 @@ public class DataWritingTest {
 	//	System.out.println("My Button list here is " + manager.getButtonList());
 	}
 
-	private List<EngineElementable> generateSprites(){
-		List<EngineElementable> elements = new ArrayList<EngineElementable>();
+	private List<Elementable> generateSprites(){
+		List<Elementable> elements = new ArrayList<Elementable>();
 		for (int i=1;i<2;i++){
 			Map<String,VoogaData> properties = new HashMap<String,VoogaData>();
 			properties.put("health", new VoogaNumber(10d));

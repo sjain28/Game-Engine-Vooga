@@ -3,7 +3,8 @@ package authoring.interfaces.model;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import authoring.interfaces.EngineElementable;
+
+import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 
 
@@ -22,7 +23,7 @@ public interface EditElementable extends EditSpritable {
 
     public boolean hasElement (String id);
 
-    public EngineElementable getVoogaElement (String id);
+    public Elementable getVoogaElement (String id);
 
     public Collection<String> getMySpriteNames ();
 }
