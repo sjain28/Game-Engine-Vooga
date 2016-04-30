@@ -19,7 +19,7 @@ public class CollisionCauseGUI implements EventGUI{
     public CollisionCauseGUI(EditEventable manager){
         group1=new SpriteComboBox(manager);
         group2= new SpriteComboBox(manager);
-        collisionType = new ComboBox<String>();
+        collisionType = new ComboBox<>();
         collisionType.getItems().addAll("Horizontal","Above", "Below");
     }
 
