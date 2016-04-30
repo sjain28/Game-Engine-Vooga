@@ -4,6 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+
+import org.codehaus.groovy.runtime.ArrayUtil;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
 import data.Deserializer;
@@ -43,9 +49,13 @@ public class GameRunner implements IGameRunner {
     private static final double SEC_PER_MIN = 60;
     private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
     private static final double SPEEDCONTROL = 10;
+    private static final String GAMES_PATH = "games/";
     private static final String LEVELS_PATH = "levels/";
     private static final String XML_EXTENSION_SUFFIX = ".xml";
     private static final String NULL_STRING = "";
+    private static final String SLASH = "/";
+    private static final String FIRST_LEVEL = "First Level";
+    private static final String REGULAR_LEVEL = "Regular Level";
     private IPhysicsEngine myPhysicsEngine;
     private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
@@ -53,9 +63,11 @@ public class GameRunner implements IGameRunner {
     private ElementUpdater myElementUpdater;
     private EventManager myEventManager;
 	private List<String> myLevelList;
+	private Map<String,String> myLevelMap;
 	private LevelListCreator myLevelListCreator;
 	private Timeline myTimeline;
 	private boolean playSessionActive;
+	private String myCurrentGameString;
     private String myCurrentLevelString;
     private IDisplayScroller myScroller;
 	private int myCurrentStep;
@@ -84,6 +96,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	private void createLevelList(String xmlList) throws FileNotFoundException, IOException, VoogaException {
 		myLevelListCreator = new LevelListCreator(xmlList);
+		//myLevelMap = myLevelListCreator.getLevelMap();
 		myLevelList = myLevelListCreator.getLevelList();
 	}
 	/**
@@ -116,12 +129,23 @@ public class GameRunner implements IGameRunner {
 		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / SEC_PER_MIN);
 		
 		//save progress if at checkpoint
-    	if (myLevelData.getSaveNow()) {myStats.saveGameProgress(myLevelListCreator.getGameFilePath());}
+    	if (myLevelData.getSaveNow()) {
+//    		myLevelData.saveProgress();
+    		myStats.saveGameProgress(myLevelListCreator.getGameFilePath());
+    		System.out.println("DID WE DECIDE TO SAVE HERE YES!");
+    		myLevelData.saveProgress(myCurrentGameString);}
     	
 		//check if a level transition effect has been triggered
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
+			//playLevel(myLevelData.getNextLevelName());       TRY THIS!!
 		}
+		
+		//transition to leaderboard screen if the last level has been won. ADD AFTER MAP IMPLEMENTATION
+//		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
+//			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
+//		}
+		
 	}
 	/**
 	 * 	Initializes myLevelList and plays the game
@@ -130,17 +154,15 @@ public class GameRunner implements IGameRunner {
 		//start new game playing session
 		myStats.startPlaySession();
 		playSessionActive = true;
-
-		String latestLevelReached="";
+		myCurrentGameString = gameXmlList;
+		String latestLevelReached=NULL_STRING;
 		//get the last level reached if it exists
 		PlaySession playsesh = myStats.getCurrentStatCell().getLatestPlaySession();
-		if (playsesh != null) {
-			latestLevelReached = (String) (((VoogaString) (playsesh.getProperty(PlaySession.LEVEL_REACHED))).getValue());
-			//System.out.println("ChECKING TO SEE IF LATEST PLAY SESSION IS NULL HERE" + latestLevelReached);
+		if (myStats.getCurrentStatCell().checkProgress() != null) {
+			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
 		}
-		
 		try {
-			Preferences preferences = (Preferences) Deserializer.deserialize(1, "games/" + gameXmlList + "/" + gameXmlList + ".xml").get(0);
+			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
 			double width = Double.parseDouble(preferences.getWidth());
 			double height = Double.parseDouble(preferences.getHeight());
 			myGameDisplay.setSceneDimensions(width, height);
@@ -149,9 +171,18 @@ public class GameRunner implements IGameRunner {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");			
 		}
 		
-		//if the 
-		if (latestLevelReached.equals("")) {latestLevelReached = myLevelList.get(0);}
+//		if (latestLevelReached.equals(NULL_STRING)){
+//	        for (Entry<String, String> entry : myLevelMap.entrySet()) {
+//	            if (entry.getValue().equals(FIRST_LEVEL)) {
+//	                System.out.println(entry.getKey());
+//	            }
+//	        }
+//		}
 		
+		System.out.println(myLevelList);
+		
+		//if the 
+		if (latestLevelReached.equals(NULL_STRING)) {latestLevelReached = myLevelList.get(0);}	
 		myGameDisplay.display();
 		playLevel(latestLevelReached);
 		run();
@@ -174,6 +205,7 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/').lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
 		myLevelList = Arrays.asList(levelName);
+//		myLevelMap.put(levelName, REGULAR_LEVEL);
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
@@ -243,6 +275,7 @@ public class GameRunner implements IGameRunner {
 	public void finishPlaySession() {
 //		System.out.println((Double) myLevelData.getGlobalVar("Score").getValue());
 //		System.out.println(myLevelReached);
+		//showLeaderBoard()
 		if(playSessionActive){
 			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);			
 		}

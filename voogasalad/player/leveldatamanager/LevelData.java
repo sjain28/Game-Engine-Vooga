@@ -191,11 +191,11 @@ public class LevelData implements ILevelData {
     /**
      * Saves current game progress into a XML file
      */
-    public void saveProgress(String filePath, String playerName, String gameName) {
+    public void saveProgress(String filePath) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
     	System.out.println("I SAVED HERE!!!!!!!!");
     	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory);
-    	saver.saveCurrentProgress(filePath, playerName,gameName);
+    	saver.saveCurrentProgress(filePath);
     }
     /**
      * Returns the game's physics engine

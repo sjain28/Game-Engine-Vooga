@@ -54,23 +54,25 @@ public class GameSaver implements IGameSaver {
 	/**
 	 * Public method called in LevelData to save current state of the game
 	 * 
-	 * @param filePath
-	 * @param playerName
+	 * @param nameOfGame
 	 */
-	public void saveCurrentProgress(String filePath, String playerName, String gameName) {
-        DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
+	public void saveCurrentProgress(String nameOfGame) {
+        String gameName = VoogaBundles.preferences.getProperty("GameName");
+        String playerName = VoogaBundles.preferences.getProperty("UserName");
+		DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
         		myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap(),
         		myAnimationFactory.getMyAnimationEvents(),
         		myAnimationFactory.getMyPaths(), 
         		myAnimationFactory.getMyAnimationSequences());
+        
         try {
-            FileWriterFromGameObjects.saveGameObjects(dataContainer, filePath +LEVELS +  playerName + XML_SUFFIX);
+            FileWriterFromGameObjects.saveGameObjects(dataContainer, nameOfGame +LEVELS +  playerName + XML_SUFFIX);
         } catch (Exception e) {
         	new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
         }
-        System.out.println("What is filePath " + filePath +LEVELS +  playerName + XML_SUFFIX);
+        System.out.println("What is filePath " + nameOfGame +LEVELS +  playerName + XML_SUFFIX);
         CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
         PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
-        latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(filePath));
+        latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(nameOfGame));
 	}
 }
