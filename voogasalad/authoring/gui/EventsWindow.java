@@ -26,7 +26,7 @@ import tools.VoogaException;
 /**
  * Events Window GUI component class. 
  * 
- * @author HarryGuo
+ * @author Nick Lockett
  *
  */
 
@@ -82,8 +82,8 @@ public class EventsWindow extends TabPane implements Observer {
 				}
 				effects.put(e, effectsString);
 				HBox info = new HBox();
-				ListView<String> causeList = new ListView<String>(causes.get(e));
-				ListView<String> effectList = new ListView<String>(effects.get(e));
+				ListView<String> causeList = new ListView<>(causes.get(e));
+				ListView<String> effectList = new ListView<>(effects.get(e));
 				Button delete = new Button(eventsWindowProperties.getString("Delete"));
 				delete.setOnAction(ee -> delete(e, info));
 				info.getChildren().addAll(causeList, effectList, delete);
