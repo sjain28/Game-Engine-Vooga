@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
 import javafx.beans.binding.Bindings;
@@ -27,7 +27,7 @@ import tools.VoogaException;
 import tools.interfaces.*;
 
 
-public class Sprite implements Moveable, Effectable, EngineElementable {
+public class Sprite implements Moveable, Effectable, Elementable {
     private boolean isMainCharacter;
     private Velocity myVelocity;
     private Acceleration myAcceleration;

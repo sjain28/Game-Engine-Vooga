@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.HashMap;
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
 import events.AnimationEvent;
 import events.AnimationFactory;
@@ -35,7 +35,7 @@ public class LevelData implements ILevelData {
             VoogaBundles.defaultglobalvars.getProperty("SaveProgress");
     private IPhysicsEngine myPhysics;
     private String myMainCharID;
-    private Map<String, EngineElementable> myElements;
+    private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
     private AnimationFactory myAnimationFactory;
 
@@ -83,7 +83,7 @@ public class LevelData implements ILevelData {
      * 
      * @return
      */
-    public Set<Entry<String, EngineElementable>> getElementables () {
+    public Set<Entry<String, Elementable>> getElementables () {
         return myElements.entrySet();
     }
 
@@ -214,7 +214,7 @@ public class LevelData implements ILevelData {
      * @return
      */
     public Sprite addSprite (String archetype) {
-        EngineElementable newSprite = mySpriteFactory.createSprite(archetype);
+        Elementable newSprite = mySpriteFactory.createSprite(archetype);
         myElements.put(newSprite.getId(), newSprite);
         return (Sprite) newSprite;
     }
@@ -259,7 +259,7 @@ public class LevelData implements ILevelData {
     }
 
     @Override
-    public Map<String, EngineElementable> getElements () {
+    public Map<String, Elementable> getElements () {
         return myElements;
     }
 
