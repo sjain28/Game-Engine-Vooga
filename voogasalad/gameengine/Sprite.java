@@ -122,8 +122,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		myImage= new ImageView(image);
 		myImage.setFitWidth(image.getWidth());
 		myImage.setFitHeight(image.getHeight());
-		Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).getProperty(),myImage.fitWidthProperty());
-                Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).getProperty(),myImage.fitHeightProperty());
 	}
 
 	private Image setNewImage () {
@@ -201,8 +199,11 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		// Convert the Sprite's Cartesian Coordinates to display-able x and y's
 		myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
 		myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
-		myImage.setTranslateZ(myZ.doubleValue());
-
+		myImage.setTranslateZ(myZ.doubleValue()); 
+		
+		myImage.setFitWidth((double) myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).getValue());
+		myImage.setFitHeight((double) myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).getValue());
+		
 		if (!myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString().equals(previousImage)) {
 			Image newImage = setNewImage();
 			myImage.setImage(newImage);
