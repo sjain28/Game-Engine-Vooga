@@ -3,12 +3,7 @@
  */
 package player.gamerunner;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import authoring.gui.cartography.LevelType;
-import authoring.gui.cartography.NetworkContainer;
 import authoring.model.Preferences;
 import data.Deserializer;
 import tools.VoogaException;
@@ -20,13 +15,14 @@ import tools.VoogaException;
  * @author Hunter Lee
  *
  */
-public class LevelMapCreator {
+public class LevelListCreator {
 	
     private static final String GAMES_PATH_PREFIX = "games/";
     private static final String SLASH = "/";
     private static final String XML_EXTENSION = ".xml";
 
-    private Map<String,LevelType> myLevelMap;
+    
+    private List<String> myLevelList;
     private String myGameFilePath;
     
     /**
@@ -35,20 +31,19 @@ public class LevelMapCreator {
      * @param xmlList
      * @throws VoogaException
      */
-    public LevelMapCreator(String xmlList) throws VoogaException {
-    	myLevelMap = new HashMap<String,LevelType>();
+    public LevelListCreator(String xmlList) throws VoogaException {
+    	myLevelList = new ArrayList<>();
 		myGameFilePath = GAMES_PATH_PREFIX + xmlList + SLASH;
-		String XMLwithListOfLevels =myGameFilePath + "map" + SLASH + xmlList + "Map"+ XML_EXTENSION;
-		System.out.println(XMLwithListOfLevels);
-		myLevelMap = ((NetworkContainer) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getLevelTypes();
+		String XMLwithListOfLevels =myGameFilePath + xmlList + XML_EXTENSION;
+		myLevelList = ((Preferences) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getManagerNames();
     }
     
     /**
      * Returns the level list
      * @return
      */
-    public Map<String,LevelType> getLevelMap() {
-    	return myLevelMap;
+    public List<String> getLevelList() {
+    	return myLevelList;
     }
     
     /**

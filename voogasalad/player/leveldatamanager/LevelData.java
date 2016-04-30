@@ -166,7 +166,6 @@ public class LevelData implements ILevelData {
     	//myAnimationFactory.clearMaps();
     	//myAnimationFactory.populateMaps();
     	myAnimationFactory = myTransitioner.getNewAnimationFactory();
-    	System.out.println(myAnimationFactory + " is the animation factory");
     }
     
     public String getNextLevelName() {
@@ -192,11 +191,10 @@ public class LevelData implements ILevelData {
     /**
      * Saves current game progress into a XML file
      */
-    public void saveProgress(String filePath) {
+    public void saveProgress(String filePath, String playerName, String gameName) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-    	System.out.println("I SAVED HERE!!!!!!!!");
-    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory, myAnimationFactory);
-    	saver.saveCurrentProgress(filePath);
+    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory);
+    	saver.saveCurrentProgress(filePath, playerName,gameName);
     }
     /**
      * Returns the game's physics engine
