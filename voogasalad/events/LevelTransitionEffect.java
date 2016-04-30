@@ -13,8 +13,7 @@ public class LevelTransitionEffect extends Effect{
 
 	@Override
 	public void execute(ILevelData data) {
-		data.getGlobalVar("NextLevelIndex").setValue(myNextLevel);;
-		
+		data.getGlobalVar("NextLevelIndex").setValue(myNextLevel);
 	}
 
 	@Override

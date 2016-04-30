@@ -50,11 +50,13 @@ public class CauseAndEffectFactory {
 	 * @return parsed form of String
 	 */
     private Object parseString (String input) {
-        if (input.equalsIgnoreCase("true"))
+        if (input.equalsIgnoreCase("true")) {
             return new Boolean(true);
-
-        else if (input.equalsIgnoreCase("false"))
+        }
+        
+        else if (input.equalsIgnoreCase("false")) {
             return new Boolean(false);
+        }
         
         try {
         	return Double.parseDouble(input);
