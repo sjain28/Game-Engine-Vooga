@@ -2,7 +2,7 @@ package authoring.gui.menubar.menuitems;
 
 import java.io.File;
 
-import application.Launcher;
+import authoring.UILauncher;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.gui.Saveable;
 import javafx.stage.FileChooser;
@@ -39,7 +39,7 @@ public class OpenProjectFileItem extends MenuItemHandler {
 				new ExtensionFilter("All Files", "*.*"));
 		File file = popUp.showOpenDialog(new Stage());
 		if (file != null) {
-			Launcher newProject = new Launcher(new Stage());
+			UILauncher newProject = new UILauncher(new Stage());
 		}
 	}
 
