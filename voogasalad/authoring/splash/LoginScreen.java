@@ -58,7 +58,8 @@ public class LoginScreen extends Stage {
 				login(myLoginUsername.getText(), myLoginPassword.getText());
 				this.close();
 			} catch (Exception ee) {
-				new VoogaAlert("This user does not exist. Please enter a valid username or password.");
+				VoogaAlert alert = new VoogaAlert("This user does not exist. Please enter a valid username or password.");
+				alert.showAndWait();
 			}
 		});
 

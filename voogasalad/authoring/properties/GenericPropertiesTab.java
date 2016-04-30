@@ -201,7 +201,8 @@ public class GenericPropertiesTab extends Tab {
      */
     private boolean elementablePresent () {
         if (myElementable == null) {
-            new VoogaAlert(ppProperties.getString("NoSpriteError"));
+            VoogaAlert alert = new VoogaAlert(ppProperties.getString("NoSpriteError"));
+            alert.showAndWait();
             return false;
         }
         return true;

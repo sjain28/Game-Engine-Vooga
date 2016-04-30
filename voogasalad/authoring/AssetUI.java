@@ -35,13 +35,15 @@ public class AssetUI extends Tab implements Observer {
 	private VoogaFile objectsFolder;
 	private CompleteAuthoringModelable myManager;
 	private Set<Node> gameObjects;
-	
+
 	/**
-	 * Constructor to initialize basic settings of the Game Assets, mostly with display and creating
-	 * basic folders for the GUI and connecting the authoring model (element manager) to this tab.
+	 * Constructor to initialize basic settings of the Game Assets, mostly with
+	 * display and creating basic folders for the GUI and connecting the
+	 * authoring model (element manager) to this tab.
 	 * 
-	 * @param myManager: the complete authoring element manager that forms the connection between the 
-	 * 						sprite factory and the game assets tab.
+	 * @param myManager:
+	 *            the complete authoring element manager that forms the
+	 *            connection between the sprite factory and the game assets tab.
 	 */
 	public AssetUI(CompleteAuthoringModelable myManager) {
 		gameDisplayProperties = VoogaBundles.GameDisplayProperties;
@@ -49,9 +51,10 @@ public class AssetUI extends Tab implements Observer {
 		this.setText(gameDisplayProperties.getString("GameAssetsWindowName"));
 		this.myManager.getSpriteFactory().addObserver(this);
 		this.myManager.addObserver(this);
-		this.gameObjects = new HashSet<Node>();
+		this.gameObjects = new HashSet<>();
 
-		rtv = new ResourceTreeView(new VoogaFile(VoogaFileType.FOLDER, VoogaBundles.preferences.getProperty("GameName")));
+		rtv = new ResourceTreeView(
+				new VoogaFile(VoogaFileType.FOLDER, VoogaBundles.preferences.getProperty("GameName")));
 		archetypesFolder = new VoogaFile(VoogaFileType.FOLDER, gameDisplayProperties.getString("Archetypes"));
 		objectsFolder = new VoogaFile(VoogaFileType.FOLDER, gameDisplayProperties.getString("GameObjects"));
 		rtv.addItem(archetypesFolder);
@@ -62,13 +65,17 @@ public class AssetUI extends Tab implements Observer {
 		addGameObjects(myManager.getElements());
 
 	}
-	
+
 	/**
 	 * Method for adding asset to this resource tree.
 	 * 
-	 * @param type: type of VoogaFile
-	 * @param archetype: the archetype to build the VoogaFile upon (whether archetype or game object)
-	 * @param path: adding this file to the overall file path
+	 * @param type:
+	 *            type of VoogaFile
+	 * @param archetype:
+	 *            the archetype to build the VoogaFile upon (whether archetype
+	 *            or game object)
+	 * @param path:
+	 *            adding this file to the overall file path
 	 */
 	private void addAsset(VoogaFileType type, String archetype, String path) {
 
@@ -82,13 +89,14 @@ public class AssetUI extends Tab implements Observer {
 	}
 
 	/**
-	 * Method to add game objects to the game objects resource file. 
+	 * Method to add game objects to the game objects resource file.
 	 * 
-	 * @param arg: list of nodes to add to game objects folder
+	 * @param arg:
+	 *            list of nodes to add to game objects folder
 	 */
 	private void addGameObjects(List<Node> arg) {
-		List<Node> objects = (List<Node>) arg;
-		if (arg.size() > 0 && arg.get(0) instanceof Node) {
+		List<Node> objects = arg;
+		if (!arg.isEmpty() && arg.get(0) instanceof Node) {
 			for (Node object : objects) {
 				if (object instanceof GameObject && !gameObjects.contains(object)) {
 					gameObjects.add(object);
@@ -102,9 +110,11 @@ public class AssetUI extends Tab implements Observer {
 	}
 
 	/**
-	 * Initializes and populates the archetype folder with sprites from a sprite factory.
+	 * Initializes and populates the archetype folder with sprites from a sprite
+	 * factory.
 	 * 
-	 * @param sf: sprite factory to get sprites from
+	 * @param sf:
+	 *            sprite factory to get sprites from
 	 */
 	private void initializeArchetypeFolder(SpriteFactory sf) {
 		for (String archetype : sf.getArchetypeMap().keySet()) {
@@ -113,22 +123,18 @@ public class AssetUI extends Tab implements Observer {
 			addAsset(file.getType(), file.toString(), file.getPath());
 		}
 	}
-	
+
 	/**
-	 * Observer interface that communicates with the element manager/sprite factory in the complete
-	 * authoring modelable to add the assets.
+	 * Observer interface that communicates with the element manager/sprite
+	 * factory in the complete authoring modelable to add the assets.
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof SpriteFactory) {
-			if (arg instanceof VoogaFile) {
-				addAsset(((VoogaFile) arg).getType(), ((VoogaFile) arg).toString(), ((VoogaFile) arg).getPath());
-			}
+		if (o instanceof SpriteFactory && arg instanceof VoogaFile) {
+			addAsset(((VoogaFile) arg).getType(), ((VoogaFile) arg).toString(), ((VoogaFile) arg).getPath());
 		}
-		if (o instanceof ElementManager) {
-			if (arg instanceof List) {
-				addGameObjects((List<Node>) arg);
-			}
+		if (o instanceof ElementManager && arg instanceof List) {
+			addGameObjects((List<Node>) arg);
 		}
 
 	}

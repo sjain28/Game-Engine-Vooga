@@ -41,7 +41,8 @@ public class MenuPanelHandlingMirror {
             handleEvent();
         }
         catch (VoogaException e1) {
-            new VoogaAlert(e1.getMessage());
+            VoogaAlert alert = new VoogaAlert(e1.getMessage());
+            alert.showAndWait();
         }
     }
 

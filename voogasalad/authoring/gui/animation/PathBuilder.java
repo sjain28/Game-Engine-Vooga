@@ -135,8 +135,8 @@ public class PathBuilder extends Tab {
 				new VoogaInfo("Your path, \"" + name.getText() + "\", was created!");
 				name.setText("");
 			} catch (Exception e1) {
-				new VoogaAlert("Please define a proper path and name.");
-				e1.printStackTrace();
+				VoogaAlert alert = new VoogaAlert("Please define a proper path and name.");
+				alert.showAndWait();
 			}
 		}));
 		return row;

@@ -148,7 +148,8 @@ public class GameRunner implements IGameRunner {
 			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
-			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
+			VoogaAlert alert = new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
+			alert.showAndWait();
 		}
 		if (latestLevelReached.equals(NULL_STRING)){
 			for (Entry<String, LevelType> entry : myLevelMap.entrySet()) {

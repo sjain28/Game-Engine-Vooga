@@ -23,16 +23,4 @@ public class Launcher {
 		new UILauncher(primaryStage);
 	}
 
-	/**
-	 * Initializes authoring environment
-	 * 
-	 * @param primaryStage
-	 *            to display the environment in
-	 * @param file
-	 *            to load as the model
-	 */
-	public Launcher(Stage primaryStage, File fileToLoadIn) {
-		new UILauncher(primaryStage);
-	}
-
 }

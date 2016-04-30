@@ -220,7 +220,8 @@ public class LevelCartographer extends Stage {
 				reloadByLevelTypes();
 			}
 		} catch (VoogaException e) {
-			new VoogaAlert("This is the first time opening the Cartographer.");
+			VoogaAlert alert = new VoogaAlert("This is the first time opening the Cartographer.");
+			alert.showAndWait();
 		}
 	}
 	

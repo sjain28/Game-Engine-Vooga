@@ -26,7 +26,8 @@ public class SpriteComboBox extends ComboBox<String> implements VoogaNode {
             return manager.getSpriteIdFromName(this.getValue());
         }
         catch (VoogaException e) {
-            new VoogaAlert(e.getMessage());
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
         return null;
     }
