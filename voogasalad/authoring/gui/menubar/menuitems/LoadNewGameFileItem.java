@@ -38,13 +38,11 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() throws VoogaException {
-		System.out.println("Hello");
 		/*
 		 * Using FileChooser, opens a new file and plays that file
 		 * 
 		 */
 		this.myGameRunner.getGameDisplay().getStage().close();
-//		this.myGameRunner.playGame(new File(myFileChooser.launch()));
 		this.myGameRunner.playGame(myFileChooser.launch());
 		this.myGameRunner.getGameDisplay().getStage().show();
 	}

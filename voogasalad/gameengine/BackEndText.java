@@ -49,7 +49,7 @@ public class BackEndText implements Elementable {
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
-        return null;
+        return myProperties;
     }
 
     @Override
