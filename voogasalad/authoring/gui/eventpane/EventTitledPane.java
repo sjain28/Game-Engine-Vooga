@@ -2,6 +2,7 @@ package authoring.gui.eventpane;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
+
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;

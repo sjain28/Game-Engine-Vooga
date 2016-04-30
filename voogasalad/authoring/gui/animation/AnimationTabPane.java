@@ -1,7 +1,6 @@
 package authoring.gui.animation;
 
 import javafx.scene.control.TabPane;
-import player.gamedisplay.Menuable;
 
 /**
  * The TabPane that populates the main AnimationGUI Stage. It contains two tabs, one for

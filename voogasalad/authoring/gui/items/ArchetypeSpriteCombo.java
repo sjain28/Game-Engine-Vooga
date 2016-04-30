@@ -3,6 +3,7 @@ package authoring.gui.items;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
 import authoring.interfaces.model.EditEventable;
 import javafx.event.EventHandler;
 import javafx.scene.Node;

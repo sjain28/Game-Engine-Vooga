@@ -1,6 +1,7 @@
 package authoring.interfaces;
 
 import java.util.Map;
+
 import javafx.scene.Node;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;

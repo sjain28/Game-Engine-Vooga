@@ -1,16 +1,9 @@
 package authoring.gui.menubar.menuitems;
 
-import authoring.VoogaScene;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.Builder;
 import authoring.gui.menubar.builders.GameObjectBuilder;
-import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.interfaces.model.EditElementable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.input.InputEvent;
-import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
 public class NewGameObjectNewItem extends MenuItemHandler {

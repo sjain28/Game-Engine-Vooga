@@ -2,6 +2,7 @@ package authoring.gui.eventpane;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
 import javafx.geometry.Insets;

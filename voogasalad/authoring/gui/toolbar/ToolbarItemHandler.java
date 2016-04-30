@@ -1,7 +1,5 @@
 package authoring.gui.toolbar;
 
-import authoring.interfaces.model.CompleteAuthoringModelable;
-
 public abstract class ToolbarItemHandler {
  
 	public ToolbarItemHandler() {

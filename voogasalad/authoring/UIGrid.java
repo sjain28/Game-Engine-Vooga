@@ -3,10 +3,10 @@ package authoring;
 import java.util.ResourceBundle;
 
 import authoring.gui.DesignBoardHousing;
-import authoring.properties.PropertiesPane;
 import authoring.gui.EventsWindow;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
+import authoring.properties.PropertiesPane;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;

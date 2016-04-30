@@ -4,10 +4,6 @@ import java.awt.Desktop;
 import java.net.URI;
 
 import authoring.gui.menubar.MenuItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 import tools.VoogaException;
 

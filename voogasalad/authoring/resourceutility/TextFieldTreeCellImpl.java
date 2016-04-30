@@ -1,8 +1,5 @@
 package authoring.resourceutility;
 
-import java.util.Arrays;
-import java.util.List;
-
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;

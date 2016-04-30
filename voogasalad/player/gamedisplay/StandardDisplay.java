@@ -2,13 +2,14 @@ package player.gamedisplay;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
-import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;

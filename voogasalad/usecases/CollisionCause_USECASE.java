@@ -2,8 +2,6 @@ package usecases;
 
 import java.util.List;
 
-import usecases.Sprite_USECASE;
-
 public class CollisionCause_USECASE implements Cause_USECASE{
 
 	private List<Sprite_USECASE> groupA;

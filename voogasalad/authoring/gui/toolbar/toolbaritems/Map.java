@@ -3,7 +3,6 @@ package authoring.gui.toolbar.toolbaritems;
 import authoring.UIManager;
 import authoring.gui.cartography.LevelCartographer;
 import authoring.gui.toolbar.ToolbarItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
 import player.gamedisplay.Menuable;
 
 

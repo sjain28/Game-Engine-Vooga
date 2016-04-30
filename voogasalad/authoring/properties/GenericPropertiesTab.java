@@ -3,6 +3,7 @@ package authoring.properties;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SwitchButton;

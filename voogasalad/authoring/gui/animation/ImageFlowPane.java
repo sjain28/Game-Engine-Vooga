@@ -5,7 +5,6 @@ import java.util.List;
 
 import authoring.resourceutility.ButtonMaker;
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import tools.VoogaAlert;
 import tools.VoogaException;
