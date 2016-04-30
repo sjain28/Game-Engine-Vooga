@@ -2,7 +2,7 @@ package authoring.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import gameengine.BackEndText;
@@ -35,10 +35,10 @@ public class ElementManagerUnserializer {
         return elementManager;
     }
     
-    private List<Node> getNodeList(List<Elementable> elements) throws VoogaException{
+    private List<Node> getNodeList(List<EngineElementable> elements) throws VoogaException{
         List<Node> nodeList = new ArrayList<Node>();
         
-        for (Elementable e : elements){
+        for (EngineElementable e : elements){
             if (e instanceof Sprite){
                 Sprite sprite = (Sprite) e;
                 sprite.init();

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import authoring.VoogaScene;
-import authoring.model.VoogaButton;
 import authoring.model.VoogaFrontEndText;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

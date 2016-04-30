@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
 import events.AnimationEvent;
@@ -34,7 +34,7 @@ public class LevelTransitioner {
     private static final String SAVE_PROGRESS = "SaveProgress";
     private DataContainerOfLists myData;
     private FileReaderToGameObjects myFileManager;
-    private Map<String, Elementable> myElements;
+    private Map<String, EngineElementable> myElements;
     private KeyEventContainer myKeyEventContainer;
     private Map<String, VoogaData> myGlobalVariables;
     private ResourceBundle myEventMethods;
@@ -51,7 +51,7 @@ public class LevelTransitioner {
      * @param globals
      * @param nextlevelkey
      */
-    public LevelTransitioner(String levelfilename, Map<String, Elementable> elements, KeyEventContainer container, 
+    public LevelTransitioner(String levelfilename, Map<String, EngineElementable> elements, KeyEventContainer container, 
     						 Map<String, VoogaData> globals, String nextlevelkey) {
     	myData = new DataContainerOfLists();
     	myElements = elements;
@@ -67,15 +67,15 @@ public class LevelTransitioner {
      * TODO: Create a scrolling sprite
      * @param levelfilename
      */
-    public Map<String, Elementable> populateNewSprites () {
+    public Map<String, EngineElementable> populateNewSprites () {
         myFileManager = new FileReaderToGameObjects(myLevelFileName);
         myData = myFileManager.getDataContainer();
-        List<Elementable> elementObjects = myData.getElementableList();
+        List<EngineElementable> elementObjects = myData.getElementableList();
         myElements.clear();
-        for (Elementable elementable : elementObjects) {
-            try {elementable.init();}
+        for (EngineElementable engineElementable : elementObjects) {
+            try {engineElementable.init();}
             catch (VoogaException e1) {e1.printStackTrace();}
-            myElements.put(elementable.getId(), elementable);
+            myElements.put(engineElementable.getId(), engineElementable);
         }
         return myElements;
     }

@@ -2,7 +2,7 @@ package data;
 
 import java.util.List;
 import java.util.Map;
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import events.AnimationEvent;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -18,7 +18,7 @@ public class DataContainerOfLists {
 
 	
     private List<VoogaEvent> eventList;
-    private List<Elementable> elementableList;
+    private List<EngineElementable> elementableList;
     private Map<String, VoogaData> variableMap;
     private Map<String, Sprite> archetypeMap;
     private Map<String, AnimationEvent> myAnimationEvents;
@@ -28,7 +28,7 @@ public class DataContainerOfLists {
     public DataContainerOfLists () {
     }
 
-    public DataContainerOfLists (List<Elementable> ElementableList,
+    public DataContainerOfLists (List<EngineElementable> ElementableList,
                                  Map<String, VoogaData> variableMap,
                                  List<VoogaEvent> eventList,Map<String,Sprite> archetypeToFactory,
                                   Map<String, AnimationEvent> animationEvents,
@@ -44,7 +44,7 @@ public class DataContainerOfLists {
         myAnimationSequences = animationSequences;
     }
 
-    public List<Elementable> getElementableList () {
+    public List<EngineElementable> getElementableList () {
 
         return this.elementableList;
     }
