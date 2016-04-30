@@ -1,8 +1,11 @@
 package stats.database;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tools.interfaces.VoogaData;
 
 public class CellEntry implements PropertiesCell{
@@ -17,5 +20,10 @@ public class CellEntry implements PropertiesCell{
 	@Override
 	public VoogaData getProperty(String param) {
 		return myPropertyMap.get(param);
+	}
+	
+	public ObservableList<String> getPropertyOptions(){
+	    //return new ArrayList<String>(myPropertyMap.keySet());
+	    return FXCollections.observableList(new ArrayList<String>(myPropertyMap.keySet()));
 	}
 }

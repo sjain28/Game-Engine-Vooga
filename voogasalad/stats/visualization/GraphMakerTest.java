@@ -35,7 +35,7 @@ public class GraphMakerTest extends Application {
 		
 		GraphMaker statsvisualizer = new GraphMaker();
 		StatsVisualizer visualizer = new StatsVisualizer();
-		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("testergame", "klo14");
+		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("test2", "Nick");
 		List<CellEntry> list = ((StatCell) statinfo).getAuthorStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
 		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
