@@ -136,6 +136,7 @@ public class PathBuilder extends Tab {
 				name.setText("");
 			} catch (Exception e1) {
 				new VoogaAlert("Please define a proper path and name.");
+				e1.printStackTrace();
 			}
 		}));
 		return row;

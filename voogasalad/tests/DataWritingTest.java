@@ -65,9 +65,9 @@ public class DataWritingTest {
 		List<VoogaEvent> elements = new ArrayList<VoogaEvent>();
 		for (int i =0;i<10;i++){
 			VoogaEvent testEvent = new VoogaEvent();
-			testEvent.addCause(new KeyCause("k", testEvent));
-			testEvent.addEffect(new VariableEffect("LevelIndex", "set", "Level2", testEvent));
-			elements.add(testEvent);
+//			testEvent.addCause(new KeyCause("k", testEvent));
+//			testEvent.addEffect(new VariableEffect("LevelIndex", "set", "Level2", testEvent));
+//			elements.add(testEvent);
 		}
 		return elements;
 	}

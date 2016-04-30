@@ -8,8 +8,8 @@ import player.gamedisplay.Menuable;
  * 
  * @author Hunter, Michael
  */
-public interface IGameRunner extends Menuable {
-
+public interface IGameRunner extends Menuable{
+	
 	void exit();
 
 	void speedUp();
@@ -19,9 +19,9 @@ public interface IGameRunner extends Menuable {
 	void playGame(String xmlList);
 
 	void testLevel(String levelName);
-
+			
 	void takeSnapShot();
-
+	
 	void finishPlaySession();
 	
 	void replayLevel();

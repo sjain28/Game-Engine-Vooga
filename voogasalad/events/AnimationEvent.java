@@ -3,16 +3,11 @@ package events;
 import gameengine.Sprite;
 import player.gamerunner.GameRunner;
 import player.leveldatamanager.ILevelData;
-
-//Process: 
-//VoogaEvent has some outside Cause paired to an AnimationEffect
-//AnimationEffect has an AnimationEvent in it
-//AnimationEvent has a WrapperCause and RorateEffects/PathEffects
-//Outside cause triggers animationeffect. animationeffect sets WrapperCause() to true
-//As long as wrappercause is true, path/rotation effects execute.
-//Once duration of the path/rotation effects is over, wrappercause gets set back to false. 
-
-
+/**
+ * This class houses animation actions (translations, rotations, etc) and executes them based on the status of a WrapperCause
+ * This class is used by AnimationEffect to allow animation actions to run for their complete duration
+ * @author Anita Desai, Saumya Jain
+ */
 public class AnimationEvent extends VoogaEvent {
 
 	private WrapperCause myCause;
@@ -23,52 +18,60 @@ public class AnimationEvent extends VoogaEvent {
 	private ScaleAnimationEffect myScaleEffect;
 	private String myName;
 	private Integer myCounter;
-
 	private Integer myDuration;
 
+	/**
+	 * Constructor
+	 * @param Name of the AnimationEvent
+	 * @param duration Length of the animation in seconds
+	 */
 	public AnimationEvent(String name, Integer duration){
 		myName = name;
 		myCause = new WrapperCause(this);
 		myDuration = (int) GameRunner.FRAME_RATE * duration;
 		myCounter = 0;
 	}
-
+	/**
+	 * Executes animation actions if wrappercause is true
+	 * Updates its own list of Sprites 
+	 * Contains logic to execute for the full length of its duration and then terminate until triggered again
+	 */
 	@Override
 	public void update(ILevelData data){
-		for (Sprite sprite : getCauseSprites()){
-			if (!data.containsSprite(sprite.getId())){
-				removeSprite(sprite);
-			}
-		}
 		if(myCause.getValue()){
+			if(getCauseSprites().size() > 0){
+			System.out.println("animation event sprite size " + getCauseSprites().size());
+			}
+			for (Sprite sprite : getCauseSprites()){
+				if (!data.containsSprite(sprite.getId())){
+					removeSprite(sprite);
+				}
+			}
 			for(Effect e: getEffects()){
 				e.execute(data);
 			}
 			myCounter++;
 			if (myCounter > myDuration){
-				if(myNextEvent != null)
+				if(myNextEvent != null){
 					myNextEvent.setCauseValue(true);
+				}
 				getCauseSprites().clear();
-				setCauseValue(false);
 				myCounter = 0;
+				if(myPathEffect != null){
+					myPathEffect.setCounter(1);
+				}
+				if(myImageEffect != null){
+					myImageEffect.setCounter(0);
+				}
+				setCauseValue(false);
 			}
 		}
 	}
-	protected WrapperCause getCause(){
-		return myCause;
-	}
 
-	protected Integer getDuration(){
-		return myDuration;
-	}
-	private void checkSprites(){
-		for (Sprite sprite : getCauseSprites()){
+	/**
+	 * Getters and setters below
+	 */
 
-		}
-	}
-	protected void setCauseValue(Boolean value){
-		myCause.setValue(value);
-	}
 	public void addPathEffect(PathEffect pathEffect){
 		if (myPathEffect != null){
 			getEffects().remove(myPathEffect);
@@ -120,6 +123,11 @@ public class AnimationEvent extends VoogaEvent {
 		}
 		return clone;
 	}
+
+	protected void setCauseValue(Boolean value){
+		myCause.setValue(value);
+	}
+
 	private ScaleAnimationEffect getScaleAnimationEffect() {
 		return myScaleEffect;
 	}
@@ -144,5 +152,13 @@ public class AnimationEvent extends VoogaEvent {
 	}
 	protected Integer getCounter(){
 		return myCounter;
+	}
+
+	protected WrapperCause getCause(){
+		return myCause;
+	}
+
+	protected Integer getDuration(){
+		return myDuration;
 	}
 }

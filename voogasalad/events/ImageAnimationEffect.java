@@ -14,7 +14,7 @@ public class ImageAnimationEffect extends SpriteEffect {
 	private Integer myCounter;
 	private Integer myCycles;
 	private Integer myCurrentImageInt;
-	
+
 	public ImageAnimationEffect(List<String> images, Integer numCycles, AnimationEvent voogaEvent) {
 		super(voogaEvent);
 		setNeedsSprites(true);
@@ -53,5 +53,7 @@ public class ImageAnimationEffect extends SpriteEffect {
 	public ImageAnimationEffect clone(AnimationEvent event) {
 		return new ImageAnimationEffect(Collections.unmodifiableList(myImages), myCycles, (AnimationEvent) getEvent());
 	}
-
+	public void setCounter(Integer count){
+		myCounter = count;
+	}
 }
