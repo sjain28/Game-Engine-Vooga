@@ -8,13 +8,13 @@ import javafx.scene.Node;
  */
 public interface VoogaData {
 
-    public Object getValue ();
+    Object getValue ();
 
-    public void setValue (Object o);
+    void setValue (Object o);
 
-    public Node display ();
+    Node display ();
 
-    public <T> Property<T> getProperty ();
+    <T> Property<T> getProperty ();
 
-    public <T> void setProperty (T newVal);
+    <T> void setProperty (T newVal);
 }
