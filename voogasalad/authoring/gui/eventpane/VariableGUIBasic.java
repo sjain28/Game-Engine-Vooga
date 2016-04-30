@@ -52,7 +52,6 @@ public abstract class VariableGUIBasic implements EventGUI {
 
     protected void setChangeListeners () {
         level.setOnAction(e -> {
-            // System.out.println("level activated");
             resetNode();
             addGUIElements(level);
 
@@ -131,7 +130,7 @@ public abstract class VariableGUIBasic implements EventGUI {
             result += ((NumberTextField) amount).getText();
         }
         else if (amount instanceof ComboBox) {
-            result += ((ComboBox) amount).getValue();
+            result += ((ComboBox<?>) amount).getValue();
         }
         return result;
     }

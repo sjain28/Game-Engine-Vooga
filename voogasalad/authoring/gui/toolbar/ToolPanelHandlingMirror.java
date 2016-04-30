@@ -38,11 +38,9 @@ public class ToolPanelHandlingMirror {
         Class<?> clazz;
         try {
             clazz = Class.forName(PACKAGE_LOCATION + toolbarItem.getId());
-//            System.out.println("Class-Tool: "+clazz);
             toolbarItemHandler =
                     (ToolbarItemHandler) clazz.getConstructor(Menuable.class)
                             .newInstance(myManager);
-//            System.out.println("ToolBarItemHandler-Tool: "+toolbarItemHandler);
             toolbarItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(toolbarItemHandler);
         }
         catch (Exception ee) {
