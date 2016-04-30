@@ -36,14 +36,14 @@ public class SpriteFactory extends Observable{
 	private Map<String, Sprite> myArchetypes;
 
 	// Path for folder where all archetypes ever saved are stored
-	private final String ARCHETYPE_RESOURCE_PATH = "resources/saved_archetypes/";
+	private final static String ARCHETYPE_RESOURCE_PATH = "resources/saved_archetypes/";
 
 	public SpriteFactory () {
-		myArchetypes = new HashMap<String, Sprite>();
+		myArchetypes = new HashMap<>();
 	}
 
 	public SpriteFactory(Map<String, Sprite> archetypeMap) {
-		myArchetypes = new HashMap<String,Sprite>(archetypeMap);
+		myArchetypes = new HashMap<>(archetypeMap);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class SpriteFactory extends Observable{
 		System.out.println("creating sprite in SpriteFactory");
 		Sprite original = myArchetypes.get(archetype);
 
-		Map<String,VoogaData> map = new HashMap<String,VoogaData>(original.getParameterMap());
+		Map<String,VoogaData> map = new HashMap<>(original.getParameterMap());
 
 		Sprite clone = new Sprite(original.getImagePath(), original.getArchetype(),
 				map,

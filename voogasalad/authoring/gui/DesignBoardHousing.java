@@ -41,22 +41,36 @@ public class DesignBoardHousing extends TabPane {
 			preferences.setClosable(false);
 			preferences.setListener(e -> {
 				try {
-					mySceneName.set(preferences.getName());
-					elem.getGlobalVariables().put(
-							preferences.getName()+designboardProperties.getString("Scrolling"), new VoogaString(preferences.getScrollingType()));
-					elem.getGlobalVariables().put(
-							preferences.getName()+designboardProperties.getString("mainUUID"), new VoogaString(preferences.getMainSpriteID()));
-					elem.getGlobalVariables().put(
-							preferences.getName()+designboardProperties.getString("ScrollSpeed"), new VoogaNumber(preferences.getContinuousScrollSpeed()));
-					elem.getGlobalVariables().put(
-							preferences.getName()+designboardProperties.getString("ScrollAngle"), new VoogaNumber(preferences.getScrollAngle()));
-					elem.getGlobalVariables().put(
-							preferences.getName()+designboardProperties.getString("contScrollType"), new VoogaString(preferences.getContinuousScrollType()));
-					elem.getGlobalVariables().put(
-							preferences.getName()+designboardProperties.getString("TrackingDirection"), new VoogaString(preferences.getTrackingDirection()));
-					this.getTabs().remove(preferences);
-					this.getTabs().add(new DesignBoard(elem));
-					elem.setName(preferences.getName());
+//<<<<<<< HEAD
+//					mySceneName.set(preferences.getName());
+//					elem.getGlobalVariables().put(
+//							preferences.getName()+designboardProperties.getString("Scrolling"), new VoogaString(preferences.getScrollingType()));
+//					elem.getGlobalVariables().put(
+//							preferences.getName()+designboardProperties.getString("mainUUID"), new VoogaString(preferences.getMainSpriteID()));
+//					elem.getGlobalVariables().put(
+//							preferences.getName()+designboardProperties.getString("ScrollSpeed"), new VoogaNumber(preferences.getContinuousScrollSpeed()));
+//					elem.getGlobalVariables().put(
+//							preferences.getName()+designboardProperties.getString("ScrollAngle"), new VoogaNumber(preferences.getScrollAngle()));
+//					elem.getGlobalVariables().put(
+//							preferences.getName()+designboardProperties.getString("contScrollType"), new VoogaString(preferences.getContinuousScrollType()));
+//					elem.getGlobalVariables().put(
+//							preferences.getName()+designboardProperties.getString("TrackingDirection"), new VoogaString(preferences.getTrackingDirection()));
+//					this.getTabs().remove(preferences);
+//					this.getTabs().add(new DesignBoard(elem));
+//					elem.setName(preferences.getName());
+//=======
+				mySceneName.set(preferences.getName());
+				elem.getGlobalVariables().put(preferences.getName()+"Scrolling", new VoogaString(preferences.getScrollingType()));
+				elem.getGlobalVariables().put(preferences.getName()+"MainUUID", new VoogaString(preferences.getMainSpriteID()));
+				elem.getGlobalVariables().put(preferences.getName()+"ScrollSpeed", new VoogaNumber(preferences.getContinuousScrollSpeed()));
+				elem.getGlobalVariables().put(preferences.getName()+"ScrollAngle", new VoogaNumber(preferences.getScrollAngle()));
+				elem.getGlobalVariables().put(preferences.getName()+"ContinuousScrollType", new VoogaString(preferences.getContinuousScrollType()));
+				elem.getGlobalVariables().put(preferences.getName()+"TrackingDirection", new VoogaString(preferences.getTrackingDirection()));
+				elem.getGlobalVariables().put(preferences.getName()+"BGM", new VoogaString(preferences.getBGM()));
+				this.getTabs().remove(preferences);
+				this.getTabs().add(new DesignBoard(elem));
+				elem.setName(preferences.getName());
+//>>>>>>> ed3c744dd78c2928f7b542a1f88fdaeee3726a5c
 				} catch(Exception ee) {
 					VoogaAlert alert = new VoogaAlert(designboardProperties.getString("prefAlert"));
 					alert.showAndWait();
