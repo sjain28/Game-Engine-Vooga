@@ -60,11 +60,11 @@ public class DesignBoard extends Tab implements Observer {
 
 	private double y_offset, x_offset;
 
-	private static final double RESIZE_FACTOR = 0.5;
-	private static final int INT_RESIZE_FACTOR = 2;
-	private static final double SLIDER_MIN = 0.1;
-	private static final double SLIDER_MAX = 10;
-	private static final double SLIDER_INCREMENT = 1;
+	private double RESIZE_FACTOR;
+	private int INT_RESIZE_FACTOR;
+	private double SLIDER_MIN;
+	private double SLIDER_MAX;
+	private double SLIDER_INCREMENT;
 
 	/**
 	 * Constructs DesignBoard with object that has the functionality described
@@ -80,6 +80,12 @@ public class DesignBoard extends Tab implements Observer {
 
 		this.width = Double.parseDouble(designboardProperties.getString("Width"));
 		this.height = Double.parseDouble(designboardProperties.getString("Height"));
+
+		RESIZE_FACTOR = Double.parseDouble(designboardProperties.getString("ResizeFactor"));
+		INT_RESIZE_FACTOR = Integer.parseInt(designboardProperties.getString("intResizeFactor"));
+		SLIDER_MIN = Double.parseDouble(designboardProperties.getString("SliderMin"));
+		SLIDER_MAX = Double.parseDouble(designboardProperties.getString("SliderMax"));
+		SLIDER_INCREMENT = Double.parseDouble(designboardProperties.getString("SliderIncrement"));
 
 		initializeContainers();
 		initializeZoom();
