@@ -26,8 +26,11 @@ import tools.interfaces.VoogaData;
 
 public class ArchetypeBuilder extends Builder {
 
+	private static final String PATH = "file:";
     private static final double WIDTH = 400;
     private static final double HEIGHT = 250;
+    private static final int FIT_WIDTH = 50;
+    
     private String myImagePath;
     private Map<String, VoogaData> myProperties;
     private Button image;
@@ -49,7 +52,7 @@ public class ArchetypeBuilder extends Builder {
         this.setMinWidth(WIDTH);
         this.setMinHeight(HEIGHT);
         this.tabpane = new TabPane();
-        this.myProperties = new HashMap<String, VoogaData>();
+        this.myProperties = new HashMap<>();
         this.createTab = new Tab("Create");
         this.propertiesTab = new Tab("Properties");
         this.creation = new VBox();
@@ -110,9 +113,9 @@ public class ArchetypeBuilder extends Builder {
 
     private void loadImage (String path) {
         this.myImagePath = path;
-        this.iv.setImage(new Image("file:" + myImagePath));
+        this.iv.setImage(new Image(PATH + myImagePath));
         this.iv.setPreserveRatio(true);
-        this.iv.setFitWidth(50);
+        this.iv.setFitWidth(FIT_WIDTH);
     }
 
     public String getArchetypeName () {
@@ -138,7 +141,7 @@ public class ArchetypeBuilder extends Builder {
             }
 
             mySpriteFactory.addArchetype(archetypeName.getText(),
-                                         new Sprite("file:" + myImagePath,
+                                         new Sprite(PATH + myImagePath,
                                                     archetypeName.getText(), myProperties, mass));
             quit();
         }
