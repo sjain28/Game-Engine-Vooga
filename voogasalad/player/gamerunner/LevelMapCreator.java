@@ -41,6 +41,7 @@ public class LevelMapCreator {
 		String XMLwithListOfLevels =myGameFilePath + "map" + SLASH + xmlList + "Map"+ XML_EXTENSION;
 		System.out.println(XMLwithListOfLevels);
 		myLevelMap = ((NetworkContainer) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getLevelTypes();
+		System.out.println("my level map from level map creator: "+myLevelMap);
     }
     
     /**

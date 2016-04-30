@@ -142,18 +142,23 @@ public class GameRunner implements IGameRunner {
 		String latestLevelReached = NULL_STRING;
 		if (myStats.getCurrentStatCell().checkProgress() != null) {
 			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
-		} try {
+		} 
+		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
 			double width = Double.parseDouble(preferences.getWidth());
 			double height = Double.parseDouble(preferences.getHeight());
 			myGameDisplay.setSceneDimensions(width, height);
+			System.out.println("creating level map");
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
 		}
+		System.out.println("latest level reached: "+latestLevelReached+"hjkhlkjhljk");
+		System.out.println("level map outside of level reached:"+myLevelMap);
 		if (latestLevelReached.equals(NULL_STRING)){
 	        for (Entry<String, LevelType> entry : myLevelMap.entrySet()) {
 	            if (entry.getValue().equals(LevelType.ENTRYPOINT)) {
+	            	System.out.println("Level Map: "+myLevelMap);
 	                latestLevelReached = entry.getKey();
 	            }
 	        }
@@ -167,6 +172,7 @@ public class GameRunner implements IGameRunner {
 	 * Play a level, called by playGame
 	 */
 	private void playLevel(String fileName) {
+		System.out.println("inputted filename: "+fileName);
 		myLevelReached++;
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
