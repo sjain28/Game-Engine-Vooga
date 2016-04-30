@@ -148,7 +148,7 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	private void createPane(OrderedProperties resource) {
 		myPane.setCenter(myGameScreen);
-		myPane.setTop(new MenuPanel(myGameRunner, e -> new MenuPanelHandlingMirror(e, myGameRunner), resource));
+		myPane.setTop(new MenuPanel((Menuable) myGameRunner, e -> new MenuPanelHandlingMirror(e, (Menuable) myGameRunner), resource));
 		myPane.setBottom(myControl.createControl());
 		myPane.setRight(myHUD.createHUD());
 		myStage.setScene(myScene);

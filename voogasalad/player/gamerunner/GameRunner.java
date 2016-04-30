@@ -1,13 +1,12 @@
 package player.gamerunner;
 
-import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
 import data.Deserializer;
@@ -22,7 +21,6 @@ import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
-import player.leveldatamanager.IDisplayScroller;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
@@ -63,8 +61,6 @@ public class GameRunner implements IGameRunner {
 	private boolean playSessionActive;
 	private String myCurrentLevelString;
 	private DisplayScroller myScroller;
-	//private List<BufferedImage> videoScreenshots;
-	// TODO: Test
 	private int myCurrentStep;
 	private CurrentSessionStats myStats;
 	private double myLevelReached;
@@ -80,7 +76,6 @@ public class GameRunner implements IGameRunner {
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
 		myScroller = new DisplayScroller(myGameDisplay);
-		//videoScreenshots = new ArrayList<BufferedImage>();
 		myTimeline = new Timeline();
 		myLevelReached = 0;
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -89,7 +84,6 @@ public class GameRunner implements IGameRunner {
 		myTimeline.getKeyFrames().add(frame);
 		myStats = new CurrentSessionStats();
 	}
-
 	/**
 	 * createLevelList reads a text file and creates a list of levels
 	 */
@@ -98,7 +92,6 @@ public class GameRunner implements IGameRunner {
 		myLevelListCreator = new LevelListCreator(xmlList);
 		myLevelList = myLevelListCreator.getLevelList();
 	}
-
 	/**
 	 * Public method in the IGameRunner interface that runs the game
 	 */
@@ -107,7 +100,6 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setRate(FRAME_RATE);
 		myTimeline.play();
 	}
-
 	/**
 	 * Stub function that calls methods that need to be called in order
 	 */
@@ -123,11 +115,9 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay.clearKeyEvents();
 		myScroller.increaseScrollingSpeed(myScroller.getScrollingSprite());
 	}
-
 	/**
 	 * Checks and updates all LevelData GlobalVariables
 	 */
-
 	private void checkAndUpdateGlobalVariables() {
 		// update global timer
 		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE)
@@ -144,7 +134,6 @@ public class GameRunner implements IGameRunner {
 					.getNextLevelName())));
 		}
 	}
-
 	/**
 	 * Initializes myLevelList and plays the game
 	 */
@@ -183,7 +172,6 @@ public class GameRunner implements IGameRunner {
 		playLevel(latestLevelReached);
 		run();
 	}
-
 	/**
 	 * Play a level, called by playGame
 	 */
@@ -195,7 +183,6 @@ public class GameRunner implements IGameRunner {
 		// addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
-
 	/**
 	 * Plays a single level called by authoring for testing purposes
 	 */
@@ -214,7 +201,6 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay.displayTestMode();
 		run();
 	}
-
 	@Override
 	public void replayLevel() {
 		myLevelData.setNextLevelName(myCurrentLevelString);
@@ -244,11 +230,6 @@ public class GameRunner implements IGameRunner {
 			myTimeline.setRate(myTimeline.getRate() - SPEEDCONTROL);
 		}
 		promptForSave();
-	}
-
-	@Override
-	public CompleteAuthoringModelable getManager() {
-		return null;
 	}
 
 	// PUT THIS CODE HERE ONLY FOR TESTING PURPOSES!!!!!!!!
@@ -286,54 +267,34 @@ public class GameRunner implements IGameRunner {
 
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
-/*
-	@Override
-//TODO where to save?
-	public void startVideoCapture() {
-		videoScreenshots.clear();
-	}
-
-	@Override
-	public void endVideoCapture() {
-		String outputFileName = VoogaBundles.imageProperties
-				.getString("saveLocation")
-				+ myCurrentLevelString
-				+ VoogaBundles.imageProperties.getString("timeStamp")
-				+ VoogaBundles.imageProperties.getString("dotmp4");
-	
-		myScreenProcessor.encodeScreenshots(outputFileName, videoScreenshots, FRAME_RATE);
-		videoScreenshots.clear();
-	}
-*/
 	@Override
 	public Timeline getTimeline() {
 		return myTimeline;
 	}
-
 	@Override
 	public void finishPlaySession() {
-//		System.out.println((Double) myLevelData.getGlobalVar("Score").getValue());
-//		System.out.println(myLevelReached);
 		if(playSessionActive){
 			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);			
 		}
 	}
-
+	@Override
+	public CompleteAuthoringModelable getManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public void addScene() {
 		// TODO Auto-generated method stub
-
+		
 	}
-
 	@Override
 	public void addScene(CompleteAuthoringModelable manager) {
 		// TODO Auto-generated method stub
-
+		
 	}
-
 	@Override
 	public void saveAll() {
 		// TODO Auto-generated method stub
-
+		
 	}
 }
