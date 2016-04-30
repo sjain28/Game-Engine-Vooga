@@ -1,13 +1,17 @@
 package authoring.gui.animation;
 
+import java.util.List;
+
 import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
 import authoring.resourceutility.ButtonMaker;
+import events.AnimationEvent;
 import events.AnimationFactory;
 import events.VoogaEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import player.gamedisplay.Menuable;
@@ -40,6 +44,7 @@ public class AnimationEventGUI extends Tab {
 	private RotationEffectSelector rotationSelector;
 	private ImageAnimationEffectSelector imageSelector;
 	private NumberTextField duration;
+	private TextField name;
 	private AnimationFactory factory;
 	private Button OK;
 	private Button preview;
@@ -55,11 +60,13 @@ public class AnimationEventGUI extends Tab {
 		duration = new NumberTextField();
 		duration.setPromptText("Duration in seconds");
 		duration.sanitizeForInteger();
+		name = new TextField();
 		container.getChildren().addAll(pathSelector,
 									   scaleSelector,
 									   rotationSelector,
 									   imageSelector,
 									   GUIUtils.makeRow(new CustomText("Duration: "), duration),
+									   GUIUtils.makeRow(new CustomText("Name: "), name),
 									   buttonRow());
 		this.setContent(container);
 	}
@@ -81,21 +88,20 @@ public class AnimationEventGUI extends Tab {
 	private HBox buttonRow() {
 		OK = new ButtonMaker().makeButton("OK", e -> {
 			//TODO: implement once animation factory has been finalized.
-			
-//			VoogaEvent animationEvent = factory.makeAnimationEvent((String) pathSelector.getValue(), Double.parseDouble(duration.getText()));
-//			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
-//			if(pathSelector.selectEffect.isSelected()) {
-//				factory.makePathEffect((String) pathSelector.getValue(), pathSelector.isReverse(), animationEvent);
-//			}
-//			if(rotationSelector.selectEffect.isSelected()) {
-//				factory.makeRotateEffect(rotationSelector.getValue(), animationEvent);
-//			}
-//			if(scaleSelector.selectEffect.isSelected()) {
-//				factory.makeScaleEffect(scaleSelector.getValue(), animationEvent);
-//			}
-//			if(imageSelector.selectEffect.isSelected()) {
-//				factory.makeImageAnimationEffect(imageSelector.getValue(), animationEvent);
-//			}
+			AnimationEvent animationEvent = factory.makeAnimationEvent(name.getText(), Integer.parseInt(duration.getText()));
+			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
+			if(pathSelector.selectEffect.isSelected()) {
+				factory.makePathEffect((String) pathSelector.getValue(), pathSelector.isReverse(), animationEvent);
+			}
+			if(rotationSelector.selectEffect.isSelected()) {
+				factory.makeRotateEffect((Double)rotationSelector.getValue(), animationEvent);
+			}
+			if(scaleSelector.selectEffect.isSelected()) {
+				factory.makeScaleAnimationEffect((Double)scaleSelector.getValue(), animationEvent);
+			}
+			if(imageSelector.selectEffect.isSelected()) {
+				factory.makeImageAnimationEffect((List<String>)imageSelector.getValue(), imageSelector.getNumberOfCycles(), animationEvent);
+			}
 		});
 		preview = new ButtonMaker().makeButton("Preview", e -> {
 			//TODO: allow users to preview their animation

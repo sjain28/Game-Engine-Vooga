@@ -1,7 +1,6 @@
 package events;
 
 import java.nio.file.Paths;
-
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -22,8 +21,11 @@ public class SoundEffect extends Effect {
 
 	@Override
 	public void execute(ILevelData data) {
-		Jukebox.getInstance().play(mySound, loop);
+		//if (!soundAdded){
+			Jukebox.getInstance().play(mySound, loop);
 		// data.getGameSound().createMediaPlayer(mySound);
+			//soundAdded = true;
+		//}
 		// data.getGameSound().play(mySound);
 
 	}

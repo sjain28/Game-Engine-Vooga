@@ -25,5 +25,9 @@ public class WrapperCause extends Cause {
 	protected void setValue(Boolean value){
 		myValue = value;
 	}
+	
+	protected boolean getValue(){
+		return myValue;
+	}
 
 }

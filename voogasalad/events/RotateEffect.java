@@ -11,9 +11,10 @@ public class RotateEffect extends SpriteEffect {
 	public RotateEffect(Double rotation, VoogaEvent event) {
 		super(event);
 		setNeedsSprites(true);
+		myRotation = rotation;
 	}
 	
-	protected void setCycleRotation(Double duration){
+	protected void setCycleRotation(Integer duration){
 		myCycleRotation = myRotation/duration;
 	}
 
@@ -24,5 +25,11 @@ public class RotateEffect extends SpriteEffect {
 			sprite.getImage().setRotate(myCycleRotation);
 		}
 		clearSprites();
+	}
+	protected Double getRotation(){
+		return myRotation;
+	}
+	protected RotateEffect clone(AnimationEvent event){
+       return new RotateEffect(myRotation, event);
 	}
 }

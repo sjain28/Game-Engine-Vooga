@@ -19,7 +19,7 @@ public class VoogaUser extends CellEntry{
 		setProperty(PROF_PIC_LOC, new VoogaString(profPicLocation));
 	}
 	public ImageView displayProfilePicture(){
-		return new ImageView(new Image(getProperty(PROF_PIC_LOC).getValue().toString()));
+		return new ImageView(new Image("file:" + getProperty(PROF_PIC_LOC).getValue().toString()));
 	}
 	public boolean verifyPassword(String password){
 		if(password.equals(myPassword)){return true;}

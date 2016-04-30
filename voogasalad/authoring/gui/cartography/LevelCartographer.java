@@ -1,8 +1,10 @@
 package authoring.gui.cartography;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -50,8 +52,9 @@ public class LevelCartographer extends Stage {
 	private List<String> levelNames;
 	private Set<Level> levels;
 	private Set<Connection> connectors;
-	private Set<Mapping> mappings;
+	private Map<String, String> mappings;
 	private NetworkContainer container;
+	private Map<String, LevelType> levelTypes;
 	private UIManager manager;
 
 	public LevelCartographer(Menuable model) {
@@ -67,15 +70,19 @@ public class LevelCartographer extends Stage {
 		myMap = new Group();
 		myGUI.setCenter(myMap);
 		myGUI.setBottom(buttons());
-		this.mappings = new HashSet<Mapping>();
+		this.levelTypes = new HashMap<String, LevelType>();
+		this.mappings = new HashMap<String, String>();
 		this.connectors = new HashSet<Connection>();
 		this.setScene(new VoogaScene(myGUI, WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 
 	private HBox buttons() {
 		HBox container = new HBox();
-		container.getChildren().addAll(new ButtonMaker().makeButton("Add connection", e -> addConnector()),
+		container.getChildren().addAll(new ButtonMaker().makeButton("Add connection", e -> {
+			addConnector();
+		}),
 				new ButtonMaker().makeButton("Make entrypoint", e -> makeEntrypoint()),
+				new ButtonMaker().makeButton("Make endpoint", e -> makeEndpoint()),
 				new ButtonMaker().makeButton("Save", e -> save()));
 		container.setAlignment(Pos.CENTER);
 		return container;
@@ -85,7 +92,8 @@ public class LevelCartographer extends Stage {
 		connectorsToCoordinates();
 		new Save(this.manager).handle();
 		try {
-			container = new NetworkContainer(mappings, Entrypoint.getInstance().getEntrypoint());
+			assignLevelTypes();
+			container = new NetworkContainer(mappings, levelTypes);
 			Serializer.serializeLevel(container, MAP_XML_PATH);
 		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
@@ -93,45 +101,60 @@ public class LevelCartographer extends Stage {
 		this.close();
 	}
 	
+	private void assignLevelTypes() {
+		myMap.getChildren().stream()
+						   .filter(n -> (n instanceof Point))
+						   .forEach(m -> levelTypes.put(((Point) m).getPoint(), ((Point) m).getLevelType()));
+	}
+	
 	private void connectorsToCoordinates() {
 		for(Connection connector : connectors) {
-			mappings.add(new Mapping(connector.getStartpoint().getName(), connector.getEndpoint().getName()));
+			mappings.put(connector.getStartpoint().getName(), connector.getEndpoint().getName());
 		}
 	}
 
 	private void addConnector() {
 		Connection connector = new Connection(this.manager.getManager(), 0, 0, 100, -100);
-		connector.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
-			for (Level level : levels) {
-				if (connector.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-					connector.setStartpoint(level);
-				}
-			}
-		});
-		connector.getEndAnchor().centerXProperty().addListener((obs, old, n) -> {
-			for (Level level : levels) {
-				if (connector.getEndAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
-					connector.setEndpoint(level);
-				}
-			}
-		});
+		makeConnectorListenable(connector);
 		connectors.add(connector);
 		myMap.getChildren().add(connector);
+	}
+	
+	private void makeConnectorListenable(Connection c) {
+		c.getStartAnchor().centerXProperty().addListener((obs, old, n) -> {
+			for (Level level : levels) {
+				if (c.getStartAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
+					c.setStartpoint(level);
+				}
+			}
+		});
+		c.getEndAnchor().centerXProperty().addListener((obs, old, n) -> {
+			for (Level level : levels) {
+				if (c.getEndAnchor().getBoundsInParent().intersects(level.getBoundsInParent())) {
+					c.setEndpoint(level);
+				}
+			}
+		});
 	}
 
 	private void makeEntrypoint() {
 		Entrypoint ep = Entrypoint.getInstance();
 		if (!myMap.getChildren().contains(ep)) {
-			addEntrypoint(ep);
+			addPoint(ep);
 		}
 	}
+	
+	private void makeEndpoint() {
+		Endpoint endpoint = new Endpoint();
+		addPoint(endpoint);
+	}
 
-	private void addEntrypoint(Entrypoint circ) {
+	private void addPoint(Point circ) {
 		myMap.getChildren().add(circ);
 		circ.centerXProperty().addListener((obs, old, n) -> {
 			for (Level level : levels) {
 				if (circ.getBoundsInParent().intersects(level.getBoundsInParent())) {
-					circ.setEntrypoint(level.getName());
+					circ.setPoint(level.getName());
 					return;
 				}
 			}
@@ -150,24 +173,39 @@ public class LevelCartographer extends Stage {
 				break;
 			}
 		}
-		addEntrypoint(circ);
+		addPoint(circ);
+	}
+	
+	private void addEndpoint(String levelCenter) {
+		Endpoint circ = new Endpoint();
+		circ.setPoint(levelCenter);
+		Level entry = getLevelFromString(levelCenter);
+		for(Level level : levels) {
+			if(level == entry) {
+				circ.setCenterX(level.getTranslateX() + CIRCLE_SIZE / levelNames.size());
+				circ.setCenterY(level.getTranslateY() + CIRCLE_SIZE / levelNames.size());
+				break;
+			}
+		}
+		addPoint(circ);
 	}
 
 	private void loadLevels() {
 		levels = new HashSet<Level>();
 		levelNames = this.manager.getAllManagerNames();
+		levelNames.stream()
+				  .forEach(n -> levelTypes.put(n, LevelType.NORMAL));
 	}
 
 	private void loadLinesAndPoints() {
-		Set<Mapping> mappings;
 		try {
 			List<Object> deserialization = Deserializer.deserialize(1, MAP_XML_PATH);
 			if (deserialization.size() > 0) {
 				container = (NetworkContainer) deserialization.get(0);
-				mappings = (Set<Mapping>) container.getMappings();
-				for(Mapping mapping : mappings) {
-					Level startLevel = getLevelFromString(mapping.getStart());
-					Level endLevel = getLevelFromString(mapping.getEnd());
+				mappings = (Map<String, String>) container.getMappings();
+				for(String startPoint : mappings.keySet()) {
+					Level startLevel = getLevelFromString(startPoint);
+					Level endLevel = getLevelFromString(mappings.get(startPoint));
 					Connection connection = new Connection(this.manager.getManager(),
 						    startLevel.getTranslateX() + CIRCLE_SIZE / levelNames.size(),
 						    startLevel.getTranslateY() + CIRCLE_SIZE / levelNames.size(),
@@ -175,14 +213,25 @@ public class LevelCartographer extends Stage {
 						    endLevel.getTranslateY()+ CIRCLE_SIZE / levelNames.size());
 					connection.setStartpoint(startLevel);
 					connection.setEndpoint(endLevel);
+					makeConnectorListenable(connection);
 					connectors.add(connection);
 					myMap.getChildren().add(connection);
 				}
-				addEntrypoint((String) container.getEntrypoint());
-				Entrypoint.getInstance().setEntrypoint((String) container.getEntrypoint());
+				reloadByLevelTypes();
 			}
 		} catch (VoogaException e) {
 			new VoogaAlert("This is the first time opening the Cartographer.");
+		}
+	}
+	
+	private void reloadByLevelTypes() {
+		for(String levelName : container.getLevelTypes().keySet()) {
+			if(container.getLevelTypes().get(levelName) == LevelType.ENTRYPOINT) {
+				addEntrypoint(levelName);
+				Entrypoint.getInstance().setPoint(levelName);
+			} else if (container.getLevelTypes().get(levelName) == LevelType.ENDPOINT) {
+				addEndpoint(levelName);
+			}
 		}
 	}
 	
