@@ -1,15 +1,13 @@
 package authoring.gui.cartography;
 
-import javafx.event.EventHandler;
 import javafx.scene.Cursor;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public abstract class Point extends Circle {
-	
+
 	private static final int STROKE_WIDTH = 3;
-	
+
 	public Point(double r, Color c) {
 		super(r, c);
 		this.setStroke(Color.WHITE);
@@ -19,53 +17,38 @@ public abstract class Point extends Circle {
 
 	private void enableDrag(final Circle circle) {
 		final Delta dragDelta = new Delta();
-		circle.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				dragDelta.x = circle.getCenterX() - mouseEvent.getX();
-				dragDelta.y = circle.getCenterY() - mouseEvent.getY();
-				circle.getScene().setCursor(Cursor.MOVE);
-			}
+		circle.setOnMousePressed(e -> {
+			dragDelta.x = circle.getCenterX() - e.getX();
+			dragDelta.y = circle.getCenterY() - e.getY();
+			circle.getScene().setCursor(Cursor.MOVE);
 		});
-		circle.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mouseEvent) {
+		circle.setOnMouseReleased(e -> circle.getScene().setCursor(Cursor.HAND));
+
+		circle.setOnMouseDragged(e -> {
+			circle.setCenterX(e.getX() + dragDelta.x);
+			circle.setCenterY(e.getY() + dragDelta.y);
+		});
+
+		enableDragCursor(circle);
+	}
+
+	private void enableDragCursor(final Circle circle) {
+		circle.setOnMouseEntered(e -> {
+			if (!e.isPrimaryButtonDown()) {
 				circle.getScene().setCursor(Cursor.HAND);
 			}
 		});
-		circle.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				circle.setCenterX(mouseEvent.getX() + dragDelta.x);
-				circle.setCenterY(mouseEvent.getY() + dragDelta.y);
-			}
-		});
-		enableDragCursor(circle);
-	}
-	
-	private void enableDragCursor(final Circle circle) {
-		circle.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				if (!mouseEvent.isPrimaryButtonDown()) {
-					circle.getScene().setCursor(Cursor.HAND);
-				}
-			}
-		});
-		circle.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				if (!mouseEvent.isPrimaryButtonDown()) {
-					circle.getScene().setCursor(Cursor.DEFAULT);
-				}
+		circle.setOnMouseExited(e -> {
+			if (!e.isPrimaryButtonDown()) {
+				circle.getScene().setCursor(Cursor.DEFAULT);
 			}
 		});
 	}
-	
+
 	protected abstract void setPoint(String name);
-	
+
 	protected abstract String getPoint();
 
 	protected abstract LevelType getLevelType();
-	
+
 }

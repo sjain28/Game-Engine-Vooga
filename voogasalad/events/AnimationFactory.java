@@ -22,7 +22,7 @@ public class AnimationFactory {
 		myPaths = new HashMap<>();
 	}
 
-	public static AnimationFactory getInstance () {
+	public synchronized static AnimationFactory getInstance () {
 		if(animationFactory == null) {
 			animationFactory = new AnimationFactory();
 		}

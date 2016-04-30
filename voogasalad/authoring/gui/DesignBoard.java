@@ -59,6 +59,12 @@ public class DesignBoard extends Tab implements Observer {
     private ResourceBundle designboardProperties;
 
     private double y_offset, x_offset;
+    
+    private static final double RESIZE_FACTOR = 0.5;
+    private static final int INT_RESIZE_FACTOR = 2;
+    private static final double SLIDER_MIN = 0.1;
+    private static final double SLIDER_MAX = 10;
+    private static final double SLIDER_INCREMENT = 1;
 
     /**
      * Constructs DesignBoard with object that has the functionality described
@@ -102,22 +108,22 @@ public class DesignBoard extends Tab implements Observer {
         container = new VBox(zoomBar, scroller);
         this.setContent(container);
 
-        y_offset = width / 2;
-        x_offset = height / 2;
+        y_offset = width * RESIZE_FACTOR;
+        x_offset = height * RESIZE_FACTOR;
     }
 
     /**
      * Initializes the zoom slider which affects the magnification of the authoring environment.
      */
     private void initializeZoom () {
-        Slider zoomControl = new Slider(0.1, 10, 1);
+        Slider zoomControl = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_INCREMENT);
         Text coordinateDisplay = new CustomText("");
         contentPane.setOnMouseMoved(e -> {
             String xCoordinate =
-                    new BigDecimal(e.getX() - width / 2).setScale(2, RoundingMode.HALF_UP)
+                    new BigDecimal(e.getX() - width * RESIZE_FACTOR).setScale(INT_RESIZE_FACTOR, RoundingMode.HALF_UP)
                             .toString();
             String yCoordinate =
-                    new BigDecimal(e.getY() - height / 2).setScale(2, RoundingMode.HALF_UP)
+                    new BigDecimal(e.getY() - height * RESIZE_FACTOR).setScale(INT_RESIZE_FACTOR, RoundingMode.HALF_UP)
                             .toString();
             coordinateDisplay.setText(String.format("X: %s   Y: %s", xCoordinate, yCoordinate));
         });
@@ -149,8 +155,8 @@ public class DesignBoard extends Tab implements Observer {
         guide.setStrokeWidth(Integer.parseInt(designboardProperties.getString("StrokeWidth")));
         guide.setFill(Paint.valueOf(designboardProperties.getString("RecFill")));
         this.contentPane.getChildren().add(guide);
-        guide.setTranslateX(width / 2);
-        guide.setTranslateY(height / 2);
+        guide.setTranslateX(width * RESIZE_FACTOR);
+        guide.setTranslateY(height * RESIZE_FACTOR);
         this.scroller
                 .setVvalue(Double.parseDouble(designboardProperties.getString("ScrollerVValue")));
         this.scroller

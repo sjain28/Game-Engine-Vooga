@@ -51,7 +51,7 @@ public class LevelCauseWindow extends Stage {
 			for (String eventDetails : causeAccoridion.getDetails()) {
 				populateEvent(eventDetails);
 			}
-			LevelTransitionEffect levelTransition = new LevelTransitionEffect(endLevel, event);
+			new LevelTransitionEffect(endLevel, event);
 			populateEvent("events.LevelTransitionEffect," + endLevel);
 			model.addEvents(event);
 			this.close();
