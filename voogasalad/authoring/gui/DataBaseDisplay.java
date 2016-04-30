@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import authoring.VoogaScene;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -55,9 +54,8 @@ public class DataBaseDisplay extends Stage {
         VBox content = new VBox();
         HBox header = makeHeader();
         data = makeData();
-        Scene scene = new VoogaScene(content);
         content.getChildren().addAll(header, data);
-        this.setScene(scene);
+        this.setScene(new VoogaScene(content));
     }
 
     private HBox makeHeader () {
