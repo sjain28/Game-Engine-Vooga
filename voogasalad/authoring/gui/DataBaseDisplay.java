@@ -70,6 +70,7 @@ public class DataBaseDisplay extends Stage {
         } 
         catch(Exception IllegalArgumentException){
             //do Nothing
+            System.out.println("error");
         }
         pict.setFitHeight(HEADER_HEIGHT);
         pict.setPreserveRatio(true);
@@ -114,7 +115,7 @@ public class DataBaseDisplay extends Stage {
         ComboBox<String> cellData = new ComboBox<String>();
         try{
             cellData.setItems(selectedCell.getPropertyOptions());        
-            cellData.getItems().addAll(((StatCell) selectedCell).getAuthorStats(). .get(0).getPropertyOptions());
+            cellData.getItems().addAll(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions());
             cellData.getItems().addAll(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions());
         } catch(Exception ArrayIndexOutOfBoundsException){
            System.out.println("no Data");

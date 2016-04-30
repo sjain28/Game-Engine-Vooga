@@ -93,9 +93,8 @@ public class LoginScreen extends Stage {
 	}
 
 	private void newUser() {
-		database.checkThenAddIfNewUser(myMakeDisplayname.getText(), myMakeUsername.getText(), myMakePassword.getText(), null);
+	        database.checkThenAddIfNewUser(myMakeDisplayname.getText(), myMakeUsername.getText(), myMakePassword.getText(), myImagePath);
 		database.save();
-		database.checkThenAddIfNewUser(myMakeDisplayname.getText(), myMakeUsername.getText(), myMakePassword.getText(), myImagePath);
 		login(myMakeUsername.getText(), myMakePassword.getText());
 	}
 
