@@ -1,17 +1,30 @@
 package authoring.gui;
 
+import java.util.ResourceBundle;
+
 import authoring.gui.levelpreferences.DesignBoardPreferences;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TabPane;
+import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.VoogaString;
 
+/**
+ * 
+ * The GUI class that manages the housing for the design board.
+ * 
+ * @author Harry Guo, Arjun Desai, Aditya Srinivasan, Nick Lockett
+ *
+ */
+
 public class DesignBoardHousing extends TabPane {
 
 	private SimpleStringProperty mySceneName;
+	
+	private ResourceBundle designboardProperties;
 
 	/**
 	 * Initializes the housing for the Design Board. This contains functionality
@@ -22,24 +35,32 @@ public class DesignBoardHousing extends TabPane {
 	 */
 	public DesignBoardHousing(CompleteAuthoringModelable elem, boolean bypass) {
 		mySceneName = new SimpleStringProperty();
+		designboardProperties = VoogaBundles.designboardProperties;
 		if (!bypass) {
 			DesignBoardPreferences preferences = new DesignBoardPreferences(elem);
 			preferences.setClosable(false);
 			preferences.setListener(e -> {
 				try {
-				mySceneName.set(preferences.getName());
-				elem.getGlobalVariables().put(preferences.getName()+"Scrolling", new VoogaString(preferences.getScrollingType()));
-				elem.getGlobalVariables().put(preferences.getName()+"MainUUID", new VoogaString(preferences.getMainSpriteID()));
-				elem.getGlobalVariables().put(preferences.getName()+"ScrollSpeed", new VoogaNumber(preferences.getContinuousScrollSpeed()));
-				elem.getGlobalVariables().put(preferences.getName()+"ScrollAngle", new VoogaNumber(preferences.getScrollAngle()));
-				elem.getGlobalVariables().put(preferences.getName()+"ContinuousScrollType", new VoogaString(preferences.getContinuousScrollType()));
-				elem.getGlobalVariables().put(preferences.getName()+"TrackingDirection", new VoogaString(preferences.getTrackingDirection()));
-				elem.getGlobalVariables().put(preferences.getName()+"BGM", new VoogaString(preferences.getBGM()));
-				this.getTabs().remove(preferences);
-				this.getTabs().add(new DesignBoard(elem));
-				elem.setName(preferences.getName());
+
+					mySceneName.set(preferences.getName());
+					elem.getGlobalVariables().put(
+							preferences.getName()+designboardProperties.getString("Scrolling"), new VoogaString(preferences.getScrollingType()));
+					elem.getGlobalVariables().put(
+							preferences.getName()+designboardProperties.getString("mainUUID"), new VoogaString(preferences.getMainSpriteID()));
+					elem.getGlobalVariables().put(
+							preferences.getName()+designboardProperties.getString("ScrollSpeed"), new VoogaNumber(preferences.getContinuousScrollSpeed()));
+					elem.getGlobalVariables().put(
+							preferences.getName()+designboardProperties.getString("ScrollAngle"), new VoogaNumber(preferences.getScrollAngle()));
+					elem.getGlobalVariables().put(
+							preferences.getName()+designboardProperties.getString("contScrollType"), new VoogaString(preferences.getContinuousScrollType()));
+					elem.getGlobalVariables().put(
+							preferences.getName()+designboardProperties.getString("TrackingDirection"), new VoogaString(preferences.getTrackingDirection()));
+					this.getTabs().remove(preferences);
+					this.getTabs().add(new DesignBoard(elem));
+					elem.setName(preferences.getName());
+
 				} catch(Exception ee) {
-					VoogaAlert alert = new VoogaAlert("Please enter all preference values.");
+					VoogaAlert alert = new VoogaAlert(designboardProperties.getString("prefAlert"));
 					alert.showAndWait();
 				}
 			});
@@ -68,7 +89,10 @@ public class DesignBoardHousing extends TabPane {
 		DesignBoard design = new DesignBoard(elem);
 		this.getTabs().add(design);
 	}
-	
+
+	/**
+	 * @return the name of the current scene
+	 */
 	public Property<String> getName() {
 		return this.mySceneName;
 	}
