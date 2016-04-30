@@ -1,3 +1,4 @@
+package tests;
 // package authoring.model;
 //
 // import static org.junit.Assert.*;
