@@ -109,10 +109,12 @@ public class Connection extends Group {
 	}
 
 	public void setStartpoint(Level start) {
+		System.out.println("SETTING STARTPOINT TO " + start.getName());
 		this.start = start;
 	}
 	
 	public void setEndpoint(Level end) {
+		System.out.println("SETTING ENDPOINT TO " + end.getName());
 		this.end = end;
 	}
 	

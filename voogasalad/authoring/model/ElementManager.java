@@ -53,7 +53,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         GPM = new GlobalPropertiesManager();
         myIds = new HashSet<String>();
         spriteFactory = new SpriteFactory();
-        animationFactory = new AnimationFactory();
+        animationFactory = AnimationFactory.getInstance();
         names = new ArrayList<String>();
         
         initGlobalVariablesPane();
