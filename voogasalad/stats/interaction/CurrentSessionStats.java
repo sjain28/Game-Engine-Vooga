@@ -49,7 +49,6 @@ public class CurrentSessionStats {
 	private void setCurrentGameAndUser(){
 		myCurrentGame = VoogaBundles.preferences.getProperty("GameName");
 		myCurrentUser = VoogaBundles.preferences.getProperty("UserName");
-		System.out.println(myCurrentGame +" "+ myCurrentUser);
 		myDataBase.printDataBase();
 	}
 }
