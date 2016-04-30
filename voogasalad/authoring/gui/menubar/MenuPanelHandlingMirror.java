@@ -1,5 +1,6 @@
 package authoring.gui.menubar;
 
+import java.lang.reflect.InvocationTargetException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.MenuItem;
 import player.gamedisplay.Menuable;
@@ -59,11 +60,10 @@ public class MenuPanelHandlingMirror {
                             .newInstance(myManager);
             menuItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(menuItemHandler);
         }
-        catch (Exception ee) {
-            ee.printStackTrace();
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e1) {
             throw new VoogaException(ITEM_NOT_IMPLEMENTED_ERROR);
         }
-
+        
     }
 
 }
