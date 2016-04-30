@@ -88,7 +88,6 @@ public class CollisionCause extends Cause{
 				}
 			}
 		}
-
 		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
 	}

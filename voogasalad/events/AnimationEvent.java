@@ -48,7 +48,7 @@ public class AnimationEvent extends VoogaEvent {
 			if (myCounter > myDuration){
 				if(myNextEvent != null)
 					myNextEvent.setCauseValue(true);
-
+				getCauseSprites().clear();
 				setCauseValue(false);
 				myCounter = 0;
 			}
@@ -103,14 +103,27 @@ public class AnimationEvent extends VoogaEvent {
 		myScaleEffect = scaleEffect;
 		addEffect(myImageEffect);
 	}
-	
+
 	protected AnimationEvent clone(){
 		AnimationEvent clone = new AnimationEvent(myName, myDuration);
-		clone.addRotateEffect(getRotateEffect().clone(clone));
-		clone.addPathEffect(getPathEffect().clone(clone));
-		clone.addImageAnimationEffect(getImageAnimationEffect().clone(clone));
+		if(myRotateEffect != null){
+			clone.addRotateEffect(getRotateEffect().clone(clone));
+		}
+		if(myPathEffect != null){
+			clone.addPathEffect(getPathEffect().clone(clone));
+		}
+		if(myImageEffect != null){
+			clone.addImageAnimationEffect(getImageAnimationEffect().clone(clone));
+		}
+		if(myScaleEffect != null){
+			clone.addScaleAnimationEffect(getScaleAnimationEffect().clone(clone));
+		}
 		return clone;
 	}
+	private ScaleAnimationEffect getScaleAnimationEffect() {
+		return myScaleEffect;
+	}
+
 	protected void removeSprite(Sprite sprite){
 		getCauseSprites().remove(sprite);
 	}
