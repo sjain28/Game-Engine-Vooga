@@ -32,6 +32,10 @@ import tools.VoogaException;
 
 public class LevelCartographer extends Stage {
 
+	private static final String GAME_NAME = "GameName";
+	private static final int CON_MIN = -100;
+	private static final int CON_MAX = 100;
+	
 	/**
 	 * Constants.
 	 */
@@ -41,8 +45,8 @@ public class LevelCartographer extends Stage {
 	private static final double CIRCLE_DEGREES = 360;
 	private static final double RING_SIZE = 300;
 	private static final double INCREASE_FACTOR = 1.2;
-	private static final String MAP_XML_PATH = VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty("GameName")
-			+ "/map/" + VoogaBundles.preferences.getProperty("GameName") + "Map.xml";
+	private static final String MAP_XML_PATH = VoogaPaths.GAME_FOLDER + VoogaBundles.preferences.getProperty(GAME_NAME)
+			+ "/map/" + VoogaBundles.preferences.getProperty(GAME_NAME) + "Map.xml";
 
 	/**
 	 * Private instance variables.
@@ -70,9 +74,9 @@ public class LevelCartographer extends Stage {
 		myMap = new Group();
 		myGUI.setCenter(myMap);
 		myGUI.setBottom(buttons());
-		this.levelTypes = new HashMap<String, LevelType>();
-		this.mappings = new HashMap<String, String>();
-		this.connectors = new HashSet<Connection>();
+		this.levelTypes = new HashMap<>();
+		this.mappings = new HashMap<>();
+		this.connectors = new HashSet<>();
 		this.setScene(new VoogaScene(myGUI, WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 
@@ -114,7 +118,7 @@ public class LevelCartographer extends Stage {
 	}
 
 	private void addConnector() {
-		Connection connector = new Connection(this.manager.getManager(), 0, 0, 100, -100);
+		Connection connector = new Connection(this.manager.getManager(), 0, 0, CON_MAX, CON_MIN);
 		makeConnectorListenable(connector);
 		connectors.add(connector);
 		myMap.getChildren().add(connector);
@@ -191,7 +195,7 @@ public class LevelCartographer extends Stage {
 	}
 
 	private void loadLevels() {
-		levels = new HashSet<Level>();
+		levels = new HashSet<>();
 		levelNames = this.manager.getAllManagerNames();
 		levelNames.stream()
 				  .forEach(n -> levelTypes.put(n, LevelType.NORMAL));
@@ -200,7 +204,7 @@ public class LevelCartographer extends Stage {
 	private void loadLinesAndPoints() {
 		try {
 			List<Object> deserialization = Deserializer.deserialize(1, MAP_XML_PATH);
-			if (deserialization.size() > 0) {
+			if (!deserialization.isEmpty()) {
 				container = (NetworkContainer) deserialization.get(0);
 				mappings = (Map<String, String>) container.getMappings();
 				for(String startPoint : mappings.keySet()) {

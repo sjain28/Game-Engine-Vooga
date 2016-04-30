@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.FontWeight;
+import tools.GUIUtils;
 import tools.Pair;
 
 public class ProjectInitializationPrompt extends StarterPrompt {
@@ -66,7 +67,7 @@ public class ProjectInitializationPrompt extends StarterPrompt {
 		width.setText("600");
 		height = new NumberTextField();
 		height.setText("600");
-		dimensions = makeRow(width, new CustomText(" x "), height);
+		dimensions = GUIUtils.makeRow(width, new CustomText(" x "), height);
 	}
 
 	@Override

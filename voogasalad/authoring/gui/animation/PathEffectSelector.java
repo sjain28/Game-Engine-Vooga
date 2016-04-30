@@ -38,7 +38,7 @@ public class PathEffectSelector extends AbstractEffectSelector {
 	 */
 	@Override
 	protected void initializeSubnode() {
-		paths = new ComboBox<String>();
+		paths = new ComboBox<>();
 		reverse = new CheckBox();
 		reverse.setText(REVERSE);
 		subnode = GUIUtils.makeRow(paths, reverse); 
