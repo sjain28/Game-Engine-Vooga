@@ -3,7 +3,6 @@ package authoring.splash;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.Command;
 import authoring.UIManager;
 import authoring.VoogaScene;
@@ -54,7 +53,7 @@ public class CreateCommand implements Command {
     }
 
     private void showNewGamePrompt () {
-    	
+
         ProjectInitializationPrompt newGamePrompt = new ProjectInitializationPrompt();
         newGamePrompt.setProceedEvent(ee -> {
             newGamePrompt.close();
@@ -62,16 +61,16 @@ public class CreateCommand implements Command {
                       getFieldOrDefault(newGamePrompt.getDescription(), DEFAULT_DESCRIPTION),
                       newGamePrompt.getDimension().getFirst(),
                       newGamePrompt.getDimension().getLast());
-           
+
             open(null, "giberish");
         });
         newGamePrompt.show();
     }
 
     private void promptForSave () {
-    	CurrentSessionStats stats = new CurrentSessionStats();
-    	stats.endCurrentAuthoringSession();
-    	VoogaDataBase.getInstance().save();
+        CurrentSessionStats stats = new CurrentSessionStats();
+        stats.endCurrentAuthoringSession();
+        VoogaDataBase.getInstance().save();
     }
 
     private void showAuthorGamePrompt (StarterPrompt prompt) {
@@ -81,9 +80,11 @@ public class CreateCommand implements Command {
                 String name = ((Button) eee.getSource()).getId();
                 List<CompleteAuthoringModelable> models =
                         new ArrayList<CompleteAuthoringModelable>();
-                Preferences p = (Preferences) Deserializer.deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
+                Preferences p =
+                        (Preferences) Deserializer
+                                .deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
                 storeInfo(name, p.getDescription(), p.getWidth(), p.getHeight());
-                
+
                 String prefixPath = "games/" + name + "/levels/";
                 File levelsFolder = new File(prefixPath);
                 for (File level : levelsFolder.listFiles()) {
@@ -102,30 +103,30 @@ public class CreateCommand implements Command {
         prompt.show();
     }
 
-    
-    private void storeInfo(String name, String description, String width, String height){
+    private void storeInfo (String name, String description, String width, String height) {
         VoogaDataBase database = VoogaDataBase.getInstance();
         database.checkThenAddIfNewGame(name, description);
-        
+
         VoogaBundles.preferences.setProperty("GameName", name);
-        VoogaBundles.preferences.setProperty("GameDescription",description);
+        VoogaBundles.preferences.setProperty("GameDescription", description);
         VoogaBundles.preferences.setProperty("GameWidth", width);
         VoogaBundles.preferences.setProperty("GameHeight", height);
     }
-    
+
     private String getFieldOrDefault (String field, String defaultField) {
         return (field == null || field.isEmpty()) ? defaultField : field;
     }
-    
+
+    @SuppressWarnings("unchecked")
     private void open (Object models, String tag) {
         CurrentSessionStats stats = new CurrentSessionStats();
         stats.startAuthoringSession();
         UIManager manager;
-        if(tag.equals(LOAD)){
-             manager = new UIManager((List<CompleteAuthoringModelable>) models);
+        if (tag.equals(LOAD)) {
+            manager = new UIManager((List<CompleteAuthoringModelable>) models);
         }
         else {
-             manager = new UIManager(new ElementManager());
+            manager = new UIManager(new ElementManager());
         }
         Scene scene = new VoogaScene(manager);
         Stage primaryStage = new Stage();
