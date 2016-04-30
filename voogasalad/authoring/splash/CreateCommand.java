@@ -119,7 +119,7 @@ public class CreateCommand implements Command {
                     models.add(em);
                 }
                 CurrentSessionStats stats = new CurrentSessionStats();
-        		stats.startAuthoringSession();
+        		//stats.startAuthoringSession();
                 UIManager manager = new UIManager(models);
                 Scene scene = new VoogaScene(manager);
                 Stage primaryStage = new Stage();

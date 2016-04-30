@@ -110,6 +110,10 @@ public class PathEffect extends SpriteEffect{
 	protected Vector createSpline(Integer counter){
 		System.out.println("total spline number " + xCoord.size());
 		System.out.println("total duration " + ((AnimationEvent) getEvent()).getDuration());
+		
+		if(counter >= xCoord.size()){
+			counter = xCoord.size()-1;
+		}
 		return new Position(xCoord.get(counter) - xCoord.get(counter - 1), yCoord.get(counter) - yCoord.get(counter-1));
 	}
 	
