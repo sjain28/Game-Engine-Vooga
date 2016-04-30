@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
+import tools.GUIUtils;
 
 /**
  * The GUI through which game libraries can be searched based on user-defined tags.
@@ -65,9 +66,9 @@ public class ProjectOpenBySearchPrompt extends StarterPrompt implements Observer
 		container.setSpacing(SPACING);
 		container.setPadding(new Insets(SPACING));
 		initializeSearchBar();
-		container.getChildren().addAll(makeRow(new CustomText(TITLE, FontWeight.BOLD, HEADER_SIZE)),
-									   makeRow(new CustomText(SUBTITLE, FontWeight.BOLD)),
-							  	       makeRow(new CustomText(SEARCH), searchBar),
+		container.getChildren().addAll(GUIUtils.makeRow(new CustomText(TITLE, FontWeight.BOLD, HEADER_SIZE)),
+									   GUIUtils.makeRow(new CustomText(SUBTITLE, FontWeight.BOLD)),
+							  	       GUIUtils.makeRow(new CustomText(SEARCH), searchBar),
 							  	       tagHolder.display(),
 							  	       gamesListing);
 	}

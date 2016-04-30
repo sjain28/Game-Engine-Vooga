@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.GUIUtils;
 import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -39,7 +40,7 @@ public class PropertyBuilder extends Builder {
         this.variableValue = new TextField();
         this.swtch = new SwitchButton(true);
         this.numberSelector = makeInfo("Value:", "Enter a value...", variableValue);
-        this.boolSelector = makeRow(new CustomText("Value:"), swtch);
+        this.boolSelector = GUIUtils.makeRow(new CustomText("Value:"), swtch);
         this.buttons = makeButtons();
         this.chosenData = VOOGA_NUMBER;
         this.correctData = true;
@@ -77,7 +78,7 @@ public class PropertyBuilder extends Builder {
             }
             container.getChildren().add(buttons);
         });
-        return makeRow(number, bool);
+        return GUIUtils.makeRow(number, bool);
     }
 
     public String getName () {

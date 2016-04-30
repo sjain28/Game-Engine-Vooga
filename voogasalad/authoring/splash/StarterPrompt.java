@@ -23,11 +23,4 @@ public abstract class StarterPrompt extends Stage {
 	
 	protected abstract void setTheScene();
 	
-	protected HBox makeRow(Node... nodes) {
-		HBox container = new HBox(SPACING);
-		container.setAlignment(Pos.CENTER);
-		container.getChildren().addAll(nodes);
-		return container;
-	}
-	
 }
