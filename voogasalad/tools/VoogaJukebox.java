@@ -14,7 +14,7 @@ import javafx.scene.media.MediaPlayer;
  * @author Hunter Lee
  *
  */
-public class VoogaJukebox implements IVoogaGameSound {
+public class VoogaJukebox {
 
 	// TODO put string to path resource bundles
 	private static VoogaJukebox gameSound;
@@ -54,38 +54,38 @@ public class VoogaJukebox implements IVoogaGameSound {
 		myBGM = new MediaPlayer(new Media(new File(filename).toURI().toString()));
 	}
 
-	/**
-	 * Play a sound bite
-	 */
-	public void play(String soundname) {
-		myMediaMap.get(soundname).play();
-	}
-
-	/**
-	 * Play a continuous, controllable sound piece
-	 */
-	public void playBGM() {
-		myBGM.play();
-	}
-
-	/**
-	 * Permanently stop background music, needs restarting
-	 */
-	public void stopBGM() {
-		myBGM.stop();
-	}
-
-	/**
-	 * Pause background music for later return to point
-	 */
-	public void pauseBGM() {
-		myBGM.pause();
-	}
-
-	/**
-	 * Getters and setters below
-	 */
-	public Map<String, MediaPlayer> getMediaMap() {
-		return myMediaMap;
-	}
+//	/**
+//	 * Play a sound bite
+//	 */
+//	public void play(String soundname) {
+//		myMediaMap.get(soundname).play();
+//	}
+//
+//	/**
+//	 * Play a continuous, controllable sound piece
+//	 */
+//	public void playBGM() {
+//		myBGM.play();
+//	}
+//
+//	/**
+//	 * Permanently stop background music, needs restarting
+//	 */
+//	public void stopBGM() {
+//		myBGM.stop();
+//	}
+//
+//	/**
+//	 * Pause background music for later return to point
+//	 */
+//	public void pauseBGM() {
+//		myBGM.pause();
+//	}
+//
+//	/**
+//	 * Getters and setters below
+//	 */
+//	public Map<String, MediaPlayer> getMediaMap() {
+//		return myMediaMap;
+//	}
 }

@@ -34,6 +34,7 @@ public class DesignBoardHousing extends TabPane {
 				elem.getGlobalVariables().put(preferences.getName()+"ScrollAngle", new VoogaNumber(preferences.getScrollAngle()));
 				elem.getGlobalVariables().put(preferences.getName()+"ContinuousScrollType", new VoogaString(preferences.getContinuousScrollType()));
 				elem.getGlobalVariables().put(preferences.getName()+"TrackingDirection", new VoogaString(preferences.getTrackingDirection()));
+				elem.getGlobalVariables().put(preferences.getName()+"BGM", new VoogaString(preferences.getBGM()));
 				this.getTabs().remove(preferences);
 				this.getTabs().add(new DesignBoard(elem));
 				elem.setName(preferences.getName());

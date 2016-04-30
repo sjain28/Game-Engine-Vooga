@@ -20,6 +20,7 @@ import resources.VoogaBundles;
 import tools.Pair;
 import tools.PairZAxisComparator;
 import tools.VoogaBoolean;
+import tools.VoogaJukebox;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
@@ -152,6 +153,8 @@ public class LevelData implements ILevelData {
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
+		System.out.println("MY SOUND " + myGlobalVariables.get(levelfilename.replace(".xml", "")+"BGM").getValue());
+		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(levelfilename.replace(".xml", "")+"BGM").getValue());
 		// TODO: Anita: implement clearMap and setMap and call a stub
 		// mySpriteFactory.clearMap();
 		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());
