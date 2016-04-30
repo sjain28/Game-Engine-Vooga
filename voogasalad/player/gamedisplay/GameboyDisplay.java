@@ -391,5 +391,11 @@ public class GameboyDisplay implements IGameDisplay {
 		
 	}
 
+	@Override
+	public Pair<Double, Double> getDimensions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

@@ -33,7 +33,7 @@ public class KeyCauseGUI implements EventGUI{
         		textField.setText("");
         	}
         });
-        keyOptions = new ComboBox<String>();
+        keyOptions = new ComboBox<>();
         keyOptions.getItems().addAll(VoogaBundles.EventMethods.getString("Press"),VoogaBundles.EventMethods.getString("Release"));
     	holder.getChildren().addAll(keyOptions,textField, iv);
     }

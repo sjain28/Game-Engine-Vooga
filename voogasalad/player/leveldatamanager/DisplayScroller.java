@@ -5,6 +5,7 @@ import java.util.Map;
 
 import gameengine.Sprite;
 import player.gamedisplay.IGameDisplay;
+import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -20,15 +21,20 @@ public class DisplayScroller implements IDisplayScroller {
 
 	private static final double INCREASE_FACTOR = 1;
 	private static final double SCROLL_FACTOR = 0.01;
-	private static final int MIN_SCROLL = 300;
 
 	private Sprite myScrollingSprite;
 	private IGameDisplay myGameDisplay;
 	private String myScrollingType;
 	private String myTrackingDirection;
 	private boolean isExponentialScroll;
+	private Double myMidScreenX;
+	private Double myMidScreenY;
+	private Double myMinScrollX;
+	private Double myMinScrollY;
 	private Double myMaxScrollX;
 	private Double myMaxScrollY;
+	private Double myTrackX;
+	private Double myTrackY;
 
 	/**
 	 * Default constructor that sets the game display to scroll
@@ -37,6 +43,8 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	public DisplayScroller(IGameDisplay gamedisplay) {
 		this.myGameDisplay = gamedisplay;
+		this.myMidScreenX = Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth"))/3;
+		this.myMidScreenY = Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight"))/3;
 	}
 
 	/**
@@ -70,8 +78,8 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	private void scrollX(Sprite scrollsprite) {
 		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
-			if (n.intValue() > MIN_SCROLL && n.intValue() < myMaxScrollX) {
-				myGameDisplay.getScreen().setTranslateX(-(n.intValue() - MIN_SCROLL));
+			if (n.intValue() > myMinScrollX && n.intValue() < myMaxScrollX) {
+				myGameDisplay.getScreen().setTranslateX(-(n.intValue() - myTrackX));
 			}
 		});
 	}
@@ -84,8 +92,8 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	private void scrollY(Sprite scrollsprite) {
 		scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
-			if (n.intValue() > MIN_SCROLL && n.intValue() < myMaxScrollY) {
-				myGameDisplay.getScreen().setTranslateY(-(n.intValue() - MIN_SCROLL));
+			if (n.intValue() > myMinScrollY && n.intValue() < myMaxScrollY) {
+				myGameDisplay.getScreen().setTranslateY(-(n.intValue() - myTrackY));
 			}
 		});
 	}
@@ -103,8 +111,7 @@ public class DisplayScroller implements IDisplayScroller {
 		try {
 			try {
 				myTrackingDirection = (String) globals.get(currentlevel + "TrackingDirection").getValue();
-				myMaxScrollX = (Double) globals.get(currentlevel + "EndX").getValue();
-				myMaxScrollY = (Double) globals.get(currentlevel + "EndY").getValue();
+				establishXandYBounds(globals, currentlevel);
 			} catch(Exception e) {
 				VoogaAlert alert = new VoogaAlert("Please specify your finish line.");
 				alert.showAndWait();
@@ -117,7 +124,7 @@ public class DisplayScroller implements IDisplayScroller {
 				// Create a scrolling sprite and return it
 				double scrollAngle = (double) globals.get(currentlevel + "ScrollAngle").getValue();
 				double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
-				Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<String, VoogaData>(),
+				Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<>(),
 						new VoogaNumber());
 				scrollSprite.getImage().setOpacity(0);
 				scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
@@ -130,6 +137,15 @@ public class DisplayScroller implements IDisplayScroller {
 			alert.showAndWait();
 		}
 		return null;
+	}
+	
+	private void establishXandYBounds(Map<String, VoogaData> globals, String currentlevel) {
+		Double endX = (Double) globals.get(currentlevel + "EndX").getValue();
+		Double endY = (Double) globals.get(currentlevel + "EndY").getValue();
+		if(endX >= myMidScreenX) { myMinScrollX = myMidScreenX; myMaxScrollX = endX; myTrackX = myMinScrollX.doubleValue();}
+		else { myMaxScrollX = myMidScreenX; myMinScrollX = endX; myTrackX = myMaxScrollX.doubleValue();}
+		if(endY >= myMidScreenY) { myMinScrollY = myMidScreenY; myMaxScrollY = endY; myTrackY = myMinScrollY.doubleValue();}
+		else { myMaxScrollY = myMidScreenY; myMinScrollY = endY; myTrackY = myMaxScrollY.doubleValue();}
 	}
 
 	/**

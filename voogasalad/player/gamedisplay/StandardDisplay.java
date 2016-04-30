@@ -19,8 +19,7 @@ import resources.VoogaBundles;
 import stats.database.VoogaDataBase;
 import tools.OrderedProperties;
 import tools.Pair;
-import tools.VoogaGameSound;
-import tools.interfaces.IVoogaGameSound;
+import tools.VoogaJukebox;
 /**
  * Standard Display that creates a display with basic user-interaction controls
  * Uses composition to contain elements of the display
@@ -31,7 +30,6 @@ public class StandardDisplay implements IGameDisplay {
 	private IPromptFactory myPrompt;
 	private IControl myControl;
 	private IHUD myHUD;
-	private IVoogaGameSound myGameSound;
 	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
@@ -42,7 +40,8 @@ public class StandardDisplay implements IGameDisplay {
 	private List<KeyEvent> myKeyEvents;
 	private List<KeyEvent> myKeyPresses;
 	private List<KeyEvent> myKeyReleases;
-
+	private Pair<Double, Double> myDimensions;
+	
 	/**
 	 * Overloaded constructor to set the reference to GameRunner
 	 */
@@ -50,7 +49,6 @@ public class StandardDisplay implements IGameDisplay {
 		myGameRunner = gamerunner;
 		myControl = new StandardControl(myGameRunner);
 		myHUD = new StandardHUD(myGameRunner);
-		myGameSound = new VoogaGameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
@@ -114,12 +112,11 @@ public class StandardDisplay implements IGameDisplay {
 	private void addEffects() {
 		myStage.show();
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
-		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
 			saveDatabase();
 			myGameRunner.getTimeline().stop();
 			myGameRunner.finishPlaySession();
-			myGameSound.stopBGM();
+			VoogaJukebox.getInstance().stopBGM();
 		});
 	}
 
@@ -142,7 +139,13 @@ public class StandardDisplay implements IGameDisplay {
 
 	@Override
 	public void setSceneDimensions(double width, double height) {
+		myDimensions = new Pair<>(width, height);
 		myScene = new VoogaScene(myPane, width, height);
+	}
+	
+	@Override
+	public Pair<Double, Double> getDimensions() {
+		return this.myDimensions;
 	}
 
 	@Override
@@ -169,7 +172,7 @@ public class StandardDisplay implements IGameDisplay {
 
 	@Override
 	public void exit() {
-		myGameSound.stopBGM();
+		VoogaJukebox.getInstance().stopBGM();
 		myStage.close();
 	}
 
