@@ -22,14 +22,17 @@ public class PathEffect extends SpriteEffect{
 	private Map<Sprite, Velocity> spritePastVelocities;
 	private int myCounter;
 
-	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, Boolean reverse, AnimationEvent event) {
+	public PathEffect(Double[] xPathPoints, Double[] yPathPoints, Boolean reverse, AnimationEvent event) {
 		super(event);
 		setNeedsSprites(true);
 		xCoord = new ArrayList<>();
 		yCoord = new ArrayList<>();
-		this.xPathPoints = xMousePoints;
-		this.yPathPoints = yMousePoints;
+		this.xPathPoints = xPathPoints;
+		this.yPathPoints = yPathPoints;
 		this.reverse = reverse;
+//		if (reverse){
+//			xPathPoints 
+//		}
 		spritePastVelocities = new HashMap<>();
 		myCounter = 1;
 	}
@@ -117,7 +120,15 @@ public class PathEffect extends SpriteEffect{
 		}
 		return new Position(xCoord.get(counter) - xCoord.get(counter - 1), yCoord.get(counter) - yCoord.get(counter-1));
 	}
-	
+	protected Double[] reverseArray(Double[] array){
+		for(int i = 0; i < array.length / 2; i++)
+		{
+		    double temp = array[i];
+		    array[i] = array[array.length - i - 1];
+		    array[array.length - i - 1] = temp;
+		}
+		return array;
+	}
 	protected PathEffect clone(AnimationEvent event){
 		return new PathEffect(xPathPoints, yPathPoints, reverse, event);
 	}
