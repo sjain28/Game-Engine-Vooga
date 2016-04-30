@@ -24,7 +24,7 @@ public class Explorer extends TabPane {
 		resourceExplorer = new ResourceUI();
 		assetExplorer = new AssetUI(myManager);
 		this.getTabs().addAll(resourceExplorer,
-						      assetExplorer);
+				assetExplorer);
 	}
 
 }

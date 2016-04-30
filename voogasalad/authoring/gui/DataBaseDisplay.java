@@ -2,6 +2,7 @@ package authoring.gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import authoring.VoogaScene;
 import authoring.resourceutility.ButtonMaker;
@@ -32,7 +33,7 @@ import tools.GUIUtils;
 import tools.VoogaAlert;
 
 /**
- * Displays information stored in the database. Can be flexibally graphed in any
+ * Displays information stored in the database. Can be flexibly graphed in any
  * potential combination
  * 
  * @author Nick
@@ -40,15 +41,15 @@ import tools.VoogaAlert;
  */
 public class DataBaseDisplay extends Stage {
 
-	private static final double HEADER_HEIGHT = 50;
-	private static final double HEADER_WIDTH = 700;
-	private static final double DATA_WIDTH = 700;
-	private static final double DATA_HEIGHT = 400;
-	private String USR = "UserName";
+	private double HEADER_HEIGHT;
+	private double HEADER_WIDTH;
+	private double DATA_HEIGHT;
+	private double DATA_WIDTH;
+	private String USR;
 
-	private static final double FONT_SIZE = 30;
-	private static final double TABPANE_SIZE_FACTOR = 3 / 4;
-	private static final double ACCORDION_SIZE_FACTOR = 1 / 4;
+	private double FONT_SIZE;
+	private double TABPANE_SIZE_FACTOR;
+	private double ACCORDION_SIZE_FACTOR;
 	private VoogaDataBase database = VoogaDataBase.getInstance();
 	private VoogaUser user;
 	private CellEntry selectedCell;
@@ -58,8 +59,23 @@ public class DataBaseDisplay extends Stage {
 	private String nextY = "";
 	private HBox data;
 
+	private ResourceBundle databaseProperties;
+
 	public DataBaseDisplay() {
+		databaseProperties = VoogaBundles.databaseProperties;
+		HEADER_HEIGHT = Double.parseDouble(databaseProperties.getString("HeaderHeight"));
+		HEADER_WIDTH = Double.parseDouble(databaseProperties.getString("HeaderWidth"));
+		DATA_HEIGHT = Double.parseDouble(databaseProperties.getString("DataHeight"));
+		DATA_WIDTH = Double.parseDouble(databaseProperties.getString("DataWidth"));
+		USR = databaseProperties.getString("Username");
 		user = database.getUser(VoogaBundles.preferences.getProperty(USR));
+
+
+		FONT_SIZE = Double.parseDouble(databaseProperties.getString("FontSize"));
+		TABPANE_SIZE_FACTOR = Double.parseDouble(databaseProperties.getString("TabPaneSizeFactor"));
+		ACCORDION_SIZE_FACTOR =  Double.parseDouble(databaseProperties.getString("AccordionSizeFactor"));
+
+
 		VBox content = new VBox();
 		HBox header = makeHeader();
 		data = makeData();
@@ -77,7 +93,7 @@ public class DataBaseDisplay extends Stage {
 		pict.setFitHeight(HEADER_HEIGHT);
 		pict.setPreserveRatio(true);
 		Text t = new Text(user.getProperty(VoogaUser.DISPLAY_NAME).toString());
-		t.setFill(Color.WHITE);
+		t.setFill(Color.valueOf(databaseProperties.getString("textColor")));
 		t.setFont(Font.font(FONT_SIZE));
 		ans = GUIUtils.makeRow(pict, t);
 		ans.setAlignment(Pos.BASELINE_LEFT);
@@ -89,7 +105,7 @@ public class DataBaseDisplay extends Stage {
 		HBox ans = new HBox();
 
 		plots = new TabPane();
-		plotMaker = new Tab("Plot Maker");
+		plotMaker = new Tab(databaseProperties.getString("PlotMaker"));
 		plotMaker.setContent(infoOptions());
 		plots.getTabs().addAll(plotMaker);
 		plots.setPrefWidth(DATA_WIDTH * TABPANE_SIZE_FACTOR);
@@ -101,8 +117,8 @@ public class DataBaseDisplay extends Stage {
 
 	private VBox infoOptions() {
 		VBox scene = new VBox();
-		HBox xData = dataSelector("X Value");
-		HBox yData = dataSelector("Y Value");
+		HBox xData = dataSelector(databaseProperties.getString("xVal"));
+		HBox yData = dataSelector(databaseProperties.getString("yVal"));
 		Button apply = new Button("Apply");
 		apply.setOnAction(e -> makeNewTab());
 		scene.getChildren().addAll(xData, yData, apply);
@@ -119,17 +135,17 @@ public class DataBaseDisplay extends Stage {
 			cellData.getItems().addAll(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions());
 			cellData.getItems().addAll(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions());
 		} catch (Exception ArrayIndexOutOfBoundsException) {
-			VoogaAlert alert = new VoogaAlert("There is no data.");
+			VoogaAlert alert = new VoogaAlert(databaseProperties.getString("noDataAlert"));
 			alert.showAndWait();
 		}
 
 		Button set = new ButtonMaker().makeButton("Set", e -> {
 			// TODO: THIS IS BAD CODING... CHANGE
 			if (label.contains("X")) {
-					nextX = cellData.getValue();
+				nextX = cellData.getValue();
 			}
 			if (label.contains("Y")) {
-					nextY = cellData.getValue();
+				nextY = cellData.getValue();
 			}
 		});
 
@@ -160,7 +176,7 @@ public class DataBaseDisplay extends Stage {
 	private Node makeLists() {
 		Accordion lists = new Accordion();
 		TitledPane games = new TitledPane();
-		games.setText("Games");
+		games.setText(databaseProperties.getString("Games"));
 		ListView<String> actualGames = new ListView<>();
 		List<String> authoredGames = database.getStatsbyUser(user.getProperty(VoogaUser.USER_NAME).toString()).stream()
 				.map(e -> e.getProperty(StatCell.MY_GAME).toString()).collect(Collectors.toList());

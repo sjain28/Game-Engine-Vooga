@@ -34,5 +34,4 @@ public class NewSceneCommand implements Command {
 		tabManager.addManager(new ElementManager());
 		grid.addScene(tabManager.getCurrentManager());
 	}
-
 }
