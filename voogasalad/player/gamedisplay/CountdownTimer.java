@@ -17,6 +17,7 @@ import javafx.util.Duration;
  * @author Hunter
  *
  */
+@Deprecated
 public class CountdownTimer {
 	// Default STARTTIME is 1 minute (60 seconds)
 	private static final Integer STARTTIME = 60;
