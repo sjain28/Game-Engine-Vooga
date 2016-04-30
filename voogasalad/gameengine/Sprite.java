@@ -122,6 +122,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		myImage= new ImageView(image);
 		myImage.setFitWidth(image.getWidth());
 		myImage.setFitHeight(image.getHeight());
+		Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).getProperty(),myImage.fitWidthProperty());
+                Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).getProperty(),myImage.fitHeightProperty());
 	}
 
 	private Image setNewImage () {
@@ -361,9 +363,11 @@ public class Sprite implements Moveable, Effectable, Elementable {
 	}
 
 	public void initializeImage () {
-		if (myImage == null) {
-			myImage = new ImageView(getImagePath());
-		}
+	    if (myImage == null) {
+                myImage = new ImageView(getImagePath());
+                Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).getProperty(),myImage.fitWidthProperty());
+                Bindings.bindBidirectional(myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).getProperty(),myImage.fitHeightProperty());
+	    }
 	}
 
 	public void setInitializationMap (Map<String, Object> ip) {

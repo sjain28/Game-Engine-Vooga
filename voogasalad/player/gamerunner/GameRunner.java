@@ -220,6 +220,7 @@ public class GameRunner implements IGameRunner {
 	public void testLevel(String levelName) {
 		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/')
 				.lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
+		System.out.println("Current level: "+myCurrentLevelString);
 //		myLevelList = Arrays.asList(levelName);
 		myLevelMap.put(levelName, LevelType.ENTRYPOINT);
 		myLevelData.refreshLevelData(levelName);
