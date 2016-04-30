@@ -2,6 +2,7 @@ package authoring.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class ElementTabManager {

@@ -2,7 +2,7 @@ package authoring.resourceutility;
 
 import java.io.File;
 import java.util.List;
-import authoring.tagextension.GameTagManager;
+
 import tools.VoogaException;
 import tools.VoogaFileChooser;
 

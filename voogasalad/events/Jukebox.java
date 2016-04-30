@@ -1,8 +1,6 @@
 package events;
 
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

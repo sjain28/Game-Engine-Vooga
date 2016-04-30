@@ -3,9 +3,10 @@ package authoring.model;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
+
 import authoring.gui.Selector;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.AuthoringElementable;
+import authoring.interfaces.Elementable;
 import gameengine.BackEndText;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;

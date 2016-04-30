@@ -1,12 +1,8 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.AuthoringMenuItemHandler;
-import authoring.gui.menubar.MenuItemHandler;
 import authoring.gui.menubar.builders.ImportArchetype;
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 import tools.VoogaException;
 

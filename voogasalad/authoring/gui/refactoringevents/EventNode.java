@@ -1,8 +1,9 @@
 package authoring.gui.refactoringevents;
 
+import java.util.List;
+
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
-import java.util.List;
 
 public class EventNode {
     private VoogaNode node;

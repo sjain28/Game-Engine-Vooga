@@ -1,7 +1,4 @@
 package usecases;
-import usecases.Cause_USECASE;
-import usecases.Effect_USECASE;
-
 import java.util.List;
 import java.util.Map;
 

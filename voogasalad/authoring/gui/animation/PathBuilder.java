@@ -6,7 +6,6 @@ import authoring.resourceutility.ButtonMaker;
 import events.AnimationFactory;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;

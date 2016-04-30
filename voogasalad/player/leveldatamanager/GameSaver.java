@@ -5,6 +5,7 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Map;
+
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;

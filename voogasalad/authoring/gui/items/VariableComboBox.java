@@ -1,12 +1,10 @@
 package authoring.gui.items;
 
 import java.util.Map;
+
 import authoring.gui.refactoringevents.VoogaNode;
 import authoring.interfaces.Elementable;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.model.EditEventable;
-import authoring.model.ElementManager;
-import gameengine.Sprite;
 import javafx.scene.control.ComboBox;
 import tools.interfaces.VoogaData;
 

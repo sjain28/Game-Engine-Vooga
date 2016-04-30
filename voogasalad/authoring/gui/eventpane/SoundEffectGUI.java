@@ -2,6 +2,7 @@ package authoring.gui.eventpane;
 
 import java.io.File;
 import java.util.ResourceBundle;
+
 import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
 import javafx.scene.Node;

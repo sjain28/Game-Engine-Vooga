@@ -2,12 +2,11 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.VoogaScene;
 import authoring.gui.levelpreferences.DesignBoardPreferences;
-import authoring.gui.menubar.MenuItemHandler;	
+import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
-import resources.VoogaBundles;
 import tools.VoogaNumber;
 import tools.VoogaString;
 

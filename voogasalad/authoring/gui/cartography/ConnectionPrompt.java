@@ -4,7 +4,6 @@ import java.util.List;
 
 import authoring.CustomText;
 import authoring.VoogaScene;
-import authoring.gui.eventpane.CauseTitledPane;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.resourceutility.ButtonMaker;
 import events.Cause;
@@ -12,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
