@@ -43,7 +43,7 @@ public class ScaleEffectSelector extends AbstractEffectSelector {
 	 */
 	@Override
 	protected Object getValue() {
-		return Integer.parseInt(scaleAmount.getText());
+		return Double.parseDouble(scaleAmount.getText());
 	}
 
 }

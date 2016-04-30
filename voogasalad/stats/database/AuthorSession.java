@@ -1,17 +1,14 @@
 package stats.database;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+//import java.time.Instant;
 import java.util.Date;
-import java.util.Timer;
 
 import tools.VoogaDate;
 import tools.VoogaNumber;
 
 public class AuthorSession extends VoogaSession{
-	private Instant startInstant;
-	private Instant endInstant;
+//	private Instant startInstant;
+//	private Instant endInstant;
 	public static final String DATE_AUTHORED = "date_authored";
 	public static final String AUTHOR_DURATION = "author_duration";
 	public static final String SPRITES_ADDED = "sprites_added";

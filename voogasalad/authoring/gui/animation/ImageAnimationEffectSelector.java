@@ -1,7 +1,10 @@
 package authoring.gui.animation;
 
 import authoring.CustomText;
+import authoring.gui.items.NumberTextField;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import tools.GUIUtils;
 
 /**
  * A subclass of the abstract effect selector. It allows users to define sequences of images that will be strung together
@@ -17,6 +20,8 @@ public class ImageAnimationEffectSelector extends AbstractEffectSelector {
 	 */
 	private static final String IMAGE_SELECTOR = "Image Animation Effect";
 	
+	private NumberTextField numberOfCycles;
+	
 	/**
 	 * Initializes the selector and the heading.
 	 */
@@ -30,7 +35,10 @@ public class ImageAnimationEffectSelector extends AbstractEffectSelector {
 	 */
 	@Override
 	protected void initializeSubnode() {
-		subnode = new ImageFlowPane();
+		numberOfCycles = new NumberTextField();
+		numberOfCycles.setPromptText("Number of cycles");
+		numberOfCycles.sanitizeForInteger();
+		subnode = GUIUtils.makeRow(new ImageFlowPane(), numberOfCycles);
 	}
 
 	/**
@@ -38,7 +46,11 @@ public class ImageAnimationEffectSelector extends AbstractEffectSelector {
 	 */
 	@Override
 	protected Object getValue() {
-		return ((ImageFlowPane) subnode).getImageNames();
+		return ((ImageFlowPane) ((HBox) subnode).getChildren().get(0)).getImageNames();
+	}
+	
+	public Integer getNumberOfCycles() {
+		return Integer.parseInt(numberOfCycles.getText());
 	}
 
 }

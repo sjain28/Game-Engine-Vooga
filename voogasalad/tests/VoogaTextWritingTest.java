@@ -1,10 +1,13 @@
-package data;
+package tests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import authoring.interfaces.Elementable;
+import data.DataContainerOfLists;
+import data.Deserializer;
+import data.Serializer;
 import events.KeyCause;
 import events.VariableEffect;
 import events.VoogaEvent;
@@ -23,7 +26,7 @@ public class VoogaTextWritingTest extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
         DataContainerOfLists manager = new DataContainerOfLists(generateSprites(),
-        			generateGlobalVariables(),generateEvents(), null);
+        			generateGlobalVariables(),generateEvents(), null, null, null, null);
         
 
         Serializer.serialize(manager, "levels/Test.xml");
@@ -57,7 +60,7 @@ public class VoogaTextWritingTest extends Application {
         List<VoogaEvent> elements = new ArrayList<VoogaEvent>();
         for (int i =0;i<10;i++){
                 VoogaEvent testEvent = new VoogaEvent();
-                testEvent.addCause(new KeyCause("k", testEvent));
+                //testEvent.addCause(new KeyCause("k", testEvent));
 //                testEvent.addEffect(new VariableEffect("LevelIndex", "set", "Level2", testEvent));
             elements.add(testEvent);
         }

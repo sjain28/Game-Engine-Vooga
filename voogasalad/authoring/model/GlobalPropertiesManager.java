@@ -2,10 +2,7 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import authoring.interfaces.Elementable;
-import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.Node;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;

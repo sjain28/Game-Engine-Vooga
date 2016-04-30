@@ -59,7 +59,8 @@ public class VoogaDataBase implements IDataBase{
 	 * Adds a new game to the DataBase
 	 * @param gamename
 	 */
-	public void addGame(String gamename, String gamedescrip){
+
+	public void checkThenAddIfNewGame(String gamename, String gamedescrip){
 		if(getGame(gamename)==null){
 			totalrows++;
 			//initialize game
@@ -69,6 +70,7 @@ public class VoogaDataBase implements IDataBase{
 				String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
 				myStatInfo.get(col).add(new StatCell(gamename,username));
 			}
+			printDataBase();
 			System.out.println("What is my game here, this can only be shown if a game was added 2 list " + myGames);
 		}
 	}
@@ -91,8 +93,7 @@ public class VoogaDataBase implements IDataBase{
 	 * @param username
 	 * @param password
 	 */
-	public void addUser(String displayname, String username, String password, String profpiclocation){
-		System.out.println("in user");
+	public void checkThenAddIfNewUser(String displayname, String username, String password, String profpiclocation){
 		if(getUser(username)==null){
 			System.out.println("actually adding in the user");
 			totalcols++;

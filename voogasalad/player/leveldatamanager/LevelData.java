@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.HashMap;
 import authoring.interfaces.Elementable;
 import authoring.model.VoogaFrontEndText;
+import events.AnimationEvent;
+import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
@@ -27,13 +29,13 @@ import tools.interfaces.VoogaData;
  * @author Krista, Hunter
  */
 public class LevelData implements ILevelData {
-    private static final String SAVE_PROGRESS = "SaveProgress";
+    private static final String SAVE_PROGRESS = VoogaBundles.defaultglobalvars.getProperty("SaveProgress");
     private IPhysicsEngine myPhysics;
     private String myMainCharID;
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
-    //TODO: Implement AnimationFactory
-    //private AnimationFactory myAnimationFactory;
+    private AnimationFactory myAnimationFactory;
+
     private Map<String, VoogaData> myGlobalVariables;
     private KeyEventContainer myKeyEventContainer;
     private String myTimerKey;
@@ -55,6 +57,9 @@ public class LevelData implements ILevelData {
      */
     public Sprite getSpriteByID (String id) {
         return (Sprite) myElements.get(id);
+    }
+    public Boolean containsSprite(String id){
+    	return myElements.containsKey(id);
     }
     /**
      * Removes sprite by it's ID
@@ -84,6 +89,14 @@ public class LevelData implements ILevelData {
             }
         }
         return list;
+    }
+    public AnimationEvent getAnimationFromFactory(String animationString){
+    	if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
+    		List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
+    		return clonedSequence.get(0);
+    	}else{
+    		return myAnimationFactory.cloneAnimationEvent(animationString);
+    	}
     }
     /**
      * Adds a sprite as a member of the given archetype
@@ -131,7 +144,6 @@ public class LevelData implements ILevelData {
     }
     /**
      * Add a given event and populate the pressed and released KeyCombos
-     * @param VoogaEvent
      */
     public void addEventAndPopulateKeyCombos(VoogaEvent event) {
     	myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
@@ -146,9 +158,16 @@ public class LevelData implements ILevelData {
     	myElements = myTransitioner.populateNewSprites();
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
+    	//mySpriteFactory.clearMap();
+    	//mySpriteFactory.setMap(myTransitioner.getSpriteMap());
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
+		System.out.println(myElements);
     	myMainCharID = myTransitioner.getMainCharID();
+    	//myAnimationFactory.clearMaps();
+    	//myAnimationFactory.populateMaps();
+    	myAnimationFactory = myTransitioner.getNewAnimationFactory();
     }
+    
     public String getNextLevelName() {
         return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
     }

@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import resources.VoogaBundles;
 import tools.Acceleration;
 import tools.Position;
 import tools.VoogaNumber;
@@ -27,307 +28,306 @@ import tools.interfaces.*;
 
 public class Sprite implements Moveable, Effectable, Elementable {
 
-    protected static final String MASS = "Mass";
-    protected static final String ALIVE = "Alive";
-    protected static final String GRAVITY = "Gravity";
-    protected static final String WIDTH = "Width";
-    protected static final String HEIGHT = "Height";
-    protected static final String X_POS = "X_Position";
-    protected static final String Y_POS = "Y_Position";
-    protected static final String IMAGE_PATH = "Image";
-    protected static final String Z_POS = "Z Index";
+	private boolean isMainCharacter;
+	private Velocity myVelocity;
+	private Acceleration myAcceleration;
+	private Position myLoc;
+	private String myID;
+	private String myName;
+	private Map<String, VoogaData> myProperties;
+	private String myArchetype;
+	private String previousImage;
+	private String myImagePath;
 
-    private boolean isMainCharacter;
-    private Velocity myVelocity;
-    private Acceleration myAcceleration;
-    private Position myLoc;
-    private String myID;
-    private String myName;
-    private Map<String, VoogaData> myProperties;
-    private String myArchetype;
-    private String previousImage;
-    private String myImagePath;
+	private transient ImageView myImage;
+	private transient SimpleDoubleProperty myX;
+	private transient SimpleDoubleProperty myY;
+	private transient SimpleDoubleProperty myZ;
+	private transient SimpleDoubleProperty myWidth;
+	private transient SimpleDoubleProperty myHeight;
+	private transient SimpleStringProperty myImagePathProperty;
+	private transient SimpleBooleanProperty myAlive;
 
-    private transient ImageView myImage;
-    private transient SimpleDoubleProperty myX;
-    private transient SimpleDoubleProperty myY;
-    private transient SimpleDoubleProperty myZ;
-    private transient SimpleDoubleProperty myWidth;
-    private transient SimpleDoubleProperty myHeight;
-    private transient SimpleStringProperty myImagePathProperty;
-    private transient SimpleBooleanProperty myAlive;
+	private Map<String, Object> initializationProperties;
 
-    private Map<String, Object> initializationProperties;
+	public Sprite (String imagePath,
+			String archetype,
+			Map<String, VoogaData> properties,
+			VoogaNumber mass) {
+		myProperties = properties;
+		initializeCoordinates();
+		myLoc = new Position(myX.get(), myY.get());
+		myVelocity = new Velocity(0, 0);
+		myAcceleration = new Acceleration(0, 0);
+		myID = UUID.randomUUID().toString();
+		myArchetype = archetype;
+		initializeImage(imagePath);
+		// TODO: use properties file to put these
+		myProperties.put(VoogaBundles.spriteProperties.getString("MASS"), new VoogaNumber((Double) mass.getValue()));
+		myProperties.put(VoogaBundles.spriteProperties.getString("GRAVITY"), new VoogaNumber(0.0));
+		initializeAlive();
+		initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
+	}
 
-    public Sprite (String imagePath,
-                   String archetype,
-                   Map<String, VoogaData> properties,
-                   VoogaNumber mass) {
-        myProperties = properties;
-        initializeCoordinates();
-        myLoc = new Position(myX.get(), myY.get());
-        myVelocity = new Velocity(0, 0);
-        myAcceleration = new Acceleration(0, 0);
-        myID = UUID.randomUUID().toString();
-        myArchetype = archetype;
-        initializeImage(imagePath);
-        // TODO: use properties file to put these
-        myProperties.put(MASS, new VoogaNumber((Double) mass.getValue()));
-        myProperties.put(GRAVITY, new VoogaNumber(0.0));
-        initializeAlive();
-        initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
-    }
+	private void initializeAlive () {
+		myProperties.put(VoogaBundles.spriteProperties.getString("ALIVE"), new VoogaBoolean(true));
+		myAlive =
+				new SimpleBooleanProperty((boolean) myProperties.get(VoogaBundles.spriteProperties.getString("ALIVE")).getProperty()
+						.getValue());
+		Bindings.bindBidirectional(myAlive, myProperties.get(VoogaBundles.spriteProperties.getString("ALIVE")).getProperty());
+	}
 
-    private void initializeAlive () {
-        myProperties.put(ALIVE, new VoogaBoolean(true));
-        myAlive =
-                new SimpleBooleanProperty((boolean) myProperties.get(ALIVE).getProperty()
-                        .getValue());
-        Bindings.bindBidirectional(myAlive, myProperties.get(ALIVE).getProperty());
-    }
+	private void initializeImage (String path) {
+		VoogaString imagePathString = new VoogaString(path);
+		myImagePath = path;
+		previousImage = path;
+		myImagePathProperty = new SimpleStringProperty(path);
+		myProperties.put(VoogaBundles.spriteProperties.getString("IMAGE_PATH"), imagePathString);
+		Image newImage = setNewImage();
+		Bindings.bindBidirectional(myImagePathProperty, myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getProperty());
+		myImage = new ImageView(newImage);
+		myImage.setFitHeight(newImage.getHeight());
+		myImage.setFitWidth(newImage.getWidth());
+	}
 
-    private void initializeImage (String path) {
-        VoogaString imagePathString = new VoogaString(path);
-        myImagePath = path;
-        previousImage = path;
-        myImagePathProperty = new SimpleStringProperty(path);
-        myProperties.put(IMAGE_PATH, imagePathString);
-        Image newImage = setNewImage();
-        Bindings.bindBidirectional(myImagePathProperty, myProperties.get(IMAGE_PATH).getProperty());
-        myImage = new ImageView(newImage);
-        myImage.setFitHeight(newImage.getHeight());
-        myImage.setFitWidth(newImage.getWidth());
-    }
+	private Image setNewImage () {
+		Image image;
+		if (myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString().contains("file:")) {
+			image = new Image(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString());
+		}
+		else {
+			image =
+					new Image(this.getClass().getResourceAsStream(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH"))
+							.getValue().toString()));
 
-    private Image setNewImage () {
-        Image image;
-        if (myProperties.get(IMAGE_PATH).getValue().toString().contains("file:")) {
-            image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
-        }
-        else {
-            image =
-                    new Image(this.getClass().getResourceAsStream(myProperties.get(IMAGE_PATH)
-                            .getValue().toString()));
-        }
-        return image;
-    }
+		}
+		return image;
+	}
 
-    private void initializeDimensions (double width, double height) {
-        myProperties.put(WIDTH, new VoogaNumber(width));
-        myProperties.put(HEIGHT, new VoogaNumber(height));
-        myWidth = new SimpleDoubleProperty();
-        myHeight = new SimpleDoubleProperty();
-        Bindings.bindBidirectional(myWidth, myProperties.get(WIDTH).getProperty());
-        Bindings.bindBidirectional(myHeight, myProperties.get(HEIGHT).getProperty());
+	private void initializeDimensions (double width, double height) {
+		myProperties.put(VoogaBundles.spriteProperties.getString("WIDTH"), new VoogaNumber(width));
+		myProperties.put(VoogaBundles.spriteProperties.getString("HEIGHT"), new VoogaNumber(height));
+		myWidth = new SimpleDoubleProperty();
+		myHeight = new SimpleDoubleProperty();
+		Bindings.bindBidirectional(myWidth, myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).getProperty());
+		Bindings.bindBidirectional(myHeight, myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).getProperty());
 
-    }
+	}
 
-    private void initializeCoordinates () {
-        myProperties.put(X_POS, new VoogaNumber());
-        myProperties.put(Y_POS, new VoogaNumber());
-        myProperties.put(Z_POS, new VoogaNumber());
-        myX = new SimpleDoubleProperty();
-        myY = new SimpleDoubleProperty();
-        myZ = new SimpleDoubleProperty();
-        Bindings.bindBidirectional(myX, myProperties.get(X_POS).getProperty());
-        Bindings.bindBidirectional(myY, myProperties.get(Y_POS).getProperty());
-        Bindings.bindBidirectional(myZ, myProperties.get(Z_POS).getProperty());
-        
-        myX.addListener( (obs, old, n) -> {
-            myLoc.setX((double) n);
-        });
-        myY.addListener( (obs, old, n) -> {
-            myLoc.setY((double) n);
-        });
-    }
+	private void initializeCoordinates () {
+		myProperties.put(VoogaBundles.spriteProperties.getString("X_POS"), new VoogaNumber());
+		myProperties.put(VoogaBundles.spriteProperties.getString("Y_POS"), new VoogaNumber());
+		myProperties.put(VoogaBundles.spriteProperties.getString("Z_POS"), new VoogaNumber());
+		myX = new SimpleDoubleProperty();
+		myY = new SimpleDoubleProperty();
+		myZ = new SimpleDoubleProperty();
+		Bindings.bindBidirectional(myX, myProperties.get(VoogaBundles.spriteProperties.getString("X_POS")).getProperty());
+		Bindings.bindBidirectional(myY, myProperties.get(VoogaBundles.spriteProperties.getString("Y_POS")).getProperty());
+		Bindings.bindBidirectional(myZ, myProperties.get(VoogaBundles.spriteProperties.getString("Z_POS")).getProperty());
 
-    public void update () {
-        myLoc.addX(myVelocity.getX());
-        myLoc.addY(myVelocity.getY());
-        // Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
-        myVelocity.addX(myAcceleration.getX());
-        myVelocity.addY(myAcceleration.getY());
-        // Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
-        myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
-        myImage.setTranslateZ(myZ.doubleValue());
-        if (!myProperties.get(IMAGE_PATH).getValue().toString().equals(previousImage)) {
-            Image newImage = setNewImage();
-            myImage.setImage(newImage);
-            previousImage = myProperties.get(IMAGE_PATH).getValue().toString();
-        }
-    }
+		myX.addListener( (obs, old, n) -> {
+			myLoc.setX((double) n);
+		});
+		myY.addListener( (obs, old, n) -> {
+			myLoc.setY((double) n);
+		});
+	}
 
-    public void setName (String name) {
-        myName = name;
-    }
+	/**
+	 * Initializes JavaFX objects that can't be serialized
+	 * Need to call this before using the Sprite in the game engine!
+	 * 
+	 * @throws VoogaException
+	 * @throws InvocationTargetException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public void init () throws VoogaException {
+		if (myImage != null)
+			return;
+		ImageProperties imageProperties = new ImageProperties();
+		initializeImage(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString());
+		Image image = new Image(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString());
+		myImage = new ImageView(image);
+		imageProperties.loadData(myImage, initializationProperties);
+		initializeCoordinates();
+		initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
+		initializeAlive();
+		myX.set(myImage.getTranslateX());
+		myY.set(myImage.getTranslateY());
 
-    @Override
-    public Velocity getVelocity () {
-        return myVelocity;
-    }
+		myWidth.set(myImage.getFitWidth());
+		myHeight.set(myImage.getFitHeight());
+		myAlive.set(true);
+	}
+	
+	public void update () {
+		myLoc.addX(myVelocity.getX());
+		myLoc.addY(myVelocity.getY());
+		// Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
+		myVelocity.addX(myAcceleration.getX());
+		myVelocity.addY(myAcceleration.getY());
+		// Convert the Sprite's Cartesian Coordinates to display-able x and y's
+		myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
+		myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
+		myImage.setTranslateZ(myZ.doubleValue());
+		if (!myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString().equals(previousImage)) {
+			Image newImage = setNewImage();
+			myImage.setImage(newImage);
+			previousImage = myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString();
+		}
+	}
 
-    @Override
-    public void setVelocity (Velocity velocity) {
-        myVelocity = velocity;
-    }
+	public void setName (String name) {
+		myName = name;
+	}
 
-    public Position getPosition () {
-        return myLoc;
-    }
+	@Override
+	public Velocity getVelocity () {
+		return myVelocity;
+	}
 
-    public void setPosition (Position position) {
-        myLoc = position;
-    }
+	@Override
+	public void setVelocity (Velocity velocity) {
+		myVelocity = velocity;
+	}
 
-    public void addProperty (String property, VoogaData data) {
-        myProperties.put(property, data);
-    }
+	public Position getPosition () {
+		return myLoc;
+	}
 
-    public VoogaData getProperty (String s) {
-        return myProperties.get(s);
-    }
+	public void setPosition (Position position) {
+		myLoc = position;
+	}
 
-    public void setProperties (Map<String, VoogaData> properties) {
-        myProperties = new HashMap<String, VoogaData>(properties);
-    }
+	public void addProperty (String property, VoogaData data) {
+		myProperties.put(property, data);
+	}
 
-    public HashMap<String, VoogaData> getPropertiesMap () {
-        return (HashMap<String, VoogaData>) myProperties;
-    }
+	public VoogaData getProperty (String s) {
+		return myProperties.get(s);
+	}
 
-    public String getId () {
-        return myID;
-    }
+	public void setProperties (Map<String, VoogaData> properties) {
+		myProperties = new HashMap<String, VoogaData>(properties);
+	}
 
-    public ImageView getImage () {
-        return myImage;
-    }
+	public HashMap<String, VoogaData> getPropertiesMap () {
+		return (HashMap<String, VoogaData>) myProperties;
+	}
 
-    public void setArchetype (String archetype) {
-        myArchetype = archetype;
-    }
+	public String getId () {
+		return myID;
+	}
 
-    public String getArchetype () {
-        return myArchetype;
-    }
+	public ImageView getImage () {
+		return myImage;
+	}
 
-    public void setImagePath (String path) {
-        myProperties.put(IMAGE_PATH, new VoogaString(path));
-        Image image =
-                new Image(this.getClass()
-                        .getResourceAsStream(myProperties.get(IMAGE_PATH).getValue().toString()));
-        myImage = new ImageView(image);
-        myImage.setLayoutX(myLoc.getX());
-        myImage.setLayoutY(myLoc.getY());
-    }
+	public void setArchetype (String archetype) {
+		myArchetype = archetype;
+	}
 
-    public String getImagePath () {
-        return myProperties.get(IMAGE_PATH).getValue().toString();
-    }
+	public String getArchetype () {
+		return myArchetype;
+	}
 
-    @Override
-    public Map<String, VoogaData> getParameterMap () {
-        return myProperties;
-    }
+	public void setImagePath (String path) {
+		myProperties.put(VoogaBundles.spriteProperties.getString("IMAGE_PATH"), new VoogaString(path));
+		Image image =
+				new Image(this.getClass()
+						.getResourceAsStream(myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString()));
+		myImage = new ImageView(image);
+		myImage.setLayoutX(myLoc.getX());
+		myImage.setLayoutY(myLoc.getY());
+	}
 
-    @Override
-    public Map<String, VoogaData> getVoogaProperties () {
-        return myProperties;
-    }
+	public String getImagePath () {
+		return myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue().toString();
+	}
 
-    @Override
-    public void removeProperty (String name) {
-        myProperties.remove(name);
-    }
+	@Override
+	public Map<String, VoogaData> getParameterMap () {
+		return myProperties;
+	}
 
-    @Override
-    public Node getNodeObject () {
-        initializeImage();
-        return myImage;
-    }
+	@Override
+	public Map<String, VoogaData> getVoogaProperties () {
+		return myProperties;
+	}
 
-    @Override
-    public String getName () {
-        return myName;
-    }
+	@Override
+	public void removeProperty (String name) {
+		myProperties.remove(name);
+	}
 
-    public boolean isMainCharacter () {
-        return isMainCharacter;
-    }
+	@Override
+	public Node getNodeObject () {
+		initializeImage();
+		return myImage;
+	}
 
-    public void setMainCharacter (boolean isMainCharacter) {
-        this.isMainCharacter = isMainCharacter;
-    }
+	@Override
+	public String getName () {
+		return myName;
+	}
 
-    @Override
-    public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-        this.myProperties = newVoogaProperties;
-    }
+	public boolean isMainCharacter () {
+		return isMainCharacter;
+	}
 
-    public Property<Number> getX () {
-        return this.myX;
-    }
+	public void setMainCharacter (boolean isMainCharacter) {
+		this.isMainCharacter = isMainCharacter;
+	}
 
-    public Property<Number> getY () {
-        return this.myY;
-    }
+	@Override
+	public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
+		this.myProperties = newVoogaProperties;
+	}
 
-    public Property<Number> getZ () {
-        return this.myZ;
-    }
+	public Property<Number> getX () {
+		return this.myX;
+	}
 
-    public Property<Number> getWidth () {
-        return this.myWidth;
-    }
+	public Property<Number> getY () {
+		return this.myY;
+	}
 
-    public Property<Number> getHeight () {
-        return this.myHeight;
-    }
+	public Property<Number> getZ () {
+		return this.myZ;
+	}
 
-    public Property<String> getImagePathProperty () {
-        return this.myImagePathProperty;
-    }
+	public Property<Number> getWidth () {
+		return this.myWidth;
+	}
 
-    public void initializeImage () {
-        if (myImage == null) {
-            myImage = new ImageView(getImagePath());
-        }
-    }
+	public Property<Number> getHeight () {
+		return this.myHeight;
+	}
 
-    public void setInitializationMap (Map<String, Object> ip) {
-        initializationProperties = ip;
-    }
+	public Property<String> getImagePathProperty () {
+		return this.myImagePathProperty;
+	}
 
-    public Property<Boolean> isAlive () {
-        return this.myAlive;
-    }
+	public void initializeImage () {
+		if (myImage == null) {
+			myImage = new ImageView(getImagePath());
+		}
+	}
 
-    /**
-     * Initializes JavaFX objects that can't be serialized
-     * Need to call this before using the Sprite in the game engine!
-     * 
-     * @throws VoogaException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     */
-    public void init () throws VoogaException {
-        if (myImage != null)
-            return;
-        ImageProperties imageProperties = new ImageProperties();
-        initializeImage(myProperties.get(IMAGE_PATH).getValue().toString());
-        Image image = new Image(myProperties.get(IMAGE_PATH).getValue().toString());
-        myImage = new ImageView(image);
-        imageProperties.loadData(myImage, initializationProperties);
-        initializeCoordinates();
-        initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
-        initializeAlive();
-        myX.set(myImage.getTranslateX());
-        myY.set(myImage.getTranslateY());
-       
-        myWidth.set(myImage.getFitWidth());
-        myHeight.set(myImage.getFitHeight());
-        myAlive.set(true);
-    }
+	public void setInitializationMap (Map<String, Object> ip) {
+		initializationProperties = ip;
+	}
+
+	public Property<Boolean> isAlive () {
+		return this.myAlive;
+	}
+	public void setHeight(Double height){
+		myProperties.get(VoogaBundles.spriteProperties.getString("HEIGHT")).setValue(height);
+		myImage.setFitHeight(height);
+	}
+	public void setWidth(Double width){
+		myProperties.get(VoogaBundles.spriteProperties.getString("WIDTH")).setValue(width);
+		myImage.setFitHeight(width);
+	}
 }

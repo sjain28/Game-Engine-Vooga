@@ -1,7 +1,9 @@
 package events;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
 import tools.Position;
@@ -15,27 +17,35 @@ public class PathEffect extends SpriteEffect{
 	private Double[] xMousePoints;
 	private Double[] yMousePoints;
 	private Double myVelocity;
-	private Integer myCounter;
+	private Boolean reverse;
+	private Map<Sprite, Velocity> spritePastVelocities;
 
-	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, AnimationEvent event) {
+	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, Boolean reverse, AnimationEvent event) {
 		super(event);
 		setNeedsSprites(true);
+		xCoord = new ArrayList<Double>();
+		yCoord = new ArrayList<Double>();
 		this.xMousePoints = xMousePoints;
 		this.yMousePoints = yMousePoints;
-		myCounter = 0;
+		this.reverse = reverse;
+		spritePastVelocities = new HashMap<>();
 	}
 
 	@Override
 	public void execute(ILevelData data) {
-		setSprites(data);
-		myCounter++;
-		for (Sprite sprite : getSprites()){
-			// TODO: What if other interaction occurs? (for example, collision)
-			Vector nextVector = createSpline(myCounter);
-			sprite.setVelocity(
-					new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), nextVector.getY()/nextVector.getMagnitude() * getMyVelocity()));
-			sprite.getPosition().addVector(createSpline(myCounter));
+		if (((AnimationEvent) getEvent()).getCounter() > 0){
+			checkPastVelocities();
 		}
+		setSprites(data);
+		for (Sprite sprite : getSprites()){
+			Vector nextVector = createSpline(((AnimationEvent) getEvent()).getCounter());
+			//data.getPhysicsEngine().translateX(sprite, nextVector.getX());
+			//data.getPhysicsEngine().translateY(sprite, nextVector.getY());
+			sprite.setVelocity(
+					new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), 
+							nextVector.getY()/nextVector.getMagnitude() * getMyVelocity()));
+		}
+		setPastVelocities();
 		clearSprites();
 	}
 
@@ -44,8 +54,19 @@ public class PathEffect extends SpriteEffect{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	protected Double getVelocity(Double duration){
+	private void setPastVelocities(){
+		for (Sprite sprite : getSprites()){
+			spritePastVelocities.put(sprite, sprite.getVelocity());
+		}
+	}
+	private void checkPastVelocities(){
+		for (Sprite sprite : getSprites()){
+			if (!sprite.getVelocity().equals(spritePastVelocities.get(sprite))){
+				((AnimationEvent) getEvent()).removeSprite(sprite);
+			}
+		}
+	}
+	protected Double getVelocity(Integer duration){
 		Double distance = 0.0;
 		for (int i = 1; i < xMousePoints.length; i++){
 			distance += getDistance(xMousePoints[i - 1], xMousePoints[i], yMousePoints[i - 1], yMousePoints[i]);
@@ -54,10 +75,10 @@ public class PathEffect extends SpriteEffect{
 		return distance/duration;
 	}
 
-	protected void createAnimationPoints(Double duration){	
+	protected void createAnimationPoints(Integer duration){	
 
 		myVelocity = getVelocity(duration);
-		
+
 		xCoord.add(xMousePoints[0]);
 		yCoord.add(yMousePoints[0]);
 
@@ -71,15 +92,18 @@ public class PathEffect extends SpriteEffect{
 			}
 		}
 	}
-	
+
 	private Double getDistance(Double x1, Double x2, Double y1, Double y2){
 		return Math.sqrt(Math.pow((x2-x1), 2) + Math.pow((y2-y1), 2));
 	}
-	
+
 	protected Double getMyVelocity(){
 		return myVelocity;
 	}
 	protected Vector createSpline(Integer counter){
 		return new Position(xCoord.get(counter) - xCoord.get(counter - 1), yCoord.get(counter) - yCoord.get(counter-1));
+	}
+	protected PathEffect clone(AnimationEvent event){
+		return new PathEffect(xMousePoints, yMousePoints, reverse, event);
 	}
 }

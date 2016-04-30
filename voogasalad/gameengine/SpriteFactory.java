@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
 import data.Serializer;
+import resources.VoogaBundles;
 import data.Deserializer;
 import tools.VoogaException;
 import tools.VoogaNumber;
@@ -57,7 +58,7 @@ public class SpriteFactory extends Observable{
         
         Sprite clone = new Sprite(original.getImagePath(), original.getArchetype(),
                                   map,
-                                  (VoogaNumber) map.get(Sprite.MASS));
+                                  (VoogaNumber) map.get(VoogaBundles.spriteProperties.getString("MASS")));
         return clone;
     }
 

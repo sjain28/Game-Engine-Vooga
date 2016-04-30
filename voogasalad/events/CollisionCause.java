@@ -9,30 +9,51 @@ import physics.IPhysicsEngine;
 import player.leveldatamanager.ILevelData;
 import resources.VoogaBundles;
 
+/**
+ * 
+ * @author Saumya Jain
+ * This class detects collisions between Sprites
+ *
+ */
+ 
 public class CollisionCause extends Cause{
 
 	private List<Sprite> collidedSprites; 
 	private String archA;
 	private String archB;
-	private String myDirection; //Can be the Strings Horizontal, Above, or Below
+	private String myDirection = VoogaBundles.EventMethods.getString("None"); 
 	private Map<String, Integer> collisionDirections;
-	private List<Sprite> groupA;
-	private List<Sprite> groupB;
 
-	
-	public CollisionCause(String archetypeA, String archetypeB, VoogaEvent voogaEvent){ //Simple Collision
-		super(voogaEvent);
-		archA = archetypeA;
-		archB = archetypeB;
+	/**
+	 * @param spriteA Archetype or ID of a Sprite in the collision
+	 * @param spriteB Archetype or ID of a different Sprite
+	 * @param voogaEvent An event that this cause triggers
+	 */
+	public CollisionCause(String spriteA, String spriteB, VoogaEvent event){
+		super(event);
+		archA = spriteA;
+		archB = spriteB;
 		initMap();
 		collidedSprites = new ArrayList<>();
 	}
 	
-	public CollisionCause(String archetypeA, String archetypeB, String direction, VoogaEvent event){
-		this(archetypeA, archetypeB, event);
+	/**
+	 * 
+	 * @param spriteA Archetype or ID of a Sprite in the collision
+	 * @param spriteB Archetype or ID of a different Sprite
+	 * @param voogaEvent An event that this cause triggers
+	 * @param direction The direction of the collision (Above, Below, Horizontal)
+	 */
+	public CollisionCause(String spriteA, String spriteB, String direction, VoogaEvent event){
+		this(spriteA, spriteB, event);
 		myDirection = direction;
 	}
-
+	/**
+	 * 
+	 * @param data A LevelData object containing Sprites
+	 * @param arch A spriteID or archetype name 
+	 * @return
+	 */
 	private List<Sprite> getSprites(ILevelData data, String arch){
 		List<Sprite> group = new ArrayList<>();
 	        
@@ -44,7 +65,9 @@ public class CollisionCause extends Cause{
 		}
 		return group;
 	}
-	
+	/**
+	 * Checks for collisions between the groups of Sprites specified in the constructor
+	 */
 	@Override
 	public boolean check(ILevelData data) {
 		
@@ -53,7 +76,7 @@ public class CollisionCause extends Cause{
 		IPhysicsEngine physics = data.getPhysicsEngine();
 		for(Sprite a: getSprites(data,archA)){
 			for(Sprite b: getSprites(data,archB)){
-				if(myDirection == null){
+				if(myDirection == VoogaBundles.EventMethods.getString("None")){
 					if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
 						addSprites(a,b);
 						myVal = true;
@@ -69,12 +92,22 @@ public class CollisionCause extends Cause{
 		getEvent().addSpritesFromCause(collidedSprites);
 		return myVal;
 	}
-	
+	/**
+	 * Adds Sprites that have collided to a list that's updated every cycle
+	 * @param a Sprite
+	 * @param b Sprite
+	 */
 	private void addSprites(Sprite a, Sprite b){
 		collidedSprites.add(a);
 		collidedSprites.add(b);
 	}
-	
+	/**
+	 * Queries physics engine to determine if two sprites are colliding
+	 * @param a A sprite being checked for collisions
+	 * @param b Being checked for collision with a
+	 * @param data Leveldata object
+	 * @return whether A and B are colliding in the direction specified by the user
+	 */
 	private boolean handleCollision(Sprite a, Sprite b, ILevelData data){
 		IPhysicsEngine physics = data.getPhysicsEngine();
 
@@ -93,13 +126,18 @@ public class CollisionCause extends Cause{
 			return false;
 		}
 	}
-	
+	/**
+	 * Initializes the mapping of collision directions to numerical values returned by physics
+	 */
 	private void initMap(){
 		collisionDirections = new HashMap<>();
 		collisionDirections.put(VoogaBundles.EventMethods.getString("Above"), 1);
 		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), -1);
 	}
-	
+	/**
+	 * 
+	 * @return all sprites that have been involved in collisions during a cycle
+	 */
 	public List<Sprite> getAllCollidedSprites(){
 		return collidedSprites;
 	}
