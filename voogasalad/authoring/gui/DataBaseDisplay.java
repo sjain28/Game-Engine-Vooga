@@ -91,7 +91,7 @@ public class DataBaseDisplay extends Stage {
 		plots = new TabPane();
 		plotMaker = new Tab("Plot Maker");
 		plotMaker.setContent(infoOptions());
-		plots.getTabs().addAll(plotMaker);
+		plots.getTabs().add(plotMaker);
 		plots.setPrefWidth(DATA_WIDTH * TABPANE_SIZE_FACTOR);
 
 		ans.getChildren().addAll(makeLists(), plots);
@@ -119,8 +119,7 @@ public class DataBaseDisplay extends Stage {
 			cellData.getItems().addAll(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions());
 			cellData.getItems().addAll(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions());
 		} catch (Exception ArrayIndexOutOfBoundsException) {
-			VoogaAlert alert = new VoogaAlert("There is no data.");
-			alert.showAndWait();
+			
 		}
 
 		Button set = new ButtonMaker().makeButton("Set", e -> {
