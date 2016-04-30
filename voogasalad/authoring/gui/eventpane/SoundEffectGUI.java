@@ -17,6 +17,9 @@ import tools.VoogaFileChooser;
 
 
 public class SoundEffectGUI implements EventGUI {
+	
+	private static final int PADDING = 15;
+	
     private Text file;
     private Button browse;
     private VoogaFileChooser fileChooser;
@@ -48,8 +51,6 @@ public class SoundEffectGUI implements EventGUI {
                 alert.showAndWait();
             }
         });
-        
-        
         node = generateHBox(new Text("Sound Path"), browse, file);
     }
 
@@ -60,7 +61,7 @@ public class SoundEffectGUI implements EventGUI {
 
     private HBox generateHBox (Node ... nodes) {
         HBox hbox = new HBox();
-        hbox.setSpacing(15);
+        hbox.setSpacing(PADDING);
         for (Node node : nodes) {
             hbox.getChildren().add(node);
         }
@@ -69,7 +70,14 @@ public class SoundEffectGUI implements EventGUI {
 
     @Override
     public String getDetails () throws VoogaException {
-        return "events.SoundEffect,"+file.getText();
+        return "events.SoundEffect," + file.getText();
     }
+
+	/**
+	 * @return the manager
+	 */
+	public EditEventable getManager() {
+		return manager;
+	}
 
 }
