@@ -159,7 +159,7 @@ public class LevelData implements ILevelData {
 		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());
 		mySpriteFactory = myTransitioner.getNewSpriteFactory();
 		myMainCharID = myTransitioner.getMainCharID();
-		myAnimationFactory = myTransitioner.getNewAnimationFactory();
+		myAnimationFactory = myTransitioner.getAnimationFactory();
 	}
 
 	/**

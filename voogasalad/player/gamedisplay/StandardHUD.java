@@ -15,6 +15,7 @@ import player.gamerunner.IGameRunner;
  * @author Hunter Lee
  *
  */
+@Deprecated
 public class StandardHUD implements IHUD {
 
 	private IGameRunner myGameRunner;
@@ -54,9 +55,9 @@ public class StandardHUD implements IHUD {
 		Label score = new Label(SCORE_LABEL);
 		//	    score.textProperty().bind(valueProperty);
 		//	    Label timer = new Timer();
-		Timer cttimer = new Timer();
+		//Timer cttimer = new Timer();
 
-		myHUD.getChildren().addAll(score, cttimer.getTimeLabel());
+		//myHUD.getChildren().addAll(score, cttimer.getTimeLabel());
 		return myHUD;
 	}
 

@@ -1,6 +1,5 @@
 package authoring.gui.eventpane;
 
-
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
@@ -10,8 +9,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import tools.VoogaException;
 
-
 public class SpawnEffectGUI implements EventGUI {
+	
+	private static final int PADDING = 5;
 
     private SpriteComboBox archetypes;
     private ComboBox<String> targetDesired;
@@ -37,9 +37,9 @@ public class SpawnEffectGUI implements EventGUI {
 
         targetId = new SpriteComboBox(elementManager);
         x = new NumberTextField();
-        x.setPadding(new Insets(5,5,5,5));
+        x.setPadding(new Insets(PADDING));
         y = new NumberTextField();
-        y.setPadding(new Insets(5,5,5,5));
+        y.setPadding(new Insets(PADDING));
 
         targetDesired.setOnAction(e -> {
             if (targetDesired.getValue().equals("Relative Position")) {
@@ -60,24 +60,6 @@ public class SpawnEffectGUI implements EventGUI {
         addGUIElements(archetypes, targetDesired);
     }
 
-    private void addGUIElements (Node ... elements) {
-        node.getChildren().addAll(elements);
-    }
-
-    private void removeInactiveNodes (Node ... elements) {
-        for (Node element : elements) {
-            if (node.getChildren().contains(element)) {
-                node.getChildren().remove(element);
-            }
-        }
-
-    }
-
-    @Override
-    public Node display () {
-        return node;
-    }
-
     @Override
     public String getDetails () throws VoogaException {
         String result = "events.SpawnEffect," + archetypes.getValue() + ",";
@@ -88,4 +70,21 @@ public class SpawnEffectGUI implements EventGUI {
         return result;
     }
 
+    private void removeInactiveNodes (Node ... elements) {
+        for (Node element : elements) {
+            if (node.getChildren().contains(element)) {
+                node.getChildren().remove(element);
+            }
+        }
+
+    }
+    
+    @Override
+    public Node display () {
+        return node;
+    }
+
+    private void addGUIElements (Node ... elements) {
+        node.getChildren().addAll(elements);
+    }
 }

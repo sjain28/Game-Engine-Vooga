@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import tools.GUIUtils;
 import tools.VoogaAlert;
 
 
@@ -48,20 +49,11 @@ public abstract class Builder extends Stage {
 
     protected HBox makeInfo (String label, String prompt, TextField tf) {
         tf.setPromptText(prompt);
-        return makeRow(new CustomText(label), tf);
+        return GUIUtils.makeRow(new CustomText(label), tf);
     }
 
     protected void quit () {
         this.close();
-    }
-
-    protected HBox makeRow (Node ... items) {
-        HBox row = new HBox();
-        for (Node node : items) {
-            row.getChildren().add(node);
-        }
-        row.setSpacing(10);
-        return row;
     }
 
     protected void numberError (String s) {

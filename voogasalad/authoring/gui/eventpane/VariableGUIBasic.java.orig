@@ -82,8 +82,13 @@ public abstract class VariableGUIBasic implements EventGUI {
                 addGUIElements(actions, amount);
             }
             if (vd instanceof VoogaBoolean) {
+<<<<<<< HEAD
                 actions.getItems().addAll(voogaProperties());
                 ComboBox<String> cb = new ComboBox<String>();
+=======
+                actions.getItems().addAll(("Set"));
+                ComboBox<String> cb = new ComboBox<>();
+>>>>>>> master
                 cb.getItems().addAll("true", "false");
                 amount = cb;
                 addGUIElements(actions, amount);

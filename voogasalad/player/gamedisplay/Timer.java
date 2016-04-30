@@ -17,6 +17,7 @@ import javafx.util.Duration;
  * @author Hunter
  *
  */
+@Deprecated
 public class Timer {
 
 	// Default STARTTIME is 0 seconds

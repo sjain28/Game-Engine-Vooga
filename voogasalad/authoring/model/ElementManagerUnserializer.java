@@ -6,6 +6,7 @@ import java.util.List;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
+import events.AnimationFactory;
 import gameengine.BackEndText;
 import gameengine.Sprite;
 import javafx.scene.Node;
@@ -31,7 +32,7 @@ public class ElementManagerUnserializer {
         elementManager.setSpriteFactory(data.getArchetypeMap());
         elementManager.setEventList(data.getEventList());
         elementManager.setGlobalProperties(data.getVariableMap());
-		
+        AnimationFactory.set(data.getAnimationFactory());
         
         return elementManager;
     }

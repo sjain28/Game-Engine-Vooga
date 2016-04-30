@@ -15,6 +15,10 @@ import javafx.scene.layout.VBox;
 
 
 public class ArchetypeSpriteCombo extends Observable {
+	private static final int PADDING = 15;
+	private static final String SPRITE = "Sprite";
+	private static final String ARCHETYPE = "Archetype";
+	
     private SpriteComboBox spriteComboBox;
     private ComboBox needsSprites;
     private HBox hbox;
@@ -26,19 +30,19 @@ public class ArchetypeSpriteCombo extends Observable {
         this.effect=effect;
         needsSprites = new ComboBox();
         needsSprites.setPromptText("Get sprites from cause");
-        needsSprites.getItems().addAll("true","false");
+        needsSprites.getItems().addAll("true", "false");
         
-        hbox = new HBox(15);
-        ToggleGroup tg = createToggleGroup(hbox,"Sprite","Archetype");
+        hbox = new HBox(PADDING);
+        ToggleGroup tg = createToggleGroup(hbox, SPRITE, ARCHETYPE);
         
         
         tg.selectedToggleProperty().addListener((obs,old,n)->{
             clearAfterIndex(overallRegion);
             overallRegion.getChildren().addAll(hbox);
-            if (((RadioButton) n).getText().equals("Sprite")){
+            if (((RadioButton) n).getText().equals(SPRITE)){
                 spriteComboBox = new SpriteComboBox(manager);
             }
-            if (((RadioButton) n).getText().equals("Archetype")){
+            if (((RadioButton) n).getText().equals(ARCHETYPE)){
                 if (effect){
                     overallRegion.getChildren().add(needsSprites);
                 }
@@ -53,7 +57,7 @@ public class ArchetypeSpriteCombo extends Observable {
     
     private void clearAfterIndex(VBox region){
         int index =region.getChildren().indexOf(hbox);
-        List<Node> nodes = new ArrayList<Node>();
+        List<Node> nodes = new ArrayList<>();
         
         for (int i = index;i<region.getChildren().size();i++){
             nodes.add(region.getChildren().get(i));

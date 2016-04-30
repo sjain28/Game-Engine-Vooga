@@ -280,7 +280,6 @@ public class DesignBoard extends Tab implements Observer {
     private void displayElements (Collection<Node> nodeList) {
         for (Node node : nodeList) {
             if (!contentPane.getChildren().contains(node)) {
-                System.out.println("displaying element" + node);
                 contentPane.getChildren().add(node);
             }
         }
@@ -293,7 +292,6 @@ public class DesignBoard extends Tab implements Observer {
     @Override
     public void update (Observable o, Object arg) {
         if ((o instanceof CompleteAuthoringModelable) && (arg instanceof List)) {
-            System.out.println("updatign eelments");
             displayElements(((CompleteAuthoringModelable) o).getElements());
         }
 
@@ -301,7 +299,7 @@ public class DesignBoard extends Tab implements Observer {
             for (Node e : contentPane.getChildren()) {
                 System.out.println(e);
             }
-            List<Node> newChildren = new ArrayList<Node>(contentPane.getChildren());
+            List<Node> newChildren = new ArrayList<>(contentPane.getChildren());
             newChildren.sort(new NodeZAxisComparator());
             contentPane.getChildren().clear();
             contentPane.getChildren().addAll(newChildren);
