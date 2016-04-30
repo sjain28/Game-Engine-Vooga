@@ -27,8 +27,6 @@ public class DisplayScroller implements IDisplayScroller {
 	private String myScrollingType;
 	private String myTrackingDirection;
 	private boolean isExponentialScroll;
-	private Double myMinScrollX;
-	private Double myMinScrollY;
 	private Double myMaxScrollX;
 	private Double myMaxScrollY;
 
@@ -49,9 +47,9 @@ public class DisplayScroller implements IDisplayScroller {
 	public void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite) {
 		if (myScrollingType.equals("Tracking")) {
 			isExponentialScroll = false;
-			if (myTrackingDirection == "X") {
+			if (myTrackingDirection.equals("X")) {
 				scrollX(scrollingsprite);
-			} else if (myTrackingDirection == "Y") {
+			} else if (myTrackingDirection.equals("Y")) {
 				scrollY(scrollingsprite);
 			} else {
 				scrollX(scrollingsprite);

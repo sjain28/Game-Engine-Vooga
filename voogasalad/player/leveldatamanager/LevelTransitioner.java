@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
-import events.AnimationEvent;
 import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.Sprite;
