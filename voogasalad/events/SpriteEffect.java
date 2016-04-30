@@ -116,6 +116,7 @@ public class SpriteEffect extends VariableEffect{
 			}
 		}
 	}
+	
 	@Override
 	public String toString() {
 		String effectString = getMethodString() + " " + getVariable() + " for " ;

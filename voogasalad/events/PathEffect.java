@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
 import tools.Position;
@@ -20,50 +19,56 @@ public class PathEffect extends SpriteEffect{
 	private Double myVelocity;
 	private Boolean reverse;
 	private Map<Sprite, Velocity> spritePastVelocities;
+	private int myCounter;
 
 	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, Boolean reverse, AnimationEvent event) {
 		super(event);
 		setNeedsSprites(true);
-		xCoord = new ArrayList<Double>();
-		yCoord = new ArrayList<Double>();
+		xCoord = new ArrayList<>();
+		yCoord = new ArrayList<>();
 		this.xMousePoints = xMousePoints;
 		this.yMousePoints = yMousePoints;
 		this.reverse = reverse;
 		spritePastVelocities = new HashMap<>();
+		myCounter = 1;
 	}
 
 	@Override
 	public void execute(ILevelData data) {
-		if (((AnimationEvent) getEvent()).getCounter() > 0){
-			checkPastVelocities();
+		if (myCounter > 0 && myCounter < ((AnimationEvent)getEvent()).getDuration() - 1){
+			//checkPastVelocities();
+			setSprites(data);
+
+			for (Sprite sprite : getSprites()){
+				System.out.println("Got me in the loop. Bought it dinner first too.");
+				Vector nextVector = createSpline(myCounter);
+				data.getPhysicsEngine().translateX(sprite, nextVector.getX());
+				data.getPhysicsEngine().translateY(sprite, nextVector.getY());
+//				Velocity nextVelocity = new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), 
+//									nextVector.getY()/nextVector.getMagnitude() * getMyVelocity());
+//				
+//				System.out.println("NEXT VELOCITY: " + nextVelocity.getX() + ", " + nextVelocity.getY());
+//				sprite.setVelocity(nextVelocity);
+				setPastVelocities(sprite);
+			}
 		}
-		setSprites(data);
-		for (Sprite sprite : getSprites()){
-			Vector nextVector = createSpline(((AnimationEvent) getEvent()).getCounter());
-			data.getPhysicsEngine().translateX(sprite, nextVector.getX());
-			data.getPhysicsEngine().translateY(sprite, nextVector.getY());
-			sprite.setVelocity(
-					new Velocity(nextVector.getX()/nextVector.getMagnitude() * getMyVelocity(), 
-							nextVector.getY()/nextVector.getMagnitude() * getMyVelocity()));
-		}
-		setPastVelocities();
 		clearSprites();
+		myCounter++;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	private void setPastVelocities(){
-		for (Sprite sprite : getSprites()){
+	private void setPastVelocities(Sprite sprite){
 			spritePastVelocities.put(sprite, sprite.getVelocity());
-		}
 	}
 	private void checkPastVelocities(){
-		for (Sprite sprite : getSprites()){
+		for (int i = 0; i < getSprites().size(); i++){
+			Sprite sprite = getSprites().get(i);
 			if (!sprite.getVelocity().equals(spritePastVelocities.get(sprite))){
 				((AnimationEvent) getEvent()).removeSprite(sprite);
+				i--;
 			}
 		}
 	}
@@ -82,10 +87,10 @@ public class PathEffect extends SpriteEffect{
 
 		xCoord.add(xMousePoints[0]);
 		yCoord.add(yMousePoints[0]);
-
+		
 		Double distance = 0.0;
-		for (int i = 1; i < xCoord.size(); i++){
-			distance += getDistance(xCoord.get(i-1), xCoord.get(i), yCoord.get(i-1), yCoord.get(i));
+		for (int i = 1; i < xMousePoints.length; i++){
+			distance += getDistance(xMousePoints[i-1], xMousePoints[i], yMousePoints[i-1], yMousePoints[i]);
 			if (distance >= myVelocity){
 				xCoord.add(xMousePoints[i]);
 				yCoord.add(yMousePoints[i]);
@@ -101,10 +106,18 @@ public class PathEffect extends SpriteEffect{
 	protected Double getMyVelocity(){
 		return myVelocity;
 	}
+	
 	protected Vector createSpline(Integer counter){
+		System.out.println("total spline number " + xCoord.size());
+		System.out.println("total duration " + ((AnimationEvent) getEvent()).getDuration());
 		return new Position(xCoord.get(counter) - xCoord.get(counter - 1), yCoord.get(counter) - yCoord.get(counter-1));
 	}
+	
 	protected PathEffect clone(AnimationEvent event){
 		return new PathEffect(xMousePoints, yMousePoints, reverse, event);
+	}
+	
+	protected void setCounter(int newCount){
+		myCounter = newCount;
 	}
 }
