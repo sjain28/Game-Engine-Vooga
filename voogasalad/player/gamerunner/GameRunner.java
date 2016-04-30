@@ -233,6 +233,11 @@ public class GameRunner implements IGameRunner {
 	}
 
 	@Override
+	public void replayLevel() {
+		myLevelData.setNextLevelName(myCurrentLevelString);
+	}
+	
+	@Override
 	public void finishPlaySession() {
 		if (playSessionActive) {
 			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
