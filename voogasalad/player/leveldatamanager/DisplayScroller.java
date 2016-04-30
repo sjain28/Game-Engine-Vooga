@@ -20,13 +20,14 @@ public class DisplayScroller implements IDisplayScroller {
 
 	private static final double INCREASE_FACTOR = 1;
 	private static final double SCROLL_FACTOR = 0.01;
-	private static final int MIN_SCROLL = 200;
-	private static final int MAX_SCROLL = 3000;
+	private static final int MIN_SCROLL = 300;
 
 	private Sprite myScrollingSprite;
 	private IGameDisplay myGameDisplay;
 	private String myScrollingType;
 	private boolean isExponentialScroll;
+	private int myMaxScrollX;
+	private int myMaxScrollY;
 
 	/**
 	 * Default constructor that sets the game display to scroll
@@ -59,7 +60,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	private void scrollX(Sprite scrollsprite) {
 		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
-			if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
+			if (n.intValue() > MIN_SCROLL && n.intValue() < myMaxScrollX) {
 				myGameDisplay.getScreen().setTranslateX(-(n.intValue() - MIN_SCROLL));
 			}
 		});
@@ -73,7 +74,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	private void scrollY(Sprite scrollsprite) {
 		scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
-			if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
+			if (n.intValue() > MIN_SCROLL && n.intValue() < myMaxScrollY) {
 				myGameDisplay.getScreen().setTranslateY(-(n.intValue() - MIN_SCROLL));
 			}
 		});
@@ -90,6 +91,8 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
 		try {
+			myMaxScrollX = (int) globals.get(currentlevel + "EndX").getValue();
+			myMaxScrollY = (int) globals.get(currentlevel + "EndY").getValue();
 			myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 			// Scrolling is centered on the main character
 			if (myScrollingType.equals("Tracking")) {

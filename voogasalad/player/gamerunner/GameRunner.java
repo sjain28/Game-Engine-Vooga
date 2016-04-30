@@ -82,7 +82,7 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 		myStats = new CurrentSessionStats();
-		myLevelMap = new HashMap<String,LevelType>();
+		myLevelMap = new HashMap<String, LevelType>();
 	}
 
 	/**
@@ -145,20 +145,14 @@ public class GameRunner implements IGameRunner {
 		} 
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
-			double width = Double.parseDouble(preferences.getWidth());
-			double height = Double.parseDouble(preferences.getHeight());
-			myGameDisplay.setSceneDimensions(width, height);
-			System.out.println("creating level map");
+			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
 		}
-		System.out.println("latest level reached: "+latestLevelReached+"hjkhlkjhljk");
-		System.out.println("level map outside of level reached:"+myLevelMap);
 		if (latestLevelReached.equals(NULL_STRING)){
 	        for (Entry<String, LevelType> entry : myLevelMap.entrySet()) {
 	            if (entry.getValue().equals(LevelType.ENTRYPOINT)) {
-	            	System.out.println("Level Map: "+myLevelMap);
 	                latestLevelReached = entry.getKey();
 	            }
 	        }
@@ -172,7 +166,6 @@ public class GameRunner implements IGameRunner {
 	 * Play a level, called by playGame
 	 */
 	private void playLevel(String fileName) {
-		System.out.println("inputted filename: "+fileName);
 		myLevelReached++;
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
@@ -200,8 +193,7 @@ public class GameRunner implements IGameRunner {
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
-		myScroller.scroll(myLevelData.getGlobalVariables(),
-				myCurrentLevelString, scrollingSprite);
+		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}
 
 	public IGameDisplay getGameDisplay() {
