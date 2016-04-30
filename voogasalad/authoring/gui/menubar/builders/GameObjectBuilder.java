@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.GUIUtils;
 import tools.VoogaAlert;
 
 
@@ -96,7 +97,7 @@ public class GameObjectBuilder extends Builder {
                                                                         }
                                                                     };
         archetypes.getItems().addAll(items);
-        return makeRow(new CustomText("Select an archetype:"), archetypes);
+        return GUIUtils.makeRow(new CustomText("Select an archetype:"), archetypes);
     }
 
     public void setDraggedImage (String path) {

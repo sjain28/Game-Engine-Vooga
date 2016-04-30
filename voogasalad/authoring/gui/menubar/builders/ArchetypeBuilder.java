@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.GUIUtils;
 import tools.VoogaAlert;
 import tools.VoogaFileChooser;
 import tools.VoogaNumber;
@@ -86,7 +87,7 @@ public class ArchetypeBuilder extends Builder {
             }
 
         });
-        return makeRow(new CustomText("Image"), image, iv);
+        return GUIUtils.makeRow(new CustomText("Image"), image, iv);
     }
 
     private HBox makeMassPicker () {
@@ -99,7 +100,7 @@ public class ArchetypeBuilder extends Builder {
                 mass.clear();
             }
         });
-        return makeRow(new CustomText("Mass:"), mass, infiniteMass);
+        return GUIUtils.makeRow(new CustomText("Mass:"), mass, infiniteMass);
     }
 
     public void setImagePath (String path) {
