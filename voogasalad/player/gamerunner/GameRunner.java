@@ -40,17 +40,17 @@ import videos.ScreenProcessor;
  * @author Hunter, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
-	public static final double FRAME_RATE = 60;
-	private static final double SEC_PER_MIN = 60;
-	private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
-	private static final double SPEEDCONTROL = 10;
-	private static final String GAMES_PATH = "games/";
-	private static final String LEVELS_PATH = "levels/";
-	private static final String XML_EXTENSION_SUFFIX = ".xml";
-	private static final String NULL_STRING = "";
-	private static final String SLASH = "/";
-	private IPhysicsEngine myPhysicsEngine;
-	private ILevelData myLevelData;
+    public static final double FRAME_RATE = 60;
+    private static final double SEC_PER_MIN = 60;
+    private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
+    private static final double SPEEDCONTROL = 10;
+    private static final String GAMES_PATH = "games/";
+    private static final String LEVELS_PATH = "levels/";
+    private static final String XML_EXTENSION_SUFFIX = ".xml";
+    private static final String NULL_STRING = "";
+    private static final String SLASH = "/";
+    private IPhysicsEngine myPhysicsEngine;
+    private ILevelData myLevelData;
 	private IGameDisplay myGameDisplay;
 	private ScreenProcessor myScreenProcessor;
 	private ElementUpdater myElementUpdater;
@@ -58,10 +58,10 @@ public class GameRunner implements IGameRunner {
 	private Map<String,LevelType> myLevelMap;
 	private LevelMapCreator myLevelMapCreator;
 	private Timeline myTimeline;
-	private IDisplayScroller myScroller;
+    private IDisplayScroller myScroller;
 	private CurrentSessionStats myStats;
 	private String myCurrentGameString;
-	private String myCurrentLevelString;
+    private String myCurrentLevelString;
 	private boolean playSessionActive;
 	private int myCurrentStep;
 	private double myLevelReached = 0;
@@ -82,7 +82,7 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 		myStats = new CurrentSessionStats();
-		myLevelMap = new HashMap<String, LevelType>();
+		myLevelMap = new HashMap<String,LevelType>();
 	}
 
 	/**
@@ -152,11 +152,11 @@ public class GameRunner implements IGameRunner {
 			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
 		}
 		if (latestLevelReached.equals(NULL_STRING)){
-			for (Entry<String, LevelType> entry : myLevelMap.entrySet()) {
-				if (entry.getValue().equals(LevelType.ENTRYPOINT)) {
-					latestLevelReached = entry.getKey();
-				}
-			}
+	        for (Entry<String, LevelType> entry : myLevelMap.entrySet()) {
+	            if (entry.getValue().equals(LevelType.ENTRYPOINT)) {
+	                latestLevelReached = entry.getKey();
+	            }
+	        }
 		}
 		myGameDisplay.display();
 		playLevel(latestLevelReached);
@@ -185,7 +185,7 @@ public class GameRunner implements IGameRunner {
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
-				Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
+					Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
 		myGameDisplay.displayTestMode();
 		run();
 	}
@@ -228,7 +228,7 @@ public class GameRunner implements IGameRunner {
 		String fileName = currentLevel + formattedDate;
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
-
+	
 	@Override
 	public Timeline getTimeline() {
 		return myTimeline;
@@ -246,12 +246,12 @@ public class GameRunner implements IGameRunner {
 			VoogaDataBase.getInstance().save();
 		}
 	}
-
+	
 	@Override
 	public CompleteAuthoringModelable getManager() {
 		return null;
 	}
-
+	
 	@Override
 	public void addScene() {}
 
