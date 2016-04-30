@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import tools.interfaces.IVoogaGameSound;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
