@@ -28,6 +28,8 @@ public class LeaderBoards extends Stage {
     private VoogaDataBase database = VoogaDataBase.getInstance();
     private String game;
 
+    private static final int LEADERBOARD_MEMBER_COUNT = 10;
+    
     /**
      * Initializes a new leaderboard, requires the string name of the game which should be accessed from the properties file
      * @param game
@@ -55,7 +57,7 @@ public class LeaderBoards extends Stage {
         }
         
         scores.sort(new ScoreCompare());
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < LEADERBOARD_MEMBER_COUNT; i++) {
             if (scores.get(i) != null) {
                 best.getChildren().add(makeHox(scores.get(i).getFirst(), scores.get(i).getLast()));
             }

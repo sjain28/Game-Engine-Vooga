@@ -19,11 +19,14 @@ public class Test extends Application {
 
 	  private Rectangle lastOne;
 
+	  private static final int TEST_SCENE_SIZE = 500;
+	  private static final int TEST_GRID_LENGTH = 7;
+	  
 	  public void start(Stage stage) throws Exception {
 	    Pane root = new Pane();
 
-	    int grid_x = 7; //number of rows
-	    int grid_y = 7; //number of columns
+	    int grid_x = TEST_GRID_LENGTH; //number of rows
+	    int grid_y = TEST_GRID_LENGTH; //number of columns
 
 	    // this binding will find out which parameter is smaller: height or width
 	    NumberBinding rectsAreaSize = Bindings.min(root.heightProperty(), root.widthProperty());
@@ -57,7 +60,7 @@ public class Test extends Application {
 	            root.getChildren().add(rectangle);
 	        }
 	    }
-	    Scene scene = new Scene(root, 500, 500);
+	    Scene scene = new Scene(root, TEST_SCENE_SIZE, TEST_SCENE_SIZE);
 	    stage.setScene(scene);
 	    stage.show();
 	  }
