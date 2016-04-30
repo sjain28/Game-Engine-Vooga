@@ -9,7 +9,7 @@ import player.leveldatamanager.ILevelData;
  *
  */
 public class AnimationEffect extends SpriteEffect {
-	
+
 	private AnimationEvent myAnimationEvent;
 	private String myAnimationName;
 	/**
@@ -56,10 +56,15 @@ public class AnimationEffect extends SpriteEffect {
 		setSprites(data);
 		if (myAnimationEvent == null){
 			myAnimationEvent = data.getAnimationFromFactory(myAnimationName);
+			data.addEventAndPopulateKeyCombos(myAnimationEvent);
 		}
-		myAnimationEvent.addSpritesFromCause(getSprites());
-		data.addEventAndPopulateKeyCombos(myAnimationEvent);
-		myAnimationEvent.setCauseValue(true);
+		System.out.println("executing animation effect " + getSprites().size());
+		if (myAnimationEvent.getCauseSprites().size() == 0){
+			System.out.println("adding sprites to animation event " + getSprites().size());
+			myAnimationEvent.addSpritesFromCause(getSprites());
+			myAnimationEvent.setCauseValue(true);
+		}
+		clearSprites();
 	}
 
 	@Override

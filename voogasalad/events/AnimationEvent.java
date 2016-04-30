@@ -19,7 +19,7 @@ public class AnimationEvent extends VoogaEvent {
 	private String myName;
 	private Integer myCounter;
 	private Integer myDuration;
-	
+
 	/**
 	 * Constructor
 	 * @param Name of the AnimationEvent
@@ -38,30 +38,40 @@ public class AnimationEvent extends VoogaEvent {
 	 */
 	@Override
 	public void update(ILevelData data){
-		for (Sprite sprite : getCauseSprites()){
-			if (!data.containsSprite(sprite.getId())){
-				removeSprite(sprite);
-			}
-		}
 		if(myCause.getValue()){
+			if(getCauseSprites().size() > 0){
+			System.out.println("animation event sprite size " + getCauseSprites().size());
+			}
+			for (Sprite sprite : getCauseSprites()){
+				if (!data.containsSprite(sprite.getId())){
+					removeSprite(sprite);
+				}
+			}
 			for(Effect e: getEffects()){
 				e.execute(data);
 			}
 			myCounter++;
 			if (myCounter > myDuration){
-				if(myNextEvent != null)
+				if(myNextEvent != null){
 					myNextEvent.setCauseValue(true);
+				}
 				getCauseSprites().clear();
-				setCauseValue(false);
 				myCounter = 0;
+				if(myPathEffect != null){
+					myPathEffect.setCounter(1);
+				}
+				if(myImageEffect != null){
+					myImageEffect.setCounter(0);
+				}
+				setCauseValue(false);
 			}
 		}
 	}
-	
+
 	/**
 	 * Getters and setters below
 	 */
-	
+
 	public void addPathEffect(PathEffect pathEffect){
 		if (myPathEffect != null){
 			getEffects().remove(myPathEffect);
@@ -96,7 +106,7 @@ public class AnimationEvent extends VoogaEvent {
 		myScaleEffect = scaleEffect;
 		addEffect(myImageEffect);
 	}
-	
+
 	protected AnimationEvent clone(){
 		AnimationEvent clone = new AnimationEvent(myName, myDuration);
 		if(myRotateEffect != null){
@@ -117,7 +127,7 @@ public class AnimationEvent extends VoogaEvent {
 	protected void setCauseValue(Boolean value){
 		myCause.setValue(value);
 	}
-	
+
 	private ScaleAnimationEffect getScaleAnimationEffect() {
 		return myScaleEffect;
 	}
@@ -143,7 +153,7 @@ public class AnimationEvent extends VoogaEvent {
 	protected Integer getCounter(){
 		return myCounter;
 	}
-	
+
 	protected WrapperCause getCause(){
 		return myCause;
 	}
