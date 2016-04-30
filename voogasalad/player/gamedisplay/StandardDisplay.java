@@ -142,12 +142,11 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	private void addEffects() {
 		myStage.show();
-        myStage.setOnCloseRequest(e -> {
-            promptForSave();
-        });
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
+            promptForSave();
+            System.out.println("DOES IT SAVE HEREEEEEEEE");
 			myGameRunner.getTimeline().stop();
 			myGameRunner.finishPlaySession();
 			myGameSound.stopBGM();
@@ -155,6 +154,7 @@ public class StandardDisplay implements IGameDisplay {
 	}
 	
     private void promptForSave () {
+    	System.out.println("DOES IT SAVE HEREEEEEEEE ?????????????????");
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }
