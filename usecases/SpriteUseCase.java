@@ -12,7 +12,7 @@ import tools.interfaces.VoogaData;
 
 //Remove all the Map double instances. I added them just so I could compile. sorry!
 
-public class Sprite_USECASE extends ImageView implements Moveable {
+public class SpriteUseCase extends ImageView implements Moveable {
 
 	private Vector myVelocity;
 	private String myID;
@@ -20,7 +20,7 @@ public class Sprite_USECASE extends ImageView implements Moveable {
 	//Remove later. i put this here just so i could compile
 	private Map<String, Double> myDoubleProperties;
 
-	public Sprite_USECASE(String imageID, String id) {
+	public SpriteUseCase(String imageID, String id) {
 		super(new Image(imageID));
 		myID = id;
 		myProperties = new HashMap<String, VoogaData>();

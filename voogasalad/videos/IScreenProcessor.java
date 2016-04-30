@@ -9,7 +9,7 @@ import javafx.scene.Scene;
  * 
  * @author Michael Kuryshev
  */
-public interface IScreenProcessor {
+interface IScreenProcessor {
 	
 	/**
 	 * Set the image to some local file location
@@ -18,7 +18,7 @@ public interface IScreenProcessor {
 	 * @param image
 	 * @return
 	 */
-	public String dumpImageToFile(BufferedImage image, String outputFilePrefix);
+	String dumpImageToFile(BufferedImage image, String outputFilePrefix);
 	
 	/**
 	 * Check if the image is of the correct output format, if not, 
@@ -28,14 +28,14 @@ public interface IScreenProcessor {
 	 * @param targetType
 	 * @return
 	 */
-	public BufferedImage convertImageToType(BufferedImage sourceImage, int targetType);
+	BufferedImage convertImageToType(BufferedImage sourceImage, int targetType);
 	
 	/**
 	 * Take a single snapshot of the screen for a PNG file image
 	 * 
 	 * @param screenshotZone
 	 */
-	public void createSceneScreenshotPNG(Scene screenshotZone, String imageName);
+	void createSceneScreenshotPNG(Scene screenshotZone, String imageName);
 
 	/**
 	 * Encode an array of buffered images into an mp4 video

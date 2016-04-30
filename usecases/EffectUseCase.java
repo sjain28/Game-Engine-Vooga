@@ -1,6 +1,6 @@
 package usecases;
 
-public interface Effect_USECASE {
+public interface EffectUseCase {
 
 	public double performEffect();
 
