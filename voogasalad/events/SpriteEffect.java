@@ -106,8 +106,6 @@ public class SpriteEffect extends VariableEffect{
 		if (myArchetype != null){
 			effectString += myArchetype;
 		}
-		
-		// TODO: MAKE INTO SPRITE NAME, NOT ID
 		if (getSpriteID() != null){
 			effectString += " " + getSpriteID();
 		}
