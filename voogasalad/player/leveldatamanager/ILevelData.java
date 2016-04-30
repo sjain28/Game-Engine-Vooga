@@ -25,10 +25,10 @@ import tools.interfaces.VoogaData;
 public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
-	
+
 	void setNextLevelName(String levelNumber);
 
-    void removeSpriteByID(String id);
+	void removeSpriteByID(String id);
 
 	void updatedGlobalTimer(double time);
 
@@ -37,13 +37,13 @@ public interface ILevelData {
 	void addEventAndPopulateKeyCombos(VoogaEvent event);
 
 	boolean getSaveNow();
-	
+
 	String getNextLevelName();
 
 	Boolean containsSprite(String id);
 
-    Sprite getMainSprite();
-    
+	Sprite getMainSprite();
+
 	Sprite getSpriteByID(String id);
 
 	Sprite addSprite(String archetype);
@@ -51,17 +51,17 @@ public interface ILevelData {
 	IPhysicsEngine getPhysicsEngine();
 
 	VoogaData getGlobalVar(String myVarName);
-	
+
 	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
 	KeyEventContainer getKeyEventContainer();
 
 	List<Pair<Node, Boolean>> getDisplayableNodes();
-	
+
 	List<Sprite> getSpritesByArch(String archA);
-	
+
 	Set<Entry<String, Elementable>> getElementables();
-	
+
 	Map<String, VoogaData> getGlobalVariables();
 
 	Map<String, Elementable> getElements();
