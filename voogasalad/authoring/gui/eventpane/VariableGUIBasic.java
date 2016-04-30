@@ -15,6 +15,10 @@ import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 public abstract class VariableGUIBasic implements EventGUI {
+
+	private static final String GLOBAL = "global";
+	private static final String LOCAL = "local";
+	
     private ComboBox<String> level;
     private ArchetypeSpriteCombo name;
     private VariableComboBox variables;
@@ -33,12 +37,12 @@ public abstract class VariableGUIBasic implements EventGUI {
     }
 
     protected void initialize () {
-        level = new ComboBox<String>();
-        level.getItems().addAll("global", "local");
+        level = new ComboBox<>();
+        level.getItems().addAll(GLOBAL, LOCAL);
         
         name = new ArchetypeSpriteCombo(elementManager, node, e -> onNameSelected(),true);
         variables = new VariableComboBox(elementManager);
-        actions = new ComboBox<String>();
+        actions = new ComboBox<>();
         
         setChangeListeners();
         addGUIElements(level);
@@ -55,11 +59,11 @@ public abstract class VariableGUIBasic implements EventGUI {
             resetNode();
             addGUIElements(level);
 
-            if (level.getValue().equals("global")) {
+            if (level.getValue().equals(GLOBAL)) {
                 variables.resetVariables(elementManager.getGlobalVariables());
                 addGUIElements(variables);
             }
-            if (level.getValue().equals("local")) {
+            if (level.getValue().equals(LOCAL)) {
                 name.display();
             }
         });
@@ -76,7 +80,7 @@ public abstract class VariableGUIBasic implements EventGUI {
             }
             if (vd instanceof VoogaBoolean) {
                 actions.getItems().addAll(("Set"));
-                ComboBox<String> cb = new ComboBox<String>();
+                ComboBox<String> cb = new ComboBox<>();
                 cb.getItems().addAll("true", "false");
                 amount = cb;
                 addGUIElements(actions, amount);
@@ -117,10 +121,10 @@ public abstract class VariableGUIBasic implements EventGUI {
     
     public String getDetails(){
         String result = "";
-        if (level.getValue().contains("global")) {
+        if (level.getValue().contains(GLOBAL)) {
             result += "events.Variable"+type.toString()+",";
         }
-        if (level.getValue().contains("local")) {
+        if (level.getValue().contains(LOCAL)) {
             result += "events.Sprite"+type.toString()+"," + name.getDetails() + ",";
         }
         result += variables.getValue() +
