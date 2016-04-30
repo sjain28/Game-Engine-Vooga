@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import tools.interfaces.IVoogaGameSound;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -54,26 +53,26 @@ public class VoogaJukebox {
 		myBGM = new MediaPlayer(new Media(new File(filename).toURI().toString()));
 	}
 
-//	/**
-//	 * Play a sound bite
-//	 */
-//	public void play(String soundname) {
-//		myMediaMap.get(soundname).play();
-//	}
-//
-//	/**
-//	 * Play a continuous, controllable sound piece
-//	 */
-//	public void playBGM() {
-//		myBGM.play();
-//	}
-//
-//	/**
-//	 * Permanently stop background music, needs restarting
-//	 */
-//	public void stopBGM() {
-//		myBGM.stop();
-//	}
+	/**
+	 * Play a sound bite
+	 */
+	public void play(String soundname) {
+		myMediaMap.get(soundname).play();
+	}
+
+	/**
+	 * Play a continuous, controllable sound piece
+	 */
+	public void playBGM() {
+		myBGM.play();
+	}
+
+	/**
+	 * Permanently stop background music, needs restarting
+	 */
+	public void stopBGM() {
+		myBGM.stop();
+	}
 //
 //	/**
 //	 * Pause background music for later return to point

@@ -112,11 +112,12 @@ public class StandardDisplay implements IGameDisplay {
 	private void addEffects() {
 		myStage.show();
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
+		VoogaJukebox.getInstance().playBGM();
 		myStage.setOnCloseRequest(e -> {
 			saveDatabase();
 			myGameRunner.getTimeline().stop();
 			myGameRunner.finishPlaySession();
-			//VoogaJukebox.getInstance().stopBGM();
+			VoogaJukebox.getInstance().stopBGM();
 		});
 	}
 
@@ -172,7 +173,7 @@ public class StandardDisplay implements IGameDisplay {
 
 	@Override
 	public void exit() {
-		//VoogaJukebox.getInstance().stopBGM();
+		VoogaJukebox.getInstance().stopBGM();
 		myStage.close();
 	}
 
