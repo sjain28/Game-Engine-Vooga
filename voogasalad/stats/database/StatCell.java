@@ -54,6 +54,7 @@ public class StatCell extends CellEntry {
 	}
 	public void updateProgress(String levelName){
 		setProperty(LATEST_PROGRESS, new VoogaString(""));
+		System.out.println("The levelname here was set to levelName " + levelName);
 	}
 	public String checkProgress(){
 		return (String) ((VoogaString) getProperty(LATEST_PROGRESS)).getValue();

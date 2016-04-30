@@ -90,7 +90,7 @@ public class LevelData implements ILevelData {
         }
         return list;
     }
-    public AnimationEvent getAnimationFromFactory(String animationString){
+    public AnimationEvent getAnimationFromFactory(String animationString){    	
     	if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
     		List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
     		return clonedSequence.get(0);
@@ -166,6 +166,7 @@ public class LevelData implements ILevelData {
     	//myAnimationFactory.clearMaps();
     	//myAnimationFactory.populateMaps();
     	myAnimationFactory = myTransitioner.getNewAnimationFactory();
+    	System.out.println(myAnimationFactory + " is the animation factory");
     }
     
     public String getNextLevelName() {
@@ -194,7 +195,7 @@ public class LevelData implements ILevelData {
     public void saveProgress(String filePath) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
     	System.out.println("I SAVED HERE!!!!!!!!");
-    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory);
+    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory, myAnimationFactory);
     	saver.saveCurrentProgress(filePath);
     }
     /**

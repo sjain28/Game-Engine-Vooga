@@ -3,6 +3,7 @@ package videos;
 import java.awt.image.BufferedImage;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.List;
 
 import javafx.scene.Scene;
 
@@ -28,16 +29,24 @@ public interface IScreenProcessor {
 	public BufferedImage convertImageToType(BufferedImage sourceImage, int targetType);
 	
 	/**
-	 * Take a snapshot of the screen, dependent on the area demanded
-	 * 
-	 * @return
-	 */
-	public BufferedImage createDesktopScreenshotForVideo(Dimension screenBounds);
-	
-	/**
 	 * Take a single snapshot of the screen for a PNG file image
 	 * 
 	 * @param screenshotZone
 	 */
 	public void createSceneScreenshotPNG(Scene screenshotZone, String imageName);
+
+	/**
+	 * Encode an array of buffered images into an mp4 video
+	 * 
+	 * @param images
+	 * @param outputFileName
+	 */
+	void encodeScreenshots(String outputFileName, List<BufferedImage> images, double frameRate);
+	
+	/**
+	 * Add buffered images to video array for alter compression if enabled
+	 * 
+	 * @param videoImages
+	 */
+//	void updateVideo(List<BufferedImage> videoImages);
 }
