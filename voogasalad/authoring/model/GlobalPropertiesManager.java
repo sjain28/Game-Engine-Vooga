@@ -2,6 +2,7 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import authoring.gui.Selector;
 import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;

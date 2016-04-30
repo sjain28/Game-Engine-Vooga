@@ -100,7 +100,8 @@ public class ImportArchetype extends Stage {
 			this.close();
 		}
 		catch (VoogaException e) {
-			new VoogaAlert(e.getMessage());
+			VoogaAlert alert = new VoogaAlert(e.getMessage());
+			alert.showAndWait();
 		}
 	}
 

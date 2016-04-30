@@ -1,10 +1,7 @@
 package authoring.gui.menubar;
 
-import authoring.interfaces.model.Sceneable;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -41,7 +38,8 @@ public class MenuPanelHandlingMirror {
             handleEvent();
         }
         catch (VoogaException e1) {
-            new VoogaAlert(e1.getMessage());
+            VoogaAlert alert = new VoogaAlert(e1.getMessage());
+            alert.showAndWait();
         }
     }
 

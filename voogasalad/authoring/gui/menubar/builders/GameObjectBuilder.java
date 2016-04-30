@@ -2,6 +2,7 @@ package authoring.gui.menubar.builders;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import authoring.CustomText;
 import authoring.interfaces.model.EditElementable;
 import authoring.model.GameObject;
@@ -13,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tools.VoogaAlert;
-import tools.VoogaException;
 
 
 public class GameObjectBuilder extends Builder {
@@ -61,7 +61,8 @@ public class GameObjectBuilder extends Builder {
         
         if (editor.getSpriteFactory().getAllArchetypeNames().contains(myName.getText()) ||
             editor.getMySpriteNames().contains(myName.getText())) {
-            new VoogaAlert("This name already exists");
+            VoogaAlert alert = new VoogaAlert("This name already exists");
+            alert.showAndWait();
             return;
         }
         

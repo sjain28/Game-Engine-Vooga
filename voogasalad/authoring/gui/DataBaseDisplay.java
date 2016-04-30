@@ -1,13 +1,10 @@
 package authoring.gui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import authoring.VoogaScene;
-import authoring.model.VoogaFrontEndText;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -18,7 +15,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,11 +26,8 @@ import resources.VoogaBundles;
 import stats.database.CellEntry;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
-import stats.database.VoogaGame;
 import stats.database.VoogaUser;
-import stats.visualization.GraphMaker;
 import stats.visualization.StatsVisualizer;
-import tools.VoogaAlert;
 
 public class DataBaseDisplay extends Stage {
     private static final double HEADER_HEIGHT = 50;

@@ -2,14 +2,11 @@
  * 
  */
 package player.gamerunner;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import authoring.gui.cartography.LevelType;
 import authoring.gui.cartography.NetworkContainer;
-import authoring.model.Preferences;
 import data.Deserializer;
 import tools.VoogaException;
 

@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import events.Effectable;
@@ -18,13 +19,13 @@ import javafx.scene.image.ImageView;
 import resources.VoogaBundles;
 import tools.Acceleration;
 import tools.Position;
-import tools.VoogaNumber;
-import tools.VoogaString;
-import tools.bindings.ImageProperties;
 import tools.Velocity;
 import tools.VoogaBoolean;
 import tools.VoogaException;
-import tools.interfaces.*;
+import tools.VoogaNumber;
+import tools.VoogaString;
+import tools.bindings.ImageProperties;
+import tools.interfaces.VoogaData;
 
 
 public class Sprite implements Moveable, Effectable, Elementable {

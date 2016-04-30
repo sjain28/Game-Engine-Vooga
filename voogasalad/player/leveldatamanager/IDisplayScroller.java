@@ -4,6 +4,7 @@
 package player.leveldatamanager;
 
 import java.util.Map;
+
 import gameengine.Sprite;
 import tools.interfaces.VoogaData;
 
@@ -17,10 +18,10 @@ public interface IDisplayScroller {
 
 	void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite);
 	
-	Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite);
-	
 	void increaseScrollingSpeed(Sprite scrollingSprite);
-	
+
+	Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite);
+
 	Sprite getScrollingSprite();
 
 }

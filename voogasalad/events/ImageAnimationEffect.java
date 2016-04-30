@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import gameengine.Sprite;
-import javafx.scene.image.Image;
 import player.leveldatamanager.ILevelData;
 
 public class ImageAnimationEffect extends SpriteEffect {

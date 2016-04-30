@@ -1,7 +1,6 @@
 package authoring.gui.cartography;
 
 import java.util.Map;
-import java.util.Set;
 
 public class NetworkContainer {
 	

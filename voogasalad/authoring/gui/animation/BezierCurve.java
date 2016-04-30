@@ -1,15 +1,11 @@
 package authoring.gui.animation;
 
 import authoring.gui.menubar.builders.Anchor;
-import javafx.beans.property.DoubleProperty;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeType;
 
 /**
  * This is a group of a CubicCurve, anchors, and lines that embody the Bezier curve. Intended to be used

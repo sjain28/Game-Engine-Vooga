@@ -16,8 +16,6 @@ import org.xml.sax.SAXException;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
-import events.KeyCause;
-import events.VariableEffect;
 import events.VoogaEvent;
 import gameengine.Sprite;
 import tools.Position;

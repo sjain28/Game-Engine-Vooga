@@ -1,8 +1,6 @@
 package authoring.gui.animation;
 
-import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import tools.GUIUtils;
 

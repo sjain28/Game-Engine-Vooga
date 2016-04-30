@@ -5,7 +5,6 @@ import java.util.List;
 
 import authoring.resourceutility.ButtonMaker;
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import tools.VoogaAlert;
 import tools.VoogaException;
@@ -45,7 +44,8 @@ public class ImageFlowPane extends FlowPane {
 			String imagePath = imageChooser.launch();
 			this.getChildren().add(positionToAdd, new Frame(imagePath));
 		} catch (VoogaException e) {
-			new VoogaAlert(INCORRECT);
+			VoogaAlert alert = new VoogaAlert(INCORRECT);
+			alert.showAndWait();
 		}
 	}
 	

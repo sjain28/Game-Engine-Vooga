@@ -8,6 +8,8 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class VoogaAlert {
 
+	private Alert alert;
+	
 	public VoogaAlert(String message) {
 		alert(message);
 	}
@@ -17,10 +19,13 @@ public class VoogaAlert {
 	 * 
 	 * @param message
 	 */
-	public void alert(String message) {
-		Alert alert = new Alert(AlertType.ERROR);
+	private void alert(String message) {
+		alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
 		alert.setContentText(message);
+	}
+	
+	public void showAndWait() {
 		alert.showAndWait();
 	}
 }

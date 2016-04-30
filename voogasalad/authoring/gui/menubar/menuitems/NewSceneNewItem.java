@@ -1,12 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.MenuItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.MouseEvent;
 import player.gamedisplay.Menuable;
 
 public class NewSceneNewItem extends MenuItemHandler {
