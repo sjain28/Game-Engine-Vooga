@@ -125,6 +125,8 @@ public class LevelData implements ILevelData {
      * @param levelfilename
      */
     public void refreshLevelData(String levelfilename) {
+		System.out.println("inputted filename to level data: "+levelfilename);
+
     	myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, 
     										   myGlobalVariables, myNextLevelKey);
     	myElements = myTransitioner.populateNewSprites();
