@@ -43,7 +43,7 @@ public class DisplayScroller implements IDisplayScroller {
 			setContinuousScrollType(globals, currentlevel);
 		}
 		scrollX(scrollingsprite);
-		scrollY(scrollingsprite);
+		//scrollY(scrollingsprite);
 	} 
 	
 	/**
