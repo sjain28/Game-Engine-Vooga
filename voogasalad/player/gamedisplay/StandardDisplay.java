@@ -11,14 +11,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
 import stats.database.VoogaDataBase;
 import tools.IVoogaGameSound;
 import tools.OrderedProperties;
+import tools.Pair;
 import tools.VoogaGameSound;
-
 /**
  * Standard Display that creates a display with basic user-interaction controls
  * Uses composition to contain elements of the display
@@ -35,43 +36,29 @@ public class StandardDisplay implements IGameDisplay {
 	private Scene myScene;
 	private BorderPane myPane;
 	private Pane myGameScreen;
-	private List<Node> myListToDisplay;
+	private Pane myUIScreen;
+	private StackPane myScreensHolder;
 	private List<KeyEvent> myKeyEvents;
 	private List<KeyEvent> myKeyPresses;
 	private List<KeyEvent> myKeyReleases;
-	
+
 	/**
 	 * Overloaded constructor to set the reference to GameRunner
 	 */
 	public StandardDisplay(IGameRunner gamerunner) {
 		myGameRunner = gamerunner;
-		initialize();
-	}
-	
-	/**
-	 * Method that contains a series of initialize statements
-	 */
-	private void initialize() {
 		myControl = new StandardControl(myGameRunner);
 		myHUD = new StandardHUD(myGameRunner);
 		myGameSound = new VoogaGameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
-		myGameScreen = new Pane();	
-//		myGameScreen = new StackPane();	
-		// Made the scene from log in scene creator;
-		// myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
-//		myLogInScreen = new LogInSceneCreator(); 
-//		myScene = myLogInScreen.createLogInScene(myPane, PANE_SIZE,PANE_SIZE);
+		myGameScreen = new Pane();
+		myUIScreen = new Pane();
+		myScreensHolder = new StackPane();
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myKeyPresses = new ArrayList<>();
-		myKeyReleases = new ArrayList<>();
-	}
-	
-	@Override
-	public void setSceneDimensions(double width, double height) {
-		myScene = new VoogaScene(myPane, width, height);
+		myKeyReleases = new ArrayList<>();	
 	}
 
 	/**
@@ -88,21 +75,20 @@ public class StandardDisplay implements IGameDisplay {
 			}
 		}
 	};
-	
-	@Override
-	public Pane getScreen() {
-		return this.myGameScreen;
-	}
-
 	/**
 	 * Reads in the list of Nodes to display and populates the screen
 	 */
-	public void readAndPopulate(List<Node> listToDisplay) {
-		myListToDisplay = listToDisplay;
+	public void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay) {
 		myGameScreen.getChildren().clear();
-		myListToDisplay.forEach(n -> myGameScreen.getChildren().add(n));
+		myUIScreen.getChildren().clear();
+		for(Pair<Node, Boolean> p : listToDisplay) {
+			if (p.getLast()) {
+				myUIScreen.getChildren().add(p.getFirst());
+			} else {
+				myGameScreen.getChildren().add(p.getFirst());
+			}
+		}
 	}
-
 	/**
 	 * Public method defined in the interface that displays game display
 	 */
@@ -111,7 +97,7 @@ public class StandardDisplay implements IGameDisplay {
 		createPane(VoogaBundles.playerMenubarProperties);
 		addEffects();
 	}
-	
+
 	/**
 	 * Create a display to be used for testing (single level)
 	 */
@@ -120,7 +106,7 @@ public class StandardDisplay implements IGameDisplay {
 		createPane(VoogaBundles.playerTesterMenubarProperties);
 		addEffects();
 	}
-	
+
 	/**
 	 * Add secondary effects to the stage, called by display and displayTestMode
 	 */
@@ -129,44 +115,38 @@ public class StandardDisplay implements IGameDisplay {
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
-            promptForSave();
-            System.out.println("DOES IT SAVE HEREEEEEEEE");
+			saveDatabase();
 			myGameRunner.getTimeline().stop();
 			myGameRunner.finishPlaySession();
 			myGameSound.stopBGM();
 		});
 	}
 	
-    private void promptForSave () {
-    	System.out.println("DOES IT SAVE HEREEEEEEEE ?????????????????");
-    	VoogaDataBase.getInstance().printDataBase();
-        VoogaDataBase.getInstance().save();
-    }
-	
 	/**
 	 * Creates the game display, adding all components
 	 */
 	private void createPane(OrderedProperties resource) {
-		myPane.setCenter(myGameScreen);
+		myScreensHolder.getChildren().addAll(myGameScreen, myUIScreen);
+		myPane.setCenter(myScreensHolder);
 		myPane.setTop(new MenuPanel(myGameRunner, e -> new MenuPanelHandlingMirror(e, myGameRunner), resource));
 		myPane.setBottom(myControl.createControl());
 		myPane.setRight(myHUD.createHUD());
 		myStage.setScene(myScene);
 	}
 	
-	/**
-	 * Creates an interactive prompt and shows it to the user
-	 */
+	private void saveDatabase() {
+		VoogaDataBase.getInstance().printDataBase();
+		VoogaDataBase.getInstance().save();
+	}
+
+	@Override
+	public void setSceneDimensions(double width, double height) {
+		myScene = new VoogaScene(myPane, width, height);
+	}
+
 	@Override
 	public void createPrompt(String message) {
 		myPrompt.prompt(message);
-	}
-
-	/**
-	 * @param myListToDisplay the myListToDisplay to set
-	 */
-	public void setListToDisplay(List<Node> myListToDisplay) {
-		this.myListToDisplay = myListToDisplay;
 	}
 
 	@Override
@@ -174,31 +154,24 @@ public class StandardDisplay implements IGameDisplay {
 		return myKeyEvents;
 	}
 
-	/**
-	 * Clears the list of KeyEvents, called at each time step
-	 */
 	@Override
 	public void clearKeyEvents() {
 		myKeyEvents.clear();
 	}
-	/**
-	 * @return the myControl
-	 */
+
 	public IControl getControl() {
 		return myControl;
 	}
 	public IHUD getHUD() {
 		return myHUD;
 	}
-	/**
-	 * Stops the background music and close the stages
-	 */
+
 	@Override
 	public void exit() {
 		myGameSound.stopBGM();
 		myStage.close();
 	}
-	
+
 	public List<KeyEvent> getMyKeyPresses() {
 		return myKeyPresses;
 	}
@@ -206,13 +179,20 @@ public class StandardDisplay implements IGameDisplay {
 	public List<KeyEvent> getMyKeyReleases() {
 		return myKeyReleases;
 	}
-	
+
 	public Scene getMyScene() {
 		return myScene;
 	}
-
 	@Override
 	public Stage getStage() {
 		return myStage;
+	}
+	@Override
+	public Pane getScreen() {
+		return this.myGameScreen;
+	}
+	@Override
+	public Pane getUI() {
+		return this.myUIScreen;
 	}
 }

@@ -9,28 +9,20 @@ import player.gamedisplay.Menuable;
  * @author Hunter, Michael
  */
 public interface IGameRunner extends Menuable {
-	
+
 	void exit();
-	
-	Timeline getTimeline();
 
 	void speedUp();
 
 	void speedDown();
-		
+
 	void playGame(String xmlList);
-	
+
 	void testLevel(String levelName);
-	
-//	void playNextLevel();
-		
-	void replayLevel();
 
 	void takeSnapShot();
-/*
-	void startVideoCapture();
 
-	void endVideoCapture();
-*/
 	void finishPlaySession();
+
+	Timeline getTimeline();
 }
