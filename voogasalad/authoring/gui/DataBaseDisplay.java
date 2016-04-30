@@ -3,7 +3,6 @@ package authoring.gui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import authoring.VoogaScene;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -26,15 +25,22 @@ import resources.VoogaBundles;
 import stats.database.CellEntry;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import stats.database.VoogaGame;
 import stats.database.VoogaUser;
 import stats.visualization.StatsVisualizer;
 
+/**
+ * Displays information stored in the database.  Can be flexibally graphed in any potential combination
+ * @author Nick
+ *
+ */
 public class DataBaseDisplay extends Stage {
     private static final double HEADER_HEIGHT = 50;
     private static final double HEADER_WIDTH = 700;
     private static final double DATA_WIDTH = 700;
     private static final double DATA_HEIGHT = 400;
-    
+    private String USR = "UserName";
+
     private VoogaDataBase database = VoogaDataBase.getInstance();
     private VoogaUser user;
     private CellEntry selectedCell;
@@ -43,9 +49,9 @@ public class DataBaseDisplay extends Stage {
     private String nextX = "";
     private String nextY = "";
     private HBox data;
-    
-    public DataBaseDisplay(){
-        user = database.getUser(VoogaBundles.preferences.getProperty("UserName"));
+
+    public DataBaseDisplay () {
+        user = database.getUser(VoogaBundles.preferences.getProperty(USR));
         VBox content = new VBox();
         HBox header = makeHeader();
         data = makeData();
@@ -56,17 +62,15 @@ public class DataBaseDisplay extends Stage {
 
     private HBox makeHeader () {
         HBox ans = new HBox(20);
-        ImageView pict =  new ImageView();
-        try{
+        ImageView pict = new ImageView();
+        try {
             pict = user.displayProfilePicture();
-        } 
-        catch(Exception IllegalArgumentException){
-            //do Nothing
-            System.out.println("error");
+        }
+        catch (Exception IllegalArgumentException) {
         }
         pict.setFitHeight(HEADER_HEIGHT);
         pict.setPreserveRatio(true);
-        Text t = new Text(user.getProperty(user.DISPLAY_NAME).toString());
+        Text t = new Text(user.getProperty(VoogaUser.DISPLAY_NAME).toString());
         t.setFill(Color.WHITE);
         t.setFont(Font.font(30));
         ans.getChildren().addAll(pict, t);
@@ -77,50 +81,57 @@ public class DataBaseDisplay extends Stage {
 
     private HBox makeData () {
         HBox ans = new HBox();
-        
+
         plots = new TabPane();
         plotMaker = new Tab("Plot Maker");
         plotMaker.setContent(infoOptions());
         plots.getTabs().addAll(plotMaker);
         plots.setPrefWidth(DATA_WIDTH * 3 / 4);
-        
+
         ans.getChildren().addAll(makeLists(), plots);
         ans.setPrefSize(DATA_WIDTH, DATA_HEIGHT);
         return ans;
     }
 
     private VBox infoOptions () {
-       VBox scene = new VBox();
-       HBox xData = dataSelector("X Value");
-       HBox yData = dataSelector("Y Value");
-       Button apply = new Button("Apply");
-       apply.setOnAction(e -> makeNewTab(nextX, nextY));
-       scene.getChildren().addAll(xData, yData, apply);
-       return scene;
+        VBox scene = new VBox();
+        HBox xData = dataSelector("X Value");
+        HBox yData = dataSelector("Y Value");
+        Button apply = new Button("Apply");
+        apply.setOnAction(e -> makeNewTab(nextX, nextY));
+        scene.getChildren().addAll(xData, yData, apply);
+        return scene;
     }
-    
-    private HBox dataSelector(String label){
+
+    private HBox dataSelector (String label) {
         HBox data = new HBox(15);
         Text t = new Text(label);
         t.setFill(Color.WHITE);
-        
+
         ComboBox<String> cellData = new ComboBox<String>();
-        try{
-            cellData.setItems(selectedCell.getPropertyOptions());        
-            cellData.getItems().addAll(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions());
-            cellData.getItems().addAll(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions());
-        } catch(Exception ArrayIndexOutOfBoundsException){
-           System.out.println("no Data");
+        try {
+            cellData.setItems(selectedCell.getPropertyOptions());
+            cellData.getItems()
+                    .addAll(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions());
+            cellData.getItems()
+                    .addAll(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions());
         }
-        
+        catch (Exception ArrayIndexOutOfBoundsException) {
+            System.out.println("no Data");
+        }
+
         Button set = new Button("Set");
-        
-        //TODO: THIS IS BAD CODING... CHANGE
-        if(label.contains("X")){
-            set.setOnAction(e -> {nextX = cellData.getValue();});
+
+        // TODO: THIS IS BAD CODING... CHANGE
+        if (label.contains("X")) {
+            set.setOnAction(e -> {
+                nextX = cellData.getValue();
+            });
         }
-        if(label.contains("Y")){
-            set.setOnAction(e -> {nextY = cellData.getValue();});
+        if (label.contains("Y")) {
+            set.setOnAction(e -> {
+                nextY = cellData.getValue();
+            });
         }
         data.getChildren().addAll(t, cellData, set);
         return data;
@@ -128,27 +139,29 @@ public class DataBaseDisplay extends Stage {
 
     private void makeNewTab (String xProp, String yProp) {
         Tab tab = new Tab(nextX + nextY);
-        StatsVisualizer gmaker = new StatsVisualizer(); 
+        StatsVisualizer gmaker = new StatsVisualizer();
         List<CellEntry> xlist = new ArrayList<CellEntry>();
         List<CellEntry> ylist = new ArrayList<CellEntry>();
-        if(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions().contains(nextX)){
+        if (((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions()
+                .contains(nextX)) {
             xlist = ((StatCell) selectedCell).getAuthorStats();
         }
-        else if(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions().contains(nextX)){
+        else if (((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions()
+                .contains(nextX)) {
             xlist = ((StatCell) selectedCell).getPlayStats();
         }
-        
-        if(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions().contains(nextY)){
+
+        if (((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions()
+                .contains(nextY)) {
             ylist = ((StatCell) selectedCell).getAuthorStats();
         }
-        else if(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions().contains(nextY)){
+        else if (((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions()
+                .contains(nextY)) {
             ylist = ((StatCell) selectedCell).getPlayStats();
         }
-        
         tab.setContent(gmaker.getVoogaStatsScatterPlot(xlist, ylist, nextX, nextY));
         plots.getTabs().add(tab);
         System.out.println(plots.getTabs().size());
-        
     }
 
     private Node makeLists () {
@@ -156,17 +169,25 @@ public class DataBaseDisplay extends Stage {
         TitledPane games = new TitledPane();
         games.setText("Games");
         ListView<String> actualGames = new ListView<String>();
-        List<String> authoredGames = database.getStatsbyUser(user.getProperty(VoogaUser.USER_NAME).toString()).stream().map(e -> e.getProperty(StatCell.MY_GAME).toString()).collect(Collectors.toList());
+        List<String> authoredGames =
+                database.getStatsbyUser(user.getProperty(VoogaUser.USER_NAME).toString()).stream()
+                        .map(e -> e.getProperty(StatCell.MY_GAME).toString())
+                        .collect(Collectors.toList());
         actualGames.getItems().setAll(authoredGames);
-        actualGames.setOnMouseClicked(e -> clickList(actualGames.getSelectionModel().getSelectedItem()));
+        actualGames.setOnMouseClicked(e -> clickList(actualGames.getSelectionModel()
+                .getSelectedItem()));
         games.setContent(actualGames);
         lists.getPanes().addAll(games);
-        lists.setPrefWidth(DATA_WIDTH/4);
+        lists.setPrefWidth(DATA_WIDTH / 4);
         return lists;
     }
 
-    private void clickList (String game) {        
-        selectedCell = database.getStatByGameAndUser(database.getGame(game).getProperty(database.getGame(game).GAME_NAME).getValue().toString(), user.getProperty(VoogaUser.USER_NAME).getValue().toString());
+    private void clickList (String game) {
+        database.getGame(game);
+        selectedCell =
+                database.getStatByGameAndUser(database.getGame(game)
+                        .getProperty(VoogaGame.GAME_NAME).getValue()
+                        .toString(), user.getProperty(VoogaUser.USER_NAME).getValue().toString());
         plotMaker.setContent(infoOptions());
     }
 }
