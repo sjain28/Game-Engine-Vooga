@@ -17,7 +17,6 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
-import tools.NodeZAxisComparator;
 import tools.VoogaBoolean;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -61,6 +60,9 @@ public class LevelData implements ILevelData {
     public Boolean containsSprite(String id){
     	return myElements.containsKey(id);
     }
+    public void putSprite(Sprite s){
+    	myElements.put(s.getId(), s);
+    }
     /**
      * Removes sprite by it's ID
      */
@@ -94,9 +96,8 @@ public class LevelData implements ILevelData {
     	if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
     		List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
     		return clonedSequence.get(0);
-    	}else{
-    		return myAnimationFactory.cloneAnimationEvent(animationString);
     	}
+    	else{return myAnimationFactory.cloneAnimationEvent(animationString);}
     }
     /**
      * Adds a sprite as a member of the given archetype
@@ -139,7 +140,6 @@ public class LevelData implements ILevelData {
         for (Object key : myElements.keySet()) {
             displayablenodes.add(myElements.get(key).getNodeObject());
         }
-        displayablenodes.sort(new NodeZAxisComparator());
         return displayablenodes;
     }
     /**
@@ -158,13 +158,8 @@ public class LevelData implements ILevelData {
     	myElements = myTransitioner.populateNewSprites();
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
-    	//mySpriteFactory.clearMap();
-    	//mySpriteFactory.setMap(myTransitioner.getSpriteMap());
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
-		System.out.println(myElements);
     	myMainCharID = myTransitioner.getMainCharID();
-    	//myAnimationFactory.clearMaps();
-    	//myAnimationFactory.populateMaps();
     	myAnimationFactory = myTransitioner.getNewAnimationFactory();
     }
     
@@ -191,10 +186,11 @@ public class LevelData implements ILevelData {
     /**
      * Saves current game progress into a XML file
      */
-    public void saveProgress(String filePath, String playerName, String gameName) {
+    public void saveProgress(String filePath) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory);
-    	saver.saveCurrentProgress(filePath, playerName,gameName);
+    	System.out.println("I SAVED HERE!!!!!!!!");
+    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory, myAnimationFactory);
+    	saver.saveCurrentProgress(filePath);
     }
     /**
      * Returns the game's physics engine
@@ -202,23 +198,13 @@ public class LevelData implements ILevelData {
     public IPhysicsEngine getPhysicsEngine() {
         return myPhysics;
     }
+    public Map<String,VoogaData> getGlobalVars(){
+    	return myGlobalVariables;
+    }
 	/**
 	 * @return the myKeyEventContainer
 	 */
 	public KeyEventContainer getKeyEventContainer() {
 		return myKeyEventContainer;
-	}
-	/**
-	 * @return the myGlobalVariables
-	 */
-	public Map<String, VoogaData> getGlobalVariables() {
-		return myGlobalVariables;
-	}
-	/**
-	 * @return the myElements
-	 */
-	@Override
-	public Map<String, Elementable> getElements() {
-		return myElements;
 	}
 }

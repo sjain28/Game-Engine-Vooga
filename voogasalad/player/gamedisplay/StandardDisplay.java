@@ -16,6 +16,7 @@ import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
 import stats.database.VoogaDataBase;
 import tools.IVoogaGameSound;
+import tools.NodeZAxisComparator;
 import tools.OrderedProperties;
 import tools.VoogaGameSound;
 
@@ -98,6 +99,7 @@ public class StandardDisplay implements IGameDisplay {
 	 * Reads in the list of Nodes to display and populates the screen
 	 */
 	public void readAndPopulate(List<Node> listToDisplay) {
+        listToDisplay.sort(new NodeZAxisComparator());
 		myListToDisplay = listToDisplay;
 		myGameScreen.getChildren().clear();
 		myListToDisplay.forEach(n -> myGameScreen.getChildren().add(n));
@@ -126,12 +128,11 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	private void addEffects() {
 		myStage.show();
-        myStage.setOnCloseRequest(e -> {
-            promptForSave();
-        });
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
+            promptForSave();
+            System.out.println("DOES IT SAVE HEREEEEEEEE");
 			myGameRunner.getTimeline().stop();
 			myGameRunner.finishPlaySession();
 			myGameSound.stopBGM();
@@ -139,6 +140,7 @@ public class StandardDisplay implements IGameDisplay {
 	}
 	
     private void promptForSave () {
+    	System.out.println("DOES IT SAVE HEREEEEEEEE ?????????????????");
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }

@@ -47,22 +47,22 @@ public interface ILevelData {
 	
 	Sprite addSprite(String archetype);
 	
+	void putSprite(Sprite s);
+	
 	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
 
-	void saveProgress(String playerName, String filePath, String gameName);
+	void saveProgress(String filePath);
 	
 	KeyEventContainer getKeyEventContainer();
 	
-	Map<String, VoogaData> getGlobalVariables();
-
-	Map<String, Elementable> getElements();
-
 	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
 	Boolean containsSprite(String id);
 
+    public Map<String,VoogaData> getGlobalVars();
+	
 	void addEventAndPopulateKeyCombos(VoogaEvent event);
 
 }

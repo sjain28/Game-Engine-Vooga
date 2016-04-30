@@ -18,13 +18,9 @@ import tools.interfaces.VoogaData;
 public class DisplayScroller implements IDisplayScroller {
 	
 	private static final double INCREASE_FACTOR = 1;
-	private static final double SCROLL_FACTOR = 0.01;
-	private static final int MIN_SCROLL = 200;
-	private static final int MAX_SCROLL = 3000;
 	
 	private Sprite myScrollingSprite;
 	private boolean isExponentialScroll;
-	private String myScrollingType;
 	private IGameDisplay myGameDisplay;
 	
 	public DisplayScroller(IGameDisplay gamedisplay) {
@@ -37,11 +33,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @param scrollsprite
 	 */
 	public void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite) {
-		if (myScrollingType.equals("Tracking")) {
-			isExponentialScroll = false;
-		} else {
-			setContinuousScrollType(globals, currentlevel);
-		}
+		setContinuousScrollType(globals, currentlevel);
 		scrollX(scrollingsprite);
 		scrollY(scrollingsprite);
 	} 
@@ -52,24 +44,26 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @param scrollsprite
 	 */
 	private void scrollX(Sprite scrollsprite) {
-	    scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
-	        if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
-	            myGameDisplay.getScreen().setTranslateX(-(n.intValue() - MIN_SCROLL));
-	        }
-	    });
+		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+			// TODO: Link to size of level instead of hardcoding
+    		if (n.intValue() > 200 && n.intValue() < 3000) {
+    			myGameDisplay.getScreen().setTranslateX(-(n.intValue() - 200));
+    		}
+		});
 	}
-
+	
 	/**
 	 * Scrolls the display vertically using addListener method and by translatingY
 	 * 
 	 * @param scrollsprite
 	 */
 	private void scrollY(Sprite scrollsprite) {
-	    scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
-	        if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
-	            myGameDisplay.getScreen().setTranslateY(-(n.intValue() - MIN_SCROLL));
-	        }
-	    });
+		scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
+			// TODO: Link to size of level instead of hardcoding
+    		if (n.intValue() > 200 && n.intValue() < 3000) {
+    			myGameDisplay.getScreen().setTranslateY(-(n.intValue() - 200));
+    		}
+		});
 	}
 
 	/**
@@ -82,18 +76,17 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @return
 	 */
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
-		myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
+		String scrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 		// Scrolling is centered on the main character
-		if (myScrollingType.equals("Tracking")) {
+		if (scrollingType.equals("Tracking")) {
 			return mainsprite;
 		} else {
-			// Create a scrolling sprite and return it
+			// Create a scrolling sprite
 			double scrollAngle = (double) globals.get(currentlevel + "ScrollAngle").getValue();
 			double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
-			Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<String, VoogaData>(), new VoogaNumber());
+			Sprite scrollSprite = new Sprite("A.png", "ScrollingSprite", new HashMap<String, VoogaData>(), new VoogaNumber());
 			scrollSprite.getImage().setOpacity(0);
-			scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
-			scrollSprite.getVelocity().setVelocity(scrollSpeed * SCROLL_FACTOR, scrollAngle);
+			scrollSprite.getVelocity().setVelocity(scrollSpeed, scrollAngle);
 			myScrollingSprite = scrollSprite;
 			return scrollSprite;			
 		}

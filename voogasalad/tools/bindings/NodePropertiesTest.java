@@ -1,13 +1,13 @@
 package tools.bindings;
 
-import java.lang.reflect.Method;
 import java.util.Map;
 import javafx.application.Application;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import resources.VoogaBundles;
-import tools.VoogaException;
 
+/**
+ * 'Test' for handling text operations
+ */
 public class NodePropertiesTest extends Application{
 
     @Override
