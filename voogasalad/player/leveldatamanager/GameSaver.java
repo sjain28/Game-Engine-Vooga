@@ -5,11 +5,10 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+import events.AnimationFactory;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
-import events.AnimationFactory;
 import gameengine.SpriteFactory;
 import resources.VoogaBundles;
 import stats.database.CellEntry;
@@ -65,9 +64,7 @@ public class GameSaver implements IGameSaver {
 		String playerName = VoogaBundles.preferences.getProperty("UserName");
 		DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
 				myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap(),
-				myAnimationFactory.getMyAnimationEvents(),
-				myAnimationFactory.getMyPaths(), 
-				myAnimationFactory.getMyAnimationSequences());
+				myAnimationFactory);
 
 		try {
 			FileWriterFromGameObjects.saveGameObjects(dataContainer,GAMES+ nameOfGame + SLASH + LEVELS +  playerName + XML_SUFFIX);

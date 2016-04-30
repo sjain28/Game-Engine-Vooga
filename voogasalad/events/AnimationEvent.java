@@ -28,7 +28,9 @@ public class AnimationEvent extends VoogaEvent {
 	public AnimationEvent(String name, Integer duration){
 		myName = name;
 		myCause = new WrapperCause(this);
-		myDuration = (int) GameRunner.FRAME_RATE * duration;
+		//myDuration = (int) GameRunner.FRAME_RATE * duration;
+		//myDuration = duration * 60;
+		myDuration = 300;
 		myCounter = 0;
 	}
 	/**

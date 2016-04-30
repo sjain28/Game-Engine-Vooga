@@ -1,6 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
-import application.Launcher;
+import authoring.UILauncher;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.gui.Saveable;
 import javafx.stage.Stage;
@@ -23,7 +23,7 @@ public class NewProjectFileItem extends MenuItemHandler {
          */
 	@Override
 	public void handle() {
-		new Launcher(new Stage());
+		new UILauncher(new Stage());
 	}
 
 }
