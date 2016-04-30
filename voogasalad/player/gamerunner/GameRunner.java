@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -96,6 +97,7 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 		myStats = new CurrentSessionStats();
+		myLevelMap = new HashMap<String, LevelType>();
 	}
 
 	/**
