@@ -2,7 +2,7 @@ package authoring.interfaces;
 
 import authoring.gui.Selector;
 
-public interface FrontEndElementable extends Elementable {
-    public Elementable getElementable();
+public interface AuthoringElementable extends Elementable {
+    public EngineElementable getElementable();
     public void select(Selector selector);
 }

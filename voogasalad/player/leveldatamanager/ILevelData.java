@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import events.AnimationEvent;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -62,10 +62,10 @@ public interface ILevelData {
 
 	List<Sprite> getSpritesByArch(String archA);
 
-	Set<Entry<String, Elementable>> getElementables();
+	Set<Entry<String, EngineElementable>> getElementables();
 
     public Map<String,VoogaData> getGlobalVariables();
 	
 
-	Map<String, Elementable> getElements();
+	Map<String, EngineElementable> getElements();
 }
