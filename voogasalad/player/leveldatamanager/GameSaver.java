@@ -63,7 +63,6 @@ public class GameSaver implements IGameSaver {
 	public void saveCurrentProgress(String nameOfGame) {
 		String gameName = VoogaBundles.preferences.getProperty("GameName");
 		String playerName = VoogaBundles.preferences.getProperty("UserName");
-		System.out.println("The animation factory here is " + myAnimationFactory);
 		DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
 				myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap(),
 				myAnimationFactory.getMyAnimationEvents(),
@@ -80,5 +79,6 @@ public class GameSaver implements IGameSaver {
 		PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
 		latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(nameOfGame));
 		((StatCell) entry).updateProgress(playerName);
+		System.out.println("What is the current update progress" + ((StatCell) entry).checkProgress());
 	}
 }

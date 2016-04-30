@@ -222,6 +222,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
         myImage.setTranslateZ(myZ.doubleValue());
+        
+        myProperties.get(VoogaBundles.spriteProperties.getString("X_POS")).setValue(myLoc.getX());
+        myProperties.get(VoogaBundles.spriteProperties.getString("Y_POS")).setValue(myLoc.getY());
+       
 
         myImage.setFitWidth((double) myProperties
                 .get(VoogaBundles.spriteProperties.getString("WIDTH")).getValue());

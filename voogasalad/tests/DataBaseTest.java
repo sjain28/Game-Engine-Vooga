@@ -1,10 +1,16 @@
-package stats.database;
+package tests;
 
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
 
+import stats.database.CellEntry;
+import stats.database.PlaySession;
+import stats.database.StatCell;
+import stats.database.VoogaDataBase;
+import stats.database.VoogaGame;
+import stats.database.VoogaUser;
 import stats.interaction.CurrentSessionStats;
 
 public class DataBaseTest {

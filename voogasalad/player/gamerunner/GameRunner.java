@@ -127,14 +127,11 @@ public class GameRunner implements IGameRunner {
 		}
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			System.out.println("AN ENDPOINT HAS BEEN REACHED SO A WIN SCREEN SHOULD BE PULLED. typeis + " + myLevelMap.get(myLevelData.getNextLevelName()));
-			playLevel(myLevelData.getNextLevelName());
 			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
 				//TODO: Implement win screen
-				for (int i =0 ; i< 100000; i++){
-				System.out.println("AN ENDPOINT HAS BEEN REACHED SO A WIN SCREEN SHOULD BE PULLED");
-				}
 				LeaderBoard leaderBoard = new LeaderBoard(VoogaBundles.preferences.getProperty("GameName"));
 			}
+			playLevel(myLevelData.getNextLevelName());
 		}
 	}
 
@@ -184,6 +181,7 @@ public class GameRunner implements IGameRunner {
 		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
 		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
+		System.out.println("The level being played here is called " + fileName);
 	}
 
 	/**

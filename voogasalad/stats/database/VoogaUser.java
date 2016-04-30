@@ -10,6 +10,7 @@ public class VoogaUser extends CellEntry{
 	public static final String USER_NAME = "user_name";
 	public static final String PROF_PIC_LOC = "prof_pic_loc";
 	
+	
 	public VoogaUser(String displayname,String username, String password, String profPicLocation){
 		super();
 		myPassword = password;

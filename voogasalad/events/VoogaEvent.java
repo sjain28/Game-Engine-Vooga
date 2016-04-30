@@ -70,7 +70,7 @@ public class VoogaEvent {
 		List<Sprite> newSpriteList = new ArrayList<>();
 		newSpriteList.addAll(sprites);
 		myCauseSprites.addAll(newSpriteList);
-		System.out.println("added sprites to animation event " + getCauseSprites().size());
+//		System.out.println("added sprites to animation event " + getCauseSprites().size());
 	}
 
 	protected List<Sprite> getCauseSprites() {
