@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import stats.database.CellEntry;
 import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
@@ -42,15 +43,30 @@ public class LeaderBoards extends Stage {
 
     private void makeLeaders () {
         List<Pair<String, Double>> scores = new ArrayList<Pair<String, Double>>();
-        database.getStatsbyGame(game).stream().forEach(e -> ((StatCell) e).getPlayStats()
-                .stream().forEach(ee -> scores.add(new Pair<String, Double>(
-                                                                            ee.getProperty(StatCell.MY_USER)
-                                                                                    .getValue()
-                                                                                    .toString(),
-                                                                            Double.parseDouble(ee
-                                                                                    .getProperty(PlaySession.SCORE)
-                                                                                    .getValue()
-                                                                                    .toString())))));
+        
+        for(CellEntry c: database.getStatsbyGame(game)){
+            for(CellEntry e: ((StatCell) c).getPlayStats()){
+                scores.add(new Pair<String, Double>(
+                        e.getProperty(StatCell.MY_USER)
+                                .getValue()
+                                .toString(),
+                        Double.parseDouble(e
+                                .getProperty(PlaySession.SCORE)
+                                .getValue()
+                                .toString())));
+            }
+        }
+        
+        
+//        database.getStatsbyGame(game).stream().forEach(e -> ((StatCell) e).getPlayStats()
+//                .stream().forEach(ee -> scores.add(new Pair<String, Double>(
+//                                                                            ee.getProperty(StatCell.MY_USER)
+//                                                                                    .getValue()
+//                                                                                    .toString(),
+//                                                                            Double.parseDouble(ee
+//                                                                                    .getProperty(PlaySession.SCORE)
+//                                                                                    .getValue()
+//                                                                                    .toString())))));
         scores.sort(new ScoreCompare());
         for (int i = 0; i < 10; i++) {
             if (scores.get(i) != null) {
