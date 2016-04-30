@@ -37,6 +37,7 @@ import tools.VoogaAlert;
  *
  */
 public class DataBaseDisplay extends Stage {
+
 	private static final double HEADER_HEIGHT = 50;
 	private static final double HEADER_WIDTH = 700;
 	private static final double DATA_WIDTH = 700;

@@ -54,24 +54,6 @@ public class SpriteEffect extends VariableEffect{
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
 	}
-
-	// constructor with nothing- apply to all for which event supplies
-
-	public SpriteEffect(String variable, String method, Double parameter, VoogaEvent event) {
-		super(variable, method, parameter, event);
-		setNeedsSprites(true);
-	}
-
-	public SpriteEffect(String variable, String method, Boolean parameter, VoogaEvent event) {
-		super(variable, method, parameter, event);
-		setNeedsSprites(true);
-	}
-	
-	public SpriteEffect(String variable, String method, String parameter, VoogaEvent event) {
-		super(variable, method, parameter, event);
-		setNeedsSprites(true);
-	}
-
 	public SpriteEffect(String method, Double parameter, VoogaEvent event){
 		super(method, parameter, event);
 	}
@@ -124,8 +106,6 @@ public class SpriteEffect extends VariableEffect{
 		if (myArchetype != null){
 			effectString += myArchetype;
 		}
-		
-		// TODO: MAKE INTO SPRITE NAME, NOT ID
 		if (getSpriteID() != null){
 			effectString += " " + getSpriteID();
 		}
