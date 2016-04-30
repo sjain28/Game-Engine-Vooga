@@ -30,6 +30,12 @@ import resources.VoogaPaths;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
+/**
+ * Displays the mapping of levels to allow users to define transitions, entrypoints, and endpoints visually.
+ * 
+ * @author Aditya Srinivasan
+ *
+ */
 public class LevelCartographer extends Stage {
 
 	private static final String GAME_NAME = "GameName";
