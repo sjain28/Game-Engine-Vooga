@@ -17,7 +17,6 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
-import tools.NodeZAxisComparator;
 import tools.Pair;
 import tools.PairZAxisComparator;
 import tools.VoogaBoolean;
@@ -25,8 +24,8 @@ import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
- * A centralized class to contain and access data relevant to a level
- * This includes Sprite's, Text, Global Variables, and Events
+ * A centralized class to contain and access data relevant to a level includes 
+ * Sprites, Text, Global Variables, and Events
  * 
  * @author Krista, Hunter
  */
@@ -37,7 +36,6 @@ public class LevelData implements ILevelData {
     private Map<String, Elementable> myElements;
     private SpriteFactory mySpriteFactory;
     private AnimationFactory myAnimationFactory;
-
     private Map<String, VoogaData> myGlobalVariables;
     private KeyEventContainer myKeyEventContainer;
     private String myTimerKey;
@@ -140,6 +138,7 @@ public class LevelData implements ILevelData {
         List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
         for (Object key : myElements.keySet()) {
         	Boolean isStatic = false;
+        	//TODO: Replace this
 //        	if(myElements.get(key) instanceof Sprite) {
 //        		Sprite sprite = (Sprite) myElements.get(key);
 //        		if((Double) sprite.getVoogaProperties().get(VoogaBundles.spriteProperties.getString("MASS")).getProperty().getValue() > 10) {
@@ -167,15 +166,12 @@ public class LevelData implements ILevelData {
     	myElements = myTransitioner.populateNewSprites();
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
+    	//TODO: Anita: implement clearMap and setMap and call a stub
     	//mySpriteFactory.clearMap();
     	//mySpriteFactory.setMap(myTransitioner.getSpriteMap());
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
-		System.out.println(myElements);
     	myMainCharID = myTransitioner.getMainCharID();
-    	//myAnimationFactory.clearMaps();
-    	//myAnimationFactory.populateMaps();
     	myAnimationFactory = myTransitioner.getNewAnimationFactory();
-    	System.out.println(myAnimationFactory + " is the animation factory");
     }
     
     public String getNextLevelName() {
@@ -203,7 +199,6 @@ public class LevelData implements ILevelData {
      */
     public void saveProgress(String filePath) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-    	System.out.println("I SAVED HERE!!!!!!!!");
     	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory, myAnimationFactory);
     	saver.saveCurrentProgress(filePath);
     }
