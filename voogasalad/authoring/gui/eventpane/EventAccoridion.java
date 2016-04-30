@@ -123,6 +123,7 @@ public class EventAccoridion extends Tab {
         }
         catch (VoogaException e) {
             VoogaAlert va = new VoogaAlert(e.getMessage());
+            va.showAndWait();
         }
         return null;
     }

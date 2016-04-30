@@ -2,7 +2,7 @@ package authoring.model;
 
 import java.util.Map;
 import authoring.gui.Selector;
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
@@ -121,7 +121,7 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     }
     
     @Override
-    public EngineElementable getElementable () {
+    public Elementable getElementable () {
         return mySprite;
     }
 
@@ -135,6 +135,24 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     public void setName (String name) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void init () throws VoogaException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
     }
 
 }

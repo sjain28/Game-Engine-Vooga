@@ -61,7 +61,8 @@ public class GameObjectBuilder extends Builder {
         
         if (editor.getSpriteFactory().getAllArchetypeNames().contains(myName.getText()) ||
             editor.getMySpriteNames().contains(myName.getText())) {
-            new VoogaAlert("This name already exists");
+            VoogaAlert alert = new VoogaAlert("This name already exists");
+            alert.showAndWait();
             return;
         }
         

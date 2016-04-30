@@ -12,7 +12,7 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import data.DataContainerOfLists;
@@ -117,7 +117,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
      */
     @Override
     public void onSave () throws VoogaException {
-        List<EngineElementable> elements = new ArrayList<EngineElementable>();
+        List<Elementable> elements = new ArrayList<Elementable>();
 
         for (Node element : myGameElements) {
             if (element instanceof GameObject) {
@@ -175,15 +175,15 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         Collection<String> mySpriteNames = new HashSet<String>();
         
         for (Node e : myGameElements) {
-            mySpriteNames.add(((EngineElementable) e).getName());
+            mySpriteNames.add(((Elementable) e).getName());
         }
         return mySpriteNames;
     }
 
     public String getSpriteIdFromName (String name) throws VoogaException {
         for (Node e : myGameElements) {
-            if (((EngineElementable) e).getName().equals(name)) {
-                return ((EngineElementable) e).getId();
+            if (((Elementable) e).getName().equals(name)) {
+                return ((Elementable) e).getId();
             }
         }
         throw new VoogaException("Can't get Sprite from the name");
@@ -191,8 +191,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     
     public String getSpriteNameFromId (String id) throws VoogaException {
         for (Node e : myGameElements) {
-            if (((EngineElementable) e).getId().equals(id)) {
-                return ((EngineElementable) e).getName();
+            if (((Elementable) e).getId().equals(id)) {
+                return ((Elementable) e).getName();
             }
         }
         throw new VoogaException("Can't get Sprite from the id");
@@ -208,10 +208,10 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     @Override
-    public EngineElementable getVoogaElement (String id) {
+    public Elementable getVoogaElement (String id) {
         for (Node node : myGameElements) {
-            if (node instanceof EngineElementable) {
-                EngineElementable e = (EngineElementable) node;
+            if (node instanceof Elementable) {
+                Elementable e = (Elementable) node;
                 if (e.getId().equals(id)) {
                     return e;
                 }
@@ -242,7 +242,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         myIds = new HashSet<String>();
 
         for (Node e : elementableList) {
-            myIds.add(((EngineElementable) e).getId());
+            myIds.add(((Elementable) e).getId());
         }
     }
 

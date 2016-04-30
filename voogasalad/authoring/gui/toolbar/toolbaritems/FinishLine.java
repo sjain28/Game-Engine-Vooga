@@ -20,8 +20,8 @@ public class FinishLine extends ToolbarItemHandler {
     public void handle () {
     	FinishLinePrompt finishLinePrompt = new FinishLinePrompt();
     	finishLinePrompt.setProceedListener(e -> {
-    		manager.getGlobalVariables().put("EndX", new VoogaNumber(finishLinePrompt.getCoords().getFirst()));
-    		manager.getGlobalVariables().put("EndY", new VoogaNumber(finishLinePrompt.getCoords().getLast()));
+    		manager.getGlobalVariables().put(manager.getName() + "EndX", new VoogaNumber(finishLinePrompt.getCoords().getFirst()));
+    		manager.getGlobalVariables().put(manager.getName() + "EndY", new VoogaNumber(finishLinePrompt.getCoords().getLast()));
     		finishLinePrompt.close();
     	});
     	finishLinePrompt.show();

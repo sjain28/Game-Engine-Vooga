@@ -4,7 +4,6 @@ import authoring.interfaces.model.EditElementable;
 import authoring.model.VoogaFrontEndText;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import tools.VoogaAlert;
 
 
 public class TextObjectBuilder extends Builder {

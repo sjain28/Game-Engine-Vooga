@@ -9,7 +9,6 @@ import authoring.gui.items.SwitchButton;
 import authoring.gui.menubar.builders.PropertyBuilder;
 import authoring.gui.menubar.builders.TextObjectBuilder;
 import authoring.interfaces.Elementable;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.ButtonMaker;
@@ -201,7 +200,8 @@ public class GenericPropertiesTab extends Tab {
      */
     private boolean elementablePresent () {
         if (myElementable == null) {
-            new VoogaAlert(ppProperties.getString("NoSpriteError"));
+            VoogaAlert alert = new VoogaAlert(ppProperties.getString("NoSpriteError"));
+            alert.showAndWait();
             return false;
         }
         return true;

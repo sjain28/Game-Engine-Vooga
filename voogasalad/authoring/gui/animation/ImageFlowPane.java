@@ -45,7 +45,8 @@ public class ImageFlowPane extends FlowPane {
 			String imagePath = imageChooser.launch();
 			this.getChildren().add(positionToAdd, new Frame(imagePath));
 		} catch (VoogaException e) {
-			new VoogaAlert(INCORRECT);
+			VoogaAlert alert = new VoogaAlert(INCORRECT);
+			alert.showAndWait();
 		}
 	}
 	

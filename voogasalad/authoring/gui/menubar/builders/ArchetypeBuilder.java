@@ -80,7 +80,8 @@ public class ArchetypeBuilder extends Builder {
                 loadImage(path);
             }
             catch (Exception e1) {
-                new VoogaAlert(e1.getMessage());
+                VoogaAlert alert = new VoogaAlert(e1.getMessage());
+                alert.showAndWait();
             }
 
         });

@@ -37,7 +37,8 @@ public class DesignBoardHousing extends TabPane {
 				this.getTabs().add(new DesignBoard(elem));
 				elem.setName(preferences.getName());
 				} catch(Exception ee) {
-					new VoogaAlert("Please enter all preference values.");
+					VoogaAlert alert = new VoogaAlert("Please enter all preference values.");
+					alert.showAndWait();
 				}
 			});
 			this.getTabs().add(preferences);
