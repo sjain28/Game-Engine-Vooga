@@ -14,7 +14,7 @@ import tools.interfaces.VoogaData;
 public class BackEndText implements Elementable {
 
     private Map<String, VoogaData> myProperties;
-    private Map<String,VoogaData> initializationMap;
+    private Map<String, Object> initializationProperties;
     
     private String myId;
     private Position myLoc;
@@ -23,7 +23,7 @@ public class BackEndText implements Elementable {
     private transient Text text;
     
     private VoogaData displayedData;
-    private Map<String, Object> initializationProperties;
+    
     
     public BackEndText (String id) {
         myProperties = new HashMap<String,VoogaData>();
@@ -50,13 +50,11 @@ public class BackEndText implements Elementable {
 
     @Override
     public void addProperty (String name, VoogaData data) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeProperty (String name) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -72,7 +70,6 @@ public class BackEndText implements Elementable {
 
     @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -90,7 +87,6 @@ public class BackEndText implements Elementable {
         text = new Text();
         TextProperties tp = new TextProperties();
         tp.loadData(text, initializationProperties);
-
     }
     
     public void setDisplayedData(VoogaData data){

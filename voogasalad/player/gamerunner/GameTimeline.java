@@ -17,9 +17,9 @@ import javafx.util.Duration;
  */
 public class GameTimeline {
 	
-    private static final double INIT_SPEED = 60;
-    private static final double MILLISECOND_DELAY = 1000 / INIT_SPEED;
-    private static final double SPEEDCONTROL = 10;
+    private static final double FRAME_RATE = 60;
+    private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
+//    private static final double SPEEDCONTROL = 10;
     
 	private Timeline myTimeline;
 

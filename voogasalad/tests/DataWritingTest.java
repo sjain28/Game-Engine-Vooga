@@ -1,4 +1,4 @@
-package data;
+package tests;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import authoring.interfaces.Elementable;
+import data.DataContainerOfLists;
+import data.FileWriterFromGameObjects;
 import events.KeyCause;
 import events.VariableEffect;
 import events.VoogaEvent;
@@ -31,7 +33,7 @@ public class DataWritingTest {
 
 	@Before
 	public void setup(){
-		manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),generateEvents(), new HashMap<String,Sprite>());
+		//manager = new DataContainerOfLists(generateSprites(), generateGlobalVariables(),generateEvents(), new HashMap<String,Sprite>());
 //		manager.addButton(generateButtons());
 	//	System.out.println("My Button list here is " + manager.getButtonList());
 	}

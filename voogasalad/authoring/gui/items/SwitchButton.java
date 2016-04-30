@@ -12,7 +12,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 
 
-public class SwitchButton extends Label {
+public class SwitchButton extends Label{
     private SimpleBooleanProperty switchedOn;
 
     public SwitchButton (boolean on) {

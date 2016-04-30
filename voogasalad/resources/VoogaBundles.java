@@ -28,13 +28,17 @@ public class VoogaBundles {
 	public final static ResourceBundle textProperties = ResourceBundle.getBundle("resources/textproperties");
 	public final static ResourceBundle physicsEffectsToGUI = ResourceBundle.getBundle("resources/PhysicsEffectsToGUI");
 	public final static ResourceBundle GameDisplayProperties = ResourceBundle.getBundle("resources/GameDisplay");
+	public final static ResourceBundle exceptionProperties = ResourceBundle.getBundle("resources/exceptions");
 	public final static Properties preferences = makeProperties("preferences.properties");
 	public final static ResourceBundle EventMethods = ResourceBundle.getBundle("resources/EventMethods");
 	public final static ResourceBundle designboardProperties = ResourceBundle.getBundle("resources/designboard");
 	public final static ResourceBundle designboardPreferencesProperties = ResourceBundle.getBundle("resources/designboardpreferences");
 	public final static ResourceBundle eventswindowProperties = ResourceBundle.getBundle("resources/eventswindow");
 	public final static ResourceBundle propertiesPaneProperties = ResourceBundle.getBundle("resources/propertiesPane");
+	public final static ResourceBundle spriteProperties = ResourceBundle.getBundle("resources/spritepropertiesmaptags");
 	
+	public final static ResourceBundle causeNames = ResourceBundle.getBundle("resources/causes");
+	public final static ResourceBundle effectNames = ResourceBundle.getBundle("resources/effects");
 	private static Properties makeProperties(String path) {
 		try {
 			Properties props = new Properties();

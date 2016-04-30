@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import player.gamerunner.GameRunner;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
+import stats.database.VoogaDataBase;
 
 public class OpenCommand implements Command {
 
@@ -30,6 +31,7 @@ public class OpenCommand implements Command {
 			String name = ((Button) ee.getSource()).getId();
 			//set the current gamename to the game being played
 			VoogaBundles.preferences.setProperty("GameName", name);
+			VoogaDataBase.getInstance().checkThenAddIfNewGame(name, "dragons!!");
 			IGameRunner gameRunner = new GameRunner();
 	        gameRunner.playGame(name);
 		});

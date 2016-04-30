@@ -1,6 +1,5 @@
 package stats.database;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -33,6 +32,7 @@ public class StatCell extends CellEntry {
 		return Collections.unmodifiableList(myPlayStats);
 	}
 	public PlaySession getLatestPlaySession(){
+		System.out.println(myPlayStats.size());
 		if (myPlayStats.empty()){
 			return null;
 		}
