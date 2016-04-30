@@ -83,7 +83,8 @@ public class PropertyBuilder extends Builder {
 
     public String getName () {
         if (variableName.getText().equals("")) {
-            new VoogaAlert("Please input a variable name");
+            VoogaAlert alert = new VoogaAlert("Please input a variable name");
+            alert.showAndWait();
             return null;
         }
         return this.variableName.getText();

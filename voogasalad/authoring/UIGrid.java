@@ -57,7 +57,8 @@ public class UIGrid extends GridPane{
 			populate(false);
 		}
 		catch (VoogaException e) {
-			new VoogaAlert(e.getMessage());
+			VoogaAlert alert = new VoogaAlert(e.getMessage());
+			alert.showAndWait();
 		}
 
 	}
@@ -80,7 +81,8 @@ public class UIGrid extends GridPane{
 			populate(bypass);
 		}
 		catch (VoogaException e) {
-			new VoogaAlert(e.getMessage());
+			VoogaAlert alert = new VoogaAlert(e.getMessage());
+			alert.showAndWait();
 		}
 
 	}

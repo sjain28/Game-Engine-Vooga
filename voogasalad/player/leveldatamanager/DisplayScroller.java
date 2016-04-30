@@ -107,7 +107,8 @@ public class DisplayScroller implements IDisplayScroller {
 				return scrollSprite;
 			}
 		} catch (Exception e) {
-			new VoogaAlert("Please choose your tracking method.");
+			VoogaAlert alert = new VoogaAlert("Please choose your tracking method.");
+			alert.showAndWait();
 		}
 		return null;
 	}

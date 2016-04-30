@@ -65,7 +65,8 @@ public class EventWindow extends Stage{
             
         } catch (Exception e){
             ready=false;
-            new VoogaAlert(e.getMessage());
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
         
         

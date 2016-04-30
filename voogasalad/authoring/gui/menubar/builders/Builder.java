@@ -71,7 +71,8 @@ public abstract class Builder extends Stage {
     }
 
     protected void numberError (String s) {
-        new VoogaAlert(s);
+        VoogaAlert alert = new VoogaAlert(s);
+        alert.showAndWait();
     }
 
     public abstract void compile ();

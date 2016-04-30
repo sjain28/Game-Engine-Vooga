@@ -43,7 +43,8 @@ public class SoundEffectGUI implements EventGUI {
                 file.setText(fileChooser.launch());
             }
             catch (Exception e1) {
-                new VoogaAlert(e1.getMessage());
+                VoogaAlert alert = new VoogaAlert(e1.getMessage());
+                alert.showAndWait();
             }
         });
         

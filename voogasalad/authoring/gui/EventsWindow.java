@@ -110,7 +110,8 @@ public class EventsWindow extends TabPane implements Observer {
 				try {
 					c = myManager.getSpriteNameFromId(c);
 				} catch (VoogaException e) {
-					new VoogaAlert(eventsWindowProperties.getString("NoSpriteError"));
+					VoogaAlert alert = new VoogaAlert(eventsWindowProperties.getString("NoSpriteError"));
+					alert.showAndWait();
 					e.printStackTrace();
 				}
 			}

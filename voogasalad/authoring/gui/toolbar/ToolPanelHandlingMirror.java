@@ -23,10 +23,9 @@ public class ToolPanelHandlingMirror {
             handleEvent();
         }
         catch (VoogaException e1) {
-            // TODO Auto-generated catch block
-            new VoogaAlert(e1.getMessage());
+            VoogaAlert alert = new VoogaAlert(e1.getMessage());
+            alert.showAndWait();
         }
-//        System.out.println(toolbarEvent.getSource());
     }
 
     /**

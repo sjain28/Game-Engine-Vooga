@@ -151,7 +151,8 @@ public class GameRunner implements IGameRunner {
 			System.out.println("creating level map");
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
-			new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
+			VoogaAlert alert = new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
+			alert.showAndWait();
 		}
 		System.out.println("latest level reached: "+latestLevelReached+"hjkhlkjhljk");
 		System.out.println("level map outside of level reached:"+myLevelMap);

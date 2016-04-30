@@ -33,7 +33,8 @@ public class FileReaderToGameObjects {
             e.printStackTrace();
         }
         catch (VoogaException e) {
-            new VoogaAlert(e.getMessage());
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
     }
 
