@@ -31,6 +31,7 @@ public class LoginScreen extends Stage {
 	private TextField myMakePassword;
 	private TextField myLoginUsername;
 	private TextField myLoginPassword;
+	private String myImagePath;
 
 	public LoginScreen() {
 		myHouse = new TabPane();
@@ -41,7 +42,7 @@ public class LoginScreen extends Stage {
 		login.setContent(loginContent);
 		Tab user = new Tab("New User");
 		VBox userContent = new VBox();
-		userContent.getChildren().addAll(userInput(), userConfirm());
+		userContent.getChildren().addAll(userInput(), imageSelect(), userConfirm());
 		user.setContent(userContent);
 		myHouse.getTabs().addAll(login, user);
 		myHouse.setPrefSize(WIDTH, HEIGHT);
@@ -126,6 +127,32 @@ public class LoginScreen extends Stage {
 		input.setPrefHeight(HEIGHT / 2);
 
 		return input;
+	}
+
+
+	private HBox imageSelect(){
+	    HBox box = new HBox(TEXT_SPACING);
+	    box.setAlignment(Pos.CENTER);
+
+	    ImageView image = new ImageView();
+	    image.setPreserveRatio(true);
+	    image.setFitWidth(50);
+
+	    Button imageChooser = new ButtonMaker().makeButton("Picture", e -> {
+	        VoogaFileChooser fileChooser = new VoogaFileChooser();
+	        try {
+	            myImagePath = fileChooser.launch();
+	            image.setImage(new Image("file:" + myImagePath));
+
+	        }
+	        catch (Exception e1) {
+	            new VoogaAlert(e1.getMessage());
+	        }
+
+	    });
+
+	    box.getChildren().addAll(image, imageChooser);
+	    return box;
 	}
 
 }

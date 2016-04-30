@@ -73,15 +73,16 @@ public class DataBaseDisplay extends Stage {
     private Node makeTabs () {
         TabPane ans = new TabPane();
         GraphMaker graphMaker = new GraphMaker();
-        Tab playsScore = new Tab("Score on Game");
-        //TODO: add in playsScore content
-        Tab playsTime = new Tab("Time Spent on Game");
-        //TODO: add in playsScore content
-        Tab highScore = new Tab("High Scores");
-        //TODO: add in playsScore content
-        ans.getTabs().addAll(playsScore, playsTime, highScore);
+        Tab plotMaker = new Tab("Plot Maker");
+        plotMaker.setContent(infoOptions());
+        ans.getTabs().addAll(plotMaker);
         ans.setPrefWidth(DATA_WIDTH * 3 / 4);
         return ans;
+    }
+
+    private VBox infoOptions () {
+       VBox scene = new VBox();
+       return scene;
     }
 
     private Node makeLists () {
