@@ -4,6 +4,9 @@ import java.util.Arrays;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
+/**
+ * Utilities for the graphic unit interface
+ */
 public class GUIUtils {
 	
 	private static final double SPACING = 10;

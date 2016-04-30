@@ -92,7 +92,7 @@ public class LevelData implements ILevelData {
         }
         return list;
     }
-    public AnimationEvent getAnimationFromFactory(String animationString){
+    public AnimationEvent getAnimationFromFactory(String animationString){    	
     	if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
     		List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
     		return clonedSequence.get(0);

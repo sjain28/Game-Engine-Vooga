@@ -2,7 +2,9 @@ package tools.bindings;
 
 import resources.VoogaBundles;
 
-
+/**
+ * All properties that text can have in game
+ */
 public class TextProperties extends NodeProperties {
 
     Double opacity;

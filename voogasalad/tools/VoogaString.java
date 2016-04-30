@@ -7,7 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import tools.interfaces.VoogaData;
 
-
+/**
+ * String methods within the salad
+ */
 public class VoogaString implements VoogaData {
     private String myValue;
     private transient SimpleStringProperty valueProperty;
@@ -21,6 +23,9 @@ public class VoogaString implements VoogaData {
         initializeProperty();
     }
 
+    /**
+     * Initialize a string with value and listener
+     */
     private void initializeProperty () {
         if (valueProperty != null) return;
         
@@ -32,20 +37,31 @@ public class VoogaString implements VoogaData {
         });
     }
 
+    /**
+     * Return a string as a node in the salad
+     */
     @Override
     public Node display () {
-        // TODO Auto-generated method stub
         TextField field = new TextField();
         
         Bindings.bindBidirectional(field.textProperty(),getProperty());
         
-        System.out.println("myValue for string: "+myValue);
         field.setText(myValue);
-        System.out.println("String fields text: "+field.getText());
         return field;
     }
-
-    @Override
+    
+    /**
+     * Redundantly return a string as a string?
+     */
+    public String toString () {
+        return myValue;
+    }
+    
+    /**
+     * Getters and setters below
+     */
+    @SuppressWarnings("unchecked")
+	@Override
     public Property<String> getProperty () {
         initializeProperty();
         return this.valueProperty;
@@ -67,9 +83,5 @@ public class VoogaString implements VoogaData {
         if (!(o instanceof String))
             return;
         myValue = (String) o;
-    }
-    
-    public String toString () {
-        return myValue;
     }
 }

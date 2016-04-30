@@ -16,8 +16,10 @@ public class AnimationFactory {
 	private Map<String, List<AnimationEvent>> myAnimationSequences;
 
 	public AnimationFactory () {
-		myAnimationEvents = new HashMap<String, AnimationEvent>();
-		myPaths = new HashMap<String, List<Double[]>>();
+		myAnimationEvents = new HashMap<>();
+		myPaths = new HashMap<>();
+		myAnimationSequences = new HashMap<>();
+		myPaths = new HashMap<>();
 	}
 
 	private static class SingletonHolder {
@@ -32,6 +34,7 @@ public class AnimationFactory {
 		System.out.println("making animation event");
 		AnimationEvent newEvent = new AnimationEvent(name, duration);
 		myAnimationEvents.put(name, newEvent);
+		System.out.println("Event map size: " + myAnimationEvents.size());
 		return newEvent;
 	}
 
@@ -57,9 +60,10 @@ public class AnimationFactory {
 	public void addPath (String name, Double[] xCoord, Double[] yCoord) {
 		myPaths.put(name, new ArrayList<Double[]>(Arrays.asList(xCoord, yCoord)));
 	}
-	// TODO: make image animation effect
-	// TODO: make scale animation effect
+
 	public AnimationEvent cloneAnimationEvent (String eventName) {
+		System.out.println("Events map size during cloning" + myAnimationEvents.size());
+		System.out.println("Event name during cloning " + eventName);
 		return myAnimationEvents.get(eventName).clone();
 	}
 

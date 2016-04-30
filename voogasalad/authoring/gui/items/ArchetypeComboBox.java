@@ -2,7 +2,6 @@ package authoring.gui.items;
 
 import authoring.interfaces.model.EditEventable;
 
-
 public class ArchetypeComboBox extends SpriteComboBox {
 
     public ArchetypeComboBox (EditEventable manager) {
