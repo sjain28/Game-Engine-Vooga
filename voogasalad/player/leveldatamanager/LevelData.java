@@ -24,8 +24,7 @@ import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
- * A centralized class to contain and access data relevant to a level includes 
- * Sprites, Text, Global Variables, and Events
+ * A centralized class to contain and access data including Sprites, Text, Global Variables, and Events
  * 
  * @author Krista, Hunter
  */
@@ -43,6 +42,10 @@ public class LevelData implements ILevelData {
     private LevelTransitioner myTransitioner;
     private ResourceBundle myEventMethods;
     
+    /**
+     * Default constructor that takes in an instance of a physics module
+     * @param physicsengine
+     */
     public LevelData (IPhysicsEngine physicsengine) {
         myEventMethods = VoogaBundles.EventMethods;
         myKeyEventContainer = new KeyEventContainer();
@@ -52,28 +55,7 @@ public class LevelData implements ILevelData {
         myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
         myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
     } 
-    /**
-     * Returns sprite by it's ID
-     */
-    public Sprite getSpriteByID (String id) {
-        return (Sprite) myElements.get(id);
-    }
-    public Boolean containsSprite(String id){
-    	return myElements.containsKey(id);
-    }
-    /**
-     * Removes sprite by it's ID
-     */
-    public void removeSpriteByID(String id) {
-    	myElements.remove(id);
-    }
-    /**
-     * returns all Elementables
-     * @return
-     */
-    public Set<Entry<String, Elementable>> getElementables() {
-    	return myElements.entrySet();
-    }
+
     /**
      * Returns a list of sprite IDs given an archetype
      * @param archetype
@@ -90,6 +72,10 @@ public class LevelData implements ILevelData {
         }
         return list;
     }
+    
+    /**
+     * Returns animation created by AnimationFactory
+     */
     public AnimationEvent getAnimationFromFactory(String animationString){    	
     	if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
     		List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
@@ -98,6 +84,7 @@ public class LevelData implements ILevelData {
     		return myAnimationFactory.cloneAnimationEvent(animationString);
     	}
     }
+    
     /**
      * Adds a sprite as a member of the given archetype
      * @param archetype
@@ -108,6 +95,7 @@ public class LevelData implements ILevelData {
         myElements.put(newSprite.getId(), newSprite);
         return (Sprite) newSprite;
     }
+    
     /**
      * Returns a Global Variable (VoogaData) as specified by its variable name
      * @param variable
@@ -116,12 +104,7 @@ public class LevelData implements ILevelData {
     public VoogaData getGlobalVar(String variable) {
         return myGlobalVariables.get(variable);
     }
-    /**
-     * Returns the centered sprite
-     */
-    public Sprite getMainSprite() {
-    	return getSpriteByID(myMainCharID);
-    }
+
     /**
      * Returns a text object by ID
      * @param id
@@ -130,8 +113,9 @@ public class LevelData implements ILevelData {
     public VoogaFrontEndText getText(Object id) {
         return (VoogaFrontEndText) myElements.get(id);
     }
+    
     /**
-     * Put all objects into a generic list of displayable objects
+     * Put all objects into a pair of displayable objects
      * @return
      */
     public List<Pair<Node, Boolean>> getDisplayableNodes() {
@@ -150,12 +134,14 @@ public class LevelData implements ILevelData {
         displayablenodes.sort(new PairZAxisComparator());
         return displayablenodes;
     }
+    
     /**
      * Add a given event and populate the pressed and released KeyCombos
      */
     public void addEventAndPopulateKeyCombos(VoogaEvent event) {
     	myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
     }
+    
     /**
      * Refreshes the data and restarts timer in global variable and sets level path TODO: where??
      * @param levelfilename
@@ -174,19 +160,6 @@ public class LevelData implements ILevelData {
     	myAnimationFactory = myTransitioner.getNewAnimationFactory();
     }
     
-    public String getNextLevelName() {
-        return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
-    }
-    public boolean getSaveNow() {
-       return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
-    }
-    /**
-     * Set the next level name in order to transition levels
-     * @param levelName
-     */
-    public void setNextLevelName(String levelName) {
-        myGlobalVariables.put(myNextLevelKey, new VoogaString(levelName));
-    }
     /**
      * Update the global timer double
      * @param time
@@ -194,6 +167,7 @@ public class LevelData implements ILevelData {
     public void updatedGlobalTimer(double time) {
         myGlobalVariables.get(myTimerKey).setValue(new Double(time));
     }
+    
     /**
      * Saves current game progress into a XML file
      */
@@ -202,29 +176,53 @@ public class LevelData implements ILevelData {
     	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory, myAnimationFactory);
     	saver.saveCurrentProgress(filePath);
     }
-    /**
-     * Returns the game's physics engine
-     */
+    
+    public String getNextLevelName() {
+        return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
+    }
+    
+    public boolean getSaveNow() {
+       return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
+    }
+
+    public void setNextLevelName(String levelName) {
+        myGlobalVariables.put(myNextLevelKey, new VoogaString(levelName));
+    }
+
+    public Sprite getSpriteByID (String id) {
+        return (Sprite) myElements.get(id);
+    }
+    
+    public void removeSpriteByID(String id) {
+    	myElements.remove(id);
+    }
+    
+    public Boolean containsSprite(String id){
+    	return myElements.containsKey(id);
+    }
+    
+    public Sprite getMainSprite() {
+    	return getSpriteByID(myMainCharID);
+    }
+    
     public IPhysicsEngine getPhysicsEngine() {
         return myPhysics;
     }
-	/**
-	 * @return the myKeyEventContainer
-	 */
+
 	public KeyEventContainer getKeyEventContainer() {
 		return myKeyEventContainer;
 	}
-	/**
-	 * @return the myGlobalVariables
-	 */
+
 	public Map<String, VoogaData> getGlobalVariables() {
 		return myGlobalVariables;
 	}
-	/**
-	 * @return the myElements
-	 */
+
 	@Override
 	public Map<String, Elementable> getElements() {
 		return myElements;
 	}
+
+    public Set<Entry<String, Elementable>> getElementables() {
+    	return myElements.entrySet();
+    }
 }
