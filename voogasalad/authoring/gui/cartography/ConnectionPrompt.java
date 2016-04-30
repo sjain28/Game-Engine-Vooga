@@ -2,11 +2,14 @@ package authoring.gui.cartography;
 
 import java.util.List;
 
+import org.codehaus.groovy.runtime.ArrayUtil;
+
 import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.resourceutility.ButtonMaker;
 import events.Cause;
+import groovy.json.internal.ArrayUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import tools.GUIUtils;
 
 public class ConnectionPrompt extends Stage {
 
@@ -39,19 +43,12 @@ public class ConnectionPrompt extends Stage {
 		addCond.setDisable(start == null || end == null);
 		container = new VBox();
 		container.setAlignment(Pos.CENTER);
-		container.getChildren().addAll(makeRow(new CustomText("Start:", FontWeight.BOLD), new CustomText(startLevel)),
-				makeRow(new CustomText("End:", FontWeight.BOLD), new CustomText(endLevel)), makeRow(addCond),
+		container.getChildren().addAll(GUIUtils.makeRow(new CustomText("Start:", FontWeight.BOLD), new CustomText(startLevel)),
+				GUIUtils.makeRow(new CustomText("End:", FontWeight.BOLD), new CustomText(endLevel)), GUIUtils.makeRow(addCond),
 				causeList);
 		Scene scene = new VoogaScene(container, 300, 300);
 		this.setScene(scene);
 		this.show();
-	}
-
-	private HBox makeRow(Node... nodes) {
-		HBox row = new HBox(SPACING);
-		row.setAlignment(Pos.CENTER);
-		row.getChildren().addAll(nodes);
-		return row;
 	}
 
 }

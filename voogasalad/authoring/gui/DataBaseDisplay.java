@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import authoring.VoogaScene;
+import authoring.resourceutility.ButtonMaker;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
@@ -27,6 +28,7 @@ import stats.database.VoogaDataBase;
 import stats.database.VoogaGame;
 import stats.database.VoogaUser;
 import stats.visualization.StatsVisualizer;
+import tools.GUIUtils;
 import tools.VoogaAlert;
 
 /**
@@ -63,7 +65,7 @@ public class DataBaseDisplay extends Stage {
 	}
 
 	private HBox makeHeader() {
-		HBox ans = new HBox(20);
+		HBox ans;
 		ImageView pict = new ImageView();
 		try {
 			pict = user.displayProfilePicture();
@@ -74,7 +76,7 @@ public class DataBaseDisplay extends Stage {
 		Text t = new Text(user.getProperty(VoogaUser.DISPLAY_NAME).toString());
 		t.setFill(Color.WHITE);
 		t.setFont(Font.font(30));
-		ans.getChildren().addAll(pict, t);
+		ans = GUIUtils.makeRow(pict, t);
 		ans.setAlignment(Pos.BASELINE_LEFT);
 		ans.setPrefSize(HEADER_WIDTH, HEADER_HEIGHT);
 		return ans;
@@ -105,7 +107,6 @@ public class DataBaseDisplay extends Stage {
 	}
 
 	private HBox dataSelector(String label) {
-		HBox data = new HBox(15);
 		Text t = new Text(label);
 		t.setFill(Color.WHITE);
 
@@ -119,21 +120,17 @@ public class DataBaseDisplay extends Stage {
 			alert.showAndWait();
 		}
 
-		Button set = new Button("Set");
+		Button set = new ButtonMaker().makeButton("Set", e -> {
+			// TODO: THIS IS BAD CODING... CHANGE
+			if (label.contains("X")) {
+					nextX = cellData.getValue();
+			}
+			if (label.contains("Y")) {
+					nextY = cellData.getValue();
+			}
+		});
 
-		// TODO: THIS IS BAD CODING... CHANGE
-		if (label.contains("X")) {
-			set.setOnAction(e -> {
-				nextX = cellData.getValue();
-			});
-		}
-		if (label.contains("Y")) {
-			set.setOnAction(e -> {
-				nextY = cellData.getValue();
-			});
-		}
-		data.getChildren().addAll(t, cellData, set);
-		return data;
+		return GUIUtils.makeRow(t, cellData, set);
 	}
 
 	private void makeNewTab(String xProp, String yProp) {

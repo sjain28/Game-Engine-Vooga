@@ -14,6 +14,7 @@ import stats.database.CellEntry;
 import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import tools.GUIUtils;
 import tools.Pair;
 import tools.ScoreCompare;
 
@@ -63,14 +64,14 @@ public class LeaderBoards extends Stage {
     }
 
     private HBox makeHox (String n, Double s) {
-        HBox ans = new HBox(20);
+        HBox ans;
         Text name = new Text(n);
         name.setFill(Color.WHITE);
 
         Text score = new Text(s.toString());
         score.setFill(Color.WHITE);
 
-        ans.getChildren().addAll(name, score);
+        ans = GUIUtils.makeRow(name, score);
         ans.setAlignment(Pos.BASELINE_CENTER);
         return ans;
     }
