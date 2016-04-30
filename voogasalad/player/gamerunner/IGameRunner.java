@@ -25,6 +25,8 @@ public interface IGameRunner extends Menuable{
 	void takeSnapShot();
 	
 	void finishPlaySession();
+	
+	void replayLevel();
 
 	Timeline getTimeline();
 }
