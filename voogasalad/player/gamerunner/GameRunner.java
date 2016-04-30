@@ -22,7 +22,6 @@ import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
 import player.leveldatamanager.EventManager;
-import player.leveldatamanager.IDisplayScroller;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
@@ -63,8 +62,6 @@ public class GameRunner implements IGameRunner {
 	private boolean playSessionActive;
 	private String myCurrentLevelString;
 	private DisplayScroller myScroller;
-	//private List<BufferedImage> videoScreenshots;
-	// TODO: Test
 	private int myCurrentStep;
 	private CurrentSessionStats myStats;
 	private double myLevelReached;
