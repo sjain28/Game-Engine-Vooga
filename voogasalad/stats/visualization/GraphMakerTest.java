@@ -31,11 +31,11 @@ public class GraphMakerTest extends Application {
 		
 		//fill up the x-params and y-params
 		//fillArrays4(xparams,yparams);
-
+		VoogaDataBase.getInstance().printDataBase();
 		
 		GraphMaker statsvisualizer = new GraphMaker();
 		StatsVisualizer visualizer = new StatsVisualizer();
-		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("testergame", "klo14");
+		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("testergame3", "klo14");
 		List<CellEntry> list = ((StatCell) statinfo).getAuthorStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
 		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
