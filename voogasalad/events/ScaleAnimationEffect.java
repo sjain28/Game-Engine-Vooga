@@ -46,4 +46,7 @@ public class ScaleAnimationEffect extends SpriteEffect {
 			}
 		}
 	}
+	protected ScaleAnimationEffect clone(AnimationEvent event){
+		return new ScaleAnimationEffect(mySizeScale, event);
+	}
 }

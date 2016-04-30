@@ -44,16 +44,4 @@ public class FileReaderToGameObjects {
     public DataContainerOfLists getDataContainer () {
         return data;
     }
-    
-    public Map<String, AnimationEvent> getAnimationEvents(){
-    	return data.getAnimations();
-    }
-    
-    public Map<String, List<Double[]>> getPaths(){
-    	return data.getPaths();
-    }
-    
-    public Map<String, List<AnimationEvent>> getSequences(){
-    	return data.getSequences();
-    }
 }
