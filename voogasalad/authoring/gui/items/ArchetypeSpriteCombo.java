@@ -86,10 +86,10 @@ public class ArchetypeSpriteCombo extends Observable {
     
     public String getDetails(){
         String result ="";
-        if (spriteComboBox instanceof ArchetypeComboBox && effect){
-            result=needsSprites.getValue()+",";
-        }
         result+=spriteComboBox.getSpriteId();
+        if (spriteComboBox instanceof ArchetypeComboBox && effect){
+            result=result+","+needsSprites.getValue();
+        }
         return result;
     }
     
