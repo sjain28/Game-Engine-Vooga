@@ -41,7 +41,8 @@ public class StandardDisplay implements IGameDisplay {
 	private List<KeyEvent> myKeyEvents;
 	private List<KeyEvent> myKeyPresses;
 	private List<KeyEvent> myKeyReleases;
-
+	private Pair<Double, Double> myDimensions;
+	
 	/**
 	 * Overloaded constructor to set the reference to GameRunner
 	 */
@@ -141,7 +142,13 @@ public class StandardDisplay implements IGameDisplay {
 
 	@Override
 	public void setSceneDimensions(double width, double height) {
+		myDimensions = new Pair<>(width, height);
 		myScene = new VoogaScene(myPane, width, height);
+	}
+	
+	@Override
+	public Pair<Double, Double> getDimensions() {
+		return this.myDimensions;
 	}
 
 	@Override

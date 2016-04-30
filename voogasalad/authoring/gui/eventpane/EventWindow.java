@@ -80,7 +80,8 @@ public class EventWindow extends Stage {
             System.out.println("EventDetails-EventWindow: "+eventDetails);
             eventFactory.create(event, eventDetails);
         } catch (Exception e){
-            throw e;
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
     }
     private void cancel(){
