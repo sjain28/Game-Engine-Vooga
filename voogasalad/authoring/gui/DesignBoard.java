@@ -13,7 +13,7 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.CustomText;
 import authoring.gui.menubar.builders.GameObjectBuilder;
-import authoring.interfaces.FrontEndElementable;
+import authoring.interfaces.AuthoringElementable;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
@@ -299,7 +299,7 @@ public class DesignBoard extends Tab implements Observer {
             displayElements(((CompleteAuthoringModelable) o).getElements());
         }
 
-        if ((o instanceof ElementSelectionModel) && (arg instanceof FrontEndElementable)) {
+        if ((o instanceof ElementSelectionModel) && (arg instanceof AuthoringElementable)) {
             for (Node e : contentPane.getChildren()) {
                 System.out.println(e);
             }

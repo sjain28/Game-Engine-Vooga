@@ -2,16 +2,18 @@ package gameengine;
 
 import java.util.HashMap;
 import java.util.Map;
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
+import resources.VoogaBundles;
 import tools.Position;
+import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
 
 
-public class BackEndText implements Elementable {
+public class BackEndText implements EngineElementable {
 
     private Map<String, VoogaData> myProperties;
     private Map<String, Object> initializationProperties;
@@ -27,6 +29,7 @@ public class BackEndText implements Elementable {
     
     public BackEndText (String id) {
         myProperties = new HashMap<String,VoogaData>();
+        myProperties.put(VoogaBundles.textMapProperties.getString("STATIC"), new VoogaBoolean(false));
         myId = id;
 
     }
@@ -50,12 +53,13 @@ public class BackEndText implements Elementable {
 
     @Override
     public void addProperty (String name, VoogaData data) {
-
+        myProperties.put(name, data);
     }
 
     @Override
     public void removeProperty (String name) {
-
+        if (!myProperties.keySet().contains(name)) return;
+        myProperties.remove(name);
     }
 
     @Override
@@ -70,7 +74,7 @@ public class BackEndText implements Elementable {
 
     @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-
+        this.myProperties = newVoogaProperties;
     }
 
     @Override
