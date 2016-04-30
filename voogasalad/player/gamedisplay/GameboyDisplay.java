@@ -29,8 +29,6 @@ import tools.Pair;
  */
 public class GameboyDisplay implements IGameDisplay {
 
-	private static final int PANE_WIDTH = 1200;
-	private static final int PANE_HEIGHT = 800;
 	private static final String BGM_PATH = "resources/sound/hypnotize.mp3";
 	private static final String CSS_PATH = "/player/gamedisplay/style.css";
 
@@ -78,21 +76,11 @@ public class GameboyDisplay implements IGameDisplay {
 		myControl = new StandardControl(getGameRunner());
 		myHUD = new StandardHUD(getGameRunner());
 		myStage = new Stage();
-	//	myPane = new BorderPane();
 		myPane = new AnchorPane();
 
 		myPane.setId("bp");
-		
-//		image = new Image ("http://wall.rimbuz.com/wp-content/uploads/Black-Texture-Wallpaper-High-Definition.jpg");
-//        myPane.setBackground(new Background(new BackgroundImage(image,BackgroundRepeat.REPEAT,
-//                BackgroundRepeat.REPEAT,
-//                BackgroundPosition.DEFAULT,
-//                BackgroundSize.DEFAULT)));
-		
+
 		myGameScreen = new Pane();
-		//myGameScreen.setPrefSize(280, 370);
-//		myGameScreen.setLayoutX(400);
-//		myGameScreen.setLayoutY(200);
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
@@ -140,13 +128,9 @@ public class GameboyDisplay implements IGameDisplay {
 	 */
 	@Override
 	public void display() {
-		//Creates the main pane
 		createPane();
-		//Shows the scene
 		getStage().show();
-		//Adds keyinput listener
 		getScene().addEventHandler(KeyEvent.ANY, keyListener);
-		//Plays BGM music
 		playMusic();
 	}
 
