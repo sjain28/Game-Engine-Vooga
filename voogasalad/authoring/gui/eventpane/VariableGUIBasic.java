@@ -16,11 +16,12 @@ import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
+
 public abstract class VariableGUIBasic implements EventGUI {
 
-	private static final String GLOBAL = "global";
-	private static final String LOCAL = "local";
-	
+    private static final String GLOBAL = "global";
+    private static final String LOCAL = "local";
+
     private ComboBox<String> level;
     private ArchetypeSpriteCombo name;
     private VariableComboBox variables;
@@ -31,7 +32,7 @@ public abstract class VariableGUIBasic implements EventGUI {
     private VBox node;
     private EventParts type;
     private ResourceBundle bundle;
-    
+
     public VariableGUIBasic (EditEventable elementManager, EventParts type) {
         this.elementManager = elementManager;
         node = new VBox();
@@ -42,11 +43,11 @@ public abstract class VariableGUIBasic implements EventGUI {
     protected void initialize () {
         level = new ComboBox<>();
         level.getItems().addAll(GLOBAL, LOCAL);
-        
-        name = new ArchetypeSpriteCombo(elementManager, node, e -> onNameSelected(),true);
+
+        name = new ArchetypeSpriteCombo(elementManager, node, e -> onNameSelected(), true);
         variables = new VariableComboBox(elementManager);
         actions = new ComboBox<>();
-        
+
         setChangeListeners();
         addGUIElements(level);
     }
@@ -70,7 +71,7 @@ public abstract class VariableGUIBasic implements EventGUI {
                 name.display();
             }
         });
-        
+
         variables.setOnAction(e -> {
             removeInactiveNodes(actions, amount);
             actions.getItems().clear();
@@ -112,26 +113,27 @@ public abstract class VariableGUIBasic implements EventGUI {
         }
 
     }
-    
-    protected abstract Collection<String> voogaNumberProperties();
-    protected abstract Collection<String> voogaProperties();
-    
+
+    protected abstract Collection<String> voogaNumberProperties ();
+
+    protected abstract Collection<String> voogaProperties ();
+
     private void resetNode () {
         node.getChildren().clear();
     }
-    
+
     @Override
     public Node display () {
         return node;
     }
-    
-    public String getDetails(){
+
+    public String getDetails () {
         String result = "";
         if (level.getValue().contains(GLOBAL)) {
-            result += "events.Variable"+type.toString()+",";
+            result += "events.Variable" + type.toString() + ",";
         }
         if (level.getValue().contains(LOCAL)) {
-            result += "events.Sprite"+type.toString()+"," + name.getDetails() + ",";
+            result += "events.Sprite" + type.toString() + "," + name.getDetails() + ",";
         }
         result += variables.getValue() +
                   "," + VoogaBundles.EventMethods.getString(actions.getValue()) + ",";
@@ -145,4 +147,3 @@ public abstract class VariableGUIBasic implements EventGUI {
         return result;
     }
 }
-
