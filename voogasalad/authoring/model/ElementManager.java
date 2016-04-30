@@ -90,6 +90,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public Node getElement (String id) {
+        System.out.println("id activated: "+id);
         for (Node node : myGameElements) {
             if (node.getId().equals(id)) {
                 return node;

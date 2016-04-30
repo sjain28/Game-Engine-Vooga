@@ -40,7 +40,7 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
 
     public VoogaFrontEndText (BackEndText backtext) throws VoogaException {
         this.backEndText = backtext;
-        
+        this.setId(backtext.getId());
         create();
         initializeMap();
         this.setOpacity(1);
