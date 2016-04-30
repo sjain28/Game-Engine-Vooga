@@ -36,7 +36,7 @@ public class VoogaBundles {
 	public final static ResourceBundle eventswindowProperties = ResourceBundle.getBundle("resources/eventswindow");
 	public final static ResourceBundle propertiesPaneProperties = ResourceBundle.getBundle("resources/propertiesPane");
 	public final static ResourceBundle spriteProperties = ResourceBundle.getBundle("resources/spritepropertiesmaptags");
-	public final static ResourceBundle textMapProperties = ResourceBundle.getBundle("resource/textpropertiesmaptags");
+	public final static ResourceBundle textMapProperties = ResourceBundle.getBundle("resources/textpropertiesmaptags");
 	public final static ResourceBundle fileLocationProperties = ResourceBundle.getBundle("resources/filelocations");
 	
 	public final static ResourceBundle causeNames = ResourceBundle.getBundle("resources/causes");

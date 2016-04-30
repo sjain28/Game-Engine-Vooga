@@ -29,7 +29,7 @@ public class BackEndText implements EngineElementable {
     
     public BackEndText (String id) {
         myProperties = new HashMap<String,VoogaData>();
-        myProperties.put(VoogaBundles.textMapProperties.getString("Static"), new VoogaBoolean(false));
+        myProperties.put(VoogaBundles.textMapProperties.getString("STATIC"), new VoogaBoolean(false));
         myId = id;
 
     }

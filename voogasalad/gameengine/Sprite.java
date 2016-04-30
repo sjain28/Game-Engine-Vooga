@@ -74,8 +74,6 @@ public class Sprite implements Moveable, Effectable, EngineElementable {
 
         initializeAlive();
         initializeDimensions(myImage.getFitWidth(), myImage.getFitHeight());
-        System.out.println("image path after initialization: " + properties
-                .get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue());
     }
 
     private void initializeAlive () {
