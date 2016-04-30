@@ -16,6 +16,8 @@ import javafx.stage.Stage;
  */
 public interface IGameDisplay {
 	
+//	void readAndPopulate(List<Node> listToDisplayMoving ,List<Node> listToDisplayFixed);
+	
 	void readAndPopulate(List<Node> listToDisplay);
 	
 	void display();
