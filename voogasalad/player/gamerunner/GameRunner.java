@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import authoring.gui.cartography.LevelType;
@@ -81,6 +82,7 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 		myStats = new CurrentSessionStats();
+		myLevelMap = new HashMap<String,LevelType>();
 	}
 
 	/**
