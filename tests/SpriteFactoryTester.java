@@ -1,4 +1,4 @@
-package gameengine.test;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 

@@ -38,7 +38,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private Map<String, VoogaData> myProperties;
     private String myArchetype;
     private String previousImage;
-    private String myImagePath;
 
     private transient ImageView myImage;
     private transient SimpleDoubleProperty myX;
@@ -50,7 +49,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private transient SimpleBooleanProperty myAlive;
 
     private Map<String, Object> initializationProperties;
-
+    
+    private static final int RESIZE_FACTOR = 2;
+    
     public Sprite (String imagePath,
                    String archetype,
                    Map<String, VoogaData> properties,
@@ -91,7 +92,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private void initializeImage (String path) {
         VoogaString imagePathString = new VoogaString(path);
 
-        myImagePath = path;
         previousImage = path;
 
         myProperties.put(VoogaBundles.spriteProperties.getString("IMAGE_PATH"), imagePathString);
@@ -113,7 +113,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
     public void setImagePath (String path) {
         myImagePathProperty.set(path);
-        Image image = null;
+        Image image;
 
         if (myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue()
                 .toString().contains("file:")) {
@@ -219,8 +219,8 @@ public class Sprite implements Moveable, Effectable, Elementable {
         myVelocity.addY(myAcceleration.getY());
         
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
-        myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
-        myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
+        myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / RESIZE_FACTOR);
+        myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / RESIZE_FACTOR);
         myImage.setTranslateZ(myZ.doubleValue());
 
         myImage.setFitWidth((double) myProperties
@@ -250,9 +250,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
      */
 
     public void init () throws VoogaException {
-        if (myImage != null)
+        if (myImage != null) {
             return;
-        System.out.println("Initializing:");
+        }
         ImageProperties imageProperties = new ImageProperties();
         for (String key : myProperties.keySet()) {
             System.out.println(key + " " + myProperties.get(key).getValue().toString());
@@ -295,7 +295,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     public void setProperties (Map<String, VoogaData> properties) {
-        myProperties = new HashMap<String, VoogaData>(properties);
+        myProperties = new HashMap<>(properties);
     }
 
     public HashMap<String, VoogaData> getPropertiesMap () {

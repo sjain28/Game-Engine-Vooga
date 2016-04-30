@@ -40,15 +40,9 @@ public class BuggyPhysics implements IPhysicsEngine {
 		return Math.abs(number.doubleValue()) - numToCompare < ERROR;
 	}
 
-	
-	@Deprecated
-	private double myFrameTime;
-
-
 	@Override
 	public void translateX(Sprite sprite, Double change) {
 		sprite.getVelocity().setX(change * REDUCE_FACTOR);
-		//System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
 	}
 	
 
@@ -57,14 +51,7 @@ public class BuggyPhysics implements IPhysicsEngine {
 		if (event.isConsumed()) {
 			sprite.getVelocity().setX(0);
 		}
-		//System.out.println("Translate: my velocity is: " + sprite.getVelocity().getX());
 	}
-	
-//	@Override
-//	public void translateX(Sprite sprite, Double change) {
-//		sprite.getPosition().addX(change* 5);
-//		
-//	}
 	
 	public void translateY(Sprite sprite, Double change) {
 		sprite.getVelocity().setY(change * REDUCE_FACTOR);
@@ -88,19 +75,12 @@ public class BuggyPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
-		
-		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
 		if (sprite.getVelocity().getY() < 0.1 && sprite.getVelocity().getY() != 0.0) {
-			// Set velocity to 0--stop the bounce
 			sprite.getVelocity().setY(0.0);
-			// Set the Y position to a little higher so there is no collision
 			sprite.getPosition().setY(sprite.getPosition().getY() - LIFT);
 		}
 		
 		else {
-			
-			//sprite.getImage().getBoundsInParent().
-			//sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
 			sprite.getVelocity().setY(-1 * sprite.getVelocity().getY() * bounceCoefficient);
 		}
 
@@ -125,16 +105,7 @@ public class BuggyPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
-		// If velocity is going left
-//		System.out.println("Velocity angle: " + sprite.getVelocity().getAngleDegree());
-//		System.out.println("Velocity x: " + sprite.getVelocity().getX() + " Velocity y: " + sprite.getVelocity().getY());
 		if (isThisNumber(sprite.getVelocity().getAngleDegree(), 90) || isThisNumber(sprite.getVelocity().getAngleDegree(), 270)) {
-		}
-		else if (sprite.getVelocity().getAngleDegree() > 180 && sprite.getVelocity().getAngleDegree() < 360) {
-			//sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
-		}
-		else {
-			//sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
 		}
 		sprite.getVelocity().setX(0);
 
@@ -151,22 +122,8 @@ public class BuggyPhysics implements IPhysicsEngine {
 	public int checkCollisionX(Sprite spriteA, Sprite spriteB) {
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
-//		if (boundA.intersects(boundB)) {
-//			if (checkOverlapY(spriteA, spriteB) != 0 && checkOverlapX(spriteA, spriteB, true) == 0) {
-//				return 1;
-//			}
-//		}
-//		return 0;
-		
-		//if (checkCollisionY(spriteA, spriteB) == 0) {
-//		System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
-////		System.out.println("This is overlap tag: " + checkOverlapY(spriteA, spriteB));
-//		System.out.println("CheckOverlapX: " + checkOverlapX(spriteA, spriteB, false));
-//		System.out.println("CheckOverlapY: " + checkOverlapY(spriteA, spriteB));
-//		
-		if (boundA.intersects(boundB)) {
-		
-		if (checkOverlapY(spriteA, spriteB) != 0) {
+
+		if (boundA.intersects(boundB) && (checkOverlapY(spriteA, spriteB) != 0)) {
 			if (checkOverlapX(spriteA, spriteB, true) == 1) {
 				return 1;
 			}
@@ -175,29 +132,8 @@ public class BuggyPhysics implements IPhysicsEngine {
 			}
 		}
 		else {
-			return 0;
+			return 0;		
 		}
-		
-		}
-		return 0;
-
-		//---------------------
-//		Bounds boundA = spriteA.getImage().getBoundsInParent();
-//		Bounds boundB = spriteB.getImage().getBoundsInParent();
-//        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
-//        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
-//        
-//        // If Y collision is happening, return false
-//        if (checkCollisionY(spriteA, spriteB) == 1 || checkCollisionY(spriteA, spriteB) == -1) {
-//        	return 0;
-//        }
-//        
-//        if (atRightBorder || atLeftBorder) {
-//        	return 1;
-//        }
-//        else {
-//        	return 0;
-//        }
 	}
 	
 	/**
@@ -212,29 +148,13 @@ public class BuggyPhysics implements IPhysicsEngine {
 		
 		Bounds boundA = spriteA.getImage().getBoundsInParent();
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
-//		if (boundA.intersects(boundB)) {
-//			if (checkOverlapX(spriteA, spriteB) == 1) {
-//				if (checkOverlapY(spriteA, spriteB) == )
-//			}
-//		}
-
-
-		//System.out.println("Sprite A: " + spriteA.getName() + " and spriteB is: " + spriteB.getName());
-		//if (boundA.intersects(boundB)) {
-		
-//		if (boundA.intersects(boundB)) {
-//			System.out.println("we intersected in checkCollisionY");
-//			System.out.println("checkOverlapX value: " + checkOverlapX(spriteA, spriteB, false));
-//			System.out.println("checkOverlapY value: " + checkOverlapY(spriteA, spriteB));
-//			spriteA.getVelocity().setY(0);
-//		}
 		
 		if (boundA.intersects(boundB)) {
 			if (checkOverlapX(spriteA, spriteB, false) == 1) {
 				if (checkOverlapY(spriteA, spriteB) == 1) {
 					return -1;
 				}
-				if (checkOverlapY(spriteA, spriteB) == 2) {
+				else if (checkOverlapY(spriteA, spriteB) == 2) {
 					return 1;
 				}
 				else {
@@ -245,38 +165,6 @@ public class BuggyPhysics implements IPhysicsEngine {
 			}
 		}
 		return 0;
-//		}
-//		return 0;
-		
-		
-//		Bounds boundA = spriteA.getImage().getBoundsInParent();
-//		Bounds boundB = spriteB.getImage().getBoundsInParent();
-//		
-//		// CollisionX and collisionY are checked mutually exclusively
-//        boolean atRightBorder = boundA.getMaxX() >= boundB.getMinX();
-//        boolean atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
-//        // X collision happening--return false
-//        if (atRightBorder || atLeftBorder) {
-//        	return 0;
-//        }
-//		
-//		//The following assumes JavaFX Pane style coordinates
-//		boolean atTopBorder = boundA.getMinY() <= boundB.getMaxY();
-//		boolean atBottomBorder = boundA.getMaxY() >= boundB.getMinY();
-//
-//		//		// The following assumes the Cartesian coordinates
-//		//        boolean atTopBorder = boundA.getMaxY() >= boundB.getMinY();
-//		//        boolean atBottomBorder = boundA.getMinY() <= boundB.getMaxY();
-//
-//        if (atTopBorder) {
-//        	return 1;
-//        }
-//        else if (atBottomBorder) {
-//        	return -1;
-//        }
-//        else {
-//        	return 0;
-//        }
 	}
 
 	/**
@@ -299,30 +187,14 @@ public class BuggyPhysics implements IPhysicsEngine {
 	        atRightBorder = boundA.getMaxX() >= boundB.getMinX();
 	        atLeftBorder = boundA.getMinX() <= boundB.getMaxX();
 		}
-
-        //if(boundA.intersects(boundB)){ 
-	        // If A left B right
-	        if (boundA.getMinX() <= boundB.getMinX()) {
-	        	if (atRightBorder) {
-	        		return 1;
-	        	}
+	        if (boundA.getMinX() <= boundB.getMinX() && (atRightBorder) ) {
+	        	return 1;
 	        }
-	        // If A right B left
-	        if (boundA.getMinX() > boundB.getMinX()) {
-	        	if (atLeftBorder) {
+	        if (boundA.getMinX() > boundB.getMinX() && (atLeftBorder)) {
 	        		return 1;
-	        	}
 	        }
 	        return 0;
 	}
-        //return 0;
-
-//        if (atRightBorder || atLeftBorder) {
-//        	return 1;
-//        } else {
-//        	return 0;
-//        }
-//	}
 
 	/**
 	 * Check overlap for Y
@@ -337,23 +209,14 @@ public class BuggyPhysics implements IPhysicsEngine {
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
 		boolean atTopBorder = boundA.getMinY() <= boundB.getMaxY();
 		boolean atBottomBorder = boundA.getMaxY() >= boundB.getMinY();
-//boundA.getM
-//		if (boundA.intersects(boundB)){
-		//If A is above B
-		//System.out.println(boundA.getMaxX() + " " + boundB.getMinY());
-		if (boundA.getMinY() <= boundB.getMinY()) {
-			if (atBottomBorder) {
-				return 2;
-			} 
+
+		if (boundA.getMinY() <= boundB.getMinY() && (atBottomBorder)) {
+			return 2;
 		}
-		// If A is below B..
-		if (boundA.getMinY() > boundB.getMinY()) {
-			if (atTopBorder) {
-				return 1;
-			}
+
+		if (boundA.getMinY() > boundB.getMinY() && (atTopBorder)) {
+			return 1;
 		}
-		
-//		}
 		return 0;
 	}
 	
@@ -372,12 +235,7 @@ public class BuggyPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void jump(Sprite sprite, Double jumpMagnitude) {
-		
-		//System.out.println("When Jump is called, this is sprite's y velocity: " + sprite.getVelocity().getY());
-		//System.out.println("And this is the result of isZero check: " + isZero(sprite.getVelocity().getY()));
-		// Check if the main character is on the ground, not in the air to be able to jump
 		if (isThisNumber(sprite.getVelocity().getY(), 0)) {
-			// Apply change to the velocity so that the character has upward velocity
 			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude * JUMP_FACTOR);
 		}
 	}
@@ -388,16 +246,10 @@ public class BuggyPhysics implements IPhysicsEngine {
 	 */
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
-		//System.out.println("Gravity is called");
-		
-		//if (onGround) return;
-		
-		//if (isZero(sprite.getVelocity().getY())) return;
-		// Get mass value of the sprite
+
 		Double mass = (((Double) sprite.getPropertiesMap().get("Mass").getValue()).isInfinite()) 
 				? 0d : (Double) sprite.getPropertiesMap().get("Mass").getValue();
 		
-		// Apply velocity change to the sprite's velocity
 		sprite.getVelocity().setY(sprite.getVelocity().getY() + 
 				mass * gravityMagnitude * VELOCITY_FACTOR);
 	}

@@ -17,7 +17,6 @@ import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
 import tools.VoogaAlert;
-import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
