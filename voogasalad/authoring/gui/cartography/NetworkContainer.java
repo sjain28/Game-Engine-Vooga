@@ -1,23 +1,24 @@
 package authoring.gui.cartography;
 
+import java.util.Map;
 import java.util.Set;
 
 public class NetworkContainer {
 	
-	private Set<Mapping> mappings;
-	private String entrypoint;
+	private Map<String, String> mappings;
+	private Map<String, LevelType> levelTypes;
 	
-	public NetworkContainer(Set<Mapping> mappings, String entrypoint) {
+	public NetworkContainer(Map<String, String> mappings, Map<String, LevelType> levelTypes) {
 		this.mappings = mappings;
-		this.entrypoint = entrypoint;
+		this.levelTypes = levelTypes;
 	}
 	
-	public Set<Mapping> getMappings() {
+	public Map<String, String> getMappings() {
 		return this.mappings;
 	}
 	
-	public String getEntrypoint() {
-		return this.entrypoint;
+	public Map<String, LevelType> getLevelTypes() {
+		return this.levelTypes;
 	}
 
 }
