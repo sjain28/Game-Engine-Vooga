@@ -8,7 +8,7 @@ import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SwitchButton;
 import authoring.gui.menubar.builders.PropertyBuilder;
 import authoring.gui.menubar.builders.TextObjectBuilder;
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.ButtonMaker;
@@ -43,7 +43,7 @@ public class GenericPropertiesTab extends Tab {
     private HBox propertiesHBox;
     protected Map<String, VoogaData> propertiesMap;
     protected ScrollPane myScrollPane;
-    private Elementable myElementable;
+    private EngineElementable myElementable;
     private CompleteAuthoringModelable manager;
 
     private ResourceBundle ppProperties;
@@ -64,11 +64,11 @@ public class GenericPropertiesTab extends Tab {
     }
 
     /**
-     * Gets the properties map based off the Elementable
+     * Gets the properties map based off the EngineElementable
      * 
      * @param elem: elmenta
      */
-    public void getPropertiesMap (Elementable elem) {
+    public void getPropertiesMap (EngineElementable elem) {
         myElementable = elem;
         propertiesMap = myElementable.getVoogaProperties();
         updateProperties();

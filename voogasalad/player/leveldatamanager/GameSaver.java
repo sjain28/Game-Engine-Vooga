@@ -5,7 +5,7 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Map;
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
 import events.AnimationFactory;
@@ -31,7 +31,7 @@ public class GameSaver implements IGameSaver {
     private static final String GAMES = "games/";
     private static final String LEVELS = "levels/";
     private static final String SLASH = "/";
-	private Map<String, Elementable> myElements;
+	private Map<String, EngineElementable> myElements;
 	private KeyEventContainer myKeyEventContainer;
 	private Map<String, VoogaData> myGlobalVariables;
 	private SpriteFactory mySpriteFactory;
@@ -45,7 +45,7 @@ public class GameSaver implements IGameSaver {
 	 * @param globals
 	 * @param spritefactory
 	 */
-	public GameSaver(Map<String, Elementable> elements, KeyEventContainer container,
+	public GameSaver(Map<String, EngineElementable> elements, KeyEventContainer container,
 					 Map<String, VoogaData> globals, SpriteFactory spritefactory, AnimationFactory AnimationFactory) {
 		myElements = elements;
 		myKeyEventContainer = container;

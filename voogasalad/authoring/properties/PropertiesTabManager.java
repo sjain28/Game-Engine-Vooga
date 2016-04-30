@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import authoring.interfaces.Elementable;
+import authoring.interfaces.EngineElementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import javafx.scene.control.Tab;
@@ -82,8 +82,8 @@ public class PropertiesTabManager implements Observer {
     @Override
     public void update (Observable o, Object arg) {
 
-        if (arg instanceof Elementable) {
-            Elementable tabInfo = (Elementable) arg;
+        if (arg instanceof EngineElementable) {
+            EngineElementable tabInfo = (EngineElementable) arg;
             if ((o instanceof CompleteAuthoringModelable)) {
                 GPT.getPropertiesMap(tabInfo);
             }
