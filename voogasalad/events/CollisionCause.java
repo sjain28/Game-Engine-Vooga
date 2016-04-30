@@ -134,7 +134,6 @@ public class CollisionCause extends Cause{
 		collisionDirections.put(VoogaBundles.EventMethods.getString("Below"), -1);
 	}
 	/**
-	 * 
 	 * @return all sprites that have been involved in collisions during a cycle
 	 */
 	public List<Sprite> getAllCollidedSprites(){
