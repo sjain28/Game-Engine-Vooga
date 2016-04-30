@@ -17,7 +17,7 @@ public interface EventGUI {
      * 
      * @return Node to display on the EventWindow
      */
-    public Node display();
+    Node display();
     
     /**
      * Gets string that details the event class path and other details that are specified for the constructor of the specific cause
@@ -30,5 +30,5 @@ public interface EventGUI {
      * @return string representation of details needed to construct the specified
      * @throws VoogaException
      */
-    public String getDetails() throws VoogaException;
+    String getDetails() throws VoogaException;
 }

@@ -11,7 +11,7 @@ public enum TransitionOrder {
 	private Map<String, Color> orderColorMap;
 	
 	private TransitionOrder() {
-		orderColorMap = new HashMap<String, Color>();
+		orderColorMap = new HashMap<>();
 		orderColorMap.put("FIRST", Color.FORESTGREEN);
 		orderColorMap.put("LAST", Color.ORANGERED);
 	}
