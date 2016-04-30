@@ -10,10 +10,11 @@ import javafx.scene.layout.VBox;
 import tools.VoogaException;
 
 /**
- * Authoring representation of AnimationEffect
+ * Authoring representation of AnimationEffect, where the user can choose the animation event that he or she wishes to happen
+ * 
  * 
  * Added to the Cause and Event Pane
- * @author arjunaashna
+ * @author Aditya Srinivasan, Arjun Desai, Harry GUO, Nick Lockett,
  *
  */
 public class AnimationEffectGUI implements EventGUI{
