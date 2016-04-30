@@ -70,11 +70,12 @@ public class UIManager extends VBox implements Menuable {
 	 * Initializes all the pieces of the authoring environment
 	 */
 	void initializeComponents() {
+		grid = new UIGridHousing(elementTabManager.getCurrentManager());
 		this.getChildren().addAll(new MenuPanel(this, e -> {
 			new MenuPanelHandlingMirror(e, this);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
 			new ToolPanelHandlingMirror(e, this);
-		}), grid = new UIGridHousing(elementTabManager.getCurrentManager()));
+		}), grid);
 
 		grid.getSelectionModel().selectedIndexProperty().addListener((obs, old, n) -> {
 			this.currentTabIndex.set((int) n);

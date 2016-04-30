@@ -14,7 +14,6 @@ import tools.VoogaException;
  */
 public class ResourceDecipherer {
 
-	private static ResourceBundle fileExtensions;
 	private static final String IMAGE = "IMAGE";
 	private static final String AUDIO = "AUDIO";
 	private static final String EXTENSION_ERROR = "This file format is not supported!";
@@ -29,9 +28,8 @@ public class ResourceDecipherer {
 	 * @throws VoogaException 
 	 */
 	public static VoogaFileType decipherName(String path) throws VoogaException {
-		fileExtensions = VoogaBundles.extensionProperties;
 		try {
-			return VoogaFileType.valueOf(fileExtensions.getString(getExtension(path, '.')));
+			return VoogaFileType.valueOf(VoogaBundles.extensionProperties.getString(getExtension(path, '.')));
 		} catch(MissingResourceException e) {
 			throw new VoogaException(EXTENSION_ERROR);
 		}
