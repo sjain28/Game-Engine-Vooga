@@ -2,7 +2,6 @@ package authoring.splash;
 
 import authoring.VoogaScene;
 import authoring.resourceutility.ButtonMaker;
-import database.VoogaDataBase;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;

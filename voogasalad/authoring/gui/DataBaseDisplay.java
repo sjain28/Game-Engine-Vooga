@@ -1,11 +1,9 @@
 package authoring.gui;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import authoring.VoogaScene;
 import authoring.model.VoogaFrontEndText;
-import authoring.statvisualization.GraphMaker;
-import database.VoogaDataBase;
-import database.VoogaGame;
-import database.VoogaUser;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -24,9 +22,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
+import stats.database.StatCell;
 import stats.database.VoogaDataBase;
 import stats.database.VoogaGame;
 import stats.database.VoogaUser;
+import stats.visualization.GraphMaker;
 
 public class DataBaseDisplay extends Stage {
     private static final double HEADER_HEIGHT = 50;
@@ -86,20 +86,14 @@ public class DataBaseDisplay extends Stage {
 
     private Node makeLists () {
         Accordion lists = new Accordion();
-        TitledPane gamesMade = new TitledPane();
-        gamesMade.setText("Games Made");
-        ListView<String> made = new ListView<String>();
-        made.getItems().setAll(database.getStatsbyUser(user.getProperty(user.USER_NAME).toString()).toString());
-        made.setOnMouseClicked(e -> clickList(made.getSelectionModel().getSelectedItem()));
-        gamesMade.setContent(made);
-        TitledPane gamesPlayed = new TitledPane();
-        ListView<String> played = new ListView<String>();
-        //THIS IS INCORRECT
-        played.getItems().setAll(database.getStatsbyUser(user.getProperty(user.USER_NAME).toString()).toString());
-        played.setOnMouseClicked(e -> clickList(made.getSelectionModel().getSelectedItem()));
-        gamesPlayed.setText("Games Played");
-        gamesPlayed.setContent(played);
-        lists.getPanes().addAll(gamesMade, gamesPlayed);
+        TitledPane games = new TitledPane();
+        games.setText("Games");
+        ListView<String> actualGames = new ListView<String>();
+        List<String> authoredGames = database.getStatsbyUser(user.getProperty(user.USER_NAME).toString()).stream().map(e -> e.getProperty(StatCell.MY_GAME).toString()).collect(Collectors.toList());
+        actualGames.getItems().setAll(authoredGames);
+        actualGames.setOnMouseClicked(e -> clickList(actualGames.getSelectionModel().getSelectedItem()));
+        games.setContent(actualGames);
+        lists.getPanes().addAll(games);
         lists.setPrefWidth(DATA_WIDTH/4);
         return lists;
     }
