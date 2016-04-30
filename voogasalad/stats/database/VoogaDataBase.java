@@ -147,7 +147,7 @@ public class VoogaDataBase implements IDataBase{
 	/**
 	 * DeSerializes all information
 	 */
-	private void load(){
+	private synchronized void load(){
 		if(!(new File(FILE_LOCATION)).exists()){
 			System.out.println("loading, and file location does not yet exist.");
 			totalrows = 0;

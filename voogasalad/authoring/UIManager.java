@@ -2,6 +2,7 @@ package authoring;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
@@ -17,7 +18,6 @@ import javafx.scene.layout.VBox;
 import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 import resources.VoogaPaths;
-import stats.interaction.CurrentSessionStats;
 
 /**
  * The UIManager is responsible for assembling view components, such as the
@@ -70,11 +70,12 @@ public class UIManager extends VBox implements Menuable {
 	 * Initializes all the pieces of the authoring environment
 	 */
 	void initializeComponents() {
+		grid = new UIGridHousing(elementTabManager.getCurrentManager());
 		this.getChildren().addAll(new MenuPanel(this, e -> {
 			new MenuPanelHandlingMirror(e, this);
 		}, VoogaBundles.menubarProperties), new ToolPanel(e -> {
 			new ToolPanelHandlingMirror(e, this);
-		}), grid = new UIGridHousing(elementTabManager.getCurrentManager()));
+		}), grid);
 
 		grid.getSelectionModel().selectedIndexProperty().addListener((obs, old, n) -> {
 			this.currentTabIndex.set((int) n);

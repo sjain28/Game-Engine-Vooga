@@ -1,9 +1,10 @@
 package authoring.model;
 
 import java.util.Map;
+
 import authoring.gui.Selector;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.AuthoringElementable;
+import authoring.interfaces.Elementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
 import javafx.beans.binding.Bindings;

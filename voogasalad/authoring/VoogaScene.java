@@ -44,12 +44,7 @@ public class VoogaScene extends Scene {
 	 */
 	public VoogaScene(Parent parent, double width, double height, String csspath) {
 		super(parent, width, height);
-
-//		this.getStylesheets().addAll(this.getClass().getResource(csspath).toExternalForm());
 		this.getStylesheets().add(csspath);
-//		System.out.println(parent.getId());
-//		System.out.println(this.getClass().getResource(csspath).toExternalForm());
-
 	}
 
 }

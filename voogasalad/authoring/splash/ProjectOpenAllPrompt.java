@@ -6,22 +6,13 @@ import java.util.List;
 
 import authoring.CustomText;
 import authoring.VoogaScene;
-import authoring.resourceutility.ButtonMaker;
 import authoring.tagextension.GamesListing;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class ProjectOpenAllPrompt extends StarterPrompt {
 	

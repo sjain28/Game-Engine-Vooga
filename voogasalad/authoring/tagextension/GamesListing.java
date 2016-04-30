@@ -7,7 +7,6 @@ import authoring.resourceutility.ButtonMaker;
 import authoring.splash.GameRowDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;

@@ -1,17 +1,8 @@
 package authoring.gui.menubar.menuitems;
 
-import authoring.gui.menubar.PlayerMenuItemHandler;
 import authoring.gui.animation.AnimationEventBuilder;
-import authoring.gui.menubar.MenuItemHandler;
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
+import authoring.gui.menubar.PlayerMenuItemHandler;
 import player.gamedisplay.Menuable;
-import player.gamerunner.GameRunner;
 
 public class NewAnimationNewItem extends PlayerMenuItemHandler {
 

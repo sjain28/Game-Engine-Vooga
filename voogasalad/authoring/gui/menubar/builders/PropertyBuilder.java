@@ -10,7 +10,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tools.VoogaAlert;
-import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 

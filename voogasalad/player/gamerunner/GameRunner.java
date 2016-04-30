@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import authoring.gui.LeaderBoard;
 import authoring.gui.cartography.LevelType;
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -23,6 +22,8 @@ import physics.IPhysicsEngine;
 import physics.StandardPhysics;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
+import player.leveldatamanager.DisplayScroller;
+import player.leveldatamanager.ElementUpdater;
 import player.leveldatamanager.EventManager;
 import player.leveldatamanager.IDisplayScroller;
 import player.leveldatamanager.ILevelData;
@@ -30,8 +31,6 @@ import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
 import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
-import player.leveldatamanager.DisplayScroller;
-import player.leveldatamanager.ElementUpdater;
 import tools.VoogaAlert;
 import tools.VoogaException;
 import videos.ScreenProcessor;
@@ -260,9 +259,7 @@ public class GameRunner implements IGameRunner {
 	}
 
 	@Override
-	public CompleteAuthoringModelable getManager() {
-		return null;
-	}
+	public CompleteAuthoringModelable getManager() { return null; }
 
 	@Override
 	public void addScene() {}

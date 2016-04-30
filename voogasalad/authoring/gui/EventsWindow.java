@@ -32,13 +32,11 @@ import tools.VoogaException;
 
 public class EventsWindow extends TabPane implements Observer {
 
-	//private static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
+	private static final String UUID_REGEX = "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
 
 	/**
 	 * Private instance variables
 	 */
-	private String UUID_REGEX;
-
 	private CompleteAuthoringModelable myManager;
 	private Tab main;
 	private ScrollPane scroller;
@@ -58,8 +56,6 @@ public class EventsWindow extends TabPane implements Observer {
 		myManager.addObserver(this);
 		eventsWindowProperties = VoogaBundles.eventswindowProperties;
 		main = new Tab(eventsWindowProperties.getString("EventsWindowName"));
-		UUID_REGEX = eventsWindowProperties.getString("UUIDregex");
-		System.out.println(UUID_REGEX);
 		content = new VBox();
 		scroller = new ScrollPane(content);
 		causes = new HashMap<VoogaEvent, ObservableList<String>>();

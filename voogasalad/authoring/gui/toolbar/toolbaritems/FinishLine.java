@@ -5,7 +5,6 @@ import authoring.gui.levelpreferences.FinishLinePrompt;
 import authoring.gui.toolbar.ToolbarItemHandler;
 import authoring.model.ElementManager;
 import player.gamedisplay.Menuable;
-import resources.VoogaBundles;
 import tools.VoogaNumber;
 
 public class FinishLine extends ToolbarItemHandler {

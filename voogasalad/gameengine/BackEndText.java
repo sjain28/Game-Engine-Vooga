@@ -2,6 +2,7 @@ package gameengine;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
@@ -48,7 +49,7 @@ public class BackEndText implements Elementable {
 
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
-        return null;
+        return myProperties;
     }
 
     @Override

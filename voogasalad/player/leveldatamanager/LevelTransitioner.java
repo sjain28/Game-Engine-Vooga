@@ -27,10 +27,9 @@ import tools.interfaces.VoogaData;
  * LevelTransitioner class that processes level transition called by LevelData interface
  * 
  * @author Hunter Lee
- *
  */
 public class LevelTransitioner {
-	
+
     private static final String SAVE_PROGRESS = "SaveProgress";
     private DataContainerOfLists myData;
     private FileReaderToGameObjects myFileManager;
@@ -62,9 +61,9 @@ public class LevelTransitioner {
         myNextLevelKey = nextlevelkey;
         myMainCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
     }
+    
     /**
      * Populate myElements with new sprites pertinent to a new level
-     * TODO: Create a scrolling sprite
      * @param levelfilename
      */
     public Map<String, Elementable> populateNewSprites () {
@@ -73,13 +72,67 @@ public class LevelTransitioner {
         List<Elementable> elementObjects = myData.getElementableList();
         myElements.clear();
         for (Elementable elementable : elementObjects) {
-            try {elementable.init();}
-            catch (VoogaException e1) {e1.printStackTrace();}
+            try {elementable.init();
+            } catch (VoogaException e1) {
+            	//TODO: remove printstacktrace
+            	e1.printStackTrace();
+            }
             myElements.put(elementable.getId(), elementable);
         }
         return myElements;
     }
-    
+
+	/**
+	 * Returns a newly-populated myKeyEventContainer (Events, KeyEvents and Inputs)
+	 * @return KeyEventContainer
+	 */
+	public KeyEventContainer populateNewEvents() {
+		myKeyEventContainer.clearAll();
+		List<VoogaEvent> eventObjects = myData.getEventList();
+		for (VoogaEvent event : eventObjects) {
+			myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
+		}
+		return myKeyEventContainer;
+	}
+
+	/**
+	 * Returns a newly-populated myGlobalVariables
+	 * @return Map<String, VoogaData>
+	 */
+	public Map<String, VoogaData> populateNewGlobals() {
+		myGlobalVariables = myData.getVariableMap();
+		myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
+		myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
+		return myGlobalVariables;
+	}
+	
+	/**
+	 * Returns ID of the sprite the display is being scrolled on
+	 * @return String centerScroll sprite ID
+	 */
+	public String getMainCharID() {
+		Path path = Paths.get(this.myLevelFileName);
+		String rawLevelName = path.getFileName().toString().replace(".xml", "");
+		return (String) myGlobalVariables.get(rawLevelName + myMainCharKey).getValue();
+	}
+	
+	/**
+	 * Returns a newly-populated SpriteFactory
+	 * @return SpriteFactory
+	 */
+	public SpriteFactory getNewSpriteFactory() {
+		Map<String, Sprite> archetypeMap = myData.getArchetypeMap();
+		return new SpriteFactory(archetypeMap);
+	}
+
+	public AnimationFactory getNewAnimationFactory(){
+		AnimationFactory factory = new AnimationFactory();
+		factory.setMyPaths(myData.getPaths());
+		factory.setMyAnimationEvents(myData.getAnimations());
+		factory.setMyAnimationSequences(myData.getSequences());
+		return factory;
+	}
+	
     public Map<String, AnimationEvent> getAnimations(){
     	return myData.getAnimations();
     }
@@ -90,56 +143,5 @@ public class LevelTransitioner {
     
     public Map<String, List<AnimationEvent>> getSequences(){
     	return myData.getSequences();
-    }
-
-    /**
-     * Returns a newly-populated myKeyEventContainer (Events, KeyEvents and Inputs)
-     * @return KeyEventContainer
-     */
-    public KeyEventContainer populateNewEvents() {
-        myKeyEventContainer.clearAll();
-        List<VoogaEvent> eventObjects = myData.getEventList();
-        for (VoogaEvent event : eventObjects) {
-            myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
-        }
-        return myKeyEventContainer;
-    }
-    
-    /**
-     * Returns a newly-populated myGlobalVariables
-     * @return Map<String, VoogaData>
-     */
-    public Map<String, VoogaData> populateNewGlobals() {
-        myGlobalVariables = myData.getVariableMap();
-        myGlobalVariables.put(myNextLevelKey, new VoogaString(""));
-        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-        return myGlobalVariables;
-    }
-
-    /**
-     * Returns a newly-populated SpriteFactory
-     * @return SpriteFactory
-     */
-    public SpriteFactory getNewSpriteFactory() {
-        Map<String, Sprite> archetypeMap = myData.getArchetypeMap();
-        return new SpriteFactory(archetypeMap);
-    }
-    
-    public AnimationFactory getNewAnimationFactory(){
-    	AnimationFactory factory = new AnimationFactory();
-    	factory.setMyPaths(myData.getPaths());
-    	factory.setMyAnimationEvents(myData.getAnimations());
-    	factory.setMyAnimationSequences(myData.getSequences());
-    	return factory;
-    }
-    
-    /**
-     * Returns ID of the sprite the display is being scrolled on
-     * @return String centerScroll sprite ID
-     */
-    public String getMainCharID() {
-        Path path = Paths.get(this.myLevelFileName);
-        String rawLevelName = path.getFileName().toString().replace(".xml", "");
-        return (String) myGlobalVariables.get(rawLevelName + myMainCharKey).getValue();
     }
 }

@@ -2,8 +2,8 @@ package player.leveldatamanager;
 
 import java.util.List;
 import java.util.Map;
+
 import events.KeyCause;
-import events.VoogaEvent;
 import javafx.scene.input.KeyEvent;
 /**
  * EventManager is in charge of updating all LevelData according to

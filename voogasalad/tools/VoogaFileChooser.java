@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import resources.VoogaBundles;
 import authoring.tagextension.GameTagManager;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import resources.VoogaBundles;
 
 /**
  * Obtaining, selecting or modifying file path locally or globally
