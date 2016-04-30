@@ -33,7 +33,6 @@ public class PathEffect extends SpriteEffect{
 
 	@Override
 	public void execute(ILevelData data) {
-		System.out.println("EXECUTING A PATH EFFECT!");
 		if (((AnimationEvent) getEvent()).getCounter() > 0){
 			checkPastVelocities();
 		}
