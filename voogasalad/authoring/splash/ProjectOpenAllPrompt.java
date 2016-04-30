@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
+import tools.GUIUtils;
 
 public class ProjectOpenAllPrompt extends StarterPrompt {
 	
@@ -39,9 +40,9 @@ public class ProjectOpenAllPrompt extends StarterPrompt {
 		container.setSpacing(SPACING);
 		container.setPadding(new Insets(SPACING));
 		gamesListing = new GamesListing();
-		container.getChildren().addAll(makeRow(new CustomText("Welcome!", FontWeight.BOLD, HEADER_SIZE)),
-									   makeRow(new CustomText("Choose from all these games.", FontWeight.BOLD)),
-							  	       makeRow(gamesListing));
+		container.getChildren().addAll(GUIUtils.makeRow(new CustomText("Welcome!", FontWeight.BOLD, HEADER_SIZE)),
+									   GUIUtils.makeRow(new CustomText("Choose from all these games.", FontWeight.BOLD)),
+							  	       GUIUtils.makeRow(gamesListing));
 	}
 	
 	private List<String> getGamesList() {

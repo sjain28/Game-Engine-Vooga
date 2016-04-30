@@ -12,6 +12,14 @@ import tools.VoogaException;
 
 
 public class ProjectileEffectGUI implements EventGUI {
+	
+	private static final String REL_POS = "Relative Position";
+	private static final String ABS_POS = "Absolute Position";
+	private static final String SC_VEL = "Scaled Velocity";
+	private static final String AB_VEL = "Absolute Velocity";
+
+	private static final int PADDING = 5;
+	
     private EditEventable elementManager;
 
     private SpriteComboBox archetypes;
@@ -37,22 +45,22 @@ public class ProjectileEffectGUI implements EventGUI {
         archetypes = new ArchetypeComboBox(elementManager);
         archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
         targetDesired = new ComboBox();
-        targetDesired.getItems().addAll("Relative Position", "Absolute Position");
+        targetDesired.getItems().addAll(REL_POS, ABS_POS);
 
         targetId = new SpriteComboBox(elementManager);
         posx = new NumberTextField();
-        posx.setPadding(new Insets(5, 5, 5, 5));
+        posx.setPadding(new Insets(PADDING));
         posy = new NumberTextField();
-        posy.setPadding(new Insets(5, 5, 5, 5));
+        posy.setPadding(new Insets(PADDING));
         velx = new NumberTextField();
-        velx.setPadding(new Insets(5, 5, 5, 5));
+        velx.setPadding(new Insets(PADDING));
         vely = new NumberTextField();
-        vely.setPadding(new Insets(5, 5, 5, 5));
+        vely.setPadding(new Insets(PADDING));
         amount = new NumberTextField();
-        amount.setPadding(new Insets(5, 5, 5, 5));
+        amount.setPadding(new Insets(PADDING));
 
         velocityScaledDesired = new ComboBox();
-        velocityScaledDesired.getItems().addAll("Scaled Velocity", "Absolute Velocity");
+        velocityScaledDesired.getItems().addAll(SC_VEL, AB_VEL);
     }
 
     private void initialize () {
@@ -60,11 +68,11 @@ public class ProjectileEffectGUI implements EventGUI {
         createObjects();
 
         targetDesired.setOnAction(e -> {
-            if (targetDesired.getValue().equals("Relative Position")) {
+            if (targetDesired.getValue().equals(REL_POS)) {
                 removeInactiveNodes(targetId, posx, posy);
                 addGUIElements(targetId);
             }
-            if (targetDesired.getValue().equals("Absolute Position")) {
+            if (targetDesired.getValue().equals(ABS_POS)) {
                 removeInactiveNodes(targetId, posx, posy, velx, vely, targetId, amount);
                 addGUIElements(posx, posy, velx, vely);
             }
@@ -76,11 +84,11 @@ public class ProjectileEffectGUI implements EventGUI {
         });
 
         velocityScaledDesired.setOnAction(e -> {
-            if (targetDesired.getValue().equals("Scaled Velocity")) {
+            if (targetDesired.getValue().equals(SC_VEL)) {
                 removeInactiveNodes(velx, vely);
                 addGUIElements(amount);
             }
-            if (targetDesired.getValue().equals("Absolute Velocity")) {
+            if (targetDesired.getValue().equals(AB_VEL)) {
                 removeInactiveNodes(amount);
                 addGUIElements(velx, vely);
             }
@@ -110,17 +118,17 @@ public class ProjectileEffectGUI implements EventGUI {
     @Override
     public String getDetails () throws VoogaException {
         String result = "events.ProjectileEffect," + archetypes.getValue() + ",";
-        if (targetDesired.getValue().equals("Relative Position")) {
+        if (targetDesired.getValue().equals(REL_POS)) {
             result += targetId.getSpriteId() + ",";
         }
         result += posx.getText() + "," + posy.getText()+",";
         
-        if (targetDesired.getValue().equals("Absolute Position")){
+        if (targetDesired.getValue().equals(ABS_POS)){
             result+= velx.getText()+","+vely.getText()+",";
             return result;
         }
         
-        if (velocityScaledDesired.getValue().equals("Scaled Velocity")){
+        if (velocityScaledDesired.getValue().equals(SC_VEL)){
             result += amount.getText();
         } else {
             result += velx.getText()+","+vely.getText();
