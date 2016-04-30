@@ -148,14 +148,14 @@ public class GameRunner implements IGameRunner {
     	
 		//check if a level transition effect has been triggered
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
+			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
+				// show win screen
+			}
 //			playLevel(myLevelList.get(myLevelList.indexOf(myLevelData.getNextLevelName())));
 			playLevel(myLevelData.getNextLevelName());      // TRY THIS!!
 		}
-		
 		//transition to leaderboard screen if the last level has been won. ADD AFTER MAP IMPLEMENTATION
-		if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
-			// show win screen
-		}
+
 		
 	}
 
