@@ -8,10 +8,12 @@ import javafx.scene.shape.Circle;
 
 public abstract class Point extends Circle {
 	
+	private static final int STROKE_WIDTH = 3;
+	
 	public Point(double r, Color c) {
 		super(r, c);
 		this.setStroke(Color.WHITE);
-		this.setStrokeWidth(3);
+		this.setStrokeWidth(STROKE_WIDTH);
 		enableDrag(this);
 	}
 
@@ -38,6 +40,10 @@ public abstract class Point extends Circle {
 				circle.setCenterY(mouseEvent.getY() + dragDelta.y);
 			}
 		});
+		enableDragCursor(circle);
+	}
+	
+	private void enableDragCursor(final Circle circle) {
 		circle.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
