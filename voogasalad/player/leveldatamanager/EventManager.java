@@ -30,8 +30,8 @@ public class EventManager {
 		checkKeys(myKeyEventContainer.getKeyReleasedCombos(), keyReleases, 
 				  										      myKeyEventContainer.getKeyReleaseCauses());
 		
-		for(VoogaEvent e : myKeyEventContainer.getEvents()) {
-			e.update(myLevelData);
+		for(int i = 0; i < myKeyEventContainer.getEvents().size(); i++) {
+			myKeyEventContainer.getEvents().get(i).update(myLevelData);
 		}
 						
 		for(List<String> cause : myKeyEventContainer.getKeyReleaseCauses().keySet()) {

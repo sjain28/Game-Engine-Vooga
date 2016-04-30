@@ -1,11 +1,13 @@
 package videos;
 
 import java.awt.image.BufferedImage;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-
 import javafx.scene.Scene;
 
+/**
+ * General interface for scene or screen capture, image conversion, and video processing
+ * 
+ * @author Michael Kuryshev
+ */
 public interface IScreenProcessor {
 	
 	/**
@@ -28,16 +30,16 @@ public interface IScreenProcessor {
 	public BufferedImage convertImageToType(BufferedImage sourceImage, int targetType);
 	
 	/**
-	 * Take a snapshot of the screen, dependent on the area demanded
-	 * 
-	 * @return
-	 */
-	public BufferedImage createDesktopScreenshotForVideo(Dimension screenBounds);
-	
-	/**
 	 * Take a single snapshot of the screen for a PNG file image
 	 * 
 	 * @param screenshotZone
 	 */
 	public void createSceneScreenshotPNG(Scene screenshotZone, String imageName);
+
+	/**
+	 * Encode an array of buffered images into an mp4 video
+	 * 
+	 * @param images
+	 * @param outputFileName
+	 */
 }

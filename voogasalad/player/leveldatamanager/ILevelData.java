@@ -13,6 +13,7 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
+import tools.Pair;
 import tools.interfaces.VoogaData;
 
 /**
@@ -24,45 +25,47 @@ import tools.interfaces.VoogaData;
 public interface ILevelData {
 
 	void refreshLevelData(String levelfilename);
-    
-    Sprite getMainSprite();
 
-	Set<Entry<String, Elementable>> getElementables();
-    
-	List<Node> getDisplayableNodes();
-	
+	void setNextLevelName(String levelNumber);
+
+	void removeSpriteByID(String id);
+
+	void saveProgress(String filePath);
+
+	void addEventAndPopulateKeyCombos(VoogaEvent event);
+
 	boolean getSaveNow();
 
 	String getNextLevelName();
 
-	void setNextLevelName(String levelNumber);
-	
+	Boolean containsSprite(String id);
+
+	Sprite getMainSprite();
+
 	Sprite getSpriteByID(String id);
 
-	List<Sprite> getSpritesByArch(String archA);
-	
-    void removeSpriteByID(String id);
-	
-	VoogaData getGlobalVar(String myVarName);
-	
 	Sprite addSprite(String archetype);
+	
+	void putSprite(Sprite s);
 	
 	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
 
-	void saveProgress(String playerName, String filePath, String gameName);
-	
-	KeyEventContainer getKeyEventContainer();
-	
-	Map<String, VoogaData> getGlobalVariables();
-
-	Map<String, Elementable> getElements();
+	VoogaData getGlobalVar(String myVarName);
 
 	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
-	Boolean containsSprite(String id);
+	KeyEventContainer getKeyEventContainer();
+	
+	List<Pair<Node, Boolean>> getDisplayableNodes();
 
-	void addEventAndPopulateKeyCombos(VoogaEvent event);
+	List<Sprite> getSpritesByArch(String archA);
 
+	Set<Entry<String, Elementable>> getElementables();
+
+    public Map<String,VoogaData> getGlobalVariables();
+	
+
+	Map<String, Elementable> getElements();
 }

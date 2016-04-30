@@ -2,11 +2,7 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import authoring.interfaces.Elementable;
 import events.AnimationEvent;
-import events.VoogaEvent;
-import gameengine.Sprite;
-import gameengine.SpriteFactory;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -43,17 +39,5 @@ public class FileReaderToGameObjects {
 
     public DataContainerOfLists getDataContainer () {
         return data;
-    }
-    
-    public Map<String, AnimationEvent> getAnimationEvents(){
-    	return data.getAnimations();
-    }
-    
-    public Map<String, List<Double[]>> getPaths(){
-    	return data.getPaths();
-    }
-    
-    public Map<String, List<AnimationEvent>> getSequences(){
-    	return data.getSequences();
     }
 }

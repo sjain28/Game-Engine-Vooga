@@ -1,9 +1,7 @@
 package authoring;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
 import authoring.gui.toolbar.ToolPanel;
@@ -19,9 +17,7 @@ import javafx.scene.layout.VBox;
 import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 import resources.VoogaPaths;
-import stats.database.AuthorSession;
-import stats.database.StatCell;
-import stats.database.VoogaDataBase;
+import stats.interaction.CurrentSessionStats;
 
 /**
  * The UIManager is responsible for assembling view components, such as the
@@ -31,18 +27,19 @@ import stats.database.VoogaDataBase;
  * 
  */
 public class UIManager extends VBox implements Menuable {
-
+	
 	private UIGridHousing grid;
 	private SimpleIntegerProperty currentTabIndex;
 	private ElementTabManager elementTabManager;
-
+	
 	/**
 	 * Initializes the UI Manager given multiple models.
 	 * 
 	 * @param model
-	 *            Interface to mediate interactions with backend
+	 *            Interface to mediate interactions with back-end
 	 */
 	public UIManager(List<CompleteAuthoringModelable> models) {
+		
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
 		ElementManager temp = new ElementManager();
@@ -56,7 +53,6 @@ public class UIManager extends VBox implements Menuable {
 		grid.removeFirstTab();
 		System.out.println(elementTabManager.getAllManagers().size());
 	}
-
 	/**
 	 * Initializes the UI Manager given a singular model
 	 * 
@@ -70,7 +66,6 @@ public class UIManager extends VBox implements Menuable {
 		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
 		initializeComponents();
 	}
-
 	/**
 	 * Initializes all the pieces of the authoring environment
 	 */
@@ -85,14 +80,12 @@ public class UIManager extends VBox implements Menuable {
 			this.currentTabIndex.set((int) n);
 		});
 	}
-
 	/**
 	 * Adds a new scene.
 	 */
 	public void addScene() {
 		addScene(new ElementManager());
 	}
-
 	/**
 	 * Adds a new scene given a manager.
 	 */
@@ -100,14 +93,12 @@ public class UIManager extends VBox implements Menuable {
 		elementTabManager.addManager((ElementManager) manager);
 		grid.addScene(elementTabManager.getCurrentManager());
 	}
-
 	/**
 	 * Gets the current authoring model.
 	 */
 	public CompleteAuthoringModelable getManager() {
 		return elementTabManager.getCurrentManager();
 	}
-
 	/**
 	 * @return the list of names of each tab manager
 	 */
@@ -116,7 +107,6 @@ public class UIManager extends VBox implements Menuable {
 		elementTabManager.getAllManagers().stream().map(ElementManager::getName).forEach(names::add);
 		return names;
 	}
-
 	/**
 	 * Saves the current through serialization.
 	 */
@@ -134,7 +124,6 @@ public class UIManager extends VBox implements Menuable {
 				e.printStackTrace();
 			}
 	}
-
 	/**
 	 * Opens scene dependent on current manager
 	 * @param manager: manager for selected scene

@@ -15,6 +15,7 @@ public class StatCell extends CellEntry {
 	private Stack<PlaySession> myPlayStats;
 	public static final String MY_USER = "my_user";
 	public static final String MY_GAME = "my_game";
+	public static final String LATEST_PROGRESS = "latest_progress";
 	public static final String LAST_SAVED_LEVEL_LOC = "last_saved_level_loc";
 	
 	public StatCell(String gamename, String username){
@@ -24,6 +25,7 @@ public class StatCell extends CellEntry {
 		setProperty(MY_GAME, new VoogaString(gamename));
 		setProperty(MY_USER, new VoogaString(username));
 		setProperty(LAST_SAVED_LEVEL_LOC, new VoogaString(""));
+		setProperty(LATEST_PROGRESS, new VoogaString(""));
 	}
 	public List<CellEntry> getAuthorStats(){
 		return Collections.unmodifiableList(myAuthorStats);
@@ -54,4 +56,12 @@ public class StatCell extends CellEntry {
 	public String toString(){
 		return "Cell";
 	}
+	public void updateProgress(String levelName){
+		setProperty(LATEST_PROGRESS, new VoogaString(""));
+		System.out.println("The levelname here was set to levelName " + levelName);
+	}
+	public String checkProgress(){
+		return (String) ((VoogaString) getProperty(LATEST_PROGRESS)).getValue();
+	}
+	
 }

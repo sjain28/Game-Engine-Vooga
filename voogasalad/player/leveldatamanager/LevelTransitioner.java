@@ -62,7 +62,6 @@ public class LevelTransitioner {
         myNextLevelKey = nextlevelkey;
         myMainCharKey = VoogaBundles.defaultglobalvars.getProperty("MainCharacter");
     }
-	
     /**
      * Populate myElements with new sprites pertinent to a new level
      * TODO: Create a scrolling sprite

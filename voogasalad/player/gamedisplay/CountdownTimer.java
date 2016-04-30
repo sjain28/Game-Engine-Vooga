@@ -18,7 +18,6 @@ import javafx.util.Duration;
  *
  */
 public class CountdownTimer {
-
 	// Default STARTTIME is 1 minute (60 seconds)
 	private static final Integer STARTTIME = 60;
 	private static final String TIMER_STRING = "Time remaining: ";

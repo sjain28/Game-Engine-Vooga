@@ -17,14 +17,14 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
-import tools.NodeZAxisComparator;
+import tools.Pair;
+import tools.PairZAxisComparator;
 import tools.VoogaBoolean;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
- * A centralized class to contain and access data relevant to a level
- * This includes Sprite's, Text, Global Variables, and Events
+ * A centralized class to contain and access data including Sprites, Text, Global Variables, and Events
  * 
  * @author Krista, Hunter
  */
@@ -61,6 +61,9 @@ public class LevelData implements ILevelData {
     public Boolean containsSprite(String id){
     	return myElements.containsKey(id);
     }
+    public void putSprite(Sprite s){
+    	myElements.put(s.getId(), s);
+    }
     /**
      * Removes sprite by it's ID
      */
@@ -90,23 +93,12 @@ public class LevelData implements ILevelData {
         }
         return list;
     }
-    public AnimationEvent getAnimationFromFactory(String animationString){
+    public AnimationEvent getAnimationFromFactory(String animationString){    	
     	if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
     		List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
     		return clonedSequence.get(0);
-    	}else{
-    		return myAnimationFactory.cloneAnimationEvent(animationString);
     	}
-    }
-    /**
-     * Adds a sprite as a member of the given archetype
-     * @param archetype
-     * @return
-     */
-    public Sprite addSprite(String archetype) {
-        Elementable newSprite = mySpriteFactory.createSprite(archetype);
-        myElements.put(newSprite.getId(), newSprite);
-        return (Sprite) newSprite;
+    	else{return myAnimationFactory.cloneAnimationEvent(animationString);}
     }
     /**
      * Returns a Global Variable (VoogaData) as specified by its variable name
@@ -121,26 +113,6 @@ public class LevelData implements ILevelData {
      */
     public Sprite getMainSprite() {
     	return getSpriteByID(myMainCharID);
-    }
-    /**
-     * Returns a text object by ID
-     * @param id
-     * @return
-     */
-    public VoogaFrontEndText getText(Object id) {
-        return (VoogaFrontEndText) myElements.get(id);
-    }
-    /**
-     * Put all objects into a generic list of displayable objects
-     * @return
-     */
-    public List<Node> getDisplayableNodes() {
-        List<Node> displayablenodes = new ArrayList<>();
-        for (Object key : myElements.keySet()) {
-            displayablenodes.add(myElements.get(key).getNodeObject());
-        }
-        displayablenodes.sort(new NodeZAxisComparator());
-        return displayablenodes;
     }
     /**
      * Add a given event and populate the pressed and released KeyCombos
@@ -158,13 +130,8 @@ public class LevelData implements ILevelData {
     	myElements = myTransitioner.populateNewSprites();
     	myKeyEventContainer = myTransitioner.populateNewEvents();
     	myGlobalVariables = myTransitioner.populateNewGlobals();
-    	//mySpriteFactory.clearMap();
-    	//mySpriteFactory.setMap(myTransitioner.getSpriteMap());
     	mySpriteFactory = myTransitioner.getNewSpriteFactory();
-		System.out.println(myElements);
     	myMainCharID = myTransitioner.getMainCharID();
-    	//myAnimationFactory.clearMaps();
-    	//myAnimationFactory.populateMaps();
     	myAnimationFactory = myTransitioner.getNewAnimationFactory();
     }
     
@@ -191,10 +158,11 @@ public class LevelData implements ILevelData {
     /**
      * Saves current game progress into a XML file
      */
-    public void saveProgress(String filePath, String playerName, String gameName) {
+    public void saveProgress(String filePath) {
     	myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory);
-    	saver.saveCurrentProgress(filePath, playerName,gameName);
+    	System.out.println("I SAVED HERE!!!!!!!!");
+    	GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory, myAnimationFactory);
+    	saver.saveCurrentProgress(filePath);
     }
     /**
      * Returns the game's physics engine
@@ -202,23 +170,57 @@ public class LevelData implements ILevelData {
     public IPhysicsEngine getPhysicsEngine() {
         return myPhysics;
     }
+    public Map<String,VoogaData> getGlobalVariables(){
+    	return myGlobalVariables;
+    }
 	/**
-	 * @return the myKeyEventContainer
+	 * Adds a sprite as a member of the given archetype
+	 * @param archetype
+	 * @return
 	 */
+	public Sprite addSprite(String archetype) {
+		Elementable newSprite = mySpriteFactory.createSprite(archetype);
+		myElements.put(newSprite.getId(), newSprite);
+		return (Sprite) newSprite;
+	}
+
+	/**
+	 * Returns a text object by ID
+	 * @param id
+	 * @return
+	 */
+	public VoogaFrontEndText getText(Object id) {
+		return (VoogaFrontEndText) myElements.get(id);
+	}
+
+	/**
+	 * Put all objects into a pair of displayable objects
+	 * @return
+	 */
+	public List<Pair<Node, Boolean>> getDisplayableNodes() {
+		List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
+		for (Object key : myElements.keySet()) {
+			Boolean isStatic = false;
+			//TODO: Replace this
+			//        	if(myElements.get(key) instanceof Sprite) {
+			//        		Sprite sprite = (Sprite) myElements.get(key);
+			//        		if((Double) sprite.getVoogaProperties().get(VoogaBundles.spriteProperties.getString("MASS")).getProperty().getValue() > 10) {
+			//        			isStatic = true;
+			//        		}
+			//        	}
+			displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
+		}
+		displayablenodes.sort(new PairZAxisComparator());
+		return displayablenodes;
+	}
+
 	public KeyEventContainer getKeyEventContainer() {
 		return myKeyEventContainer;
 	}
-	/**
-	 * @return the myGlobalVariables
-	 */
-	public Map<String, VoogaData> getGlobalVariables() {
-		return myGlobalVariables;
-	}
-	/**
-	 * @return the myElements
-	 */
+
 	@Override
 	public Map<String, Elementable> getElements() {
 		return myElements;
 	}
+
 }

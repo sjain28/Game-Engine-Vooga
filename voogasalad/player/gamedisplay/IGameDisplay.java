@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import tools.Pair;
 
 /**
  * Interface for GameDisplay
@@ -16,8 +17,8 @@ import javafx.stage.Stage;
  */
 public interface IGameDisplay {
 	
-	void readAndPopulate(List<Node> listToDisplay);
-	
+	void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay);
+
 	void display();
 	
 	void displayTestMode();
@@ -35,6 +36,8 @@ public interface IGameDisplay {
 	Stage getStage();
 	
 	Pane getScreen();
+	
+	Pane getUI();
 	
 	void exit();
 

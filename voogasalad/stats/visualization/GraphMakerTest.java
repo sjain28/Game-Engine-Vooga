@@ -25,17 +25,17 @@ import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 public class GraphMakerTest extends Application {
-	public void start(Stage stage) {
+	public void start(Stage stage) {		
 		List<Object> xparams = new ArrayList<Object>();
 		List<Object> yparams = new ArrayList<Object>();
 		
 		//fill up the x-params and y-params
-		fillArrays4(xparams,yparams);
+		//fillArrays4(xparams,yparams);
 
 		
 		GraphMaker statsvisualizer = new GraphMaker();
 		StatsVisualizer visualizer = new StatsVisualizer();
-		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("game5", "klo14");
+		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("testergame", "klo14");
 		List<CellEntry> list = ((StatCell) statinfo).getAuthorStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
 		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);
@@ -51,7 +51,7 @@ public class GraphMakerTest extends Application {
 		stage.setScene(scene);
 		stage.show();
 	}
-	public void fillArrays1(List<VoogaData> xparams, List<VoogaData> yparams){
+	/*public void fillArrays1(List<VoogaData> xparams, List<VoogaData> yparams){
 		xparams.add(new VoogaString("true"));
 		xparams.add(new VoogaString("false"));
 		xparams.add(new VoogaString("true"));
@@ -95,7 +95,7 @@ public class GraphMakerTest extends Application {
 			xparams.add(entry.getProperty(xparam));
 			yparams.add(entry.getProperty(yparam));
 		}
-	}
+	}*/
 	public static void main(String[] args){
 		launch(args);
 	}

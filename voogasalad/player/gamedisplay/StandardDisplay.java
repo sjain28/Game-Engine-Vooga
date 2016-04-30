@@ -11,12 +11,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
 import stats.database.VoogaDataBase;
 import tools.IVoogaGameSound;
 import tools.OrderedProperties;
+import tools.Pair;
 import tools.VoogaGameSound;
 
 /**
@@ -35,6 +37,8 @@ public class StandardDisplay implements IGameDisplay {
 	private Scene myScene;
 	private BorderPane myPane;
 	private Pane myGameScreen;
+	private Pane myUIScreen;
+	private StackPane myScreensHolder;
 	private List<Node> myListToDisplay;
 	private List<KeyEvent> myKeyEvents;
 	private List<KeyEvent> myKeyPresses;
@@ -57,7 +61,9 @@ public class StandardDisplay implements IGameDisplay {
 		myGameSound = new VoogaGameSound();
 		myStage = new Stage();
 		myPane = new BorderPane();
-		myGameScreen = new Pane();	
+		myGameScreen = new Pane();
+		myUIScreen = new Pane();
+		myScreensHolder = new StackPane();
 //		myGameScreen = new StackPane();	
 		// Made the scene from log in scene creator;
 		// myScene = new VoogaScene(myPane, PANE_SIZE, PANE_SIZE);
@@ -93,14 +99,24 @@ public class StandardDisplay implements IGameDisplay {
 	public Pane getScreen() {
 		return this.myGameScreen;
 	}
+	
+	@Override
+	public Pane getUI() {
+		return this.myUIScreen;
+	}
 
 	/**
 	 * Reads in the list of Nodes to display and populates the screen
 	 */
-	public void readAndPopulate(List<Node> listToDisplay) {
-		myListToDisplay = listToDisplay;
+	public void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay) {
+//		myListToDisplay = listToDisplay;
 		myGameScreen.getChildren().clear();
-		myListToDisplay.forEach(n -> myGameScreen.getChildren().add(n));
+		myUIScreen.getChildren().clear();
+		for(Pair<Node, Boolean> p : listToDisplay) {
+			if(p.getLast()) myUIScreen.getChildren().add(p.getFirst());
+			else myGameScreen.getChildren().add(p.getFirst());
+		}
+//		myListToDisplay.forEach(n -> myGameScreen.getChildren().add(n));
 	}
 
 	/**
@@ -126,12 +142,11 @@ public class StandardDisplay implements IGameDisplay {
 	 */
 	private void addEffects() {
 		myStage.show();
-        myStage.setOnCloseRequest(e -> {
-            promptForSave();
-        });
 		myScene.addEventHandler(KeyEvent.ANY, keyListener);
 		myGameSound.playBGM();
 		myStage.setOnCloseRequest(e -> {
+            promptForSave();
+            System.out.println("DOES IT SAVE HEREEEEEEEE");
 			myGameRunner.getTimeline().stop();
 			myGameRunner.finishPlaySession();
 			myGameSound.stopBGM();
@@ -139,6 +154,7 @@ public class StandardDisplay implements IGameDisplay {
 	}
 	
     private void promptForSave () {
+    	System.out.println("DOES IT SAVE HEREEEEEEEE ?????????????????");
     	VoogaDataBase.getInstance().printDataBase();
         VoogaDataBase.getInstance().save();
     }
@@ -147,7 +163,8 @@ public class StandardDisplay implements IGameDisplay {
 	 * Creates the game display, adding all components
 	 */
 	private void createPane(OrderedProperties resource) {
-		myPane.setCenter(myGameScreen);
+		myScreensHolder.getChildren().addAll(myGameScreen, myUIScreen);
+		myPane.setCenter(myScreensHolder);
 		myPane.setTop(new MenuPanel(myGameRunner, e -> new MenuPanelHandlingMirror(e, myGameRunner), resource));
 		myPane.setBottom(myControl.createControl());
 		myPane.setRight(myHUD.createHUD());

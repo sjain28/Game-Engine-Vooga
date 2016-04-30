@@ -20,6 +20,7 @@ import resources.VoogaBundles;
 import stats.database.AuthorSession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import stats.interaction.CurrentSessionStats;
 import tools.VoogaException;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 
@@ -72,6 +73,8 @@ public class CreateCommand implements Command {
             VoogaBundles.preferences.setProperty("GameWidth", width);
             VoogaBundles.preferences.setProperty("GameHeight", height);
        
+            CurrentSessionStats stats = new CurrentSessionStats();
+    		stats.startAuthoringSession();
             UIManager manager = new UIManager(new ElementManager());
             Scene scene = new VoogaScene(manager);
             Stage primaryStage = new Stage();
@@ -86,12 +89,9 @@ public class CreateCommand implements Command {
     }
 
     private void promptForSave () {
-    	String gamename = VoogaBundles.preferences.getProperty("GameName");
-    	String username = VoogaBundles.preferences.getProperty("UserName");
-    	StatCell statinfo = (StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(gamename, username);
-//        statinfo.getLatestAuthoringSession().endSession();
-    	VoogaDataBase.getInstance().printDataBase();
-        VoogaDataBase.getInstance().save();
+    	CurrentSessionStats stats = new CurrentSessionStats();
+    	stats.endCurrentAuthoringSession();
+    	VoogaDataBase.getInstance().save();
     }
 
     private void showAuthorGamePrompt (StarterPrompt prompt) {
@@ -118,7 +118,8 @@ public class CreateCommand implements Command {
                     em.setName(level.getName().replace(".xml", ""));
                     models.add(em);
                 }
-            	
+                CurrentSessionStats stats = new CurrentSessionStats();
+        		stats.startAuthoringSession();
                 UIManager manager = new UIManager(models);
                 Scene scene = new VoogaScene(manager);
                 Stage primaryStage = new Stage();

@@ -7,85 +7,100 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import tools.interfaces.VoogaData;
 
-
+/**
+ * Handling and passing of booleans in the salad
+ */
 public class VoogaBoolean implements VoogaData {
-    private boolean myValue;
-    private transient SimpleBooleanProperty valueProperty;
+	private boolean myValue;
+	private transient SimpleBooleanProperty valueProperty;
 
-    public VoogaBoolean () {
-        myValue = true;
+	public VoogaBoolean() {
+		myValue = true;
 
-        initializeProperty();
-    }
+		initializeProperty();
+	}
 
-    public VoogaBoolean (boolean value) {
-        this.myValue = value;
-        initializeProperty();
-    }
+	public VoogaBoolean(boolean value) {
+		this.myValue = value;
+		initializeProperty();
+	}
 
-    public void setValue (Boolean value) {
-        this.myValue = value;
-    }
+	/**
+	 * Create and a new voogaBoolean with listener
+	 */
+	private void initializeProperty() {
+		if (valueProperty != null)
+			return;
 
-    @Override
-    public Object getValue () {
-        return (Boolean) myValue;
-    }
-    
-    private void initializeProperty () {
-        if (valueProperty != null)
-            return;
+		this.valueProperty = new SimpleBooleanProperty();
+		this.valueProperty.setValue(myValue);
 
-        this.valueProperty = new SimpleBooleanProperty();
-        this.valueProperty.setValue(myValue);
+		this.valueProperty.addListener((obs, old, n) -> {
+			this.myValue = (Boolean) n;
+			System.out.println(n);
+		});
+	}
 
-        this.valueProperty.addListener( (obs, old, n) -> {
-            this.myValue = (Boolean) n;
-            System.out.println(n);
-        });
-    }
+	/**
+	 * Bind switchbutton to boolean value and return 
+	 */
+	public Node display() {
+		SwitchButton switchButton = new SwitchButton(myValue);
+		Bindings.bindBidirectional(switchButton.booleanProperty(),
+				getProperty());
+		switchButton.setOn(myValue);
+		return switchButton;
+	}
 
-    public Node display () {
+	/**
+	 * Check if input is of a state
+	 * 
+	 * @param val
+	 * @return
+	 */
+	public boolean equals(Boolean val) {
+		return val == myValue;
+	}
 
-        SwitchButton switchButton = new SwitchButton(myValue);
-        Bindings.bindBidirectional(switchButton.booleanProperty(), getProperty());
-        switchButton.setOn(myValue);
-        return switchButton;
-    }
+	/**
+	 * Return boolean as a string
+	 */
+	public String toString() {
+		return Boolean.toString(myValue);
+	}
 
-    @Override
-    public void setValue (Object o) {
-        System.out.println("telling me to set value of boolean");
+	/**
+	 * Getters and setters all below
+	 * 
+	 * @param value
+	 */
+	public void setValue(Boolean value) {
+		this.myValue = value;
+	}
 
-        if (!(o instanceof Boolean)) {
-            return;
-        }
+	@Override
+	public void setValue(Object o) {
+		if (!(o instanceof Boolean)) {
+			return;
+		}
+		myValue = (Boolean) o;
+	}
+	
+	@Override
+	public Object getValue() {
+		return (Boolean) myValue;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> Property<T> getProperty() {
+		initializeProperty();
+		return (Property<T>) this.valueProperty;
+	}
 
-        System.out.println("setting boolean to : " + (Boolean) o);
-        myValue = (Boolean) o;
-
-    }
-
-    @Override
-    public <T> Property<T> getProperty () {
-        initializeProperty();
-        return (Property<T>) this.valueProperty;
-    }
-
-    @Override
-    public <T> void setProperty (T newVal) {
-        System.out.println("telling me to set value of property to: " + (boolean) newVal);
-        initializeProperty();
-        this.valueProperty.set((boolean) (Object) newVal);
-    }
-    
-
-    public boolean equals (Boolean val) {
-        return val == myValue;
-    }
-
-    public String toString () {
-        return Boolean.toString(myValue);
-    }
-
+	@Override
+	public <T> void setProperty(T newVal) {
+		initializeProperty();
+		this.valueProperty.set((boolean) (Object) newVal);
+	}
 }
