@@ -9,7 +9,6 @@ import authoring.gui.items.SwitchButton;
 import authoring.gui.menubar.builders.PropertyBuilder;
 import authoring.gui.menubar.builders.TextObjectBuilder;
 import authoring.interfaces.Elementable;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.VoogaFrontEndText;
 import authoring.resourceutility.ButtonMaker;

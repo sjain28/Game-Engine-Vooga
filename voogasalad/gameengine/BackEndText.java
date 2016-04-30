@@ -2,7 +2,7 @@ package gameengine;
 
 import java.util.HashMap;
 import java.util.Map;
-import authoring.interfaces.EngineElementable;
+import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import resources.VoogaBundles;
@@ -13,7 +13,7 @@ import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
 
 
-public class BackEndText implements EngineElementable {
+public class BackEndText implements Elementable {
 
     private Map<String, VoogaData> myProperties;
     private Map<String, Object> initializationProperties;
