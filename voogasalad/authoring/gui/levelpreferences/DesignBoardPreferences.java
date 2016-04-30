@@ -27,6 +27,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
 import resources.VoogaBundles;
 import tools.GUIUtils;
+import tools.VoogaAlert;
+import tools.VoogaFileChooser;
 
 /**
  * Tab that allows the user to define their preferences for the design board in terms of
@@ -60,6 +62,7 @@ public class DesignBoardPreferences extends Tab {
 	private CustomText speedLabel;
 	private EventHandler<ActionEvent> e;
 	private ResourceBundle dbfProperties;
+	private String soundTrackPath;
 	
 	/**
 	 * Constructor to build the pop up for the user to specify preferences.
@@ -76,7 +79,7 @@ public class DesignBoardPreferences extends Tab {
 
 		container.setSpacing(spacing);
 		container.setAlignment(Pos.CENTER);
-		container.getChildren().addAll(header(), chooseName(), chooseTrackingMode());
+		container.getChildren().addAll(header(), chooseName(), chooseBGM(), chooseTrackingMode());
 		this.setContent(container);
 		
 		initializeSpecifics();
@@ -85,6 +88,19 @@ public class DesignBoardPreferences extends Tab {
 		makeTrackingControl();
 	}
 
+	private Button chooseBGM() {
+		return new ButtonMaker().makeButton("Choose Soundtrack", e -> {
+			VoogaFileChooser chooser = new VoogaFileChooser();
+			try {
+				this.soundTrackPath = chooser.launch();
+			} catch (Exception ee) {
+				VoogaAlert alert = new VoogaAlert("Not a correct file.");
+				alert.showAndWait();
+				ee.printStackTrace();
+			}
+		});
+	}
+	
 	/**
 	 * Sets the name of the level.
 	 * 
@@ -295,6 +311,14 @@ public class DesignBoardPreferences extends Tab {
 
 	public void setTrackingDirection(String value) {
 		this.trackingDirection.setValue(value);
+	}
+
+	public String getBGM() {
+		return (this.soundTrackPath.isEmpty() || this.soundTrackPath == null) ? "" : this.soundTrackPath;
+	}
+	
+	public void setBGM(String BGM) {
+		this.soundTrackPath = BGM;
 	}
 
 }
