@@ -248,9 +248,7 @@ public class GameRunner implements IGameRunner {
 	}
 
 	@Override
-	public CompleteAuthoringModelable getManager() {
-		return null;
-	}
+	public CompleteAuthoringModelable getManager() { return null; }
 
 	@Override
 	public void addScene() {}

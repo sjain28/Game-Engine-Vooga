@@ -121,7 +121,7 @@ public class StandardDisplay implements IGameDisplay {
 			myGameSound.stopBGM();
 		});
 	}
-	
+
 	/**
 	 * Creates the game display, adding all components
 	 */
@@ -133,7 +133,7 @@ public class StandardDisplay implements IGameDisplay {
 		myPane.setRight(myHUD.createHUD());
 		myStage.setScene(myScene);
 	}
-	
+
 	private void saveDatabase() {
 		VoogaDataBase.getInstance().printDataBase();
 		VoogaDataBase.getInstance().save();
