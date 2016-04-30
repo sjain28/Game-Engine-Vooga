@@ -17,6 +17,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
+import tools.Pair;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -115,21 +116,21 @@ public class GameboyDisplay implements IGameDisplay {
 		}
 	};
 
-	/**
-	 * Reads in the list of Nodes to display
-	 * 
-	 */
-	@Override
-	public void readAndPopulate(List<Node> listToDisplay) {
-		myListToDisplay = listToDisplay;
-		getGameScreen().getChildren().clear();
-		getListToDisplay().forEach(n -> {
-			getGameScreen().getChildren().add(n);
-//			getGameScreen().setClip(n);
-//			n.setLayoutX(n.getLayoutX() + 400);
-//			n.setLayoutY(n.getLayoutY() + 200);
-		});
-	}
+//	/**
+//	 * Reads in the list of Nodes to display
+//	 * 
+//	 */
+//	@Override
+//	public void readAndPopulate(List<Node> listToDisplay) {
+//		myListToDisplay = listToDisplay;
+//		getGameScreen().getChildren().clear();
+//		getListToDisplay().forEach(n -> {
+//			getGameScreen().getChildren().add(n);
+////			getGameScreen().setClip(n);
+////			n.setLayoutX(n.getLayoutX() + 400);
+////			n.setLayoutY(n.getLayoutY() + 200);
+//		});
+//	}
 
 	/**
 	 * Public method defined in the interface that displays
@@ -375,6 +376,18 @@ public class GameboyDisplay implements IGameDisplay {
 	@Override
 	public void setSceneDimensions(double width, double height) {
 		myScene = new VoogaScene(myPane, width, height, CSS_PATH);
+	}
+
+	@Override
+	public Pane getUI() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

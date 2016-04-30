@@ -5,34 +5,36 @@ import java.util.Map;
 
 import gameengine.Sprite;
 import player.gamedisplay.IGameDisplay;
+import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
 /**
- * DisplayScroller provides public methods that choose Nodes to display
- * in a visible frame
+ * DisplayScroller provides public methods that choose Nodes to display in a
+ * visible frame
  * 
  * @author Hunter Lee
  *
  */
 public class DisplayScroller implements IDisplayScroller {
-	
+
 	private static final double INCREASE_FACTOR = 1;
 	private static final double SCROLL_FACTOR = 0.01;
 	private static final int MIN_SCROLL = 200;
 	private static final int MAX_SCROLL = 3000;
-	
+
 	private Sprite myScrollingSprite;
 	private boolean isExponentialScroll;
 	private String myScrollingType;
 	private IGameDisplay myGameDisplay;
-	
+
 	public DisplayScroller(IGameDisplay gamedisplay) {
 		this.myGameDisplay = gamedisplay;
 	}
-	
+
 	/**
-	 * Stub scroll method that scrolls the display both horizontally and vertically
+	 * Stub scroll method that scrolls the display both horizontally and
+	 * vertically
 	 * 
 	 * @param scrollsprite
 	 */
@@ -43,33 +45,34 @@ public class DisplayScroller implements IDisplayScroller {
 			setContinuousScrollType(globals, currentlevel);
 		}
 		scrollX(scrollingsprite);
-		//scrollY(scrollingsprite);
-	} 
-	
+//		scrollY(scrollingsprite);
+	}
 	/**
-	 * Scrolls the display horizontally using addListener method and by translatingX
+	 * Scrolls the display horizontally using addListener method and by
+	 * translatingX
 	 * 
 	 * @param scrollsprite
 	 */
 	private void scrollX(Sprite scrollsprite) {
-	    scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
-	        if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
-	            myGameDisplay.getScreen().setTranslateX(-(n.intValue() - MIN_SCROLL));
-	        }
-	    });
+		scrollsprite.getNodeObject().translateXProperty().addListener((obs, old, n) -> {
+			if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
+				myGameDisplay.getScreen().setTranslateX(-(n.intValue() - MIN_SCROLL));
+			}
+		});
 	}
 
 	/**
-	 * Scrolls the display vertically using addListener method and by translatingY
+	 * Scrolls the display vertically using addListener method and by
+	 * translatingY
 	 * 
 	 * @param scrollsprite
 	 */
 	private void scrollY(Sprite scrollsprite) {
-	    scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
-	        if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
-	            myGameDisplay.getScreen().setTranslateY(-(n.intValue() - MIN_SCROLL));
-	        }
-	    });
+		scrollsprite.getNodeObject().translateYProperty().addListener((obs, old, n) -> {
+			if (n.intValue() > MIN_SCROLL && n.intValue() < MAX_SCROLL) {
+				myGameDisplay.getScreen().setTranslateY(-(n.intValue() - MIN_SCROLL));
+			}
+		});
 	}
 
 	/**
@@ -82,23 +85,29 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @return
 	 */
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
-		myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
-		// Scrolling is centered on the main character
-		if (myScrollingType.equals("Tracking")) {
-			return mainsprite;
-		} else {
-			// Create a scrolling sprite and return it
-			double scrollAngle = (double) globals.get(currentlevel + "ScrollAngle").getValue();
-			double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
-			Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<String, VoogaData>(), new VoogaNumber());
-			scrollSprite.getImage().setOpacity(0);
-			scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
-			scrollSprite.getVelocity().setVelocity(scrollSpeed * SCROLL_FACTOR, scrollAngle);
-			myScrollingSprite = scrollSprite;
-			return scrollSprite;			
+		try {
+			myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
+			// Scrolling is centered on the main character
+			if (myScrollingType.equals("Tracking")) {
+				return mainsprite;
+			} else {
+				// Create a scrolling sprite and return it
+				double scrollAngle = (double) globals.get(currentlevel + "ScrollAngle").getValue();
+				double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
+				Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<String, VoogaData>(),
+						new VoogaNumber());
+				scrollSprite.getImage().setOpacity(0);
+				scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
+				scrollSprite.getVelocity().setVelocity(scrollSpeed * SCROLL_FACTOR, scrollAngle);
+				myScrollingSprite = scrollSprite;
+				return scrollSprite;
+			}
+		} catch (Exception e) {
+			new VoogaAlert("Please choose your tracking method.");
 		}
+		return null;
 	}
-	
+
 	/**
 	 * Set the boolean flag for the case of continuous (constant) scrolling
 	 * 

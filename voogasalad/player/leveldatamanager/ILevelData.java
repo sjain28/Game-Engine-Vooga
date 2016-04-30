@@ -13,6 +13,7 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
+import tools.Pair;
 import tools.interfaces.VoogaData;
 
 /**
@@ -29,7 +30,7 @@ public interface ILevelData {
 
 	Set<Entry<String, Elementable>> getElementables();
     
-	List<Node> getDisplayableNodes();
+	List<Pair<Node, Boolean>> getDisplayableNodes();
 	
 	boolean getSaveNow();
 
