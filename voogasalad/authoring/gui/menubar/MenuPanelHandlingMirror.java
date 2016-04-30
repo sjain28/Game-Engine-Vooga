@@ -34,7 +34,6 @@ public class MenuPanelHandlingMirror {
                                     Menuable manager) {
         this.e = e;
         myManager = manager;
-
         try {
             handleEvent();
         }
@@ -49,7 +48,7 @@ public class MenuPanelHandlingMirror {
      * 
      * @throws VoogaException
      */
-    private void handleEvent () throws VoogaException {
+    public void handleEvent () throws VoogaException {
         MenuItem menuItem = (MenuItem) e.getSource();
         MenuItemHandler menuItemHandler;
         Class<?> clazz;

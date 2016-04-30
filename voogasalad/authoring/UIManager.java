@@ -105,7 +105,7 @@ public class UIManager extends VBox implements Menuable {
 	 * @return the list of names of each tab manager
 	 */
 	public List<String> getAllManagerNames() {
-		List<String> names = new ArrayList<String>();
+		List<String> names = new ArrayList<>();
 		elementTabManager.getAllManagers().stream().map(ElementManager::getName).forEach(names::add);
 		return names;
 	}
