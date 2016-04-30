@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import authoring.gui.LeaderBoard;
-import authoring.gui.LeaderBoards;
 import authoring.gui.cartography.LevelType;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
@@ -135,7 +134,7 @@ public class GameRunner implements IGameRunner {
 				for (int i =0 ; i< 100000; i++){
 				System.out.println("AN ENDPOINT HAS BEEN REACHED SO A WIN SCREEN SHOULD BE PULLED");
 				}
-				LeaderBoards leaderBoard = new LeaderBoards(VoogaBundles.preferences.getProperty("GameName"));
+				LeaderBoard leaderBoard = new LeaderBoard(VoogaBundles.preferences.getProperty("GameName"));
 			}
 		}
 	}

@@ -20,12 +20,12 @@ import stats.database.VoogaDataBase;
 import tools.Pair;
 import tools.ScoreCompare;
 
-public class LeaderBoards extends Stage{
+public class LeaderBoard extends Stage{
     private VBox best;
     private VoogaDataBase database = VoogaDataBase.getInstance();
     private String game;
 
-    public LeaderBoards (String game) {
+    public LeaderBoard (String game) {
         this.game = game;
         best = new VBox();
         best.getChildren().add(new Text("High Scores"));
