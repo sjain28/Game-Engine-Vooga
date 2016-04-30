@@ -9,21 +9,39 @@ public class Pair<A, B> {
     private final A first;
     private final B last;
 
-
+    /**
+     * Pair a map key to a value
+     * 
+     * @param key
+     * @param value
+     */
     public Pair (A key, B value) {  
-        this.first = key;
-        this.last = value;
-    }
+		this.first = key;
+		this.last = value;
+	}
 
-    public A getFirst () {
-        return first;
-    }
-    
-    public B getLast () {
-        return last;
-    }
+	/**
+	 * Return the key
+	 * 
+	 * @return
+	 */
+	public A getFirst() {
+		return first;
+	}
 
-    public String toString() { 
-        return "(" + first + ", " + last + ")";  
-    }
+	/**
+	 * Return the mapped value
+	 * 
+	 * @return
+	 */
+	public B getLast() {
+		return last;
+	}
+
+	/**
+	 * Return the mapping as a string
+	 */
+	public String toString() {
+		return "(" + first + ", " + last + ")";
+	}
 }
