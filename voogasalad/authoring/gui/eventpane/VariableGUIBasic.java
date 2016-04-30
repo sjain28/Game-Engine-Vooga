@@ -1,5 +1,7 @@
 package authoring.gui.eventpane;
 
+import java.util.Collection;
+import java.util.ResourceBundle;
 import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.VariableComboBox;
@@ -24,6 +26,7 @@ public abstract class VariableGUIBasic implements EventGUI {
     private EditEventable elementManager;
     private VBox node;
     private EventParts type;
+    private ResourceBundle bundle;
     
     public VariableGUIBasic (EditEventable elementManager, EventParts type) {
         this.elementManager = elementManager;
@@ -69,20 +72,20 @@ public abstract class VariableGUIBasic implements EventGUI {
             actions.getItems().clear();
             VoogaData vd = variables.getProperty(variables.getValue());
             if (vd instanceof VoogaNumber) {
-                actions.getItems().addAll("Set", "Decrease", "Increase");
+                actions.getItems().addAll(voogaNumberProperties());
                 NumberTextField numField = new NumberTextField();
                 amount = numField;
                 addGUIElements(actions, amount);
             }
             if (vd instanceof VoogaBoolean) {
-                actions.getItems().addAll(("Set"));
+                actions.getItems().addAll(voogaProperties());
                 ComboBox<String> cb = new ComboBox<String>();
                 cb.getItems().addAll("true", "false");
                 amount = cb;
                 addGUIElements(actions, amount);
             }
             if (vd instanceof VoogaString) {
-                actions.getItems().addAll("Set");
+                actions.getItems().addAll(voogaProperties());
                 TextField field = new TextField();
                 amount = field;
                 addGUIElements(actions, amount);
@@ -105,6 +108,9 @@ public abstract class VariableGUIBasic implements EventGUI {
         }
 
     }
+    
+    protected abstract Collection<String> voogaNumberProperties();
+    protected abstract Collection<String> voogaProperties();
     
     private void resetNode () {
         node.getChildren().clear();
