@@ -17,13 +17,14 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
+import tools.Pair;
+import tools.PairZAxisComparator;
 import tools.VoogaBoolean;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
- * A centralized class to contain and access data relevant to a level
- * This includes Sprite's, Text, Global Variables, and Events
+ * A centralized class to contain and access data including Sprites, Text, Global Variables, and Events
  * 
  * @author Krista, Hunter
  */
@@ -100,16 +101,6 @@ public class LevelData implements ILevelData {
     	else{return myAnimationFactory.cloneAnimationEvent(animationString);}
     }
     /**
-     * Adds a sprite as a member of the given archetype
-     * @param archetype
-     * @return
-     */
-    public Sprite addSprite(String archetype) {
-        Elementable newSprite = mySpriteFactory.createSprite(archetype);
-        myElements.put(newSprite.getId(), newSprite);
-        return (Sprite) newSprite;
-    }
-    /**
      * Returns a Global Variable (VoogaData) as specified by its variable name
      * @param variable
      * @return
@@ -122,25 +113,6 @@ public class LevelData implements ILevelData {
      */
     public Sprite getMainSprite() {
     	return getSpriteByID(myMainCharID);
-    }
-    /**
-     * Returns a text object by ID
-     * @param id
-     * @return
-     */
-    public VoogaFrontEndText getText(Object id) {
-        return (VoogaFrontEndText) myElements.get(id);
-    }
-    /**
-     * Put all objects into a generic list of displayable objects
-     * @return
-     */
-    public List<Node> getDisplayableNodes() {
-        List<Node> displayablenodes = new ArrayList<>();
-        for (Object key : myElements.keySet()) {
-            displayablenodes.add(myElements.get(key).getNodeObject());
-        }
-        return displayablenodes;
     }
     /**
      * Add a given event and populate the pressed and released KeyCombos
@@ -198,13 +170,57 @@ public class LevelData implements ILevelData {
     public IPhysicsEngine getPhysicsEngine() {
         return myPhysics;
     }
-    public Map<String,VoogaData> getGlobalVars(){
+    public Map<String,VoogaData> getGlobalVariables(){
     	return myGlobalVariables;
     }
 	/**
-	 * @return the myKeyEventContainer
+	 * Adds a sprite as a member of the given archetype
+	 * @param archetype
+	 * @return
 	 */
+	public Sprite addSprite(String archetype) {
+		Elementable newSprite = mySpriteFactory.createSprite(archetype);
+		myElements.put(newSprite.getId(), newSprite);
+		return (Sprite) newSprite;
+	}
+
+	/**
+	 * Returns a text object by ID
+	 * @param id
+	 * @return
+	 */
+	public VoogaFrontEndText getText(Object id) {
+		return (VoogaFrontEndText) myElements.get(id);
+	}
+
+	/**
+	 * Put all objects into a pair of displayable objects
+	 * @return
+	 */
+	public List<Pair<Node, Boolean>> getDisplayableNodes() {
+		List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
+		for (Object key : myElements.keySet()) {
+			Boolean isStatic = false;
+			//TODO: Replace this
+			//        	if(myElements.get(key) instanceof Sprite) {
+			//        		Sprite sprite = (Sprite) myElements.get(key);
+			//        		if((Double) sprite.getVoogaProperties().get(VoogaBundles.spriteProperties.getString("MASS")).getProperty().getValue() > 10) {
+			//        			isStatic = true;
+			//        		}
+			//        	}
+			displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
+		}
+		displayablenodes.sort(new PairZAxisComparator());
+		return displayablenodes;
+	}
+
 	public KeyEventContainer getKeyEventContainer() {
 		return myKeyEventContainer;
 	}
+
+	@Override
+	public Map<String, Elementable> getElements() {
+		return myElements;
+	}
+
 }

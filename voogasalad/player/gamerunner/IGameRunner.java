@@ -11,15 +11,13 @@ import player.gamedisplay.Menuable;
 public interface IGameRunner extends Menuable{
 	
 	void exit();
-	
-	Timeline getTimeline();
 
 	void speedUp();
 
 	void speedDown();
-		
+
 	void playGame(String xmlList);
-	
+
 	void testLevel(String levelName);
 			
 	void replayLevel();
@@ -27,4 +25,6 @@ public interface IGameRunner extends Menuable{
 	void takeSnapShot();
 	
 	void finishPlaySession();
+
+	Timeline getTimeline();
 }

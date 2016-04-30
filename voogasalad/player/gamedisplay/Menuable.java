@@ -1,7 +1,6 @@
 package player.gamedisplay;
 
 import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.model.ElementManager;
 
 public interface Menuable {
     
