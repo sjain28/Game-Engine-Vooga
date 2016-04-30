@@ -24,17 +24,21 @@ public class DisplayScroller implements IDisplayScroller {
 	private static final int MAX_SCROLL = 3000;
 
 	private Sprite myScrollingSprite;
-	private boolean isExponentialScroll;
-	private String myScrollingType;
 	private IGameDisplay myGameDisplay;
+	private String myScrollingType;
+	private boolean isExponentialScroll;
 
+	/**
+	 * Default constructor that sets the game display to scroll
+	 * 
+	 * @param gamedisplay
+	 */
 	public DisplayScroller(IGameDisplay gamedisplay) {
 		this.myGameDisplay = gamedisplay;
 	}
 
 	/**
-	 * Stub scroll method that scrolls the display both horizontally and
-	 * vertically
+	 * Stub scroll method that scrolls the display both horizontally and vertically
 	 * 
 	 * @param scrollsprite
 	 */
