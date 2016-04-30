@@ -1,5 +1,6 @@
 package player.leveldatamanager;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -153,8 +154,7 @@ public class LevelData implements ILevelData {
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
-		System.out.println("MY SOUND " + myGlobalVariables.get(levelfilename.replace(".xml", "")+"BGM").getValue());
-		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(levelfilename.replace(".xml", "")+"BGM").getValue());
+		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "")+"BGM").getValue());
 		// TODO: Anita: implement clearMap and setMap and call a stub
 		// mySpriteFactory.clearMap();
 		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());
