@@ -10,7 +10,7 @@ import player.leveldatamanager.ILevelData;
 	 * @author Saumya Jain
 	 *
 	 */
-public class SpriteVariableCause extends VariableCause {
+public class SpriteCause extends VariableCause {
 	
 	private List<Sprite> mySprites;
 	private String mySpriteID;
@@ -23,7 +23,7 @@ public class SpriteVariableCause extends VariableCause {
 	 * @param predicate A predicate method to be applied to the Sprite proeprty
 	 * @param voogaevent Event that this cause belongs to
 	 */
-	private SpriteVariableCause(String spriteID, String varName, String predicate, VoogaEvent voogaevent){
+	private SpriteCause(String spriteID, String varName, String predicate, VoogaEvent voogaevent){
 		super(predicate, voogaevent);
 		mySpriteID = spriteID;
 		myVarName = varName;
@@ -37,7 +37,7 @@ public class SpriteVariableCause extends VariableCause {
 	 * @param target A target value for testing equality or other logical relationships to the Sprite property
 	 * @param voogaEvent
 	 */
-	public SpriteVariableCause(String spriteID, String varName, String predicate, Double target, VoogaEvent voogaEvent) {
+	public SpriteCause(String spriteID, String varName, String predicate, Double target, VoogaEvent voogaEvent) {
 		this(spriteID, varName, predicate, voogaEvent);
 		setTarget(target);
 	}
@@ -49,7 +49,7 @@ public class SpriteVariableCause extends VariableCause {
 	 * @param target
 	 * @param voogaEvent
 	 */
-	public SpriteVariableCause(String spriteID, String varName, String predicate, Boolean target, VoogaEvent voogaEvent) {
+	public SpriteCause(String spriteID, String varName, String predicate, Boolean target, VoogaEvent voogaEvent) {
 		this(spriteID, varName, predicate, voogaEvent);
 		setTarget(target);;
 	}

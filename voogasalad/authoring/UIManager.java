@@ -40,9 +40,7 @@ public class UIManager extends VBox implements Menuable {
 	 *            Interface to mediate interactions with back-end
 	 */
 	public UIManager(List<CompleteAuthoringModelable> models) {
-		gameName = VoogaBundles.preferences.getProperty("GameName");
-		this.currentTabIndex = new SimpleIntegerProperty(-1);
-		this.elementTabManager = new ElementTabManager();
+		initializeTabs();
 		ElementManager temp = new ElementManager();
 		this.elementTabManager.addManager(temp);
 		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
@@ -52,7 +50,6 @@ public class UIManager extends VBox implements Menuable {
 		}
 		this.elementTabManager.removeManager(temp);
 		grid.removeFirstTab();
-		System.out.println(elementTabManager.getAllManagers().size());
 	}
 	/**
 	 * Initializes the UI Manager given a singular model
@@ -61,12 +58,18 @@ public class UIManager extends VBox implements Menuable {
 	 *            Interface to mediate interactions with backend
 	 */
 	public UIManager(CompleteAuthoringModelable model) {
-		this.currentTabIndex = new SimpleIntegerProperty(-1);
-		this.elementTabManager = new ElementTabManager();
+		initializeTabs();
 		this.elementTabManager.addManager((ElementManager) model);
 		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
 		initializeComponents();
 	}
+	
+	private void initializeTabs() {
+		gameName = VoogaBundles.preferences.getProperty("GameName");
+		this.currentTabIndex = new SimpleIntegerProperty(-1);
+		this.elementTabManager = new ElementTabManager();
+	}
+	
 	/**
 	 * Initializes all the pieces of the authoring environment
 	 */

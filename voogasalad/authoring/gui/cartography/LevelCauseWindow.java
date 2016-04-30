@@ -51,7 +51,7 @@ public class LevelCauseWindow extends Stage {
 			for (String eventDetails : causeAccoridion.getDetails()) {
 				populateEvent(eventDetails);
 			}
-			new LevelTransitionEffect(endLevel, event);
+			LevelTransitionEffect levelTransition = new LevelTransitionEffect(endLevel, event);
 			populateEvent("events.LevelTransitionEffect," + endLevel);
 			model.addEvents(event);
 			this.close();
@@ -65,7 +65,8 @@ public class LevelCauseWindow extends Stage {
         try{
             eventFactory.create(event, eventDetails);
         } catch (Exception e){
-            throw e;
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
     }
 	
