@@ -46,16 +46,13 @@ public class LeaderBoards extends Stage {
         
         for(CellEntry c: database.getStatsbyGame(game)){
             for(CellEntry e: ((StatCell) c).getPlayStats()){
-                scores.add(new Pair<String, Double>(
-                        e.getProperty(StatCell.MY_USER)
-                                .getValue()
-                                .toString(),
-                        Double.parseDouble(e
-                                .getProperty(PlaySession.SCORE)
-                                .getValue()
-                                .toString())));
+                scores.add(new Pair<String, Double>(e.getProperty(StatCell.MY_USER).getValue().toString(),
+                								    Double.parseDouble(e.getProperty(PlaySession.SCORE)
+                								    					.getValue()
+                								    					.toString())));
             }
         }
+        
         scores.sort(new ScoreCompare());
         for (int i = 0; i < 10; i++) {
             if (scores.get(i) != null) {
