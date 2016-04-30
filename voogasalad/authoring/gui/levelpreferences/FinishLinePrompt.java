@@ -3,10 +3,14 @@ package authoring.gui.levelpreferences;
 import authoring.CustomText;
 import authoring.VoogaScene;
 import authoring.gui.items.NumberTextField;
+import authoring.resourceutility.ButtonMaker;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tools.GUIUtils;
+import tools.Pair;
 
 public class FinishLinePrompt extends Stage {
 	
@@ -30,12 +34,16 @@ public class FinishLinePrompt extends Stage {
 									   GUIUtils.makeRow(new CustomText("Y: "), yCoordinate));
 	}
 	
-//	public void setProceedListener(EventHandler<ActionEvent> e) {
-//		
-//	}
+	public void setProceedListener(EventHandler<ActionEvent> e) {
+		container.getChildren().add(new ButtonMaker().makeButton("OK", e));
+	}
 	
 	private void initializeScene() {
 		this.setScene(new VoogaScene(container));
+	}
+
+	public Pair<Double, Double> getCoords() {
+		return new Pair<Double, Double>(Double.parseDouble(xCoordinate.getText()), Double.parseDouble(yCoordinate.getText()));
 	}
 
 }
