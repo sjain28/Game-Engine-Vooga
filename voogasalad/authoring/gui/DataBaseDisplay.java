@@ -39,7 +39,7 @@ public class DataBaseDisplay extends Stage {
     private VoogaGame selectedGame;
     
     public DataBaseDisplay(){
-        user = database.getUser(VoogaBundles.preferences.getProperty("Username"));
+        user = database.getUser(VoogaBundles.preferences.getProperty("UserName"));
         VBox content = new VBox();
         HBox header = makeHeader();
         HBox data = makeData();
@@ -50,8 +50,13 @@ public class DataBaseDisplay extends Stage {
 
     private HBox makeHeader () {
         HBox ans = new HBox(20);
-        ImageView pict = new ImageView();
-        pict.setImage(new Image("file:" + user.getProperty(user.PROF_PIC_LOC)));
+        ImageView pict =  new ImageView();
+        try{
+            pict = user.displayProfilePicture();
+        } 
+        catch(Exception IllegalArgumentException){
+            //do Nothing
+        }
         pict.setFitHeight(HEADER_HEIGHT);
         pict.setPreserveRatio(true);
         Text t = new Text(user.getProperty(user.DISPLAY_NAME).toString());
