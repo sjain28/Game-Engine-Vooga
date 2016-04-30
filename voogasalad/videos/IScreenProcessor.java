@@ -1,12 +1,13 @@
 package videos;
 
 import java.awt.image.BufferedImage;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.util.List;
-
 import javafx.scene.Scene;
 
+/**
+ * General interface for scene or screen capture, image conversion, and video processing
+ * 
+ * @author Michael Kuryshev
+ */
 public interface IScreenProcessor {
 	
 	/**
@@ -41,12 +42,4 @@ public interface IScreenProcessor {
 	 * @param images
 	 * @param outputFileName
 	 */
-	void encodeScreenshots(String outputFileName, List<BufferedImage> images, double frameRate);
-	
-	/**
-	 * Add buffered images to video array for alter compression if enabled
-	 * 
-	 * @param videoImages
-	 */
-//	void updateVideo(List<BufferedImage> videoImages);
 }

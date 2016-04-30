@@ -97,8 +97,16 @@ public class PathBuilder extends Tab {
 				myShape = line.getLine();
 			}
 		});
-		toolbar.getItems().addAll(spline, linear);
+		toolbar.getItems().addAll(spline, linear, coordinates());
 		return toolbar;
+	}
+	
+	private HBox coordinates() {
+		CustomText text = new CustomText("");
+		border.setOnMouseMoved(e -> {
+			text.setText(String.format("X:  %s   Y:  %s", e.getX(), e.getY()));
+		});
+		return GUIUtils.makeRow(text);
 	}
 
 	/**
@@ -128,6 +136,7 @@ public class PathBuilder extends Tab {
 				name.setText("");
 			} catch (Exception e1) {
 				new VoogaAlert("Please define a proper path and name.");
+				e1.printStackTrace();
 			}
 		}));
 		return row;

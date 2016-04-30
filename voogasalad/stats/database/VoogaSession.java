@@ -1,6 +1,7 @@
 package stats.database;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 public abstract class VoogaSession extends CellEntry{
 	private Instant startInstant;
@@ -12,10 +13,8 @@ public abstract class VoogaSession extends CellEntry{
 	public void endSession(){
 		endInstant = Instant.now();
 		
-		// COMMENT for now 
-//		gap = ChronoUnit.MINUTES.between(startInstant,endInstant);
-//		System.out.println("The gap here is " + gap);
-//		setDurationProperty(gap);
+		gap = ChronoUnit.MINUTES.between(startInstant,endInstant);
+		setDurationProperty(gap);
 	}
 	protected abstract void setDurationProperty(double gap);
 }

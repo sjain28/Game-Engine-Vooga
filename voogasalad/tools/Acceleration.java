@@ -16,8 +16,6 @@ public class Acceleration extends Vector {
 	 */
 	public Acceleration(double x, double y) {
 		super(x, y);
-//		System.out.println("X acceleration: "+getX());
-//		System.out.println("Y acceleration: "+getY());
 	}
 
 }
