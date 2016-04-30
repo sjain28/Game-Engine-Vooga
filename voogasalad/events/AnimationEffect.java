@@ -28,7 +28,9 @@ public class AnimationEffect extends SpriteEffect {
 	@Override
 	public void execute(ILevelData data) {
 		setSprites(data);
+		if (myAnimationEvent == null){
 		myAnimationEvent = data.getAnimationFromFactory(myAnimationName);
+		}
 		myAnimationEvent.addSpritesFromCause(getSprites());
 		data.addEventAndPopulateKeyCombos(myAnimationEvent);
 		myAnimationEvent.setCauseValue(true);
@@ -36,7 +38,7 @@ public class AnimationEffect extends SpriteEffect {
 
 	@Override
 	public String toString() {
-		String effectString = "Applies " + myAnimationEvent.toString() + " to ";
+		String effectString = "Applies " + myAnimationName + " to ";
 		if (getSpriteID() != null){
 			effectString += getSpriteID();
 		}
@@ -48,5 +50,4 @@ public class AnimationEffect extends SpriteEffect {
 		}		
 		return effectString;
 	}
-
 }

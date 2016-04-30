@@ -8,7 +8,6 @@ import java.util.Vector;
 
 /**
  * A class that orders properties files alphabetically.
- *
  */
 @SuppressWarnings("serial")
 public class OrderedProperties extends Properties {
@@ -22,6 +21,12 @@ public class OrderedProperties extends Properties {
         _names = new Vector<Object>();
     }
 
+    /**
+     * Load a stream of ordered objects
+     * 
+     * @param inStream
+     * @return
+     */
     public static OrderedProperties loadOrdered (InputStream inStream) {
         OrderedProperties op = new OrderedProperties();
         try {

@@ -10,83 +10,81 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 import tools.VoogaException;
 
-
+/**
+ * Storing and loading of data in serialization
+ */
 public abstract class NodeProperties {
-    private ResourceBundle bundle;
-    
-    public NodeProperties (ResourceBundle bundle) {
-        this.bundle = bundle;
-        
-    }
+	private ResourceBundle bundle;
 
-    public Map<String,Object> storeData (Node node) throws VoogaException {
-        System.out.println("Storing Data");
-//        System.out.println(this.getClass());
-//        System.out.println(this.getClass().getDeclaredFields().length);
-        
-        Map<String,Object> propertiesMap = new HashMap<String,Object>();
-        for (Field field : this.getClass().getDeclaredFields()){
-            System.out.println("Field: "+field);
-            System.out.println("ResourceBundleValue: "+getResourceBundle().getString(field.getName()));
-            
-            Method method =
-                    getMethodName(node, getResourceBundle().getString(field.getName()), "get",0);
-           System.out.println("Method: " + method.toString());
-        }
-        for (Field field : this.getClass().getDeclaredFields()) {
-            Method method =
-                    getMethodName(node, getResourceBundle().getString(field.getName()), "get",0);
+	public NodeProperties(ResourceBundle bundle) {
+		this.bundle = bundle;
 
-            if (method.getParameters().length == 0) {
-                try {
-                    field.set(this, method.invoke(node, null));
-                    propertiesMap.put(field.getName(), field.get(this));
-                    System.out.println(field.getName()+ " "+field.get(this));
-                }
-                catch (IllegalArgumentException | IllegalAccessException
-                        | InvocationTargetException e) {
-                    throw new VoogaException("Failed to store the data");
-                }
-            }
-        }
-        
-        return propertiesMap;
-    }
+	}
 
-    public void loadData (Node node, Map<String,Object> nodeProperties) throws VoogaException {
-        System.out.println("Loading Data");
-        for (String field : nodeProperties.keySet()) {
-            System.out.println("field name: " + field);
-            Method method =
-                    getMethodName(node, getResourceBundle().getString(field), "set",1);
+	public Map<String, Object> storeData(Node node) throws VoogaException {
+		System.out.println("Storing Data");
 
-            try {
-                method.invoke(node, nodeProperties.get(field));
-            }
-            catch (IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException e) {
-                throw new VoogaException("Failed to load the data");
-            }
-        }
+		Map<String, Object> propertiesMap = new HashMap<String, Object>();
+		for (Field field : this.getClass().getDeclaredFields()) {
 
-    }
+			// TODO what does this method do? remove the print and it gets
+			// warning
+			Method method = getMethodName(node,
+					getResourceBundle().getString(field.getName()), "get", 0);
+		}
+		for (Field field : this.getClass().getDeclaredFields()) {
+			Method method = getMethodName(node,
+					getResourceBundle().getString(field.getName()), "get", 0);
 
-    private Method getMethodName (Object o, String name, String operation, int numParameters) throws VoogaException {
-        Method[] methods = o.getClass().getMethods();
+			if (method.getParameters().length == 0) {
+				try {
+					// TODO remove the null to remove warning, will it break?
+					field.set(this, method.invoke(node, null));
+					propertiesMap.put(field.getName(), field.get(this));
+				} catch (IllegalArgumentException | IllegalAccessException
+						| InvocationTargetException e) {
+					throw new VoogaException("Failed to store the data");
+				}
+			}
+		}
 
-        for (Method method : methods) {
-            if ((method.getName().equalsIgnoreCase(operation + name) ||
-                method.getName().equalsIgnoreCase(name)) && (method.getParameterCount()==numParameters)) {
-                return method;
-            }
-        }
+		return propertiesMap;
+	}
 
-        throw new VoogaException("Could not store data");
-    }
+	public void loadData(Node node, Map<String, Object> nodeProperties)
+			throws VoogaException {
+		for (String field : nodeProperties.keySet()) {
+			Method method = getMethodName(node,
+					getResourceBundle().getString(field), "set", 1);
 
-    public ResourceBundle getResourceBundle () {
-        return bundle;
-    }
+			try {
+				method.invoke(node, nodeProperties.get(field));
+			} catch (IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException e) {
+				throw new VoogaException("Failed to load the data");
+			}
+		}
+
+	}
+
+	private Method getMethodName(Object o, String name, String operation,
+			int numParameters) throws VoogaException {
+		Method[] methods = o.getClass().getMethods();
+
+		for (Method method : methods) {
+			if ((method.getName().equalsIgnoreCase(operation + name) || method
+					.getName().equalsIgnoreCase(name))
+					&& (method.getParameterCount() == numParameters)) {
+				return method;
+			}
+		}
+
+		throw new VoogaException("Could not store data");
+	}
+
+	public ResourceBundle getResourceBundle() {
+		return bundle;
+	}
 
 
 

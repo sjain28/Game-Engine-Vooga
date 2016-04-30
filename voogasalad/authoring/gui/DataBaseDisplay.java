@@ -1,5 +1,7 @@
 package authoring.gui;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import authoring.VoogaScene;
 import authoring.model.VoogaFrontEndText;
 import javafx.collections.FXCollections;
@@ -11,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,21 +22,24 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import resources.VoogaBundles;
+import stats.database.StatCell;
 import stats.database.VoogaDataBase;
 import stats.database.VoogaGame;
 import stats.database.VoogaUser;
+import stats.visualization.GraphMaker;
 
 public class DataBaseDisplay extends Stage {
     private static final double HEADER_HEIGHT = 50;
     private static final double HEADER_WIDTH = 700;
     private static final double DATA_WIDTH = 700;
     private static final double DATA_HEIGHT = 400;
+    
     private VoogaDataBase database = VoogaDataBase.getInstance();
     private VoogaUser user;
     private VoogaGame selectedGame;
     
     public DataBaseDisplay(){
-        user = database.getUser(VoogaBundles.preferences.getProperty("Username"));
+        user = database.getUser(VoogaBundles.preferences.getProperty("UserName"));
         VBox content = new VBox();
         HBox header = makeHeader();
         HBox data = makeData();
@@ -43,8 +49,14 @@ public class DataBaseDisplay extends Stage {
     }
 
     private HBox makeHeader () {
-        HBox ans = new HBox();
-        ImageView pict = new ImageView();
+        HBox ans = new HBox(20);
+        ImageView pict =  new ImageView();
+        try{
+            pict = user.displayProfilePicture();
+        } 
+        catch(Exception IllegalArgumentException){
+            //do Nothing
+        }
         pict.setFitHeight(HEADER_HEIGHT);
         pict.setPreserveRatio(true);
         Text t = new Text(user.getProperty(user.DISPLAY_NAME).toString());
@@ -65,33 +77,29 @@ public class DataBaseDisplay extends Stage {
 
     private Node makeTabs () {
         TabPane ans = new TabPane();
-        Tab playsScore = new Tab("Score on Game");
-        //TODO: add in playsScore content
-        Tab playsTime = new Tab("Time Lasted on Game");
-        //TODO: add in playsScore content
-        Tab highScore = new Tab("High Scores");
-        //TODO: add in playsScore content
-        ans.getTabs().addAll(playsScore, playsTime, highScore);
+        GraphMaker graphMaker = new GraphMaker();
+        Tab plotMaker = new Tab("Plot Maker");
+        plotMaker.setContent(infoOptions());
+        ans.getTabs().addAll(plotMaker);
         ans.setPrefWidth(DATA_WIDTH * 3 / 4);
         return ans;
     }
 
+    private VBox infoOptions () {
+       VBox scene = new VBox();
+       return scene;
+    }
+
     private Node makeLists () {
         Accordion lists = new Accordion();
-        TitledPane gamesMade = new TitledPane();
-        gamesMade.setText("Games Made");
-        ListView<String> made = new ListView<String>();
-        made.getItems().setAll(database.getStatsbyUser(user.getProperty(user.USER_NAME).toString()).toString());
-        made.setOnMouseClicked(e -> clickList(made.getSelectionModel().getSelectedItem()));
-        gamesMade.setContent(made);
-        TitledPane gamesPlayed = new TitledPane();
-        ListView<String> played = new ListView<String>();
-        //THIS IS INCORRECT
-        played.getItems().setAll(database.getStatsbyUser(user.getProperty(user.USER_NAME).toString()).toString());
-        played.setOnMouseClicked(e -> clickList(made.getSelectionModel().getSelectedItem()));
-        gamesPlayed.setText("Games Played");
-        gamesPlayed.setContent(played);
-        lists.getPanes().addAll(gamesMade, gamesPlayed);
+        TitledPane games = new TitledPane();
+        games.setText("Games");
+        ListView<String> actualGames = new ListView<String>();
+        List<String> authoredGames = database.getStatsbyUser(user.getProperty(user.USER_NAME).toString()).stream().map(e -> e.getProperty(StatCell.MY_GAME).toString()).collect(Collectors.toList());
+        actualGames.getItems().setAll(authoredGames);
+        actualGames.setOnMouseClicked(e -> clickList(actualGames.getSelectionModel().getSelectedItem()));
+        games.setContent(actualGames);
+        lists.getPanes().addAll(games);
         lists.setPrefWidth(DATA_WIDTH/4);
         return lists;
     }
