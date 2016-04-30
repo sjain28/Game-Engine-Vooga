@@ -74,11 +74,11 @@ public class StandardControl implements IControl {
 		Button speedDown = maker.makeButton((gameDisplayProperties.getString(SLOW_DOWN_KEY)), e -> getGameRunner().speedDown());
 //		Button playNext = maker.makeButton((gameDisplayProperties.getString(PLAYNEXTLEVEL_BUTTON_KEY)), e -> getGameRunner().playNextLevel());
 		Button snapshot = maker.makeButton((gameDisplayProperties.getString(SNAPSHOT_KEY)), e -> getGameRunner().takeSnapShot());
-		Button videoStart = maker.makeButton((gameDisplayProperties.getString(START_VIDEO_KEY)), e -> getGameRunner().startVideoCapture());
-		Button videoStop = maker.makeButton((gameDisplayProperties.getString(STOP_VIDEO_KEY)), e -> getGameRunner().endVideoCapture());
-		myControl.getChildren().addAll(start, pause, speedUp, speedDown, snapshot, videoStart, videoStop);
+//		Button videoStart = maker.makeButton((gameDisplayProperties.getString(START_VIDEO_KEY)), e -> getGameRunner().startVideoCapture());
+//		Button videoStop = maker.makeButton((gameDisplayProperties.getString(STOP_VIDEO_KEY)), e -> getGameRunner().endVideoCapture());
+//		myControl.getChildren().addAll(start, pause, speedUp, speedDown, snapshot, videoStart, videoStop);
 //		myControl.getChildren().addAll(start, pause, speedUp, speedDown, playNext, snapshot);
-//		myControl.getChildren().addAll(start, pause, speedUp, speedDown,snapshot);
+		myControl.getChildren().addAll(start, pause, speedUp, speedDown,snapshot);
 		return myControl;
 	}
 

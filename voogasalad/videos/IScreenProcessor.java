@@ -41,10 +41,12 @@ public interface IScreenProcessor {
 	 * @param images
 	 * @param outputFileName
 	 */
-	void encodeScreenshots(String outputFileName, double frameRate);
-
+	void encodeScreenshots(String outputFileName, List<BufferedImage> images, double frameRate);
+	
 	/**
-	 * Set the truth boolean for recording to falses
+	 * Add buffered images to video array for alter compression if enabled
+	 * 
+	 * @param videoImages
 	 */
-	void endRecording();
+//	void updateVideo(List<BufferedImage> videoImages);
 }

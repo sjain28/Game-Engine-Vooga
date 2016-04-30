@@ -63,7 +63,7 @@ public class GameRunner implements IGameRunner {
 	private boolean playSessionActive;
 	private String myCurrentLevelString;
 	private DisplayScroller myScroller;
-	private List<BufferedImage> videoScreenshots;
+	//private List<BufferedImage> videoScreenshots;
 	// TODO: Test
 	private int myCurrentStep;
 	private CurrentSessionStats myStats;
@@ -80,7 +80,7 @@ public class GameRunner implements IGameRunner {
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
 		myScroller = new DisplayScroller(myGameDisplay);
-		videoScreenshots = new ArrayList<BufferedImage>();
+		//videoScreenshots = new ArrayList<BufferedImage>();
 		myTimeline = new Timeline();
 		myLevelReached = 0;
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -119,6 +119,7 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(),
 				myGameDisplay.getMyKeyReleases());
+		//myScreenProcessor.updateVideo(videoScreenshots);
 		myGameDisplay.clearKeyEvents();
 		myScroller.increaseScrollingSpeed(myScroller.getScrollingSprite());
 	}
@@ -289,24 +290,25 @@ public class GameRunner implements IGameRunner {
 
 		myScreenProcessor.createSceneScreenshotPNG(myScene, fileName);
 	}
-
+/*
 	@Override
 //TODO where to save?
 	public void startVideoCapture() {
-System.out.println("Pressed");
-		String outputFileName = VoogaBundles.imageProperties
-				.getString("saveLocation")
-				+ myCurrentLevelString
-				+ VoogaBundles.imageProperties.getString(".mp4");
-System.out.println(outputFileName);
-		myScreenProcessor.encodeScreenshots(outputFileName, FRAME_RATE);
+		videoScreenshots.clear();
 	}
 
 	@Override
 	public void endVideoCapture() {
+		String outputFileName = VoogaBundles.imageProperties
+				.getString("saveLocation")
+				+ myCurrentLevelString
+				+ VoogaBundles.imageProperties.getString("timeStamp")
+				+ VoogaBundles.imageProperties.getString("dotmp4");
+	
+		myScreenProcessor.encodeScreenshots(outputFileName, videoScreenshots, FRAME_RATE);
 		videoScreenshots.clear();
 	}
-
+*/
 	@Override
 	public Timeline getTimeline() {
 		return myTimeline;

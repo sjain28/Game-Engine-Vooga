@@ -27,10 +27,10 @@ public interface IGameRunner extends Menuable {
 	void replayLevel();
 
 	void takeSnapShot();
-
+/*
 	void startVideoCapture();
 
 	void endVideoCapture();
-
+*/
 	void finishPlaySession();
 }

@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 import com.xuggle.mediatool.IMediaWriter;
 import com.xuggle.mediatool.ToolFactory;
 import com.xuggle.xuggler.ICodec;
+import com.xuggle.xuggler.IRational;
 
 import resources.VoogaBundles;
 import tools.VoogaAlert;
@@ -85,11 +86,11 @@ public class ScreenProcessor implements IScreenProcessor{
 			new VoogaAlert(VoogaBundles.exceptionProperties.getString("SnapshotFail"));
 		}
 	}
-	
+
 	@Override
-    public void encodeScreenshots(String outputFileName, double frameRate) {
-		recordingState = true;
+    public void encodeScreenshots(String outputFileName, List<BufferedImage> images, double frameRate) {
         final IMediaWriter writer = ToolFactory.makeWriter(outputFileName);
+        /*
         screenBounds = Toolkit.getDefaultToolkit().getScreenSize();
         long startTime = System.nanoTime();
         
@@ -109,11 +110,21 @@ System.out.println("Next frame for video");
 			}
         }
         writer.close();
+        */
+        long nextFrameTime = 0;
+        writer.addVideoStream(0, 0, ICodec.ID.CODEC_ID_MPEG4, IRational.make(30), 702, 304);
+        
+        for (BufferedImage n: images) {
+        	writer.encodeVideo(0, n, nextFrameTime, TimeUnit.MILLISECONDS);
+        	nextFrameTime += frameRate/1000;
+        	
+        }
+        writer.close();
     }
-	
+/*	
 	@Override 
-	public void endRecording() {
-		recordingState = false;
+	public void updateVideo(List<BufferedImage> videoImages) {
+		videoImages.add(createDesktopScreenshotForVideo());
 	}
 	
 	/**
@@ -121,6 +132,7 @@ System.out.println("Next frame for video");
 	 * 
 	 * @return
 	 */
+/*
 	private BufferedImage createDesktopScreenshotForVideo() {
             Rectangle captureSize = new Rectangle(screenBounds);
             return robot.createScreenCapture(captureSize);
@@ -130,7 +142,9 @@ System.out.println("Next frame for video");
 	 * Check to see whether more frames should be taken for recording
 	 * @return
 	 */
+/*
 	private boolean checkIfStillRecording() {
 		return recordingState;
 	}
+*/
 }
