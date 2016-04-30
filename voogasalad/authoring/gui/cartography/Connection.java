@@ -47,7 +47,8 @@ public class Connection extends Group {
 	private void initializeModel(CompleteAuthoringModelable model) {
 		connector.setOnMouseClicked(e -> {
 			if(e.getClickCount() == COMPLETE_COUNT) {
-				new ConnectionPrompt(start.getName(), end.getName(), model);
+				ConnectionPrompt prompt = new ConnectionPrompt(start.getName(), end.getName(), model);
+				prompt.show();
 			}
 		});
 	}
