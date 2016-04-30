@@ -104,7 +104,7 @@ public class DataBaseDisplay extends Stage {
         Text t = new Text(label);
         t.setFill(Color.WHITE);
         
-        ComboBox<String> cellData = new ComboBox<String>();
+        ComboBox<String> cellData = new ComboBox<>();
         try{
             cellData.setItems(selectedCell.getPropertyOptions());        
             cellData.getItems().addAll(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions());
@@ -129,8 +129,8 @@ public class DataBaseDisplay extends Stage {
     private void makeNewTab (String xProp, String yProp) {
         Tab tab = new Tab(nextX + nextY);
         StatsVisualizer gmaker = new StatsVisualizer(); 
-        List<CellEntry> xlist = new ArrayList<CellEntry>();
-        List<CellEntry> ylist = new ArrayList<CellEntry>();
+        List<CellEntry> xlist = new ArrayList<>();
+        List<CellEntry> ylist = new ArrayList<>();
         if(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions().contains(nextX)){
             xlist = ((StatCell) selectedCell).getAuthorStats();
         }
@@ -155,7 +155,7 @@ public class DataBaseDisplay extends Stage {
         Accordion lists = new Accordion();
         TitledPane games = new TitledPane();
         games.setText("Games");
-        ListView<String> actualGames = new ListView<String>();
+        ListView<String> actualGames = new ListView<>();
         List<String> authoredGames = database.getStatsbyUser(user.getProperty(VoogaUser.USER_NAME).toString()).stream().map(e -> e.getProperty(StatCell.MY_GAME).toString()).collect(Collectors.toList());
         actualGames.getItems().setAll(authoredGames);
         actualGames.setOnMouseClicked(e -> clickList(actualGames.getSelectionModel().getSelectedItem()));
