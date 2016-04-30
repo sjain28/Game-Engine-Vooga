@@ -28,9 +28,8 @@ public class AnimationEvent extends VoogaEvent {
 	public AnimationEvent(String name, Integer duration){
 		myName = name;
 		myCause = new WrapperCause(this);
-		//myDuration = (int) GameRunner.FRAME_RATE * duration;
-		//myDuration = duration * 60;
-		myDuration = 300;
+		myDuration = (int) GameRunner.FRAME_RATE * duration;
+		System.out.println("duration " + myDuration);
 		myCounter = 0;
 	}
 	/**
@@ -110,7 +109,7 @@ public class AnimationEvent extends VoogaEvent {
 	}
 
 	protected AnimationEvent clone(){
-		AnimationEvent clone = new AnimationEvent(myName, myDuration);
+		AnimationEvent clone = new AnimationEvent(myName, myDuration/(int)GameRunner.FRAME_RATE);
 		if(myRotateEffect != null){
 			clone.addRotateEffect(getRotateEffect().clone(clone));
 		}
