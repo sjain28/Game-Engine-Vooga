@@ -46,6 +46,9 @@ public class DataBaseDisplay extends Stage {
 	private static final double DATA_HEIGHT = 400;
 	private String USR = "UserName";
 
+	private static final double FONT_SIZE = 30;
+	private static final double TABPANE_SIZE_FACTOR = 3 / 4;
+	private static final double ACCORDION_SIZE_FACTOR = 1 / 4;
 	private VoogaDataBase database = VoogaDataBase.getInstance();
 	private VoogaUser user;
 	private CellEntry selectedCell;
@@ -75,7 +78,7 @@ public class DataBaseDisplay extends Stage {
 		pict.setPreserveRatio(true);
 		Text t = new Text(user.getProperty(VoogaUser.DISPLAY_NAME).toString());
 		t.setFill(Color.WHITE);
-		t.setFont(Font.font(30));
+		t.setFont(Font.font(FONT_SIZE));
 		ans = GUIUtils.makeRow(pict, t);
 		ans.setAlignment(Pos.BASELINE_LEFT);
 		ans.setPrefSize(HEADER_WIDTH, HEADER_HEIGHT);
@@ -89,7 +92,7 @@ public class DataBaseDisplay extends Stage {
 		plotMaker = new Tab("Plot Maker");
 		plotMaker.setContent(infoOptions());
 		plots.getTabs().addAll(plotMaker);
-		plots.setPrefWidth(DATA_WIDTH * 3 / 4);
+		plots.setPrefWidth(DATA_WIDTH * TABPANE_SIZE_FACTOR);
 
 		ans.getChildren().addAll(makeLists(), plots);
 		ans.setPrefSize(DATA_WIDTH, DATA_HEIGHT);
@@ -101,7 +104,7 @@ public class DataBaseDisplay extends Stage {
 		HBox xData = dataSelector("X Value");
 		HBox yData = dataSelector("Y Value");
 		Button apply = new Button("Apply");
-		apply.setOnAction(e -> makeNewTab(nextX, nextY));
+		apply.setOnAction(e -> makeNewTab());
 		scene.getChildren().addAll(xData, yData, apply);
 		return scene;
 	}
@@ -133,7 +136,7 @@ public class DataBaseDisplay extends Stage {
 		return GUIUtils.makeRow(t, cellData, set);
 	}
 
-	private void makeNewTab(String xProp, String yProp) {
+	private void makeNewTab() {
 		Tab tab = new Tab(nextX + nextY);
 		StatsVisualizer gmaker = new StatsVisualizer();
 		List<CellEntry> xlist = new ArrayList<>();
@@ -165,7 +168,7 @@ public class DataBaseDisplay extends Stage {
 		actualGames.setOnMouseClicked(e -> clickList(actualGames.getSelectionModel().getSelectedItem()));
 		games.setContent(actualGames);
 		lists.getPanes().addAll(games);
-		lists.setPrefWidth(DATA_WIDTH / 4);
+		lists.setPrefWidth(DATA_WIDTH * ACCORDION_SIZE_FACTOR);
 		return lists;
 	}
 
