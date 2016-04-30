@@ -127,7 +127,7 @@ public abstract class VariableGUIBasic implements EventGUI {
                   "," + VoogaBundles.EventMethods.getString(actions.getValue()) + ",";
 
         if (amount instanceof TextField) {
-            result += ((NumberTextField) amount).getText();
+            result += ((TextField) amount).getText();
         }
         else if (amount instanceof ComboBox) {
             result += ((ComboBox<?>) amount).getValue();
