@@ -2,6 +2,7 @@ package player.gamedisplay;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring.VoogaScene;
 import authoring.gui.menubar.MenuPanel;
 import authoring.gui.menubar.MenuPanelHandlingMirror;
@@ -16,10 +17,10 @@ import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
 import stats.database.VoogaDataBase;
-import tools.IVoogaGameSound;
 import tools.OrderedProperties;
 import tools.Pair;
 import tools.VoogaGameSound;
+import tools.interfaces.IVoogaGameSound;
 /**
  * Standard Display that creates a display with basic user-interaction controls
  * Uses composition to contain elements of the display

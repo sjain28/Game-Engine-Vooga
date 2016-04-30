@@ -1,4 +1,4 @@
-package tools;
+package tools.interfaces;
 
 import java.util.Map;
 
@@ -18,28 +18,28 @@ public interface IVoogaGameSound {
 	 * 
 	 * @return
 	 */
-	public Map<String, MediaPlayer> getMediaMap();
+	Map<String, MediaPlayer> getMediaMap();
 
 	/**
 	 * Play the sound mapped to a key name
 	 * 
 	 * @param soundname
 	 */
-	public void play(String soundname);
+	void play(String soundname);
 
 	/**
 	 * Play background music: constant sound
 	 */
-	public void playBGM();
+	void playBGM();
 
 	/**
 	 * Stop background, restart will play from start
 	 */
-	public void stopBGM();
+	void stopBGM();
 
 	/**
 	 * Pause background music, restart plays from pause point
 	 */
-	public void pauseBGM();
+	void pauseBGM();
 
 }

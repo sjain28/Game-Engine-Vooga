@@ -17,6 +17,7 @@ public abstract class Vector {
 	protected double x;
 	protected double y;
 
+	private static final double TWO = 2;
 	/**
 	 * Default constructors
 	 * 
@@ -130,7 +131,7 @@ public abstract class Vector {
 	 * @return the magnitude of a vector
 	 */
 	public double getMagnitude(){
-		return Math.sqrt(Math.pow(getX() - getxPrev(), 2) + Math.pow(getY() - getyPrev(), 2));
+		return Math.sqrt(Math.pow(getX() - getxPrev(), TWO) + Math.pow(getY() - getyPrev(), TWO));
 	}
 
 }
