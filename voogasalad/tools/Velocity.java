@@ -66,26 +66,7 @@ public class Velocity extends Vector {
 		setX(Math.cos(angle) * magnitude);
 		setY(Math.sin(angle) * magnitude);
 	}
+
 	
-	/**
-	 * For unit testing only
-	 * 
-	 */
-	public static void main(String args[]){
-		
-		Velocity v1 = new Velocity(1, 1);
-		Velocity v2 = new Velocity(1, 0);
-		Velocity v3 = new Velocity(-1, -1);
-		
-		System.out.println("v1's Magnitude: " + v1.getMagnitude());
-		System.out.println("v1's Direction angle: " + v1.getAngleDegree());
-		
-		System.out.println("v2's Magnitude: " + v2.getMagnitude());
-		System.out.println("v2's Direction angle: " + v2.getAngleDegree());
-		
-		System.out.println("v3's Magnitude: " + v3.getMagnitude());
-		System.out.println("v3's Direction angle: " + v3.getAngleDegree());
-		
-	}
 
 }

@@ -49,6 +49,8 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	public VoogaGame getGame(String gamename){
 		for(VoogaGame game : myGames){
+			System.out.println("looking for: "+gamename);
+			System.out.println("comparing with: "+game.getProperty(VoogaGame.GAME_NAME).toString());
 			if(game.getProperty(VoogaGame.GAME_NAME).toString().equals(gamename)){
 				return game;
 			}
@@ -114,6 +116,7 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	public CellEntry getStatByGameAndUser(String gamename, String username){
 		this.printDataBase();
+		System.out.println(gamename);
 		int row = myGames.indexOf(getGame(gamename));
 		int col = myUsers.indexOf(getUser(username));
 		System.out.println("the row here is " + row + "and the column is" + col);

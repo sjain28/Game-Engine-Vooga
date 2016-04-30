@@ -30,8 +30,6 @@ public interface ILevelData {
 
 	void removeSpriteByID(String id);
 
-	void updatedGlobalTimer(double time);
-
 	void saveProgress(String filePath);
 
 	void addEventAndPopulateKeyCombos(VoogaEvent event);
@@ -47,6 +45,10 @@ public interface ILevelData {
 	Sprite getSpriteByID(String id);
 
 	Sprite addSprite(String archetype);
+	
+	void putSprite(Sprite s);
+	
+	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
 
@@ -55,14 +57,15 @@ public interface ILevelData {
 	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
 	KeyEventContainer getKeyEventContainer();
-
+	
 	List<Pair<Node, Boolean>> getDisplayableNodes();
 
 	List<Sprite> getSpritesByArch(String archA);
 
 	Set<Entry<String, Elementable>> getElementables();
 
-	Map<String, VoogaData> getGlobalVariables();
+    public Map<String,VoogaData> getGlobalVariables();
+	
 
 	Map<String, Elementable> getElements();
 }

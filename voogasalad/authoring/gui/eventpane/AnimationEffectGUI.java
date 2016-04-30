@@ -1,7 +1,6 @@
 package authoring.gui.eventpane;
 
 import authoring.gui.items.ArchetypeSpriteCombo;
-import authoring.gui.items.NumberTextField;
 import authoring.interfaces.model.EditEventable;
 import events.AnimationFactory;
 import javafx.scene.Node;
@@ -10,6 +9,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tools.VoogaException;
 
+/**
+ * Authoring representation of AnimationEffect
+ * 
+ * Added to the Cause and Event Pane
+ * @author arjunaashna
+ *
+ */
 public class AnimationEffectGUI implements EventGUI{
     
     private ArchetypeSpriteCombo names;

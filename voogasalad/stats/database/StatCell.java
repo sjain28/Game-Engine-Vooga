@@ -1,9 +1,13 @@
 package stats.database;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
-
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tools.VoogaString;
 
 public class StatCell extends CellEntry {
