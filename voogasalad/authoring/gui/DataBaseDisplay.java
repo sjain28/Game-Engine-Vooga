@@ -47,8 +47,8 @@ public class DataBaseDisplay extends Stage {
 	private String USR = "UserName";
 
 	private static final double FONT_SIZE = 30;
-	private static final double TABPANE_SIZE_FACTOR = 3 / 4;
-	private static final double ACCORDION_SIZE_FACTOR = 1 / 4;
+	private static final double TABPANE_SIZE_FACTOR = 3d / 4d;
+	private static final double ACCORDION_SIZE_FACTOR = 1d / 4d;
 	private VoogaDataBase database = VoogaDataBase.getInstance();
 	private VoogaUser user;
 	private CellEntry selectedCell;
