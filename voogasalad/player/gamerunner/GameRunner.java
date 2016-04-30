@@ -129,7 +129,9 @@ public class GameRunner implements IGameRunner {
 			System.out.println("AN ENDPOINT HAS BEEN REACHED SO A WIN SCREEN SHOULD BE PULLED. typeis + " + myLevelMap.get(myLevelData.getNextLevelName()));
 			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
 				//TODO: Implement win screen
+				VoogaDataBase.getInstance().save();
 				LeaderBoard leaderBoard = new LeaderBoard(VoogaBundles.preferences.getProperty("GameName"));
+				return;
 			}
 			playLevel(myLevelData.getNextLevelName());
 		}
