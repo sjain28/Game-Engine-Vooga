@@ -54,7 +54,7 @@ public class ImageFlowPane extends FlowPane {
 	 * @return a List<String>
 	 */
 	public List<String> getImageNames() {
-		List<String> imageNames = new ArrayList<String>();
+		List<String> imageNames = new ArrayList<>();
 		this.getChildren().stream()
 						  .filter(n -> indexOf(n) != (this.getChildren().size() - 1))
 						  .map(n -> ((Frame) n).getImagePath())
@@ -76,5 +76,4 @@ public class ImageFlowPane extends FlowPane {
 		}
 		return -1;
 	}
-	
 }

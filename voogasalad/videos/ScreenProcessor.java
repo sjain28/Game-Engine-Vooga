@@ -32,6 +32,7 @@ public class ScreenProcessor implements IScreenProcessor {
 					new File(outputFilename));
 			return outputFilename;
 		} catch (IOException e) {
+			//TODO remove stacktrace print
 			e.printStackTrace();
 			return null;
 		}

@@ -6,16 +6,17 @@ package player.leveldatamanager;
 import java.util.ArrayList;
 import java.util.Map;
 
+import events.AnimationFactory;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileWriterFromGameObjects;
-import events.AnimationFactory;
 import gameengine.SpriteFactory;
 import resources.VoogaBundles;
 import stats.database.CellEntry;
 import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import tools.VoogaAlert;
 import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -66,16 +67,14 @@ public class GameSaver implements IGameSaver {
 		System.out.println("The animation factory here is " + myAnimationFactory);
 		DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
 				myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap(),
-				myAnimationFactory.getMyAnimationEvents(),
-				myAnimationFactory.getMyPaths(), 
-				myAnimationFactory.getMyAnimationSequences());
+				myAnimationFactory);
 
 		try {
 			FileWriterFromGameObjects.saveGameObjects(dataContainer,GAMES+ nameOfGame + SLASH + LEVELS +  playerName + XML_SUFFIX);
 		} catch (Exception e) {
-			new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
+			VoogaAlert alert = new VoogaAlert(VoogaBundles.exceptionProperties.getString("SavingFailed"));
+			alert.showAndWait();
 		}
-		System.out.println("What is filePath " + GAMES+ nameOfGame + SLASH + LEVELS +  playerName + XML_SUFFIX);
 		CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
 		PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
 		latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(nameOfGame));

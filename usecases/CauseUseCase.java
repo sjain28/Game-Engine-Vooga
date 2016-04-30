@@ -1,6 +1,6 @@
 package usecases;
 
-public interface Cause_USECASE {
+public interface CauseUseCase {
 	
 	boolean checkCause();
 

@@ -25,9 +25,8 @@ public class DisplayScroller implements IDisplayScroller {
 	private Sprite myScrollingSprite;
 	private IGameDisplay myGameDisplay;
 	private String myScrollingType;
+	private String myTrackingDirection;
 	private boolean isExponentialScroll;
-	private Double myMinScrollX;
-	private Double myMinScrollY;
 	private Double myMaxScrollX;
 	private Double myMaxScrollY;
 
@@ -48,11 +47,20 @@ public class DisplayScroller implements IDisplayScroller {
 	public void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite) {
 		if (myScrollingType.equals("Tracking")) {
 			isExponentialScroll = false;
-		} else {
+			if (myTrackingDirection.equals("X")) {
+				scrollX(scrollingsprite);
+			} else if (myTrackingDirection.equals("Y")) {
+				scrollY(scrollingsprite);
+			} else {
+				scrollX(scrollingsprite);
+				scrollY(scrollingsprite);
+			}
+		} else { // Consistent scrolling
 			setContinuousScrollType(globals, currentlevel);
+			scrollX(scrollingsprite);
+			scrollY(scrollingsprite);
 		}
-		scrollX(scrollingsprite);
-		//		scrollY(scrollingsprite);
+
 	}
 	/**
 	 * Scrolls the display horizontally using addListener method and by
@@ -94,8 +102,9 @@ public class DisplayScroller implements IDisplayScroller {
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
 		try {
 			try {
-			myMaxScrollX = (Double) globals.get(currentlevel + "EndX").getValue();
-			myMaxScrollY = (Double) globals.get(currentlevel + "EndY").getValue();
+				myTrackingDirection = (String) globals.get(currentlevel + "TrackingDirection").getValue();
+				myMaxScrollX = (Double) globals.get(currentlevel + "EndX").getValue();
+				myMaxScrollY = (Double) globals.get(currentlevel + "EndY").getValue();
 			} catch(Exception e) {
 				VoogaAlert alert = new VoogaAlert("Please specify your finish line.");
 				alert.showAndWait();

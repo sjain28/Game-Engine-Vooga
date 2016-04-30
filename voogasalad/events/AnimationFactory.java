@@ -13,20 +13,20 @@ public class AnimationFactory {
 	private Map<String, AnimationEvent> myAnimationEvents;
 	private Map<String, List<Double[]>> myPaths;
 	private Map<String, List<AnimationEvent>> myAnimationSequences;
+	private static AnimationFactory animationFactory;
 
-	public AnimationFactory () {
+	private AnimationFactory () {
 		myAnimationEvents = new HashMap<>();
 		myPaths = new HashMap<>();
 		myAnimationSequences = new HashMap<>();
 		myPaths = new HashMap<>();
 	}
 
-	private static class SingletonHolder {
-		private static final AnimationFactory INSTANCE = new AnimationFactory();
-	}
-
-	public static AnimationFactory getInstance () {
-		return SingletonHolder.INSTANCE;
+	public synchronized static AnimationFactory getInstance () {
+		if(animationFactory == null) {
+			animationFactory = new AnimationFactory();
+		}
+		return animationFactory;
 	}
 
 	public AnimationEvent makeAnimationEvent (String name, Integer duration) {
@@ -109,5 +109,9 @@ public class AnimationFactory {
 
 	public void setMyAnimationEvents(Map<String, AnimationEvent> myAnimationEvents) {
 		this.myAnimationEvents = myAnimationEvents;
+	}
+
+	public static void set(AnimationFactory animationFactory) {
+		AnimationFactory.animationFactory = animationFactory;
 	}
 }

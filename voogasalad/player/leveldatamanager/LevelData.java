@@ -67,10 +67,8 @@ public class LevelData implements ILevelData {
 	public List<Sprite> getSpritesByArch(String archetype) {
 		List<Sprite> list = new ArrayList<>();
 		for (String id : myElements.keySet()) {
-			if (myElements.get(id) instanceof Sprite) {
-				if (((Sprite) myElements.get(id)).getArchetype().equals(archetype)) {
-					list.add((Sprite) myElements.get(id));
-				}
+			if (myElements.get(id) instanceof Sprite && ((Sprite) myElements.get(id)).getArchetype().equals(archetype)) {
+				list.add((Sprite) myElements.get(id));
 			}
 		}
 		return list;
@@ -159,7 +157,7 @@ public class LevelData implements ILevelData {
 		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());
 		mySpriteFactory = myTransitioner.getNewSpriteFactory();
 		myMainCharID = myTransitioner.getMainCharID();
-		myAnimationFactory = myTransitioner.getNewAnimationFactory();
+		myAnimationFactory = myTransitioner.getAnimationFactory();
 	}
 
 	/**

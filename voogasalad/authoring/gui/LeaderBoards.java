@@ -10,9 +10,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import stats.database.CellEntry;
 import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import tools.GUIUtils;
 import tools.Pair;
 import tools.ScoreCompare;
 
@@ -26,6 +28,8 @@ public class LeaderBoards extends Stage {
     private VoogaDataBase database = VoogaDataBase.getInstance();
     private String game;
 
+    private static final int LEADERBOARD_MEMBER_COUNT = 10;
+    
     /**
      * Initializes a new leaderboard, requires the string name of the game which should be accessed from the properties file
      * @param game
@@ -41,18 +45,19 @@ public class LeaderBoards extends Stage {
     }
 
     private void makeLeaders () {
-        List<Pair<String, Double>> scores = new ArrayList<Pair<String, Double>>();
-        database.getStatsbyGame(game).stream().forEach(e -> ((StatCell) e).getPlayStats()
-                .stream().forEach(ee -> scores.add(new Pair<String, Double>(
-                                                                            ee.getProperty(StatCell.MY_USER)
-                                                                                    .getValue()
-                                                                                    .toString(),
-                                                                            Double.parseDouble(ee
-                                                                                    .getProperty(PlaySession.SCORE)
-                                                                                    .getValue()
-                                                                                    .toString())))));
+        List<Pair<String, Double>> scores = new ArrayList<>();
+        
+        for(CellEntry c: database.getStatsbyGame(game)){
+            for(CellEntry e: ((StatCell) c).getPlayStats()){
+                scores.add(new Pair<String, Double>(e.getProperty(StatCell.MY_USER).getValue().toString(),
+                								    Double.parseDouble(e.getProperty(PlaySession.SCORE)
+                								    					.getValue()
+                								    					.toString())));
+            }
+        }
+        
         scores.sort(new ScoreCompare());
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < LEADERBOARD_MEMBER_COUNT; i++) {
             if (scores.get(i) != null) {
                 best.getChildren().add(makeHox(scores.get(i).getFirst(), scores.get(i).getLast()));
             }
@@ -61,14 +66,14 @@ public class LeaderBoards extends Stage {
     }
 
     private HBox makeHox (String n, Double s) {
-        HBox ans = new HBox(20);
+        HBox ans;
         Text name = new Text(n);
         name.setFill(Color.WHITE);
 
         Text score = new Text(s.toString());
         score.setFill(Color.WHITE);
 
-        ans.getChildren().addAll(name, score);
+        ans = GUIUtils.makeRow(name, score);
         ans.setAlignment(Pos.BASELINE_CENTER);
         return ans;
     }

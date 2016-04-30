@@ -40,12 +40,9 @@ public class VoogaDataImage implements VoogaData {
 
 	@Override
 	public void setValue(Object o) {
-		if (!(o instanceof String))
-			return;
-		imagePath = (String) imagePath;
+
 	}
-	
-	// TODO remove or modify these methods?
+
 	@Override
 	public Property<Object> getProperty() {
 		return null;

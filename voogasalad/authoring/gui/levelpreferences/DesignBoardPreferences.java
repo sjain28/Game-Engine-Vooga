@@ -37,43 +37,32 @@ import tools.GUIUtils;
  */
 
 public class DesignBoardPreferences extends Tab {
-	
-	private double SPACING;
-	private double WIDTH;
-	
 	private static final double MIN_SPEED = 0;
 	private static final double MAX_SPEED = 5;
 	private static final double DEF_SPEED = 1;
-
+	
+	private double spacing;
+	private double width;
+	private List<Node> gameObjects;
 	private VBox container;
-
+	private HBox buttons;
+	private HBox continuousControl;
 	private TextField levelName;
-
+	private TextField angle;
 	private RadioButton realistic;
 	private RadioButton cartoon;
 	private RadioButton continuous;
 	private RadioButton tracking;
-	
 	private ToggleGroup trackingMode;
 	private ToggleGroup physicsType;
-
 	private Slider scrollSpeed;
 	private ComboBox<SpriteNameIDPair> sprites;
 	private ComboBox<String> continuousScrollType;
 	private ComboBox<String> trackingDirection;
-	private TextField angle;
-
-	private HBox buttons;
-	private HBox continuousControl;
-	
 	private CustomText speedLabel;
-
-	private List<Node> gameObjects;
-
 	private EventHandler<ActionEvent> e;
-
 	private ResourceBundle dbfProperties;
-
+	
 	/**
 	 * Constructor to build the pop up for the user to specify preferences.
 	 * 
@@ -84,10 +73,10 @@ public class DesignBoardPreferences extends Tab {
 		container = new VBox();
 		
 		dbfProperties = VoogaBundles.designboardPreferencesProperties;
-		SPACING = Double.parseDouble(dbfProperties.getString("Spacing"));
-		WIDTH = Double.parseDouble(dbfProperties.getString("Width"));
+		spacing = Double.parseDouble(dbfProperties.getString("Spacing"));
+		width = Double.parseDouble(dbfProperties.getString("Width"));
 
-		container.setSpacing(SPACING);
+		container.setSpacing(spacing);
 		container.setAlignment(Pos.CENTER);
 		this.setContent(container);
 		container.getChildren().addAll(header(), chooseName(), choosePhysicsModule(), chooseTrackingMode());
@@ -208,9 +197,9 @@ public class DesignBoardPreferences extends Tab {
 	 */
 	private void initializeSpecifics() {
 		scrollSpeed = new Slider(MIN_SPEED, MAX_SPEED, DEF_SPEED);
-		scrollSpeed.setMaxWidth(WIDTH);
+		scrollSpeed.setMaxWidth(width);
 		sprites = new ComboBox<>();
-		if (this.gameObjects.size() > 0) {
+		if (!gameObjects.isEmpty()) {
 			for (Node node : this.gameObjects) {
 				if (node instanceof GameObject) {
 					Sprite sprite = ((GameObject) node).getSprite();

@@ -25,7 +25,7 @@ public class EventTitledPane extends TitledPane {
     }
 
     protected void initialize () {
-        options = new ComboBox<String>();
+        options = new ComboBox<>();
         options.getItems().addAll(bundle.keySet().toArray(new String[bundle.keySet().size()]));
         options.setOnAction(e -> constructGUI("authoring.gui.eventpane." + bundle.getString(options.getValue()) +
                                               "GUI"));

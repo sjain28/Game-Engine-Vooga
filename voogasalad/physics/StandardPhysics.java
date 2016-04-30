@@ -15,7 +15,7 @@ import tools.Velocity;
  */
 public class StandardPhysics implements IPhysicsEngine {
 	
-	private static final double REDUCE_FACTOR = 0.1;
+	public static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
 	private static final double LIFT = 0.1;
 	private static final double ERROR = 0.01;
