@@ -50,5 +50,4 @@ public class AnimationEffect extends SpriteEffect {
 		}		
 		return effectString;
 	}
-
 }
