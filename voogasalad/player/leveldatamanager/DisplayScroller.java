@@ -26,8 +26,8 @@ public class DisplayScroller implements IDisplayScroller {
 	private IGameDisplay myGameDisplay;
 	private String myScrollingType;
 	private boolean isExponentialScroll;
-	private int myMaxScrollX;
-	private int myMaxScrollY;
+	private Double myMaxScrollX;
+	private Double myMaxScrollY;
 
 	/**
 	 * Default constructor that sets the game display to scroll
@@ -91,8 +91,13 @@ public class DisplayScroller implements IDisplayScroller {
 	 */
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
 		try {
-			myMaxScrollX = (int) globals.get(currentlevel + "EndX").getValue();
-			myMaxScrollY = (int) globals.get(currentlevel + "EndY").getValue();
+			try {
+			myMaxScrollX = (Double) globals.get(currentlevel + "EndX").getValue();
+			myMaxScrollY = (Double) globals.get(currentlevel + "EndY").getValue();
+			} catch(Exception e) {
+				VoogaAlert alert = new VoogaAlert("Please specify your finish line.");
+				alert.showAndWait();
+			}
 			myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 			// Scrolling is centered on the main character
 			if (myScrollingType.equals("Tracking")) {

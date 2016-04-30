@@ -24,7 +24,8 @@ import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 /**
- * A centralized class to contain and access data including Sprites, Text, Global Variables, and Events
+ * A centralized class to contain and access data including Sprites, Text,
+ * Global Variables, and Events
  * 
  * @author Krista, Hunter
  */
@@ -44,9 +45,10 @@ public class LevelData implements ILevelData {
 
 	/**
 	 * Default constructor that takes in an instance of a physics module
+	 * 
 	 * @param physicsengine
 	 */
-	public LevelData (IPhysicsEngine physicsengine) {
+	public LevelData(IPhysicsEngine physicsengine) {
 		myEventMethods = VoogaBundles.EventMethods;
 		myKeyEventContainer = new KeyEventContainer();
 		myPhysics = physicsengine;
@@ -54,10 +56,11 @@ public class LevelData implements ILevelData {
 		myGlobalVariables = new HashMap<>();
 		myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
 		myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
-	} 
+	}
 
 	/**
 	 * Returns a list of sprite IDs given an archetype
+	 * 
 	 * @param archetype
 	 * @return
 	 */
@@ -76,17 +79,18 @@ public class LevelData implements ILevelData {
 	/**
 	 * Returns animation created by AnimationFactory
 	 */
-	public AnimationEvent getAnimationFromFactory(String animationString){    	
-		if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)){
+	public AnimationEvent getAnimationFromFactory(String animationString) {
+		if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)) {
 			List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
 			return clonedSequence.get(0);
-		}else{
+		} else {
 			return myAnimationFactory.cloneAnimationEvent(animationString);
 		}
 	}
 
 	/**
 	 * Adds a sprite as a member of the given archetype
+	 * 
 	 * @param archetype
 	 * @return
 	 */
@@ -98,6 +102,7 @@ public class LevelData implements ILevelData {
 
 	/**
 	 * Returns a Global Variable (VoogaData) as specified by its variable name
+	 * 
 	 * @param variable
 	 * @return
 	 */
@@ -107,6 +112,7 @@ public class LevelData implements ILevelData {
 
 	/**
 	 * Returns a text object by ID
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -116,19 +122,13 @@ public class LevelData implements ILevelData {
 
 	/**
 	 * Put all objects into a pair of displayable objects
+	 * 
 	 * @return
 	 */
 	public List<Pair<Node, Boolean>> getDisplayableNodes() {
 		List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
 		for (Object key : myElements.keySet()) {
-			Boolean isStatic = false;
-			//TODO: Replace this
-			//        	if(myElements.get(key) instanceof Sprite) {
-			//        		Sprite sprite = (Sprite) myElements.get(key);
-			//        		if((Double) sprite.getVoogaProperties().get(VoogaBundles.spriteProperties.getString("MASS")).getProperty().getValue() > 10) {
-			//        			isStatic = true;
-			//        		}
-			//        	}
+			Boolean isStatic = (Boolean) myElements.get(key).getVoogaProperties().get(VoogaBundles.spriteProperties.getString("STATIC")).getProperty().getValue();
 			displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
 		}
 		displayablenodes.sort(new PairZAxisComparator());
@@ -143,18 +143,20 @@ public class LevelData implements ILevelData {
 	}
 
 	/**
-	 * Refreshes the data and restarts timer in global variable and sets level path TODO: where??
+	 * Refreshes the data and restarts timer in global variable and sets level
+	 * path TODO: where??
+	 * 
 	 * @param levelfilename
 	 */
 	public void refreshLevelData(String levelfilename) {
-		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, 
-				myGlobalVariables, myNextLevelKey);
+		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables,
+				myNextLevelKey);
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
-		//TODO: Anita: implement clearMap and setMap and call a stub
-		//mySpriteFactory.clearMap();
-		//mySpriteFactory.setMap(myTransitioner.getSpriteMap());
+		// TODO: Anita: implement clearMap and setMap and call a stub
+		// mySpriteFactory.clearMap();
+		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());
 		mySpriteFactory = myTransitioner.getNewSpriteFactory();
 		myMainCharID = myTransitioner.getMainCharID();
 		myAnimationFactory = myTransitioner.getNewAnimationFactory();
@@ -162,6 +164,7 @@ public class LevelData implements ILevelData {
 
 	/**
 	 * Update the global timer double
+	 * 
 	 * @param time
 	 */
 	public void updatedGlobalTimer(double time) {
@@ -173,7 +176,8 @@ public class LevelData implements ILevelData {
 	 */
 	public void saveProgress(String filePath) {
 		myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-		GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory, myAnimationFactory);
+		GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory,
+				myAnimationFactory);
 		saver.saveCurrentProgress(filePath);
 	}
 
@@ -189,7 +193,7 @@ public class LevelData implements ILevelData {
 		myGlobalVariables.put(myNextLevelKey, new VoogaString(levelName));
 	}
 
-	public Sprite getSpriteByID (String id) {
+	public Sprite getSpriteByID(String id) {
 		return (Sprite) myElements.get(id);
 	}
 
@@ -197,7 +201,7 @@ public class LevelData implements ILevelData {
 		myElements.remove(id);
 	}
 
-	public Boolean containsSprite(String id){
+	public Boolean containsSprite(String id) {
 		return myElements.containsKey(id);
 	}
 
