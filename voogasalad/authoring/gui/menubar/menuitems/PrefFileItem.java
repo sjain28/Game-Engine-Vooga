@@ -10,26 +10,33 @@ import player.gamedisplay.Menuable;
 import tools.VoogaNumber;
 import tools.VoogaString;
 
+
 public class PrefFileItem extends MenuItemHandler { 
-    /**
-     * Initializes the MenuItem
-     * 
-     * @param model to interface backend interactions with the model
-     * @param event: Unused vestige of previous poor programming. Should soon be phased out.
-     */
-	
+
+	private static final String MAINUUID = "MainUUID";
+	private static final String SCROLL_SPEED = "ScrollSpeed";
+	private static final String SCROLL_ANGLE = "ScrollAngle";
+	private static final String CONT_SCROLL = "ContinuousScrollType";
+	private static final String TRACKING_DIR = "TrackingDirection";
+	private static final String SCROLL = "Scrolling";
+
 	private static final double WINDOW_WIDTH = 600;
 	private static final double WINDOW_HEIGHT = 350;
-	
+
 	private CompleteAuthoringModelable model;
 
+	/**
+	 * Initializes the MenuItem
+	 * 
+	 * @param model to interface backend interactions with the model
+	 */
 	public PrefFileItem(Menuable model) {
 		super();
 		this.model = (CompleteAuthoringModelable) model.getManager();
 	}
 	/**
-         * Action to be taken on the selection of this menuItem
-         */
+	 * Action to be taken on the selection of this menuItem
+	 */
 	@Override
 	public void handle() {
 		Stage stage = new Stage();
@@ -37,19 +44,18 @@ public class PrefFileItem extends MenuItemHandler {
 		DesignBoardPreferences preferences = new DesignBoardPreferences(model);
 		preferences.setText("Preferences for \"" + this.model.getName() + "\"");
 		preferences.setName(this.model.getName());
-		System.out.println("printing size" + model.getGlobalVariables().size());
-		preferences.setScrolling((String) model.getGlobalVariables().get(this.model.getName()+"Scrolling").getValue());
-		preferences.setSpeed((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollSpeed").getValue());
-		preferences.setMainSprite((String) model.getGlobalVariables().get(this.model.getName()+"MainUUID").getValue());
-		preferences.setAngle(Double.toString((Double) model.getGlobalVariables().get(this.model.getName()+"ScrollAngle").getValue()));
-		preferences.setContinuousScrollType((String) model.getGlobalVariables().get(this.model.getName()+"ContinuousScrollType").getValue());
+		preferences.setScrolling((String) model.getGlobalVariables().get(this.model.getName()+ SCROLL).getValue());
+		preferences.setSpeed((Double) model.getGlobalVariables().get(this.model.getName()+ SCROLL_SPEED).getValue());
+		preferences.setMainSprite((String) model.getGlobalVariables().get(this.model.getName()+ MAINUUID).getValue());
+		preferences.setAngle(Double.toString((Double) model.getGlobalVariables().get(this.model.getName()+ SCROLL_ANGLE).getValue()));
+		preferences.setContinuousScrollType((String) model.getGlobalVariables().get(this.model.getName()+ CONT_SCROLL).getValue());
 		preferences.setListener(e -> {
-			model.getGlobalVariables().put(preferences.getName()+"Scrolling", new VoogaString(preferences.getScrollingType()));
-			model.getGlobalVariables().put(preferences.getName()+"MainUUID", new VoogaString(preferences.getMainSpriteID()));
-			model.getGlobalVariables().put(preferences.getName()+"ScrollSpeed", new VoogaNumber(preferences.getContinuousScrollSpeed()));
-			model.getGlobalVariables().put(preferences.getName()+"ScrollAngle", new VoogaNumber(preferences.getScrollAngle()));
-			model.getGlobalVariables().put(preferences.getName()+"ContinuousScrollType", new VoogaString(preferences.getContinuousScrollType()));
-			model.getGlobalVariables().put(preferences.getName()+"TrackingDirection", new VoogaString(preferences.getTrackingDirection()));
+			model.getGlobalVariables().put(preferences.getName()+ SCROLL, new VoogaString(preferences.getScrollingType()));
+			model.getGlobalVariables().put(preferences.getName()+ MAINUUID, new VoogaString(preferences.getMainSpriteID()));
+			model.getGlobalVariables().put(preferences.getName()+ SCROLL_SPEED, new VoogaNumber(preferences.getContinuousScrollSpeed()));
+			model.getGlobalVariables().put(preferences.getName()+ SCROLL_ANGLE, new VoogaNumber(preferences.getScrollAngle()));
+			model.getGlobalVariables().put(preferences.getName()+ CONT_SCROLL, new VoogaString(preferences.getContinuousScrollType()));
+			model.getGlobalVariables().put(preferences.getName()+ TRACKING_DIR, new VoogaString(preferences.getTrackingDirection()));
 			stage.close();
 		});
 		tp.getTabs().add(preferences);

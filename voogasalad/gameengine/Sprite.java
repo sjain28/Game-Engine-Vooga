@@ -217,7 +217,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
         // Acceleration in m/s^2 >> Each step is one s, so number of m/s u should increment
         myVelocity.addX(myAcceleration.getX());
         myVelocity.addY(myAcceleration.getY());
-
+        
         // Convert the Sprite's Cartesian Coordinates to display-able x and y's
         myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / 2);
         myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / 2);
