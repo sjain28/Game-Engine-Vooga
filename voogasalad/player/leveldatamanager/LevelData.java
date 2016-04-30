@@ -18,6 +18,8 @@ import javafx.scene.Node;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
 import tools.NodeZAxisComparator;
+import tools.Pair;
+import tools.PairZAxisComparator;
 import tools.VoogaBoolean;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -134,12 +136,19 @@ public class LevelData implements ILevelData {
      * Put all objects into a generic list of displayable objects
      * @return
      */
-    public List<Node> getDisplayableNodes() {
-        List<Node> displayablenodes = new ArrayList<>();
+    public List<Pair<Node, Boolean>> getDisplayableNodes() {
+        List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
         for (Object key : myElements.keySet()) {
-            displayablenodes.add(myElements.get(key).getNodeObject());
+        	Boolean isStatic = false;
+//        	if(myElements.get(key) instanceof Sprite) {
+//        		Sprite sprite = (Sprite) myElements.get(key);
+//        		if((Double) sprite.getVoogaProperties().get(VoogaBundles.spriteProperties.getString("MASS")).getProperty().getValue() > 10) {
+//        			isStatic = true;
+//        		}
+//        	}
+            displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
         }
-        displayablenodes.sort(new NodeZAxisComparator());
+        displayablenodes.sort(new PairZAxisComparator());
         return displayablenodes;
     }
     /**

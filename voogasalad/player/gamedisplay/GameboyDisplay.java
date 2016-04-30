@@ -377,5 +377,11 @@ public class GameboyDisplay implements IGameDisplay {
 		myScene = new VoogaScene(myPane, width, height, CSS_PATH);
 	}
 
+	@Override
+	public Pane getUI() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
