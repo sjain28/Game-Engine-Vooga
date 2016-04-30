@@ -2,11 +2,12 @@ package authoring.splash;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
 import authoring.Command;
 import authoring.UIManager;
 import authoring.VoogaScene;
+import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementManager;
 import authoring.model.ElementManagerUnserializer;
 import authoring.model.Preferences;
@@ -14,15 +15,10 @@ import data.Deserializer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import player.gamerunner.GameRunner;
-import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
-import stats.database.AuthorSession;
-import stats.database.StatCell;
 import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import tools.VoogaException;
-import authoring.interfaces.model.CompleteAuthoringModelable;
 
 
 public class CreateCommand implements Command {

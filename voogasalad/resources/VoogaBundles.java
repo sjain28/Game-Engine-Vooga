@@ -3,6 +3,7 @@ package resources;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
+
 import tools.OrderedProperties;
 
 /**
@@ -36,10 +37,14 @@ public class VoogaBundles {
 	public final static ResourceBundle eventswindowProperties = ResourceBundle.getBundle("resources/eventswindow");
 	public final static ResourceBundle propertiesPaneProperties = ResourceBundle.getBundle("resources/propertiesPane");
 	public final static ResourceBundle spriteProperties = ResourceBundle.getBundle("resources/spritepropertiesmaptags");
+	public final static ResourceBundle textMapProperties = ResourceBundle.getBundle("resources/textpropertiesmaptags");
 	public final static ResourceBundle fileLocationProperties = ResourceBundle.getBundle("resources/filelocations");
 	
 	public final static ResourceBundle causeNames = ResourceBundle.getBundle("resources/causes");
 	public final static ResourceBundle effectNames = ResourceBundle.getBundle("resources/effects");
+	public final static ResourceBundle eventBasics = ResourceBundle.getBundle("resources/eventBasics");
+	
+	
 	private static Properties makeProperties(String path) {
 		try {
 			Properties props = new Properties();

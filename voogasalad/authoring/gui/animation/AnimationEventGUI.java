@@ -7,14 +7,12 @@ import authoring.gui.items.NumberTextField;
 import authoring.resourceutility.ButtonMaker;
 import events.AnimationEvent;
 import events.AnimationFactory;
-import events.VoogaEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import player.gamedisplay.Menuable;
 import tools.GUIUtils;
 
 /**

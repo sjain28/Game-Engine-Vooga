@@ -3,9 +3,10 @@ package authoring.model;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
+
 import authoring.gui.Selector;
+import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;
-import authoring.interfaces.FrontEndElementable;
 import gameengine.BackEndText;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
@@ -23,7 +24,7 @@ import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
 
 
-public class VoogaFrontEndText extends Text implements FrontEndElementable {
+public class VoogaFrontEndText extends Text implements AuthoringElementable {
 
     private Map<String, VoogaData> propertiesMap;
     private BackEndText backEndText;
@@ -82,7 +83,8 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
         propertiesMap.put("Z", new VoogaNumber());
         propertiesMap.put("Opacity", new VoogaNumber());
         propertiesMap.put("Style", new VoogaString());
-
+        propertiesMap.putAll(backEndText.getVoogaProperties());
+        
         Bindings.bindBidirectional(this.textProperty(), propertiesMap.get("Name").getProperty());
         Bindings.bindBidirectional(this.translateXProperty(), propertiesMap.get("X").getProperty());
         Bindings.bindBidirectional(this.translateYProperty(), propertiesMap.get("Y").getProperty());
@@ -90,7 +92,8 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
         Bindings.bindBidirectional(this.opacityProperty(),
                                    propertiesMap.get("Opacity").getProperty());
         Bindings.bindBidirectional(this.styleProperty(), propertiesMap.get("Style").getProperty());
-        this.setStyle("-fx-fill: red;-fx-font:27px;");
+        
+        this.setStyle("-fx-fill: red;");
     }
 
     void onDrag (MouseEvent event) {
@@ -105,12 +108,6 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
         return propertiesMap;
-    }
-
-    @Override
-    public Node getNodeObject () {
-        // TODO Auto-generated method stub
-        return this;
     }
 
     @Override
@@ -143,27 +140,36 @@ public class VoogaFrontEndText extends Text implements FrontEndElementable {
     }
 
     @Override
-    public void update () {
-
-    }
-
-    @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-        // TODO Auto-generated method stub
-
+        backEndText.setVoogaProperties(newVoogaProperties);
     }
 
     @Override
     public void addProperty (String name, VoogaData data) {
-
+        backEndText.addProperty(name, data);
     }
 
     @Override
     public void removeProperty (String name) {
+        backEndText.removeProperty(name);
+    }
+
+    @Override
+    public Node getNodeObject () {
         // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void init () throws VoogaException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
     }
     
-    public void init () throws VoogaException {
-
-    }
 }

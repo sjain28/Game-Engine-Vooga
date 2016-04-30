@@ -6,15 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
 import org.xml.sax.SAXException;
 
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileType;
+import data.Deserializer;
 import data.Serializer;
 import resources.VoogaBundles;
-import data.Deserializer;
 import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;

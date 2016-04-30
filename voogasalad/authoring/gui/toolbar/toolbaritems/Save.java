@@ -1,11 +1,7 @@
 package authoring.gui.toolbar.toolbaritems;
 
 import authoring.gui.toolbar.ToolbarItemHandler;
-import authoring.interfaces.gui.Saveable;
-import authoring.interfaces.model.CompleteAuthoringModelable;
 import player.gamedisplay.Menuable;
-import resources.VoogaBundles;
-import tools.VoogaException;
 
 
 public class Save extends ToolbarItemHandler {

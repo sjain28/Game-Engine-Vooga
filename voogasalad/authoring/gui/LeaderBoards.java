@@ -1,10 +1,8 @@
 package authoring.gui;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import authoring.VoogaScene;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import stats.database.CellEntry;
 import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;

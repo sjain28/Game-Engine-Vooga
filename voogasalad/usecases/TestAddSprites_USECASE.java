@@ -1,14 +1,17 @@
 package usecases;
 
-import javafx.scene.Node;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import javafx.scene.Node;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 public class TestAddSprites_USECASE {
 	

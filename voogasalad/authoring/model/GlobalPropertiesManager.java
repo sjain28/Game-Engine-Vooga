@@ -2,6 +2,9 @@ package authoring.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import authoring.gui.Selector;
+import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 import resources.VoogaBundles;
@@ -12,19 +15,14 @@ import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 
-public class GlobalPropertiesManager implements Elementable {
+public class GlobalPropertiesManager implements AuthoringElementable {
 
     private Map<String, VoogaData> globalPropertiesMap;
     private String myName;
 
     public GlobalPropertiesManager () {
         globalPropertiesMap = new HashMap<String, VoogaData>();
-        try {init();}
-        catch (VoogaException e) {e.printStackTrace();}
-    }
-
-    @Override
-    public void update () {
+        initialize();
     }
     
     @Override
@@ -48,11 +46,6 @@ public class GlobalPropertiesManager implements Elementable {
     }
 
     @Override
-    public Node getNodeObject () {
-        return null;
-    }
-
-    @Override
     public String getId () {
         return null;
     }
@@ -66,13 +59,41 @@ public class GlobalPropertiesManager implements Elementable {
     public void setName (String name) {
         this.myName = name;
     }
+    
+    public void initialize(){
+        addProperty(VoogaBundles.defaultglobalvars.getProperty("Time"), new VoogaNumber(0.0));
+        addProperty(VoogaBundles.defaultglobalvars.getProperty("Score"), new VoogaNumber(0.0));
+        addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"), new VoogaBoolean(false));
+        addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"), new VoogaString(""));
+    }
+
+    @Override
+    public Elementable getElementable () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void select (Selector selector) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     @Override
     public void init () throws VoogaException {
-    	addProperty(VoogaBundles.defaultglobalvars.getProperty("Time"), new VoogaNumber(0.0));
-    	addProperty(VoogaBundles.defaultglobalvars.getProperty("Score"), new VoogaNumber(0.0));
-    	addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"), new VoogaBoolean(false));
-    	// wat is dhis???
-    	addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"), new VoogaString(""));
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
     }
 }

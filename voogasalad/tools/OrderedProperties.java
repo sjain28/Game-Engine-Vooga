@@ -33,7 +33,8 @@ public class OrderedProperties extends Properties {
             op.load(inStream);
         }
         catch (Exception e) {
-            new VoogaAlert(e.getMessage());
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
         return op;
     }

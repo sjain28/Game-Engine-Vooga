@@ -2,6 +2,7 @@ package authoring.gui.menubar.builders;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import authoring.CustomText;
 import authoring.interfaces.model.EditElementable;
 import authoring.resourceutility.ButtonMaker;
@@ -80,7 +81,8 @@ public class ArchetypeBuilder extends Builder {
                 loadImage(path);
             }
             catch (Exception e1) {
-                new VoogaAlert(e1.getMessage());
+                VoogaAlert alert = new VoogaAlert(e1.getMessage());
+                alert.showAndWait();
             }
 
         });

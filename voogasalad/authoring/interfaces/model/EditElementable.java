@@ -3,6 +3,7 @@ package authoring.interfaces.model;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 

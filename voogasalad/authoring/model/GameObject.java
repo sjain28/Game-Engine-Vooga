@@ -1,9 +1,10 @@
 package authoring.model;
 
 import java.util.Map;
+
 import authoring.gui.Selector;
+import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;
-import authoring.interfaces.FrontEndElementable;
 import authoring.interfaces.Moveable;
 import gameengine.Sprite;
 import javafx.beans.binding.Bindings;
@@ -23,7 +24,7 @@ import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
 
-public class GameObject extends ImageView implements Moveable, FrontEndElementable {
+public class GameObject extends ImageView implements Moveable, AuthoringElementable {
 
     private Sprite mySprite;
     private String name;
@@ -104,11 +105,6 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
         mySprite.removeProperty(name);
     }
 
-    @Override
-    public Node getNodeObject () {
-        return mySprite.getImage();
-    }
-
     public String getName () {
         return name;
     }
@@ -131,11 +127,6 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
     }
 
     @Override
-    public void update () {
-
-    }
-
-    @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
         // TODO Auto-generated method stub
 
@@ -148,9 +139,21 @@ public class GameObject extends ImageView implements Moveable, FrontEndElementab
     }
 
     @Override
+    public Node getNodeObject () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public void init () throws VoogaException {
         // TODO Auto-generated method stub
+        
+    }
 
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
     }
 
 }
