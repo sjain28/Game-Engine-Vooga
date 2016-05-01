@@ -23,17 +23,19 @@ public class DisplayScroller implements IDisplayScroller {
 	private static final double SCROLL_FACTOR = 0.01;
 	private static final int SCREEN_FACTOR = 3;
 
+	private static final String TRACKING_SCROLL_TYPE = "Tracking";
+	
 	private Sprite myScrollingSprite;
 	private IGameDisplay myGameDisplay;
 	private String myScrollingType;
 	private String myTrackingDirection;
 	private boolean isExponentialScroll;
+	private double myMinScrollX;
+	private double myMinScrollY;
+	private double myMaxScrollX;
+	private double myMaxScrollY;
 	private Double myMidScreenX;
 	private Double myMidScreenY;
-	private Double myMinScrollX;
-	private Double myMinScrollY;
-	private Double myMaxScrollX;
-	private Double myMaxScrollY;
 	private Double myTrackX;
 	private Double myTrackY;
 
@@ -54,7 +56,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @param scrollsprite
 	 */
 	public void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite) {
-		if (myScrollingType.equals("Tracking")) {
+		if (myScrollingType.equals(TRACKING_SCROLL_TYPE)) {
 			isExponentialScroll = false;
 			if (myTrackingDirection.equals("X")) {
 				scrollX(scrollingsprite);
@@ -119,7 +121,7 @@ public class DisplayScroller implements IDisplayScroller {
 			}
 			myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 			// Scrolling is centered on the main character
-			if (myScrollingType.equals("Tracking")) {
+			if (myScrollingType.equals(TRACKING_SCROLL_TYPE)) {
 				return mainsprite;
 			} else {
 				// Create a scrolling sprite and return it
@@ -143,10 +145,10 @@ public class DisplayScroller implements IDisplayScroller {
 	private void establishXandYBounds(Map<String, VoogaData> globals, String currentlevel) {
 		Double endX = (Double) globals.get(currentlevel + "EndX").getValue();
 		Double endY = (Double) globals.get(currentlevel + "EndY").getValue();
-		if(endX >= myMidScreenX) { myMinScrollX = myMidScreenX; myMaxScrollX = endX; myTrackX = myMinScrollX.doubleValue();}
-		else { myMaxScrollX = myMidScreenX; myMinScrollX = endX; myTrackX = myMaxScrollX.doubleValue();}
-		if(endY >= myMidScreenY) { myMinScrollY = myMidScreenY; myMaxScrollY = endY; myTrackY = myMinScrollY.doubleValue();}
-		else { myMaxScrollY = myMidScreenY; myMinScrollY = endY; myTrackY = myMaxScrollY.doubleValue();}
+		if(endX >= myMidScreenX) { myMinScrollX = myMidScreenX; myMaxScrollX = endX; myTrackX = myMinScrollX;}
+		else { myMaxScrollX = myMidScreenX; myMinScrollX = endX; myTrackX = myMaxScrollX;}
+		if(endY >= myMidScreenY) { myMinScrollY = myMidScreenY; myMaxScrollY = endY; myTrackY = myMinScrollY;}
+		else { myMaxScrollY = myMidScreenY; myMinScrollY = endY; myTrackY = myMaxScrollY;}
 	}
 
 	/**
