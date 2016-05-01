@@ -41,7 +41,6 @@ import videos.ScreenProcessor;
  */
 public class GameRunner implements IGameRunner {
 	public static final double FRAME_RATE = 60;
-	private static final double SEC_PER_MIN = 60;
 	private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
 	private static final double SPEEDCONTROL = 10;
 	private static final String GAMES_PATH = "games/";
@@ -120,7 +119,7 @@ public class GameRunner implements IGameRunner {
 	 * Checks and updates all LevelData GlobalVariables
 	 */
 	private void checkAndUpdateGlobalVariables() {
-		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / SEC_PER_MIN);
+		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / FRAME_RATE);
 		if (myLevelData.getSaveNow()) {
 			myStats.saveGameProgress(myLevelMapCreator.getGameFilePath());
 			myLevelData.saveProgress(myCurrentGameString);
