@@ -11,23 +11,23 @@ import javafx.scene.shape.Shape;
  *
  */
 public abstract class AnimationPath {
-	
+
 	protected Shape myShape;
-	
+
 	public AnimationPath(Shape shape) {
 		this.myShape = shape;
 	}
-	
+
 	/**
 	 * Returns the X controls for the path, as defined by the subclass.
 	 * @return
 	 */
 	public abstract Double[] getXControls();
-	
+
 	/**
 	 * Returns the Y controls for the path, as defined by the subclass.
 	 * @return
 	 */
 	public abstract Double[] getYControls();
-	
+
 }

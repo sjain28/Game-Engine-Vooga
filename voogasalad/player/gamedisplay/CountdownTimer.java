@@ -3,12 +3,6 @@
  */
 package player.gamedisplay;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.control.Label;
-import javafx.util.Duration;
 
 /**
  * CountdownTimer that provides a label with a given time that decrements every second

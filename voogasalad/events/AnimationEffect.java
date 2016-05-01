@@ -58,12 +58,10 @@ public class AnimationEffect extends SpriteEffect {
 			myAnimationEvent = data.getAnimationFromFactory(myAnimationName);
 			data.addEventAndPopulateKeyCombos(myAnimationEvent);
 		}
-		System.out.println("executing animation effect " + getSprites().size());
 		if (myAnimationEvent.getCauseSprites().size() == 0){
-			System.out.println("adding sprites to animation event " + getSprites().size());
 			myAnimationEvent.addSpritesFromCause(getSprites());
-			myAnimationEvent.setCauseValue(true);
 		}
+		myAnimationEvent.setCauseValue(true);
 		clearSprites();
 	}
 

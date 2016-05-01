@@ -29,8 +29,6 @@ public class AnimationEvent extends VoogaEvent {
 		myName = name;
 		myCause = new WrapperCause(this);
 		myDuration = (int) GameRunner.FRAME_RATE * duration;
-		//myDuration = duration * 60;
-		//myDuration = 300;
 		myCounter = 0;
 	}
 	/**
@@ -63,6 +61,7 @@ public class AnimationEvent extends VoogaEvent {
 					myImageEffect.setCounter(0);
 				}
 				setCauseValue(false);
+				System.out.println("Animation event is done now!");
 			}
 		}
 	}

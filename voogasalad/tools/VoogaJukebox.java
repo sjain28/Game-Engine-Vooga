@@ -9,6 +9,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * GameSound that manages all sounds that are to be played in the display
+ * Uses a Singleton design pattern
  * 
  * @author Hunter Lee
  *
@@ -24,8 +25,8 @@ public class VoogaJukebox {
 		myMediaMap = new HashMap<>();
 	}
 	
-	public synchronized static VoogaJukebox getInstance() {
-		if(gameSound == null) {
+	public static VoogaJukebox getInstance() {
+		if (gameSound == null) {
 			gameSound = new VoogaJukebox();
 		}
 		return gameSound;
@@ -49,10 +50,7 @@ public class VoogaJukebox {
 	 * @return
 	 */
 	public void setBGM(String filename) {
-		System.out.println("SETTING BGM");
-		System.out.println("filename: "+filename);
 		myBGM = new MediaPlayer(new Media(new File(filename).toURI().toString()));
-		System.out.println("myBGM:"+myBGM);
 	}
 
 	/**
@@ -66,7 +64,6 @@ public class VoogaJukebox {
 	 * Play a continuous, controllable sound piece
 	 */
 	public void playBGM() {
-		System.out.println(myBGM);
 		myBGM.play();
 	}
 
@@ -74,13 +71,15 @@ public class VoogaJukebox {
 	 * Permanently stop background music, needs restarting
 	 */
 	public void stopBGM() {
-		myBGM.stop();
+		if (myBGM != null) {
+			myBGM.stop();
+		}
 	}
 
 	/**
 	 * Pause background music for later return to point
 	 */
-/*
+
 	public void pauseBGM() {
 		myBGM.pause();
 	}
@@ -88,9 +87,9 @@ public class VoogaJukebox {
 	/**
 	 * Getters and setters below
 	 */
-/*
+
 	public Map<String, MediaPlayer> getMediaMap() {
 		return myMediaMap;
 	}
-*/
+
 }

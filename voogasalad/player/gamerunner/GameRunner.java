@@ -76,7 +76,6 @@ public class GameRunner implements IGameRunner {
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
-		myScroller = new DisplayScroller(myGameDisplay);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		myTimeline.setCycleCount(Animation.INDEFINITE);
@@ -146,6 +145,8 @@ public class GameRunner implements IGameRunner {
 		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
 			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
+			VoogaBundles.preferences.setProperty("GameWidth", preferences.getWidth());
+			VoogaBundles.preferences.setProperty("GameHeight", preferences.getHeight());
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			VoogaAlert alert = new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
@@ -169,7 +170,6 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName) {
 		myLevelReached++;
 		myCurrentLevelString = fileName;
-		System.out.println("my level data is about to refresh level data");
 		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
 		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
@@ -183,7 +183,6 @@ public class GameRunner implements IGameRunner {
 		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/')
 				.lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
 		myLevelMap.put(levelName, LevelType.ENTRYPOINT);
-		System.out.println("about to refresh level data in test level");
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
@@ -193,9 +192,9 @@ public class GameRunner implements IGameRunner {
 	}
 
 	private void addScrolling() {
+		myScroller = new DisplayScroller(myGameDisplay);
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
-		System.out.println(scrollingSprite);
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
 		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}

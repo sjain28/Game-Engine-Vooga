@@ -94,9 +94,11 @@ public class CreateCommand implements Command {
                     em.setName(level.getName().replace(".xml", ""));
                     models.add(em);
                 }
+                System.out.println("someError");
                 open(models, LOAD);
             }
             catch (VoogaException ex) {
+                System.out.println("Error");
             }
         });
         prompt.show();
@@ -130,7 +132,6 @@ public class CreateCommand implements Command {
         Scene scene = new VoogaScene(manager);
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> promptForSave());
     }

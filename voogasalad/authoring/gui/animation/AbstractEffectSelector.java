@@ -13,15 +13,15 @@ import tools.GUIUtils;
  *
  */
 public abstract class AbstractEffectSelector extends VBox {
-	
+
 	/**
 	 * Constants
 	 */
 	private static final double SPACING = 10;
-	
+
 	protected CheckBox selectEffect;
 	protected Node subnode;
-	
+
 	/**
 	 * Initializes the checkbox for selection and the subnode. Also creates a listener to display or hide the
 	 * particular subnode.
@@ -39,7 +39,7 @@ public abstract class AbstractEffectSelector extends VBox {
 			}
 		});
 	}
-	
+
 	/**
 	 * Initializes the selector's title.
 	 * @param name
@@ -47,16 +47,16 @@ public abstract class AbstractEffectSelector extends VBox {
 	protected void initializeHeader(String name) {
 		this.getChildren().add(GUIUtils.makeRow(selectEffect, new CustomText(name)));
 	}
-	
+
 	/**
 	 * Allows subclasses to define the subnode to display upon selection of the checkbox.
 	 */
 	protected abstract void initializeSubnode();
-	
+
 	/**
 	 * Returns the particular value in question for a subclass.
 	 * @return
 	 */
 	protected abstract Object getValue();
-	
+
 }

@@ -11,9 +11,6 @@ import authoring.interfaces.Elementable;
 import gameengine.BackEndText;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Menu;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.ClipboardContent;
@@ -22,7 +19,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
@@ -32,6 +28,8 @@ import tools.interfaces.VoogaData;
 
 public class VoogaFrontEndText extends Text implements AuthoringElementable {
 
+    private static final String OPAC = "Opacity";
+    private static final String STY = null;
     private Map<String, VoogaData> propertiesMap;
     private BackEndText backEndText;
     private AuthoringElementableMenu menu;
@@ -89,14 +87,14 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
     }
 
     private void initializeMap () {
-        propertiesMap = new TreeMap<String, VoogaData>();
+        propertiesMap = new TreeMap<>();
 
         propertiesMap.put("Name", new VoogaString());
         propertiesMap.put("X", new VoogaNumber());
         propertiesMap.put("Y", new VoogaNumber());
         propertiesMap.put("Z", new VoogaNumber());
-        propertiesMap.put("Opacity", new VoogaNumber());
-        propertiesMap.put("Style", new VoogaString());
+        propertiesMap.put(OPAC, new VoogaNumber());
+        propertiesMap.put(STY, new VoogaString());
         propertiesMap.putAll(backEndText.getVoogaProperties());
         
         Bindings.bindBidirectional(this.textProperty(), propertiesMap.get("Name").getProperty());
@@ -104,8 +102,8 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
         Bindings.bindBidirectional(this.translateYProperty(), propertiesMap.get("Y").getProperty());
         Bindings.bindBidirectional(this.translateZProperty(), propertiesMap.get("Z").getProperty());
         Bindings.bindBidirectional(this.opacityProperty(),
-                                   propertiesMap.get("Opacity").getProperty());
-        Bindings.bindBidirectional(this.styleProperty(), propertiesMap.get("Style").getProperty());
+                                   propertiesMap.get(OPAC).getProperty());
+        Bindings.bindBidirectional(this.styleProperty(), propertiesMap.get(STY).getProperty());
         
         this.setStyle("-fx-fill: red;");
     }

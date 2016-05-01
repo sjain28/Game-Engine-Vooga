@@ -11,16 +11,17 @@ import tools.VoogaException;
 
 
 public class TimerCauseGUI implements EventGUI {
-    private ComboBox decimalPlace;
+    private ComboBox<String> decimalPlace;
     private NumberTextField control;
     private NumberTextField startingTime;
     private VBox node;
     
-    private EditEventable manager;
+    
+    //private EditEventable manager;
 
     private static final double NODE_SPACING = 15;
     public TimerCauseGUI (EditEventable elementManager) {
-        manager = elementManager;
+       // manager = elementManager;
 
         initialize();
     }
@@ -31,7 +32,7 @@ public class TimerCauseGUI implements EventGUI {
 
         control = new NumberTextField();
         startingTime = new NumberTextField();
-
+        decimalPlace = new ComboBox<>();
         decimalPlace.getItems().addAll("0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8",
                                        "0.9");
 
