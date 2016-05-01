@@ -26,7 +26,7 @@ import tools.VoogaException;
 /**
  * Events Window GUI component class. 
  * 
- * @author Nick Lockett
+ * @author Nick Lockett, Harry Guo, Arjun Desai, Aditya Srinivasan
  *
  */
 
@@ -130,6 +130,9 @@ public class EventsWindow extends TabPane implements Observer {
 		effects.remove(e);
 	}
 
+	/**
+	 * Initializes the observer interface.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		initialize();

@@ -5,18 +5,24 @@ import java.util.TreeMap;
 import java.util.UUID;
 
 import authoring.gui.Selector;
+import authoring.gui.menubar.builders.TextPropertyModifier;
 import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;
 import gameengine.BackEndText;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import tools.VoogaException;
 import tools.VoogaNumber;
 import tools.VoogaString;
@@ -28,7 +34,8 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
 
     private Map<String, VoogaData> propertiesMap;
     private BackEndText backEndText;
-
+    private AuthoringElementableMenu menu;
+    
     public VoogaFrontEndText () {
         setId(UUID.randomUUID().toString());
         backEndText = new BackEndText(getId());
@@ -71,7 +78,14 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
         });
 
         this.setOnDragDetected((MouseEvent e) -> onDrag(e));
-        this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
+        this.setOnMouseClicked(e -> {
+            if (e.getButton().equals(MouseButton.PRIMARY)){
+                ElementSelectionModel.getInstance().setSelected(this);
+            }
+            if (e.getButton().equals(MouseButton.SECONDARY)){
+                menu.show(this,e.getScreenX(),e.getScreenY());
+            }
+        });
     }
 
     private void initializeMap () {
@@ -171,5 +185,15 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public void setMenu (AuthoringElementableMenu menu) {
+        this.menu=menu;
+        menu.addItem("Modify Properties", e->openTextModifier());
+    }
     
+    private void openTextModifier(){
+        TextPropertyModifier tp = new TextPropertyModifier(this);
+        tp.showAndWait();
+    }
 }

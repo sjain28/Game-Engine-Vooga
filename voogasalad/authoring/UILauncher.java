@@ -20,8 +20,8 @@ public class UILauncher {
 	 *            to hold splash screen
 	 */
 	public UILauncher(Stage primaryStage) {
-		 primaryStage = new LoginScreen();
-		 primaryStage.show();
+		primaryStage = new LoginScreen();
+		primaryStage.show();
 	}
 
 }

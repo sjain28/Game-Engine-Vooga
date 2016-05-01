@@ -27,6 +27,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
 import resources.VoogaBundles;
 import tools.GUIUtils;
+import tools.VoogaAlert;
+import tools.VoogaFileChooser;
 
 /**
  * Tab that allows the user to define their preferences for the design board in terms of
@@ -47,21 +49,21 @@ public class DesignBoardPreferences extends Tab {
 	private VBox container;
 	private HBox buttons;
 	private HBox continuousControl;
+	private HBox trackingControl;
 	private TextField levelName;
 	private TextField angle;
-	private RadioButton realistic;
-	private RadioButton cartoon;
 	private RadioButton continuous;
 	private RadioButton tracking;
 	private ToggleGroup trackingMode;
-	private ToggleGroup physicsType;
 	private Slider scrollSpeed;
 	private ComboBox<SpriteNameIDPair> sprites;
+	private ComboBox<SpriteNameIDPair> contSprites;
 	private ComboBox<String> continuousScrollType;
 	private ComboBox<String> trackingDirection;
 	private CustomText speedLabel;
 	private EventHandler<ActionEvent> e;
 	private ResourceBundle dbfProperties;
+	private String soundTrackPath;
 	
 	/**
 	 * Constructor to build the pop up for the user to specify preferences.
@@ -78,8 +80,11 @@ public class DesignBoardPreferences extends Tab {
 
 		container.setSpacing(spacing);
 		container.setAlignment(Pos.CENTER);
+		container.getChildren().addAll(header(), chooseName(), chooseBGM(), chooseTrackingMode());
 		this.setContent(container);
-		container.getChildren().addAll(header(), chooseName(), choosePhysicsModule(), chooseTrackingMode());
+		buttons = new HBox();
+		sprites = spriteBox();
+		contSprites = spriteBox();
 		
 		initializeSpecifics();
 		chooseSpecificTrackingMode();
@@ -87,6 +92,19 @@ public class DesignBoardPreferences extends Tab {
 		makeTrackingControl();
 	}
 
+	private Button chooseBGM() {
+		return new ButtonMaker().makeButton("Choose Soundtrack", e -> {
+			VoogaFileChooser chooser = new VoogaFileChooser();
+			try {
+				this.soundTrackPath = chooser.launch();
+			} catch (Exception ee) {
+				VoogaAlert alert = new VoogaAlert("Not a correct file.");
+				alert.showAndWait();
+				ee.printStackTrace();
+			}
+		});
+	}
+	
 	/**
 	 * Sets the name of the level.
 	 * 
@@ -133,18 +151,6 @@ public class DesignBoardPreferences extends Tab {
 	}
 
 	/**
-	 * Choose physics module prompt.
-	 * 
-	 * @return: physics prompt
-	 */
-	private HBox choosePhysicsModule() {
-		realistic = new RadioButton("Realistic");
-		cartoon = new RadioButton("Cartoon");
-		physicsType = new ToggleGroup();
-		return createToggleGroup(physicsType, "Physics Module:", realistic, cartoon);
-	}
-
-	/**
 	 * Choose tracking mode prompt.
 	 * 
 	 * @return: tracking prompt
@@ -163,11 +169,11 @@ public class DesignBoardPreferences extends Tab {
 		trackingMode.selectedToggleProperty().addListener((obs, old, n) -> {
 			container.getChildren().remove(buttons);
 			if(n == continuous) {
+				container.getChildren().remove(trackingControl);
 				container.getChildren().add(continuousControl);
-				container.getChildren().remove(makeTrackingControl());
 			} else {
 				container.getChildren().remove(continuousControl);
-				container.getChildren().add(makeTrackingControl());
+				container.getChildren().add(trackingControl);
 			}
 			container.getChildren().add(buttons);
 		});
@@ -182,14 +188,15 @@ public class DesignBoardPreferences extends Tab {
 		});
 		continuousScrollType = new ComboBox<>();
 		continuousScrollType.getItems().addAll("Linear", "Exponential");
-		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, scrollSpeed, speedLabel, sprites));
+		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, contSprites, scrollSpeed, speedLabel));
 		return continuousControl;
 	}
 	
 	private HBox makeTrackingControl() {
 		trackingDirection = new ComboBox<>();
 		trackingDirection.getItems().addAll(Arrays.asList("X", "Y", "Both"));
-		return customHBox(GUIUtils.makeRow(sprites, trackingDirection));
+		trackingControl = customHBox(GUIUtils.makeRow(sprites, trackingDirection));
+		return trackingControl;
 	}
 
 	/**
@@ -198,7 +205,11 @@ public class DesignBoardPreferences extends Tab {
 	private void initializeSpecifics() {
 		scrollSpeed = new Slider(MIN_SPEED, MAX_SPEED, DEF_SPEED);
 		scrollSpeed.setMaxWidth(width);
-		sprites = new ComboBox<>();
+	}
+	
+	private ComboBox<SpriteNameIDPair> spriteBox() {
+		ComboBox<SpriteNameIDPair> sprites = new ComboBox<>();
+		sprites.getItems().clear();
 		if (!gameObjects.isEmpty()) {
 			for (Node node : this.gameObjects) {
 				if (node instanceof GameObject) {
@@ -209,6 +220,7 @@ public class DesignBoardPreferences extends Tab {
 		} else {
 			sprites.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
 		}
+		return sprites;
 	}
 
 	/**
@@ -250,7 +262,9 @@ public class DesignBoardPreferences extends Tab {
 	 * @return the sprite to track based on ID
 	 */
 	public String getMainSpriteID() {
-		return (sprites.getValue() == null) ? "" : sprites.getValue().getID();
+		if(contSprites.getValue() == null) return sprites.getValue().getID();
+		if(sprites.getValue() == null) return contSprites.getValue().getID();
+		return "";
 	}
 
 	public String getScrollingType() {
@@ -267,14 +281,6 @@ public class DesignBoardPreferences extends Tab {
 	
 	public String getContinuousScrollType() {
 		return continuousScrollType.getValue();
-	}
-	
-	public void setPhysics(String name) {
-		for(Toggle toggle : physicsType.getToggles()) {
-			if(((RadioButton) toggle).getText().equals(name)) {
-				physicsType.selectToggle(toggle);
-			}
-		}
 	}
 	
 	public void setScrolling(String name) {
@@ -308,6 +314,18 @@ public class DesignBoardPreferences extends Tab {
 	
 	public String getTrackingDirection() {
 		return (trackingDirection.getValue() == null) ? "" : trackingDirection.getValue();
+	}
+
+	public void setTrackingDirection(String value) {
+		this.trackingDirection.setValue(value);
+	}
+
+	public String getBGM() {
+		return (this.soundTrackPath.isEmpty() || this.soundTrackPath == null) ? "" : this.soundTrackPath;
+	}
+	
+	public void setBGM(String BGM) {
+		this.soundTrackPath = BGM;
 	}
 
 }

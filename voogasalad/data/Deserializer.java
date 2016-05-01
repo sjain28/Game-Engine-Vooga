@@ -21,14 +21,14 @@ public final class Deserializer {
 
     public static List<Object> deserialize (int objectNum, String fileName) throws VoogaException {
         XStream unSerializer = new XStream(new DomDriver());
-        List<Object> objectsCreated = new ArrayList<Object>();
+        List<Object> objectsCreated = new ArrayList<>();
         try {
             ObjectInputStream objectInputStream =
                     unSerializer.createObjectInputStream(new FileInputStream(fileName));
             for (int i = 0; i < objectNum; i++) {
                 try {
-                    Object object = null;
-                    object = (Object) objectInputStream.readObject();
+                    Object object;
+                    object = objectInputStream.readObject();
                     objectsCreated.add(object);
                 }
                 catch (ClassNotFoundException e) {
@@ -37,11 +37,9 @@ public final class Deserializer {
             }
         }
         catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
         catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
         return objectsCreated;

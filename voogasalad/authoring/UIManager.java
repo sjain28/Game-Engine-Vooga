@@ -27,12 +27,12 @@ import resources.VoogaPaths;
  * 
  */
 public class UIManager extends VBox implements Menuable {
-	
+
 	private UIGridHousing grid;
 	private SimpleIntegerProperty currentTabIndex;
 	private ElementTabManager elementTabManager;
 	private String gameName;
-	
+
 	/**
 	 * Initializes the UI Manager given multiple models.
 	 * 
@@ -63,13 +63,13 @@ public class UIManager extends VBox implements Menuable {
 		Bindings.bindBidirectional(this.currentTabIndex, elementTabManager.getCurrentManagerIndexProperty());
 		initializeComponents();
 	}
-	
+
 	private void initializeTabs() {
 		gameName = VoogaBundles.preferences.getProperty("GameName");
 		this.currentTabIndex = new SimpleIntegerProperty(-1);
 		this.elementTabManager = new ElementTabManager();
 	}
-	
+
 	/**
 	 * Initializes all the pieces of the authoring environment
 	 */
@@ -110,43 +110,43 @@ public class UIManager extends VBox implements Menuable {
 	public List<String> getAllManagerNames() {
 		List<String> names = new ArrayList<>();
 		elementTabManager.getAllManagers().stream()
-										  .map(ElementManager::getName)
-										  .forEach(names::add);
+		.map(ElementManager::getName)
+		.forEach(names::add);
 		return names;
 	}
-	
-    /**
-     * Saves the current through serialization.
-     */
-    public void saveAll () {
-        try {
-            Preferences preferences = new Preferences(gameName,
-                                                      VoogaBundles.preferences
-                                                              .getProperty("GameDescription"),
-                                                      VoogaBundles.preferences
-                                                              .getProperty("GameWidth"),
-                                                      VoogaBundles.preferences
-                                                              .getProperty("GameHeight"),
-                                                      getAllManagerNames());
-            Serializer.serializeLevel(preferences,
-                                      VoogaPaths.GAME_FOLDER + gameName + "/" + gameName + ".xml");
-            for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
-                m.onSave();
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    /**
-     * Opens scene dependent on current manager
-     * 
-     * @param manager: manager for selected scene
-     */
-    public void openScene (ElementManager manager) {
-        elementTabManager.addManager(manager);
-        grid.openScene(manager);
-    }
+	/**
+	 * Saves the current through serialization.
+	 */
+	public void saveAll () {
+		try {
+			Preferences preferences = new Preferences(gameName,
+					VoogaBundles.preferences
+					.getProperty("GameDescription"),
+					VoogaBundles.preferences
+					.getProperty("GameWidth"),
+					VoogaBundles.preferences
+					.getProperty("GameHeight"),
+					getAllManagerNames());
+			Serializer.serializeLevel(preferences,
+					VoogaPaths.GAME_FOLDER + gameName + "/" + gameName + ".xml");
+			for (CompleteAuthoringModelable m : elementTabManager.getAllManagers()) {
+				m.onSave();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Opens scene dependent on current manager
+	 * 
+	 * @param manager: manager for selected scene
+	 */
+	public void openScene (ElementManager manager) {
+		elementTabManager.addManager(manager);
+		grid.openScene(manager);
+	}
 
 }

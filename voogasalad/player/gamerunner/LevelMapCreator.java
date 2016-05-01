@@ -33,7 +33,7 @@ public class LevelMapCreator {
      * @throws VoogaException
      */
     public LevelMapCreator(String xmlList) throws VoogaException {
-    	myLevelMap = new HashMap<String,LevelType>();
+    	myLevelMap = new HashMap<>();
 		myGameFilePath = GAMES_PATH_PREFIX + xmlList + SLASH;
 		String XMLwithListOfLevels =myGameFilePath + "map" + SLASH + xmlList + "Map"+ XML_EXTENSION;
 		System.out.println(XMLwithListOfLevels);

@@ -13,7 +13,6 @@ import tools.VoogaException;
 
 public class PhysicsEffectGUI implements EventGUI {
     private ArchetypeSpriteCombo name;
-    private SpriteComboBox sprites;
     private ComboBox<String> actions;
     private NumberTextField amount;
 
@@ -28,7 +27,6 @@ public class PhysicsEffectGUI implements EventGUI {
     }
 
     private void onNameSelected () {
-        sprites = name.getSpriteComboBox();
         addGUIElements(actions, amount);
     }
 

@@ -64,7 +64,7 @@ public class SpriteEffect extends VariableEffect{
 	@Override
 	public void execute(ILevelData data) {
 		setSprites(data);
-		if (mySprites.size() > 0){
+		if (!mySprites.isEmpty() && mySprites.size() > 0){
 			for (Sprite sprite : mySprites){
 				VoogaData variable = sprite.getParameterMap().get(getVariable());
 				callEffectMethod(variable);
@@ -85,7 +85,7 @@ public class SpriteEffect extends VariableEffect{
 		}
 		if (getMyArchetype() != null){
 			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
-			if (mySprites.size() != 0){
+			if (!mySprites.isEmpty()){
 				for(Sprite causeSprite : mySprites){
 					if(!archSpriteIDs.contains(causeSprite)){
 						mySprites.remove(causeSprite);
