@@ -30,10 +30,8 @@ public class AnimationFactory {
 	}
 
 	public AnimationEvent makeAnimationEvent (String name, Integer duration) {
-		System.out.println("making animation event");
 		AnimationEvent newEvent = new AnimationEvent(name, duration);
 		myAnimationEvents.put(name, newEvent);
-		System.out.println("Event map size: " + myAnimationEvents.size());
 		return newEvent;
 	}
 
@@ -47,11 +45,9 @@ public class AnimationFactory {
 	public void makeRotateEffect (Double rotation, AnimationEvent event) {
 		event.addRotateEffect(new RotateEffect(rotation, event));
 	}
-	
 	public void makeScaleAnimationEffect(Double scale, AnimationEvent event){
 		event.addScaleAnimationEffect(new ScaleAnimationEffect(scale, event));
 	}
-	
 	public void makeImageAnimationEffect(List<String> images, Integer cycles, AnimationEvent event){
 		event.addImageAnimationEffect(new ImageAnimationEffect(images, cycles, event));
 

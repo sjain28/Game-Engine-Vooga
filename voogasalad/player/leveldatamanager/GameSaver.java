@@ -63,7 +63,6 @@ public class GameSaver implements IGameSaver {
 	public void saveCurrentProgress(String nameOfGame) {
 		String gameName = VoogaBundles.preferences.getProperty("GameName");
 		String playerName = VoogaBundles.preferences.getProperty("UserName");
-		System.out.println("The animation factory here is " + myAnimationFactory);
 		DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
 				myGlobalVariables, myKeyEventContainer.getEvents(), mySpriteFactory.getArchetypeMap(),
 				myAnimationFactory);

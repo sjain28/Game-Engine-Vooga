@@ -9,6 +9,6 @@ package player.leveldatamanager;
  * @author Hunter Lee
  *
  */
-public interface ILevelData extends ILevelGetter, ILevelLoader{
+public interface ILevelData extends ILevelGetter, ILevelLoader {
 
 }

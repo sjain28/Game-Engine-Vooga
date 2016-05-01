@@ -7,13 +7,26 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-
+/**
+ * Graph Maker to make any sort of scatter plot with two lists of objects
+ * @author Krista
+ *
+ */
 public class GraphMaker {
 	private Axis xAxis;
 	private Axis yAxis;
 	private Object xPoint;
 	private Object yPoint;
-	//TODO: re-factor so that you only need to check the x/y param types once
+	/**
+	 * Creates a scatter plot for any list of x parameters, y parameters
+	 * 
+	 * @param title
+	 * @param xlabel
+	 * @param ylabel
+	 * @param xparams
+	 * @param yparams
+	 * @return
+	 */
 	public ScatterChart<?,?> createScatterPlot(String title, String xlabel, String ylabel, List<Object> xparams, List<Object> yparams){
 		//choose x axis type
 		if(xparams.get(0) instanceof Number){xAxis = new NumberAxis();}
