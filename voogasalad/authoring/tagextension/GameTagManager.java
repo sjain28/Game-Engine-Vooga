@@ -65,8 +65,6 @@ public class GameTagManager {
             if (!ResourceDecipherer.isImage(filename)) return;
         }
         catch (VoogaException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         
         // Retrieve recognition results
@@ -88,7 +86,7 @@ public class GameTagManager {
             Serializer.serializeLevel(myTags, getTagLocation());
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -97,7 +95,6 @@ public class GameTagManager {
      */
     @SuppressWarnings("unchecked")
     private void loadCurrentGameTags () {
-        System.out.println("loading");
         Path path = Paths.get(getTagLocation());
         try {
             if (Files.notExists(path)) {
@@ -105,10 +102,9 @@ public class GameTagManager {
             }
             List<Object> objects = Deserializer.deserialize(1, getTagLocation());
             myTags = (List<Tag>) objects.get(0);
-            System.out.println("my tags: " + myTags);
         }
         catch (VoogaException e) {
-            e.printStackTrace();
+
         }
     }
 

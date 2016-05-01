@@ -22,7 +22,6 @@ public class PreviewMirror {
 			previewer = (Previewer) clazz.getConstructor(VoogaFile.class).newInstance(file);
 			previewer.getClass().getDeclaredMethod(PREVIEW).invoke(previewer);
 		} catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 

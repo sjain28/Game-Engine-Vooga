@@ -55,7 +55,6 @@ public class SpriteFactory extends Observable{
 	 * @return Sprite
 	 */
 	public Sprite createSprite (String archetype) {
-		System.out.println("creating sprite in SpriteFactory");
 		Sprite original = myArchetypes.get(archetype);
 
 		Map<String,VoogaData> map = new HashMap<>(original.getParameterMap());

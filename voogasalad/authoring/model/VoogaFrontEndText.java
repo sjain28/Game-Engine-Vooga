@@ -86,7 +86,6 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
     private void create () {
 
         this.textProperty().addListener( (o, oldVal, newVal) -> {
-            System.out.println(newVal);
             backEndText.setName(newVal);
         });
 
@@ -126,7 +125,6 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
     void onDrag (MouseEvent event) {
         Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
         ClipboardContent content = new ClipboardContent();
-        System.out.println("Picked up");
         content.putString(getId());
         db.setContent(content);
         event.consume();

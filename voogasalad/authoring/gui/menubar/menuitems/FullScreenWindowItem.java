@@ -28,7 +28,6 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	public FullScreenWindowItem(Menuable model) {
 		super();
 		this.myGameRunner = (GameRunner) model;
-		System.out.println(myGameRunner + "NULL>??");
 	}
 	
 	/**
