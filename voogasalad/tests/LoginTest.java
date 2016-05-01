@@ -1,6 +1,8 @@
-package stats.database;
+package tests;
 
 import org.junit.Test;
+
+import stats.database.VoogaDataBase;
 
 public class LoginTest {
 

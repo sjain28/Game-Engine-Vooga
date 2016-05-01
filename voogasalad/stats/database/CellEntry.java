@@ -8,6 +8,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tools.interfaces.VoogaData;
 
+
+/**
+ * Cell Entry contains all the different properties of a cell. 
+ * 
+ * @author Joshua Xu
+ *
+ */
+
 public class CellEntry implements PropertiesCell{
 	private Map<String, VoogaData> myPropertyMap;
 	

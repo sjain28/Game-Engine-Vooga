@@ -15,7 +15,8 @@ public class StatCell extends CellEntry {
 	public static final String LAST_SAVED_LEVEL_LOC = "last_saved_level_loc";
 	
 	public StatCell(String gamename, String username){
-		super();
+		super()
+		;
 		myAuthorStats = new Stack<AuthorSession>();
 		myPlayStats = new Stack<PlaySession>();
 		setProperty(MY_GAME, new VoogaString(gamename));
@@ -27,14 +28,14 @@ public class StatCell extends CellEntry {
 		return Collections.unmodifiableList(myAuthorStats);
 	}
 	public void addAuthoringSession(AuthorSession authorsesh){
-		System.out.println("adding authoring session: "+myAuthorStats.size());
+//		System.out.println("adding authoring session: "+myAuthorStats.size());
 		myAuthorStats.add(authorsesh);
 	}
 	public List<CellEntry> getPlayStats(){
 		return Collections.unmodifiableList(myPlayStats);
 	}
 	public PlaySession getLatestPlaySession(){
-		System.out.println(myPlayStats.size());
+//		System.out.println(myPlayStats.size());
 		if (myPlayStats.empty()){
 			return null;
 		}
@@ -48,6 +49,9 @@ public class StatCell extends CellEntry {
 	}
 	public void addPlaySession(PlaySession voogaplaysesh){
 		myPlayStats.add(voogaplaysesh);
+	}
+	public void addAuthorSession(AuthorSession voogaauthorsesh){
+		myAuthorStats.add(voogaauthorsesh);
 	}
 	public String toString(){
 		return "Cell";

@@ -178,7 +178,7 @@ public class LevelData implements ILevelData {
 		myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
 		GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory,
 				myAnimationFactory);
-		saver.saveCurrentProgress(filePath);
+		saver.saveCurrentProgress();
 	}
 
 	public String getNextLevelName() {

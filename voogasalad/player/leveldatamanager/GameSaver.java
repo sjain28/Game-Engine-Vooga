@@ -15,6 +15,7 @@ import stats.database.CellEntry;
 import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import stats.interaction.CurrentSessionStats;
 import tools.VoogaException;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
@@ -59,7 +60,7 @@ public class GameSaver implements IGameSaver {
 	 * 
 	 * @param nameOfGame
 	 */
-	public void saveCurrentProgress(String nameOfGame) {
+	public void saveCurrentProgress() {
 		String gameName = VoogaBundles.preferences.getProperty("GameName");
 		String playerName = VoogaBundles.preferences.getProperty("UserName");
 		DataContainerOfLists dataContainer = new DataContainerOfLists(new ArrayList<>(myElements.values()), 
@@ -67,15 +68,17 @@ public class GameSaver implements IGameSaver {
 				myAnimationFactory);
 
 		try {
-			FileWriterFromGameObjects.saveGameObjects(dataContainer,GAMES+ nameOfGame + SLASH + LEVELS +  playerName + XML_SUFFIX);
+			FileWriterFromGameObjects.saveGameObjects(dataContainer,GAMES+ gameName + SLASH + LEVELS +  playerName + XML_SUFFIX);
 		} catch (Exception e) {
 			new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
 		}
-		System.out.println("What is filePath " + GAMES+ nameOfGame + SLASH + LEVELS +  playerName + XML_SUFFIX);
-		CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
-		PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
-		latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(nameOfGame));
-		((StatCell) entry).updateProgress(playerName);
-		System.out.println("What is the current update progress" + ((StatCell) entry).checkProgress());
+		System.out.println("What is filePath " + GAMES+ gameName + SLASH + LEVELS +  playerName + XML_SUFFIX);
+		CurrentSessionStats currentCell = new CurrentSessionStats();
+		currentCell.saveGameProgress(playerName);
+//		CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
+//		PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
+//		latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(nameOfGame));
+//		((StatCell) entry).updateProgress(playerName);
+//		System.out.println("What is the current update progress" + ((StatCell) entry).checkProgress());
 	}
 }

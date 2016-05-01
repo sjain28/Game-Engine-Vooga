@@ -126,11 +126,12 @@ public class GameRunner implements IGameRunner {
 			myLevelData.saveProgress(myCurrentGameString);
 		}
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
-			System.out.println("AN ENDPOINT HAS BEEN REACHED SO A WIN SCREEN SHOULD BE PULLED. typeis + " + myLevelMap.get(myLevelData.getNextLevelName()));
 			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
 				//TODO: Implement win screen
-				VoogaDataBase.getInstance().save();
+				finishPlaySession();
+				myTimeline.stop();
 				LeaderBoard leaderBoard = new LeaderBoard(VoogaBundles.preferences.getProperty("GameName"));
+				System.out.println("The timeline didn't stop");
 				return;
 			}
 			playLevel(myLevelData.getNextLevelName());
@@ -158,7 +159,6 @@ public class GameRunner implements IGameRunner {
 	}
 
 	private String checkProgressInDatabase() {
-		myStats.startPlaySession();
 		playSessionActive = true;
 		String latestLevelReached = NULL_STRING;
 		if (myStats.getCurrentStatCell().checkProgress() != null) {

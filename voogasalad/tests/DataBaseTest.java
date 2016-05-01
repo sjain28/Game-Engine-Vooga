@@ -63,6 +63,8 @@ public class DataBaseTest {
 		CurrentSessionStats stats = new CurrentSessionStats();
 		stats.startAuthoringSession();
 		stats.endCurrentAuthoringSession();
+		stats.saveGameProgress("HI");
+		System.out.println("The progress here should be hi but it is " +stats.loadGameProgress());
 		
 		PlaySession playsesh5 =new PlaySession(new Date());
 		System.out.println("here");

@@ -20,9 +20,10 @@ public class CurrentSessionStats {
 	}
 	public void saveGameProgress(String levelurl){
 		getCurrentStatCell().setProperty(StatCell.LAST_SAVED_LEVEL_LOC, new VoogaString(levelurl));
+		VoogaDataBase.getInstance().getStatByGameAndUser(myCurrentGame, myCurrentUser).getProperty(StatCell.LAST_SAVED_LEVEL_LOC);
 	}
-	public void getLastSavedLevel(){
-		getCurrentStatCell().getProperty(StatCell.LAST_SAVED_LEVEL_LOC);
+	public String loadGameProgress(){
+		return (String) ((VoogaString) getCurrentStatCell().getProperty(StatCell.LAST_SAVED_LEVEL_LOC)).getValue();
 	}
 	public void startAuthoringSession(){
     	StatCell statcell = getCurrentStatCell();
