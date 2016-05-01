@@ -7,14 +7,16 @@ import authoring.interfaces.model.EditEventable;
 
 public class VariableCauseGUI extends VariableGUIBasic implements EventGUI{
     
+	private static final String EQUALS = "Equals";
+	
     public VariableCauseGUI (EditEventable elementManager) {
         super(elementManager,EventParts.CAUSE);
     }
 
     @Override
     protected Collection<String> voogaNumberProperties () {
-        Collection<String> numberProperties = new ArrayList<String> ();
-        numberProperties.add("Equals");
+        Collection<String> numberProperties = new ArrayList<> ();
+        numberProperties.add(EQUALS);
         numberProperties.add(">");
         numberProperties.add("<");
         return numberProperties;
@@ -22,8 +24,8 @@ public class VariableCauseGUI extends VariableGUIBasic implements EventGUI{
 
     @Override
     protected Collection<String> voogaProperties () {
-        Collection<String> properties = new ArrayList<String> ();
-        properties.add("Equals");
+        Collection<String> properties = new ArrayList<> ();
+        properties.add(EQUALS);
         return properties;
     }
 

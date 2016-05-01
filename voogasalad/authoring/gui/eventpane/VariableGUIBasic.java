@@ -1,7 +1,6 @@
-package authoring.gui.eventpane;
+	package authoring.gui.eventpane;
 
 import java.util.Collection;
-import java.util.ResourceBundle;
 import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.VariableComboBox;
@@ -31,7 +30,6 @@ public abstract class VariableGUIBasic implements EventGUI {
     private EditEventable elementManager;
     private VBox node;
     private EventParts type;
-    private ResourceBundle bundle;
 
     public VariableGUIBasic (EditEventable elementManager, EventParts type) {
         this.elementManager = elementManager;
@@ -84,7 +82,7 @@ public abstract class VariableGUIBasic implements EventGUI {
             }
             if (vd instanceof VoogaBoolean) {
                 actions.getItems().addAll(voogaProperties());
-                ComboBox<String> cb = new ComboBox<String>();
+                ComboBox<String> cb = new ComboBox<>();
                 cb.getItems().addAll("true", "false");
                 amount = cb;
                 addGUIElements(actions, amount);
