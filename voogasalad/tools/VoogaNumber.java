@@ -149,8 +149,7 @@ public class VoogaNumber implements VoogaData {
 
     @Override
     public Object getValue () {
-        double number = (double) myValue;
-        return number;
+        return (double) myValue;
     }
 
     @SuppressWarnings("unchecked")

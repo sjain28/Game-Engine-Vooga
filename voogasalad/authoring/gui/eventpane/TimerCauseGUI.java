@@ -14,11 +14,11 @@ public class TimerCauseGUI implements EventGUI {
     private ComboBox decimalPlace;
     private NumberTextField control;
     private NumberTextField startingTime;
-
     private VBox node;
-
+    
     private EditEventable manager;
 
+    private static final double NODE_SPACING = 15;
     public TimerCauseGUI (EditEventable elementManager) {
         manager = elementManager;
 
@@ -27,9 +27,8 @@ public class TimerCauseGUI implements EventGUI {
 
     public void initialize () {
         node = new VBox();
-        node.setSpacing(15);
+        node.setSpacing(NODE_SPACING);
 
-        decimalPlace = new ComboBox();
         control = new NumberTextField();
         startingTime = new NumberTextField();
 
@@ -42,7 +41,7 @@ public class TimerCauseGUI implements EventGUI {
 
     private HBox generateHBox (Node ... nodes) {
         HBox hbox = new HBox();
-        hbox.setSpacing(15);
+        hbox.setSpacing(NODE_SPACING);
         for (Node node : nodes) {
             hbox.getChildren().add(node);
         }

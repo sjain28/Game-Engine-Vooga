@@ -35,12 +35,11 @@ public class CurrentSessionStats {
 	}
 	public void startPlaySession(){
 		PlaySession playsession = new PlaySession(new Date());
-		getCurrentStatCell().addPlaySession(playsession);;
+		getCurrentStatCell().addPlaySession(playsession);
 		playsession.startSession();
 	}
 	public void endCurrentPlaySession(double score, double myLevelReached){
 		PlaySession playsession = getCurrentStatCell().getLatestPlaySession();
-//		System.out.println(playsession);
 		playsession.endSession(new VoogaNumber(score), new VoogaNumber(myLevelReached));
 	}
 	public StatCell getCurrentStatCell(){

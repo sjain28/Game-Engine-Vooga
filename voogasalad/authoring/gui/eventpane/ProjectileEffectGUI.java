@@ -10,7 +10,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import tools.VoogaException;
 
-
 public class ProjectileEffectGUI implements EventGUI {
 	
 	private static final String REL_POS = "Relative Position";
@@ -44,7 +43,6 @@ public class ProjectileEffectGUI implements EventGUI {
     private void createObjects () {
         archetypes = new ArchetypeComboBox(elementManager);
         archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
-        targetDesired = new ComboBox();
         targetDesired.getItems().addAll(REL_POS, ABS_POS);
 
         targetId = new SpriteComboBox(elementManager);
@@ -59,7 +57,6 @@ public class ProjectileEffectGUI implements EventGUI {
         amount = new NumberTextField();
         amount.setPadding(new Insets(PADDING));
 
-        velocityScaledDesired = new ComboBox();
         velocityScaledDesired.getItems().addAll(SC_VEL, AB_VEL);
     }
 

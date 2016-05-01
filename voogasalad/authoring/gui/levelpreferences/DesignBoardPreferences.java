@@ -57,6 +57,7 @@ public class DesignBoardPreferences extends Tab {
 	private ToggleGroup trackingMode;
 	private Slider scrollSpeed;
 	private ComboBox<SpriteNameIDPair> sprites;
+	private ComboBox<SpriteNameIDPair> contSprites;
 	private ComboBox<String> continuousScrollType;
 	private ComboBox<String> trackingDirection;
 	private CustomText speedLabel;
@@ -82,6 +83,8 @@ public class DesignBoardPreferences extends Tab {
 		container.getChildren().addAll(header(), chooseName(), chooseBGM(), chooseTrackingMode());
 		this.setContent(container);
 		buttons = new HBox();
+		sprites = spriteBox();
+		contSprites = spriteBox();
 		
 		initializeSpecifics();
 		chooseSpecificTrackingMode();
@@ -166,8 +169,8 @@ public class DesignBoardPreferences extends Tab {
 		trackingMode.selectedToggleProperty().addListener((obs, old, n) -> {
 			container.getChildren().remove(buttons);
 			if(n == continuous) {
-				container.getChildren().add(continuousControl);
 				container.getChildren().remove(trackingControl);
+				container.getChildren().add(continuousControl);
 			} else {
 				container.getChildren().remove(continuousControl);
 				container.getChildren().add(trackingControl);
@@ -185,14 +188,15 @@ public class DesignBoardPreferences extends Tab {
 		});
 		continuousScrollType = new ComboBox<>();
 		continuousScrollType.getItems().addAll("Linear", "Exponential");
-		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, spriteBox(), scrollSpeed, speedLabel));
+		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, contSprites, scrollSpeed, speedLabel));
 		return continuousControl;
 	}
 	
-	private void makeTrackingControl() {
+	private HBox makeTrackingControl() {
 		trackingDirection = new ComboBox<>();
 		trackingDirection.getItems().addAll(Arrays.asList("X", "Y", "Both"));
 		trackingControl = customHBox(GUIUtils.makeRow(sprites, trackingDirection));
+		return trackingControl;
 	}
 
 	/**
@@ -201,22 +205,22 @@ public class DesignBoardPreferences extends Tab {
 	private void initializeSpecifics() {
 		scrollSpeed = new Slider(MIN_SPEED, MAX_SPEED, DEF_SPEED);
 		scrollSpeed.setMaxWidth(width);
-		sprites = spriteBox();
 	}
 	
 	private ComboBox<SpriteNameIDPair> spriteBox() {
-		ComboBox<SpriteNameIDPair> cb = new ComboBox<>();
+		ComboBox<SpriteNameIDPair> sprites = new ComboBox<>();
+		sprites.getItems().clear();
 		if (!gameObjects.isEmpty()) {
 			for (Node node : this.gameObjects) {
 				if (node instanceof GameObject) {
 					Sprite sprite = ((GameObject) node).getSprite();
-					cb.getItems().add(new SpriteNameIDPair(sprite.getName(), sprite.getId()));
+					sprites.getItems().add(new SpriteNameIDPair(sprite.getName(), sprite.getId()));
 				}
 			}
 		} else {
-			cb.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
+			sprites.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
 		}
-		return cb;
+		return sprites;
 	}
 
 	/**
@@ -258,7 +262,9 @@ public class DesignBoardPreferences extends Tab {
 	 * @return the sprite to track based on ID
 	 */
 	public String getMainSpriteID() {
-		return (sprites.getValue() == null) ? "" : sprites.getValue().getID();
+		if(contSprites.getValue() == null) return sprites.getValue().getID();
+		if(sprites.getValue() == null) return contSprites.getValue().getID();
+		return "";
 	}
 
 	public String getScrollingType() {

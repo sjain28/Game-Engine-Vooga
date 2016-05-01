@@ -1,4 +1,4 @@
-package stats.visualization;
+package tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,8 @@ import stats.database.AuthorSession;
 import stats.database.CellEntry;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import stats.visualization.GraphMaker;
+import stats.visualization.StatsVisualizer;
 
 public class GraphMakerTest extends Application {
 	public void start(Stage stage) {		
@@ -19,11 +21,12 @@ public class GraphMakerTest extends Application {
 		
 		//fill up the x-params and y-params
 		//fillArrays4(xparams,yparams);
-
+		VoogaDataBase.getInstance().printDataBase();
 		
 		GraphMaker statsvisualizer = new GraphMaker();
 		StatsVisualizer visualizer = new StatsVisualizer();
-		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("test2", "Nick");
+		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("testergame3", "klo14");
+
 		List<CellEntry> list = ((StatCell) statinfo).getAuthorStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
 		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);

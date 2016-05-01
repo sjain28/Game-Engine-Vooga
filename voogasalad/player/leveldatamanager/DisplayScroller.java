@@ -110,25 +110,34 @@ public class DisplayScroller implements IDisplayScroller {
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
 		try {
 			try {
+				System.out.println("FROM MAP tracking: " + globals.get(currentlevel + "TrackingDirection").getValue());
 				myTrackingDirection = (String) globals.get(currentlevel + "TrackingDirection").getValue();
 				establishXandYBounds(globals, currentlevel);
 			} catch(Exception e) {
 				VoogaAlert alert = new VoogaAlert("Please specify your finish line.");
 				alert.showAndWait();
 			}
+			System.out.println("FROM MAP scrolling: " + globals.get(currentlevel + "Scrolling").getValue());
 			myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 			// Scrolling is centered on the main character
 			if (myScrollingType.equals("Tracking")) {
 				return mainsprite;
 			} else {
 				// Create a scrolling sprite and return it
+				System.out.println("1");
 				double scrollAngle = (double) globals.get(currentlevel + "ScrollAngle").getValue();
+				System.out.println("2");
 				double scrollSpeed = (double) globals.get(currentlevel + "ScrollSpeed").getValue();
+				System.out.println("3");
 				Sprite scrollSprite = new Sprite("/A.png", "ScrollingSprite", new HashMap<>(),
 						new VoogaNumber());
+				System.out.println("4");
 				scrollSprite.getImage().setOpacity(0);
+				System.out.println("5");
 				scrollSprite.getPosition().setXY(mainsprite.getPosition().getX(), mainsprite.getPosition().getY());
+				System.out.println("6");
 				scrollSprite.getVelocity().setVelocity(scrollSpeed * SCROLL_FACTOR, scrollAngle);
+				System.out.println("7");
 				myScrollingSprite = scrollSprite;
 				return scrollSprite;
 			}
