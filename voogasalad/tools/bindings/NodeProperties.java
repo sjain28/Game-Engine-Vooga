@@ -22,8 +22,6 @@ public abstract class NodeProperties {
 	}
 
 	public Map<String, Object> storeData(Node node) throws VoogaException {
-		System.out.println("Storing Data");
-
 		Map<String, Object> propertiesMap = new HashMap<>();
 
 		for (Field field : this.getClass().getDeclaredFields()) {

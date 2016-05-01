@@ -39,7 +39,6 @@ public class ElementSelectionModel extends Observable {
 		this.selected = e;
 		this.selected.select(Selector.HIGHLIGHTED);
 
-		System.out.println("");
 		setChanged();
 		notifyObservers(this.selected);
 	}

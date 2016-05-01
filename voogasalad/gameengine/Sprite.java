@@ -106,7 +106,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		}
 		Bindings.bindBidirectional(myImagePathProperty, myProperties
 				.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getProperty());
-		System.out.println("reload image- path property: " + myImagePathProperty.get());
 		setImagePath((String) myProperties
 				.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getProperty()
 				.getValue());
@@ -152,9 +151,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 	private void reloadDimensions () {
 		myWidth = new SimpleDoubleProperty();
 		myHeight = new SimpleDoubleProperty();
-
-		System.out.println("Image width before : " + myImage.fitWidthProperty().get());
-		System.out.println("Image height before: " + myImage.fitHeightProperty().get());
 
 		Bindings.bindBidirectional(myProperties
 				.get(VoogaBundles.spriteProperties.getString("WIDTH")).getProperty(),
@@ -243,9 +239,6 @@ public class Sprite implements Moveable, Effectable, Elementable {
 			return;
 		}
 		ImageProperties imageProperties = new ImageProperties();
-		for (String key : myProperties.keySet()) {
-			System.out.println(key + " " + myProperties.get(key).getValue().toString());
-		}
 		reloadImage();
 		imageProperties.loadData(myImage, initializationProperties);
 		reloadCoordinates();

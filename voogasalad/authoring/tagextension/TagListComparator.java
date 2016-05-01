@@ -26,9 +26,6 @@ public class TagListComparator implements Comparator<Object> {
 	    double perc1 = generateTotalPercentMatch(pair1.getTagList());
 	    double perc2 = generateTotalPercentMatch(pair2.getTagList());
 
-	    System.out.println(pair1.getGameName()+" : "+ perc1);
-	    System.out.println(pair2.getGameName()+" : "+ perc2);
-
 	    if(perc1 < perc2){return 1;}
 	    if(perc1 > perc2){return -1;}
 	    return 0;

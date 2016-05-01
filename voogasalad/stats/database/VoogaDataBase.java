@@ -53,8 +53,6 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	public VoogaGame getGame(String gamename){
 		for(VoogaGame game : myGames){
-			System.out.println("looking for: "+gamename);
-			System.out.println("comparing with: "+game.getProperty(VoogaGame.GAME_NAME).toString());
 			if(game.getProperty(VoogaGame.GAME_NAME).toString().equals(gamename)){
 				return game;
 			}
@@ -77,7 +75,6 @@ public class VoogaDataBase implements IDataBase{
 				myStatInfo.get(col).add(new StatCell(gamename,username));
 			}
 			printDataBase();
-			System.out.println("What is my game here, this can only be shown if a game was added 2 list " + myGames);
 		}
 	}
 	/**
@@ -102,7 +99,6 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	public void checkThenAddIfNewUser(String displayname, String username, String password, String profpiclocation){
 		if(getUser(username)==null){
-			System.out.println("actually adding in the user");
 			totalcols++;
 			myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));
 			List<CellEntry> userstatinfo = new ArrayList<>();
@@ -121,10 +117,8 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	public CellEntry getStatByGameAndUser(String gamename, String username){
 		this.printDataBase();
-		System.out.println(gamename);
 		int row = myGames.indexOf(getGame(gamename));
 		int col = myUsers.indexOf(getUser(username));
-		System.out.println("the row here is " + row + "and the column is" + col);
 		return myStatInfo.get(col).get(row);
 	}
 	/**
@@ -154,7 +148,6 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	private synchronized void load(){
 		if(!(new File(FILE_LOCATION)).exists()){
-			System.out.println("loading, and file location does not yet exist.");
 			totalrows = 0;
 			totalcols = 0;
 			myGames = new ArrayList<>();

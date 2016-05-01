@@ -30,7 +30,6 @@ public class GameTagLibrary {
 		for(GameTagPair gtp : gtpairs){
 			gamenames.add(gtp.getGameName());
 		}
-		System.out.println(gamenames);
 		return gamenames;
 	}
 	/**
@@ -55,19 +54,13 @@ public class GameTagLibrary {
 				try {
 					String gamename = child.getName().substring(0,child.getName().length()-TAG_SUFFIX.length());
 					List<Object> objects = Deserializer.deserialize(1,dir.getName()+"/"+child.getName());
-					System.out.println("objects: "+objects);
 					myTags = (List<Tag>) objects.get(0);
-					System.out.println("moreobjects: "+myTags);
 					GameTagPair gtp = new GameTagPair(gamename, myTags);
 					gtpairs.add(gtp);
-					System.out.println(gtpairs);
 				} catch (VoogaException e) {e.printStackTrace();}
 			}
 		}
-		System.out.println(count);
-		System.out.println(gtpairs.size());
 		Collections.sort(gtpairs,comp);
-		//Collections.reverse(gtpairs);
 		return gtpairs;
 	}
 }

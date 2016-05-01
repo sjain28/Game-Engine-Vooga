@@ -26,7 +26,6 @@ public class PlaySession extends VoogaSession{
 		return getProperty(DATE_PLAYED).toString()+" "+getProperty(PLAY_DURATION).toString()+" "+getProperty(SCORE);
 	}
 	public void endSession(VoogaNumber score, VoogaNumber levelreached) {
-		System.out.println("ending sesion");
 		setProperty(PlaySession.IN_ACTION, new VoogaBoolean(false));
 		setProperty(PlaySession.SCORE, score);
 		setProperty(PlaySession.LEVEL_REACHED, levelreached);

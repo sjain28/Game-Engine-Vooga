@@ -165,7 +165,6 @@ public class DataBaseDisplay extends Stage {
 		}
 		tab.setContent(gmaker.getVoogaStatsScatterPlot(xlist, ylist, nextX, nextY));
 		plots.getTabs().add(tab);
-		System.out.println(plots.getTabs().size());
 	}
 
 	private Node makeLists() {

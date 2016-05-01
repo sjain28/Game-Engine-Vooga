@@ -52,7 +52,6 @@ public class VoogaBundles {
 	private static Properties makeProperties(String path) {
 		try {
 			Properties props = new Properties();
-			System.out.println(path);
 			props.load(VoogaBundles.class.getResourceAsStream(path));
 			return props;
 		} catch (IOException e) {

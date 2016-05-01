@@ -27,14 +27,12 @@ public class StatCell extends CellEntry {
 		return Collections.unmodifiableList(myAuthorStats);
 	}
 	public void addAuthoringSession(AuthorSession authorsesh){
-		System.out.println("adding authoring session: "+myAuthorStats.size());
 		myAuthorStats.add(authorsesh);
 	}
 	public List<CellEntry> getPlayStats(){
 		return Collections.unmodifiableList(myPlayStats);
 	}
 	public PlaySession getLatestPlaySession(){
-		System.out.println(myPlayStats.size());
 		if (myPlayStats.empty()){
 			return null;
 		}
@@ -54,7 +52,6 @@ public class StatCell extends CellEntry {
 	}
 	public void updateProgress(String levelName){
 		setProperty(LATEST_PROGRESS, new VoogaString(""));
-		System.out.println("The levelname here was set to levelName " + levelName);
 	}
 	public String checkProgress(){
 		return (String) ((VoogaString) getProperty(LATEST_PROGRESS)).getValue();

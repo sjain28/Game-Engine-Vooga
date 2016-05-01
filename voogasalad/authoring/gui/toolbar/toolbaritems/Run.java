@@ -13,7 +13,6 @@ public class Run extends ToolbarItemHandler {
 	private String game;
 
 	public Run (Menuable model) {
-		//save = new Save(model);
 		this.model = (UIManager) model;
 		game = VoogaBundles.preferences.getProperty("GameName");
 	}
@@ -21,9 +20,6 @@ public class Run extends ToolbarItemHandler {
 	@Override
 	public void handle () {
 		GameRunner gameRunner = new GameRunner();
-		System.out.println("Running:"+"games/" + game + "/levels/" + model.getManager().getName() + ".xml");
-		//gameRunner.testLevel("games/" + VoogaBundles.preferences.getProperty("GameName") 
-							//+ "/levels/" + model.getManager().getName() + ".xml");
 		gameRunner.playGame(game);
 	}
 }

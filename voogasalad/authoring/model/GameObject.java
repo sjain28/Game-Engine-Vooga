@@ -35,7 +35,6 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     private transient SimpleStringProperty imagePath;
 
     public GameObject (Sprite sprite, String name) {
-        System.out.println("image path property: " + sprite.getImagePathProperty());
         initializeSprite(sprite);
         sprite.setName(name);
         this.name = name;
@@ -72,7 +71,6 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         
         imagePath.addListener((obs,old,n)->{
             try{
-                System.out.println("changing path");
                 mySprite.setImagePath(n);
                 this.setImage(new Image(n));
             } catch (Exception e){
@@ -86,20 +84,17 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
 
     }
 
-    // TODO: Send back immutable sprite
     public Sprite getSprite () {
         return mySprite;
     }
 
     @Override
     public Vector getVelocity () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void setVelocity (Velocity velocity) {
-        // TODO Auto-generated method stub
     }
 
     private void onDrag (MouseEvent event) {
@@ -153,32 +148,23 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
 
     @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void setName (String name) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public Node getNodeObject () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void init () throws VoogaException {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void update () {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
