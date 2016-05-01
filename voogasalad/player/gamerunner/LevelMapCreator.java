@@ -35,10 +35,8 @@ public class LevelMapCreator {
     public LevelMapCreator(String xmlList) throws VoogaException {
     	myLevelMap = new HashMap<>();
 		myGameFilePath = GAMES_PATH_PREFIX + xmlList + SLASH;
-		String XMLwithListOfLevels =myGameFilePath + "map" + SLASH + xmlList + "Map"+ XML_EXTENSION;
-		System.out.println(XMLwithListOfLevels);
+		String XMLwithListOfLevels =myGameFilePath + "map" + SLASH + xmlList + "Map" + XML_EXTENSION;
 		myLevelMap = ((NetworkContainer) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getLevelTypes();
-		System.out.println("my level map from level map creator: "+myLevelMap);
     }
     
     /**
