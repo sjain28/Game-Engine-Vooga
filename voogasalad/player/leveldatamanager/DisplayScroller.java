@@ -22,9 +22,7 @@ public class DisplayScroller implements IDisplayScroller {
 	private static final double INCREASE_FACTOR = 1.00005;
 	private static final double SCROLL_FACTOR = 0.01;
 	private static final int SCREEN_FACTOR = 3;
-
 	private static final String TRACKING_SCROLL_TYPE = "Tracking";
-	
 	private Sprite myScrollingSprite;
 	private IGameDisplay myGameDisplay;
 	private String myScrollingType;
@@ -38,7 +36,6 @@ public class DisplayScroller implements IDisplayScroller {
 	private Double myMidScreenY;
 	private Double myTrackX;
 	private Double myTrackY;
-
 	/**
 	 * Default constructor that sets the game display to scroll
 	 * 
@@ -56,6 +53,7 @@ public class DisplayScroller implements IDisplayScroller {
 	 * @param scrollsprite
 	 */
 	public void scroll(Map<String, VoogaData> globals, String currentlevel, Sprite scrollingsprite) {
+		resetScroll();
 		if (myScrollingType.equals(TRACKING_SCROLL_TYPE)) {
 			isExponentialScroll = false;
 			if (myTrackingDirection.equals("X")) {
@@ -71,8 +69,13 @@ public class DisplayScroller implements IDisplayScroller {
 			scrollX(scrollingsprite);
 			scrollY(scrollingsprite);
 		}
-
 	}
+	
+	public void resetScroll() {
+		myGameDisplay.getScreen().setTranslateX(0);
+		myGameDisplay.getScreen().setTranslateY(0);
+	}
+	
 	/**
 	 * Scrolls the display horizontally using addListener method and by
 	 * translatingX
@@ -100,7 +103,7 @@ public class DisplayScroller implements IDisplayScroller {
 			}
 		});
 	}
-
+	
 	/**
 	 * Creates a scrolling sprite per specification
 	 * 
@@ -142,6 +145,12 @@ public class DisplayScroller implements IDisplayScroller {
 		return null;
 	}
 	
+	/**
+	 * Sets X and Y bounds to ensure the display knows the bounds
+	 * 
+	 * @param globals
+	 * @param currentlevel
+	 */
 	private void establishXandYBounds(Map<String, VoogaData> globals, String currentlevel) {
 		Double endX = (Double) globals.get(currentlevel + "EndX").getValue();
 		Double endY = (Double) globals.get(currentlevel + "EndY").getValue();
@@ -180,9 +189,6 @@ public class DisplayScroller implements IDisplayScroller {
 		}
 	}
 
-	/**
-	 * @return the myScrollingSprite
-	 */
 	public Sprite getScrollingSprite() {
 		return myScrollingSprite;
 	}
