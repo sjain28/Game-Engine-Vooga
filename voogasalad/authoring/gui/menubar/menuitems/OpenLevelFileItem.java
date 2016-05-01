@@ -13,15 +13,35 @@ import player.gamedisplay.Menuable;
 import tools.VoogaException;
 import tools.VoogaFileChooser;
 
-public class OpenLevelFileItem extends MenuItemHandler {
+/**
+ * File Menu Item to import an archetype.
+ * 
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
+ *
+ */
 
+public class OpenLevelFileItem extends MenuItemHandler {
+	
 	private Menuable myUIManager;
 
+	/**
+	 * Initializes the MenuItem
+	 * 
+	 * @param model
+	 *            to interface backend interactions with the model
+	 * @param event:
+	 *            Unused vestige of previous poor programming. Should soon be
+	 *            phased out.
+	 */
 	public OpenLevelFileItem(Menuable model) {
 		super();
 		myUIManager = model;
 	}
 
+	/**
+	 * Action to be taken on the selection of this menuItem
+	 * Open a certain level.
+	 */
 	@Override
 	public void handle() throws VoogaException {
 		String xmlPath = getLevelPath();
@@ -33,6 +53,11 @@ public class OpenLevelFileItem extends MenuItemHandler {
 		((UIManager) myUIManager).openScene(manager);
 	}
 
+	/**
+	 * Get Level Path through a file chooser.
+	 * @return
+	 * @throws VoogaException
+	 */
 	private String getLevelPath() throws VoogaException {
 		VoogaFileChooser fileChooser = new VoogaFileChooser();
 		fileChooser.addFilters(new ExtensionFilter("XML (.xml)", "*.xml"));

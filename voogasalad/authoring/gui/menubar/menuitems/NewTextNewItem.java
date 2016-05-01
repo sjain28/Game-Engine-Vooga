@@ -5,6 +5,13 @@ import authoring.gui.menubar.builders.TextObjectBuilder;
 import authoring.interfaces.model.EditElementable;
 import player.gamedisplay.Menuable;
 
+/**
+ * File Menu Item to create a new text item.
+ * 
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
+ *
+ */
+
 public class NewTextNewItem extends MenuItemHandler {
 	private EditElementable myManager;
 
@@ -26,6 +33,7 @@ public class NewTextNewItem extends MenuItemHandler {
 
 	/**
 	 * Action to be taken on the selection of this menuItem
+	 * Create new text
 	 */
 	@Override
 	public void handle() {
