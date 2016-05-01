@@ -34,6 +34,7 @@ public class VoogaDataBase implements IDataBase{
 	private VoogaDataBase(){
 		load();
 	}
+	
 	/**
 	 * Singleton method to getInstance of DataBase
 	 * @return
@@ -42,6 +43,7 @@ public class VoogaDataBase implements IDataBase{
 		if(myInstance==null){new VoogaDataBase();}
 		return myInstance;
 	}
+	
 	/**
 	 * Returns the Game specified by a GameName
 	 * @param gamename
@@ -57,11 +59,11 @@ public class VoogaDataBase implements IDataBase{
 		}
 		return null;
 	}
+	
 	/**
 	 * Adds a new game to the DataBase
 	 * @param gamename
 	 */
-
 	public void checkThenAddIfNewGame(String gamename, String gamedescrip){
 		if(getGame(gamename)==null){
 			totalrows++;
@@ -89,6 +91,7 @@ public class VoogaDataBase implements IDataBase{
 		}
 		return null;
 	}
+	
 	/**
 	 * Adds user to the DataBase
 	 * @param displayname
