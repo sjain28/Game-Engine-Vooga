@@ -23,6 +23,12 @@ import tools.VoogaFileChooser;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
 
+/**
+ * Builder class that builds an archetype through the user.
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
 
 public class ArchetypeBuilder extends Builder {
 
@@ -45,6 +51,10 @@ public class ArchetypeBuilder extends Builder {
 
     private EditElementable editor;
 
+    /**
+     * Initializing Builder.
+     * @param editor
+     */
     public ArchetypeBuilder (EditElementable editor) {
         super(editor);
         this.editor = editor;
@@ -63,6 +73,9 @@ public class ArchetypeBuilder extends Builder {
         load(this.tabpane);
     }
 
+    /**
+     * Populates the VBox that contains the settings.
+     */
     private void populate () {
         createTab.setContent(creation);
         creation.setSpacing(SPACING);
@@ -75,6 +88,10 @@ public class ArchetypeBuilder extends Builder {
         propertiesTab.setContent(pt);
     }
 
+    /**
+     * Method to pick image for archetype.
+     * @return
+     */
     private HBox makeImagePicker () {
         iv = new ImageView();
         image = new ButtonMaker().makeButton("Choose Image", e -> {
@@ -93,6 +110,10 @@ public class ArchetypeBuilder extends Builder {
         return GUIUtils.makeRow(new CustomText("Image"), image, iv);
     }
 
+    /**
+     * Method to pick mass.
+     * @return
+     */
     private HBox makeMassPicker () {
         mass = new TextField();
         mass.setPromptText("Enter a mass...");
@@ -106,11 +127,19 @@ public class ArchetypeBuilder extends Builder {
         return GUIUtils.makeRow(new CustomText("Mass:"), mass, infiniteMass);
     }
 
+    /**
+     * Setting the image path to put in local directory.
+     * @param path
+     */
     public void setImagePath (String path) {
         loadImage(path);
         this.image.setDisable(true);
     }
 
+    /**
+     * Loads the image into local directory.
+     * @param path
+     */
     private void loadImage (String path) {
         this.myImagePath = path;
         this.iv.setImage(new Image(PATH + myImagePath));
@@ -118,10 +147,17 @@ public class ArchetypeBuilder extends Builder {
         this.iv.setFitWidth(FIT_WIDTH);
     }
 
+    /**
+     * Returns the name of the archetype.
+     * @return
+     */
     public String getArchetypeName () {
         return this.archetypeName.getText();
     }
 
+    /**
+     * Compiles the archetype into the game engine and stores it.
+     */
     @Override
     public void compile () {
 
@@ -153,6 +189,9 @@ public class ArchetypeBuilder extends Builder {
         }
     }
 
+    /**
+     * Compile status for debugging.
+     */
     @Override
     public boolean compileStatus () {
         return compile;
