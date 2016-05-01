@@ -9,7 +9,7 @@ import tools.VoogaException;
  *
  */
 public abstract class MenuItemHandler {
-	
+
 	/**
 	 * Handles the function of the menu item.
 	 * @throws VoogaException
