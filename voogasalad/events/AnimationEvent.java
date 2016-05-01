@@ -51,6 +51,9 @@ public class AnimationEvent extends VoogaEvent {
 			if (myCounter > myDuration){
 				if(myNextEvent != null){
 					myNextEvent.setCauseValue(true);
+					myNextEvent.setCauseSprites(getCauseSprites());
+					data.addEventAndPopulateKeyCombos(myNextEvent);
+
 				}
 				refreshEffects(data);
 				getCauseSprites().clear();
