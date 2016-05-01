@@ -43,6 +43,8 @@ public class ProjectileEffectGUI implements EventGUI {
     private void createObjects () {
         archetypes = new ArchetypeComboBox(elementManager);
         archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
+        targetDesired = new ComboBox<>();
+        velocityScaledDesired = new ComboBox<>();
         targetDesired.getItems().addAll(REL_POS, ABS_POS);
 
         targetId = new SpriteComboBox(elementManager);
