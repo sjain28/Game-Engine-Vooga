@@ -37,7 +37,7 @@ import videos.ScreenProcessor;
 /**
  * GameRunner runs the game; uses composition to contain LevelData and GameDisplay
  * 
- * @author Hunter, Michael, Josh
+ * @author Hunter, Krista, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
 	public static final double FRAME_RATE = 60;
@@ -204,25 +204,33 @@ public class GameRunner implements IGameRunner {
 	public IGameDisplay getGameDisplay() {
 		return myGameDisplay;
 	}
-
+	/**
+	 * Speeds up the timeline
+	 */
 	@Override
 	public void speedUp() {
 		myTimeline.setRate(myTimeline.getRate() + SPEEDCONTROL);
 	}
-
+	/**
+	 * Slows down the timeline
+	 */
 	@Override
 	public void speedDown() {
 		if (myTimeline.getRate() - SPEEDCONTROL > 0) {
 			myTimeline.setRate(myTimeline.getRate() - SPEEDCONTROL);
 		}
 	}
-
+	/**
+	 * Exits the game
+	 */
 	@Override
 	public void exit() {
 		myTimeline.stop();
 		myGameDisplay.exit();
 	}
-
+	/**
+	 * Takes a snap shot of the screen
+	 */
 	@Override
 	public void takeSnapShot() {
 		Scene myScene = myGameDisplay.getMyScene();
@@ -236,12 +244,16 @@ public class GameRunner implements IGameRunner {
 	public Timeline getTimeline() {
 		return myTimeline;
 	}
-
+	/**
+	 * Replays a level
+	 */
 	@Override
 	public void replayLevel() {
 		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
-
+	/**
+	 * Finishes a play session if the play session was started
+	 */
 	@Override
 	public void finishPlaySession() {
 		if (playSessionActive) {
@@ -249,7 +261,9 @@ public class GameRunner implements IGameRunner {
 			VoogaDataBase.getInstance().save();
 		}
 	}
-
+	/**
+	 * Empty methods from the Menueable interface
+	 */
 	@Override
 	public CompleteAuthoringModelable getManager() { 
 		return null; 
