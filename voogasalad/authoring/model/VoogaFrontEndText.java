@@ -29,7 +29,7 @@ import tools.interfaces.VoogaData;
 public class VoogaFrontEndText extends Text implements AuthoringElementable {
 
     private static final String OPAC = "Opacity";
-    private static final String STY = null;
+    private static final String STY = "Style";
     private Map<String, VoogaData> propertiesMap;
     private BackEndText backEndText;
     private AuthoringElementableMenu menu;

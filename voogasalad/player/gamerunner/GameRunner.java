@@ -48,6 +48,8 @@ public class GameRunner implements IGameRunner {
 	private static final String LEVELS_PATH = "levels/";
 	private static final String XML_EXTENSION_SUFFIX = ".xml";
 	private static final String NULL_STRING = "";
+	private static final String GAME_WIDTH = "GameWidth";
+	private static final String GAME_HEIGHT = "GameHeight";
 	private static final String SLASH = "/";
 	private IPhysicsEngine myPhysicsEngine;
 	private ILevelData myLevelData;
@@ -126,7 +128,8 @@ public class GameRunner implements IGameRunner {
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelData.getNextLevelName());
 			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
-				//TODO: Implement win screen
+				myTimeline.stop();
+				return;
 			}
 		}
 	}
@@ -141,12 +144,11 @@ public class GameRunner implements IGameRunner {
 		String latestLevelReached = NULL_STRING;
 		if (myStats.getCurrentStatCell().checkProgress() != null) {
 			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
-		} 
-		try {
+		} try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
 			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
-			VoogaBundles.preferences.setProperty("GameWidth", preferences.getWidth());
-			VoogaBundles.preferences.setProperty("GameHeight", preferences.getHeight());
+			VoogaBundles.preferences.setProperty(GAME_WIDTH, preferences.getWidth());
+			VoogaBundles.preferences.setProperty(GAME_HEIGHT, preferences.getHeight());
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			VoogaAlert alert = new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
@@ -185,8 +187,8 @@ public class GameRunner implements IGameRunner {
 		myLevelMap.put(levelName, LevelType.ENTRYPOINT);
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
-		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
-				Double.parseDouble(VoogaBundles.preferences.getProperty("GameHeight")));
+		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_WIDTH)), 
+				Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_HEIGHT)));
 		myGameDisplay.displayTestMode();
 		run();
 	}
@@ -249,7 +251,9 @@ public class GameRunner implements IGameRunner {
 	}
 
 	@Override
-	public CompleteAuthoringModelable getManager() { return null; }
+	public CompleteAuthoringModelable getManager() { 
+		return null; 
+	}
 
 	@Override
 	public void addScene() {}

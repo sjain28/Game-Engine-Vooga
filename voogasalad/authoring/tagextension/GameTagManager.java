@@ -61,6 +61,7 @@ public class GameTagManager {
         loadCurrentGameTags();
         
         try {
+        	if(filename.endsWith(".gif")) return;
             if (!ResourceDecipherer.isImage(filename)) return;
         }
         catch (VoogaException e) {
@@ -72,15 +73,9 @@ public class GameTagManager {
         List<RecognitionResult> results =
                 clarifai.recognize(new RecognitionRequest(new File(filename)));
 
-        // TODO: here for debugging purposes, print out names of tags
-        for (Tag tag : results.get(0).getTags()) {
-            System.out.println(tag.getName() + ": " + tag.getProbability());
-        }
-
         // add all of the Tags to a list
         myTags.addAll(results.get(0).getTags());
 
-        System.out.println("about to save: " + myTags);
         // save Tags
         saveCurrentGameTags();
     }
@@ -90,7 +85,6 @@ public class GameTagManager {
      */
     private void saveCurrentGameTags () {
         try {
-            System.out.println("tags saved to :" + getTagLocation());
             Serializer.serializeLevel(myTags, getTagLocation());
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
