@@ -5,7 +5,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 
 /**
- * Anchor class to mark beginning and end anchor.
+ * Anchor class to mark beginning and end of path. ***For cartography use***
  * 
  * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
  *
