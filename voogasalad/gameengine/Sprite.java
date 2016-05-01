@@ -114,22 +114,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 
 	public void setImagePath (String path) {
 		myImagePathProperty.set(path);
-		Image image;
-
-		if (myProperties.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue()
-				.toString().contains("file:")) {
-			image =
-					new Image(myProperties
-							.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH")).getValue()
-							.toString());
-		}
-		else {
-			image =
-					new Image(this.getClass()
-							.getResourceAsStream(myProperties
-									.get(VoogaBundles.spriteProperties.getString("IMAGE_PATH"))
-									.getValue().toString()));
-		}
+		Image image=setNewImage();
 
 		myImage = new ImageView(image);
 		myImage.setFitWidth(image.getWidth());

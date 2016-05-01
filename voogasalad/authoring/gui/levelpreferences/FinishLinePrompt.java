@@ -43,7 +43,7 @@ public class FinishLinePrompt extends Stage {
 	}
 
 	public Pair<Double, Double> getCoords() {
-		return new Pair<Double, Double>(Double.parseDouble(xCoordinate.getText()), Double.parseDouble(yCoordinate.getText()));
+		return new Pair<>(Double.parseDouble(xCoordinate.getText()), Double.parseDouble(yCoordinate.getText()));
 	}
 
 }

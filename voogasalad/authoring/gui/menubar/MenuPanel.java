@@ -42,7 +42,7 @@ public class MenuPanel extends MenuBar implements Windowable {
 	 * @return
 	 */
 	private Map<String, List<MenuItem>> menuMap(EventHandler<ActionEvent> menuItemEvent) {
-		Map<String, List<MenuItem>> menus = new LinkedHashMap<String, List<MenuItem>>();
+		Map<String, List<MenuItem>> menus = new LinkedHashMap<>();
 		for (Enumeration<?> enumer = menubarProperties.propertyNames(); enumer.hasMoreElements();) {
 			String key = (String) enumer.nextElement();
 			if (key.endsWith(MENU_KEY)) {

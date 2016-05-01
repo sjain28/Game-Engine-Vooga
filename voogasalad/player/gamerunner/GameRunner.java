@@ -40,7 +40,7 @@ import videos.ScreenProcessor;
  * @author Hunter, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
-	public static final double FRAME_RATE = 60;
+	public static final double FRAME_RATE = 10;
 	private static final double SEC_PER_MIN = 60;
 	private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
 	private static final double SPEEDCONTROL = 10;
@@ -160,7 +160,6 @@ public class GameRunner implements IGameRunner {
 		}
 		playLevel(latestLevelReached);
 		myGameDisplay.display();
-		//playLevel(latestLevelReached);
 		run();
 	}
 

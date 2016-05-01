@@ -26,10 +26,9 @@ import gameengine.BackEndText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import resources.VoogaBundles;
 import tools.VoogaException;
+import tools.VoogaNumber;
 import tools.bindings.ImageProperties;
 import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
@@ -53,16 +52,15 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private List<String> names;
     
     public ElementManager () {
-        myGameElements = new ArrayList<Node>();
-        myEventList = new ArrayList<VoogaEvent>();
+        myGameElements = new ArrayList<>();
+        myEventList = new ArrayList<>();
         GPM = new GlobalPropertiesManager();
-        myIds = new HashSet<String>();
+        myIds = new HashSet<>();
         spriteFactory = new SpriteFactory();
         animationFactory = AnimationFactory.getInstance();
-        names = new ArrayList<String>();
+        names = new ArrayList<>();
         
         initGlobalVariablesPane();
-       
     }
 
     public void addGameElements (Node ... elements) {
@@ -133,7 +131,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
      */
     @Override
     public void onSave () throws VoogaException {
-        List<Elementable> elements = new ArrayList<Elementable>();
+        List<Elementable> elements = new ArrayList<>();
         for (Node element : myGameElements) {
             if (element instanceof GameObject) {
                 GameObject object = (GameObject) element;
@@ -142,7 +140,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                 sprite.setInitializationMap(ip.storeData(object));
                 elements.add(sprite);
             }
-
             if (element instanceof VoogaFrontEndText) {
                 VoogaFrontEndText frontText = (VoogaFrontEndText) element;
                 BackEndText text = (BackEndText) frontText.getElementable();
@@ -156,28 +153,21 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                 elements.add(text);
             }
         }
-
         try {
             DataContainerOfLists data =
                     new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
                                              spriteFactory.getArchetypeMap(), 
                                              AnimationFactory.getInstance());
-            // System.out.println(myXmlDataFile.getPath());
             FileWriterFromGameObjects.saveGameObjects(data,
                                                       "games/" +
                                                             VoogaBundles.preferences
                                                                     .getProperty("GameName") +
                                                             "/levels/" + getName() + ".xml");
-            System.out.println("I'm done saving in element manager");
-            // System.out.println(GPM.getVoogaProperties().toString().toString());
-
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
             e.printStackTrace();
             throw new VoogaException();
         }
-
-        // System.out.println("The save file location here is " + filePath);
     }
 
     public SpriteFactory getSpriteFactory () {
@@ -266,10 +256,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void setGlobalProperties (Map<String, VoogaData> globalPropertiesMap) throws VoogaException {
-
-//        if (!GPM.getVoogaProperties().isEmpty()) {
-//            throw new VoogaException();
-//        }
         GPM.setVoogaProperties(globalPropertiesMap);
     }
 
