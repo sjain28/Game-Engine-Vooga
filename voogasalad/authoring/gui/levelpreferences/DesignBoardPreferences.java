@@ -42,7 +42,7 @@ public class DesignBoardPreferences extends Tab {
 	private static final double MIN_SPEED = 0;
 	private static final double MAX_SPEED = 5;
 	private static final double DEF_SPEED = 1;
-	
+
 	private double spacing;
 	private double width;
 	private List<Node> gameObjects;
@@ -64,7 +64,7 @@ public class DesignBoardPreferences extends Tab {
 	private EventHandler<ActionEvent> e;
 	private ResourceBundle dbfProperties;
 	private String soundTrackPath;
-	
+
 	/**
 	 * Constructor to build the pop up for the user to specify preferences.
 	 * 
@@ -73,7 +73,7 @@ public class DesignBoardPreferences extends Tab {
 	public DesignBoardPreferences(CompleteAuthoringModelable model) {
 		gameObjects = model.getElements();
 		container = new VBox();
-		
+
 		dbfProperties = VoogaBundles.designboardPreferencesProperties;
 		spacing = Double.parseDouble(dbfProperties.getString("Spacing"));
 		width = Double.parseDouble(dbfProperties.getString("Width"));
@@ -85,7 +85,7 @@ public class DesignBoardPreferences extends Tab {
 		buttons = new HBox();
 		sprites = spriteBox();
 		contSprites = spriteBox();
-		
+
 		initializeSpecifics();
 		chooseSpecificTrackingMode();
 		makeContinuousControl();
@@ -104,7 +104,7 @@ public class DesignBoardPreferences extends Tab {
 			}
 		});
 	}
-	
+
 	/**
 	 * Sets the name of the level.
 	 * 
@@ -134,7 +134,7 @@ public class DesignBoardPreferences extends Tab {
 		return  customHBox(GUIUtils.makeRow(new CustomText(dbfProperties.getString("DefineLevelName"), FontWeight.BOLD, 
 				Integer.parseInt(dbfProperties.getString("HeaderSpacing")))));
 	}
-	
+
 	private HBox customHBox(HBox box) {
 		box.setAlignment(Pos.CENTER);
 		return box;
@@ -178,7 +178,7 @@ public class DesignBoardPreferences extends Tab {
 			container.getChildren().add(buttons);
 		});
 	}
-	
+
 	private HBox makeContinuousControl() {
 		speedLabel = new CustomText("0");
 		angle = new TextField();
@@ -191,7 +191,7 @@ public class DesignBoardPreferences extends Tab {
 		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, contSprites, scrollSpeed, speedLabel));
 		return continuousControl;
 	}
-	
+
 	private HBox makeTrackingControl() {
 		trackingDirection = new ComboBox<>();
 		trackingDirection.getItems().addAll(Arrays.asList("X", "Y", "Both"));
@@ -206,7 +206,7 @@ public class DesignBoardPreferences extends Tab {
 		scrollSpeed = new Slider(MIN_SPEED, MAX_SPEED, DEF_SPEED);
 		scrollSpeed.setMaxWidth(width);
 	}
-	
+
 	private ComboBox<SpriteNameIDPair> spriteBox() {
 		ComboBox<SpriteNameIDPair> sprites = new ComboBox<>();
 		sprites.getItems().clear();
@@ -263,30 +263,50 @@ public class DesignBoardPreferences extends Tab {
 	 */
 	public String getMainSpriteID() {
 		if(contSprites.getValue() == null && sprites.getValue() != null) {
-		    return sprites.getValue().getID();
+			return sprites.getValue().getID();
 		}
 		if(sprites.getValue() == null && contSprites.getValue() != null) {
-		    return contSprites.getValue().getID();
+			return contSprites.getValue().getID();
 		}
 		return "";
 	}
 
+	/**
+	 * Get scrolling type selected.
+	 * @return
+	 */
 	public String getScrollingType() {
 		return ((RadioButton) trackingMode.getSelectedToggle()).getText();
 	}
-	
+
+	/**
+	 * Get continuous scroll speed selected.
+	 * @return
+	 */
 	public Double getContinuousScrollSpeed() {
 		return scrollSpeed.getValue();
 	}
-	
+
+	/**
+	 * Get scroll angle selected.
+	 * @return
+	 */
 	public Double getScrollAngle() {
 		return (this.angle.getText().isEmpty()) ? 0 : Double.parseDouble(this.angle.getText());
 	}
-	
+
+	/**
+	 * Get continuous scroll type selected.
+	 * @return
+	 */
 	public String getContinuousScrollType() {
 		return continuousScrollType.getValue();
 	}
-	
+
+	/**
+	 * Set the type of scrolling.
+	 * @param name: type of scrolling
+	 */
 	public void setScrolling(String name) {
 		for(Toggle toggle : trackingMode.getToggles()) {
 			if(((RadioButton) toggle).getText().equals(name)) {
@@ -295,18 +315,34 @@ public class DesignBoardPreferences extends Tab {
 		}
 	}
 
+	/**
+	 * Set angle to scroll at.
+	 * @param value
+	 */
 	public void setAngle(String value) {
 		this.angle.setText(value);
 	}
-	
+
+	/**
+	 * Set scrolling speed.
+	 * @param value
+	 */
 	public void setSpeed(Double value) {
 		this.scrollSpeed.setValue(value);
 	}
-	
+
+	/**
+	 * Select the continuous scroll type.
+	 * @param type
+	 */
 	public void setContinuousScrollType(String type) {
 		this.continuousScrollType.getSelectionModel().select(type);
 	}
 
+	/**
+	 * Sets the main sprite for scrolling to center around.
+	 * @param value
+	 */
 	public void setMainSprite(String value) {
 		for(SpriteNameIDPair s : sprites.getItems()) {
 			if(s.getID().equals(value)) {
@@ -315,19 +351,35 @@ public class DesignBoardPreferences extends Tab {
 			}
 		}
 	}
-	
+
+	/**
+	 * Get tracking direction selected.
+	 * @return
+	 */
 	public String getTrackingDirection() {
 		return (trackingDirection.getValue() == null) ? "" : trackingDirection.getValue();
 	}
 
+	/**
+	 * Sets the value of the tracking direction combo box.
+	 * @param value
+	 */
 	public void setTrackingDirection(String value) {
 		this.trackingDirection.setValue(value);
 	}
 
+	/**
+	 * Get the background music path.
+	 * @return
+	 */
 	public String getBGM() {
 		return (this.soundTrackPath.isEmpty() || this.soundTrackPath == null) ? "" : this.soundTrackPath;
 	}
 	
+	/**
+	 * set the background music.
+	 * @param BGM
+	 */
 	public void setBGM(String BGM) {
 		this.soundTrackPath = BGM;
 	}

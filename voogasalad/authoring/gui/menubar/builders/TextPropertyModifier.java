@@ -15,6 +15,13 @@ import javafx.stage.*;
 import resources.VoogaBundles;
 import tools.GUIUtils;
 
+/**
+ * GUI object to help change text within the design board.
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
+
 
 public class TextPropertyModifier extends Stage {
     private Scene scene;
