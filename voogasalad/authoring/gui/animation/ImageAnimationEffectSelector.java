@@ -47,6 +47,10 @@ public class ImageAnimationEffectSelector extends AbstractEffectSelector {
 		return ((ImageFlowPane) ((HBox) subnode).getChildren().get(0)).getImageNames();
 	}
 	
+	/**
+	 * Returns the number of cycles.
+	 * @return integer value of number of cycles
+	 */
 	public Integer getNumberOfCycles() {
 		return Integer.parseInt(numberOfCycles.getText());
 	}

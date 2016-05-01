@@ -2,6 +2,7 @@ package gameengine;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -99,7 +100,7 @@ public class SpriteFactory extends Observable{
 		return myArchetypes.get(archetype);
 	}
 	
-	public void resetArchetypeMap(Map newArchetypeMap){
+	public void resetArchetypeMap(Map<String, Sprite> newArchetypeMap){
 		myArchetypes = newArchetypeMap;
 	}
 	

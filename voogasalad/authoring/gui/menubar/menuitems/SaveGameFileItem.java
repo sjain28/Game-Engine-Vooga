@@ -2,7 +2,6 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.gui.menubar.PlayerMenuItemHandler;
 import player.gamedisplay.Menuable;
-import player.gamerunner.GameRunner;
 import resources.VoogaBundles;
 import stats.interaction.CurrentSessionStats;
 
@@ -14,7 +13,7 @@ import stats.interaction.CurrentSessionStats;
  *
  */
 public class SaveGameFileItem extends PlayerMenuItemHandler {
-    private GameRunner myGameRunner;
+   // private GameRunner myGameRunner;
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -23,7 +22,7 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	public SaveGameFileItem(Menuable model) {
 		super();
-		this.myGameRunner = (GameRunner) model;
+		//this.myGameRunner = (GameRunner) model;
 	}
 	/**
 	 * Action to be taken on the selection of this menuItem

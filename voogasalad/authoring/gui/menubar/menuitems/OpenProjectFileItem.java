@@ -4,14 +4,13 @@ import java.io.File;
 
 import authoring.UILauncher;
 import authoring.gui.menubar.MenuItemHandler;
-import authoring.interfaces.gui.Saveable;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
 public class OpenProjectFileItem extends MenuItemHandler {
-	private Saveable myManager;
+	//private Saveable myManager;
 
 	/**
 	 * Initializes the MenuItem
@@ -24,7 +23,7 @@ public class OpenProjectFileItem extends MenuItemHandler {
 	 */
 	public OpenProjectFileItem(Menuable model) {
 		super();
-		myManager = (Saveable) model.getManager();
+		//myManager = (Saveable) model.getManager();
 	}
 
 	/**
