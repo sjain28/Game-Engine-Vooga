@@ -95,9 +95,11 @@ public class CreateCommand implements Command {
                     em.setName(level.getName().replace(".xml", ""));
                     models.add(em);
                 }
+                System.out.println("someError");
                 open(models, LOAD);
             }
             catch (VoogaException ex) {
+                System.out.println("Error");
             }
         });
         prompt.show();
