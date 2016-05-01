@@ -110,12 +110,14 @@ public class DisplayScroller implements IDisplayScroller {
 	public Sprite createScrollingSprite(Map<String, VoogaData> globals, String currentlevel, Sprite mainsprite) {
 		try {
 			try {
+				System.out.println("FROM MAP tracking: " + globals.get(currentlevel + "TrackingDirection").getValue());
 				myTrackingDirection = (String) globals.get(currentlevel + "TrackingDirection").getValue();
 				establishXandYBounds(globals, currentlevel);
 			} catch(Exception e) {
 				VoogaAlert alert = new VoogaAlert("Please specify your finish line.");
 				alert.showAndWait();
 			}
+			System.out.println("FROM MAP scrolling: " + globals.get(currentlevel + "Scrolling").getValue());
 			myScrollingType = (String) globals.get(currentlevel + "Scrolling").getValue();
 			// Scrolling is centered on the main character
 			if (myScrollingType.equals("Tracking")) {
