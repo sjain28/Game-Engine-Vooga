@@ -87,4 +87,8 @@ public class VoogaString implements VoogaData {
         }
         myValue = (String) o;
     }
+    
+    public void setValue (String o) {
+        myValue = o;
+    }
 }

@@ -7,18 +7,17 @@ import java.util.List;
 import authoring.VoogaScene;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import player.gamerunner.IGameRunner;
 import tools.Pair;
+import tools.VoogaJukebox;
 
 /**
  * Standard Display that creates a display with basic user-interaction controls
@@ -27,6 +26,7 @@ import tools.Pair;
  * @author Hunter Lee
  *
  */
+@Deprecated
 public class GameboyDisplay implements IGameDisplay {
 
 	private static final String BGM_PATH = "resources/sound/hypnotize.mp3";
@@ -45,7 +45,10 @@ public class GameboyDisplay implements IGameDisplay {
 	private List<KeyEvent> myKeyEvents;
 	private List<KeyEvent> myKeyPresses;
 	private List<KeyEvent> myKeyReleases;
-	
+	private Pair<Double, Double> myDimensions;
+	private StackPane myScreensHolder;
+	private Pane myUIScreen;
+
 	// BGM
 	private Media myBGM;
 	private MediaPlayer myMediaPlayer;
@@ -73,53 +76,35 @@ public class GameboyDisplay implements IGameDisplay {
 	 */
 	private void initialize() {
 		myPromptFactory = new PromptFactory();
-		myControl = new StandardControl(getGameRunner());
-		myHUD = new StandardHUD(getGameRunner());
+//		myControl = new StandardControl(getGameRunner());
+		//myHUD = new StandardHUD(getGameRunner());
 		myStage = new Stage();
 		myPane = new AnchorPane();
-
 		myPane.setId("bp");
-
 		myGameScreen = new Pane();
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
 		myBGM = new Media(new File(BGM_PATH).toURI().toString());
 		myMediaPlayer = new MediaPlayer(myBGM);
+		myScreensHolder = new StackPane();
+		myUIScreen = new Pane();
+
 	}
 	
 	/**
-	 * Creates a keyListener for listening in on key inputs
-	 * Adds each event to the list
-	 * 
+	 * Creates a keyListener for listening in on key inputs and adds each event to the list
 	 */
 	private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
-
 		@Override
 		public void handle(KeyEvent event) {
 			myKeyEvents.add(event);
-			if(event.getEventType().equals(KeyEvent.KEY_PRESSED)){
+			if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
 				myKeyPresses.add(event);
-			}else{
+			} else {
 				myKeyReleases.add(event);
 			}
 		}
 	};
-
-//	/**
-//	 * Reads in the list of Nodes to display
-//	 * 
-//	 */
-//	@Override
-//	public void readAndPopulate(List<Node> listToDisplay) {
-//		myListToDisplay = listToDisplay;
-//		getGameScreen().getChildren().clear();
-//		getListToDisplay().forEach(n -> {
-//			getGameScreen().getChildren().add(n);
-////			getGameScreen().setClip(n);
-////			n.setLayoutX(n.getLayoutX() + 400);
-////			n.setLayoutY(n.getLayoutY() + 200);
-//		});
-//	}
 
 	/**
 	 * Public method defined in the interface that displays
@@ -131,9 +116,24 @@ public class GameboyDisplay implements IGameDisplay {
 		createPane();
 		getStage().show();
 		getScene().addEventHandler(KeyEvent.ANY, keyListener);
-		playMusic();
+//		playMusic();
 	}
-
+	
+	/**
+	 * Reads in the list of Nodes to display and populates the screen
+	 */
+	@Override
+	public void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay) {
+		myGameScreen.getChildren().clear();
+		myUIScreen.getChildren().clear();
+		for(Pair<Node, Boolean> p : listToDisplay) {
+			if (p.getLast()) {
+				myUIScreen.getChildren().add(p.getFirst());
+			} else {
+				myGameScreen.getChildren().add(p.getFirst());
+			}
+		}
+	}
 	/**
 	 * Creates an interactive prompt and shows it to the user
 	 * 
@@ -148,41 +148,20 @@ public class GameboyDisplay implements IGameDisplay {
 	 * 
 	 */
 	private void createPane() {
-		VBox HUD = myHUD.createHUD();
-		Parent control = myControl.createControl();
-
-		getPane().getChildren().addAll(myGameScreen, HUD, control);
-		AnchorPane.setTopAnchor(myGameScreen, 190.0);
-		AnchorPane.setLeftAnchor(myGameScreen, 380.0);
-		AnchorPane.setTopAnchor(HUD, 0.0);
-		AnchorPane.setRightAnchor(HUD, 0.0);
-		AnchorPane.setBottomAnchor(control, 0.0);
-		AnchorPane.setRightAnchor(control, 350.0);
-		//fitWidthProperty().bind(center.widthProperty());
-	    Rectangle clip = new Rectangle(435, 345);
-	    clip.setLayoutX(0);
-	    clip.setLayoutY(0);
-//	    clip.autosize();
-	    myGameScreen.setClip(clip);
-	    //clip.widthProperty().bind(clip.widthProperty()*myGameScreen.widthProperty()/PANE_WIDTH);
-	    //clip.heightProperty().bind(myGameScreen.heightProperty());
-		
-//		anchor.setTopAnchor(r2, 0.0);
-//		anchor.setRightAnchor(r2, 0.0);
-		
-//		
-//		//Adds all components into the main border pane
-//		getPane().setCenter(myGameScreen);
-//		getPane().setBottom(myControl.createControl());
-//		//Below is optional (adds HUD)
-//		getPane().setRight(myHUD.createHUD());
-//		
-//		
-//		Pane l = new Pane(); l.setId("left"); getPane().setLeft(l);
-//		Pane t = new Pane(); t.setId("top"); getPane().setTop(t);
-//
-//		
-		getStage().setScene(getScene());
+//		//VBox HUD = myHUD.createHUD();
+//		Parent control = myControl.createControl();
+//		getPane().getChildren().addAll(myGameScreen, control);
+//		AnchorPane.setTopAnchor(myGameScreen, 190.0);
+//		AnchorPane.setLeftAnchor(myGameScreen, 380.0);
+//		//AnchorPane.setTopAnchor(HUD, 0.0);
+//		//AnchorPane.setRightAnchor(HUD, 0.0);
+//		AnchorPane.setBottomAnchor(control, 0.0);
+//		AnchorPane.setRightAnchor(control, 350.0);
+//	    Rectangle clip = new Rectangle(435, 345);
+//	    clip.setLayoutX(0);
+//	    clip.setLayoutY(0);
+//	    myGameScreen.setClip(clip);
+//		getStage().setScene(getScene());
 	}
 
 	/**
@@ -190,25 +169,9 @@ public class GameboyDisplay implements IGameDisplay {
 	 * to make the music stop when the stage is exited
 	 * 
 	 */
-	private void playMusic() {
-		getMediaPlayer().play();
-		getStage().setOnCloseRequest(e -> getMediaPlayer().stop());
-	}
-
-//	/**
-//	 * Populates the game screen that goes into the center
-//	 * of the game display (BorderPane)
-//	 * 
-//	 */
-//	@Override
-//	public void populateGameScreen() {
-//		getGameScreen().getChildren().clear();
-//		getListToDisplay().forEach(n -> {
-//			getGameScreen().getChildren().add(n);
-////			getGameScreen().setClip(n);
-////			n.setLayoutX(n.getLayoutX() + 400);
-////			n.setLayoutY(n.getLayoutY() + 200);
-//		});
+//	private void playMusic() {
+//		getMediaPlayer().play();
+//		getStage().setOnCloseRequest(e -> getMediaPlayer().stop());
 //	}
 
 	/**
@@ -290,33 +253,33 @@ public class GameboyDisplay implements IGameDisplay {
 		this.myBGM = myBGM;
 	}
 
-	/**
-	 * @return the myMediaPlayer
-	 */
-	public MediaPlayer getMediaPlayer() {
-		return myMediaPlayer;
-	}
-
-	/**
-	 * @return the myGameRunner
-	 */
-	public IGameRunner getGameRunner() {
-		return myGameRunner;
-	}
-
-	/**
-	 * @return the myPromptFactory
-	 */
-	public IPromptFactory getPromptFactory() {
-		return myPromptFactory;
-	}
-
-	/**
-	 * @return the myControl
-	 */
-	public IControl getControl() {
-		return myControl;
-	}
+//	/**
+//	 * @return the myMediaPlayer
+//	 */
+//	public MediaPlayer getMediaPlayer() {
+//		return myMediaPlayer;
+//	}
+//
+//	/**
+//	 * @return the myGameRunner
+//	 */
+//	public IGameRunner getGameRunner() {
+//		return myGameRunner;
+//	}
+//
+//	/**
+//	 * @return the myPromptFactory
+//	 */
+//	public IPromptFactory getPromptFactory() {
+//		return myPromptFactory;
+//	}
+//
+//	/**
+//	 * @return the myControl
+//	 */
+//	public IControl getControl() {
+//		return myControl;
+//	}
 
 	/**
 	 * @return the myHUD
@@ -325,9 +288,9 @@ public class GameboyDisplay implements IGameDisplay {
 		return myHUD;
 	}
 
+	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
-		myMediaPlayer.stop();
+		VoogaJukebox.getInstance().stopBGM();
 		myStage.close();
 	}
 	
@@ -341,44 +304,34 @@ public class GameboyDisplay implements IGameDisplay {
 
 
 	@Override
-	public void displayTestMode() {
-		// TODO Auto-generated method stub
-		
+	public void displayTestMode() {		
 	}
 
 	@Override
 	public Pane getScreen() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
 	public Scene getMyScene() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setSceneDimensions(double width, double height) {
-		myScene = new VoogaScene(myPane, width, height, CSS_PATH);
+		myDimensions = new Pair<>(width, height);
+		myScene = new VoogaScene(myPane, width, height);
 	}
 
 	@Override
 	public Pane getUI() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.myUIScreen;
 	}
 
-	@Override
-	public void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public Pair<Double, Double> getDimensions() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.myDimensions;
 	}
 
 

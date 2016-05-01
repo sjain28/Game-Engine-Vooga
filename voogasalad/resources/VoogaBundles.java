@@ -42,6 +42,7 @@ public class VoogaBundles {
 	public final static ResourceBundle textStyles = ResourceBundle.getBundle("resources/textStyles");
 	public final static ResourceBundle databaseProperties = ResourceBundle.getBundle("resources/database");
 	public final static ResourceBundle leaderboardProperties = ResourceBundle.getBundle("resources/leaderboard");
+	public final static ResourceBundle randomcolorProperties = ResourceBundle.getBundle("resources/randomcolor");
 	
 	public final static ResourceBundle causeNames = ResourceBundle.getBundle("resources/causes");
 	public final static ResourceBundle effectNames = ResourceBundle.getBundle("resources/effects");
