@@ -45,9 +45,6 @@ public class GraphMaker {
 		//fill the series with x and y values
 		XYChart.Series series = new XYChart.Series();
 		for(int i = 0; i < xparams.size(); i++){
-			System.out.println(i);
-			System.out.println(xparams.get(i).toString());
-			System.out.println(yparams.get(i).toString());
 
 			if(xparams.get(i) instanceof Number){ xPoint = Double.parseDouble(xparams.get(i).toString()); }
 			else{xPoint = xparams.get(i).toString(); }

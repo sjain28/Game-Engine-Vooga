@@ -25,7 +25,11 @@ import tools.Velocity;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
-
+/**
+ * Authoring representation of the sprite in the engine
+ * @author arjunaashna
+ *
+ */
 public class GameObject extends ImageView implements Moveable, AuthoringElementable {
 
     private Sprite mySprite;
@@ -33,9 +37,13 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     private ContextMenu menu;
 
     private transient SimpleStringProperty imagePath;
-
+    
+    /**
+     * Authoring representation of the sprite
+     * @param sprite
+     * @param name
+     */
     public GameObject (Sprite sprite, String name) {
-        System.out.println("image path property: " + sprite.getImagePathProperty());
         initializeSprite(sprite);
         sprite.setName(name);
         this.name = name;
@@ -56,7 +64,8 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         
         Tooltip.install(this, tp);
     }
-
+    
+    
     private void initializeSprite (Sprite sprite) {
         mySprite = sprite;
         imagePath = new SimpleStringProperty();
@@ -72,7 +81,6 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         
         imagePath.addListener((obs,old,n)->{
             try{
-                System.out.println("changing path");
                 mySprite.setImagePath(n);
                 this.setImage(new Image(n));
             } catch (Exception e){
@@ -85,21 +93,20 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         });
 
     }
-
-    // TODO: Send back immutable sprite
     public Sprite getSprite () {
         return mySprite;
     }
-
+    
+    /**
+     * return velocity 
+     */
     @Override
     public Vector getVelocity () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void setVelocity (Velocity velocity) {
-        // TODO Auto-generated method stub
     }
 
     private void onDrag (MouseEvent event) {
@@ -113,27 +120,42 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         }
         event.consume();
     }
-
+    
+    /**
+     * get the vooga properties
+     */
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
         return mySprite.getParameterMap();
     }
-
+    
+    /**
+     * add proeprtis to the changes
+     */
     @Override
     public void addProperty (String name, VoogaData data) {
         mySprite.addProperty(name, data);
 
     }
-
+    
+    /**
+     * remove properties basedo nthe name of the property (name)
+     */
     @Override
     public void removeProperty (String name) {
         mySprite.removeProperty(name);
     }
-
+    
+    /**
+     * set the name of hte object
+     */
     public String getName () {
         return name;
     }
-
+    
+    /**
+     * determine selector for the object
+     */
     public void select (Selector selector) {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(selector.getLightness());
@@ -141,44 +163,42 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         this.setEffect(colorAdjust);
         this.setEffect(new Glow(selector.getGlow()));
     }
-
+    
+    /**
+     * Set the properties basedo n the map
+     * @param map
+     */
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
     }
-
+    
+    /**
+     * return sprite
+     */
     @Override
     public Elementable getElementable () {
         return mySprite;
     }
-
+    
     @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void setName (String name) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public Node getNodeObject () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void init () throws VoogaException {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void update () {
-        // TODO Auto-generated method stub
-
     }
 
     @Override

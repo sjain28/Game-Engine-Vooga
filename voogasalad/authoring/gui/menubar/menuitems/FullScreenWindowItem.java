@@ -17,7 +17,6 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	
 	private static final String EXIT_MESSAGE = "Press Ctrl + Z to exit full screen mode";
 	
-	//TODO: Change GameRunner to IGameRunner
 	private GameRunner myGameRunner;
 
 	/**
@@ -29,7 +28,6 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	public FullScreenWindowItem(Menuable model) {
 		super();
 		this.myGameRunner = (GameRunner) model;
-		System.out.println(myGameRunner + "NULL>??");
 	}
 	
 	/**

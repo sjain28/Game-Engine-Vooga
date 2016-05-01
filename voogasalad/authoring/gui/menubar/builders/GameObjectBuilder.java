@@ -99,7 +99,6 @@ public class GameObjectBuilder extends Builder {
 			quit();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			numberError("Please select an Archtype");
 		}
 	}

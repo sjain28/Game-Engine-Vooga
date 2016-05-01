@@ -100,13 +100,11 @@ public class ProjectileEffectGUI implements EventGUI {
         velocityScaledDesired.setOnAction(e -> {
             
             if (velocityScaledDesired.getValue().equals(SC_VEL)) {
-                System.out.println("Velocity scaled desired activated- scaled");
                 removeInactiveNodes(velx, vely,amount);
                 addGUIElements(amount);
             }
             
             if (velocityScaledDesired.getValue().equals(AB_VEL)) {
-                System.out.println("Velocity scaled desired activated- absolute");
                 removeInactiveNodes(velx,vely,amount);
                 addGUIElements(velx, vely);
             }

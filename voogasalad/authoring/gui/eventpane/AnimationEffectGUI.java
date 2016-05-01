@@ -40,6 +40,7 @@ public class AnimationEffectGUI implements EventGUI{
 		node = new VBox();
 		animations = new ComboBox<>();
 		animations.getItems().addAll(AnimationFactory.getInstance().getMyAnimationEvents().keySet());
+		animations.getItems().addAll(AnimationFactory.getInstance().getMyAnimationSequences().keySet());
 		names = new ArchetypeSpriteCombo(manager,node,e->onNameSelected(),true);
 		names.display();
 	}

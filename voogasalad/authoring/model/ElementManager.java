@@ -28,7 +28,6 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import resources.VoogaBundles;
 import tools.VoogaException;
-import tools.VoogaNumber;
 import tools.bindings.ImageProperties;
 import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
@@ -42,14 +41,12 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private GlobalPropertiesManager GPM;
 
     private SpriteFactory spriteFactory;
-    //private AnimationFactory animationFactory;
 
     private Set<String> myIds;
 
     private String myManagerName;
 
     private String filePath;
-   // private List<String> names;
     
     public ElementManager () {
         myGameElements = new ArrayList<>();
@@ -57,9 +54,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         GPM = new GlobalPropertiesManager();
         myIds = new HashSet<>();
         spriteFactory = new SpriteFactory();
-        //animationFactory = AnimationFactory.getInstance();
-        //names = new ArrayList<>();
-        
         initGlobalVariablesPane();
     }
 
@@ -75,10 +69,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void removeGameElements (Node ... elements) {
-        System.out.println("Initial size: "+myGameElements.size());
-        myGameElements.removeAll(Arrays.asList(elements));
-        System.out.println("After removing size"+myGameElements.size());
-        
+        myGameElements.removeAll(Arrays.asList(elements));        
         for (Node n: elements){
             myIds.remove(n.getId());
         }
@@ -104,7 +95,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public Node getElement (String id) {
-        System.out.println("id activated: "+id);
         for (Node node : myGameElements) {
             if (node.getId().equals(id)) {
                 return node;
@@ -158,12 +148,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             if (element instanceof VoogaFrontEndText) {
                 VoogaFrontEndText frontText = (VoogaFrontEndText) element;
                 BackEndText text = (BackEndText) frontText.getElementable();
-                System.out.println("Text:" +frontText.getText());
                 TextProperties tp = new TextProperties();
                 Map<String,Object> map = tp.storeData(frontText);
-                for (String key : map.keySet()){
-                    System.out.println("map entry: "+key+" "+map.get(key));
-                }
                 text.setInitializationMap(map);
                 elements.add(text);
             }
@@ -273,7 +259,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         this.myManagerName = name;
         this.filePath =
                 getPath() + myManagerName + ".xml";
-        System.out.println("The file path here is " + filePath);
     }
     
     private String getPath(){
