@@ -25,6 +25,7 @@ public class CreateCommand implements Command {
     private static final String DEFAULT_PROJECT_NAME = "My DoovalSalad Project";
     private static final String DEFAULT_DESCRIPTION = "A game I built with DoovalSalad";
     private static final String LOAD = "load";
+    private static final String GAME_STRING = "games/";
 
     @Override
     public void execute () {
@@ -81,10 +82,10 @@ public class CreateCommand implements Command {
                 List<CompleteAuthoringModelable> models = new ArrayList<>();
                 Preferences p =
                         (Preferences) Deserializer
-                                .deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
+                                .deserialize(1, GAME_STRING + name + "/" + name + ".xml").get(0);
                 storeInfo(name, p.getDescription(), p.getWidth(), p.getHeight());
 
-                String prefixPath = "games/" + name + "/levels/";
+                String prefixPath = GAME_STRING + name + "/levels/";
                 File levelsFolder = new File(prefixPath);
                 for (File level : levelsFolder.listFiles()) {
                     String levelPath = prefixPath + level.getName();

@@ -51,6 +51,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
     private String IMAGE_PATH = VoogaBundles.spriteProperties.getString("IMAGE_PATH");
     private String WIDTH = VoogaBundles.spriteProperties.getString("WIDTH");
     private String HEIGHT = VoogaBundles.spriteProperties.getString("HEIGHT");
+    private String ALIVE = VoogaBundles.spriteProperties.getString("ALIVE");
     private String XPOS = VoogaBundles.spriteProperties.getString("X_POS");
     private String YPOS = VoogaBundles.spriteProperties.getString("Y_POS");
     private String ZPOS = VoogaBundles.spriteProperties.getString("Z_POS");
@@ -86,14 +87,13 @@ public class Sprite implements Moveable, Effectable, Elementable {
     }
 
     private void initializeAlive () {
-        myProperties.put(VoogaBundles.spriteProperties.getString("ALIVE"), new VoogaBoolean(true));
+        myProperties.put(ALIVE, new VoogaBoolean(true));
         reloadAlive();
     }
 
     private void reloadAlive () {
         myAlive = new SimpleBooleanProperty();
-        Bindings.bindBidirectional(myAlive, myProperties
-                .get(VoogaBundles.spriteProperties.getString("ALIVE")).getProperty());
+        Bindings.bindBidirectional(myAlive, myProperties.get(ALIVE).getProperty());
     }
 
     private void initializeImage (String path) {
