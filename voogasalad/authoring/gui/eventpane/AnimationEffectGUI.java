@@ -18,7 +18,7 @@ import tools.VoogaException;
 public class AnimationEffectGUI implements EventGUI{
     
     private ArchetypeSpriteCombo names;
-    private ComboBox animations;
+    private ComboBox<String> animations;
     private EditEventable manager;
     private VBox node;
     
@@ -33,7 +33,7 @@ public class AnimationEffectGUI implements EventGUI{
     
     private void initialize () {
         node = new VBox();
-        animations = new ComboBox();
+        animations = new ComboBox<>();
         animations.getItems().addAll(AnimationFactory.getInstance().getMyAnimationEvents().keySet());
         names = new ArchetypeSpriteCombo(manager,node,e->onNameSelected(),true);
         names.display();

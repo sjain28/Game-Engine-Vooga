@@ -25,6 +25,7 @@ import tools.VoogaJukebox;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
+
 /**
  * A centralized class to contain and access data including Sprites, Text,
  * Global Variables, and Events
@@ -32,203 +33,220 @@ import tools.interfaces.VoogaData;
  * @author Krista, Hunter
  */
 public class LevelData implements ILevelData {
-	private static final String SAVE_PROGRESS = VoogaBundles.defaultglobalvars.getProperty("SaveProgress");
-	private IPhysicsEngine myPhysics;
-	private String myMainCharID;
-	private Map<String, Elementable> myElements;
-	private SpriteFactory mySpriteFactory;
-	private AnimationFactory myAnimationFactory;
-	private Map<String, VoogaData> myGlobalVariables;
-	private KeyEventContainer myKeyEventContainer;
-	private String myTimerKey;
-	private String myNextLevelKey;
-	private LevelTransitioner myTransitioner;
-	private ResourceBundle myEventMethods;
+    private static final String SAVE_PROGRESS =
+            VoogaBundles.defaultglobalvars.getProperty("SaveProgress");
+    private IPhysicsEngine myPhysics;
+    private String myMainCharID;
+    private Map<String, Elementable> myElements;
+    private SpriteFactory mySpriteFactory;
+    private AnimationFactory myAnimationFactory;
+    private Map<String, VoogaData> myGlobalVariables;
+    private KeyEventContainer myKeyEventContainer;
+    private String myTimerKey;
+    private String myNextLevelKey;
+    private LevelTransitioner myTransitioner;
+    private ResourceBundle myEventMethods;
 
-	/**
-	 * Default constructor that takes in an instance of a physics module
-	 * 
-	 * @param physicsengine
-	 */
-	public LevelData(IPhysicsEngine physicsengine) {
-		myEventMethods = VoogaBundles.EventMethods;
-		myKeyEventContainer = new KeyEventContainer();
-		myPhysics = physicsengine;
-		myElements = new HashMap<>();
-		myGlobalVariables = new HashMap<>();
-		myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
-		myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
-	}
+    /**
+     * Default constructor that takes in an instance of a physics module
+     * 
+     * @param physicsengine
+     */
+    public LevelData (IPhysicsEngine physicsengine) {
 
-	/**
-	 * Returns a list of sprite IDs given an archetype
-	 * 
-	 * @param archetype
-	 * @return
-	 */
-	public List<Sprite> getSpritesByArch(String archetype) {
-		List<Sprite> list = new ArrayList<>();
-		for (String id : myElements.keySet()) {
-			if (myElements.get(id) instanceof Sprite && ((Sprite) myElements.get(id)).getArchetype().equals(archetype)) {
-				list.add((Sprite) myElements.get(id));
-			}
-		}
-		return list;
-	}
+        myEventMethods = VoogaBundles.EventMethods;
+        myKeyEventContainer = new KeyEventContainer();
+        myPhysics = physicsengine;
+        myElements = new HashMap<>();
+        myGlobalVariables = new HashMap<>();
+        myNextLevelKey = VoogaBundles.defaultglobalvars.getProperty("NextLevelIndex");
+        myTimerKey = VoogaBundles.defaultglobalvars.getProperty("Time");
+    }
 
-	/**
-	 * Returns animation created by AnimationFactory
-	 */
-	public AnimationEvent getAnimationFromFactory(String animationString) {
-		if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)) {
-			List<AnimationEvent> clonedSequence = myAnimationFactory.cloneAnimationSequence(animationString);
-			return clonedSequence.get(0);
-		} else {
-			return myAnimationFactory.cloneAnimationEvent(animationString);
-		}
-	}
+    /**
+     * Returns a list of sprite IDs given an archetype
+     * 
+     * @param archetype
+     * @return
+     */
+    public List<Sprite> getSpritesByArch (String archetype) {
+        List<Sprite> list = new ArrayList<>();
+        for (String id : myElements.keySet()) {
+            if (myElements.get(id) instanceof Sprite &&
+                ((Sprite) myElements.get(id)).getArchetype().equals(archetype)) {
+                list.add((Sprite) myElements.get(id));
+            }
+        }
+        return list;
+    }
 
-	/**
-	 * Adds a sprite as a member of the given archetype
-	 * 
-	 * @param archetype
-	 * @return
-	 */
-	public Sprite addSprite(String archetype) {
-		Elementable newSprite = mySpriteFactory.createSprite(archetype);
-		myElements.put(newSprite.getId(), newSprite);
-		return (Sprite) newSprite;
-	}
+    /**
+     * Returns animation created by AnimationFactory
+     */
+    public AnimationEvent getAnimationFromFactory (String animationString) {
+        if (myAnimationFactory.getMyAnimationSequences().containsKey(animationString)) {
+            List<AnimationEvent> clonedSequence =
+                    myAnimationFactory.cloneAnimationSequence(animationString);
+            return clonedSequence.get(0);
+        }
+        else {
+            return myAnimationFactory.cloneAnimationEvent(animationString);
+        }
+    }
 
-	/**
-	 * Returns a Global Variable (VoogaData) as specified by its variable name
-	 * 
-	 * @param variable
-	 * @return
-	 */
-	public VoogaData getGlobalVar(String variable) {
-		return myGlobalVariables.get(variable);
-	}
+    /**
+     * Adds a sprite as a member of the given archetype
+     * 
+     * @param archetype
+     * @return
+     */
+    public Sprite addSprite (String archetype) {
+        Elementable newSprite = mySpriteFactory.createSprite(archetype);
+        myElements.put(newSprite.getId(), newSprite);
+        return (Sprite) newSprite;
+    }
 
-	/**
-	 * Returns a text object by ID
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public VoogaFrontEndText getText(Object id) {
-		return (VoogaFrontEndText) myElements.get(id);
-	}
+    /**
+     * Returns a Global Variable (VoogaData) as specified by its variable name
+     * 
+     * @param variable
+     * @return
+     */
+    public VoogaData getGlobalVar (String variable) {
+        return myGlobalVariables.get(variable);
+    }
 
-	/**
-	 * Put all objects into a pair of displayable objects
-	 * 
-	 * @return
-	 */
-	public List<Pair<Node, Boolean>> getDisplayableNodes() {
-		List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
-		for (Object key : myElements.keySet()) {
-			Boolean isStatic = (Boolean) myElements.get(key).getVoogaProperties().get(VoogaBundles.spriteProperties.getString("STATIC")).getProperty().getValue();
-			displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
-		}
-		displayablenodes.sort(new PairZAxisComparator());
-		return displayablenodes;
-	}
+    /**
+     * Returns a text object by ID
+     * 
+     * @param id
+     * @return
+     */
+    public VoogaFrontEndText getText (Object id) {
+        return (VoogaFrontEndText) myElements.get(id);
+    }
 
-	/**
-	 * Add a given event and populate the pressed and released KeyCombos
-	 */
-	public void addEventAndPopulateKeyCombos(VoogaEvent event) {
-		myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
-	}
+    /**
+     * Put all objects into a pair of displayable objects
+     * 
+     * @return
+     */
+    public List<Pair<Node, Boolean>> getDisplayableNodes () {
+        List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
+        for (Object key : myElements.keySet()) {
+            Boolean isStatic =
+                    (Boolean) myElements.get(key).getVoogaProperties()
+                            .get(VoogaBundles.spriteProperties.getString("STATIC")).getProperty()
+                            .getValue();
+            displayablenodes
+                    .add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
+        }
+        displayablenodes.sort(new PairZAxisComparator());
+        return displayablenodes;
+    }
 
-	/**
-	 * Refreshes the data and restarts timer in global variable and sets level
-	 * path TODO: where??
-	 * 
-	 * @param levelfilename
-	 */
-	public void refreshLevelData(String levelfilename) {
-		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables,
-				myNextLevelKey);
-		myElements = myTransitioner.populateNewSprites();
-		myKeyEventContainer = myTransitioner.populateNewEvents();
-		myGlobalVariables = myTransitioner.populateNewGlobals();
-		System.out.println("about to set the bgm");
-		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "")+"BGM").getValue());
-		// TODO: Anita: implement clearMap and setMap and call a stub
-		// mySpriteFactory.clearMap();
-		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());
-		mySpriteFactory = myTransitioner.getNewSpriteFactory();
-		myMainCharID = myTransitioner.getMainCharID();
-		myAnimationFactory = myTransitioner.getAnimationFactory();
-	}
+    /**
+     * Add a given event and populate the pressed and released KeyCombos
+     */
+    public void addEventAndPopulateKeyCombos (VoogaEvent event) {
+        myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
+    }
 
-	/**
-	 * Update the global timer double
-	 * 
-	 * @param time
-	 */
-	public void updatedGlobalTimer(double time) {
-		myGlobalVariables.get(myTimerKey).setValue(new Double(time));
-	}
+    /**
+     * Refreshes the data and restarts timer in global variable and sets level
+     * path TODO: where??
+     * 
+     * @param levelfilename
+     */
+    public void refreshLevelData (String levelfilename) {
+        myTransitioner =
+                new LevelTransitioner(levelfilename, myElements, myKeyEventContainer,
+                                      myGlobalVariables,
+                                      myNextLevelKey);
+        myElements = myTransitioner.populateNewSprites();
+        myKeyEventContainer = myTransitioner.populateNewEvents();
+        myGlobalVariables = myTransitioner.populateNewGlobals();
+        System.out.println("about to set the bgm");
+        VoogaJukebox.getInstance().setBGM(
+                                          (String) myGlobalVariables
+                                                  .get(Paths.get(levelfilename).getFileName()
+                                                          .toString().replace(".xml", "") +
+                                                       "BGM")
+                                                  .getValue());
+        // TODO: Anita: implement clearMap and setMap and call a stub
+        // mySpriteFactory.clearMap();
+        // mySpriteFactory.setMap(myTransitioner.getSpriteMap());
+        mySpriteFactory = myTransitioner.getNewSpriteFactory();
+        myMainCharID = myTransitioner.getMainCharID();
+        myAnimationFactory = myTransitioner.getAnimationFactory();
+    }
 
-	/**
-	 * Saves current game progress into a XML file
-	 */
-	public void saveProgress(String filePath) {
-		myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-		GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory,
-				myAnimationFactory);
-		saver.saveCurrentProgress(filePath);
-	}
+    /**
+     * Update the global timer double
+     * 
+     * @param time
+     */
+    public void updatedGlobalTimer (double time) {
+        myGlobalVariables.get(myTimerKey).setValue(new Double(time));
+    }
 
-	public String getNextLevelName() {
-		return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
-	}
+    /**
+     * Saves current game progress into a XML file
+     */
+    public void saveProgress (String filePath) {
+        myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
+        GameSaver saver =
+                new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory,
+                              myAnimationFactory);
+        saver.saveCurrentProgress(filePath);
+    }
 
-	public boolean getSaveNow() {
-		return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
-	}
+    public String getNextLevelName () {
+        return ((String) (((VoogaString) myGlobalVariables.get(myNextLevelKey)).getValue()));
+    }
 
-	public void setNextLevelName(String levelName) {
-		myGlobalVariables.put(myNextLevelKey, new VoogaString(levelName));
-	}
+    public boolean getSaveNow () {
+        return (Boolean) (((VoogaBoolean) myGlobalVariables.get(SAVE_PROGRESS)).getValue());
+    }
 
-	public Sprite getSpriteByID(String id) {
-		return (Sprite) myElements.get(id);
-	}
+    public void setNextLevelName (String levelName) {
+        myGlobalVariables.put(myNextLevelKey, new VoogaString(levelName));
+    }
 
-	public void removeSpriteByID(String id) {
-		myElements.remove(id);
-	}
+    public Sprite getSpriteByID (String id) {
+        return (Sprite) myElements.get(id);
+    }
 
-	public Boolean containsSprite(String id) {
-		return myElements.containsKey(id);
-	}
+    public void removeSpriteByID (String id) {
+        myElements.remove(id);
+    }
 
-	public Sprite getMainSprite() {
-		return getSpriteByID(myMainCharID);
-	}
+    public Boolean containsSprite (String id) {
+        return myElements.containsKey(id);
+    }
 
-	public IPhysicsEngine getPhysicsEngine() {
-		return myPhysics;
-	}
+    public Sprite getMainSprite () {
+        return getSpriteByID(myMainCharID);
+    }
 
-	public KeyEventContainer getKeyEventContainer() {
-		return myKeyEventContainer;
-	}
+    public IPhysicsEngine getPhysicsEngine () {
+        return myPhysics;
+    }
 
-	public Map<String, VoogaData> getGlobalVariables() {
-		return myGlobalVariables;
-	}
+    public KeyEventContainer getKeyEventContainer () {
+        return myKeyEventContainer;
+    }
 
-	@Override
-	public Map<String, Elementable> getElements() {
-		return myElements;
-	}
+    public Map<String, VoogaData> getGlobalVariables () {
+        return myGlobalVariables;
+    }
 
-	public Set<Entry<String, Elementable>> getElementables() {
-		return myElements.entrySet();
-	}
+    @Override
+    public Map<String, Elementable> getElements () {
+        return myElements;
+    }
+
+    public Set<Entry<String, Elementable>> getElementables () {
+        return myElements.entrySet();
+    }
 }

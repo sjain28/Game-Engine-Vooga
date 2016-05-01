@@ -2,9 +2,6 @@ package authoring.splash;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public abstract class StarterPrompt extends Stage {

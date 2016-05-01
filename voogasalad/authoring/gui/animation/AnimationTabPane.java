@@ -10,13 +10,13 @@ import javafx.scene.control.TabPane;
  *
  */
 public class AnimationTabPane extends TabPane {
-	
+
 	/**
 	 * Constants
 	 */
 	private static final String PATH_DEFINER = "Draw Path";
 	private static final String ANIMATION_GUI = "Create Animation Event";
-	
+
 	/**
 	 * Instantiates the tabs, for path building and animation event creation.
 	 */

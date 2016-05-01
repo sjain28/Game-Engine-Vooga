@@ -10,6 +10,12 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
+<<<<<<< HEAD
+import javafx.scene.control.Menu;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
+=======
+>>>>>>> master
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
