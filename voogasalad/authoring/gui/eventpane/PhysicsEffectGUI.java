@@ -2,7 +2,6 @@ package authoring.gui.eventpane;
 
 import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
-import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -33,7 +32,7 @@ public class PhysicsEffectGUI implements EventGUI {
     private void initialize () {
         name = new ArchetypeSpriteCombo(elementManager, node, e -> onNameSelected(),true);
         name.display();
-        actions = new ComboBox<String>();
+        actions = new ComboBox<>();
         actions.getItems().addAll(VoogaBundles.physicsEffectsToGUI.keySet());
         amount = new NumberTextField();
 

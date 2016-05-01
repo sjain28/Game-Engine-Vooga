@@ -30,7 +30,6 @@ import stats.database.VoogaGame;
 import stats.database.VoogaUser;
 import stats.visualization.StatsVisualizer;
 import tools.GUIUtils;
-import tools.VoogaAlert;
 
 /**
  * Displays information stored in the database. Can be flexibly graphed in any
@@ -47,15 +46,11 @@ public class DataBaseDisplay extends Stage {
 	private double DATA_WIDTH;
 	private String USR;
 
-//<<<<<<< HEAD
-//	private double FONT_SIZE;
-//	private double TABPANE_SIZE_FACTOR;
-//	private double ACCORDION_SIZE_FACTOR;
-//=======
+
 	private static final double FONT_SIZE = 30;
 	private static final double TABPANE_SIZE_FACTOR = 3d / 4d;
 	private static final double ACCORDION_SIZE_FACTOR = 1d / 4d;
-//>>>>>>> 5cd022b7a17ee809cb054e6a76c1928ba0473e6b
+	
 	private VoogaDataBase database = VoogaDataBase.getInstance();
 	private VoogaUser user;
 	private CellEntry selectedCell;
@@ -75,11 +70,6 @@ public class DataBaseDisplay extends Stage {
 		DATA_WIDTH = Double.parseDouble(databaseProperties.getString("DataWidth"));
 		USR = databaseProperties.getString("Username");
 		user = database.getUser(VoogaBundles.preferences.getProperty(USR));
-
-
-//		FONT_SIZE = Double.parseDouble(databaseProperties.getString("FontSize"));
-//		TABPANE_SIZE_FACTOR = Double.parseDouble(databaseProperties.getString("TabPaneSizeFactor"));
-//		ACCORDION_SIZE_FACTOR =  Double.parseDouble(databaseProperties.getString("AccordionSizeFactor"));
 
 
 		VBox content = new VBox();
@@ -113,7 +103,7 @@ public class DataBaseDisplay extends Stage {
 		plots = new TabPane();
 		plotMaker = new Tab(databaseProperties.getString("PlotMaker"));
 		plotMaker.setContent(infoOptions());
-		plots.getTabs().addAll(plotMaker);
+		plots.getTabs().add(plotMaker);
 		plots.setPrefWidth(DATA_WIDTH * TABPANE_SIZE_FACTOR);
 
 		ans.getChildren().addAll(makeLists(), plots);
@@ -141,8 +131,7 @@ public class DataBaseDisplay extends Stage {
 			cellData.getItems().addAll(((StatCell) selectedCell).getAuthorStats().get(0).getPropertyOptions());
 			cellData.getItems().addAll(((StatCell) selectedCell).getPlayStats().get(0).getPropertyOptions());
 		} catch (Exception ArrayIndexOutOfBoundsException) {
-			VoogaAlert alert = new VoogaAlert(databaseProperties.getString("noDataAlert"));
-			alert.showAndWait();
+
 		}
 
 		Button set = new ButtonMaker().makeButton("Set", e -> {

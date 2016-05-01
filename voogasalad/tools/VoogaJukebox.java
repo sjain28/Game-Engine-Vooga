@@ -49,7 +49,10 @@ public class VoogaJukebox {
 	 * @return
 	 */
 	public void setBGM(String filename) {
+		System.out.println("SETTING BGM");
+		System.out.println("filename: "+filename);
 		myBGM = new MediaPlayer(new Media(new File(filename).toURI().toString()));
+		System.out.println("myBGM:"+myBGM);
 	}
 
 	/**
@@ -63,6 +66,7 @@ public class VoogaJukebox {
 	 * Play a continuous, controllable sound piece
 	 */
 	public void playBGM() {
+		System.out.println(myBGM);
 		myBGM.play();
 	}
 
