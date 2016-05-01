@@ -1,5 +1,6 @@
 package authoring.gui.eventpane;
 
+import authoring.gui.items.ArchetypeComboBox;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
@@ -13,7 +14,7 @@ public class SpawnEffectGUI implements EventGUI {
 	
 	private static final int PADDING = 5;
 
-    private SpriteComboBox archetypes;
+    private ArchetypeComboBox archetypes;
     private ComboBox<String> targetDesired;
     private SpriteComboBox targetId;
     private NumberTextField x;
@@ -33,8 +34,10 @@ public class SpawnEffectGUI implements EventGUI {
 
     private void initialize () {
 
-        archetypes = new SpriteComboBox(elementManager);
+        archetypes = new ArchetypeComboBox(elementManager);
         archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
+        
+        targetDesired = new ComboBox<>();
         targetDesired.getItems().addAll(RELATIVE_POSITION, ABSOLUTE_POSITION);
 
         targetId = new SpriteComboBox(elementManager);
