@@ -69,15 +69,11 @@ public class VoogaDataBase implements IDataBase{
 	public void checkThenAddIfNewGame(String gamename, String gamedescrip){
 		if(getGame(gamename)==null){
 			totalrows++;
-			//initialize game
 			myGames.add(new VoogaGame(gamename, gamedescrip));
-			//initialize stat-info for game for every user
 			for(int col = 0; col < totalcols; col++){
 				String username = myUsers.get(col).getProperty(VoogaUser.USER_NAME).toString();
 				myStatInfo.get(col).add(new StatCell(gamename,username));
 			}
-			printDataBase();
-			System.out.println("What is my game here, this can only be shown if a game was added 2 list " + myGames);
 		}
 	}
 	/**
@@ -120,7 +116,6 @@ public class VoogaDataBase implements IDataBase{
 	 * @return
 	 */
 	public CellEntry getStatByGameAndUser(String gamename, String username){
-		this.printDataBase();
 		System.out.println(gamename);
 		int row = myGames.indexOf(getGame(gamename));
 		int col = myUsers.indexOf(getUser(username));
@@ -195,24 +190,5 @@ public class VoogaDataBase implements IDataBase{
 		totalcols = 0;
 		myStatInfo.clear();
 		save();
-	}
-	/**
-	 * Method to print out all data in data base in matrix form
-	 * used for debugging properties
-	 */
-	public void printDataBase(){
-		System.out.print("\t");
-		for(int c = 0; c < myStatInfo.size(); c++){
-			System.out.print(myUsers.get(c)+"\t");
-		}
-		for(int r = 0; r < myStatInfo.get(0).size(); r++)
-		{
-			System.out.println(" ");
-			System.out.print(myGames.get(r)+"\t");
-			for(int c = 0; c < myStatInfo.size(); c++){
-				System.out.print(myStatInfo.get(c).get(r)+"\t");
-			}
-		}
-		System.out.println("");
 	}
 }
