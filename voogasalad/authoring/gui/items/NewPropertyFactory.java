@@ -11,8 +11,8 @@ import tools.interfaces.VoogaData;
 
 public class NewPropertyFactory {
 
-	private final String COMMAND_PATH = "tools.";
-	private ArrayList<String> myChoices = new ArrayList<String>();
+	private static final String COMMAND_PATH = "tools.";
+	private ArrayList<String> myChoices = new ArrayList<>();
 
 	/**
 	 * Constructor to populate list of choices

@@ -3,7 +3,6 @@ package authoring.splash;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.Command;
 import authoring.UIManager;
 import authoring.VoogaScene;
@@ -25,6 +24,7 @@ public class CreateCommand implements Command {
 
     private static final String DEFAULT_PROJECT_NAME = "My DoovalSalad Project";
     private static final String DEFAULT_DESCRIPTION = "A game I built with DoovalSalad";
+    private static final String LOAD = "load";
 
     @Override
     public void execute () {
@@ -53,41 +53,24 @@ public class CreateCommand implements Command {
     }
 
     private void showNewGamePrompt () {
-    	VoogaDataBase database = VoogaDataBase.getInstance();
+
         ProjectInitializationPrompt newGamePrompt = new ProjectInitializationPrompt();
         newGamePrompt.setProceedEvent(ee -> {
             newGamePrompt.close();
-            String name = getFieldOrDefault(newGamePrompt.getName(), DEFAULT_PROJECT_NAME);
-            String description =
-                    getFieldOrDefault(newGamePrompt.getDescription(), DEFAULT_DESCRIPTION);
-            //add game to database if it's a new game
-            database.checkThenAddIfNewGame(name, description);
-            String width = newGamePrompt.getDimension().getFirst();
-            String height = newGamePrompt.getDimension().getLast();
-            VoogaBundles.preferences.setProperty("GameName", name);
-            VoogaBundles.preferences.setProperty("GameDescription", description);
-            VoogaBundles.preferences.setProperty("GameWidth", width);
-            VoogaBundles.preferences.setProperty("GameHeight", height);
-       
-            CurrentSessionStats stats = new CurrentSessionStats();
-    		stats.startAuthoringSession();
-            UIManager manager = new UIManager(new ElementManager());
-            Scene scene = new VoogaScene(manager);
-            Stage primaryStage = new Stage();
-            primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
-            primaryStage.show();
-            primaryStage.setOnCloseRequest(e -> {
-                promptForSave();
-            });
+            storeInfo(getFieldOrDefault(newGamePrompt.getName(), DEFAULT_PROJECT_NAME),
+                      getFieldOrDefault(newGamePrompt.getDescription(), DEFAULT_DESCRIPTION),
+                      newGamePrompt.getDimension().getFirst(),
+                      newGamePrompt.getDimension().getLast());
+
+            open(null, "giberish");
         });
         newGamePrompt.show();
     }
 
     private void promptForSave () {
-    	CurrentSessionStats stats = new CurrentSessionStats();
-    	stats.endCurrentAuthoringSession();
-    	VoogaDataBase.getInstance().save();
+        CurrentSessionStats stats = new CurrentSessionStats();
+        stats.endCurrentAuthoringSession();
+        VoogaDataBase.getInstance().save();
     }
 
     private void showAuthorGamePrompt (StarterPrompt prompt) {
@@ -95,15 +78,12 @@ public class CreateCommand implements Command {
             try {
                 prompt.close();
                 String name = ((Button) eee.getSource()).getId();
-                List<CompleteAuthoringModelable> models =
-                        new ArrayList<CompleteAuthoringModelable>();
-                Preferences preferences = (Preferences) Deserializer
-                        .deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
-                VoogaBundles.preferences.setProperty("GameName", name);
-                VoogaBundles.preferences.setProperty("GameDescription",
-                                                     preferences.getDescription());
-                VoogaBundles.preferences.setProperty("GameWidth", preferences.getWidth());
-                VoogaBundles.preferences.setProperty("GameHeight", preferences.getHeight());
+                List<CompleteAuthoringModelable> models = new ArrayList<>();
+                Preferences p =
+                        (Preferences) Deserializer
+                                .deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
+                storeInfo(name, p.getDescription(), p.getWidth(), p.getHeight());
+
                 String prefixPath = "games/" + name + "/levels/";
                 File levelsFolder = new File(prefixPath);
                 for (File level : levelsFolder.listFiles()) {
@@ -114,25 +94,45 @@ public class CreateCommand implements Command {
                     em.setName(level.getName().replace(".xml", ""));
                     models.add(em);
                 }
-                CurrentSessionStats stats = new CurrentSessionStats();
-        		//stats.startAuthoringSession();
-                UIManager manager = new UIManager(models);
-                Scene scene = new VoogaScene(manager);
-                Stage primaryStage = new Stage();
-                primaryStage.setScene(scene);
-                primaryStage.show();
-                primaryStage.setOnCloseRequest(e -> promptForSave());
+                open(models, LOAD);
             }
             catch (VoogaException ex) {
-
-
             }
         });
         prompt.show();
     }
 
+    private void storeInfo (String name, String description, String width, String height) {
+        VoogaDataBase database = VoogaDataBase.getInstance();
+        database.checkThenAddIfNewGame(name, description);
+
+        VoogaBundles.preferences.setProperty("GameName", name);
+        VoogaBundles.preferences.setProperty("GameDescription", description);
+        VoogaBundles.preferences.setProperty("GameWidth", width);
+        VoogaBundles.preferences.setProperty("GameHeight", height);
+    }
+
     private String getFieldOrDefault (String field, String defaultField) {
         return (field == null || field.isEmpty()) ? defaultField : field;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void open (Object models, String tag) {
+        CurrentSessionStats stats = new CurrentSessionStats();
+        stats.startAuthoringSession();
+        UIManager manager;
+        if (tag.equals(LOAD)) {
+            manager = new UIManager((List<CompleteAuthoringModelable>) models);
+        }
+        else {
+            manager = new UIManager(new ElementManager());
+        }
+        Scene scene = new VoogaScene(manager);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
+        primaryStage.show();
+        primaryStage.setOnCloseRequest(e -> promptForSave());
     }
 
 }

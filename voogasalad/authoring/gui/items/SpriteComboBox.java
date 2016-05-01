@@ -11,9 +11,11 @@ import tools.VoogaException;
 public class SpriteComboBox extends ComboBox<String> implements VoogaNode {
     private EditEventable manager;
 
+    private static final double COMBO_BOX_PADDING = 10;
+    
     public SpriteComboBox (EditEventable manager) {
         this.manager = manager;
-        setPadding(new Insets(10, 10, 10, 10));
+        setPadding(new Insets(COMBO_BOX_PADDING, COMBO_BOX_PADDING, COMBO_BOX_PADDING, COMBO_BOX_PADDING));
         loadData();
     }
 

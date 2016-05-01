@@ -30,10 +30,8 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() {
-		//Save Game Progress saves this as the name of the player who is currently playing.
 		CurrentSessionStats stats = new CurrentSessionStats();
 		stats.saveGameProgress(VoogaBundles.preferences.getProperty("UserName"));
-		System.out.println("This save game file class was accessed");
 	}
 
 }

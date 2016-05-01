@@ -154,6 +154,7 @@ public class LevelData implements ILevelData {
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
+		System.out.println("about to set the bgm");
 		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "")+"BGM").getValue());
 		// TODO: Anita: implement clearMap and setMap and call a stub
 		// mySpriteFactory.clearMap();

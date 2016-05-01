@@ -5,8 +5,10 @@ import tools.VoogaException;
 
 public interface CompleteAuthoringModelable extends EditElementable, EditEventable, Saveable, Observable {
 	
-	public String getName();
-	public void setName(String name);
-        public String getSpriteNameFromId (String c) throws VoogaException;
+	String getName();
+	
+	void setName(String name);
+	
+    String getSpriteNameFromId (String c) throws VoogaException;
 
 }

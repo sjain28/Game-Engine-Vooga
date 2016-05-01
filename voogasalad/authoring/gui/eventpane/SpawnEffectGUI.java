@@ -21,6 +21,9 @@ public class SpawnEffectGUI implements EventGUI {
     private EditEventable elementManager;
     private VBox node;
 
+    private static final String RELATIVE_POSITION = "Relative Position";
+    private static final String ABSOLUTE_POSITION = "Absolute Position";
+    
     public SpawnEffectGUI (EditEventable elementManager) {
         this.elementManager = elementManager;
         node = new VBox();
@@ -32,8 +35,7 @@ public class SpawnEffectGUI implements EventGUI {
 
         archetypes = new SpriteComboBox(elementManager);
         archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
-        targetDesired = new ComboBox();
-        targetDesired.getItems().addAll("Relative Position", "Absolute Position");
+        targetDesired.getItems().addAll(RELATIVE_POSITION, ABSOLUTE_POSITION);
 
         targetId = new SpriteComboBox(elementManager);
         x = new NumberTextField();
@@ -42,11 +44,11 @@ public class SpawnEffectGUI implements EventGUI {
         y.setPadding(new Insets(PADDING));
 
         targetDesired.setOnAction(e -> {
-            if (targetDesired.getValue().equals("Relative Position")) {
+            if (targetDesired.getValue().equals(RELATIVE_POSITION)) {
                 removeInactiveNodes(targetId, x, y);
                 addGUIElements(targetId);
             }
-            if (targetDesired.getValue().equals("Absolute Position")) {
+            if (targetDesired.getValue().equals(ABSOLUTE_POSITION)) {
                 removeInactiveNodes(targetId, x, y);
                 addGUIElements(x, y);
             }
@@ -63,7 +65,7 @@ public class SpawnEffectGUI implements EventGUI {
     @Override
     public String getDetails () throws VoogaException {
         String result = "events.SpawnEffect," + archetypes.getValue() + ",";
-        if (targetDesired.getValue().equals("Relative Position")) {
+        if (targetDesired.getValue().equals(RELATIVE_POSITION)) {
             result += targetId.getSpriteId() + ",";
         }
         result += x.getText() + "," + y.getText();
