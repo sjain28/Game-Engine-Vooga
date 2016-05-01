@@ -19,7 +19,7 @@ import tools.interfaces.VoogaData;
  */
 public class DisplayScroller implements IDisplayScroller {
 
-	private static final double INCREASE_FACTOR = 1;
+	private static final double INCREASE_FACTOR = 1.00005;
 	private static final double SCROLL_FACTOR = 0.01;
 
 	private Sprite myScrollingSprite;
@@ -179,8 +179,16 @@ public class DisplayScroller implements IDisplayScroller {
 	public void increaseScrollingSpeed(Sprite scrollingSprite) {
 		if (isExponentialScroll) {
 			Double prevMagnitude = scrollingSprite.getVelocity().getMagnitude();
-			prevMagnitude = prevMagnitude + INCREASE_FACTOR;
+			prevMagnitude = prevMagnitude * INCREASE_FACTOR;
 			scrollingSprite.getVelocity().setVelocity(prevMagnitude, scrollingSprite.getVelocity().getAngleDegree());
+//			System.out.println("This is Velocity magnitude: " + scrollingSprite.getVelocity().getMagnitude());
+//			System.out.println("This is the angle: " + scrollingSprite.getVelocity().getAngleDegree());
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 	}
 
