@@ -74,11 +74,15 @@ public class AnimationFactory {
 		return clonedSequence;
 	}
 
-	public void makeAnimationSequence(String sequenceName, List<AnimationEvent> eventsList){
-		for (int i = 0; i < eventsList.size() - 1; i++){
-			eventsList.get(i).setNextEvent(eventsList.get(i + 1));
+	public void makeAnimationSequence(String sequenceName, List<String> eventsList){
+		List<AnimationEvent> eventSequence = new ArrayList<>();
+		for (String event : eventsList){
+			eventSequence.add(myAnimationEvents.get(event).clone());
 		}
-		myAnimationSequences.put(sequenceName, eventsList);
+		for (int i = 0; i < eventsList.size() - 1; i++){
+			eventSequence.get(i).setNextEvent(eventSequence.get(i + 1));
+		}
+		myAnimationSequences.put(sequenceName, eventSequence);
 	}
 	public Collection<String> getPathNames(){
 		return Collections.unmodifiableCollection(myPaths.keySet());
