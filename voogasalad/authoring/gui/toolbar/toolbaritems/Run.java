@@ -12,6 +12,11 @@ public class Run extends ToolbarItemHandler {
     private UIManager model;
     private String game;
 
+    
+    /**
+     * Initializes button takes in the backend interface
+     * @param model
+     */
     public Run (Menuable model) {
         // save = new Save(model);
         this.model = (UIManager) model;

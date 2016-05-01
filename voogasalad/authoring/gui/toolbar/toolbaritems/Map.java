@@ -13,7 +13,10 @@ public class Map extends ToolbarItemHandler {
     public Map (Menuable model) {
         this.model = (UIManager) model;
     }
-
+    
+    /**
+     * Defines what to do when the button is clicked
+     */
     @Override
     public void handle () {
         LevelCartographer mapper = new LevelCartographer(model);

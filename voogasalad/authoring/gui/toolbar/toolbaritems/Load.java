@@ -9,10 +9,18 @@ import tools.VoogaException;
 public class Load extends ToolbarItemHandler{
     OpenLevelFileItem openLevel;
     
+    
+    /**
+     * Initializes button takes in the backend interface
+     * @param model
+     */
     public Load(Menuable model){
     	openLevel = new OpenLevelFileItem(model);
     }
     
+    /**
+     * Defines what to do when the button is clicked
+     */
     @Override
     public void handle () {
         try {

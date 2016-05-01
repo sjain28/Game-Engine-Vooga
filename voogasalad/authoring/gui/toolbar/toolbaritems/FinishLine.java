@@ -12,6 +12,11 @@ public class FinishLine extends ToolbarItemHandler {
 
     private ElementManager manager;
 
+    
+    /**
+     * Initializes button takes in the backend interface
+     * @param model
+     */
     public FinishLine (Menuable model) {
         manager = (ElementManager) ((UIManager) model).getManager();
     }

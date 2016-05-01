@@ -11,6 +11,10 @@ public class RunDebug extends ToolbarItemHandler {
     Save save;
     private UIManager model;
 
+    /**
+     * Initializes button takes in the backend interface
+     * @param model
+     */
     public RunDebug (Menuable model) {
         // save = new Save(model);
         this.model = (UIManager) model;
