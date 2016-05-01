@@ -1,10 +1,7 @@
 package authoring.gui.eventpane;
 
 import authoring.gui.items.ArchetypeSpriteCombo;
-import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
@@ -35,7 +32,7 @@ public class CollisionCauseGUI implements EventGUI{
         group2= new ArchetypeSpriteCombo(manager,vbox2,e->{},false);
         group1.display();
         group2.display();
-        collisionType = new ComboBox<String>();
+        collisionType = new ComboBox<>();
         collisionType.getItems().addAll("Horizontal","Above", "Below");
         parent.getChildren().addAll(collisionType,hbox);
     }
