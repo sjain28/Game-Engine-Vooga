@@ -132,6 +132,21 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     @Override
     public void onSave () throws VoogaException {
         List<Elementable> elements = new ArrayList<>();
+        saveLoop(elements);
+        try {
+            DataContainerOfLists data =
+                    new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
+                                             spriteFactory.getArchetypeMap(), 
+                                             AnimationFactory.getInstance());
+            FileWriterFromGameObjects.saveGameObjects(data, getPath() + getName() + ".xml");
+        }
+        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
+            e.printStackTrace();
+            throw new VoogaException();
+        }
+    }
+    
+    private void saveLoop(List<Elementable> elements) throws VoogaException{
         for (Node element : myGameElements) {
             if (element instanceof GameObject) {
                 GameObject object = (GameObject) element;
@@ -152,21 +167,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
                 text.setInitializationMap(map);
                 elements.add(text);
             }
-        }
-        try {
-            DataContainerOfLists data =
-                    new DataContainerOfLists(elements, GPM.getVoogaProperties(), myEventList,
-                                             spriteFactory.getArchetypeMap(), 
-                                             AnimationFactory.getInstance());
-            FileWriterFromGameObjects.saveGameObjects(data,
-                                                      "games/" +
-                                                            VoogaBundles.preferences
-                                                                    .getProperty("GameName") +
-                                                            "/levels/" + getName() + ".xml");
-        }
-        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-            e.printStackTrace();
-            throw new VoogaException();
         }
     }
 
@@ -272,10 +272,12 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     public void setName (String name) {
         this.myManagerName = name;
         this.filePath =
-                "games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/" +
-                        myManagerName + ".xml";
+                getPath() + myManagerName + ".xml";
         System.out.println("The file path here is " + filePath);
     }
-
+    
+    private String getPath(){
+        return "games/" + VoogaBundles.preferences.getProperty("GameName") + "/levels/";
+    }
 
 }
