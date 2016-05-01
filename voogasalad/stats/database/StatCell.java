@@ -15,10 +15,9 @@ public class StatCell extends CellEntry {
 	public static final String LAST_SAVED_LEVEL_LOC = "last_saved_level_loc";
 	
 	public StatCell(String gamename, String username){
-		super()
-		;
-		myAuthorStats = new Stack<AuthorSession>();
-		myPlayStats = new Stack<PlaySession>();
+		super();
+		myAuthorStats = new Stack<>();
+		myPlayStats = new Stack<>();
 		setProperty(MY_GAME, new VoogaString(gamename));
 		setProperty(MY_USER, new VoogaString(username));
 		setProperty(LAST_SAVED_LEVEL_LOC, new VoogaString(""));

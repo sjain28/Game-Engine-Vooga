@@ -7,7 +7,6 @@ import authoring.interfaces.Elementable;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import resources.VoogaBundles;
-import tools.Position;
 import tools.VoogaBoolean;
 import tools.VoogaException;
 import tools.bindings.TextProperties;
@@ -20,7 +19,6 @@ public class BackEndText implements Elementable {
     private Map<String, Object> initializationProperties;
     
     private String myId;
-    private Position myLoc;
     private String myName;
     
     private transient Text text;
@@ -29,7 +27,7 @@ public class BackEndText implements Elementable {
     
     
     public BackEndText (String id) {
-        myProperties = new HashMap<String,VoogaData>();
+        myProperties = new HashMap<>();
         myProperties.put(VoogaBundles.textMapProperties.getString("STATIC"), new VoogaBoolean(false));
         myId = id;
 
@@ -43,7 +41,9 @@ public class BackEndText implements Elementable {
     @Override
     public void update () {
         text.setText(myName);
-        if (displayedData == null) return;
+        if (displayedData == null) {
+        	return;
+        }
         text.setText(myName+" "+displayedData.getValue());
     }
 
@@ -59,7 +59,9 @@ public class BackEndText implements Elementable {
 
     @Override
     public void removeProperty (String name) {
-        if (!myProperties.keySet().contains(name)) return;
+        if (!myProperties.keySet().contains(name)) {
+        	return;
+        }
         myProperties.remove(name);
     }
 

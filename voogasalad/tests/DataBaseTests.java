@@ -13,7 +13,7 @@ import stats.database.VoogaGame;
 import stats.database.VoogaUser;
 import stats.interaction.CurrentSessionStats;
 
-public class DataBaseTest {
+public class DataBaseTests {
 	@Test
 	public void testAddingUsers() {
 		VoogaDataBase database = VoogaDataBase.getInstance();
@@ -63,8 +63,6 @@ public class DataBaseTest {
 		CurrentSessionStats stats = new CurrentSessionStats();
 		stats.startAuthoringSession();
 		stats.endCurrentAuthoringSession();
-		stats.saveGameProgress("HI");
-		System.out.println("The progress here should be hi but it is " +stats.loadGameProgress());
 		
 		PlaySession playsesh5 =new PlaySession(new Date());
 		System.out.println("here");

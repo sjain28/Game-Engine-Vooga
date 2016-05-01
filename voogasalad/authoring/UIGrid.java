@@ -34,7 +34,7 @@ public class UIGrid extends GridPane{
 	private DesignBoardHousing designBoard;
 	private Explorer explorer;
 	private CompleteAuthoringModelable myManager;
-	
+
 	private ResourceBundle gameDisplayProperties;
 
 	private transient SimpleStringProperty mySceneName;
@@ -105,7 +105,7 @@ public class UIGrid extends GridPane{
 		this.getColumnConstraints().addAll(leftColumn, rightColumn);
 		this.getRowConstraints().addAll(topRow, middleRow, bottomRow);
 	}
-	
+
 	/**
 	 * Helper method to help parse integer from resource file
 	 * @param s: property name from resource file
@@ -149,7 +149,7 @@ public class UIGrid extends GridPane{
 	public void addScene (CompleteAuthoringModelable elem) {
 		designBoard.addScene(elem);
 	}
-	
+
 	/**
 	 * @return current authoring model
 	 */

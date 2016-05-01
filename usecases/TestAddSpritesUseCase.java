@@ -13,7 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
-public class TestAddSprites_USECASE {
+public class TestAddSpritesUseCase {
 	
     public static void main (String[] args){
        

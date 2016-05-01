@@ -25,6 +25,7 @@ public class ImageAnimationEffect extends SpriteEffect {
 	protected void setCycleTime(Integer duration){
 		myCycleTime = (duration / myCycles) / myImages.size();
 	}
+	
 	// TODO: make image strings into images
 	@Override
 	public void execute(ILevelData data) {
@@ -45,8 +46,7 @@ public class ImageAnimationEffect extends SpriteEffect {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	public ImageAnimationEffect clone(AnimationEvent event) {

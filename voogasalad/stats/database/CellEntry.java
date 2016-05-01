@@ -20,7 +20,7 @@ public class CellEntry implements PropertiesCell{
 	private Map<String, VoogaData> myPropertyMap;
 	
 	public CellEntry(){
-		myPropertyMap = new HashMap<String, VoogaData>();
+		myPropertyMap = new HashMap<>();
 	}
 	public void setProperty(String property, VoogaData value){
 		myPropertyMap.put(property, value);
@@ -31,7 +31,6 @@ public class CellEntry implements PropertiesCell{
 	}
 	
 	public ObservableList<String> getPropertyOptions(){
-	    //return new ArrayList<String>(myPropertyMap.keySet());
 	    return FXCollections.observableList(new ArrayList<String>(myPropertyMap.keySet()));
 	}
 }

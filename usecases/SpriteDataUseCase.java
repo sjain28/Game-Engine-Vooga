@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import gameengine.Sprite;
 
-public class SpriteDataExample {
+public class SpriteDataUseCase {
     public static void main (String[] args){
         Sprite a = new Sprite("bricks.jpg","DA", null, null);
         Sprite b = new Sprite("bricks.jpg","eA", null, null);

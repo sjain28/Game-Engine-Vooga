@@ -27,7 +27,9 @@ public class VoogaString implements VoogaData {
      * Initialize a string with value and listener
      */
     private void initializeProperty () {
-        if (valueProperty != null) return;
+        if (valueProperty != null) {
+        	return;
+        }
         
         this.valueProperty = new SimpleStringProperty();
         this.valueProperty.setValue(myValue);
@@ -80,8 +82,9 @@ public class VoogaString implements VoogaData {
 
     @Override
     public void setValue (Object o) {
-        if (!(o instanceof String))
+        if (!(o instanceof String)){
             return;
+        }
         myValue = (String) o;
     }
 }

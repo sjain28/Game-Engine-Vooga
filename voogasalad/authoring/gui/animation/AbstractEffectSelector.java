@@ -31,8 +31,12 @@ public abstract class AbstractEffectSelector extends VBox {
 		initializeSubnode();
 		selectEffect = new CheckBox();
 		selectEffect.selectedProperty().addListener((obs, old, n) -> {
-			if(n) this.getChildren().add(subnode);
-			else this.getChildren().remove(subnode);
+			if(n) {
+				this.getChildren().add(subnode);
+			}
+			else {
+				this.getChildren().remove(subnode);
+			}
 		});
 	}
 	

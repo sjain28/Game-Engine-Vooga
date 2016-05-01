@@ -13,20 +13,22 @@ import javafx.scene.media.MediaPlayer;
  * @author Hunter Lee
  *
  */
-public class VoogaGameSound implements IVoogaGameSound {
+public class VoogaJukebox {
 
-	// TODO put string to path resource bundles
-	private static final String BGM_PATH = "resources/sound/";
-	private static final String BGM = "chanel_show.mp3";
+	private static VoogaJukebox gameSound;
 
 	private Map<String, MediaPlayer> myMediaMap;
 	private MediaPlayer myBGM;
 
-	public VoogaGameSound() {
+	private VoogaJukebox() {
 		myMediaMap = new HashMap<>();
-
-		myBGM = createMediaPlayer(BGM);
-		myMediaMap.put(BGM, myBGM);
+	}
+	
+	public synchronized static VoogaJukebox getInstance() {
+		if(gameSound == null) {
+			gameSound = new VoogaJukebox();
+		}
+		return gameSound;
 	}
 
 	/**
@@ -35,10 +37,22 @@ public class VoogaGameSound implements IVoogaGameSound {
 	 * @param filename
 	 * @return
 	 */
-	private MediaPlayer createMediaPlayer(String filename) {
-		Media media = new Media(new File(BGM_PATH + filename).toURI()
-				.toString());
+	public MediaPlayer createMediaPlayer(String filename) {
+		Media media = new Media(new File(filename).toURI().toString());
 		return new MediaPlayer(media);
+	}
+	
+	/**
+	 * Create media player for initializing sound play
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	public void setBGM(String filename) {
+		System.out.println("SETTING BGM");
+		System.out.println("filename: "+filename);
+		myBGM = new MediaPlayer(new Media(new File(filename).toURI().toString()));
+		System.out.println("myBGM:"+myBGM);
 	}
 
 	/**
@@ -52,6 +66,7 @@ public class VoogaGameSound implements IVoogaGameSound {
 	 * Play a continuous, controllable sound piece
 	 */
 	public void playBGM() {
+		System.out.println(myBGM);
 		myBGM.play();
 	}
 
@@ -65,6 +80,7 @@ public class VoogaGameSound implements IVoogaGameSound {
 	/**
 	 * Pause background music for later return to point
 	 */
+/*
 	public void pauseBGM() {
 		myBGM.pause();
 	}
@@ -72,7 +88,9 @@ public class VoogaGameSound implements IVoogaGameSound {
 	/**
 	 * Getters and setters below
 	 */
+/*
 	public Map<String, MediaPlayer> getMediaMap() {
 		return myMediaMap;
 	}
+*/
 }

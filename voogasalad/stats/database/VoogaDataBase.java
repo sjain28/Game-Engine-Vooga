@@ -39,7 +39,9 @@ public class VoogaDataBase implements IDataBase{
 	 * @return
 	 */
 	public static VoogaDataBase getInstance( ) {
-		if(myInstance==null){new VoogaDataBase();}
+		if(myInstance==null) {
+			new VoogaDataBase();
+		}
 		return myInstance;
 	}
 	/**
@@ -100,7 +102,7 @@ public class VoogaDataBase implements IDataBase{
 			System.out.println("actually adding in the user");
 			totalcols++;
 			myUsers.add(new VoogaUser(displayname, username, password, profpiclocation));
-			List<CellEntry> userstatinfo = new ArrayList<CellEntry>();
+			List<CellEntry> userstatinfo = new ArrayList<>();
 			for(int row = 0; row < totalrows; row++){
 				String gamename = myGames.get(row).getProperty(VoogaGame.GAME_NAME).toString();
 				userstatinfo.add(row, new StatCell(gamename,username));
@@ -128,7 +130,7 @@ public class VoogaDataBase implements IDataBase{
 	 * @return
 	 */
 	public List<CellEntry> getStatsbyGame(String gamename){
-		List<CellEntry> gamestats = new ArrayList<CellEntry>();
+		List<CellEntry> gamestats = new ArrayList<>();
 		int row = myGames.indexOf(getGame(gamename));
 		for(int col = 0; col < myStatInfo.size(); col++){
 			gamestats.add(col, myStatInfo.get(col).get(row));
@@ -152,9 +154,9 @@ public class VoogaDataBase implements IDataBase{
 			System.out.println("loading, and file location does not yet exist.");
 			totalrows = 0;
 			totalcols = 0;
-			myGames = new ArrayList<VoogaGame>();
-			myUsers = new ArrayList<VoogaUser>();
-			myStatInfo = new ArrayList<List<CellEntry>>();
+			myGames = new ArrayList<>();
+			myUsers = new ArrayList<>();
+			myStatInfo = new ArrayList<>();
 			save();
 		}
 		try {

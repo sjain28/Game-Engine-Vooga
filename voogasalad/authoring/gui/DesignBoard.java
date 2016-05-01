@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-
 import authoring.CustomText;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.AuthoringElementable;
+import authoring.interfaces.Elementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.resourceutility.ResourceDecipherer;
@@ -59,12 +59,12 @@ public class DesignBoard extends Tab implements Observer {
     private ResourceBundle designboardProperties;
 
     private double y_offset, x_offset;
-    
-    private static final double RESIZE_FACTOR = 0.5;
-    private static final int INT_RESIZE_FACTOR = 2;
-    private static final double SLIDER_MIN = 0.1;
-    private static final double SLIDER_MAX = 10;
-    private static final double SLIDER_INCREMENT = 1;
+
+    private double RESIZE_FACTOR;
+    private int INT_RESIZE_FACTOR;
+    private double SLIDER_MIN;
+    private double SLIDER_MAX;
+    private double SLIDER_INCREMENT;
 
     /**
      * Constructs DesignBoard with object that has the functionality described
@@ -80,6 +80,12 @@ public class DesignBoard extends Tab implements Observer {
 
         this.width = Double.parseDouble(designboardProperties.getString("Width"));
         this.height = Double.parseDouble(designboardProperties.getString("Height"));
+
+        RESIZE_FACTOR = Double.parseDouble(designboardProperties.getString("ResizeFactor"));
+        INT_RESIZE_FACTOR = Integer.parseInt(designboardProperties.getString("intResizeFactor"));
+        SLIDER_MIN = Double.parseDouble(designboardProperties.getString("SliderMin"));
+        SLIDER_MAX = Double.parseDouble(designboardProperties.getString("SliderMax"));
+        SLIDER_INCREMENT = Double.parseDouble(designboardProperties.getString("SliderIncrement"));
 
         initializeContainers();
         initializeZoom();
@@ -120,10 +126,12 @@ public class DesignBoard extends Tab implements Observer {
         Text coordinateDisplay = new CustomText("");
         contentPane.setOnMouseMoved(e -> {
             String xCoordinate =
-                    new BigDecimal(e.getX() - width * RESIZE_FACTOR).setScale(INT_RESIZE_FACTOR, RoundingMode.HALF_UP)
+                    new BigDecimal(e.getX() - width * RESIZE_FACTOR)
+                            .setScale(INT_RESIZE_FACTOR, RoundingMode.HALF_UP)
                             .toString();
             String yCoordinate =
-                    new BigDecimal(e.getY() - height * RESIZE_FACTOR).setScale(INT_RESIZE_FACTOR, RoundingMode.HALF_UP)
+                    new BigDecimal(e.getY() - height * RESIZE_FACTOR)
+                            .setScale(INT_RESIZE_FACTOR, RoundingMode.HALF_UP)
                             .toString();
             coordinateDisplay.setText(String.format("X: %s   Y: %s", xCoordinate, yCoordinate));
         });
@@ -196,7 +204,7 @@ public class DesignBoard extends Tab implements Observer {
             }
             success = true;
         }
-        
+
         if (db.hasString()) {
             Node object = (Node) elementManager.getElement(db.getString());
             object.setTranslateX(event.getX() - x_offset);
@@ -284,11 +292,9 @@ public class DesignBoard extends Tab implements Observer {
      * @param nodeList: list of nodes
      */
     private void displayElements (Collection<Node> nodeList) {
-        for (Node node : nodeList) {
-            if (!contentPane.getChildren().contains(node)) {
-                contentPane.getChildren().add(node);
-            }
-        }
+        contentPane.getChildren().clear();
+        addGuides();
+        contentPane.getChildren().addAll(nodeList);
     }
 
     /**

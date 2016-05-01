@@ -24,22 +24,15 @@ public abstract class NodeProperties {
 	public Map<String, Object> storeData(Node node) throws VoogaException {
 		System.out.println("Storing Data");
 
-		Map<String, Object> propertiesMap = new HashMap<String, Object>();
-		for (Field field : this.getClass().getDeclaredFields()) {
+		Map<String, Object> propertiesMap = new HashMap<>();
 
-			// TODO what does this method do? remove the print and it gets
-			// warning
-			Method method = getMethodName(node,
-					getResourceBundle().getString(field.getName()), "get", 0);
-		}
 		for (Field field : this.getClass().getDeclaredFields()) {
 			Method method = getMethodName(node,
 					getResourceBundle().getString(field.getName()), "get", 0);
 
 			if (method.getParameters().length == 0) {
 				try {
-					// TODO remove the null to remove warning, will it break?
-					field.set(this, method.invoke(node, null));
+					field.set(this, method.invoke(node));
 					propertiesMap.put(field.getName(), field.get(this));
 				} catch (IllegalArgumentException | IllegalAccessException
 						| InvocationTargetException e) {

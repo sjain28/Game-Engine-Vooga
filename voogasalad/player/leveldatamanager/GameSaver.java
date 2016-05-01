@@ -5,6 +5,7 @@ package player.leveldatamanager;
 
 import java.util.ArrayList;
 import java.util.Map;
+
 import events.AnimationFactory;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
@@ -17,6 +18,7 @@ import stats.database.StatCell;
 import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import tools.VoogaException;
+import tools.VoogaAlert;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
@@ -70,7 +72,8 @@ public class GameSaver implements IGameSaver {
 		try {
 			FileWriterFromGameObjects.saveGameObjects(dataContainer,GAMES+ gameName + SLASH + LEVELS +  playerName + XML_SUFFIX);
 		} catch (Exception e) {
-			new VoogaException(VoogaBundles.exceptionProperties.getString("SavingFailed"));
+			VoogaAlert alert = new VoogaAlert(VoogaBundles.exceptionProperties.getString("SavingFailed"));
+			alert.showAndWait();
 		}
 		System.out.println("What is filePath " + GAMES+ gameName + SLASH + LEVELS +  playerName + XML_SUFFIX);
 		CurrentSessionStats currentCell = new CurrentSessionStats();

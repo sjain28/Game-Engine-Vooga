@@ -15,7 +15,7 @@ import tools.Velocity;
  */
 public class StandardPhysics implements IPhysicsEngine {
 	
-	private static final double REDUCE_FACTOR = 0.1;
+	public static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
 	private static final double LIFT = 0.1;
 	private static final double ERROR = 0.01;
@@ -59,7 +59,7 @@ public class StandardPhysics implements IPhysicsEngine {
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
 		double diffRight = Math.abs(boundB.getMinX() - boundA.getMaxX());
 		double diffLeft = Math.abs(boundA.getMinX() - boundB.getMaxX());
-		// Collision means they must intersect
+
 		if (boundA.intersects(boundB)) {
 			if (diffRight < COLLISION_CHECK || diffLeft < COLLISION_CHECK) {
 				return 1;
@@ -82,7 +82,7 @@ public class StandardPhysics implements IPhysicsEngine {
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
 		double diffTop = Math.abs(boundA.getMinY() - boundB.getMaxY());
 		double diffBottom = Math.abs(boundB.getMinY() - boundA.getMaxY());
-		// Collision means they must intersect
+
 		if (boundA.intersects(boundB)) {
 			if (diffTop < COLLISION_CHECK) {
 				return -1;
@@ -102,11 +102,9 @@ public class StandardPhysics implements IPhysicsEngine {
 	@Override
 	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
 		if (sprite.getVelocity().getX() > 0) {
-			// Set the X position to a little to the left so there is no collision
 			sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
 		}
 		else {
-			// Set the X position to a little to the right so there is no collision
 			sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
 		}
 		sprite.getVelocity().setX(0);
@@ -121,11 +119,9 @@ public class StandardPhysics implements IPhysicsEngine {
 	@Override
 	public void elasticBounceX(Sprite sprite, Double bounceCoefficient) {
 		if (sprite.getVelocity().getX() > 0) {
-			// Set the X position to a little to the left so there is no collision
 			sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
 		}
 		else {
-			// Set the X position to a little to the right so there is no collision
 			sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
 		}
 		sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
@@ -138,9 +134,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
 		if (sprite.getVelocity().getY() < LIFT && sprite.getVelocity().getY() != 0.0) {
-			// Set velocity to 0--stop the bounce
 			sprite.getVelocity().setY(0.0);
-			// Set the Y position to a little higher so there is no collision
 			sprite.getPosition().setY(sprite.getPosition().getY() - LIFT);
 		}
 		else {
@@ -153,10 +147,9 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override 
 	public void gravity(Sprite sprite, Double gravityMagnitude) {
-		// Get mass value of the sprite
 		Double mass = (((Double) sprite.getPropertiesMap().get("Mass").getValue()).isInfinite()) 
 				? 0d : (Double) sprite.getPropertiesMap().get("Mass").getValue();
-		// Apply velocity change to the sprite's velocity
+		
 		sprite.getVelocity().setY(sprite.getVelocity().getY() + mass * gravityMagnitude * VELOCITY_FACTOR);
 	}
 	
@@ -165,9 +158,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void jump(Sprite sprite, Double jumpMagnitude) {
-		// Check if the main character is on the ground, not in the air to be able to jump
         if (isThisNumber(sprite.getVelocity().getY(), 0)) {
-			// Apply change to the velocity so that the character has upward velocity
 			sprite.getVelocity().setY(sprite.getVelocity().getY() - jumpMagnitude * JUMP_FACTOR);
 		}
 	}

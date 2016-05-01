@@ -8,11 +8,11 @@ package authoring.interfaces;
  *
  */
 public interface Depthable {
-    
-    /**
-     * Sets the depth of the Depthable
-     * 
-     * @param depth: z-axis location of the object on the screen
-     */
-    public void setDepth(double depth);
+
+	/**
+	 * Sets the depth of the Depthable
+	 * 
+	 * @param depth: z-axis location of the object on the screen
+	 */
+	public void setDepth(double depth);
 }

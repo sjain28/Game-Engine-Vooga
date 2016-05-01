@@ -19,6 +19,8 @@ import tools.VoogaAlert;
  */
 public class ScreenProcessor implements IScreenProcessor {
 
+	private static final String DOT_PNG = "dotpng";
+	private static final String PNG = "png";
 	/**
 	 * Write an image to a file and return the file name
 	 */
@@ -27,11 +29,12 @@ public class ScreenProcessor implements IScreenProcessor {
 		try {
 			String outputFilename = outputFilePrefix
 					+ System.currentTimeMillis()
-					+ VoogaBundles.imageProperties.getString("dotpng");
-			ImageIO.write(image, VoogaBundles.imageProperties.getString("png"),
+					+ VoogaBundles.imageProperties.getString(DOT_PNG);
+			ImageIO.write(image, VoogaBundles.imageProperties.getString(PNG),
 					new File(outputFilename));
 			return outputFilename;
 		} catch (IOException e) {
+			//TODO remove stacktrace print
 			e.printStackTrace();
 			return null;
 		}
@@ -65,10 +68,10 @@ public class ScreenProcessor implements IScreenProcessor {
 		File file = new File(
 				VoogaBundles.imageProperties.getString("saveLocation")
 						+ imageName
-						+ VoogaBundles.imageProperties.getString("dotpng"));
+						+ VoogaBundles.imageProperties.getString(DOT_PNG));
 		try {
 			ImageIO.write(SwingFXUtils.fromFXImage(screenshot, null),
-					VoogaBundles.imageProperties.getString("png"), file);
+					VoogaBundles.imageProperties.getString(PNG), file);
 		} catch (IOException e) {
 			VoogaAlert alert = new VoogaAlert(VoogaBundles.exceptionProperties.getString("SnapshotFail"));
 			alert.showAndWait();

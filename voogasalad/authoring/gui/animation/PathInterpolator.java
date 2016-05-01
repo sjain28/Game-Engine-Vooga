@@ -12,9 +12,10 @@ public class PathInterpolator {
 	/**
 	 * Constants
 	 */
-	private static final double NUM_POINTS = 1200;
+	private static final double NUM_POINTS = 72000;
 	private static final double INCREMENT = 0.001;
-	
+	private static final int GRANULARITY_FACTOR = 3;
+	private static final int GRANULARITY_POWER = 2;
 	private Double[] xInterpolation;
 	private Double[] yInterpolation;
 	
@@ -34,10 +35,20 @@ public class PathInterpolator {
 	 */
 	public void interpolate(Double[] xRaw, Double[] yRaw) {
 		int i = 0;
-		for (double t = 0.00; t < INCREMENT * (NUM_POINTS - 1) ; t = t + INCREMENT) {
-	         xInterpolation[i] = Math.pow((1-t), 3) * xRaw[0] + 3 * Math.pow((1-t), 2) * t * xRaw[1] + 3 * (1-t) * Math.pow(t, 2) * xRaw[2] + Math.pow(t, 3) * xRaw[3];
-	         yInterpolation[i] = Math.pow((1-t), 3) * yRaw[0] + 3 * Math.pow((1-t), 2) * t * yRaw[1] + 3 * (1-t) * Math.pow(t, 2) * yRaw[2] + Math.pow(t, 3) * yRaw[3];
-	         i++;
+		for (double t = 0.00; t < INCREMENT * (NUM_POINTS - 1); t = t + INCREMENT) {
+			xInterpolation[i] = Math.pow((1 - t), GRANULARITY_FACTOR) * xRaw[0]
+					+ GRANULARITY_FACTOR * Math.pow((1 - t), GRANULARITY_POWER)
+					* t * xRaw[1] + GRANULARITY_FACTOR * (1 - t)
+					* Math.pow(t, GRANULARITY_POWER) * xRaw[GRANULARITY_POWER]
+					+ Math.pow(t, GRANULARITY_FACTOR)
+					* xRaw[GRANULARITY_FACTOR];
+			yInterpolation[i] = Math.pow((1 - t), GRANULARITY_FACTOR) * yRaw[0]
+					+ GRANULARITY_FACTOR * Math.pow((1 - t), GRANULARITY_POWER)
+					* t * yRaw[1] + GRANULARITY_FACTOR * (1 - t)
+					* Math.pow(t, GRANULARITY_POWER) * yRaw[GRANULARITY_POWER]
+					+ Math.pow(t, GRANULARITY_FACTOR)
+					* yRaw[GRANULARITY_FACTOR];
+			i++;
 		}
 	}
 	

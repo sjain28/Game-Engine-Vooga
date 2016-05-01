@@ -51,7 +51,7 @@ public class SpriteCause extends VariableCause {
 	 */
 	public SpriteCause(String spriteID, String varName, String predicate, Boolean target, VoogaEvent voogaEvent) {
 		this(spriteID, varName, predicate, voogaEvent);
-		setTarget(target);;
+		setTarget(target);
 	}
 	/**
 	 * Applies predicate to Sprite property and returns result of predicate.
