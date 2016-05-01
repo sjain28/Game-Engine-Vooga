@@ -37,7 +37,7 @@ import videos.ScreenProcessor;
 /**
  * GameRunner runs the game; uses composition to contain LevelData and GameDisplay
  * 
- * @author Hunter, Michael, Josh
+ * @author Hunter, Krista, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
 	public static final double FRAME_RATE = 60;
@@ -92,7 +92,6 @@ public class GameRunner implements IGameRunner {
 		myLevelMapCreator = new LevelMapCreator(xmlList);
 		myLevelMap = myLevelMapCreator.getLevelMap();
 	}
-
 	/**
 	 * Public method in the IGameRunner interface that runs the game
 	 */
@@ -101,7 +100,6 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setRate(FRAME_RATE);
 		myTimeline.play();
 	}
-
 	/**
 	 * Stub function that calls methods that need to be called in order
 	 */
@@ -114,7 +112,6 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay.clearKeyEvents();
 		myScroller.increaseScrollingSpeed(myScroller.getScrollingSprite());
 	}
-
 	/**
 	 * Checks and updates all LevelData GlobalVariables
 	 */
@@ -132,7 +129,6 @@ public class GameRunner implements IGameRunner {
 			}
 		}
 	}
-
 	/**
 	 * Initializes myLevelList and plays the game
 	 */
@@ -164,7 +160,6 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay.display();
 		run();
 	}
-
 	/**
 	 * Play a level, called by playGame
 	 */
@@ -175,7 +170,6 @@ public class GameRunner implements IGameRunner {
 		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}
-
 	/**
 	 * Plays a single level called by authoring for testing purposes
 	 */
@@ -191,7 +185,9 @@ public class GameRunner implements IGameRunner {
 		myGameDisplay.displayTestMode();
 		run();
 	}
-
+	/**
+	 * Adds scrolling functionality
+	 */
 	private void addScrolling() {
 		myScroller = new DisplayScroller(myGameDisplay);
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
@@ -199,29 +195,40 @@ public class GameRunner implements IGameRunner {
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
 		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}
-
+	/**
+	 * Returns the game display in use
+	 * @return
+	 */
 	public IGameDisplay getGameDisplay() {
 		return myGameDisplay;
 	}
-
+	/**
+	 * Speeds up the timeline
+	 */
 	@Override
 	public void speedUp() {
 		myTimeline.setRate(myTimeline.getRate() + SPEEDCONTROL);
 	}
-
+	/**
+	 * Slows down the timeline
+	 */
 	@Override
 	public void speedDown() {
 		if (myTimeline.getRate() - SPEEDCONTROL > 0) {
 			myTimeline.setRate(myTimeline.getRate() - SPEEDCONTROL);
 		}
 	}
-
+	/**
+	 * Exits the game
+	 */
 	@Override
 	public void exit() {
 		myTimeline.stop();
 		myGameDisplay.exit();
 	}
-
+	/**
+	 * Takes a snap shot of the screen
+	 */
 	@Override
 	public void takeSnapShot() {
 		Scene myScene = myGameDisplay.getMyScene();
@@ -235,12 +242,16 @@ public class GameRunner implements IGameRunner {
 	public Timeline getTimeline() {
 		return myTimeline;
 	}
-
+	/**
+	 * Replays a level
+	 */
 	@Override
 	public void replayLevel() {
 		myLevelData.setNextLevelName(myCurrentLevelString);
 	}
-
+	/**
+	 * Finishes a play session if the play session was started
+	 */
 	@Override
 	public void finishPlaySession() {
 		if (playSessionActive) {
@@ -248,7 +259,9 @@ public class GameRunner implements IGameRunner {
 			VoogaDataBase.getInstance().save();
 		}
 	}
-
+	/**
+	 * Empty methods from the Menueable interface
+	 */
 	@Override
 	public CompleteAuthoringModelable getManager() { 
 		return null; 
