@@ -7,6 +7,7 @@ import authoring.gui.Selector;
 import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
+import javafx.scene.control.Menu;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;
@@ -15,7 +16,7 @@ import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
 
-public class GlobalPropertiesManager implements AuthoringElementable {
+public class GlobalPropertiesManager implements Elementable {
 
     private Map<String, VoogaData> globalPropertiesMap;
     private String myName;
@@ -68,18 +69,6 @@ public class GlobalPropertiesManager implements AuthoringElementable {
     }
 
     @Override
-    public Elementable getElementable () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void select (Selector selector) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public Node getNodeObject () {
         // TODO Auto-generated method stub
         return null;
@@ -96,4 +85,5 @@ public class GlobalPropertiesManager implements AuthoringElementable {
         // TODO Auto-generated method stub
         
     }
+
 }

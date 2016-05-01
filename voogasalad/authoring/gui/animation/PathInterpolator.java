@@ -12,7 +12,7 @@ public class PathInterpolator {
 	/**
 	 * Constants
 	 */
-	private static final double NUM_POINTS = 1200;
+	private static final double NUM_POINTS = 72000;
 	private static final double INCREMENT = 0.001;
 	private static final int GRANULARITY_FACTOR = 3;
 	private static final int GRANULARITY_POWER = 2;
