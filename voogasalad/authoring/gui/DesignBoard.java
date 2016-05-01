@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import authoring.interfaces.model.CompleteAuthoringModelable;
-import authoring.model.ElementSelectionModel;
+
 import authoring.CustomText;
 import authoring.gui.menubar.builders.GameObjectBuilder;
-import authoring.interfaces.FrontEndElementable;
+import authoring.interfaces.AuthoringElementable;
+import authoring.interfaces.model.CompleteAuthoringModelable;
+import authoring.model.ElementSelectionModel;
 import authoring.resourceutility.ResourceDecipherer;
 import authoring.resourceutility.VoogaFile;
 import authoring.resourceutility.VoogaFileFormat;
@@ -28,8 +28,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -255,7 +253,8 @@ public class DesignBoard extends Tab implements Observer {
                 }
             }
             catch (VoogaException e) {
-                new VoogaAlert(e.getMessage());
+                VoogaAlert alert = new VoogaAlert(e.getMessage());
+                alert.showAndWait();
             }
             elementManager.addElementId(elementPath);
         }
@@ -298,7 +297,7 @@ public class DesignBoard extends Tab implements Observer {
             displayElements(((CompleteAuthoringModelable) o).getElements());
         }
 
-        if ((o instanceof ElementSelectionModel) && (arg instanceof FrontEndElementable)) {
+        if ((o instanceof ElementSelectionModel) && (arg instanceof AuthoringElementable)) {
             for (Node e : contentPane.getChildren()) {
                 System.out.println(e);
             }

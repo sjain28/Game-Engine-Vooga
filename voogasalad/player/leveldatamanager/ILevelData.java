@@ -5,8 +5,9 @@ package player.leveldatamanager;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
+
 import authoring.interfaces.Elementable;
 import events.AnimationEvent;
 import events.VoogaEvent;
@@ -34,6 +35,8 @@ public interface ILevelData {
 
 	void addEventAndPopulateKeyCombos(VoogaEvent event);
 
+	void updatedGlobalTimer(double time);
+
 	boolean getSaveNow();
 
 	String getNextLevelName();
@@ -45,10 +48,6 @@ public interface ILevelData {
 	Sprite getSpriteByID(String id);
 
 	Sprite addSprite(String archetype);
-	
-	void putSprite(Sprite s);
-	
-	void updatedGlobalTimer(double time);
 
 	IPhysicsEngine getPhysicsEngine();
 
@@ -57,15 +56,14 @@ public interface ILevelData {
 	AnimationEvent getAnimationFromFactory(String myAnimationName);
 
 	KeyEventContainer getKeyEventContainer();
-	
+
 	List<Pair<Node, Boolean>> getDisplayableNodes();
 
 	List<Sprite> getSpritesByArch(String archA);
 
 	Set<Entry<String, Elementable>> getElementables();
 
-    public Map<String,VoogaData> getGlobalVariables();
-	
+	Map<String,VoogaData> getGlobalVariables();
 
 	Map<String, Elementable> getElements();
 }

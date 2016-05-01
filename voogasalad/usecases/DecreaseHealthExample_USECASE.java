@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import usecases.Sprite_USECASE;
 import tools.VoogaNumber;
 
 public class DecreaseHealthExample_USECASE {

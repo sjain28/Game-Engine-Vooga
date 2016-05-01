@@ -1,28 +1,16 @@
 package stats.visualization;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
-
 import javafx.application.Application;
-
 import javafx.scene.Scene;
 import javafx.scene.chart.ScatterChart;
 import javafx.stage.Stage;
 import stats.database.AuthorSession;
 import stats.database.CellEntry;
-import stats.database.PlaySession;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
-import tools.VoogaBoolean;
-import tools.VoogaDate;
-import tools.VoogaNumber;
-import tools.VoogaString;
-import tools.interfaces.VoogaData;
 
 public class GraphMakerTest extends Application {
 	public void start(Stage stage) {		
@@ -36,6 +24,7 @@ public class GraphMakerTest extends Application {
 		GraphMaker statsvisualizer = new GraphMaker();
 		StatsVisualizer visualizer = new StatsVisualizer();
 		CellEntry statinfo = VoogaDataBase.getInstance().getStatByGameAndUser("testergame3", "klo14");
+
 		List<CellEntry> list = ((StatCell) statinfo).getAuthorStats();
 		//ScatterChart<?,?> sc = visualizer.graphVoogaStats(list, list, VoogaPlaySession.PLAY_DURATION, VoogaPlaySession.SCORE);
 		//ScatterChart<?,?> sc = visualizer.getVoogaStatsScatterPlot(list, list, VoogaPlaySession.DATE_PLAYED, VoogaPlaySession.SCORE);

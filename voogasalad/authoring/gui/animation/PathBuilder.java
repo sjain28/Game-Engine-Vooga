@@ -6,7 +6,6 @@ import authoring.resourceutility.ButtonMaker;
 import events.AnimationFactory;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -135,7 +134,8 @@ public class PathBuilder extends Tab {
 				new VoogaInfo("Your path, \"" + name.getText() + "\", was created!");
 				name.setText("");
 			} catch (Exception e1) {
-				new VoogaAlert("Please define a proper path and name.");
+				VoogaAlert alert = new VoogaAlert("Please define a proper path and name.");
+				alert.showAndWait();
 			}
 		}));
 		return row;

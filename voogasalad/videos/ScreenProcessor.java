@@ -4,12 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.image.WritableImage;
-
-import javax.imageio.ImageIO;
-
 import resources.VoogaBundles;
 import tools.VoogaAlert;
 
@@ -71,8 +70,8 @@ public class ScreenProcessor implements IScreenProcessor {
 			ImageIO.write(SwingFXUtils.fromFXImage(screenshot, null),
 					VoogaBundles.imageProperties.getString("png"), file);
 		} catch (IOException e) {
-			new VoogaAlert(
-					VoogaBundles.exceptionProperties.getString("SnapshotFail"));
+			VoogaAlert alert = new VoogaAlert(VoogaBundles.exceptionProperties.getString("SnapshotFail"));
+			alert.showAndWait();
 		}
 	}
 }

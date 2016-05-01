@@ -19,7 +19,8 @@ public class Load extends ToolbarItemHandler{
             openLevel.handle();
         }
         catch (VoogaException e) {
-            new VoogaAlert(e.getMessage());
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
         
     }

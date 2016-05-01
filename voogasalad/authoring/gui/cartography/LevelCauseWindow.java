@@ -56,8 +56,8 @@ public class LevelCauseWindow extends Stage {
 			model.addEvents(event);
 			this.close();
 		} catch (Exception e) {
-			e.printStackTrace();
-			new VoogaAlert(e.getMessage());
+			VoogaAlert alert = new VoogaAlert(e.getMessage());
+			alert.showAndWait();
 		}
 	}
 	

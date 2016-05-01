@@ -23,10 +23,9 @@ public class ToolPanelHandlingMirror {
             handleEvent();
         }
         catch (VoogaException e1) {
-            // TODO Auto-generated catch block
-            new VoogaAlert(e1.getMessage());
+            VoogaAlert alert = new VoogaAlert(e1.getMessage());
+            alert.showAndWait();
         }
-//        System.out.println(toolbarEvent.getSource());
     }
 
     /**
@@ -39,11 +38,9 @@ public class ToolPanelHandlingMirror {
         Class<?> clazz;
         try {
             clazz = Class.forName(PACKAGE_LOCATION + toolbarItem.getId());
-//            System.out.println("Class-Tool: "+clazz);
             toolbarItemHandler =
                     (ToolbarItemHandler) clazz.getConstructor(Menuable.class)
                             .newInstance(myManager);
-//            System.out.println("ToolBarItemHandler-Tool: "+toolbarItemHandler);
             toolbarItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(toolbarItemHandler);
         }
         catch (Exception ee) {

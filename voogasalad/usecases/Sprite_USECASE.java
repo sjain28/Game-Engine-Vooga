@@ -2,12 +2,13 @@ package usecases;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import authoring.interfaces.Moveable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tools.Vector;
 import tools.Velocity;
-import tools.interfaces.*;
+import tools.interfaces.VoogaData;
 
 //Remove all the Map double instances. I added them just so I could compile. sorry!
 

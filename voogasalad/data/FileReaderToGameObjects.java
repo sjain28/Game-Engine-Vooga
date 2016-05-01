@@ -1,8 +1,7 @@
 package data;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import events.AnimationEvent;
+
 import tools.VoogaAlert;
 import tools.VoogaException;
 
@@ -33,7 +32,8 @@ public class FileReaderToGameObjects {
             e.printStackTrace();
         }
         catch (VoogaException e) {
-            new VoogaAlert(e.getMessage());
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
     }
 

@@ -3,6 +3,7 @@ package authoring.properties;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import authoring.CustomText;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SwitchButton;
@@ -200,7 +201,8 @@ public class GenericPropertiesTab extends Tab {
      */
     private boolean elementablePresent () {
         if (myElementable == null) {
-            new VoogaAlert(ppProperties.getString("NoSpriteError"));
+            VoogaAlert alert = new VoogaAlert(ppProperties.getString("NoSpriteError"));
+            alert.showAndWait();
             return false;
         }
         return true;

@@ -2,7 +2,6 @@ package authoring.gui.animation;
 
 import authoring.VoogaScene;
 import javafx.stage.Stage;
-import player.gamedisplay.Menuable;
 
 /**
  * The stage upon which the Animation event GUI is built upon.

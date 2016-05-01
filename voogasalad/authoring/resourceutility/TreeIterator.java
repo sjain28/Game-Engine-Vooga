@@ -2,6 +2,7 @@ package authoring.resourceutility;
 
 import java.util.Iterator;
 import java.util.Stack;
+
 import javafx.scene.control.TreeItem;
 
 /**

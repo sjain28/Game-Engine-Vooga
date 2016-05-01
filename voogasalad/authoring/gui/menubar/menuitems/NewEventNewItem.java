@@ -3,9 +3,6 @@ package authoring.gui.menubar.menuitems;
 import authoring.gui.eventpane.EventWindow;
 import authoring.gui.menubar.MenuItemHandler;
 import authoring.interfaces.model.EditEventable;
-import authoring.interfaces.model.Sceneable;
-import javafx.event.EventHandler;
-import javafx.scene.input.InputEvent;
 import player.gamedisplay.Menuable;
 
 public class NewEventNewItem extends MenuItemHandler{

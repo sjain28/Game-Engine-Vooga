@@ -2,6 +2,7 @@ package authoring.gui.eventpane;
 
 import java.io.File;
 import java.util.ResourceBundle;
+
 import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
 import javafx.scene.Node;
@@ -43,7 +44,8 @@ public class SoundEffectGUI implements EventGUI {
                 file.setText(fileChooser.launch());
             }
             catch (Exception e1) {
-                new VoogaAlert(e1.getMessage());
+                VoogaAlert alert = new VoogaAlert(e1.getMessage());
+                alert.showAndWait();
             }
         });
         

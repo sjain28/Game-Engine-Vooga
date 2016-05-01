@@ -3,32 +3,44 @@ package events;
 import java.util.ArrayList;
 import java.util.List;
 
-import player.leveldatamanager.ILevelData;
 import gameengine.Sprite;
-
+import player.leveldatamanager.ILevelData;
+/**
+ * The class for an Event, which executes Effects once certain Causes are triggered. 
+ * @author Saumya Jain, Anita Desai
+ *
+ */
 public class VoogaEvent {
 
 	private List<Cause> myCauses;
 	private List<Effect> myEffects;
 	private List<Sprite> myCauseSprites;
-
+	/**
+	 * Initializes collections.
+	 */
 	public VoogaEvent(){
-		setCauses(new ArrayList<>());
-		setEffects(new ArrayList<>());
+		myEffects = new ArrayList<>();
+		myCauses = new ArrayList<>();
 		setCauseSprites(new ArrayList<>());
 	}
-
-	public void addCause(Cause cause){
+	/**
+	 * Adds a Cause to this event. 
+	 * @param cause An object that extends Cause.
+	 */
+	protected void addCause(Cause cause){
 		getCauses().add(cause);
 	}
-
-	public void addEffect(Effect effect){
+	/**
+	 * Adds an Effect to this event
+	 * @param effect An object that extends Effect
+	 */
+	protected void addEffect(Effect effect){
 		getEffects().add(effect);
 	}
 	
 	/**
-	 * Runs through all of the causes held in the event and checks them. If the causes evaluate to true, executes all of the
-	 * events according to their execute method.
+	 * Checks all of the Causes in the Event. If check() method of all causes returns true, calls execute() on all effects.
+	 * @param data Contains leveldata to be passed to causes and effects
 	 */
 	public void update(ILevelData data){
 		getCauseSprites().clear();
@@ -41,7 +53,11 @@ public class VoogaEvent {
 			e.execute(data);
 		}
 	}
-
+	
+	/**
+	 * Getters and setters below.
+	 * 
+	 */
 	public List<Cause> getCauses(){
 		return myCauses;
 	}
@@ -50,23 +66,20 @@ public class VoogaEvent {
 		return myEffects;
 	}
 
-	public void addSpritesFromCause(List<Sprite> sprites){
-		getCauseSprites().addAll(sprites);
+	protected void addSpritesFromCause(List<Sprite> sprites){
+		List<Sprite> newSpriteList = new ArrayList<>();
+		newSpriteList.addAll(sprites);
+		myCauseSprites.addAll(newSpriteList);
+		System.out.println("added sprites to animation event " + getCauseSprites().size());
 	}
 
-	public List<Sprite> getCauseSprites() {
-		return myCauseSprites;
+	protected List<Sprite> getCauseSprites() {
+		List<Sprite> newSpriteList = new ArrayList<>();
+		newSpriteList.addAll(myCauseSprites);
+		return newSpriteList;
 	}
 
-	public void setCauseSprites(List<Sprite> myCauseSprites) {
+	protected void setCauseSprites(List<Sprite> myCauseSprites) {
 		this.myCauseSprites = myCauseSprites;
-	}
-
-	public void setCauses(List<Cause> myCauses) {
-		this.myCauses = myCauses;
-	}
-
-	public void setEffects(List<Effect> myEffects) {
-		this.myEffects = myEffects;
 	}
 }

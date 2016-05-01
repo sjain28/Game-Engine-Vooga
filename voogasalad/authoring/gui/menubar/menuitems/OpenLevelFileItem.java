@@ -10,7 +10,6 @@ import authoring.model.ElementManager;
 import authoring.model.ElementManagerUnserializer;
 import javafx.stage.FileChooser.ExtensionFilter;
 import player.gamedisplay.Menuable;
-import resources.VoogaBundles;
 import tools.VoogaException;
 import tools.VoogaFileChooser;
 

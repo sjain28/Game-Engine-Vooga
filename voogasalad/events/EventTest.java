@@ -1,7 +1,9 @@
 package events;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class EventTest {
@@ -11,7 +13,7 @@ public class EventTest {
 		VoogaEvent e = new VoogaEvent();
 		ArrayList<Cause> causes = new ArrayList<>();
 
-		KeyCause tester = new KeyCause("A", e);
+		KeyCause tester = new KeyCause("A", null, e);
 		causes.add(tester);
 
 		e.addCause(tester);
@@ -36,7 +38,7 @@ public class EventTest {
 	@Test
 	public void testKeyCause(){
 		VoogaEvent v = new VoogaEvent();
-		KeyCause temp = new KeyCause("A",v);
+		KeyCause temp = new KeyCause("A",null, v);
 
 		temp.setValue(true);
 

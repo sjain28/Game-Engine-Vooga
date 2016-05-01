@@ -2,14 +2,11 @@ package stats.visualization;
 
 import java.util.List;
 
-import javafx.scene.Group;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import tools.VoogaNumber;
-import tools.interfaces.VoogaData;
 
 public class GraphMaker {
 	private Axis xAxis;

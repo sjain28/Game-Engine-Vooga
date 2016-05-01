@@ -1,8 +1,5 @@
 package authoring.gui.eventpane;
 
-import java.util.ArrayList;
-import java.util.List;
-import authoring.gui.items.ArchetypeComboBox;
 import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SpriteComboBox;

@@ -1,13 +1,14 @@
 package authoring.model;
 
 import java.util.Observable;
+
 import authoring.gui.Selector;
-import authoring.interfaces.FrontEndElementable;
+import authoring.interfaces.AuthoringElementable;
 
 
 public class ElementSelectionModel extends Observable {
 
-    private FrontEndElementable selected;
+    private AuthoringElementable selected;
 
     // Private constructor prevents instantiation from other classes
     private ElementSelectionModel () {
@@ -27,7 +28,7 @@ public class ElementSelectionModel extends Observable {
         return SingletonHolder.INSTANCE;
     }
 
-    public void setSelected (FrontEndElementable e) {
+    public void setSelected (AuthoringElementable e) {
         
         if (this.selected!=null){
             this.selected.select(Selector.UNHIGHLIGHTED);

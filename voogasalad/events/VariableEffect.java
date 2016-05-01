@@ -1,6 +1,6 @@
 package events;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Method;
 
 import player.leveldatamanager.ILevelData;
 import tools.VoogaException;

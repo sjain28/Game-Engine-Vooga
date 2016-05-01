@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import events.AnimationEffect;
-import events.AnimationEvent;
 import events.Cause;
-import events.Effect;
 import events.KeyCause;
 import events.VoogaEvent;
 

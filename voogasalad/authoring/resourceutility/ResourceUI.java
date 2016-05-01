@@ -1,7 +1,6 @@
 package authoring.resourceutility;
 
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import resources.VoogaBundles;
@@ -30,7 +29,6 @@ public class ResourceUI extends Tab {
      * Constants
      */
     private static final String WINDOW_NAME = "Resource Explorer";
-    private static final String DEFAULT_PROJECT_NAME = "My Project";
     private static final String ADD_FOLDER_PROMPT = "Add Folder";
     private static final String IMPORT_FILE_PROMPT = "Import File";
     private static final double SPACING = 10;
@@ -63,7 +61,8 @@ public class ResourceUI extends Tab {
                                 importFile();
                             }
                             catch (VoogaException ee) {
-                                new VoogaAlert(ee.getMessage());
+                                VoogaAlert alert = new VoogaAlert(ee.getMessage());
+                                alert.showAndWait();
                             }
                         }));
     }
