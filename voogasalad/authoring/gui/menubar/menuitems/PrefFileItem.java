@@ -67,8 +67,6 @@ public class PrefFileItem extends MenuItemHandler {
 		stage.setScene(new VoogaScene(tp, WINDOW_WIDTH, WINDOW_HEIGHT));
 		stage.show();
 		} catch(Exception e) {
-			e.printStackTrace();
-		}
+			e.printStackTrace(); }
 	}
-
 }

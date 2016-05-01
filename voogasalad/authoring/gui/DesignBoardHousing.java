@@ -1,13 +1,10 @@
 package authoring.gui;
 
-import java.util.ResourceBundle;
-
 import authoring.gui.levelpreferences.DesignBoardPreferences;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TabPane;
-import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.VoogaString;

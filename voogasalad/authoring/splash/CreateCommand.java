@@ -95,8 +95,7 @@ public class CreateCommand implements Command {
             try {
                 prompt.close();
                 String name = ((Button) eee.getSource()).getId();
-                List<CompleteAuthoringModelable> models =
-                        new ArrayList<CompleteAuthoringModelable>();
+                List<CompleteAuthoringModelable> models = new ArrayList<>();
                 Preferences preferences = (Preferences) Deserializer
                         .deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
                 VoogaBundles.preferences.setProperty("GameName", name);

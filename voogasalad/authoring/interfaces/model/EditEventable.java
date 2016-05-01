@@ -8,14 +8,15 @@ import events.VoogaEvent;
 import tools.interfaces.VoogaData;
 
 public interface EditEventable extends EditSpritable,EditElementable{
-    public void addEvents (VoogaEvent ... events);
-
-    public void removeEvents (VoogaEvent ... events);
-
-    public Map<String, VoogaData> getGlobalVariables ();
     
-    public void addObserver (Observer o);
+	void addEvents (VoogaEvent ... events);
+
+    void removeEvents (VoogaEvent ... events);
+
+    Map<String, VoogaData> getGlobalVariables ();
     
-    public List<VoogaEvent> getEvents();
+    void addObserver (Observer o);
+    
+    List<VoogaEvent> getEvents();
 
 }

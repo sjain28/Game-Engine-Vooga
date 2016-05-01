@@ -9,5 +9,5 @@ public interface Windowable {
      * implemented by only caring about the Node passed through to the manager.
      * 
      */
-    public Node getWindow();
+    Node getWindow();
 }

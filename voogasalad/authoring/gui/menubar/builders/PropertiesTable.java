@@ -21,8 +21,8 @@ public class PropertiesTable extends TableView<Property> {
 	private void initializeTable () {
 		this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		TableColumn<Property, String> nameColumn = new TableColumn<Property, String>("Name");
-		TableColumn<Property, Node> valueColumn = new TableColumn<Property, Node>("Value");
+		TableColumn<Property, String> nameColumn = new TableColumn<>("Name");
+		TableColumn<Property, Node> valueColumn = new TableColumn<>("Value");
 
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Property, String>("name"));
 		valueColumn.setCellValueFactory(new PropertyValueFactory<Property, Node>("value"));
