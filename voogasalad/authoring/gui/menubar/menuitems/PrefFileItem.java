@@ -40,6 +40,7 @@ public class PrefFileItem extends MenuItemHandler {
 	 */
 	@Override
 	public void handle() {
+		try {
 		Stage stage = new Stage();
 		TabPane tp = new TabPane();
 		DesignBoardPreferences preferences = new DesignBoardPreferences(model);
@@ -65,6 +66,9 @@ public class PrefFileItem extends MenuItemHandler {
 		tp.getTabs().add(preferences);
 		stage.setScene(new VoogaScene(tp, WINDOW_WIDTH, WINDOW_HEIGHT));
 		stage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
