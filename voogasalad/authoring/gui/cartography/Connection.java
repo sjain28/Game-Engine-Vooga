@@ -12,7 +12,7 @@ import javafx.scene.shape.Line;
 /**
  * Class for creating the connection bridge between levels.
  * 
- * @author Harry Guo, Nick Lockett, 
+ * @author Harry Guo, Nick Lockett, Arjun Desai, Aditya Srinivasan
  *
  */
 public class Connection extends Group {
@@ -32,11 +32,26 @@ public class Connection extends Group {
 	private Level start;
 	private Level end;
 
+	/**
+	 * Constructor to s
+	 * @param model
+	 * @param startx
+	 * @param starty
+	 * @param endx
+	 * @param endy
+	 */
 	public Connection(CompleteAuthoringModelable model, double startx, double starty, double endx, double endy) {
 		this(startx, starty, endx, endy);
 		initializeModel(model);
 	}
 
+	/**
+	 * Constructor to initializes and build the line.
+	 * @param startx
+	 * @param starty
+	 * @param endx
+	 * @param endy
+	 */
 	public Connection(double startx, double starty, double endx, double endy) {
 		this.startx = startx;
 		this.starty = starty;
@@ -47,12 +62,19 @@ public class Connection extends Group {
 		this.getChildren().addAll(connector, anchor1, anchor2);
 	}
 
+	/**
+	 * Initializes the constructor line.
+	 */
 	private void initializeLine() {
 		connector = new Line(startx, starty, endx, endy);
 		connector.setStrokeWidth(LINE_WIDTH);
 		connector.setStroke(Paint.valueOf("white"));
 	}
 
+	/**
+	 * Initializes the model
+	 * @param model
+	 */
 	private void initializeModel(CompleteAuthoringModelable model) {
 		connector.setOnMouseClicked(e -> {
 			if(e.getClickCount() == COMPLETE_COUNT) {
@@ -62,14 +84,25 @@ public class Connection extends Group {
 		});
 	}
 
+	/**
+	 * Gets the starting anchor.
+	 * @return
+	 */
 	public Anchor getStartAnchor() {
 		return this.anchor1;
 	}
 
+	/**
+	 * Get the ending anchor.
+	 * @return
+	 */
 	public Anchor getEndAnchor() {
 		return this.anchor2;
 	}
 
+	/**
+	 * Attaches anchors.
+	 */
 	private void attachAnchors() {
 		anchor1 = new Anchor(connector.startXProperty(), connector.startYProperty(), TransitionOrder.FIRST);
 		anchor2 = new Anchor(connector.endXProperty(), connector.endYProperty(), TransitionOrder.LAST);
@@ -78,6 +111,10 @@ public class Connection extends Group {
 		enableDrag(anchor2);
 	}
 
+	/**
+	 * Enables the drag effect.
+	 * @param circle
+	 */
 	private void enableDrag(final Circle circle) {
 		final Delta dragDelta = new Delta();
 		circle.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -104,6 +141,10 @@ public class Connection extends Group {
 		enableDragCursor(circle);
 	}
 
+	/**
+	 * Enables the Drag Cursor.
+	 * @param circle
+	 */
 	private void enableDragCursor(final Circle circle) {
 
 		circle.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -141,17 +182,25 @@ public class Connection extends Group {
 	}
 
 	/**
-	 * Get the  
+	 * Get the level with the start point 
 	 * @return
 	 */
 	public Level getStartpoint() {
 		return this.start;
 	}
 
+	/**
+	 * Get the level with the end point.
+	 * @return
+	 */
 	public Level getEndpoint() {
 		return this.end;
 	}
 
+	/**
+	 * Get the connecting line.
+	 * @return
+	 */
 	public Line getLine() {
 		return this.connector;
 	}

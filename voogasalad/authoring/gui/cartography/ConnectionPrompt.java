@@ -15,6 +15,12 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import tools.GUIUtils;
 
+/**
+ * Prompt for connecting Levels.
+ * 
+ * @author Harry Guo, Nick Lockett, Arjun Desai, Aditya Srinivasan
+ *
+ */
 public class ConnectionPrompt extends Stage {
 
 	private static final String NO_LEVEL_SELECTED = "Please select a valid level.";

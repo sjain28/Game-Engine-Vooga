@@ -4,10 +4,21 @@ import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * Point class for the ends of the connection line.
+ * 
+ * @author Harry Guo, Nick Lockett, Arjun Desai, Aditya Srinivasan
+ *
+ */
 public abstract class Point extends Circle {
 
 	private static final int STROKE_WIDTH = 3;
 
+	/**
+	 * Instantiates point with radius and color.
+	 * @param r
+	 * @param c
+	 */
 	public Point(double r, Color c) {
 		super(r, c);
 		this.setStroke(Color.WHITE);
@@ -15,6 +26,10 @@ public abstract class Point extends Circle {
 		enableDrag(this);
 	}
 
+	/**
+	 * Enables the drag feature on the points.
+	 * @param circle
+	 */
 	private void enableDrag(final Circle circle) {
 		final Delta dragDelta = new Delta();
 		circle.setOnMousePressed(e -> {
@@ -32,6 +47,10 @@ public abstract class Point extends Circle {
 		enableDragCursor(circle);
 	}
 
+	/**
+	 * Enables the drag cursor.
+	 * @param circle
+	 */
 	private void enableDragCursor(final Circle circle) {
 		circle.setOnMouseEntered(e -> {
 			if (!e.isPrimaryButtonDown()) {
@@ -45,10 +64,22 @@ public abstract class Point extends Circle {
 		});
 	}
 
+	/**
+	 * Sets the end point to a level name.
+	 * @param name
+	 */
 	protected abstract void setPoint(String name);
 
+	/**
+	 * Gets the level name that the point is on.
+	 * @return
+	 */
 	protected abstract String getPoint();
 
+	/**
+	 * Get the level type that the point defines.
+	 * @return
+	 */
 	protected abstract LevelType getLevelType();
 
 }

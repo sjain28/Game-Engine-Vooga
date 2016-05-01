@@ -2,10 +2,19 @@ package authoring.gui.cartography;
 
 import java.util.Random;
 
+/**
+ * Random Color Generator.
+ * 
+ * @author Harry Guo, Nick Lockett, Arjun Desai, Aditya Srinivasan
+ *
+ */
 public class RandomColor {
 
 	private String[] myColors;
 	
+	/**
+	 * Instantiates the random color array.
+	 */
 	public RandomColor() {
 		myColors = new String[] {"#EF5350",
 								 "#EC407A",
@@ -20,6 +29,10 @@ public class RandomColor {
 								 "#EF6C00"};
 	}
 	
+	/**
+	 * Gets a random color.
+	 * @return
+	 */
 	public String getRandomColor() {
 		Random random = new Random();
 		return myColors[random.nextInt(myColors.length)];
