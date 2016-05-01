@@ -20,16 +20,18 @@ public class TextPropertyModifier extends Stage {
     private Scene scene;
     private VBox root;
     private Text node;
-    private String result;
 
     private ComboBox<String> fonts;
     private NumberTextField fontSize;
     private ColorPicker color;
     private ComboBox<String> style;
 
+    private static final double RGB_MAX = 255;
+    private static final double VBOX_LENGTH = 20;
+    
     public TextPropertyModifier (Text n) {
         node = n;
-        root = new VBox(20);
+        root = new VBox(VBOX_LENGTH);
         initialize();
         scene = new VoogaScene(root);
 
@@ -37,7 +39,6 @@ public class TextPropertyModifier extends Stage {
     }
 
     private void initialize () {
-        fonts = new ComboBox();
         fonts.getItems().addAll(Font.getFamilies());
         root.getChildren().add(GUIUtils.makeRow(new CustomText("Font"), fonts));
 
@@ -47,7 +48,6 @@ public class TextPropertyModifier extends Stage {
         color = new ColorPicker();
         root.getChildren().add(GUIUtils.makeRow(new CustomText("Color"), color));
 
-        style = new ComboBox();
         style.getItems().addAll(VoogaBundles.textStyles.keySet());
         root.getChildren().add(GUIUtils.makeRow(new CustomText("Style"), style));
 
@@ -62,9 +62,9 @@ public class TextPropertyModifier extends Stage {
 
     private void establishStyle () {
         String hex = String.format( "#%02X%02X%02X",
-                                    (int)(color.getValue().getRed() * 255 ),
-                                    (int)( color.getValue().getGreen() * 255 ),
-                                    (int)( color.getValue().getBlue() * 255 ) );
+                                    (int)(color.getValue().getRed() * RGB_MAX),
+                                    (int)( color.getValue().getGreen() * RGB_MAX),
+                                    (int)( color.getValue().getBlue() * RGB_MAX) );
         String result =
                 "-fx-font-family: " + fonts.getValue() + "; " +
                         "-fx-font-size: " + fontSize.getText() + "; " +

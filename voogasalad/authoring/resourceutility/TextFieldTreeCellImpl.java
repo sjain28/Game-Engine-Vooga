@@ -22,7 +22,6 @@ import javafx.scene.input.TransferMode;
 public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 
 	private TextField textField;
-	private VoogaFile draggedItem;
 	private DataFormat voogaFormat;
 	private ResourceTreeView structure;
 	private boolean valid;
@@ -33,10 +32,8 @@ public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
 		voogaFormat = VoogaFileFormat.getInstance();
 		
 		this.setOnMouseClicked(e -> {
-			if(e.getButton() == MouseButton.SECONDARY) {
-				if(getItem().getType() != VoogaFileType.FOLDER) {
-					setContextMenu(menu());
-				}
+			if(e.getButton() == MouseButton.SECONDARY && (getItem().getType() != VoogaFileType.FOLDER)) {
+				setContextMenu(menu());
 			}
 		});
 		
@@ -46,7 +43,6 @@ public class TextFieldTreeCellImpl extends TreeCell<VoogaFile> {
                 ClipboardContent cc = new ClipboardContent();
                 cc.put(voogaFormat, getItem());
                 db.setContent(cc);
-                draggedItem = getItem();
                 Label label = new Label(String.format("%s", getItem().toString()));
                 new Scene(label);
                 db.setDragView(label.snapshot(null, null));
