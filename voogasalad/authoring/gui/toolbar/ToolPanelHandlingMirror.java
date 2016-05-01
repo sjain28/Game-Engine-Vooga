@@ -6,7 +6,11 @@ import player.gamedisplay.Menuable;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
-
+/**
+ * class to reflectively manage the clicks on each button in the toolbar
+ * @author Nick
+ *
+ */
 public class ToolPanelHandlingMirror {
     private static final String ITEM_NOT_IMPLEMENTED_ERROR =
             "This item has not been implemented. Please do so.";
