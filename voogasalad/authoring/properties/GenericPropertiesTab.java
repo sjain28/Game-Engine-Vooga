@@ -111,6 +111,10 @@ public class GenericPropertiesTab extends Tab {
         }
     }
 
+    /**
+     * Create VoogaFrontEnd formatted text to display on the GUI
+     * @param s: string to put in
+     */
     private void createDisplayedText (String s) {
         VoogaFrontEndText text = new VoogaFrontEndText(s);
         text.setVoogaData(propertiesMap.get(s));

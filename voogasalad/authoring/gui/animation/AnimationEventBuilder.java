@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  *
  */
 public class AnimationEventBuilder extends Stage {
-	
+
 	/**
 	 * Constants
 	 */
