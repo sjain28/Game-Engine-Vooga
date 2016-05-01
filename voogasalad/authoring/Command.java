@@ -8,7 +8,7 @@ package authoring;
  */
 
 public interface Command {
-	
+
 	/**
 	 * Execute method to execute function of the command.
 	 */

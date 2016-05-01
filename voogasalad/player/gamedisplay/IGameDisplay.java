@@ -32,6 +32,8 @@ public interface IGameDisplay {
 	List<KeyEvent> getMyKeyReleases();
 	
 	void clearKeyEvents();
+	
+	Pair<Double, Double> getDimensions();
 		
 	Stage getStage();
 	

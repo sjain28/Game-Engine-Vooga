@@ -42,7 +42,7 @@ public class KeyEventContainer {
 	public KeyEventContainer() {
 		myEvents = new ArrayList<>();
 		myKeyPressedCombos = new ArrayList<>();
-		myKeyReleasedCombos = new ArrayList<>(); //TODO: Check: This wasn't being done in the original LevelData
+		myKeyReleasedCombos = new ArrayList<>();
 		myKeyPressCauses = new HashMap<>();
 		myKeyReleaseCauses = new HashMap<>();
 		myAnimationEvents = new ArrayList<>();

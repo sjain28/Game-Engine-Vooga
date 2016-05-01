@@ -33,7 +33,7 @@ public class VoogaFileChooser {
 	 * @throws VoogaException
 	 */
 	public String launch() throws VoogaException {
-		String path = "";
+		String path;
 		File file = fileChooser.showOpenDialog(null);
 		if (isLocal(file)) {
 			path = file.getPath().split(LOCAL_PATH)[1];

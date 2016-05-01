@@ -18,7 +18,7 @@ public class OrderedProperties extends Properties {
     public OrderedProperties () {
         super();
 
-        _names = new Vector<Object>();
+        _names = new Vector<>();
     }
 
     /**

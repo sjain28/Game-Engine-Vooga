@@ -29,8 +29,9 @@ public class VoogaBoolean implements VoogaData {
 	 * Create and a new voogaBoolean with listener
 	 */
 	private void initializeProperty() {
-		if (valueProperty != null)
+		if (valueProperty != null) {
 			return;
+		}
 
 		this.valueProperty = new SimpleBooleanProperty();
 		this.valueProperty.setValue(myValue);
@@ -59,7 +60,7 @@ public class VoogaBoolean implements VoogaData {
 	 * @return
 	 */
 	public boolean equals(Boolean val) {
-		return val == myValue;
+		return val.equals(myValue);
 	}
 
 	/**

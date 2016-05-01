@@ -10,8 +10,8 @@ import stats.database.CellEntry;
 public class StatsVisualizer {
 	public ScatterChart<?,?> getVoogaStatsScatterPlot(List<CellEntry> xlist, List<CellEntry> ylist, String xparam, String yparam){
 		
-		List<Object> xparams = new ArrayList<Object>();
-		List<Object> yparams = new ArrayList<Object>();
+		List<Object> xparams = new ArrayList<>();
+		List<Object> yparams = new ArrayList<>();
 		
 		for(CellEntry entry : xlist){
 			xparams.add(entry.getProperty(xparam));
