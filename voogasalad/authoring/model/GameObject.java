@@ -10,6 +10,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -51,7 +52,9 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         this.setOnDragDetected(e -> onDrag(e));
         
         Tooltip tp = new Tooltip();
+        tp.setText("Name: "+name);
         
+        Tooltip.install(this, tp);
     }
 
     private void initializeSprite (Sprite sprite) {
@@ -65,8 +68,18 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
         Bindings.bindBidirectional(this.imagePath, mySprite.getImagePathProperty());
         Bindings.bindBidirectional(this.visibleProperty(), mySprite.isAlive());
-        Bindings.bindBidirectional(this.imageProperty(), sprite.getImage().imageProperty());
-
+        Bindings.bindBidirectional(this.imageProperty(), mySprite.getImage().imageProperty());
+        
+        imagePath.addListener((obs,old,n)->{
+            try{
+                System.out.println("changing path");
+                mySprite.setImagePath(n);
+                this.setImage(new Image(n));
+            } catch (Exception e){
+                
+            }
+        });
+        
         this.translateZProperty().addListener( (obs, old, n) -> {
             ElementSelectionModel.getInstance().setSelected(this);
         });

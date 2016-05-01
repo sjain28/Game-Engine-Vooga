@@ -161,7 +161,7 @@ public class DesignBoard extends Tab implements Observer {
         guide.setStroke(Paint.valueOf(designboardProperties.getString("RecStrokeColor")));
         guide.setStrokeWidth(Integer.parseInt(designboardProperties.getString("StrokeWidth")));
         guide.setFill(Paint.valueOf(designboardProperties.getString("RecFill")));
-        guide.setTranslateZ(Double.NEGATIVE_INFINITY);
+        guide.setTranslateZ(-100);
         this.contentPane.getChildren().add(guide);
         guide.setTranslateX(width * RESIZE_FACTOR);
         guide.setTranslateY(height * RESIZE_FACTOR);
