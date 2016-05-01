@@ -19,8 +19,18 @@ import javafx.stage.Stage;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
+/**
+ * Class that allows for importation of archetypes that have been stored.
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
 
 public class ImportArchetype extends Stage {
+	
+	/**
+	 * private instance variables
+	 */
 	private EditSpritable manager;
 	private Scene scene;
 	private BorderPane root;
@@ -28,6 +38,9 @@ public class ImportArchetype extends Stage {
 	private VBox vbox;
 	private HBox hbox;
 
+	/**
+	 * Initializes the GUI dialog box.
+	 */
 	public ImportArchetype(){
 		ButtonMaker maker = new ButtonMaker();
 		root = new BorderPane();
@@ -45,6 +58,10 @@ public class ImportArchetype extends Stage {
 		this.setScene(scene);
 	}
 
+	/**
+	 * Second constructor to connect 
+	 * @param manager
+	 */
 	public ImportArchetype (EditSpritable manager) {
 		this();
 
