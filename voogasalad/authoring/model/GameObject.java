@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -51,6 +52,9 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
             }
         });
         this.setOnDragDetected(e -> onDrag(e));
+        
+        Tooltip tp = new Tooltip();
+        
     }
 
     private void initializeSprite (Sprite sprite) {

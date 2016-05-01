@@ -23,6 +23,8 @@ public class Run extends ToolbarItemHandler {
                                                         + "/levels/" + model.getManager().getName() + ".xml");
 		//gameRunner.testLevel("games/" + VoogaBundles.preferences.getProperty("GameName") 
 							//+ "/levels/" + model.getManager().getName() + ".xml");
+		
+		
 		gameRunner.playGame(VoogaBundles.preferences.getProperty("GameName"));
 	}
 }
