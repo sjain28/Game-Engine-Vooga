@@ -184,7 +184,6 @@ public class ArchetypeBuilder extends Builder {
         }
         catch (Exception e) {
             compile = false;
-            e.printStackTrace();
             numberError("Please input all values");
         }
     }

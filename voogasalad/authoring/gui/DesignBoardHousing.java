@@ -46,7 +46,6 @@ public class DesignBoardHousing extends TabPane {
 
                 }
                 catch (Exception ee) {
-                    ee.printStackTrace();
                     VoogaAlert alert = new VoogaAlert(PREF_ALERT);
                     alert.showAndWait();
                 }

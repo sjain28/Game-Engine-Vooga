@@ -29,7 +29,6 @@ public class NewAnimation extends ToolbarItemHandler{
             animationCreator.handle();
         }
         catch (VoogaException e) {
-            e.printStackTrace();
         }
     }
 
