@@ -14,10 +14,22 @@ import authoring.model.AuthoringElementableMenu;
 
 public interface AuthoringElementable extends Elementable {
 	
+	/**
+	 * Returns the currently selected elementable in the authoring environment.
+	 * @return
+	 */
     public Elementable getElementable();
     
+    /**
+     * Toggles the display of the selector.
+     * @param selector
+     */
     public void select(Selector selector);
     
+    /**
+     * Sets up the context menu.
+     * @param menu
+     */
     public void setMenu(AuthoringElementableMenu menu);
     
 }
