@@ -158,8 +158,9 @@ public class GameRunner implements IGameRunner {
 				}
 			}
 		}
-		myGameDisplay.display();
 		playLevel(latestLevelReached);
+		myGameDisplay.display();
+		//playLevel(latestLevelReached);
 		run();
 	}
 
@@ -169,6 +170,7 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName) {
 		myLevelReached++;
 		myCurrentLevelString = fileName;
+		System.out.println("my level data is about to refresh level data");
 		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
 		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
@@ -182,6 +184,7 @@ public class GameRunner implements IGameRunner {
 		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/')
 				.lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
 		myLevelMap.put(levelName, LevelType.ENTRYPOINT);
+		System.out.println("about to refresh level data in test level");
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
@@ -193,6 +196,7 @@ public class GameRunner implements IGameRunner {
 	private void addScrolling() {
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
+		System.out.println(scrollingSprite);
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
 		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}

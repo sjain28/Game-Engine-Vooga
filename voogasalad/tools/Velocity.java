@@ -66,8 +66,8 @@ public class Velocity extends Vector {
 	 * @param angle
 	 */
 	public void setVelocity(Double magnitude, Double angle) {
-		setX(Math.cos(angle) * magnitude);
-		setY(Math.sin(angle) * magnitude);
+		setX(Math.cos(Math.toRadians(angle)) * magnitude);
+		setY(Math.sin(Math.toRadians(angle)) * magnitude);
 	}
 
 	
