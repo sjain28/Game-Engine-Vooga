@@ -131,7 +131,6 @@ public class StandardDisplay implements IGameDisplay {
 	}
 
 	private void saveDatabase() {
-		VoogaDataBase.getInstance().printDataBase();
 		VoogaDataBase.getInstance().save();
 	}
 
