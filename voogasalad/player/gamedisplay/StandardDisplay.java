@@ -48,7 +48,6 @@ public class StandardDisplay implements IGameDisplay {
 	public StandardDisplay(IGameRunner gamerunner) {
 		myGameRunner = gamerunner;
 		myControl = new StandardControl(myGameRunner);
-		myHUD = new StandardHUD(myGameRunner);
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
