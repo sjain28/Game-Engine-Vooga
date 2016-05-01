@@ -1,7 +1,6 @@
 package authoring.model;
 
 import java.util.Map;
-
 import authoring.gui.Selector;
 import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;
@@ -10,12 +9,16 @@ import gameengine.Sprite;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import tools.Vector;
@@ -28,34 +31,42 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
 
     private Sprite mySprite;
     private String name;
+    private ContextMenu menu;
 
     private transient SimpleStringProperty imagePath;
 
     public GameObject (Sprite sprite, String name) {
-        System.out.println("image path property: "+sprite.getImagePathProperty());
+        System.out.println("image path property: " + sprite.getImagePathProperty());
         initializeSprite(sprite);
         sprite.setName(name);
         this.name = name;
         this.setId(mySprite.getId());
         this.setImage(new Image(imagePath.get()));
-        this.setOnMouseClicked(e -> ElementSelectionModel.getInstance().setSelected(this));
+        this.setOnMouseClicked(e -> {
+            if (e.getButton().equals(MouseButton.PRIMARY)) {
+                ElementSelectionModel.getInstance().setSelected(this);
+            }
+            if (e.getButton().equals(MouseButton.SECONDARY)) {
+                menu.show(this, e.getScreenX(), e.getScreenY());
+            }
+        });
         this.setOnDragDetected(e -> onDrag(e));
     }
 
     private void initializeSprite (Sprite sprite) {
         mySprite = sprite;
         imagePath = new SimpleStringProperty();
-        
+
         Bindings.bindBidirectional(this.translateXProperty(), mySprite.getX());
         Bindings.bindBidirectional(this.translateYProperty(), mySprite.getY());
         Bindings.bindBidirectional(this.translateZProperty(), mySprite.getZ());
         Bindings.bindBidirectional(this.fitWidthProperty(), mySprite.getWidth());
         Bindings.bindBidirectional(this.fitHeightProperty(), mySprite.getHeight());
-        Bindings.bindBidirectional(this.imagePath,mySprite.getImagePathProperty());
+        Bindings.bindBidirectional(this.imagePath, mySprite.getImagePathProperty());
         Bindings.bindBidirectional(this.visibleProperty(), mySprite.isAlive());
-        Bindings.bindBidirectional(this.imageProperty(),sprite.getImage().imageProperty());
-        
-        this.translateZProperty().addListener((obs,old,n)->{
+        Bindings.bindBidirectional(this.imageProperty(), sprite.getImage().imageProperty());
+
+        this.translateZProperty().addListener( (obs, old, n) -> {
             ElementSelectionModel.getInstance().setSelected(this);
         });
 
@@ -108,7 +119,7 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     public String getName () {
         return name;
     }
-    
+
     public void select (Selector selector) {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(selector.getLightness());
@@ -120,7 +131,7 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
     }
-    
+
     @Override
     public Elementable getElementable () {
         return mySprite;
@@ -147,13 +158,18 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     @Override
     public void init () throws VoogaException {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void update () {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public void setMenu (AuthoringElementableMenu menu) {
+        this.menu = menu;
     }
 
 }

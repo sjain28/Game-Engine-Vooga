@@ -14,7 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
-
+import authoring.interfaces.AuthoringElementable;
 import authoring.interfaces.Elementable;
 import authoring.interfaces.gui.Saveable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
@@ -26,6 +26,8 @@ import gameengine.BackEndText;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import resources.VoogaBundles;
 import tools.VoogaException;
 import tools.bindings.ImageProperties;
@@ -64,14 +66,25 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     }
 
     public void addGameElements (Node ... elements) {
-        System.out.println("adding game elements");
+        for (Node n : elements){
+            AuthoringElementableMenu menu = new AuthoringElementableMenu(this,(AuthoringElementable)n);
+            ((AuthoringElementable) n).setMenu(menu);
+        }
+        
         myGameElements.addAll(Arrays.asList(elements));
         setChanged();
         notifyObservers(myGameElements);
     }
 
     public void removeGameElements (Node ... elements) {
+        System.out.println("Initial size: "+myGameElements.size());
         myGameElements.removeAll(Arrays.asList(elements));
+        System.out.println("After removing size"+myGameElements.size());
+        
+        for (Node n: elements){
+            myIds.remove(n.getId());
+        }
+        
         setChanged();
         notifyObservers(myGameElements);
     }

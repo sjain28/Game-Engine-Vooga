@@ -24,7 +24,7 @@ public class GraphMaker {
 		else{yAxis = new CategoryAxis();}
 		
 		//create the chart and get the title, x, and y axis
-		final ScatterChart<?,?> sc = new ScatterChart<Object,Object>(xAxis,yAxis);
+		final ScatterChart<?,?> sc = new ScatterChart<>(xAxis,yAxis);
 		sc.setTitle(title);
 		xAxis.setLabel(xlabel);
 		yAxis.setLabel(ylabel);

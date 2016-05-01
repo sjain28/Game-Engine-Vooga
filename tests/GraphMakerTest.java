@@ -1,4 +1,4 @@
-package stats.visualization;
+package tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,8 @@ import stats.database.AuthorSession;
 import stats.database.CellEntry;
 import stats.database.StatCell;
 import stats.database.VoogaDataBase;
+import stats.visualization.GraphMaker;
+import stats.visualization.StatsVisualizer;
 
 public class GraphMakerTest extends Application {
 	public void start(Stage stage) {		

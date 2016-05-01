@@ -15,7 +15,6 @@ import javafx.scene.media.MediaPlayer;
  */
 public class VoogaJukebox {
 
-	// TODO put string to path resource bundles
 	private static VoogaJukebox gameSound;
 
 	private Map<String, MediaPlayer> myMediaMap;
@@ -74,18 +73,21 @@ public class VoogaJukebox {
 	public void stopBGM() {
 		myBGM.stop();
 	}
-//
-//	/**
-//	 * Pause background music for later return to point
-//	 */
-//	public void pauseBGM() {
-//		myBGM.pause();
-//	}
-//
-//	/**
-//	 * Getters and setters below
-//	 */
-//	public Map<String, MediaPlayer> getMediaMap() {
-//		return myMediaMap;
-//	}
+
+	/**
+	 * Pause background music for later return to point
+	 */
+/*
+	public void pauseBGM() {
+		myBGM.pause();
+	}
+
+	/**
+	 * Getters and setters below
+	 */
+/*
+	public Map<String, MediaPlayer> getMediaMap() {
+		return myMediaMap;
+	}
+*/
 }
