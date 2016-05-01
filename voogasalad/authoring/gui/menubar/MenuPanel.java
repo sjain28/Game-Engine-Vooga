@@ -18,8 +18,17 @@ import player.gamedisplay.Menuable;
 import resources.VoogaBundles;
 import tools.OrderedProperties;
 
+/**
+ * MenuPanel that houses all the menu items.
+ * 
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
+ *
+ */
 public class MenuPanel extends MenuBar implements Windowable {
 
+	/**
+	 * private instance variabls
+	 */
 	private OrderedProperties menubarProperties;
 	private static final String MENU_KEY = "Menu";
 	private static final String ITEM_KEY = "Item";
@@ -29,7 +38,7 @@ public class MenuPanel extends MenuBar implements Windowable {
 		menubarProperties = VoogaBundles.menubarProperties;
 		makeMenus(menuMap(menuItemEvent));
 	}
-	
+
 	public MenuPanel(Menuable elementManager, EventHandler<ActionEvent> menuItemEvent, OrderedProperties properties) {
 		menubarProperties = properties;
 		makeMenus(menuMap(menuItemEvent));

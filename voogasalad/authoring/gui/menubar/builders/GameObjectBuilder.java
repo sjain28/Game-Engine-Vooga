@@ -16,98 +16,136 @@ import javafx.scene.layout.VBox;
 import tools.GUIUtils;
 import tools.VoogaAlert;
 
+/**
+ * Builder class for Game Objects.
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
 
 public class GameObjectBuilder extends Builder {
 
-    private EditElementable editor;
-    private TextField myName;
-    private ComboBox<String> archetypes;
-    private VBox container;
-    private ArchetypeBuilder archetypeBuilder;
-    private String path;
+	/**
+	 * private instance variables
+	 */
+	private EditElementable editor;
+	private TextField myName;
+	private ComboBox<String> archetypes;
+	private VBox container;
+	private ArchetypeBuilder archetypeBuilder;
+	private String path;
 
-    public GameObjectBuilder (EditElementable editor) {
-        super(editor);
-        this.editor = editor;
-        populate();
-        load(this.container);
-    }
+	/**
+	 * Initializes selection choices in the dialog box.
+	 * @param editor
+	 */
+	public GameObjectBuilder (EditElementable editor) {
+		super(editor);
+		this.editor = editor;
+		populate();
+		load(this.container);
+	}
 
-    private void populate () {
-        this.container = new VBox();
-        this.container.setSpacing(SPACING);
-        this.myName = new TextField();
+	/**
+	 * Populates the builder dialog with options.
+	 */
+	private void populate () {
+		this.container = new VBox();
+		this.container.setSpacing(SPACING);
+		this.myName = new TextField();
 
-        container.getChildren().addAll(makeInfo("Name:", "Enter a name...", myName),
-                                       makeArchetypePicker(), makeAddNewArchetypeButton(),
-                                       makeButtons());
-    }
+		container.getChildren().addAll(makeInfo("Name:", "Enter a name...", myName),
+				makeArchetypePicker(), makeAddNewArchetypeButton(),
+				makeButtons());
+	}
 
-    private HBox makeAddNewArchetypeButton () {
-        HBox container = new HBox();
-        Button button = new ButtonMaker().makeButton("Add a new archetype", e -> {
-            archetypeBuilder = new ArchetypeBuilder(editor);
-            if (path != null) {
-                archetypeBuilder.setImagePath(path);
-            }
-            archetypeBuilder.showAndWait();
-            archetypes.getItems().add(archetypeBuilder.getArchetypeName());
-            archetypes.setValue(archetypeBuilder.getArchetypeName());
-        });
-        container.getChildren().add(button);
-        return container;
-    }
+	/**
+	 * Method for add new archetype button.
+	 * @return
+	 */
+	private HBox makeAddNewArchetypeButton () {
+		HBox container = new HBox();
+		Button button = new ButtonMaker().makeButton("Add a new archetype", e -> {
+			archetypeBuilder = new ArchetypeBuilder(editor);
+			if (path != null) {
+				archetypeBuilder.setImagePath(path);
+			}
+			archetypeBuilder.showAndWait();
+			archetypes.getItems().add(archetypeBuilder.getArchetypeName());
+			archetypes.setValue(archetypeBuilder.getArchetypeName());
+		});
+		container.getChildren().add(button);
+		return container;
+	}
 
-    @Override
-    public void compile () {
-        
-        if (editor.getSpriteFactory().getAllArchetypeNames().contains(myName.getText()) ||
-            editor.getMySpriteNames().contains(myName.getText())) {
-            VoogaAlert alert = new VoogaAlert("This name already exists");
-            alert.showAndWait();
-            return;
-        }
-        
-        compile = true;
-        try {
-            Sprite sprite = mySpriteFactory.createSprite(archetypes.getValue());
-            GameObject object = new GameObject(sprite, myName.getText());
-            myManager.addGameElements(object);
-            quit();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            numberError("Please select an Archtype");
-        }
-    }
+	/**
+	 * Compiles information into manager/editor.
+	 */
+	@Override
+	public void compile () {
 
-    public void setArchetype (String string) {
-        archetypes.setValue(string);
-        archetypes.setDisable(true);
-    }
+		if (editor.getSpriteFactory().getAllArchetypeNames().contains(myName.getText()) ||
+				editor.getMySpriteNames().contains(myName.getText())) {
+			VoogaAlert alert = new VoogaAlert("This name already exists");
+			alert.showAndWait();
+			return;
+		}
 
-    private HBox makeArchetypePicker () {
-        archetypes = new ComboBox<>();
-        Collection<String> items;
-        items =
-                (mySpriteFactory.getAllArchetypeNames().size() > 0) ? mySpriteFactory
-                        .getAllArchetypeNames()
-                                                                    : new ArrayList<String>() {
-                                                                        {
-                                                                            add("<No archetypes made yet>");
-                                                                        }
-                                                                    };
-        archetypes.getItems().addAll(items);
-        return GUIUtils.makeRow(new CustomText("Select an archetype:"), archetypes);
-    }
+		compile = true;
+		try {
+			Sprite sprite = mySpriteFactory.createSprite(archetypes.getValue());
+			GameObject object = new GameObject(sprite, myName.getText());
+			myManager.addGameElements(object);
+			quit();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			numberError("Please select an Archtype");
+		}
+	}
 
-    public void setDraggedImage (String path) {
-        this.path = path;
-    }
+	/**
+	 * Sets an archetype.
+	 * @param string
+	 */
+	public void setArchetype (String string) {
+		archetypes.setValue(string);
+		archetypes.setDisable(true);
+	}
 
-    @Override
-    public boolean compileStatus () {
-        return compile;
-    }
+	/**
+	 * Makes an archetype picker.
+	 * @return
+	 */
+	private HBox makeArchetypePicker () {
+		archetypes = new ComboBox<>();
+		Collection<String> items;
+		items =
+				(mySpriteFactory.getAllArchetypeNames().size() > 0) ? mySpriteFactory
+						.getAllArchetypeNames()
+						: new ArrayList<String>() {
+							{
+								add("<No archetypes made yet>");
+							}
+						};
+						archetypes.getItems().addAll(items);
+						return GUIUtils.makeRow(new CustomText("Select an archetype:"), archetypes);
+	}
+
+	/**
+	 * Set image into local path.
+	 * @param path
+	 */
+	public void setDraggedImage (String path) {
+		this.path = path;
+	}
+
+	/**
+	 * Compile status for debugging purposes.
+	 */
+	@Override
+	public boolean compileStatus () {
+		return compile;
+	}
 
 }

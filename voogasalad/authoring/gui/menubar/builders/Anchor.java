@@ -6,12 +6,27 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 
+/**
+ * Anchor class to mark beginning and end of path. ***For bezier curve use***
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
 public class Anchor extends Circle {
 	
+	/**
+	 * private instance variables
+	 */
 	private static final int RADIUS = 10;
 	private static final double FILL_CONST = 0.5;
 	private static final int STROKE_WIDTH = 2;
 	
+	/**
+	 * Instatiation of display of anchor.
+	 * @param color
+	 * @param x
+	 * @param y
+	 */
 	public Anchor(Color color, DoubleProperty x, DoubleProperty y) {
 		super(x.get(), y.get(), RADIUS);
 		setFill(color.deriveColor(1, 1, 1, FILL_CONST));
@@ -24,6 +39,9 @@ public class Anchor extends Circle {
 		enableDrag();
 	}
 
+	/**
+	 * Enable drag
+	 */
 	private void enableDrag() {
 		final Delta dragDelta = new Delta();
 		setOnMousePressed(e -> {
@@ -37,6 +55,10 @@ public class Anchor extends Circle {
 		enableMouseDrag(dragDelta);
 	}
 	
+	/**
+	 * Enabling mouse drag
+	 * @param dragDelta
+	 */
 	private void enableMouseDrag(Delta dragDelta) {
 		setOnMouseDragged(e -> {
 			double newX = e.getX() + dragDelta.x;
@@ -60,6 +82,9 @@ public class Anchor extends Circle {
 		});
 	}
 
+	/**
+	 * Delta class to assist with drag and dropping.
+	 */
 	private class Delta {
 		double x, y;
 	}

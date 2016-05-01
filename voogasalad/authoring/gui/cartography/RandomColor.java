@@ -1,6 +1,9 @@
 package authoring.gui.cartography;
 
 import java.util.Random;
+import java.util.ResourceBundle;
+
+import resources.VoogaBundles;
 
 /**
  * Random Color Generator.
@@ -11,11 +14,13 @@ import java.util.Random;
 public class RandomColor {
 
 	private String[] myColors;
+
 	
 	/**
 	 * Instantiates the random color array.
 	 */
 	public RandomColor() {
+	
 		myColors = new String[] {"#EF5350",
 								 "#EC407A",
 								 "#7E57C2",
