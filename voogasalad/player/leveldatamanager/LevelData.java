@@ -25,6 +25,7 @@ import tools.VoogaJukebox;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
+
 /**
  * A centralized class to contain and access data including Sprites, Text,
  * Global Variables, and Events
@@ -144,7 +145,6 @@ public class LevelData implements ILevelData {
 
 	/**
 	 * Refreshes the data and restarts timer in global variable and sets level
-	 * path TODO: where??
 	 * 
 	 * @param levelfilename
 	 */

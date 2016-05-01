@@ -3,11 +3,9 @@ package authoring.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import authoring.gui.Selector;
-import authoring.interfaces.AuthoringElementable;
+
 import authoring.interfaces.Elementable;
 import javafx.scene.Node;
-import javafx.scene.control.Menu;
 import resources.VoogaBundles;
 import tools.VoogaBoolean;
 import tools.VoogaException;

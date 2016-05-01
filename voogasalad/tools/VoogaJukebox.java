@@ -64,7 +64,6 @@ public class VoogaJukebox {
 	 * Play a continuous, controllable sound piece
 	 */
 	public void playBGM() {
-		System.out.println("This is cbeing alled");
 		myBGM.play();
 	}
 
