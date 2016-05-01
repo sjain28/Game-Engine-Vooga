@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
 public class OpenProjectFileItem extends MenuItemHandler {
-	//private Saveable myManager;
 
 	/**
 	 * Initializes the MenuItem
@@ -23,11 +22,11 @@ public class OpenProjectFileItem extends MenuItemHandler {
 	 */
 	public OpenProjectFileItem(Menuable model) {
 		super();
-		//myManager = (Saveable) model.getManager();
 	}
 
 	/**
 	 * Action to be taken on the selection of this menuItem
+	 * Opens a new project
 	 */
 	@Override
 	public void handle() {

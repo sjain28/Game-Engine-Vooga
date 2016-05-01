@@ -7,6 +7,9 @@ import player.gamerunner.IGameRunner;
 
 public class PlayGameCommand implements Command {
 
+    /**
+     * excecuts opening the all project prompt
+     */
 	@Override
 	public void execute() {
 		ProjectOpenAllPrompt prompt = new ProjectOpenAllPrompt();

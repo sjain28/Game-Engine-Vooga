@@ -19,11 +19,14 @@ public class GlobalPropertiesManager implements Elementable {
     private Map<String, VoogaData> globalPropertiesMap;
     private String myName;
 
+    /**
+     * Controlls access to and stores all global properties
+     */
     public GlobalPropertiesManager () {
         globalPropertiesMap = new HashMap<String, VoogaData>();
         initialize();
     }
-    
+
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
         return globalPropertiesMap;
@@ -58,12 +61,17 @@ public class GlobalPropertiesManager implements Elementable {
     public void setName (String name) {
         this.myName = name;
     }
-    
-    public void initialize(){
+
+    /**
+     * Stores all key values in properties
+     */
+    public void initialize () {
         addProperty(VoogaBundles.defaultglobalvars.getProperty("Time"), new VoogaNumber(0.0));
         addProperty(VoogaBundles.defaultglobalvars.getProperty("Score"), new VoogaNumber(0.0));
-        addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"), new VoogaBoolean(false));
-        addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"), new VoogaString(""));
+        addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"),
+                    new VoogaBoolean(false));
+        addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"),
+                    new VoogaString(""));
     }
 
     @Override
@@ -75,13 +83,13 @@ public class GlobalPropertiesManager implements Elementable {
     @Override
     public void init () throws VoogaException {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void update () {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

@@ -41,7 +41,6 @@ import videos.ScreenProcessor;
  */
 public class GameRunner implements IGameRunner {
 	public static final double FRAME_RATE = 60;
-	private static final double SEC_PER_MIN = 60;
 	private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
 	private static final double SPEEDCONTROL = 10;
 	private static final String GAMES_PATH = "games/";
@@ -120,7 +119,7 @@ public class GameRunner implements IGameRunner {
 	 * Checks and updates all LevelData GlobalVariables
 	 */
 	private void checkAndUpdateGlobalVariables() {
-		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / SEC_PER_MIN);
+		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / FRAME_RATE);
 		if (myLevelData.getSaveNow()) {
 			myStats.saveGameProgress(myLevelMapCreator.getGameFilePath());
 			myLevelData.saveProgress(myCurrentGameString);
@@ -128,7 +127,8 @@ public class GameRunner implements IGameRunner {
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelData.getNextLevelName());
 			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
-				//TODO: Implement win screen
+				myTimeline.stop();
+				return;
 			}
 		}
 	}
@@ -143,8 +143,7 @@ public class GameRunner implements IGameRunner {
 		String latestLevelReached = NULL_STRING;
 		if (myStats.getCurrentStatCell().checkProgress() != null) {
 			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
-		} 
-		try {
+		} try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
 			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
 			VoogaBundles.preferences.setProperty(GAME_WIDTH, preferences.getWidth());
@@ -256,17 +255,11 @@ public class GameRunner implements IGameRunner {
 	}
 
 	@Override
-	public void addScene() {
-		
-	}
+	public void addScene() {}
 
 	@Override
-	public void addScene(CompleteAuthoringModelable manager) {
-		
-	}
+	public void addScene(CompleteAuthoringModelable manager) {}
 
 	@Override
-	public void saveAll() {
-		
-	}
+	public void saveAll() {}
 }

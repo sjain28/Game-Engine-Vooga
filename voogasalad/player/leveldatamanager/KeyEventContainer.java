@@ -29,7 +29,6 @@ import events.VoogaEvent;
 public class KeyEventContainer {
 
 	private List<VoogaEvent> myEvents;
-	//private List<VoogaEvent> myAnimationEvents;
 	private List<List<String>> myKeyPressedCombos;
 	private List<List<String>> myKeyReleasedCombos;
 	private Map<List<String>, KeyCause> myKeyPressCauses;
@@ -45,7 +44,6 @@ public class KeyEventContainer {
 		myKeyReleasedCombos = new ArrayList<>();
 		myKeyPressCauses = new HashMap<>();
 		myKeyReleaseCauses = new HashMap<>();
-		//myAnimationEvents = new ArrayList<>();
 	}
 
 	/**

@@ -29,7 +29,6 @@ import tools.interfaces.VoogaData;
 
 
 public class Sprite implements Moveable, Effectable, Elementable {
-
 	private boolean isMainCharacter;
 	private Velocity myVelocity;
 	private Acceleration myAcceleration;
@@ -208,7 +207,10 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / RESIZE_FACTOR);
 		myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / RESIZE_FACTOR);
 		myImage.setTranslateZ(myZ.doubleValue());
-
+		
+		myX.set(myLoc.getX());
+		myY.set(myLoc.getY());
+		
 		myImage.setFitWidth((double) myProperties
 				.get(VoogaBundles.spriteProperties.getString("WIDTH")).getValue());
 		myImage.setFitHeight((double) myProperties

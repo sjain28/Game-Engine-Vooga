@@ -28,7 +28,7 @@ public class AnimationEvent extends VoogaEvent {
 	public AnimationEvent(String name, Integer duration){
 		myName = name;
 		myCause = new WrapperCause(this);
-		myDuration = (int) GameRunner.FRAME_RATE * duration;
+		myDuration = (int) (GameRunner.FRAME_RATE)*duration;
 		myCounter = 0;
 	}
 	/**
@@ -52,17 +52,25 @@ public class AnimationEvent extends VoogaEvent {
 				if(myNextEvent != null){
 					myNextEvent.setCauseValue(true);
 				}
+				refreshEffects(data);
 				getCauseSprites().clear();
 				myCounter = 0;
-				if(myPathEffect != null){
-					myPathEffect.setCounter(1);
-				}
-				if(myImageEffect != null){
-					myImageEffect.setCounter(0);
-				}
 				setCauseValue(false);
-				System.out.println("Animation event is done now!");
 			}
+		}
+	}
+	/**
+	 * Resets counters for necessary effects and does needed correction for rounding errors
+	 */
+	private void refreshEffects(ILevelData data) {
+		if(myPathEffect != null){
+			myPathEffect.setCounter(1);
+		}
+		if(myImageEffect != null){
+			myImageEffect.setCounter(0);
+		}
+		if(myRotateEffect != null){
+			myRotateEffect.rotateCorrection(data);
 		}
 	}
 
@@ -76,7 +84,7 @@ public class AnimationEvent extends VoogaEvent {
 		}
 		myPathEffect = pathEffect;
 		myPathEffect.createAnimationPoints(myDuration);
-		addEffect(pathEffect);
+		addEffect(myPathEffect);
 	}
 
 	public void addRotateEffect(RotateEffect rotateEffect){
@@ -85,7 +93,7 @@ public class AnimationEvent extends VoogaEvent {
 		}
 		myRotateEffect = rotateEffect;
 		myRotateEffect.setCycleRotation(myDuration);
-		addEffect(rotateEffect);
+		addEffect(myRotateEffect);
 	}
 
 	public void addImageAnimationEffect(ImageAnimationEffect imageEffect){
@@ -102,11 +110,11 @@ public class AnimationEvent extends VoogaEvent {
 			getEffects().remove(myScaleEffect);
 		}
 		myScaleEffect = scaleEffect;
-		addEffect(myImageEffect);
+		addEffect(myScaleEffect);
 	}
 
 	protected AnimationEvent clone(){
-		AnimationEvent clone = new AnimationEvent(myName, myDuration / (int) GameRunner.FRAME_RATE);
+		AnimationEvent clone = new AnimationEvent(myName, myDuration/(int)GameRunner.FRAME_RATE);
 		if(myRotateEffect != null){
 			clone.addRotateEffect(getRotateEffect().clone(clone));
 		}

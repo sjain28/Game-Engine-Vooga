@@ -19,6 +19,9 @@ public class ProjectChooseAuthoringTypePrompt extends StarterPrompt {
 	private Button openGame;
 	private VBox container;
 	
+	/**
+	 * Choose to start a new game or load one screen 
+	 */
 	public ProjectChooseAuthoringTypePrompt() {
 		super();
 	}

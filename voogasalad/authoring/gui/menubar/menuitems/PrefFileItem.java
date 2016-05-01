@@ -9,7 +9,13 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
-
+/**
+ * Opens up a preferences menu for use to specify game specifics.
+ * e.g. Scroll speed, background music, tracking direction, etc.
+ * 
+ * @author Harry Guo, Nick Lockett, Aditya Srinivasan, Arjun Desai
+ *
+ */
 public class PrefFileItem extends MenuItemHandler { 
 
 	private static final String MAINUUID = "MainUUID";
@@ -34,6 +40,7 @@ public class PrefFileItem extends MenuItemHandler {
 		super();
 		this.model = (CompleteAuthoringModelable) model.getManager();
 	}
+	
 	/**
 	 * Action to be taken on the selection of this menuItem
 	 */

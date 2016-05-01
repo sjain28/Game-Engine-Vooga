@@ -35,6 +35,7 @@ import tools.interfaces.VoogaData;
 public class SpriteFactory extends Observable{
 
 	private Map<String, Sprite> myArchetypes;
+	private String archtypeError = "Could not save archetype";
 
 	// Path for folder where all archetypes ever saved are stored
 	private final static String ARCHETYPE_RESOURCE_PATH = "resources/saved_archetypes/";
@@ -59,10 +60,9 @@ public class SpriteFactory extends Observable{
 
 		Map<String,VoogaData> map = new HashMap<>(original.getParameterMap());
 
-		Sprite clone = new Sprite(original.getImagePath(), original.getArchetype(),
+		return new Sprite(original.getImagePath(), original.getArchetype(),
 				map,
 				(VoogaNumber) map.get(VoogaBundles.spriteProperties.getString("MASS")));
-		return clone;
 	}
 
 	/**
@@ -144,11 +144,11 @@ public class SpriteFactory extends Observable{
 				}
 				catch (ParserConfigurationException | TransformerException | IOException
 						| SAXException e) {
-					throw new VoogaException("Could not save archetype");
+					throw new VoogaException(archtypeError);
 				}
 			}
 			catch (IOException e) {
-				throw new VoogaException("Could not save archetype");
+				throw new VoogaException(archtypeError);
 			}
 		}
 	}
