@@ -39,6 +39,7 @@ public class TextPropertyModifier extends Stage {
     }
 
     private void initialize () {
+    	fonts = new ComboBox<>();
         fonts.getItems().addAll(Font.getFamilies());
         root.getChildren().add(GUIUtils.makeRow(new CustomText("Font"), fonts));
 
@@ -48,6 +49,7 @@ public class TextPropertyModifier extends Stage {
         color = new ColorPicker();
         root.getChildren().add(GUIUtils.makeRow(new CustomText("Color"), color));
 
+        style = new ComboBox<>();
         style.getItems().addAll(VoogaBundles.textStyles.keySet());
         root.getChildren().add(GUIUtils.makeRow(new CustomText("Style"), style));
 
