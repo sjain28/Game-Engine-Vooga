@@ -11,6 +11,19 @@ import tools.VoogaException;
  */
 
 public interface EditSpritable {
+	
+	/**
+	 * Getter for a sprite factory
+	 * @return a sprite factory
+	 */
     public SpriteFactory getSpriteFactory();
+    
+    /**
+     * Gets a sprite ID from the string name of the sprite
+     * 
+     * @param name: of sprite
+     * @return ID of sprite
+     * @throws VoogaException
+     */
     public String getSpriteIdFromName(String name) throws VoogaException;
 }
