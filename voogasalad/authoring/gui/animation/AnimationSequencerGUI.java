@@ -21,6 +21,7 @@ public class AnimationSequencerGUI extends Tab {
 	private List<String> events;
 	private ComboBox<String> animations;
 	private TextField name;
+	private List<AnimationEvent> animEvents;
 	
 	
 	public AnimationSequencerGUI() {
@@ -40,7 +41,8 @@ public class AnimationSequencerGUI extends Tab {
 			events.add(animations.getValue());
 			animationSequenceList.getChildren().add(new CustomText(animations.getValue()));
 		})), animationSequenceList, name, new ButtonMaker().makeButton("OK", e -> {
-			//TODO: Saumya add logic here
+			
+			factory.makeAnimationSequence(name.getText(), events);
 		}));
 	}
 	
