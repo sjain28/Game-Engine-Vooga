@@ -41,6 +41,7 @@ public class DesignBoardHousing extends TabPane {
             preferences.setClosable(false);
             preferences.setListener(e -> {
                 try {
+                    mySceneName.set(preferences.getName());
                     GlobalPropertiesMapSetter setter = new GlobalPropertiesMapSetter(elem,preferences);
                     setter.setGlobalProperties();
                     
@@ -50,6 +51,7 @@ public class DesignBoardHousing extends TabPane {
 
                 }
                 catch (Exception ee) {
+                    ee.printStackTrace();
                     VoogaAlert alert = new VoogaAlert(PREF_ALERT);
                     alert.showAndWait();
                 }
