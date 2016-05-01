@@ -13,7 +13,7 @@ public class PathInterpolator {
 	/**
 	 * Constants
 	 */
-	private static final double NUM_POINTS = 2400;
+	private static final double NUM_POINTS = 6000;
 	private static final int GRANULARITY_FACTOR = 3;
 	private static final int GRANULARITY_POWER = 2;
 	private Double[] xInterpolation;
