@@ -15,64 +15,85 @@ import javafx.stage.*;
 import resources.VoogaBundles;
 import tools.GUIUtils;
 
+/**
+ * GUI object to help change text within the design board.
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
+
 
 public class TextPropertyModifier extends Stage {
-    private Scene scene;
-    private VBox root;
-    private Text node;
 
-    private ComboBox<String> fonts;
-    private NumberTextField fontSize;
-    private ColorPicker color;
-    private ComboBox<String> style;
+	/**
+	 * private instance variables
+	 */
+	private Scene scene;
+	private VBox root;
+	private Text node;
 
-    private static final double RGB_MAX = 255;
-    private static final double VBOX_LENGTH = 20;
-    
-    public TextPropertyModifier (Text n) {
-        node = n;
-        root = new VBox(VBOX_LENGTH);
-        initialize();
-        scene = new VoogaScene(root);
+	private ComboBox<String> fonts;
+	private NumberTextField fontSize;
+	private ColorPicker color;
+	private ComboBox<String> style;
 
-        this.setScene(scene);
-    }
+	private static final double RGB_MAX = 255;
+	private static final double VBOX_LENGTH = 20;
 
-    private void initialize () {
-        fonts.getItems().addAll(Font.getFamilies());
-        root.getChildren().add(GUIUtils.makeRow(new CustomText("Font"), fonts));
+	/**
+	 * Constructor to initialize text to change.
+	 * @param n
+	 */
+	public TextPropertyModifier (Text n) {
+		node = n;
+		root = new VBox(VBOX_LENGTH);
+		initialize();
+		scene = new VoogaScene(root);
 
-        fontSize = new NumberTextField();
-        root.getChildren().add(GUIUtils.makeRow(new CustomText("Font Size"), fontSize));
+		this.setScene(scene);
+	}
 
-        color = new ColorPicker();
-        root.getChildren().add(GUIUtils.makeRow(new CustomText("Color"), color));
+	/**
+	 * Box to modify the text.
+	 */
+	private void initialize () {
+		fonts.getItems().addAll(Font.getFamilies());
+		root.getChildren().add(GUIUtils.makeRow(new CustomText("Font"), fonts));
 
-        style.getItems().addAll(VoogaBundles.textStyles.keySet());
-        root.getChildren().add(GUIUtils.makeRow(new CustomText("Style"), style));
+		fontSize = new NumberTextField();
+		root.getChildren().add(GUIUtils.makeRow(new CustomText("Font Size"), fontSize));
 
-        ButtonMaker maker = new ButtonMaker();
-        Button apply = maker.makeButton("Apply", e -> {
-            establishStyle();
-            this.close();
-        });
-        Button cancel = maker.makeButton("Cancel", e -> this.close());
-        root.getChildren().add(GUIUtils.makeRow(apply, cancel));
-    }
+		color = new ColorPicker();
+		root.getChildren().add(GUIUtils.makeRow(new CustomText("Color"), color));
 
-    private void establishStyle () {
-        String hex = String.format( "#%02X%02X%02X",
-                                    (int)(color.getValue().getRed() * RGB_MAX),
-                                    (int)( color.getValue().getGreen() * RGB_MAX),
-                                    (int)( color.getValue().getBlue() * RGB_MAX) );
-        String result =
-                "-fx-font-family: " + fonts.getValue() + "; " +
-                        "-fx-font-size: " + fontSize.getText() + "; " +
-                        "-fx-fill: " + hex+ "; " +
-                        VoogaBundles.textStyles.getString(style.getValue());
+		style.getItems().addAll(VoogaBundles.textStyles.keySet());
+		root.getChildren().add(GUIUtils.makeRow(new CustomText("Style"), style));
 
-        node.styleProperty().set(result);
+		ButtonMaker maker = new ButtonMaker();
+		Button apply = maker.makeButton("Apply", e -> {
+			establishStyle();
+			this.close();
+		});
+		Button cancel = maker.makeButton("Cancel", e -> this.close());
+		root.getChildren().add(GUIUtils.makeRow(apply, cancel));
+	}
 
-    }
+	/**
+	 * Establishes the style of the text.
+	 */
+	private void establishStyle () {
+		String hex = String.format( "#%02X%02X%02X",
+				(int)(color.getValue().getRed() * RGB_MAX),
+				(int)( color.getValue().getGreen() * RGB_MAX),
+				(int)( color.getValue().getBlue() * RGB_MAX) );
+		String result =
+				"-fx-font-family: " + fonts.getValue() + "; " +
+						"-fx-font-size: " + fontSize.getText() + "; " +
+						"-fx-fill: " + hex+ "; " +
+						VoogaBundles.textStyles.getString(style.getValue());
+
+		node.styleProperty().set(result);
+
+	}
 
 }
