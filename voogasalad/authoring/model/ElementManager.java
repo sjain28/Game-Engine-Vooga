@@ -241,7 +241,7 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             throw new VoogaException();
         }
 
-        this.myGameElements = elementableList;
+        addGameElements(elementableList.toArray(new Node [elementableList.size()]));
         myIds = new HashSet<String>();
 
         for (Node e : elementableList) {

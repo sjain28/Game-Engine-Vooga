@@ -20,15 +20,10 @@ public class RotateEffect extends SpriteEffect {
 
 	@Override
 	public void execute(ILevelData data){
-		System.out.println("Executing rotate effect");
-		System.out.println("my rotation: " + myRotation);
 		setSprites(data);
-		System.out.println("Num SPrites: " + getSprites().size());
 		for (Sprite sprite : getSprites()){
-			sprite.getImage().setRotate(myCycleRotation);
-			System.out.println("Rotation: " + sprite.getImage().getRotate());
+			sprite.getImage().setRotate(sprite.getImage().getRotate() + myCycleRotation);
 		}
-		
 		clearSprites();
 	}
 	protected Double getRotation(){
@@ -36,5 +31,13 @@ public class RotateEffect extends SpriteEffect {
 	}
 	protected RotateEffect clone(AnimationEvent event){
        return new RotateEffect(myRotation, event);
+	}
+	protected void rotateCorrection(ILevelData data){
+		setSprites(data);
+		for (Sprite sprite : getSprites()){
+			double offset = sprite.getImage().getRotate() - (myRotation%360);
+			sprite.getImage().setRotate(sprite.getImage().getRotate() - offset);
+		}
+		clearSprites();
 	}
 }

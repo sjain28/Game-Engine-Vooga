@@ -128,7 +128,8 @@ public class GameRunner implements IGameRunner {
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
 			playLevel(myLevelData.getNextLevelName());
 			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
-				//TODO: Implement win screen
+				myTimeline.stop();
+				return;
 			}
 		}
 	}
@@ -143,8 +144,7 @@ public class GameRunner implements IGameRunner {
 		String latestLevelReached = NULL_STRING;
 		if (myStats.getCurrentStatCell().checkProgress() != null) {
 			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
-		} 
-		try {
+		} try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
 			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
 			VoogaBundles.preferences.setProperty(GAME_WIDTH, preferences.getWidth());
@@ -256,17 +256,11 @@ public class GameRunner implements IGameRunner {
 	}
 
 	@Override
-	public void addScene() {
-		
-	}
+	public void addScene() {}
 
 	@Override
-	public void addScene(CompleteAuthoringModelable manager) {
-		
-	}
+	public void addScene(CompleteAuthoringModelable manager) {}
 
 	@Override
-	public void saveAll() {
-		
-	}
+	public void saveAll() {}
 }
