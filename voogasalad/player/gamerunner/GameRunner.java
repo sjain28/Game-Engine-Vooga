@@ -131,7 +131,6 @@ public class GameRunner implements IGameRunner {
 				finishPlaySession();
 				myTimeline.stop();
 				LeaderBoard leaderBoard = new LeaderBoard(VoogaBundles.preferences.getProperty("GameName"));
-				System.out.println("The timeline didn't stop");
 				return;
 			}
 			playLevel(myLevelData.getNextLevelName());
