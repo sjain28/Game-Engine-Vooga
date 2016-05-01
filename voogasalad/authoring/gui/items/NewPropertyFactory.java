@@ -7,7 +7,7 @@ import tools.interfaces.VoogaData;
 /**
  * The New Property Factory that creates a new VoogaData based on the user input from the GUI.
  * 
- * @author Harry Guo, Aditya Srinivasan, Arjun Desai, Nick Lockett
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
  */
 
 public class NewPropertyFactory {
@@ -48,7 +48,7 @@ public class NewPropertyFactory {
 			Class<?> c = Class.forName(COMMAND_PATH + s);
 			vgData = (VoogaData) c.newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			e.printStackTrace();
+			
 		}
 		return vgData;
 	}

@@ -135,7 +135,6 @@ public class UIManager extends VBox implements Menuable {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
