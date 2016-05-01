@@ -1,5 +1,6 @@
 package authoring.gui.menubar.menuitems;
 
+import authoring.GlobalPropertiesMapSetter;
 import authoring.VoogaScene;
 import authoring.gui.levelpreferences.DesignBoardPreferences;
 import authoring.gui.menubar.MenuItemHandler;
@@ -53,16 +54,13 @@ public class PrefFileItem extends MenuItemHandler {
 		preferences.setContinuousScrollType((String) model.getGlobalVariables().get(this.model.getName()+ CONT_SCROLL).getValue());
 		preferences.setTrackingDirection((String) model.getGlobalVariables().get(this.model.getName()+ TRACKING_DIR).getValue());
 		preferences.setBGM((String) model.getGlobalVariables().get(this.model.getName()+ BGM).getValue());
+		
 		preferences.setListener(e -> {
-			model.getGlobalVariables().put(preferences.getName()+ SCROLL, new VoogaString(preferences.getScrollingType()));
-			model.getGlobalVariables().put(preferences.getName()+ MAINUUID, new VoogaString(preferences.getMainSpriteID()));
-			model.getGlobalVariables().put(preferences.getName()+ SCROLL_SPEED, new VoogaNumber(preferences.getContinuousScrollSpeed()));
-			model.getGlobalVariables().put(preferences.getName()+ SCROLL_ANGLE, new VoogaNumber(preferences.getScrollAngle()));
-			model.getGlobalVariables().put(preferences.getName()+ CONT_SCROLL, new VoogaString(preferences.getContinuousScrollType()));
-			model.getGlobalVariables().put(preferences.getName()+ TRACKING_DIR, new VoogaString(preferences.getTrackingDirection()));
-			model.getGlobalVariables().put(preferences.getName()+ BGM, new VoogaString(preferences.getBGM()));
+			GlobalPropertiesMapSetter globalSetter = new GlobalPropertiesMapSetter(model,preferences);
+			globalSetter.setGlobalProperties();
 			stage.close();
 		});
+		
 		tp.getTabs().add(preferences);
 		stage.setScene(new VoogaScene(tp, WINDOW_WIDTH, WINDOW_HEIGHT));
 		stage.show();

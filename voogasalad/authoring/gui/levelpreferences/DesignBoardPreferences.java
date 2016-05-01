@@ -262,11 +262,11 @@ public class DesignBoardPreferences extends Tab {
 	 * @return the sprite to track based on ID
 	 */
 	public String getMainSpriteID() {
-		if(contSprites.getValue() == null) {
-			return sprites.getValue().getID();
+		if(contSprites.getValue() == null && sprites.getValue() != null) {
+		    return sprites.getValue().getID();
 		}
-		if(sprites.getValue() == null) {
-			return contSprites.getValue().getID();
+		if(sprites.getValue() == null && contSprites.getValue() != null) {
+		    return contSprites.getValue().getID();
 		}
 		return "";
 	}
