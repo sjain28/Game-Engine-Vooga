@@ -18,7 +18,7 @@ public class AnimationSequencerGUI extends Tab {
 	private AnimationFactory factory;
 	private VBox container;
 	private VBox animationSequenceList;
-	private List<AnimationEvent> events;
+	private List<String> events;
 	private ComboBox<String> animations;
 	private TextField name;
 	
@@ -37,7 +37,7 @@ public class AnimationSequencerGUI extends Tab {
 		events = new ArrayList<>();
 		initializeEventBox();
 		container.getChildren().addAll(GUIUtils.makeRow(animations, new ButtonMaker().makeButton("Add", e -> {
-			events.add(factory.getMyAnimationEvents().get(animations.getValue()));
+			events.add(animations.getValue());
 			animationSequenceList.getChildren().add(new CustomText(animations.getValue()));
 		})), animationSequenceList, name, new ButtonMaker().makeButton("OK", e -> {
 			//TODO: Saumya add logic here
