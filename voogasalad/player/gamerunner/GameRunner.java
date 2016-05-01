@@ -257,10 +257,8 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void finishPlaySession() {
 		if (playSessionActive) {
-			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()),23432);
-//			System.out.println("WJKLDJFLKJSDFLA");
+			myStats.endCurrentPlaySession(2523,myLevelReached);
 			VoogaDataBase.getInstance().save();
-//			System.out.println("WHAAT DID THE SESION END OR NAH" + myStats.getCurrentStatCell().peekLatestPlaySession().getProperty(PlaySession.LEVEL_REACHED));
 		}
 	}
 

@@ -74,7 +74,7 @@ public class LeaderBoard extends Stage {
 
 		scores.sort(new ScoreCompare());
 		for (int i = 0; i < LEADERBOARD_MEMBER_COUNT;  i++) {
-			//System.out.println(scores.get(i));
+			System.out.println(scores.get(i));
 			if (scores.get(i) != null) {
 				best.getChildren().add(makeHBox(scores.get(i).getFirst(), scores.get(i).getLast()));
 			}
