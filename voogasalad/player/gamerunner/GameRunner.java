@@ -76,7 +76,6 @@ public class GameRunner implements IGameRunner {
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
 		myLevelData = new LevelData(myPhysicsEngine);
-		myScroller = new DisplayScroller(myGameDisplay);
 		myTimeline = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		myTimeline.setCycleCount(Animation.INDEFINITE);
@@ -141,9 +140,8 @@ public class GameRunner implements IGameRunner {
 	 */
 	public void playGame(String gameXmlList) {
 		myCurrentGameString = gameXmlList;
+		System.out.println("WHATTTT THE FUCK " + GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX);
 		try {
-			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
-			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			VoogaAlert alert = new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
@@ -203,6 +201,7 @@ public class GameRunner implements IGameRunner {
 	}
 
 	private void addScrolling() {
+		myScroller = new DisplayScroller(myGameDisplay);
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
 		System.out.println(scrollingSprite);

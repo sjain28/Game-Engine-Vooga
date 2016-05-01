@@ -7,7 +7,9 @@ import java.util.Map;
 
 import authoring.gui.cartography.LevelType;
 import authoring.gui.cartography.NetworkContainer;
+import authoring.model.Preferences;
 import data.Deserializer;
+import resources.VoogaBundles;
 import tools.VoogaException;
 
 /**
@@ -22,6 +24,7 @@ public class LevelMapCreator {
     private static final String GAMES_PATH_PREFIX = "games/";
     private static final String SLASH = "/";
     private static final String XML_EXTENSION = ".xml";
+    private static final String LEVELS = "levels/";
 
     private Map<String,LevelType> myLevelMap;
     private String myGameFilePath;
@@ -39,6 +42,15 @@ public class LevelMapCreator {
 		System.out.println(XMLwithListOfLevels);
 		myLevelMap = ((NetworkContainer) Deserializer.deserialize(1, XMLwithListOfLevels).get(0)).getLevelTypes();
 		System.out.println("my level map from level map creator: "+myLevelMap);
+		setGameDimensions(xmlList);
+    }
+    
+    private void setGameDimensions(String xmlList) throws VoogaException{
+		String XMLwithListOfLevels =myGameFilePath + LEVELS + xmlList + XML_EXTENSION;
+		Preferences myPref = ((Preferences) Deserializer.deserialize(1, XMLwithListOfLevels).get(0));
+		System.out.println("What is the location of this gameheight adn game width shit " + XMLwithListOfLevels);
+    	VoogaBundles.preferences.setProperty("GameHeight",myPref.getHeight());
+    	VoogaBundles.preferences.setProperty("GameWidth",myPref.getWidth());
     }
     
     /**
