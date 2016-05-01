@@ -12,14 +12,14 @@ import tools.GUIUtils;
  *
  */
 public class ScaleEffectSelector extends AbstractEffectSelector {
-	
+
 	/**
 	 * Constants
 	 */
 	private static final String SCALE_EFFECT = "Scale Effect";
-	
+
 	private NumberTextField scaleAmount;
-	
+
 	/**
 	 * Initializes the selector and its heading.
 	 */
@@ -36,7 +36,7 @@ public class ScaleEffectSelector extends AbstractEffectSelector {
 		scaleAmount = new NumberTextField();
 		subnode = GUIUtils.makeRow(new CustomText("Scale: "), scaleAmount, new CustomText("times as large."));
 	}
-	
+
 	/**
 	 * Returns the value of this selector, in this case an integer representing
 	 * the relative scaling factor to be applied.

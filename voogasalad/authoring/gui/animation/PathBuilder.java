@@ -99,7 +99,7 @@ public class PathBuilder extends Tab {
 		toolbar.getItems().addAll(spline, linear, coordinates());
 		return toolbar;
 	}
-	
+
 	private HBox coordinates() {
 		CustomText text = new CustomText("");
 		border.setOnMouseMoved(e -> {
@@ -120,25 +120,25 @@ public class PathBuilder extends Tab {
 		name.setPromptText("Name your path");
 		GUIUtils.getInstance();
 		row.getChildren().addAll(GUIUtils.makeRow(new CustomText("Name: "), name),
-							     new ButtonMaker().makeButton("Add Path", e -> {
-			try {
-				String pathType = myShape.getClass().getSimpleName();
-				Class<?> clazz;
-				AnimationPath animationPath;
-				clazz = Class.forName("authoring.gui.animation." + pathType + "Path");
-				animationPath = (AnimationPath) clazz.getConstructor(Shape.class).newInstance(myShape);
-				interpolator.interpolate(animationPath.getXControls(), animationPath.getYControls());
-				AnimationFactory.getInstance().addPath(name.getText(), interpolator.getXInterpolation(),
-						interpolator.getYInterpolation());
-				stack.getChildren().clear();
-				VoogaInfo info = new VoogaInfo("Your path, \"" + name.getText() + "\", was created!");
-				info.showAndWait();
-				name.setText("");
-			} catch (Exception e1) {
-				VoogaAlert alert = new VoogaAlert("Please define a proper path and name.");
-				alert.showAndWait();
-			}
-		}));
+				new ButtonMaker().makeButton("Add Path", e -> {
+					try {
+						String pathType = myShape.getClass().getSimpleName();
+						Class<?> clazz;
+						AnimationPath animationPath;
+						clazz = Class.forName("authoring.gui.animation." + pathType + "Path");
+						animationPath = (AnimationPath) clazz.getConstructor(Shape.class).newInstance(myShape);
+						interpolator.interpolate(animationPath.getXControls(), animationPath.getYControls());
+						AnimationFactory.getInstance().addPath(name.getText(), interpolator.getXInterpolation(),
+								interpolator.getYInterpolation());
+						stack.getChildren().clear();
+						VoogaInfo info = new VoogaInfo("Your path, \"" + name.getText() + "\", was created!");
+						info.showAndWait();
+						name.setText("");
+					} catch (Exception e1) {
+						VoogaAlert alert = new VoogaAlert("Please define a proper path and name.");
+						alert.showAndWait();
+					}
+				}));
 		return row;
 	}
 

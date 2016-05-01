@@ -11,7 +11,7 @@ import tools.GUIUtils;
  *
  */
 public class RotationEffectSelector extends AbstractEffectSelector {
-	
+
 	/**
 	 * Constants
 	 */
@@ -19,13 +19,13 @@ public class RotationEffectSelector extends AbstractEffectSelector {
 	private static final String ROTATIONS = "Rotations";
 	private static final String ANGLE = "Angle";
 	private static final double DEGREES_IN_CIRCLE = 360;
-	
+
 	/**
 	 * Private instance variables
 	 */
 	private NumberTextField numRotations;
 	private NumberTextField modRotations;
-	
+
 	/**
 	 * Initializes the rotation effect selector and its heading.
 	 */
@@ -51,7 +51,7 @@ public class RotationEffectSelector extends AbstractEffectSelector {
 	protected Object getValue() {
 		return DEGREES_IN_CIRCLE * Double.parseDouble(numRotations.getText()) + Double.parseDouble(modRotations.getText());
 	}
-	
-	
+
+
 
 }

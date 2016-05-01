@@ -27,12 +27,12 @@ import tools.GUIUtils;
  *
  */
 public class AnimationEventGUI extends Tab {
-	
+
 	/**
 	 * Constants
 	 */
 	private static final double SPACING = 10;
-	
+
 	/**
 	 * Private instance variables
 	 */
@@ -46,7 +46,7 @@ public class AnimationEventGUI extends Tab {
 	private AnimationFactory factory;
 	private Button OK;
 	private Button preview;
-	
+
 	/**
 	 * Declares the factory, establishes the container VBox, and adds all relevant nodes to the pane and tab.
 	 */
@@ -60,15 +60,15 @@ public class AnimationEventGUI extends Tab {
 		duration.sanitizeForInteger();
 		name = new TextField();
 		container.getChildren().addAll(pathSelector,
-									   scaleSelector,
-									   rotationSelector,
-									   imageSelector,
-									   GUIUtils.makeRow(new CustomText("Duration: "), duration),
-									   GUIUtils.makeRow(new CustomText("Name: "), name),
-									   buttonRow());
+				scaleSelector,
+				rotationSelector,
+				imageSelector,
+				GUIUtils.makeRow(new CustomText("Duration: "), duration),
+				GUIUtils.makeRow(new CustomText("Name: "), name),
+				buttonRow());
 		this.setContent(container);
 	}
-	
+
 	/**
 	 * Instantiates the selectors used to add complexity to the animation.
 	 */
@@ -78,7 +78,7 @@ public class AnimationEventGUI extends Tab {
 		rotationSelector = new RotationEffectSelector();
 		imageSelector = new ImageAnimationEffectSelector();
 	}
-	
+
 	/**
 	 * Initializes the button row for adding the event and previewing it.
 	 * @return the row of buttons in the form of an HBox.
@@ -103,11 +103,11 @@ public class AnimationEventGUI extends Tab {
 		});
 		preview = new ButtonMaker().makeButton("Preview", e -> {
 			//TODO: allow users to preview their animation
-			
+
 		});
 		return GUIUtils.makeRow(OK, preview);
 	}
-	
+
 	/**
 	 * Updates the path listings inside of the path ComboBox.
 	 */
