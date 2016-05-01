@@ -11,7 +11,7 @@ import javafx.util.Duration;
  */
 public class UILauncher {
 
-	static final Duration SPLASH_DURATION = Duration.millis(6500);
+	public static final Duration SPLASH_DURATION = Duration.millis(6500);
 
 	/**
 	 * Launches the Splash Screen
