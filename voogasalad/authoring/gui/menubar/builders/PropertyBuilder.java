@@ -137,7 +137,6 @@ public class PropertyBuilder extends Builder {
 			return data;
 		}
 		catch (Exception ee) {
-			ee.printStackTrace();
 			return null;
 		}
 	}

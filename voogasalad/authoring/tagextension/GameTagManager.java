@@ -65,8 +65,6 @@ public class GameTagManager {
             if (!ResourceDecipherer.isImage(filename)) return;
         }
         catch (VoogaException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         
         // Retrieve recognition results
@@ -88,7 +86,7 @@ public class GameTagManager {
             Serializer.serializeLevel(myTags, getTagLocation());
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -106,7 +104,7 @@ public class GameTagManager {
             myTags = (List<Tag>) objects.get(0);
         }
         catch (VoogaException e) {
-            e.printStackTrace();
+
         }
     }
 

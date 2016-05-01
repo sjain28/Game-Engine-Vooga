@@ -100,7 +100,6 @@ public class DesignBoardPreferences extends Tab {
 			} catch (Exception ee) {
 				VoogaAlert alert = new VoogaAlert("Not a correct file.");
 				alert.showAndWait();
-				ee.printStackTrace();
 			}
 		});
 	}

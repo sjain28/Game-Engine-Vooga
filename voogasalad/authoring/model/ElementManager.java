@@ -177,7 +177,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
             FileWriterFromGameObjects.saveGameObjects(data, getPath() + getName() + ".xml");
         }
         catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-            e.printStackTrace();
             throw new VoogaException();
         }
     }
