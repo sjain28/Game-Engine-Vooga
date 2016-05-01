@@ -25,11 +25,19 @@ public class ElementSelectionModel extends Observable {
 	private static class SingletonHolder {
 		private static final ElementSelectionModel INSTANCE = new ElementSelectionModel();
 	}
-
+	
+	/**
+	 * 
+	 * @return instance of element selection model that is instantiated with singletone method
+	 */
 	public static ElementSelectionModel getInstance () {
 		return SingletonHolder.INSTANCE;
 	}
-
+	
+	/**
+	 * Set selected authoring elementable
+	 * @param elementable to select
+	 */
 	public void setSelected (AuthoringElementable e) {
 
 		if (this.selected!=null){
