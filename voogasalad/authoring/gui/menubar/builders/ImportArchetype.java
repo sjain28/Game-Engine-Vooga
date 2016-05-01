@@ -55,7 +55,7 @@ public class ImportArchetype extends Stage {
 	private List<String> getArchetypeNames(){
 		File folder = new File("resources/saved_archetypes/");
 		File[] listOfFiles = folder.listFiles();
-		List<String> archetypeNames = new ArrayList<String>();
+		List<String> archetypeNames = new ArrayList<>();
 
 		for (File file : listOfFiles){
 			String name = file.getName();
@@ -67,7 +67,7 @@ public class ImportArchetype extends Stage {
 	}
 
 	protected void addArchetypeNames (Collection<String> archetypeNames) {
-		if(archetypeNames.size() == 0) {
+		if(archetypeNames.isEmpty()) {
 			vbox.getChildren().add(new CustomText("No archetypes available."));
 		}
 		for (String name : archetypeNames) {
