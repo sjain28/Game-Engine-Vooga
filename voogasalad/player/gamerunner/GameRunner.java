@@ -160,7 +160,6 @@ public class GameRunner implements IGameRunner {
 		}
 		playLevel(latestLevelReached);
 		myGameDisplay.display();
-		//playLevel(latestLevelReached);
 		run();
 	}
 
