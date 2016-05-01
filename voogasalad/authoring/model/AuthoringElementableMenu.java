@@ -10,7 +10,12 @@ import javafx.scene.control.MenuItem;
 public class AuthoringElementableMenu extends ContextMenu{
     private CompleteAuthoringModelable model;
     private AuthoringElementable element;
-    
+    /**
+     * superclass to manage an elementable menu
+     * 
+     * @param model
+     * @param element
+     */
     public AuthoringElementableMenu(CompleteAuthoringModelable model,AuthoringElementable element){
         this.element=element;
         this.model=model;
@@ -24,7 +29,11 @@ public class AuthoringElementableMenu extends ContextMenu{
     private void removeElement(){
         model.removeGameElements((Node) element); 
     }
-    
+    /**
+     * Adds and Item to the menu, requires and event and the name of the 
+     * @param name
+     * @param e
+     */
     public void addItem(String name, EventHandler e){
         MenuItem item = new MenuItem(name);
         item.setOnAction(e);

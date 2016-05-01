@@ -125,7 +125,7 @@ public class CreateCommand implements Command {
     @SuppressWarnings("unchecked")
     private void open (Object models, String tag) {
         CurrentSessionStats stats = new CurrentSessionStats();
-        stats.startAuthoringSession();
+        stats.startAuthoringSession(); 
         UIManager manager;
         if (tag.equals(LOAD)) {
             manager = new UIManager((List<CompleteAuthoringModelable>) models);

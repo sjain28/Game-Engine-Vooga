@@ -12,11 +12,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import resources.VoogaBundles;
 
-
+/**
+ * Toolbar to show all the different shortcut buttons for the authoring environment
+ * @author Nick
+ *
+ */
 public class ToolPanel extends ToolBar {
 
     private EventHandler<ActionEvent> toolbarEvent;
-
+/**
+ * Passes in the event to execute on each click
+ * @param toolbarEvent
+ */
     public ToolPanel (EventHandler<ActionEvent> toolbarEvent) {
         this.toolbarEvent = toolbarEvent;
 

@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+/**
+ * SuperClass to define Screen Transitions
+ */
 public abstract class StarterPrompt extends Stage {
 	
 	protected static final double SPACING = 10;
