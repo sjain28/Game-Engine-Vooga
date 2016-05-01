@@ -45,7 +45,6 @@ public class PathEffect extends SpriteEffect{
 
 			for (Sprite sprite : getSprites()){
 				Vector nextVector = createSpline(myCounter);
-				System.out.println(nextVector);
 				data.getPhysicsEngine().translateX(sprite, nextVector.getX() / StandardPhysics.REDUCE_FACTOR);
 				data.getPhysicsEngine().translateY(sprite, nextVector.getY() / StandardPhysics.REDUCE_FACTOR);
 				setPastVelocities(sprite);
@@ -76,8 +75,6 @@ public class PathEffect extends SpriteEffect{
 		for (int i = 1; i < xPathPoints.length; i++){
 			distance += getDistance(xPathPoints[i - 1], xPathPoints[i], yPathPoints[i - 1], yPathPoints[i]);
 		}
-System.out.println("total path distance " + distance);
-System.out.println("distance per update cycle " + distance/duration);
 		return distance/duration;
 	}
 
@@ -99,13 +96,6 @@ System.out.println("distance per update cycle " + distance/duration);
 		}
 		xCoord.add(xCoord.get(xCoord.size()-1));
 		yCoord.add(yCoord.get(yCoord.size()-1));
-		
-		for(int i = 0; i < xCoord.size(); i++){
-			System.out.println(xCoord.get(i)+", "+yCoord.get(i));
-		}
-
-		System.out.println("number of  spline points " + xCoord.size());
-		System.out.println("duration " + ((AnimationEvent) getEvent()).getDuration());
 	}
 
 	private Double getDistance(Double x1, Double x2, Double y1, Double y2){

@@ -132,7 +132,6 @@ public class CreateCommand implements Command {
         Scene scene = new VoogaScene(manager);
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> promptForSave());
     }

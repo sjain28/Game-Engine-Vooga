@@ -1,13 +1,14 @@
 package authoring.gui.items;
 
-/**
- * The New Property Factory that creates a new VoogaData based on the user input from the GUI.
- * @author Harry Guo, Aditya Srinivasan, Arjun Desai
- */
-
 import java.util.ArrayList;
 
 import tools.interfaces.VoogaData;
+
+/**
+ * The New Property Factory that creates a new VoogaData based on the user input from the GUI.
+ * 
+ * @author Harry Guo, Aditya Srinivasan, Arjun Desai, Nick Lockett
+ */
 
 public class NewPropertyFactory {
 

@@ -10,6 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 
+/**
+ * Custom Switchbutton class that allows for toggle of properties to be "on" or "off".
+ * Mostly used for VoogaBooleans.
+ * 
+ * @author Harry Guo, Aditya Srinivasan, Arjun Desai, Nick Lockett
+ */
+ 
 
 public class SwitchButton extends Label{
 	
@@ -17,6 +24,10 @@ public class SwitchButton extends Label{
 	
     private SimpleBooleanProperty switchedOn;
 
+    /**
+     * Instantiates the display of the SwitchButton.
+     * @param on
+     */
     public SwitchButton (boolean on) {
         switchedOn = new SimpleBooleanProperty(on);
         Button switchBtn = new Button();
@@ -48,14 +59,26 @@ public class SwitchButton extends Label{
         switchedOn.set(false);
     }
 
+    /**
+     * Get value of the switch.
+     * @return
+     */
     public boolean switchOnProperty () {
         return switchedOn.getValue();
     }
     
+    /**
+     * Set the button to be value of boolean.
+     * @param on
+     */
     public void setOn(boolean on){
         switchedOn.setValue(on);
     }
     
+    /**
+     * Returns the boolean value of the button.
+     * @return
+     */
     public BooleanProperty booleanProperty(){
     	return switchedOn;
     }
