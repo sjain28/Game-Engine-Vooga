@@ -15,12 +15,12 @@ public interface Moveable {
 	/**
 	 * Allows for the getting of the movement Vectors (ie the velocity) of an object
 	 */
-	public Vector getVelocity();
+	Vector getVelocity();
 
 	/**
 	 * Allows for the setting of the movement Vectors of an object
 	 * 
 	 * @param velocity
 	 */
-	public void setVelocity(Velocity velocity);
+	void setVelocity(Velocity velocity);
 }

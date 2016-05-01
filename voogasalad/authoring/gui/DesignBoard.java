@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import authoring.CustomText;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.AuthoringElementable;
-import authoring.interfaces.Elementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.resourceutility.ResourceDecipherer;

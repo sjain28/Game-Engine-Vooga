@@ -9,21 +9,22 @@ import javafx.scene.Node;
 
 
 public interface EditElementable extends EditSpritable {
-    public void addGameElements (Node ... elements);
+    
+	void addGameElements (Node ... elements);
 
-    public void removeGameElements (Node ... elements);
+    void removeGameElements (Node ... elements);
 
-    public List<Node> getElements ();
+    List<Node> getElements ();
 
-    public void addElementId (String id);
+    void addElementId (String id);
 
-    public Node getElement (String id);
+    Node getElement (String id);
 
-    public Set<String> getIds ();
+    Set<String> getIds ();
 
-    public boolean hasElement (String id);
+    boolean hasElement (String id);
 
-    public Elementable getVoogaElement (String id);
+    Elementable getVoogaElement (String id);
 
-    public Collection<String> getMySpriteNames ();
+    Collection<String> getMySpriteNames ();
 }

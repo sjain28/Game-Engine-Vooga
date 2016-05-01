@@ -16,5 +16,5 @@ public interface Saveable {
      * Execute onSave
      * @throws VoogaException 
      */
-    public void onSave() throws VoogaException;
+    void onSave() throws VoogaException;
 }

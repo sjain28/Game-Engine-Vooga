@@ -78,8 +78,7 @@ public class CreateCommand implements Command {
             try {
                 prompt.close();
                 String name = ((Button) eee.getSource()).getId();
-                List<CompleteAuthoringModelable> models =
-                        new ArrayList<CompleteAuthoringModelable>();
+                List<CompleteAuthoringModelable> models = new ArrayList<>();
                 Preferences p =
                         (Preferences) Deserializer
                                 .deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
