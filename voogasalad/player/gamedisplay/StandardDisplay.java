@@ -29,7 +29,6 @@ import tools.VoogaJukebox;
 public class StandardDisplay implements IGameDisplay {
 	private IPromptFactory myPrompt;
 	private IControl myControl;
-	private IHUD myHUD;
 	private IGameRunner myGameRunner;
 	private Stage myStage;
 	private Scene myScene;
@@ -48,7 +47,6 @@ public class StandardDisplay implements IGameDisplay {
 	public StandardDisplay(IGameRunner gamerunner) {
 		myGameRunner = gamerunner;
 		myControl = new StandardControl(myGameRunner);
-		myHUD = new StandardHUD(myGameRunner); 
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
@@ -129,7 +127,6 @@ public class StandardDisplay implements IGameDisplay {
 		myPane.setCenter(myScreensHolder);
 		myPane.setTop(new MenuPanel(myGameRunner, e -> new MenuPanelHandlingMirror(e, myGameRunner), resource));
 		myPane.setBottom(myControl.createControl());
-		myPane.setRight(myHUD.createHUD());
 		myStage.setScene(myScene);
 	}
 
@@ -166,9 +163,6 @@ public class StandardDisplay implements IGameDisplay {
 
 	public IControl getControl() {
 		return myControl;
-	}
-	public IHUD getHUD() {
-		return myHUD;
 	}
 
 	@Override
