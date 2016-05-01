@@ -8,8 +8,6 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
-import tools.VoogaNumber;
-import tools.VoogaString;
 
 
 public class PrefFileItem extends MenuItemHandler { 

@@ -1,6 +1,5 @@
 package authoring.gui;
 
-import java.util.ResourceBundle;
 import authoring.GlobalPropertiesMapSetter;
 import authoring.gui.levelpreferences.DesignBoardPreferences;
 import authoring.interfaces.model.CompleteAuthoringModelable;

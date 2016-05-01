@@ -2,12 +2,11 @@ package authoring.gui.menubar.menuitems;
 
 import authoring.UILauncher;
 import authoring.gui.menubar.MenuItemHandler;
-import authoring.interfaces.gui.Saveable;
 import javafx.stage.Stage;
 import player.gamedisplay.Menuable;
 
 public class NewProjectFileItem extends MenuItemHandler {
-    private Saveable myManager;
+    //private Saveable myManager;
     /**
      * Initializes the MenuItem
      * 
@@ -16,7 +15,7 @@ public class NewProjectFileItem extends MenuItemHandler {
      */
 	public NewProjectFileItem(Menuable model) {
 		super();
-		myManager = (Saveable) model.getManager();
+		//myManager = (Saveable) model.getManager();
 	}
 	/**
          * Action to be taken on the selection of this menuItem

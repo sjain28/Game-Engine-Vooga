@@ -41,14 +41,14 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
     private GlobalPropertiesManager GPM;
 
     private SpriteFactory spriteFactory;
-    private AnimationFactory animationFactory;
+    //private AnimationFactory animationFactory;
 
     private Set<String> myIds;
 
     private String myManagerName;
 
     private String filePath;
-    private List<String> names;
+   // private List<String> names;
     
     public ElementManager () {
         myGameElements = new ArrayList<>();
@@ -56,8 +56,8 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         GPM = new GlobalPropertiesManager();
         myIds = new HashSet<>();
         spriteFactory = new SpriteFactory();
-        animationFactory = AnimationFactory.getInstance();
-        names = new ArrayList<>();
+        //animationFactory = AnimationFactory.getInstance();
+        //names = new ArrayList<>();
         
         initGlobalVariablesPane();
        
