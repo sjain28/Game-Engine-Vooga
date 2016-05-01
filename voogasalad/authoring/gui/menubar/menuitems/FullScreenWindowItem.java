@@ -17,7 +17,6 @@ public class FullScreenWindowItem extends PlayerMenuItemHandler {
 	
 	private static final String EXIT_MESSAGE = "Press Ctrl + Z to exit full screen mode";
 	
-	//TODO: Change GameRunner to IGameRunner
 	private GameRunner myGameRunner;
 
 	/**

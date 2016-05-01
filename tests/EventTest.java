@@ -1,10 +1,13 @@
-package events;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
+import events.Cause;
+import events.KeyCause;
+import events.VoogaEvent;
 
 public class EventTest {
 

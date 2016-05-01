@@ -4,6 +4,13 @@ import authoring.gui.animation.AnimationEventBuilder;
 import authoring.gui.menubar.PlayerMenuItemHandler;
 import player.gamedisplay.Menuable;
 
+/**
+ * Player Menu Item to create an animation.
+ * 
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
+ *
+ */
+
 public class NewAnimationNewItem extends PlayerMenuItemHandler {
 
 	AnimationEventBuilder animationBuilder;

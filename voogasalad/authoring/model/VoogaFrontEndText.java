@@ -34,6 +34,10 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
     private BackEndText backEndText;
     private AuthoringElementableMenu menu;
     
+    /**
+     * Initializes a generic text object
+     * @param text
+     */
     public VoogaFrontEndText () {
         setId(UUID.randomUUID().toString());
         backEndText = new BackEndText(getId());
@@ -44,6 +48,10 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
 
     }
 
+    /**
+     * Initializes the text object using backend information
+     * @param text
+     */
     public VoogaFrontEndText (BackEndText backtext) throws VoogaException {
         this.backEndText = backtext;
         this.setId(backtext.getId());
@@ -56,6 +64,10 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
         tp.loadData(this, properties);
     }
 
+    /**
+     * Initializes the text object using text and position
+     * @param text
+     */
     // stroke, color, font, text, size, name/group, position (x,y,z),
     public VoogaFrontEndText (double x, double y, String text) {
         this();
@@ -63,7 +75,10 @@ public class VoogaFrontEndText extends Text implements AuthoringElementable {
         this.setTranslateY(y);
         this.setText(text);
     }
-
+/**
+ * Initializes the text object using just the text
+ * @param text
+ */
     public VoogaFrontEndText (String text) {
         this(0, 0, text);
     }

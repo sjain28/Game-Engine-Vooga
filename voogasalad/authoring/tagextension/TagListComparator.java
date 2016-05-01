@@ -2,11 +2,11 @@ package authoring.tagextension;
 
 import java.util.Comparator;
 import java.util.List;
-
 import com.clarifai.api.Tag;
 
+
 /**
- * Compares tags by their percent match to 
+ * Compares tags by their percent match to
  * the inputted descriptions
  * 
  * @author Krista

@@ -4,6 +4,11 @@ import authoring.splash.ProjectOpenBySearchPrompt;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Test class to search for games based on tags
+ * @author Aditya Srinivasan
+ *
+ */
 public class GameTagSearcherTest extends Application {
 
 	@Override

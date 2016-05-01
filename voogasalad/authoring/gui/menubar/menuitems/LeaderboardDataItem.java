@@ -5,16 +5,30 @@ import authoring.gui.menubar.MenuItemHandler;
 import player.gamedisplay.Menuable;
 import tools.VoogaException;
 
+/**
+ * Leaderboard Item on the Data Drop down from the Menu Bar.
+ * 
+ * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
+ *
+ */
+
 public class LeaderboardDataItem extends MenuItemHandler{
 
-    public LeaderboardDataItem(Menuable manager) {
-       super();
-    }
+	/**
+	 * Super constructor of super class.
+	 * @param manager
+	 */
+	public LeaderboardDataItem(Menuable manager) {
+		super();
+	}
 
-    @Override
-    public void handle () throws VoogaException {
-       DataBaseDisplay data = new DataBaseDisplay();
-       data.show();
-    }
+	/**
+	 * Accesses the database.
+	 */
+	@Override
+	public void handle () throws VoogaException {
+		DataBaseDisplay data = new DataBaseDisplay();
+		data.show();
+	}
 
 }

@@ -25,7 +25,11 @@ import tools.Velocity;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
-
+/**
+ * Authoring representation of the sprite in the engine
+ * @author arjunaashna
+ *
+ */
 public class GameObject extends ImageView implements Moveable, AuthoringElementable {
 
     private Sprite mySprite;
@@ -33,7 +37,12 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
     private ContextMenu menu;
 
     private transient SimpleStringProperty imagePath;
-
+    
+    /**
+     * Authoring representation of the sprite
+     * @param sprite
+     * @param name
+     */
     public GameObject (Sprite sprite, String name) {
         initializeSprite(sprite);
         sprite.setName(name);
@@ -55,7 +64,8 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         
         Tooltip.install(this, tp);
     }
-
+    
+    
     private void initializeSprite (Sprite sprite) {
         mySprite = sprite;
         imagePath = new SimpleStringProperty();
@@ -83,11 +93,13 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         });
 
     }
-
     public Sprite getSprite () {
         return mySprite;
     }
-
+    
+    /**
+     * return velocity 
+     */
     @Override
     public Vector getVelocity () {
         return null;
@@ -108,27 +120,42 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         }
         event.consume();
     }
-
+    
+    /**
+     * get the vooga properties
+     */
     @Override
     public Map<String, VoogaData> getVoogaProperties () {
         return mySprite.getParameterMap();
     }
-
+    
+    /**
+     * add proeprtis to the changes
+     */
     @Override
     public void addProperty (String name, VoogaData data) {
         mySprite.addProperty(name, data);
 
     }
-
+    
+    /**
+     * remove properties basedo nthe name of the property (name)
+     */
     @Override
     public void removeProperty (String name) {
         mySprite.removeProperty(name);
     }
-
+    
+    /**
+     * set the name of hte object
+     */
     public String getName () {
         return name;
     }
-
+    
+    /**
+     * determine selector for the object
+     */
     public void select (Selector selector) {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(selector.getLightness());
@@ -136,16 +163,23 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         this.setEffect(colorAdjust);
         this.setEffect(new Glow(selector.getGlow()));
     }
-
+    
+    /**
+     * Set the properties basedo n the map
+     * @param map
+     */
     public void setProperties (Map<String, VoogaData> map) {
         mySprite.setProperties(map);
     }
-
+    
+    /**
+     * return sprite
+     */
     @Override
     public Elementable getElementable () {
         return mySprite;
     }
-
+    
     @Override
     public void setVoogaProperties (Map<String, VoogaData> newVoogaProperties) {
     }

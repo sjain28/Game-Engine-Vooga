@@ -29,7 +29,6 @@ import tools.interfaces.VoogaData;
 
 
 public class Sprite implements Moveable, Effectable, Elementable {
-
 	private boolean isMainCharacter;
 	private Velocity myVelocity;
 	private Acceleration myAcceleration;

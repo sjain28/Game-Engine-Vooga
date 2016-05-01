@@ -4,14 +4,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import com.clarifai.api.Tag;
-
 import data.Deserializer;
 import tools.VoogaException;
 
+/**
+ * Library that returns the list of tagss for the game and stores the tag to game pairs
+ * 
+ * @author Aditya Srinivasan
+ *
+ */
 public class GameTagLibrary {
-	//TODO: make sure to make a resources file for the tag information.
 	private static final String TAGS_FOLDER_LOCATION = "tags/";
 	private static final String TAG_SUFFIX = "_tags.xml";
 	private List<String> myDescripList;
@@ -42,7 +45,6 @@ public class GameTagLibrary {
 		File dir = new File(TAGS_FOLDER_LOCATION);
 		TagListComparator comp = new TagListComparator(myDescripList);
 		List<GameTagPair> gtpairs = new ArrayList<GameTagPair>();
-		//Map<List<Tag>,String> tagtogamemap = new TreeMap<List<Tag>,String>(comp);
 		
 		int count = 0;
 		
@@ -64,4 +66,3 @@ public class GameTagLibrary {
 		return gtpairs;
 	}
 }
-		  
