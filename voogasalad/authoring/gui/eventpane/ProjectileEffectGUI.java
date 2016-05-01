@@ -10,15 +10,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import tools.VoogaException;
 
-public class ProjectileEffectGUI implements EventGUI {
-	
-	private static final String REL_POS = "Relative Position";
-	private static final String ABS_POS = "Absolute Position";
-	private static final String SC_VEL = "Scaled Velocity";
-	private static final String AB_VEL = "Absolute Velocity";
 
-	private static final int PADDING = 5;
-	
+public class ProjectileEffectGUI implements EventGUI {
+
+    private static final String REL_POS = "Relative Position";
+    private static final String ABS_POS = "Absolute Position";
+    private static final String SC_VEL = "Scaled Velocity";
+    private static final String AB_VEL = "Absolute Velocity";
+
+    private static final int PADDING = 5;
+
     private EditEventable elementManager;
 
     private SpriteComboBox archetypes;
@@ -42,24 +43,38 @@ public class ProjectileEffectGUI implements EventGUI {
 
     private void createObjects () {
         archetypes = new ArchetypeComboBox(elementManager);
-        archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
+        archetypes.setPromptText("Select Archetype to Spawn");
+        
         targetDesired = new ComboBox<>();
-        velocityScaledDesired = new ComboBox<>();
+        targetDesired.setPromptText("Choose Position");
         targetDesired.getItems().addAll(REL_POS, ABS_POS);
-
+        
+        velocityScaledDesired = new ComboBox<>();
+        velocityScaledDesired.setPromptText("Scale Velocity Desired");
+        velocityScaledDesired.getItems().addAll(SC_VEL,AB_VEL);
+        
         targetId = new SpriteComboBox(elementManager);
+        
         posx = new NumberTextField();
         posx.setPadding(new Insets(PADDING));
+        posx.setPromptText("Position X");
+        
         posy = new NumberTextField();
         posy.setPadding(new Insets(PADDING));
+        posy.setPromptText("Position Y");
+        
         velx = new NumberTextField();
         velx.setPadding(new Insets(PADDING));
+        velx.setPromptText("Velocity X");
+        
         vely = new NumberTextField();
         vely.setPadding(new Insets(PADDING));
+        vely.setPromptText("Velocity Y");
+        
         amount = new NumberTextField();
         amount.setPadding(new Insets(PADDING));
 
-        velocityScaledDesired.getItems().addAll(SC_VEL, AB_VEL);
+        
     }
 
     private void initialize () {
@@ -83,12 +98,16 @@ public class ProjectileEffectGUI implements EventGUI {
         });
 
         velocityScaledDesired.setOnAction(e -> {
-            if (targetDesired.getValue().equals(SC_VEL)) {
-                removeInactiveNodes(velx, vely);
+            
+            if (velocityScaledDesired.getValue().equals(SC_VEL)) {
+                System.out.println("Velocity scaled desired activated- scaled");
+                removeInactiveNodes(velx, vely,amount);
                 addGUIElements(amount);
             }
-            if (targetDesired.getValue().equals(AB_VEL)) {
-                removeInactiveNodes(amount);
+            
+            if (velocityScaledDesired.getValue().equals(AB_VEL)) {
+                System.out.println("Velocity scaled desired activated- absolute");
+                removeInactiveNodes(velx,vely,amount);
                 addGUIElements(velx, vely);
             }
         });
@@ -106,7 +125,6 @@ public class ProjectileEffectGUI implements EventGUI {
                 node.getChildren().remove(element);
             }
         }
-
     }
 
     @Override
@@ -120,17 +138,18 @@ public class ProjectileEffectGUI implements EventGUI {
         if (targetDesired.getValue().equals(REL_POS)) {
             result += targetId.getSpriteId() + ",";
         }
-        result += posx.getText() + "," + posy.getText()+",";
-        
-        if (targetDesired.getValue().equals(ABS_POS)){
-            result+= velx.getText()+","+vely.getText()+",";
+        result += posx.getText() + "," + posy.getText() + ",";
+
+        if (targetDesired.getValue().equals(ABS_POS)) {
+            result += velx.getText() + "," + vely.getText() + ",";
             return result;
         }
-        
-        if (velocityScaledDesired.getValue().equals(SC_VEL)){
+
+        if (velocityScaledDesired.getValue().equals(SC_VEL)) {
             result += amount.getText();
-        } else {
-            result += velx.getText()+","+vely.getText();
+        }
+        else {
+            result += velx.getText() + "," + vely.getText();
         }
         return result;
     }

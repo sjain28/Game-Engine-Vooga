@@ -15,6 +15,7 @@ import javafx.util.Duration;
  * @author Hunter Lee
  *
  */
+@Deprecated
 public class GameTimeline {
 	
     private static final double FRAME_RATE = 60;
@@ -36,7 +37,6 @@ public class GameTimeline {
 	}
 
 	private Object step() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

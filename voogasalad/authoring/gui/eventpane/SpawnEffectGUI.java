@@ -12,7 +12,7 @@ import tools.VoogaException;
 
 public class SpawnEffectGUI implements EventGUI {
 	
-	private static final int PADDING = 5;
+    private static final int PADDING = 5;
 
     private ArchetypeComboBox archetypes;
     private ComboBox<String> targetDesired;
@@ -35,9 +35,10 @@ public class SpawnEffectGUI implements EventGUI {
     private void initialize () {
 
         archetypes = new ArchetypeComboBox(elementManager);
-        archetypes.getItems().addAll(elementManager.getSpriteFactory().getAllArchetypeNames());
+        archetypes.setPromptText("Select Archetype to Spawn");
         
         targetDesired = new ComboBox<>();
+        targetDesired.setPromptText("Choose Position");
         targetDesired.getItems().addAll(RELATIVE_POSITION, ABSOLUTE_POSITION);
 
         targetId = new SpriteComboBox(elementManager);

@@ -19,8 +19,18 @@ import javafx.stage.Stage;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
+/**
+ * Class that allows for importation of archetypes that have been stored.
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
 
 public class ImportArchetype extends Stage {
+	
+	/**
+	 * private instance variables
+	 */
 	private EditSpritable manager;
 	private Scene scene;
 	private BorderPane root;
@@ -28,6 +38,9 @@ public class ImportArchetype extends Stage {
 	private VBox vbox;
 	private HBox hbox;
 
+	/**
+	 * Initializes the GUI dialog box.
+	 */
 	public ImportArchetype(){
 		ButtonMaker maker = new ButtonMaker();
 		root = new BorderPane();
@@ -45,6 +58,10 @@ public class ImportArchetype extends Stage {
 		this.setScene(scene);
 	}
 
+	/**
+	 * Second constructor to connect archetype importer to editor/manager.
+	 * @param manager
+	 */
 	public ImportArchetype (EditSpritable manager) {
 		this();
 
@@ -52,6 +69,10 @@ public class ImportArchetype extends Stage {
 		addArchetypeNames(getArchetypeNames());
 	}
 
+	/**
+	 * Get archetype names from saved archetypes folder.
+	 * @return
+	 */
 	private List<String> getArchetypeNames(){
 		File folder = new File("resources/saved_archetypes/");
 		File[] listOfFiles = folder.listFiles();
@@ -66,6 +87,10 @@ public class ImportArchetype extends Stage {
 		return archetypeNames;
 	}
 
+	/**
+	 * Adds new collection of archetypes.
+	 * @param archetypeNames
+	 */
 	protected void addArchetypeNames (Collection<String> archetypeNames) {
 		if(archetypeNames.isEmpty()) {
 			vbox.getChildren().add(new CustomText("No archetypes available."));
@@ -75,12 +100,20 @@ public class ImportArchetype extends Stage {
 		}
 	}
 
+	/**
+	 * Adds a singular archetype.
+	 * @param archetypeName
+	 */
 	protected void addArchetypeName (String archetypeName) {
 		CheckBox checkbox = new CheckBox(archetypeName);
 		checkbox.setOnAction(e -> manageSelectedArchetypes(checkbox));
 		vbox.getChildren().add(checkbox);
 	}
 
+	/**
+	 * Manages the check box for picking archetypes to import.
+	 * @param checkbox
+	 */
 	protected void manageSelectedArchetypes (CheckBox checkbox) {
 		if (checkbox.isSelected()) {
 			getSelectedArchetypes().add(checkbox.getText());
@@ -92,6 +125,9 @@ public class ImportArchetype extends Stage {
 		}
 	}
 
+	/**
+	 * Import selected archetypes.
+	 */
 	protected void apply(){
 		try {
 			for (String name : getSelectedArchetypes()){
@@ -105,18 +141,34 @@ public class ImportArchetype extends Stage {
 		}
 	}
 
+	/**
+	 * sets the manager for importing archetypes and connecting to back end.
+	 * @param manager
+	 */
 	protected void setManager(EditSpritable manager){
 		this.manager=manager;
 	}
 
+	/**
+	 * Gets the manager for this class.
+	 * @return
+	 */
 	protected EditSpritable getManager(){
 		return manager;
 	}
-
+	
+	/**
+	 * Returns the list of selected archetypes imported.
+	 * @return
+	 */
 	protected List<String> getSelectedArchetypes () {
 		return selectedArchetypes;
 	}
 
+	/**
+	 * Sets the list of selected archetypes to import.
+	 * @param selectedArchetypes
+	 */
 	protected void setSelectedArchetypes (List<String> selectedArchetypes) {
 		this.selectedArchetypes = selectedArchetypes;
 	}
