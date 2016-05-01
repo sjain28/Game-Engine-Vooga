@@ -32,7 +32,6 @@ public class DataContainerOfLists {
                                  List<VoogaEvent> eventList,Map<String,Sprite> archetypeToFactory,
                                  AnimationFactory animationFactory) {
         this.eventList = eventList;
-        System.out.println(this.eventList);
         this.elementableList = ElementableList;
         this.variableMap = variableMap;
         this.archetypeMap = archetypeToFactory;

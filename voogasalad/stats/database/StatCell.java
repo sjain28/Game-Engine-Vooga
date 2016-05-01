@@ -46,7 +46,6 @@ public class StatCell extends CellEntry {
 	 * @param authorsesh
 	 */
 	public void addAuthoringSession(AuthorSession authorsesh){
-		System.out.println("adding authoring session: "+myAuthorStats.size());
 		myAuthorStats.add(authorsesh);
 	}
 	/**
@@ -61,7 +60,6 @@ public class StatCell extends CellEntry {
 	 * @return
 	 */
 	public PlaySession getLatestPlaySession(){
-		System.out.println(myPlayStats.size());
 		if (myPlayStats.empty()){
 			return null;
 		}
@@ -90,7 +88,6 @@ public class StatCell extends CellEntry {
 	 */
 	public void updateProgress(String levelName){
 		setProperty(LATEST_PROGRESS, new VoogaString(""));
-		System.out.println("The levelname here was set to levelName " + levelName);
 	}
 	/**
 	 * Checks the progress

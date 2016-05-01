@@ -21,7 +21,6 @@ public class GameTagTest {
 		listoftags.add("vector");
 		listoftags.add("character");
 		List<String> listofgamenames = taglibrary.getListOfGameNamesByTag(listoftags);
-		//System.out.println(listofgamenames);
 	}
 
 }

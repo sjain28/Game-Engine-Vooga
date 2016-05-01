@@ -308,9 +308,6 @@ public class DesignBoard extends Tab implements Observer {
         }
 
         if ((o instanceof ElementSelectionModel) && (arg instanceof AuthoringElementable)) {
-            for (Node e : contentPane.getChildren()) {
-                System.out.println(e);
-            }
             List<Node> newChildren = new ArrayList<>(contentPane.getChildren());
             newChildren.sort(new NodeZAxisComparator());
             contentPane.getChildren().clear();

@@ -95,7 +95,6 @@ public class GameTagManager {
      */
     @SuppressWarnings("unchecked")
     private void loadCurrentGameTags () {
-        System.out.println("loading");
         Path path = Paths.get(getTagLocation());
         try {
             if (Files.notExists(path)) {
@@ -103,7 +102,6 @@ public class GameTagManager {
             }
             List<Object> objects = Deserializer.deserialize(1, getTagLocation());
             myTags = (List<Tag>) objects.get(0);
-            System.out.println("my tags: " + myTags);
         }
         catch (VoogaException e) {
 

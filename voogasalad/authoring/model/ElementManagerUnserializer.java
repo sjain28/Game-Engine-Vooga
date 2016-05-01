@@ -30,9 +30,7 @@ public class ElementManagerUnserializer {
 
         FileReaderToGameObjects reader = new FileReaderToGameObjects(xmlPath);
         DataContainerOfLists data = reader.getDataContainer();
-        
-        System.out.println(elementManager.getElements().size());
-        
+                
         elementManager.setGameObjects(getNodeList(data.getElementableList()));
         elementManager.setSpriteFactory(data.getArchetypeMap());
         elementManager.setEventList(data.getEventList());

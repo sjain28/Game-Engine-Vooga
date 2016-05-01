@@ -14,7 +14,6 @@ public class Save extends ToolbarItemHandler {
      */
     public Save (Menuable model) {
         manager = model;
-        System.out.println("Manager initialized");
     }
 
     /**
@@ -22,7 +21,6 @@ public class Save extends ToolbarItemHandler {
      */
     @Override
     public void handle () {
-        System.out.println("Saving");
         manager.saveAll();
     }
 
