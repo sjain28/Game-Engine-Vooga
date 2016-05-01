@@ -30,7 +30,7 @@ public class FileReaderToGameObjects {
         data = (DataContainerOfLists) Deserializer.deserialize(1, fileName).get(0);
         }
         catch (RuntimeException e) {
-            e.printStackTrace();
+
         }
         catch (VoogaException e) {
             VoogaAlert alert = new VoogaAlert(e.getMessage());

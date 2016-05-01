@@ -37,10 +37,10 @@ public final class Deserializer {
             }
         }
         catch (FileNotFoundException e1) {
-            e1.printStackTrace();
+          
         }
         catch (IOException e1) {
-            e1.printStackTrace();
+        
         }
         return objectsCreated;
     }
