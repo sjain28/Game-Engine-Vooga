@@ -50,11 +50,11 @@ public class PathInterpolator {
 			}
 		}
 		for (Double d : xInterpolation) {
-			System.out.println(d);
+//			System.out.println(d);
 		}
-		System.out.println("-------------");
+//		System.out.println("-------------");
 		for (Double d : yInterpolation) {
-			System.out.println(d);
+//			System.out.println(d);
 		}
 	}
 
