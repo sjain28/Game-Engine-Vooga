@@ -9,17 +9,26 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
+/**
+ * Class for creating the connection bridge between levels.
+ * 
+ * @author Harry Guo, Nick Lockett, 
+ *
+ */
 public class Connection extends Group {
 
+	/**
+	 * Private instance variables.
+	 */
 	private static final double LINE_WIDTH = 5;
 	private static final int COMPLETE_COUNT = 2;
 
 	private transient Line connector;
 	private transient Anchor anchor1;
 	private transient Anchor anchor2;
-	
+
 	private double startx, starty, endx, endy;
-	
+
 	private Level start;
 	private Level end;
 
@@ -37,7 +46,7 @@ public class Connection extends Group {
 		attachAnchors();
 		this.getChildren().addAll(connector, anchor1, anchor2);
 	}
-	
+
 	private void initializeLine() {
 		connector = new Line(startx, starty, endx, endy);
 		connector.setStrokeWidth(LINE_WIDTH);
@@ -52,15 +61,15 @@ public class Connection extends Group {
 			}
 		});
 	}
-	
+
 	public Anchor getStartAnchor() {
 		return this.anchor1;
 	}
-	
+
 	public Anchor getEndAnchor() {
 		return this.anchor2;
 	}
-	
+
 	private void attachAnchors() {
 		anchor1 = new Anchor(connector.startXProperty(), connector.startYProperty(), TransitionOrder.FIRST);
 		anchor2 = new Anchor(connector.endXProperty(), connector.endYProperty(), TransitionOrder.LAST);
@@ -94,9 +103,9 @@ public class Connection extends Group {
 		});
 		enableDragCursor(circle);
 	}
-	
+
 	private void enableDragCursor(final Circle circle) {
-		
+
 		circle.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
@@ -115,25 +124,37 @@ public class Connection extends Group {
 		});
 	}
 
+	/**
+	 * Set the start point with a level
+	 * @param start
+	 */
 	public void setStartpoint(Level start) {
 		this.start = start;
 	}
-	
+
+	/**
+	 * Set and ending level
+	 * @param end
+	 */
 	public void setEndpoint(Level end) {
 		this.end = end;
 	}
-	
+
+	/**
+	 * Get the  
+	 * @return
+	 */
 	public Level getStartpoint() {
 		return this.start;
 	}
-	
+
 	public Level getEndpoint() {
 		return this.end;
 	}
-	
+
 	public Line getLine() {
 		return this.connector;
 	}
-	
+
 
 }

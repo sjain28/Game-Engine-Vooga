@@ -4,6 +4,12 @@ import javafx.beans.property.DoubleProperty;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 
+/**
+ * Anchor class to mark beginning and end anchor.
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
 public class Anchor extends Circle {
 
 	public Anchor(DoubleProperty x, DoubleProperty y, TransitionOrder order) {
