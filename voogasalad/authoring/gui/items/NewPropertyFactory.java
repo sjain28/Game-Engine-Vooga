@@ -44,7 +44,7 @@ public class NewPropertyFactory {
 	public VoogaData createNewProperty(String s) {
 		VoogaData vgData = null;
 		try {
-			Class c = Class.forName(COMMAND_PATH + s);
+			Class<?> c = Class.forName(COMMAND_PATH + s);
 			vgData = (VoogaData) c.newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();

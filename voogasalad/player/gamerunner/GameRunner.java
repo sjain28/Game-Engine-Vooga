@@ -28,6 +28,7 @@ import player.leveldatamanager.IDisplayScroller;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
+import stats.database.PlaySession;
 import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import tools.VoogaAlert;
@@ -40,7 +41,7 @@ import videos.ScreenProcessor;
  * @author Hunter, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
-	public static final double FRAME_RATE = 60;
+	public static final double FRAME_RATE = 10;
 	private static final double SEC_PER_MIN = 60;
 	private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
 	private static final double SPEEDCONTROL = 10;
@@ -142,15 +143,19 @@ public class GameRunner implements IGameRunner {
 		myCurrentGameString = gameXmlList;
 		System.out.println("WHATTTT THE FUCK " + GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX);
 		try {
+			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
+			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
+			VoogaBundles.preferences.setProperty("GameWidth", preferences.getWidth());
+			VoogaBundles.preferences.setProperty("GameHeight", preferences.getHeight());
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			VoogaAlert alert = new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
 			alert.showAndWait();
 		}
 		String latestLevelReached = checkProgressInDatabase(); 
+		playLevel(latestLevelReached);
 		myGameDisplay.display();
 		System.out.println("What is the latest level reached here "+ latestLevelReached);
-		playLevel(latestLevelReached);
 		run();
 	}
 
@@ -176,7 +181,6 @@ public class GameRunner implements IGameRunner {
 	private void playLevel(String fileName) {
 		myLevelReached++;
 		myCurrentLevelString = fileName;
-		System.out.println("my level data is about to refresh level data");
 		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
 		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
@@ -191,7 +195,6 @@ public class GameRunner implements IGameRunner {
 		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/')
 				.lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
 		myLevelMap.put(levelName, LevelType.ENTRYPOINT);
-		System.out.println("about to refresh level data in test level");
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty("GameWidth")), 
@@ -204,7 +207,6 @@ public class GameRunner implements IGameRunner {
 		myScroller = new DisplayScroller(myGameDisplay);
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
-		System.out.println(scrollingSprite);
 		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
 		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}
@@ -253,8 +255,10 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void finishPlaySession() {
 		if (playSessionActive) {
-			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
+			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()),23432);
+//			System.out.println("WJKLDJFLKJSDFLA");
 			VoogaDataBase.getInstance().save();
+//			System.out.println("WHAAT DID THE SESION END OR NAH" + myStats.getCurrentStatCell().peekLatestPlaySession().getProperty(PlaySession.LEVEL_REACHED));
 		}
 	}
 

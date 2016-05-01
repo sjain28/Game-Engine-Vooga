@@ -28,11 +28,11 @@ public class CurrentSessionStats {
 	public void startAuthoringSession(){
     	StatCell statcell = getCurrentStatCell();
     	System.out.println("ADDING AUTHORING SESSION NOW");
-    	statcell.addAuthoringSession(new AuthorSession(new Date()));
+    	statcell.addAuthorSession(new AuthorSession(new Date()));
 	}
 	public void endCurrentAuthoringSession(){
     	StatCell statcell = getCurrentStatCell();
-    	statcell.getLatestAuthoringSession().endSession();
+    	statcell.peekLatestAuthoringSession().endSession();
 	}
 	public void startPlaySession(){
 		PlaySession playsession = new PlaySession(new Date());
@@ -40,8 +40,15 @@ public class CurrentSessionStats {
 		playsession.startSession();
 	}
 	public void endCurrentPlaySession(double score, double myLevelReached){
-		PlaySession playsession = getCurrentStatCell().getLatestPlaySession();
-		playsession.endSession(new VoogaNumber(score), new VoogaNumber(myLevelReached));
+		StatCell statcell = getCurrentStatCell();
+		statcell.updatePlaySession(PlaySession.SCORE, new VoogaNumber(score));
+		statcell.updatePlaySession(PlaySession.LEVEL_REACHED, new VoogaNumber(myLevelReached));
+		System.out.println("WHAT IS THE STAT CELL HERE SDJFKL KFDSJ KLJLDSF JLFSJD KLJFDS " + statcell.peekLatestPlaySession().getProperty(PlaySession.SCORE));
+		System.out.println("WHAT IS THE SCORE CELL HERE SDJFKL KFDSJ KLJLDSF JLFSJD KLJFDS " + statcell.peekLatestPlaySession().getProperty(PlaySession.LEVEL_REACHED));
+//		PlaySession playsession = getCurrentStatCell().peekLatestPlaySession();
+//		System.out.println("The score here should be the score " +((StatCell) VoogaDataBase.getInstance().getStatByGameAndUser(myCurrentGame,myCurrentUser)).peekLatestPlaySession().getProperty(PlaySession.SCORE));
+//		playsession.endSession(new VoogaNumber(score), new VoogaNumber(myLevelReached));
+		
 	}
 	public StatCell getCurrentStatCell(){
 		setCurrentGameAndUser();

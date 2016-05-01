@@ -4,7 +4,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
+import tools.VoogaNumber;
 import tools.VoogaString;
+import tools.interfaces.VoogaData;
 
 public class StatCell extends CellEntry {
 	private Stack<AuthorSession> myAuthorStats;
@@ -26,31 +28,38 @@ public class StatCell extends CellEntry {
 	public List<CellEntry> getAuthorStats(){
 		return Collections.unmodifiableList(myAuthorStats);
 	}
-	public void addAuthoringSession(AuthorSession authorsesh){
-//		System.out.println("adding authoring session: "+myAuthorStats.size());
-		myAuthorStats.add(authorsesh);
-	}
 	public List<CellEntry> getPlayStats(){
 		return Collections.unmodifiableList(myPlayStats);
 	}
-	public PlaySession getLatestPlaySession(){
+	public PlaySession peekLatestPlaySession(){
 //		System.out.println(myPlayStats.size());
 		if (myPlayStats.empty()){
 			return null;
 		}
 		return myPlayStats.peek();
+//		System.out.println()
 	}
-	public AuthorSession getLatestAuthoringSession(){
+	public AuthorSession peekLatestAuthoringSession(){
 		if (myAuthorStats.empty()){
 			return null;
 		}
 		return myAuthorStats.peek();
 	}
 	public void addPlaySession(PlaySession voogaplaysesh){
-		myPlayStats.add(voogaplaysesh);
+		myPlayStats.push(voogaplaysesh);
 	}
 	public void addAuthorSession(AuthorSession voogaauthorsesh){
-		myAuthorStats.add(voogaauthorsesh);
+		myAuthorStats.push(voogaauthorsesh);
+	}
+	public void updateAuthorSession(String param, VoogaData value){
+		AuthorSession lastSession = myAuthorStats.pop();
+		lastSession.setProperty(param, value);
+		myAuthorStats.push(lastSession);
+	}
+	public void updatePlaySession(String param, VoogaData value){
+		PlaySession lastSession = myPlayStats.pop();
+		lastSession.setProperty(param, value);
+		myPlayStats.push(lastSession);
 	}
 	public String toString(){
 		return "Cell";

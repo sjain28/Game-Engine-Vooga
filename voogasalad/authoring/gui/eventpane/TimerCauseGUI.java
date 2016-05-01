@@ -11,16 +11,17 @@ import tools.VoogaException;
 
 
 public class TimerCauseGUI implements EventGUI {
-    private ComboBox decimalPlace;
+    private ComboBox<String> decimalPlace;
     private NumberTextField control;
     private NumberTextField startingTime;
     private VBox node;
     
-    private EditEventable manager;
+    
+    //private EditEventable manager;
 
     private static final double NODE_SPACING = 15;
     public TimerCauseGUI (EditEventable elementManager) {
-        manager = elementManager;
+       // manager = elementManager;
 
         initialize();
     }

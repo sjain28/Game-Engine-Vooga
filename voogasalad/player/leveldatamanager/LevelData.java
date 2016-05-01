@@ -25,6 +25,7 @@ import tools.VoogaJukebox;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
+
 /**
  * A centralized class to contain and access data including Sprites, Text,
  * Global Variables, and Events
@@ -144,21 +145,17 @@ public class LevelData implements ILevelData {
 
 	/**
 	 * Refreshes the data and restarts timer in global variable and sets level
-	 * path TODO: where??
 	 * 
 	 * @param levelfilename
 	 */
 	public void refreshLevelData(String levelfilename) {
-		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables,
-				myNextLevelKey);
+		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables, myNextLevelKey);
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
-		System.out.println("about to set the bgm");
+		VoogaJukebox.getInstance().stopBGM();
 		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "")+"BGM").getValue());
-		// TODO: Anita: implement clearMap and setMap and call a stub
-		// mySpriteFactory.clearMap();
-		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());
+		VoogaJukebox.getInstance().playBGM();
 		mySpriteFactory = myTransitioner.getNewSpriteFactory();
 		myMainCharID = myTransitioner.getMainCharID();
 		myAnimationFactory = myTransitioner.getAnimationFactory();
