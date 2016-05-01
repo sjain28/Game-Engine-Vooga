@@ -16,44 +16,44 @@ import tools.VoogaException;
  *
  */
 public class AnimationEffectGUI implements EventGUI{
-    
-    private ArchetypeSpriteCombo names;
-    private ComboBox animations;
-    private EditEventable manager;
-    private VBox node;
-    
-    /**
-     * 
-     * @param manager: EditEventable Manager that gives access to current game objects and list of events
-     */
-    public AnimationEffectGUI (EditEventable manager) {
-        this.manager = manager;
-        initialize();
-    }
-    
-    private void initialize () {
-        node = new VBox();
-        animations = new ComboBox();
-        animations.getItems().addAll(AnimationFactory.getInstance().getMyAnimationEvents().keySet());
-        names = new ArchetypeSpriteCombo(manager,node,e->onNameSelected(),true);
-        names.display();
-    }
-    
-    private void onNameSelected () {
-        addGUIElements(animations);
-    }
-    
-    private void addGUIElements (Node ... elements) {
-        node.getChildren().addAll(elements);
-    }
 
-    @Override
-    public Node display () {
-        return node;
-    }
+	private ArchetypeSpriteCombo names;
+	private ComboBox animations;
+	private EditEventable manager;
+	private VBox node;
 
-    @Override
-    public String getDetails () throws VoogaException {
-        return "events.AnimationEffect,"+animations.getValue()+","+names.getDetails();
-    }
+	/**
+	 * 
+	 * @param manager: EditEventable Manager that gives access to current game objects and list of events
+	 */
+	public AnimationEffectGUI (EditEventable manager) {
+		this.manager = manager;
+		initialize();
+	}
+
+	private void initialize () {
+		node = new VBox();
+		animations = new ComboBox();
+		animations.getItems().addAll(AnimationFactory.getInstance().getMyAnimationEvents().keySet());
+		names = new ArchetypeSpriteCombo(manager,node,e->onNameSelected(),true);
+		names.display();
+	}
+
+	private void onNameSelected () {
+		addGUIElements(animations);
+	}
+
+	private void addGUIElements (Node ... elements) {
+		node.getChildren().addAll(elements);
+	}
+
+	@Override
+	public Node display () {
+		return node;
+	}
+
+	@Override
+	public String getDetails () throws VoogaException {
+		return "events.AnimationEffect,"+animations.getValue()+","+names.getDetails();
+	}
 }
