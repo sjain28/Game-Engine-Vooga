@@ -90,9 +90,6 @@ public class CollisionCause extends Cause{
 			}
 		}
 		getEvent().addSpritesFromCause(collidedSprites);
-		if(myVal){
-			System.out.println(collidedSprites.size());
-		}
 		return myVal;
 	}
 	/**
