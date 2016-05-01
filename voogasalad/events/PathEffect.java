@@ -23,6 +23,8 @@ public class PathEffect extends SpriteEffect{
 	private Map<Sprite, Velocity> spritePastVelocities;
 	private int myCounter;
 
+	private final static int TWO = 2;
+	
 	public PathEffect(Double[] xMousePoints, Double[] yMousePoints, Boolean reverse, AnimationEvent event) {
 		super(event);
 		setNeedsSprites(true);
@@ -55,7 +57,7 @@ public class PathEffect extends SpriteEffect{
 
 	@Override
 	public String toString() {
-		return null;
+		return "";
 	}
 	private void setPastVelocities(Sprite sprite){
 			spritePastVelocities.put(sprite, sprite.getVelocity());
@@ -100,7 +102,7 @@ System.out.println("distance per update cycle " + distance/duration);
 	}
 
 	private Double getDistance(Double x1, Double x2, Double y1, Double y2){
-		return Math.sqrt(Math.pow((x2-x1), 2) + Math.pow((y2-y1), 2));
+		return Math.sqrt(Math.pow((x2-x1), TWO) + Math.pow((y2-y1), TWO));
 	}
 
 	protected Double getMyVelocity(){

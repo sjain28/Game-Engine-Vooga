@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
  */
 public class Main extends Application {
-	
+
 	/**
 	 * Initializes the launcher.
 	 */

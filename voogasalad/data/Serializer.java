@@ -32,14 +32,10 @@ public class Serializer {
 			throws ParserConfigurationException, TransformerException, IOException, SAXException {
 		File file = new File(fileName);
 		if (!file.exists()) {
-			boolean result = false;
 			try {
 				file.getParentFile().mkdir();
-				result = true;
 			} catch (Exception e) {
 				throw e;
-			}
-			if (result) {
 			}
 		}
 		serialize(object, fileName);

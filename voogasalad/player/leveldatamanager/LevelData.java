@@ -1,5 +1,6 @@
 package player.leveldatamanager;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import resources.VoogaBundles;
 import tools.Pair;
 import tools.PairZAxisComparator;
 import tools.VoogaBoolean;
+import tools.VoogaJukebox;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
@@ -152,6 +154,8 @@ public class LevelData implements ILevelData {
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
+		System.out.println("about to set the bgm");
+		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "")+"BGM").getValue());
 		// TODO: Anita: implement clearMap and setMap and call a stub
 		// mySpriteFactory.clearMap();
 		// mySpriteFactory.setMap(myTransitioner.getSpriteMap());

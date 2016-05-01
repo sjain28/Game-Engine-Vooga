@@ -12,7 +12,7 @@ public class PathInterpolator {
 	/**
 	 * Constants
 	 */
-	private static final double NUM_POINTS = 1200;
+	private static final double NUM_POINTS = 72000;
 	private static final double INCREMENT = 0.001;
 	private static final int GRANULARITY_FACTOR = 3;
 	private static final int GRANULARITY_POWER = 2;
@@ -35,8 +35,7 @@ public class PathInterpolator {
 	 */
 	public void interpolate(Double[] xRaw, Double[] yRaw) {
 		int i = 0;
-		for (double t = 0.00; t < INCREMENT * (NUM_POINTS - 1); t = t
-				+ INCREMENT) {
+		for (double t = 0.00; t < INCREMENT * (NUM_POINTS - 1); t = t + INCREMENT) {
 			xInterpolation[i] = Math.pow((1 - t), GRANULARITY_FACTOR) * xRaw[0]
 					+ GRANULARITY_FACTOR * Math.pow((1 - t), GRANULARITY_POWER)
 					* t * xRaw[1] + GRANULARITY_FACTOR * (1 - t)

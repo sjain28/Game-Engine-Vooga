@@ -3,7 +3,7 @@ package authoring.gui;
 /**
  * Class to handle Sprite name and ID pair.
  * 
- * @author HarryGuo
+ * @author Nick Lockett, Arjun Desai, Aditya Srinivasan, Harry Guo
  *
  */
 

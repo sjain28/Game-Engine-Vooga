@@ -26,13 +26,13 @@ import javafx.scene.text.Text;
 import resources.VoogaBundles;
 
 public class CustomText extends Text {
-	
+
 	private ResourceBundle textProperties;
-	
+
 	private String COLOR;
 	private String FONT;
 	private double FONT_SIZE;
-	
+
 	/**
 	 * new Object to allow for easy standardized text settings, like a constant font, color etc
 	 * 
@@ -46,7 +46,7 @@ public class CustomText extends Text {
 		FONT_SIZE = Double.parseDouble(textProperties.getString("fontSize"));
 		this.setFill(Paint.valueOf(COLOR));
 	}
-	
+
 	/**
 	 * Custom text with user defined fontSize
 	 * 
@@ -57,7 +57,7 @@ public class CustomText extends Text {
 		this(text);
 		this.setFont(Font.font(fontSize));
 	}
-	
+
 	/**
 	 * Custom text with user defined font weight
 	 * 
@@ -68,7 +68,7 @@ public class CustomText extends Text {
 		this(text);
 		this.setFont(Font.font(FONT, weight, FONT_SIZE));
 	}
-	
+
 	/**
 	 * Custom text with user defined font
 	 * 
