@@ -30,6 +30,8 @@ import tools.ScoreCompare;
  *
  */
 public class LeaderBoards extends Stage {
+    private static final double WIDTH = 100;
+    private static final double HEIGHT = 200;
     private VBox best;
     private VoogaDataBase database = VoogaDataBase.getInstance();
     private String game;
@@ -60,6 +62,7 @@ public class LeaderBoards extends Stage {
         best.getChildren().add(t);
         makeLeaders();
         Scene content = new VoogaScene(best);
+        best.setPrefSize(WIDTH, HEIGHT);
         this.setScene(content);
         this.show();
     }

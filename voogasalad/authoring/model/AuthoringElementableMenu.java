@@ -30,7 +30,7 @@ public class AuthoringElementableMenu extends ContextMenu{
         model.removeGameElements((Node) element); 
     }
     /**
-     * Adds and Item to the menu, requires and event and the name of the 
+     * Adds and Item to the menu, requires and event and the name of the tag
      * @param name
      * @param e
      */
