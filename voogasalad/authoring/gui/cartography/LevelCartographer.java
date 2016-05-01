@@ -121,7 +121,6 @@ public class LevelCartographer extends Stage {
 			container = new NetworkContainer(mappings, levelTypes);
 			Serializer.serializeLevel(container, MAP_XML_PATH);
 		} catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-			e.printStackTrace();
 		}
 		this.close();
 	}

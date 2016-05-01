@@ -67,7 +67,6 @@ public class GameTagLibrary {
                     gtpairs.add(gtp);
                 }
                 catch (VoogaException e) {
-                    e.printStackTrace();
                 }
             }
         }

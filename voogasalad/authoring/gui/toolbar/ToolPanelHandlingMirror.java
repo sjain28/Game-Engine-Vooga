@@ -48,7 +48,6 @@ public class ToolPanelHandlingMirror {
             toolbarItemHandler.getClass().getDeclaredMethod(HANDLE).invoke(toolbarItemHandler);
         }
         catch (Exception ee) {
-            ee.printStackTrace();
             throw new VoogaException(ITEM_NOT_IMPLEMENTED_ERROR);
         }
     }
