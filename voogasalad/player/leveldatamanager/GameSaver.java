@@ -78,10 +78,5 @@ public class GameSaver implements IGameSaver {
 		System.out.println("What is filePath " + GAMES+ gameName + SLASH + LEVELS +  playerName + XML_SUFFIX);
 		CurrentSessionStats currentCell = new CurrentSessionStats();
 		currentCell.saveGameProgress(playerName);
-//		CellEntry entry = VoogaDataBase.getInstance().getStatByGameAndUser(gameName, playerName);
-//		PlaySession latestSession =  ((StatCell) entry).getLatestPlaySession();
-//		latestSession.setProperty(PlaySession.LEVEL_REACHED,new VoogaString(nameOfGame));
-//		((StatCell) entry).updateProgress(playerName);
-//		System.out.println("What is the current update progress" + ((StatCell) entry).checkProgress());
 	}
 }
