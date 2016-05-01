@@ -3,6 +3,7 @@ package application;
 import authoring.UILauncher;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import stats.database.VoogaDataBase;
 
 /**
  * This class is the entry-point to start the program.

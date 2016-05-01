@@ -12,7 +12,7 @@ public class VariableEffectGUI extends VariableGUIBasic implements EventGUI {
 
     @Override
     protected Collection<String> voogaNumberProperties () {
-        Collection<String> numberProperties = new ArrayList<String> ();
+        Collection<String> numberProperties = new ArrayList<> ();
         numberProperties.add("Set");
         numberProperties.add("Increase");
         numberProperties.add("Decrease");
@@ -21,7 +21,7 @@ public class VariableEffectGUI extends VariableGUIBasic implements EventGUI {
 
     @Override
     protected Collection<String> voogaProperties () {
-        Collection<String> properties = new ArrayList<String> ();
+        Collection<String> properties = new ArrayList<> ();
         properties.add("Set");
         return properties;
     }

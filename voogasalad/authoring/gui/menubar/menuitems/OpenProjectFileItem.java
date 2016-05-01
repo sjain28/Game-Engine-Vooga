@@ -35,11 +35,10 @@ public class OpenProjectFileItem extends MenuItemHandler {
 		FileChooser popUp = new FileChooser();
 		popUp.setTitle("Open New Project File");
 		popUp.getExtensionFilters().addAll(
-				// TODO: add in appropriate file extension filter
 				new ExtensionFilter("All Files", "*.*"));
 		File file = popUp.showOpenDialog(new Stage());
 		if (file != null) {
-			UILauncher newProject = new UILauncher(new Stage());
+			new UILauncher(new Stage());
 		}
 	}
 

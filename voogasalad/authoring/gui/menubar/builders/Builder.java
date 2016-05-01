@@ -5,7 +5,6 @@ import authoring.VoogaScene;
 import authoring.interfaces.model.EditElementable;
 import authoring.resourceutility.ButtonMaker;
 import gameengine.SpriteFactory;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

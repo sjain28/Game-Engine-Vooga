@@ -127,7 +127,8 @@ public class ArchetypeBuilder extends Builder {
 
         if (editor.getSpriteFactory().getAllArchetypeNames().contains(archetypeName.getText()) ||
             editor.getMySpriteNames().contains(archetypeName.getText())) {
-            new VoogaAlert("This name already exists");
+            VoogaAlert alert = new VoogaAlert("This name already exists");
+            alert.showAndWait();
             return;
         }
         compile = true;

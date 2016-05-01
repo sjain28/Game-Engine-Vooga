@@ -17,13 +17,14 @@ public class KeyCauseGUI implements EventGUI{
     private KeyCode clicked;
     private ComboBox<String> keyOptions;
     
+    private static final int KEY_CAUSE_GUI_WIDTH = 30;
     public KeyCauseGUI(EditEventable manager){
     	holder = new HBox();
     	ImageView iv = new ImageView();
     	iv.setPreserveRatio(true);
-    	iv.setFitWidth(30);
+    	iv.setFitWidth(KEY_CAUSE_GUI_WIDTH);
         textField = new TextField();
-        textField.setPrefWidth(30);
+        textField.setPrefWidth(KEY_CAUSE_GUI_WIDTH);
         textField.setOnKeyPressed(e -> {
         	iv.setImage(new Image(this.getClass().getResourceAsStream("/" + e.getCode().toString() + ".png")));
         	clicked = e.getCode();
