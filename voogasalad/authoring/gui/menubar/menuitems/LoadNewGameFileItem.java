@@ -14,7 +14,6 @@ import tools.VoogaFileChooser;
  */
 public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	
-	//TODO: Change GameRunner to IGameRunner
 	private GameRunner myGameRunner;
 	private VoogaFileChooser myFileChooser;
 	
@@ -38,10 +37,7 @@ public class LoadNewGameFileItem extends PlayerMenuItemHandler {
 	 */
 	@Override
 	public void handle() throws VoogaException {
-		/*
-		 * Using FileChooser, opens a new file and plays that file
-		 * 
-		 */
+
 		this.myGameRunner.getGameDisplay().getStage().close();
 		this.myGameRunner.playGame(myFileChooser.launch());
 		this.myGameRunner.getGameDisplay().getStage().show();
