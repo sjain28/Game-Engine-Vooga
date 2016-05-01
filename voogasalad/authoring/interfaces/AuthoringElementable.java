@@ -2,7 +2,6 @@ package authoring.interfaces;
 
 import authoring.gui.Selector;
 import authoring.model.AuthoringElementableMenu;
-
 /**
  * This interface designates the elementable within the authoring environment (design board).
  * In authoring environment, the elementable selected will be handled slightly differently, mostly

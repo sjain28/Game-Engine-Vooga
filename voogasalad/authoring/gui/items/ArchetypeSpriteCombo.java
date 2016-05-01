@@ -20,7 +20,7 @@ public class ArchetypeSpriteCombo extends Observable {
 	private static final String ARCHETYPE = "Archetype";
 	
     private SpriteComboBox spriteComboBox;
-    private ComboBox needsSprites;
+    private ComboBox<String> needsSprites;
     private HBox hbox;
     private VBox overallRegion;
     private boolean effect;
@@ -28,7 +28,7 @@ public class ArchetypeSpriteCombo extends Observable {
     public ArchetypeSpriteCombo (EditEventable manager, VBox overallRegion, EventHandler e, boolean effect) {
         this.overallRegion=overallRegion;
         this.effect=effect;
-        needsSprites = new ComboBox();
+        needsSprites = new ComboBox<>();
         needsSprites.setPromptText("Get sprites from cause");
         needsSprites.getItems().addAll("true", "false");
         
