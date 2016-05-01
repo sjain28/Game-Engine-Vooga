@@ -58,8 +58,8 @@ public class EventsWindow extends TabPane implements Observer {
 		main = new Tab(eventsWindowProperties.getString("EventsWindowName"));
 		content = new VBox();
 		scroller = new ScrollPane(content);
-		causes = new HashMap<VoogaEvent, ObservableList<String>>();
-		effects = new HashMap<VoogaEvent, ObservableList<String>>();
+		causes = new HashMap<>();
+		effects = new HashMap<>();
 		initialize();
 		main.setContent(scroller);
 		this.getTabs().add(main);
