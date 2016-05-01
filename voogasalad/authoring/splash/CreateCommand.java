@@ -27,6 +27,9 @@ public class CreateCommand implements Command {
     private static final String LOAD = "load";
     private static final String GAME_STRING = "games/";
 
+    /**
+     * Executes the command to open up the create game screen
+     */
     @Override
     public void execute () {
         ProjectChooseAuthoringTypePrompt authoringTypePrompt =
