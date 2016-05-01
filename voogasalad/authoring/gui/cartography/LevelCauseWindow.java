@@ -65,7 +65,8 @@ public class LevelCauseWindow extends Stage {
         try{
             eventFactory.create(event, eventDetails);
         } catch (Exception e){
-            throw e;
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
     }
 	

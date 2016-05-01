@@ -8,7 +8,10 @@ package tools;
  *
  */
 public class Velocity extends Vector {
-
+	
+	private static final double HALF_TURN = 180;
+	private static final double FULL_TURN = 360;
+	private static final double TWO = 2;
 	/**
 	 * Default constructor
 	 * 
@@ -25,7 +28,7 @@ public class Velocity extends Vector {
 	 * @return magnitude
 	 */
 	public double getMagnitude() {
-		return Math.sqrt(Math.pow(getX(), 2) + Math.pow(getY(), 2));
+		return Math.sqrt(Math.pow(getX(),TWO) + Math.pow(getY(), TWO));
 	}
 	
 	/**
@@ -37,8 +40,8 @@ public class Velocity extends Vector {
 	 * @return direction
 	 */
 	public double getAngleDegree() {
-		double angle = 180.0 / Math.PI * Math.atan2(getY(), getX());
-		return (angle > 0) ? angle : angle + 360.0;
+		double angle = HALF_TURN / Math.PI * Math.atan2(getY(), getX());
+		return (angle > 0) ? angle : angle + FULL_TURN;
 	}
 	
 	/**
@@ -51,7 +54,7 @@ public class Velocity extends Vector {
 	 */
 	public double getAngleRadian() {
 		double angle = Math.atan2(getY(), getX());
-		return (angle > 0) ? angle : angle + 2 * Math.PI;
+		return (angle > 0) ? angle : angle + TWO * Math.PI;
 	}
 	
 	/**

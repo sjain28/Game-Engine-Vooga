@@ -26,7 +26,9 @@ public class AnimationTabPane extends TabPane {
 		AnimationEventGUI animationGUI = new AnimationEventGUI();
 		animationGUI.setText(ANIMATION_GUI);
 		animationGUI.selectedProperty().addListener((obs, old, n) -> {
-			if(n) animationGUI.updatePathListings();
+			if(n) {
+				animationGUI.updatePathListings();
+			}
 		});
 		this.getTabs().addAll(pathBuilder, animationGUI);
 	}

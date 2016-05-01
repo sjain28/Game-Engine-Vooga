@@ -4,11 +4,11 @@ import authoring.interfaces.model.CompleteAuthoringModelable;
 
 public interface Menuable {
     
-    public CompleteAuthoringModelable getManager();
+    CompleteAuthoringModelable getManager();
     
-    public void addScene();
+    void addScene();
     
-    public void addScene(CompleteAuthoringModelable manager);
+    void addScene(CompleteAuthoringModelable manager);
     
-    public void saveAll ();
+    void saveAll ();
 }

@@ -24,7 +24,7 @@ public class EventTest {
 	@Test
 	public void testAddingEffects(){
 		VoogaEvent e = new VoogaEvent();
-		ArrayList<Effect> effects = new ArrayList<>();
+		//ArrayList<Effect> effects = new ArrayList<>();
 
 
 		//		VariableEffect tester = new VariableEffect(e);

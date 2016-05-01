@@ -12,6 +12,7 @@ import javafx.scene.shape.Line;
 public class Connection extends Group {
 
 	private static final double LINE_WIDTH = 5;
+	private static final int COMPLETE_COUNT = 2;
 
 	private transient Line connector;
 	private transient Anchor anchor1;
@@ -45,8 +46,9 @@ public class Connection extends Group {
 
 	private void initializeModel(CompleteAuthoringModelable model) {
 		connector.setOnMouseClicked(e -> {
-			if(e.getClickCount() == 2) {
-				new ConnectionPrompt(start.getName(), end.getName(), model);
+			if(e.getClickCount() == COMPLETE_COUNT) {
+				ConnectionPrompt prompt = new ConnectionPrompt(start.getName(), end.getName(), model);
+				prompt.show();
 			}
 		});
 	}
@@ -90,6 +92,11 @@ public class Connection extends Group {
 				circle.setCenterY(mouseEvent.getY() + dragDelta.y);
 			}
 		});
+		enableDragCursor(circle);
+	}
+	
+	private void enableDragCursor(final Circle circle) {
+		
 		circle.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
@@ -109,12 +116,10 @@ public class Connection extends Group {
 	}
 
 	public void setStartpoint(Level start) {
-		System.out.println("SETTING STARTPOINT TO " + start.getName());
 		this.start = start;
 	}
 	
 	public void setEndpoint(Level end) {
-		System.out.println("SETTING ENDPOINT TO " + end.getName());
 		this.end = end;
 	}
 	

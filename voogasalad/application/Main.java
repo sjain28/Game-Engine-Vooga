@@ -1,5 +1,6 @@
 package application;
 
+import authoring.UILauncher;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
  * @author Aditya Srinivasan, Arjun Desai, Nick Lockett, Harry Guo
  */
 public class Main extends Application {
-	
+
 	/**
 	 * Initializes the launcher.
 	 */
@@ -19,7 +20,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// Launches Main Program
 		System.setProperty("glass.accessible.force", "false"); //This fixes a stupid bug on Saumya's machine - it's harmless. 
-		new Launcher(primaryStage);
+		new UILauncher(primaryStage);
 	}
 
 	/**

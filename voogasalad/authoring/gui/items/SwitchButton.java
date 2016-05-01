@@ -12,12 +12,15 @@ import javafx.scene.control.Label;
 
 
 public class SwitchButton extends Label{
+	
+	private static final int WIDTH = 40;
+	
     private SimpleBooleanProperty switchedOn;
 
     public SwitchButton (boolean on) {
         switchedOn = new SimpleBooleanProperty(on);
         Button switchBtn = new Button();
-        switchBtn.setPrefWidth(40);
+        switchBtn.setPrefWidth(WIDTH);
         switchBtn.setPrefHeight(this.getHeight());
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -25,9 +28,7 @@ public class SwitchButton extends Label{
                 switchedOn.set(!switchedOn.get());
             }
         });
-
         setGraphic(switchBtn);
-
         switchedOn.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed (ObservableValue<? extends Boolean> ov,
@@ -37,15 +38,13 @@ public class SwitchButton extends Label{
                     setText("ON");
                     setStyle("-fx-background-color: #64B5F6;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
-                }
-                else {
+                } else {
                     setText("OFF");
                     setStyle("-fx-background-color: grey;-fx-text-fill:black;");
                     setContentDisplay(ContentDisplay.LEFT);
                 }
             }
         });
-
         switchedOn.set(false);
     }
 

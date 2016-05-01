@@ -28,9 +28,10 @@ public class VoogaNumber implements VoogaData {
      * Set value and listener for a number in the salad
      */
     private void initializeProperty () {
-        if (valueProperty != null)
+        if (valueProperty != null) {
             return;
-
+        }
+        
         this.valueProperty = new SimpleDoubleProperty();
         this.valueProperty.setValue(myValue);
 
@@ -99,7 +100,7 @@ public class VoogaNumber implements VoogaData {
      */
     public boolean equals (Double num) {
 
-        return num == myValue;
+        return num.equals(myValue);
     }
 
     /**
@@ -138,8 +139,10 @@ public class VoogaNumber implements VoogaData {
 
     @Override
     public void setValue (Object o) {
-        if (!(o instanceof Number))
+        if (!(o instanceof Number)) {
             return;
+        }
+        
         initializeProperty();
         myValue = (double) o;
     }

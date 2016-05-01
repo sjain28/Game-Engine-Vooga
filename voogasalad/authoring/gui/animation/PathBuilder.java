@@ -131,7 +131,8 @@ public class PathBuilder extends Tab {
 				AnimationFactory.getInstance().addPath(name.getText(), interpolator.getXInterpolation(),
 						interpolator.getYInterpolation());
 				stack.getChildren().clear();
-				new VoogaInfo("Your path, \"" + name.getText() + "\", was created!");
+				VoogaInfo info = new VoogaInfo("Your path, \"" + name.getText() + "\", was created!");
+				info.showAndWait();
 				name.setText("");
 			} catch (Exception e1) {
 				VoogaAlert alert = new VoogaAlert("Please define a proper path and name.");

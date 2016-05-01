@@ -38,7 +38,7 @@ public class EventAccoridion extends Tab {
 		pane.setBottom(buttons);
 		pane.setCenter(accordion);
 
-		tiles = new ArrayList<TitledPane>();
+		tiles = new ArrayList<>();
 		generateTiles(1);
 
 		this.setText(name);
@@ -98,7 +98,7 @@ public class EventAccoridion extends Tab {
 
 	public List<String> getDetails() {
 		try {
-			List<String> eventList = new ArrayList<String>();
+			List<String> eventList = new ArrayList<>();
 			for (TitledPane pane : accordion.getPanes()) {
 				EventTitledPane eventPane = (EventTitledPane) pane;
 				eventList.add(eventPane.getDetails());

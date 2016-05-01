@@ -29,6 +29,8 @@ public class AnimationEvent extends VoogaEvent {
 		myName = name;
 		myCause = new WrapperCause(this);
 		myDuration = (int) GameRunner.FRAME_RATE * duration;
+		//myDuration = duration * 60;
+		//myDuration = 300;
 		myCounter = 0;
 	}
 	/**
@@ -39,9 +41,6 @@ public class AnimationEvent extends VoogaEvent {
 	@Override
 	public void update(ILevelData data){
 		if(myCause.getValue()){
-			if(getCauseSprites().size() > 0){
-			System.out.println("animation event sprite size " + getCauseSprites().size());
-			}
 			for (Sprite sprite : getCauseSprites()){
 				if (!data.containsSprite(sprite.getId())){
 					removeSprite(sprite);
@@ -108,7 +107,7 @@ public class AnimationEvent extends VoogaEvent {
 	}
 
 	protected AnimationEvent clone(){
-		AnimationEvent clone = new AnimationEvent(myName, myDuration);
+		AnimationEvent clone = new AnimationEvent(myName, myDuration / (int) GameRunner.FRAME_RATE);
 		if(myRotateEffect != null){
 			clone.addRotateEffect(getRotateEffect().clone(clone));
 		}

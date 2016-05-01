@@ -1,5 +1,6 @@
 package authoring.gui.levelpreferences;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,52 +26,44 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
 import resources.VoogaBundles;
+import tools.GUIUtils;
+import tools.VoogaAlert;
+import tools.VoogaFileChooser;
 
 /**
  * Tab that allows the user to define their preferences for the design board in terms of
  * level name, type of scrolling, and physics module.
  * 
- * @author Harry Guo, Nick Lockett, Aditya Srinivasan, Arjun Desai
+ * @author Aditya Srinivasan
  *
  */
 
 public class DesignBoardPreferences extends Tab {
-	
-	private double SPACING;
-	private double WIDTH;
-	
 	private static final double MIN_SPEED = 0;
 	private static final double MAX_SPEED = 5;
 	private static final double DEF_SPEED = 1;
-
+	
+	private double spacing;
+	private double width;
+	private List<Node> gameObjects;
 	private VBox container;
-
+	private HBox buttons;
+	private HBox continuousControl;
+	private HBox trackingControl;
 	private TextField levelName;
-
-	private RadioButton realistic;
-	private RadioButton cartoon;
+	private TextField angle;
 	private RadioButton continuous;
 	private RadioButton tracking;
-	
 	private ToggleGroup trackingMode;
-	private ToggleGroup physicsType;
-
 	private Slider scrollSpeed;
 	private ComboBox<SpriteNameIDPair> sprites;
 	private ComboBox<String> continuousScrollType;
-	private TextField angle;
-
-	private HBox buttons;
-	private HBox continuousControl;
-	
+	private ComboBox<String> trackingDirection;
 	private CustomText speedLabel;
-
-	private List<Node> gameObjects;
-
 	private EventHandler<ActionEvent> e;
-
 	private ResourceBundle dbfProperties;
-
+	private String soundTrackPath;
+	
 	/**
 	 * Constructor to build the pop up for the user to specify preferences.
 	 * 
@@ -81,19 +74,34 @@ public class DesignBoardPreferences extends Tab {
 		container = new VBox();
 		
 		dbfProperties = VoogaBundles.designboardPreferencesProperties;
-		SPACING = Double.parseDouble(dbfProperties.getString("Spacing"));
-		WIDTH = Double.parseDouble(dbfProperties.getString("Width"));
+		spacing = Double.parseDouble(dbfProperties.getString("Spacing"));
+		width = Double.parseDouble(dbfProperties.getString("Width"));
 
-		container.setSpacing(SPACING);
+		container.setSpacing(spacing);
 		container.setAlignment(Pos.CENTER);
+		container.getChildren().addAll(header(), chooseName(), chooseBGM(), chooseTrackingMode());
 		this.setContent(container);
-		container.getChildren().addAll(header(), chooseName(), choosePhysicsModule(), chooseTrackingMode());
+		buttons = new HBox();
 		
 		initializeSpecifics();
 		chooseSpecificTrackingMode();
 		makeContinuousControl();
+		makeTrackingControl();
 	}
 
+	private Button chooseBGM() {
+		return new ButtonMaker().makeButton("Choose Soundtrack", e -> {
+			VoogaFileChooser chooser = new VoogaFileChooser();
+			try {
+				this.soundTrackPath = chooser.launch();
+			} catch (Exception ee) {
+				VoogaAlert alert = new VoogaAlert("Not a correct file.");
+				alert.showAndWait();
+				ee.printStackTrace();
+			}
+		});
+	}
+	
 	/**
 	 * Sets the name of the level.
 	 * 
@@ -120,8 +128,13 @@ public class DesignBoardPreferences extends Tab {
 	 * @return: title 
 	 */
 	private HBox header() {
-		return makeRow(new CustomText(dbfProperties.getString("DefineLevelName"), FontWeight.BOLD, 
-				Integer.parseInt(dbfProperties.getString("HeaderSpacing"))));
+		return  customHBox(GUIUtils.makeRow(new CustomText(dbfProperties.getString("DefineLevelName"), FontWeight.BOLD, 
+				Integer.parseInt(dbfProperties.getString("HeaderSpacing")))));
+	}
+	
+	private HBox customHBox(HBox box) {
+		box.setAlignment(Pos.CENTER);
+		return box;
 	}
 
 	/**
@@ -131,19 +144,7 @@ public class DesignBoardPreferences extends Tab {
 	 */
 	private HBox chooseName() {
 		levelName = new TextField();
-		return makeRow(new CustomText(dbfProperties.getString("LevelNamePrompt")), levelName);
-	}
-
-	/**
-	 * Choose physics module prompt.
-	 * 
-	 * @return: physics prompt
-	 */
-	private HBox choosePhysicsModule() {
-		realistic = new RadioButton("Realistic");
-		cartoon = new RadioButton("Cartoon");
-		physicsType = new ToggleGroup();
-		return createToggleGroup(physicsType, "Physics Module:", realistic, cartoon);
+		return customHBox(GUIUtils.makeRow(new CustomText(dbfProperties.getString("LevelNamePrompt")), levelName));
 	}
 
 	/**
@@ -166,10 +167,10 @@ public class DesignBoardPreferences extends Tab {
 			container.getChildren().remove(buttons);
 			if(n == continuous) {
 				container.getChildren().add(continuousControl);
-				container.getChildren().remove(sprites);
+				container.getChildren().remove(trackingControl);
 			} else {
 				container.getChildren().remove(continuousControl);
-				container.getChildren().add(sprites);
+				container.getChildren().add(trackingControl);
 			}
 			container.getChildren().add(buttons);
 		});
@@ -182,10 +183,16 @@ public class DesignBoardPreferences extends Tab {
 		scrollSpeed.valueProperty().addListener((obs, old, n) -> {
 			speedLabel.setText(Double.toString((double) n));
 		});
-		continuousScrollType = new ComboBox<String>();
+		continuousScrollType = new ComboBox<>();
 		continuousScrollType.getItems().addAll("Linear", "Exponential");
-		continuousControl = makeRow(angle, continuousScrollType, scrollSpeed, speedLabel, sprites);
+		continuousControl = customHBox(GUIUtils.makeRow(angle, continuousScrollType, spriteBox(), scrollSpeed, speedLabel));
 		return continuousControl;
+	}
+	
+	private void makeTrackingControl() {
+		trackingDirection = new ComboBox<>();
+		trackingDirection.getItems().addAll(Arrays.asList("X", "Y", "Both"));
+		trackingControl = customHBox(GUIUtils.makeRow(sprites, trackingDirection));
 	}
 
 	/**
@@ -193,18 +200,23 @@ public class DesignBoardPreferences extends Tab {
 	 */
 	private void initializeSpecifics() {
 		scrollSpeed = new Slider(MIN_SPEED, MAX_SPEED, DEF_SPEED);
-		scrollSpeed.setMaxWidth(WIDTH);
-		sprites = new ComboBox<SpriteNameIDPair>();
-		if (this.gameObjects.size() > 0) {
+		scrollSpeed.setMaxWidth(width);
+		sprites = spriteBox();
+	}
+	
+	private ComboBox<SpriteNameIDPair> spriteBox() {
+		ComboBox<SpriteNameIDPair> cb = new ComboBox<>();
+		if (!gameObjects.isEmpty()) {
 			for (Node node : this.gameObjects) {
 				if (node instanceof GameObject) {
 					Sprite sprite = ((GameObject) node).getSprite();
-					sprites.getItems().add(new SpriteNameIDPair(sprite.getName(), sprite.getId()));
+					cb.getItems().add(new SpriteNameIDPair(sprite.getName(), sprite.getId()));
 				}
 			}
 		} else {
-			sprites.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
+			cb.getItems().add(new SpriteNameIDPair(dbfProperties.getString("NoSpriteToTrack"), ""));
 		}
+		return cb;
 	}
 
 	/**
@@ -214,7 +226,7 @@ public class DesignBoardPreferences extends Tab {
 	 */
 	private HBox buttonRow() {
 		Button ok = new ButtonMaker().makeButton(dbfProperties.getString("Ok"), this.e);
-		buttons = makeRow(ok);
+		buttons = customHBox(GUIUtils.makeRow(ok));
 		return buttons;
 	}
 
@@ -227,24 +239,11 @@ public class DesignBoardPreferences extends Tab {
 	 * @return
 	 */
 	private HBox createToggleGroup(ToggleGroup group, String label, RadioButton... toggles) {
-		HBox row = makeRow(new CustomText(label));
+		HBox row = customHBox(GUIUtils.makeRow(new CustomText(label)));
 		for (RadioButton toggle : toggles) {
 			toggle.setToggleGroup(group);
 			row.getChildren().add(toggle);
 		}
-		return row;
-	}
-
-	/**
-	 * Helper function to make an HBox row
-	 * @param nodes
-	 * @return
-	 */
-	private HBox makeRow(Node... nodes) {
-		HBox row = new HBox();
-		row.setSpacing(SPACING);
-		row.setMaxWidth(WIDTH);
-		row.getChildren().addAll(nodes);
 		return row;
 	}
 
@@ -278,14 +277,6 @@ public class DesignBoardPreferences extends Tab {
 		return continuousScrollType.getValue();
 	}
 	
-	public void setPhysics(String name) {
-		for(Toggle toggle : physicsType.getToggles()) {
-			if(((RadioButton) toggle).getText().equals(name)) {
-				physicsType.selectToggle(toggle);
-			}
-		}
-	}
-	
 	public void setScrolling(String name) {
 		for(Toggle toggle : trackingMode.getToggles()) {
 			if(((RadioButton) toggle).getText().equals(name)) {
@@ -313,6 +304,22 @@ public class DesignBoardPreferences extends Tab {
 				break;
 			}
 		}
+	}
+	
+	public String getTrackingDirection() {
+		return (trackingDirection.getValue() == null) ? "" : trackingDirection.getValue();
+	}
+
+	public void setTrackingDirection(String value) {
+		this.trackingDirection.setValue(value);
+	}
+
+	public String getBGM() {
+		return (this.soundTrackPath.isEmpty() || this.soundTrackPath == null) ? "" : this.soundTrackPath;
+	}
+	
+	public void setBGM(String BGM) {
+		this.soundTrackPath = BGM;
 	}
 
 }

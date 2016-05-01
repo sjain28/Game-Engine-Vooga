@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.GUIUtils;
 import tools.VoogaAlert;
 import tools.VoogaNumber;
 import tools.interfaces.VoogaData;
@@ -18,6 +19,7 @@ public class PropertyBuilder extends Builder {
 
     private static final String VOOGA_NUMBER = "VoogaNumber";
     private static final String VOOGA_BOOLEAN = "VoogaBoolean";
+    private static final String VALUE = "Value:";
 
     private VBox container;
     private TextField variableName;
@@ -25,7 +27,7 @@ public class PropertyBuilder extends Builder {
     private HBox numberSelector;
     private HBox boolSelector;
     private HBox buttons;
-    private SwitchButton swtch;
+    private SwitchButton switchButton;
     private String chosenData;
     private boolean correctData;
 
@@ -37,9 +39,9 @@ public class PropertyBuilder extends Builder {
         super(editor);
         this.variableName = new TextField();
         this.variableValue = new TextField();
-        this.swtch = new SwitchButton(true);
-        this.numberSelector = makeInfo("Value:", "Enter a value...", variableValue);
-        this.boolSelector = makeRow(new CustomText("Value:"), swtch);
+        this.switchButton = new SwitchButton(true);
+        this.numberSelector = makeInfo(VALUE, "Enter a value...", variableValue);
+        this.boolSelector = GUIUtils.makeRow(new CustomText(VALUE), switchButton);
         this.buttons = makeButtons();
         this.chosenData = VOOGA_NUMBER;
         this.correctData = true;
@@ -77,7 +79,7 @@ public class PropertyBuilder extends Builder {
             }
             container.getChildren().add(buttons);
         });
-        return makeRow(number, bool);
+        return GUIUtils.makeRow(number, bool);
     }
 
     public String getName () {
@@ -105,7 +107,7 @@ public class PropertyBuilder extends Builder {
                 }
             }
             else {
-                data.setValue(swtch.switchOnProperty());
+                data.setValue(switchButton.switchOnProperty());
             }
             return data;
         }

@@ -11,7 +11,12 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import tools.VoogaAlert;
 
-public class EventWindow extends Stage{
+public class EventWindow extends Stage {
+	
+	private static final String APPLY = "Apply";
+	private static final String CANCEL = "Cancel";
+	private static final int SCREEN_SIZE = 500;
+	
     private TabPane tabPane;
     private Scene myScene;
     private EventAccoridion causeAccoridion;
@@ -32,18 +37,18 @@ public class EventWindow extends Stage{
         event = new VoogaEvent();
         eventFactory = new CauseAndEffectFactory();
         
-        Button apply1 = maker.makeButton("Apply",e->apply());
-        Button apply2= maker.makeButton("Apply",e->apply());
-        Button cancel1 = maker.makeButton("Cancel",e->cancel());
-        Button cancel2 = maker.makeButton("Cancel",e->cancel());
+        Button apply1 = maker.makeButton(APPLY ,e->apply());
+        Button apply2= maker.makeButton(APPLY ,e->apply());
+        Button cancel1 = maker.makeButton(CANCEL ,e->cancel());
+        Button cancel2 = maker.makeButton(CANCEL ,e->cancel());
         
         causeAccoridion = new EventAccoridion(manager,"Cause",apply1,cancel1);
         effectAccoridion = new EventAccoridion(manager,"Effect",apply2,cancel2);
         tabPane.getTabs().addAll(causeAccoridion,effectAccoridion);
         
         this.setTitle("New Event");
-        this.setWidth(500);
-        this.setHeight(500);
+        this.setWidth(SCREEN_SIZE);
+        this.setHeight(SCREEN_SIZE);
         this.setScene(myScene);
     }
     
@@ -64,12 +69,10 @@ public class EventWindow extends Stage{
             this.close();
             
         } catch (Exception e){
-            ready=false;
+            setReady(false);
             VoogaAlert alert = new VoogaAlert(e.getMessage());
             alert.showAndWait();
         }
-        
-        
     }
     
     private void populateEvent(String eventDetails) throws Exception{
@@ -77,11 +80,26 @@ public class EventWindow extends Stage{
             System.out.println("EventDetails-EventWindow: "+eventDetails);
             eventFactory.create(event, eventDetails);
         } catch (Exception e){
-            throw e;
+            VoogaAlert alert = new VoogaAlert(e.getMessage());
+            alert.showAndWait();
         }
     }
     private void cancel(){
         this.close();
     }
+
+	/**
+	 * @return the ready
+	 */
+	public boolean isReady() {
+		return ready;
+	}
+
+	/**
+	 * @param ready the ready to set
+	 */
+	public void setReady(boolean ready) {
+		this.ready = ready;
+	}
     
 }

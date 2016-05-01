@@ -1,6 +1,5 @@
 package player.gamerunner;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,13 +82,13 @@ public class GameRunner implements IGameRunner {
 		myTimeline.setCycleCount(Animation.INDEFINITE);
 		myTimeline.getKeyFrames().add(frame);
 		myStats = new CurrentSessionStats();
-		myLevelMap = new HashMap<String, LevelType>();
+		myLevelMap = new HashMap<>();
 	}
 
 	/**
 	 * Reads a text file and creates a map of levels
 	 */
-	private void createLevelMap(String xmlList) throws FileNotFoundException, IOException, VoogaException {
+	private void createLevelMap(String xmlList) throws IOException, VoogaException {
 		myLevelMapCreator = new LevelMapCreator(xmlList);
 		myLevelMap = myLevelMapCreator.getLevelMap();
 	}

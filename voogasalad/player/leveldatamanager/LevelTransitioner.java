@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import authoring.interfaces.Elementable;
 import data.DataContainerOfLists;
 import data.FileReaderToGameObjects;
-import events.AnimationEvent;
 import events.AnimationFactory;
 import events.VoogaEvent;
 import gameengine.Sprite;
@@ -124,24 +123,8 @@ public class LevelTransitioner {
 		Map<String, Sprite> archetypeMap = myData.getArchetypeMap();
 		return new SpriteFactory(archetypeMap);
 	}
-
-	public AnimationFactory getNewAnimationFactory(){
-		AnimationFactory factory = new AnimationFactory();
-		factory.setMyPaths(myData.getPaths());
-		factory.setMyAnimationEvents(myData.getAnimations());
-		factory.setMyAnimationSequences(myData.getSequences());
-		return factory;
-	}
 	
-    public Map<String, AnimationEvent> getAnimations(){
-    	return myData.getAnimations();
-    }
-    
-    public Map<String, List<Double[]>> getPaths(){
-    	return myData.getPaths();
-    }
-    
-    public Map<String, List<AnimationEvent>> getSequences(){
-    	return myData.getSequences();
+    public AnimationFactory getAnimationFactory(){
+    	return myData.getAnimationFactory();
     }
 }
