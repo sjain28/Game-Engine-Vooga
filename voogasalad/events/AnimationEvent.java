@@ -41,6 +41,7 @@ public class AnimationEvent extends VoogaEvent {
 	@Override
 	public void update(ILevelData data){
 		if(myCause.getValue()){
+			System.out.println("executing animation event");
 			for (Sprite sprite : getCauseSprites()){
 				if (!data.containsSprite(sprite.getId())){
 					removeSprite(sprite);
@@ -63,6 +64,7 @@ public class AnimationEvent extends VoogaEvent {
 					myImageEffect.setCounter(0);
 				}
 				setCauseValue(false);
+				System.out.println("Animatino event is done now!");
 			}
 		}
 	}

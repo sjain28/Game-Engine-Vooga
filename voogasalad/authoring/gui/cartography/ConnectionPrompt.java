@@ -27,7 +27,9 @@ public class ConnectionPrompt extends Stage {
 
 	private VBox container;
 	private VBox causeList;
-
+	
+	private static final double SCENE_SIZE = 300;
+	
 	public ConnectionPrompt(String start, String end, CompleteAuthoringModelable model) {
 		String startLevel = (start == null) ? NO_LEVEL_SELECTED : start;
 		String endLevel = (end == null) ? NO_LEVEL_SELECTED : end;
@@ -46,7 +48,7 @@ public class ConnectionPrompt extends Stage {
 		container.getChildren().addAll(GUIUtils.makeRow(new CustomText("Start:", FontWeight.BOLD), new CustomText(startLevel)),
 				GUIUtils.makeRow(new CustomText("End:", FontWeight.BOLD), new CustomText(endLevel)), GUIUtils.makeRow(addCond),
 				causeList);
-		Scene scene = new VoogaScene(container, 300, 300);
+		Scene scene = new VoogaScene(container, SCENE_SIZE, SCENE_SIZE);
 		this.setScene(scene);
 	}
 

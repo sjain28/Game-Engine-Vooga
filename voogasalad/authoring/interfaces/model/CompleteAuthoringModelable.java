@@ -15,13 +15,13 @@ public interface CompleteAuthoringModelable extends EditElementable, EditEventab
 	 * Get name of the current authoring model
 	 * @return name of current authoring model
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Sets the name of the current authoring model
 	 * @param name: desired name of authoring model
 	 */
-	public void setName(String name);
+	void setName(String name);
 
 	/**
 	 * Gets a sprite ID from the string name of the sprite
@@ -30,6 +30,7 @@ public interface CompleteAuthoringModelable extends EditElementable, EditEventab
 	 * @return ID of sprite
 	 * @throws VoogaException
 	 */
-	public String getSpriteNameFromId (String c) throws VoogaException;
+	String getSpriteNameFromId (String c) throws VoogaException;
+
 
 }

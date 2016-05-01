@@ -47,8 +47,9 @@ public class GameObjectBuilder extends Builder {
         HBox container = new HBox();
         Button button = new ButtonMaker().makeButton("Add a new archetype", e -> {
             archetypeBuilder = new ArchetypeBuilder(editor);
-            if (path != null)
+            if (path != null) {
                 archetypeBuilder.setImagePath(path);
+            }
             archetypeBuilder.showAndWait();
             archetypes.getItems().add(archetypeBuilder.getArchetypeName());
             archetypes.setValue(archetypeBuilder.getArchetypeName());
@@ -86,8 +87,8 @@ public class GameObjectBuilder extends Builder {
     }
 
     private HBox makeArchetypePicker () {
-        archetypes = new ComboBox<String>();
-        Collection<String> items = new ArrayList<String>();
+        archetypes = new ComboBox<>();
+        Collection<String> items;
         items =
                 (mySpriteFactory.getAllArchetypeNames().size() > 0) ? mySpriteFactory
                         .getAllArchetypeNames()

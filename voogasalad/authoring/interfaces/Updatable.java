@@ -8,9 +8,9 @@ package authoring.interfaces;
  */
 
 public interface Updatable {
-
+    
 	/**
-	 * Updates the object. 
+	 * Execute on update.
 	 */
-	public void update();
+	void update();
 }

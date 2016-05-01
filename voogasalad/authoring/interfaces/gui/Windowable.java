@@ -11,11 +11,13 @@ import javafx.scene.Node;
  */
 
 public interface Windowable {
-    
-	/**
-	 * Gets the node to be put into the GUI.
-	 * 
-	 * @return node to display
-	 */
-    public Node getWindow();
+	
+    /**
+     * This Interface manages the GUI's relationship to the UIManager, 
+     * allowing the manager to remain agnostic to the component 
+     * implemented by only caring about the Node passed through to the manager.
+     * 
+     */
+    Node getWindow();
+
 }

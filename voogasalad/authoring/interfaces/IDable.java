@@ -11,5 +11,5 @@ package authoring.interfaces;
  */
 public interface IDable {
     
-    public String getID();
+    String getID();
 }

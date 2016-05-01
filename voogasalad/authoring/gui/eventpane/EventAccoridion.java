@@ -27,7 +27,8 @@ public class EventAccoridion extends Tab {
 	private HBox buttons;
 
 	private String name = "";
-
+	private static final double BUTTON_PADDING = 10;
+	
 	public EventAccoridion(EditEventable manager, String name, Button... addedButtons) {
 		this.name = name;
 		this.manager = manager;
@@ -91,7 +92,7 @@ public class EventAccoridion extends Tab {
 
 	private void initializeButtons(Button... addedButtons) {
 		buttons = new HBox();
-		buttons.setPadding(new Insets(10, 10, 10, 10));
+		buttons.setPadding(new Insets(BUTTON_PADDING, BUTTON_PADDING, BUTTON_PADDING, BUTTON_PADDING));
 		buttons.getChildren().addAll(new ButtonMaker().makeButton("Add " + name, e -> generateTiles(1)));
 		buttons.getChildren().addAll(addedButtons);
 	}
