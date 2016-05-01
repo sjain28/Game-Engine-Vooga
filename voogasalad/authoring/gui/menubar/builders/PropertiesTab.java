@@ -8,17 +8,33 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tools.interfaces.VoogaData;
 
+/**
+ * Properties Tab for adding properties while creating archetypes.
+ * 
+ * 
+ * @author Aditya Srinivasan, Harry Guo, Arjun Desai, Nick Lockett
+ *
+ */
 
 public class PropertiesTab extends VBox {
 
 	private PropertiesTable pTable;
 
+	/**
+	 * Initializes the tab with a the properties table.
+	 * @param properties
+	 */
 	public PropertiesTab (Map<String, VoogaData> properties) {
 		pTable = new PropertiesTable(properties);
 		this.getChildren().addAll(pTable,
 				makeControl());
 	}
 
+	/**
+	 * Makes the controls for the tab.
+	 * e.g. add and remove properites.
+	 * @return
+	 */
 	private HBox makeControl () {
 		HBox container = new HBox();
 		Button add = new ButtonMaker().makeButton("+", e -> {

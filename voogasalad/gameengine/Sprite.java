@@ -207,9 +207,9 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / RESIZE_FACTOR);
 		myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / RESIZE_FACTOR);
 		myImage.setTranslateZ(myZ.doubleValue());
+		myX.set(myLoc.getX());
+		myY.set(myLoc.getY());
 
-        myProperties.get(VoogaBundles.spriteProperties.getString("X_POS")).setValue(myLoc.getX());
-        myProperties.get(VoogaBundles.spriteProperties.getString("Y_POS")).setValue(myLoc.getY());
 		
 		myImage.setFitWidth((double) myProperties
 				.get(VoogaBundles.spriteProperties.getString("WIDTH")).getValue());
