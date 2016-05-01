@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import authoring.CustomText;
 import authoring.gui.menubar.builders.GameObjectBuilder;
 import authoring.interfaces.AuthoringElementable;
+import authoring.interfaces.Elementable;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.ElementSelectionModel;
 import authoring.resourceutility.ResourceDecipherer;
@@ -99,6 +100,7 @@ public class DesignBoard extends Tab implements Observer {
         this.setClosable(false);
 
         contentPane = new StackPane();
+        
         contentPane.setMinSize(width, height);
         scroller = new ScrollPane();
         scroller.setContent(contentPane);
@@ -284,11 +286,9 @@ public class DesignBoard extends Tab implements Observer {
      * @param nodeList: list of nodes
      */
     private void displayElements (Collection<Node> nodeList) {
-        for (Node node : nodeList) {
-            if (!contentPane.getChildren().contains(node)) {
-                contentPane.getChildren().add(node);
-            }
-        }
+        contentPane.getChildren().clear();
+        addGuides();
+        contentPane.getChildren().addAll(nodeList);
     }
 
     /**
