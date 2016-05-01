@@ -49,7 +49,9 @@ public class RotationEffectSelector extends AbstractEffectSelector {
 	 */
 	@Override
 	protected Object getValue() {
-		return DEGREES_IN_CIRCLE * Double.parseDouble(numRotations.getText()) + Double.parseDouble(modRotations.getText());
+		Double rotations = (modRotations.getText() == null) ? 0 : Double.parseDouble(modRotations.getText());
+		Double cycles = (numRotations.getText() == null) ? 0 : Double.parseDouble(numRotations.getText());
+		return DEGREES_IN_CIRCLE * cycles + rotations;
 	}
 
 
