@@ -1,4 +1,4 @@
-package events;
+package tests;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

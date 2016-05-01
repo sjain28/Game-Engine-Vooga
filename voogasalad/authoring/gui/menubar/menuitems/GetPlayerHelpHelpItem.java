@@ -15,7 +15,7 @@ import tools.VoogaException;
 
 /**
  * Menu Item to select the board of the display
- * 
+ *  
  * @author Nick, Hunter
  *
  */
@@ -71,7 +71,7 @@ public class GetPlayerHelpHelpItem extends PlayerMenuItemHandler {
 		stage.setFullScreen(true);
 		stage.setFullScreenExitHint(EXIT_MESSAGE);
 		stage.setFullScreenExitKeyCombination
-					(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
+		(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
 		stage.show();
 	}
 

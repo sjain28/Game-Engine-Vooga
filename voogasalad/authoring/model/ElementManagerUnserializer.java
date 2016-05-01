@@ -20,6 +20,11 @@ public class ElementManagerUnserializer {
         this.xmlPath=xmlPath;
     }
     
+    /**
+     * Unserialize data to create a new Element Manager
+     * @return
+     * @throws VoogaException
+     */
     public ElementManager unserialize() throws VoogaException{
         ElementManager elementManager = new ElementManager();
 
@@ -37,6 +42,12 @@ public class ElementManagerUnserializer {
         return elementManager;
     }
     
+    /**
+     * Get list of nodes to add to node list to elementManager
+     * @param elements: list of elementable to populate
+     * @return
+     * @throws VoogaException
+     */
     private List<Node> getNodeList(List<Elementable> elements) throws VoogaException{
         List<Node> nodeList = new ArrayList<Node>();
         

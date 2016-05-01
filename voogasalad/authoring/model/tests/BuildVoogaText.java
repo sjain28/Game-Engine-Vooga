@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 public class BuildVoogaText extends Application{
 
+    
     @Override
     public void start (Stage primaryStage) throws Exception {
         BorderPane pane = new BorderPane();

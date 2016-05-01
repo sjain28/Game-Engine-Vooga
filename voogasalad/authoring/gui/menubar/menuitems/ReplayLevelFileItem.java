@@ -10,8 +10,9 @@ import player.gamerunner.GameRunner;
  * @author Nick, Hunter
  *
  */
+
 public class ReplayLevelFileItem extends PlayerMenuItemHandler {
-	
+
 	private GameRunner myGameRunner;
 
 	/**
@@ -20,22 +21,17 @@ public class ReplayLevelFileItem extends PlayerMenuItemHandler {
 	 * @param model to interface backend interactions with the model
 	 * @param event: Unused vestige of previous poor programming. Should soon be phased out.
 	 */
-
 	public ReplayLevelFileItem(Menuable model) {
 
 		super();
 		this.myGameRunner = (GameRunner) model;
 	}
-	
+
 	/**
 	 * Action to be taken on the selection of this menuItem
 	 */
 	@Override
 	public void handle() {
-		/*
-		 * Gets the current level's filename and plays the level again
-		 * 
-		 */
 		myGameRunner.replayLevel();
 	}
 }
