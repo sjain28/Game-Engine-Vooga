@@ -28,6 +28,7 @@ import gameengine.SpriteFactory;
 import javafx.scene.Node;
 import resources.VoogaBundles;
 import tools.VoogaException;
+import tools.VoogaNumber;
 import tools.bindings.ImageProperties;
 import tools.bindings.TextProperties;
 import tools.interfaces.VoogaData;
@@ -60,7 +61,6 @@ public class ElementManager extends Observable implements Saveable, CompleteAuth
         names = new ArrayList<>();
         
         initGlobalVariablesPane();
-       
     }
 
     public void addGameElements (Node ... elements) {

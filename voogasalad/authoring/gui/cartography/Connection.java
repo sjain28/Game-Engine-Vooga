@@ -8,11 +8,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import tools.VoogaAlert;
 
 public class Connection extends Group {
 
 	private static final double LINE_WIDTH = 5;
-	private static final int COMPLETE_COUNT = 2;
+	private static final int DOUBLE_CLICK = 2;
 
 	private transient Line connector;
 	private transient Anchor anchor1;
@@ -46,9 +47,14 @@ public class Connection extends Group {
 
 	private void initializeModel(CompleteAuthoringModelable model) {
 		connector.setOnMouseClicked(e -> {
-			if(e.getClickCount() == COMPLETE_COUNT) {
-				ConnectionPrompt prompt = new ConnectionPrompt(start.getName(), end.getName(), model);
-				prompt.show();
+			if(e.getClickCount() == DOUBLE_CLICK) {
+				if(model.getName().equals(start.getName())) {
+					ConnectionPrompt prompt = new ConnectionPrompt(start.getName(), end.getName(), model);
+					prompt.show();
+				} else {
+					VoogaAlert alert = new VoogaAlert("You must define transitions from the level tab you are authoring.");
+					alert.showAndWait();
+				}
 			}
 		});
 	}
