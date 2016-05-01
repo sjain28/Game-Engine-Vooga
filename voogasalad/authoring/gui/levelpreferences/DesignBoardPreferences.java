@@ -81,6 +81,7 @@ public class DesignBoardPreferences extends Tab {
 		container.setAlignment(Pos.CENTER);
 		container.getChildren().addAll(header(), chooseName(), chooseBGM(), chooseTrackingMode());
 		this.setContent(container);
+		buttons = new HBox();
 		
 		initializeSpecifics();
 		chooseSpecificTrackingMode();

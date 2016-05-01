@@ -28,6 +28,7 @@ public class DesignBoardHousing extends TabPane {
 	private static final String SCROLL_ANGLE = "ScrollAngle";
 	private static final String CONT_SCROLL_TYPE = "ContinuousScrollType";
 	private static final String TRACK_DIR = "TrackingDirection";
+	private static final String BGM = "BGM";
 	private static final String PREF_ALERT = "Please enter all preference values.";
 
 	private SimpleStringProperty mySceneName;
@@ -53,6 +54,7 @@ public class DesignBoardHousing extends TabPane {
 					elem.getGlobalVariables().put(preferences.getName()+SCROLL_ANGLE, new VoogaNumber(preferences.getScrollAngle()));
 					elem.getGlobalVariables().put(preferences.getName()+CONT_SCROLL_TYPE, new VoogaString(preferences.getContinuousScrollType()));
 					elem.getGlobalVariables().put(preferences.getName()+TRACK_DIR, new VoogaString(preferences.getTrackingDirection()));
+					elem.getGlobalVariables().put(preferences.getName()+BGM, new VoogaString(preferences.getBGM()));
 					this.getTabs().remove(preferences);
 					this.getTabs().add(new DesignBoard(elem));
 					elem.setName(preferences.getName());
