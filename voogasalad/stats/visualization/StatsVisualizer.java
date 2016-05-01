@@ -6,8 +6,23 @@ import java.util.List;
 import javafx.scene.chart.ScatterChart;
 import resources.VoogaBundles;
 import stats.database.CellEntry;
-
+/**
+ * Allows visualization of stat parameters from the database
+ * @author Krista
+ *
+ */
 public class StatsVisualizer {
+	/**
+	 * Allows a user to visualize stat's from the database
+	 * Takes in two lists of cell entry's and an xparam and 
+	 * yparam to be graphed
+	 * 
+	 * @param xlist
+	 * @param ylist
+	 * @param xparam
+	 * @param yparam
+	 * @return
+	 */
 	public ScatterChart<?,?> getVoogaStatsScatterPlot(List<CellEntry> xlist, List<CellEntry> ylist, String xparam, String yparam){
 		
 		List<Object> xparams = new ArrayList<>();
