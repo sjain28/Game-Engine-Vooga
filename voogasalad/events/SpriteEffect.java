@@ -86,9 +86,11 @@ public class SpriteEffect extends VariableEffect{
 		if (getMyArchetype() != null){
 			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
 			if (!mySprites.isEmpty()){
-				for(Sprite causeSprite : mySprites){
+				for(int i = 0; i < mySprites.size(); i++){
+					Sprite causeSprite = mySprites.get(i);
 					if(!archSpriteIDs.contains(causeSprite)){
-						mySprites.remove(causeSprite);
+						mySprites.remove(i);
+						i--;
 					}
 				}
 			}else {

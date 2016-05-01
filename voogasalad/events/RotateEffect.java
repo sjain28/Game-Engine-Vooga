@@ -20,10 +20,15 @@ public class RotateEffect extends SpriteEffect {
 
 	@Override
 	public void execute(ILevelData data){
+		System.out.println("Executing rotate effect");
+		System.out.println("my rotation: " + myRotation);
 		setSprites(data);
+		System.out.println("Num SPrites: " + getSprites().size());
 		for (Sprite sprite : getSprites()){
 			sprite.getImage().setRotate(myCycleRotation);
+			System.out.println("Rotation: " + sprite.getImage().getRotate());
 		}
+		
 		clearSprites();
 	}
 	protected Double getRotation(){

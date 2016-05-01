@@ -38,7 +38,6 @@ public class AnimationFactory {
 	}
 
 	public void makePathEffect (String pathName, Boolean reverse, AnimationEvent event) {
-		System.out.println("Size of path points " + myPaths.get(pathName).get(0).length + ", " + myPaths.get(pathName).get(1).length);
 		event.addPathEffect(
 				new PathEffect(myPaths.get(pathName).get(0),
 						myPaths.get(pathName).get(1),
@@ -48,9 +47,11 @@ public class AnimationFactory {
 	public void makeRotateEffect (Double rotation, AnimationEvent event) {
 		event.addRotateEffect(new RotateEffect(rotation, event));
 	}
+	
 	public void makeScaleAnimationEffect(Double scale, AnimationEvent event){
 		event.addScaleAnimationEffect(new ScaleAnimationEffect(scale, event));
 	}
+	
 	public void makeImageAnimationEffect(List<String> images, Integer cycles, AnimationEvent event){
 		event.addImageAnimationEffect(new ImageAnimationEffect(images, cycles, event));
 
@@ -61,8 +62,6 @@ public class AnimationFactory {
 	}
 
 	public AnimationEvent cloneAnimationEvent (String eventName) {
-		System.out.println("Events map size during cloning" + myAnimationEvents.size());
-		System.out.println("Event name during cloning " + eventName);
 		return myAnimationEvents.get(eventName).clone();
 	}
 

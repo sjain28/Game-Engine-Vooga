@@ -41,14 +41,14 @@ public class StandardDisplay implements IGameDisplay {
 	private List<KeyEvent> myKeyPresses;
 	private List<KeyEvent> myKeyReleases;
 	private Pair<Double, Double> myDimensions;
-	
+
 	/**
 	 * Overloaded constructor to set the reference to GameRunner
 	 */
 	public StandardDisplay(IGameRunner gamerunner) {
 		myGameRunner = gamerunner;
 		myControl = new StandardControl(myGameRunner);
-		myHUD = new StandardHUD(myGameRunner);
+		myHUD = new StandardHUD(myGameRunner); 
 		myStage = new Stage();
 		myPane = new BorderPane();
 		myGameScreen = new Pane();
@@ -143,7 +143,7 @@ public class StandardDisplay implements IGameDisplay {
 		myDimensions = new Pair<>(width, height);
 		myScene = new VoogaScene(myPane, width, height);
 	}
-	
+
 	@Override
 	public Pair<Double, Double> getDimensions() {
 		return this.myDimensions;
