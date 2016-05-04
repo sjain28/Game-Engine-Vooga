@@ -5,6 +5,7 @@ import java.util.List;
 
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
+import resources.VoogaBundles;
 import tools.interfaces.VoogaData;
 
 public class SpriteEffect extends VariableEffect{
@@ -27,13 +28,13 @@ public class SpriteEffect extends VariableEffect{
 		setSpriteID(spriteID);
 		setNeedsSprites(false);
 	}
-	
+
 	public SpriteEffect(String spriteID, String variable, String method, String parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
 		setSpriteID(spriteID);
 		setNeedsSprites(false);
 	}
-	
+
 	// constructor with archetype, boolean true- apply to all of archetype
 	// constructor with archetype, boolean false- apply to all of archetype for which event supplies
 
@@ -48,7 +49,7 @@ public class SpriteEffect extends VariableEffect{
 		setMyArchetype(archetype);
 		setNeedsSprites(needsSprites);
 	}
-	
+
 	public SpriteEffect(String archetype, Boolean needsSprites, String variable, String method, String parameter, VoogaEvent event) {
 		super(variable, method, parameter, event);
 		setMyArchetype(archetype);
@@ -66,8 +67,10 @@ public class SpriteEffect extends VariableEffect{
 		setSprites(data);
 		if (!mySprites.isEmpty() && mySprites.size() > 0){
 			for (Sprite sprite : mySprites){
+				if((Boolean)sprite.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){
 				VoogaData variable = sprite.getParameterMap().get(getVariable());
 				callEffectMethod(variable);
+				}
 			}
 		}
 		mySprites.clear();
@@ -82,13 +85,16 @@ public class SpriteEffect extends VariableEffect{
 		}
 		if (getNeedsSprites()){
 			mySprites = getEvent().getCauseSprites();
+			for (Sprite sprite : getEvent().getCauseSprites()){
+			}
 		}
 		if (getMyArchetype() != null){
 			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
 			if (!mySprites.isEmpty()){
-				for(Sprite causeSprite : mySprites){
+				for(int i = 0; i < mySprites.size(); i ++){
+					Sprite causeSprite = mySprites.get(i);
 					if(!archSpriteIDs.contains(causeSprite)){
-						mySprites.remove(causeSprite);
+						mySprites.remove(i);
 					}
 				}
 			}else {
@@ -98,19 +104,17 @@ public class SpriteEffect extends VariableEffect{
 			}
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		String effectString = getMethodString() + " " + getVariable() + " for " ;
-		
+
 		if (myArchetype != null){
 			effectString += myArchetype;
 		}
 		if (getSpriteID() != null){
 			effectString += " " + getSpriteID();
 		}
-		
-		//TODO: PUT THIS IN RESOURCE BUNDLE
 		if (getNeedsSprites()){
 			effectString += " sprites from causes";
 		}

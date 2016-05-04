@@ -75,21 +75,31 @@ public class CollisionCause extends Cause{
 		collidedSprites = new ArrayList<>();
 		boolean myVal = false;
 		IPhysicsEngine physics = data.getPhysicsEngine();
+		
 		for(Sprite a: getSprites(data,archA)){
 			for(Sprite b: getSprites(data,archB)){
-				if(myDirection.equals(VoogaBundles.EventMethods.getString("None"))){
-					if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
-						addSprites(a,b);
-						myVal = true;
-					}
-				}else{
-					if(handleCollision(a,b,data)){
-						myVal = true;
-					}
-				}
+				if((Boolean) a.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue() &&
+					(Boolean) b.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){		
+					
+					if(myDirection.equals(VoogaBundles.EventMethods.getString("None"))){
+							if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
+								addSprites(a,b);
+								myVal = true;
+							}
+						}else{
+							if(handleCollision(a,b,data)){
+								myVal = true;
+							}
+						}
+				}	
 			}
 		}
 		getEvent().addSpritesFromCause(collidedSprites);
+
+		if(myVal){
+			for(Sprite s: collidedSprites){
+			}
+		}
 		return myVal;
 	}
 	/**

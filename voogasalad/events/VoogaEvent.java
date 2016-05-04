@@ -43,7 +43,8 @@ public class VoogaEvent {
 	 * @param data Contains leveldata to be passed to causes and effects
 	 */
 	public void update(ILevelData data){
-		getCauseSprites().clear();
+		myCauseSprites.clear();
+		
 		for(Cause c: getCauses()){
 			if(!c.check(data)){
 				return;

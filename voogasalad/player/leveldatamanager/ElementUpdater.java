@@ -24,16 +24,19 @@ public class ElementUpdater {
 	public void update(ILevelData leveldata) {
 		Set<Entry<String, Elementable>> elements = leveldata.getElementables();
 		elements.stream().forEach((elempair) -> {
-			Elementable elem = elempair.getValue();
-			if(elem instanceof Sprite){
-				if(!(Boolean) ((Sprite) elem).getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){
-					leveldata.removeSpriteByID(elem.getId());
-				}
-				else{applyGravity((Sprite) elem,leveldata.getPhysicsEngine());}
-			}
-			elem.update();
+		Elementable elem = elempair.getValue();
+		if(elem instanceof Sprite){
+		if(!(Boolean) ((Sprite) elem).getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){
+		//leveldata.removeSpriteByID(elem.getId());
+		//do nothing
+		}
+		else{applyGravity((Sprite) elem,leveldata.getPhysicsEngine());}
+		}
+		elem.update();
 		});
-	}
+		}
+
+
 	/**
 	 * Using gravity field of each sprite, updates sprites' velocity
 	 * 

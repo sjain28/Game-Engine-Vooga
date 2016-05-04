@@ -59,9 +59,11 @@ public class SpriteFactory extends Observable{
 
 		Map<String,VoogaData> map = new HashMap<>(original.getParameterMap());
 
-		return new Sprite(original.getImagePath(), original.getArchetype(),
+		Sprite sprite = new Sprite(original.getImagePath(), original.getArchetype(),
 				map,
 				(VoogaNumber) map.get(VoogaBundles.spriteProperties.getString("MASS")));
+		
+		return sprite;
 	}
 
 	/**

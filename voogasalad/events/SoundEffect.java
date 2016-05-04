@@ -8,11 +8,11 @@ public class SoundEffect extends Effect {
 	//private Boolean soundAdded;
 	private Boolean loop;
 
-	public SoundEffect(String sound, Boolean loop, VoogaEvent voogaEvent) {
+	public SoundEffect(String sound, VoogaEvent voogaEvent) {
 		super(voogaEvent);
 		mySound = sound;
 		//soundAdded = false;
-		this.loop = loop;
+		this.loop = false;
 	}
 
 	@Override

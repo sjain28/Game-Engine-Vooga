@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
+import resources.VoogaBundles;
 
 public class PhysicsEffect extends SpriteEffect {
 
@@ -29,7 +30,9 @@ public class PhysicsEffect extends SpriteEffect {
 		setSprites(data);
 		if (getSprites().size() > 0){
 			for (Sprite sprite: getSprites()){
-				callEffectMethod(sprite, data);
+				if((Boolean)sprite.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){
+					callEffectMethod(sprite, data);
+				}
 			}
 		}
 		clearSprites();

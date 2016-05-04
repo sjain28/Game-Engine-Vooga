@@ -1,6 +1,9 @@
 package authoring.gui.eventpane;
 
+import java.util.ArrayList;
+import java.util.List;
 import authoring.gui.items.ArchetypeComboBox;
+import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
@@ -16,7 +19,7 @@ public class SpawnEffectGUI implements EventGUI {
 
     private ArchetypeComboBox archetypes;
     private ComboBox<String> targetDesired;
-    private SpriteComboBox targetId;
+    private ArchetypeSpriteCombo targetId;
     private NumberTextField x;
     private NumberTextField y;
     private EditEventable elementManager;
@@ -31,7 +34,12 @@ public class SpawnEffectGUI implements EventGUI {
 
         initialize();
     }
-
+    
+    private void onChange(){
+        removeInactiveNodes(x,y);
+        addGUIElements(x,y);
+    }
+    
     private void initialize () {
 
         archetypes = new ArchetypeComboBox(elementManager);
@@ -41,7 +49,7 @@ public class SpawnEffectGUI implements EventGUI {
         targetDesired.setPromptText("Choose Position");
         targetDesired.getItems().addAll(RELATIVE_POSITION, ABSOLUTE_POSITION);
 
-        targetId = new SpriteComboBox(elementManager);
+        targetId = new ArchetypeSpriteCombo(elementManager,node,e->onChange(),true);
         x = new NumberTextField();
         x.setPadding(new Insets(PADDING));
         y = new NumberTextField();
@@ -49,20 +57,15 @@ public class SpawnEffectGUI implements EventGUI {
 
         targetDesired.setOnAction(e -> {
             if (targetDesired.getValue().equals(RELATIVE_POSITION)) {
-                removeInactiveNodes(targetId, x, y);
-                addGUIElements(targetId);
+                removeInactiveNodes(x,y);
+                targetId.display();
             }
             if (targetDesired.getValue().equals(ABSOLUTE_POSITION)) {
-                removeInactiveNodes(targetId, x, y);
-                addGUIElements(x, y);
+                node.getChildren().clear();
+                addGUIElements(archetypes,targetDesired,x, y);
             }
         });
-        
-        targetId.setOnAction(e->{
-            removeInactiveNodes(x,y);
-            addGUIElements(x,y);
-        });
-        
+
         addGUIElements(archetypes, targetDesired);
     }
 
@@ -70,7 +73,7 @@ public class SpawnEffectGUI implements EventGUI {
     public String getDetails () throws VoogaException {
         String result = "events.SpawnEffect," + archetypes.getValue() + ",";
         if (targetDesired.getValue().equals(RELATIVE_POSITION)) {
-            result += targetId.getSpriteId() + ",";
+            result += targetId.getDetails() + ",";
         }
         result += x.getText() + "," + y.getText();
         return result;
