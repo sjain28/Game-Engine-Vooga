@@ -33,7 +33,7 @@ public class CollisionCauseGUI implements EventGUI{
         group1.display();
         group2.display();
         collisionType = new ComboBox<>();
-        collisionType.getItems().addAll("Horizontal","Above", "Below");
+        collisionType.getItems().addAll("Horizontal","Above", "Below", "None");
         parent.getChildren().addAll(collisionType,hbox);
     }
 
@@ -48,4 +48,3 @@ public class CollisionCauseGUI implements EventGUI{
         return "events.CollisionCause,"+group1.getDetails()+","+group2.getDetails()+","+VoogaBundles.EventMethods.getString(collisionType.getValue());
     }
 }
-

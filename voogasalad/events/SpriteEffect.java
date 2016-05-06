@@ -72,33 +72,37 @@ public class SpriteEffect extends VariableEffect{
 		}
 		mySprites.clear();
 	}
-	/**
-	 * Determines which sprites need to be set for this effect depending on the constructor that was used, as well as the
-	 * sprite outputs of the cause within the same event.
-	 */
-	protected void setSprites(ILevelData data){
-		if(getSpriteID() != null){
-			mySprites.add(data.getSpriteByID(getSpriteID()));
-		}
-		if (getNeedsSprites()){
-			mySprites = getEvent().getCauseSprites();
-		}
-		if (getMyArchetype() != null){
-			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
-			if (!mySprites.isEmpty()){
-				for(Sprite causeSprite : mySprites){
-					if(!archSpriteIDs.contains(causeSprite)){
-						mySprites.remove(causeSprite);
-					}
-				}
-			}else {
-				for(Sprite sprite : archSpriteIDs){
-					mySprites.add(sprite);
-				}
-			}
-		}
-	}
 	
+    /**
+     * Determines which sprites need to be set for this effect depending on the constructor that was
+     * used, as well as the
+     * sprite outputs of the cause within the same event.
+     */
+    protected void setSprites (ILevelData data) {
+        if (getSpriteID() != null) {
+            mySprites.add(data.getSpriteByID(getSpriteID()));
+        }
+        if (getNeedsSprites()) {
+            mySprites = getEvent().getCauseSprites();
+        }
+        if (getMyArchetype() != null) {
+            List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
+            if (!mySprites.isEmpty()) {
+                for (int i = 0; i < mySprites.size(); i++) {
+                    Sprite causeSprite = mySprites.get(i);
+                    if (!archSpriteIDs.contains(causeSprite)) {
+                        mySprites.remove(i);
+                    }
+                }
+            }
+            else {
+                for (Sprite sprite : archSpriteIDs) {
+                    mySprites.add(sprite);
+                }
+            }
+        }
+    }
+
 	@Override
 	public String toString() {
 		String effectString = getMethodString() + " " + getVariable() + " for " ;

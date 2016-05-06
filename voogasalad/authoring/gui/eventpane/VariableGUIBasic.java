@@ -1,4 +1,4 @@
-	package authoring.gui.eventpane;
+package authoring.gui.eventpane;
 
 import java.util.Collection;
 import authoring.gui.items.ArchetypeSpriteCombo;
@@ -17,7 +17,6 @@ import tools.interfaces.VoogaData;
 
 
 public abstract class VariableGUIBasic implements EventGUI {
-
     private static final String GLOBAL = "global";
     private static final String LOCAL = "local";
 
@@ -30,11 +29,14 @@ public abstract class VariableGUIBasic implements EventGUI {
     private EditEventable elementManager;
     private VBox node;
     private EventParts type;
+    private boolean effect;
 
     public VariableGUIBasic (EditEventable elementManager, EventParts type) {
         this.elementManager = elementManager;
         node = new VBox();
         this.type = type;
+
+        effect = type.isEffect();
         initialize();
     }
 
@@ -42,7 +44,7 @@ public abstract class VariableGUIBasic implements EventGUI {
         level = new ComboBox<>();
         level.getItems().addAll(GLOBAL, LOCAL);
 
-        name = new ArchetypeSpriteCombo(elementManager, node, e -> onNameSelected(), true);
+        name = new ArchetypeSpriteCombo(elementManager, node, e -> onNameSelected(), effect);
         variables = new VariableComboBox(elementManager);
         actions = new ComboBox<>();
 
@@ -109,7 +111,6 @@ public abstract class VariableGUIBasic implements EventGUI {
                 node.getChildren().remove(element);
             }
         }
-
     }
 
     protected abstract Collection<String> voogaNumberProperties ();
@@ -144,4 +145,5 @@ public abstract class VariableGUIBasic implements EventGUI {
         }
         return result;
     }
+
 }

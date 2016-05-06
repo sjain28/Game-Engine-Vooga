@@ -12,7 +12,6 @@ public class Run extends ToolbarItemHandler {
     private UIManager model;
     private String game;
 
-<<<<<<< HEAD
     
     /**
      * Initializes button takes in the backend interface
