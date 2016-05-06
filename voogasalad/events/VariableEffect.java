@@ -12,28 +12,40 @@ public class VariableEffect extends Effect {
 	private String myMethod;
 	private Object myParameter;
 	private String myVariable;
+	
+	public VariableEffect (String variable, String method, Object parameter, VoogaEvent event) {
+		super(event);
+		System.out.println("Object: " + parameter);
+		myMethod = method;
+		myVariable = variable;
+		myParameter = parameter;
+	}
 
-	public VariableEffect (String variable, String method, Double parameter, VoogaEvent event) {
-		super(event);
-		myMethod = method;
-		myVariable = variable;
-		myParameter = parameter;
-	}
-	public VariableEffect (String variable, String method, Boolean parameter, VoogaEvent event) {
-		super(event);
-		myMethod = method;
-		myVariable = variable;
-		myParameter = parameter;
-	}
-	public VariableEffect (String variable, String method, String parameter, VoogaEvent event) {
-		super(event);
-		myMethod = method;
-		myVariable = variable;
-		myParameter = parameter;
-	}
+//	public VariableEffect (String variable, String method, Double parameter, VoogaEvent event) {
+//		super(event);
+//		System.out.println("Double: " + Double.toString(parameter));
+//		myMethod = method;
+//		myVariable = variable;
+//		myParameter = parameter;
+//	}
+//	public VariableEffect (String variable, String method, Boolean parameter, VoogaEvent event) {
+//		super(event);
+//		System.out.println("Boolean: " + parameter);
+//		myMethod = method;
+//		myVariable = variable;
+//		myParameter = parameter;
+//	}
+//	public VariableEffect (String variable, String method, String parameter, VoogaEvent event) {
+//		super(event);
+//		System.out.println("String:" + parameter);
+//		myMethod = method;
+//		myVariable = variable;
+//		myParameter = parameter;
+//	}
 
 	public VariableEffect (String method, Double parameter, VoogaEvent event){
 		super(event);
+		System.out.println("Double2: " + Double.toString(parameter));
 		myMethod = method;
 		myParameter = parameter;
 	}
