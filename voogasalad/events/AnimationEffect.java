@@ -56,7 +56,7 @@ public class AnimationEffect extends SpriteEffect {
 		setSprites(data);
 		if (myAnimationEvent == null){
 			myAnimationEvent = data.getAnimationFromFactory(myAnimationName);
-			data.addEventAndPopulateKeyCombos(myAnimationEvent);
+			data.addEvent(myAnimationEvent);
 		}
 		if (myAnimationEvent.getCauseSprites().size() == 0){
 			myAnimationEvent.addSpritesFromCause(getSprites());

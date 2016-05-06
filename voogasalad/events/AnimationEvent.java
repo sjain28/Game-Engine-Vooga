@@ -52,7 +52,7 @@ public class AnimationEvent extends VoogaEvent {
 				if(myNextEvent != null){
 					myNextEvent.setCauseValue(true);
 					myNextEvent.setCauseSprites(getCauseSprites());
-					data.addEventAndPopulateKeyCombos(myNextEvent);
+					data.addEvent(myNextEvent);
 
 				}
 				refreshEffects(data);

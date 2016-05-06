@@ -16,6 +16,7 @@ import events.VoogaEvent;
 import gameengine.Sprite;
 import gameengine.SpriteFactory;
 import javafx.scene.Node;
+import javafx.scene.input.KeyEvent;
 import physics.IPhysicsEngine;
 import resources.VoogaBundles;
 import tools.Pair;
@@ -40,11 +41,13 @@ public class LevelData implements ILevelData {
 	private SpriteFactory mySpriteFactory;
 	private AnimationFactory myAnimationFactory;
 	private Map<String, VoogaData> myGlobalVariables;
-	private KeyEventContainer myKeyEventContainer;
+	private EventManager myEventManager;
 	private String myTimerKey;
 	private String myNextLevelKey;
 	private LevelTransitioner myTransitioner;
 	private ResourceBundle myEventMethods;
+	private List<KeyEvent> myReleases;
+	private List<KeyEvent> myPresses;
 
 	/**
 	 * Default constructor that takes in an instance of a physics module
@@ -53,7 +56,7 @@ public class LevelData implements ILevelData {
 	 */
 	public LevelData(IPhysicsEngine physicsengine) {
 		myEventMethods = VoogaBundles.EventMethods;
-		myKeyEventContainer = new KeyEventContainer();
+		myEventManager = new EventManager();
 		myPhysics = physicsengine;
 		myElements = new HashMap<>();
 		myGlobalVariables = new HashMap<>();
@@ -150,8 +153,8 @@ public class LevelData implements ILevelData {
 	/**
 	 * Add a given event and populate the pressed and released KeyCombos
 	 */
-	public void addEventAndPopulateKeyCombos(VoogaEvent event) {
-		myKeyEventContainer.addEventAndPopulateKeyCombos(event, myEventMethods);
+	public void addEvent(VoogaEvent event) {
+		myEventManager.addEvent(event, myEventMethods);
 	}
 
 	/**
@@ -160,9 +163,9 @@ public class LevelData implements ILevelData {
 	 * @param levelfilename
 	 */
 	public void refreshLevelData(String levelfilename) {
-		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables, myNextLevelKey);
+		myTransitioner = new LevelTransitioner(levelfilename, myElements, myEventManager, myGlobalVariables, myNextLevelKey);
 		myElements = myTransitioner.populateNewSprites();
-		myKeyEventContainer = myTransitioner.populateNewEvents();
+		myEventManager = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
 		VoogaJukebox.getInstance().stopBGM();
 		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "")+"BGM").getValue());
@@ -186,7 +189,7 @@ public class LevelData implements ILevelData {
 	 */
 	public void saveProgress(String filePath) {
 		myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-		GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory,
+		GameSaver saver = new GameSaver(myElements, myEventManager, myGlobalVariables, mySpriteFactory,
 				myAnimationFactory);
 		saver.saveCurrentProgress(filePath);
 	}
@@ -223,8 +226,8 @@ public class LevelData implements ILevelData {
 		return myPhysics;
 	}
 
-	public KeyEventContainer getKeyEventContainer() {
-		return myKeyEventContainer;
+	public EventManager getKeyEventContainer() {
+		return myEventManager;
 	}
 
 	public Map<String, VoogaData> getGlobalVariables() {
@@ -239,4 +242,21 @@ public class LevelData implements ILevelData {
 	public Set<Entry<String, Elementable>> getElementables() {
 		return myElements.entrySet();
 	}
+	
+	public List<KeyEvent> getReleases() {
+		return myReleases;
+	}
+
+	public void setReleases(List<KeyEvent> myReleases) {
+		this.myReleases = myReleases;
+	}
+
+	public List<KeyEvent> getPresses() {
+		return myPresses;
+	}
+
+	public void setPresses(List<KeyEvent> myPresses) {
+		this.myPresses = myPresses;
+	}
+
 }

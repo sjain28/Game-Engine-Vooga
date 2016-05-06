@@ -12,7 +12,7 @@ public interface ILevelLoader {
 
     void saveProgress(String filePath);
 
-    void addEventAndPopulateKeyCombos(VoogaEvent event);
+    void addEvent(VoogaEvent event);
 
     void updatedGlobalTimer(double time);
 

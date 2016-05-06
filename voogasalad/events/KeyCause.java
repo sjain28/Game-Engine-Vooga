@@ -1,9 +1,20 @@
+//This entire class is part of my masterpiece
+//SAUMYA JAIN
+/*
+ * This class is an extension of Cause whose purpose is to detect whether a certain key or combination of keys has 
+ * been pressed or released. 
+ * For my masterpiece I moved the checkKeys() logic into this class and removed some of its accessors and setters.
+ * This class reflects good design because it is now a much more active class than it was before refactoring. Previously
+ * all KeyCauses and all of their data was made visible to the EventManager, which checked each KeyCause in turn. 
+ * Now, the checking logic is delegated to each KeyCause, so KeyCause is made fully responsible for updating itself.
+ */
 package events;
 
 import java.util.Arrays;
 import java.util.List;
-
+import javafx.scene.input.KeyEvent;
 import player.leveldatamanager.ILevelData;
+import resources.VoogaBundles;
 
 /**
  * This class extends cause to create the specificity needed to address key causes. This will allow us to deal with
@@ -14,8 +25,8 @@ import player.leveldatamanager.ILevelData;
 public class KeyCause extends Cause {
 
 	private List<String> myKeys;
-	private boolean myValue;
 	private String myPressed; 
+	
 	/**
 	 * Constructor
 	 * @param allKeyInputs Space-separated list of keys that are relevant to this cause
@@ -27,6 +38,7 @@ public class KeyCause extends Cause {
 		myKeys = Arrays.asList(allKeyInputs.split("\\s+"));
 		myPressed = pressStatus;
 	}
+	
 	/**
 	 * Returns myValue
 	 * Since information about keyevents is held outside of this class, the value of this class is determined elsewhere
@@ -34,7 +46,30 @@ public class KeyCause extends Cause {
 	 */
 	@Override
 	public boolean check(ILevelData data) {
-		return myValue;
+		
+		if(myPressed.equals(VoogaBundles.EventMethods.getString("Press"))){
+			return checkKeys(data.getPresses());
+		}
+		return checkKeys(data.getReleases());
+	}
+	
+	/**
+	 * Checks a list of keyClicks to see if the keys relevant to this Cause have occured
+	 */
+	private boolean checkKeys(List<KeyEvent> keyClicks){
+				
+		if(keyClicks.size() < myKeys.size()) {
+			return false;
+		}
+			
+		for (int i = 0; i < keyClicks.size(); i++) { 
+			for(int j = 0; j < myKeys.size(); j++) { //Compare the tuple to the keycombo			
+				if(!((keyClicks.get(j+i).getCode().toString()).equals(myKeys.get(j)))) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -45,8 +80,8 @@ public class KeyCause extends Cause {
 		return myKeys;
 	}
 
-	public void setValue(boolean val){
-		myValue = val;
+	public String getMyPressed() {
+		return myPressed;
 	}
 	
 	@Override
@@ -56,9 +91,5 @@ public class KeyCause extends Cause {
 			result += " "+a;
 		}
 		return result;
-	}
-
-	public String getMyPressed() {
-		return myPressed;
 	}
 }
