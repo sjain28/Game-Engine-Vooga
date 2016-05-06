@@ -1,3 +1,14 @@
+/**
+ * This entire file is part of my code masterpiece.
+ * @author Harry Guo
+ * 
+ * Added a standard physics properties file to the voogaBundles.
+ * Made some dummy VoogaBundles that represent the types of
+ * physics that could be picked from instead of standard such as
+ * moon and crazy.
+ * 
+ */
+
 package resources;
 
 import java.io.IOException;
@@ -17,6 +28,8 @@ import tools.OrderedProperties;
 public class VoogaBundles {
 	
 	public final static ResourceBundle standardPhysics = ResourceBundle.getBundle("resources/standardPhysics");
+	public final static ResourceBundle moonPhysics = ResourceBundle.getBundle("resources/moonPhysics");
+	public final static ResourceBundle crazyPhysics = ResourceBundle.getBundle("resources/crazyPhysics");
 	
     
 	public final static ResourceBundle extensionProperties = ResourceBundle.getBundle("resources/extensions");

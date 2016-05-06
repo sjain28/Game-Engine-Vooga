@@ -13,11 +13,15 @@
  * and the rest of the game would work accordingly. I renamed this class Physics
  * Runner for that reason and created an enum class Physics Type to help determine
  * the type, and then they can pick accordingly. I renamed this class to be Physics 
- * Runner just 
+ * Runner just for convetional purposes as well. I did not make method/feature for the
+ * author to pick a physics type, but I just wanted to throw out the idea of making
+ * the physics of a game more flexible.
  * 
  */
 
 package physics;
+
+import java.util.ResourceBundle;
 
 import gameengine.Sprite;
 import javafx.geometry.Bounds;
@@ -31,12 +35,27 @@ import javafx.geometry.Bounds;
  */
 public class PhysicsRunner implements IPhysicsEngine {
 	
-	public static final double REDUCE_FACTOR = 0.1;
-	private static final double VELOCITY_FACTOR = 0.00001;
-	private static final double LIFT = 0.1;
-	private static final double ERROR = 0.01;
-	private static final double JUMP_FACTOR = 0.05;
-	private static final double COLLISION_CHECK = 1;
+	private ResourceBundle physicsBundle;
+	public static double REDUCE_FACTOR;
+	private double VELOCITY_FACTOR;
+	private double LIFT;
+	private double ERROR;
+	private double JUMP_FACTOR;
+	private double COLLISION_CHECK;
+	
+	/**
+	 * Constructor that takes in a physics type that the author chooses to work with
+	 * @param physicsType
+	 */
+	public PhysicsRunner(PhysicsEnum physicsType){
+		physicsBundle = physicsType.getPhysicsBundle();
+		REDUCE_FACTOR = Double.parseDouble(physicsBundle.getString("ReduceFactor"));
+		VELOCITY_FACTOR = Double.parseDouble(physicsBundle.getString("VelocityFactor"));
+		LIFT = Double.parseDouble(physicsBundle.getString("Lift"));
+		ERROR = Double.parseDouble(physicsBundle.getString("Error"));
+		JUMP_FACTOR = Double.parseDouble(physicsBundle.getString("JumpFactor"));
+		COLLISION_CHECK = Double.parseDouble(physicsBundle.getString("CollisionCheck"));
+	}
 	
 	/**
 	 * Checks whether a double is same as numToCompare

@@ -18,6 +18,7 @@ import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.util.Duration;
 import physics.IPhysicsEngine;
+import physics.PhysicsEnum;
 import physics.PhysicsRunner;
 import player.gamedisplay.IGameDisplay;
 import player.gamedisplay.StandardDisplay;
@@ -72,7 +73,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	public GameRunner() {
 		myGameDisplay = new StandardDisplay(this);
-		myPhysicsEngine = new PhysicsRunner();
+		myPhysicsEngine = new PhysicsRunner(PhysicsEnum.STANDARD);
 		myElementUpdater = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
