@@ -30,10 +30,8 @@ public class AnimationFactory {
 	}
 
 	public AnimationEvent makeAnimationEvent (String name, Integer duration) {
-		System.out.println("making animation event");
 		AnimationEvent newEvent = new AnimationEvent(name, duration);
 		myAnimationEvents.put(name, newEvent);
-		System.out.println("Event map size: " + myAnimationEvents.size());
 		return newEvent;
 	}
 
@@ -47,11 +45,9 @@ public class AnimationFactory {
 	public void makeRotateEffect (Double rotation, AnimationEvent event) {
 		event.addRotateEffect(new RotateEffect(rotation, event));
 	}
-	
 	public void makeScaleAnimationEffect(Double scale, AnimationEvent event){
 		event.addScaleAnimationEffect(new ScaleAnimationEffect(scale, event));
 	}
-	
 	public void makeImageAnimationEffect(List<String> images, Integer cycles, AnimationEvent event){
 		event.addImageAnimationEffect(new ImageAnimationEffect(images, cycles, event));
 
@@ -78,11 +74,15 @@ public class AnimationFactory {
 		return clonedSequence;
 	}
 
-	public void makeAnimationSequence(String sequenceName, List<AnimationEvent> eventsList){
-		for (int i = 0; i < eventsList.size() - 1; i++){
-			eventsList.get(i).setNextEvent(eventsList.get(i + 1));
+	public void makeAnimationSequence(String sequenceName, List<String> eventsList){
+		List<AnimationEvent> eventSequence = new ArrayList<>();
+		for (String event : eventsList){
+			eventSequence.add(myAnimationEvents.get(event).clone());
 		}
-		myAnimationSequences.put(sequenceName, eventsList);
+		for (int i = 0; i < eventsList.size() - 1; i++){
+			eventSequence.get(i).setNextEvent(eventSequence.get(i + 1));
+		}
+		myAnimationSequences.put(sequenceName, eventSequence);
 	}
 	public Collection<String> getPathNames(){
 		return Collections.unmodifiableCollection(myPaths.keySet());

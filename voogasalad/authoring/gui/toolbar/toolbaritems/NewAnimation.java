@@ -10,16 +10,26 @@ public class NewAnimation extends ToolbarItemHandler{
 	
 	MenuItemHandler animationCreator;
     
-    public NewAnimation(Menuable model){
+	
+    /**
+     * Initializes button takes in the backend interface
+     * 
+     * @param model
+     */
+    public NewAnimation (Menuable model) {
         animationCreator = new NewAnimationNewItem(model);
     }
+
+    /**
+     * Defines what to do when the button is clicked
+     */
     @Override
     public void handle () {
         try {
-			animationCreator.handle();
-		} catch (VoogaException e) {
-			e.printStackTrace();
-		}
+            animationCreator.handle();
+        }
+        catch (VoogaException e) {
+        }
     }
- 
+
 }

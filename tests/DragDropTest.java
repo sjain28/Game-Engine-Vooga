@@ -1,4 +1,4 @@
-package authoring.model.tests;
+package tests;
 
 import authoring.gui.DesignBoardHousing;
 import authoring.model.ElementManager;

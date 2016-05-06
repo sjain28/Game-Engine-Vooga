@@ -17,8 +17,13 @@ public class VoogaUser extends CellEntry{
 	public static final String DISPLAY_NAME = "display_name";
 	public static final String USER_NAME = "user_name";
 	public static final String PROF_PIC_LOC = "prof_pic_loc";
-	
-	
+	/**
+	 * Vooga User Constructor
+	 * @param displayname
+	 * @param username
+	 * @param password
+	 * @param profPicLocation
+	 */
 	public VoogaUser(String displayname,String username, String password, String profPicLocation){
 		super();
 		myPassword = password;
@@ -37,6 +42,7 @@ public class VoogaUser extends CellEntry{
 		return new ImageView(new Image("file:" + getProperty(PROF_PIC_LOC).getValue().toString()));
 	}
 	/**
+<<<<<<< HEAD
 	 * Returns whether the password the user typed was correct. 
 	 * This is used whenever verifying whether the user should be logged in.
 	 * @param passwordAttempt
@@ -46,8 +52,5 @@ public class VoogaUser extends CellEntry{
 	public boolean verifyPassword(String passwordAttempt){
 		if(passwordAttempt.equals(myPassword)){return true;}
 		return false;
-	}
-	public String toString(){
-		return getProperty(USER_NAME).getValue().toString();
 	}
 }

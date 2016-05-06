@@ -8,6 +8,15 @@ import tools.VoogaNumber;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
+/**
+ * Stat cell that stores a list of author stats and play stats
+ * for each authoring and playing session for a given game and user
+ * Also stores pertinent information that pertains to the intersection
+ * of a game and user
+ * @author Krista
+ *
+ */
+
 public class StatCell extends CellEntry {
 	private Stack<AuthorSession> myAuthorStats;
 	private Stack<PlaySession> myPlayStats;
@@ -15,7 +24,11 @@ public class StatCell extends CellEntry {
 	public static final String MY_GAME = "my_game";
 	public static final String LATEST_PROGRESS = "latest_progress";
 	public static final String LAST_SAVED_LEVEL_LOC = "last_saved_level_loc";
-	
+	/**
+	 * Stat Cell Constructor, takes in a gamename and username
+	 * @param gamename
+	 * @param username
+	 */
 	public StatCell(String gamename, String username){
 		super();
 		myAuthorStats = new Stack<>();
@@ -25,9 +38,14 @@ public class StatCell extends CellEntry {
 		setProperty(LAST_SAVED_LEVEL_LOC, new VoogaString(""));
 		setProperty(LATEST_PROGRESS, new VoogaString(""));
 	}
+	/**
+	 * Returns a list of authoring sessions
+	 * @return
+	 */
 	public List<CellEntry> getAuthorStats(){
 		return Collections.unmodifiableList(myAuthorStats);
 	}
+<<<<<<< HEAD
 	public List<CellEntry> getPlayStats(){
 		return Collections.unmodifiableList(myPlayStats);
 	}
@@ -40,11 +58,16 @@ public class StatCell extends CellEntry {
 //		System.out.println()
 	}
 	public AuthorSession peekLatestAuthoringSession(){
+
 		if (myAuthorStats.empty()){
 			return null;
 		}
 		return myAuthorStats.peek();
 	}
+	/**
+	 * Adds a playing session
+	 * @param voogaplaysesh
+	 */
 	public void addPlaySession(PlaySession voogaplaysesh){
 		myPlayStats.push(voogaplaysesh);
 	}
@@ -61,13 +84,17 @@ public class StatCell extends CellEntry {
 		lastSession.setProperty(param, value);
 		myPlayStats.push(lastSession);
 	}
-	public String toString(){
-		return "Cell";
-	}
+	/**
+	 * Updates the checkpoint to a given level name
+	 * @param levelName
+	 */
 	public void updateProgress(String levelName){
 		setProperty(LATEST_PROGRESS, new VoogaString(""));
-		System.out.println("The levelname here was set to levelName " + levelName);
 	}
+	/**
+	 * Checks the progress
+	 * @return
+	 */
 	public String checkProgress(){
 		return (String) ((VoogaString) getProperty(LATEST_PROGRESS)).getValue();
 	}

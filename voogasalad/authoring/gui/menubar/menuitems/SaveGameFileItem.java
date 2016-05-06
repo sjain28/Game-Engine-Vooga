@@ -12,8 +12,9 @@ import stats.interaction.CurrentSessionStats;
  * @author Nick, Hunter
  *
  */
+
 public class SaveGameFileItem extends PlayerMenuItemHandler {
-   // private GameRunner myGameRunner;
+
 	/**
 	 * Initializes the MenuItem
 	 * 
@@ -22,8 +23,8 @@ public class SaveGameFileItem extends PlayerMenuItemHandler {
 	 */
 	public SaveGameFileItem(Menuable model) {
 		super();
-		//this.myGameRunner = (GameRunner) model;
 	}
+
 	/**
 	 * Action to be taken on the selection of this menuItem
 	 */

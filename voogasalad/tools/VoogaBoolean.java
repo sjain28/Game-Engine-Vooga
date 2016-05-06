@@ -38,7 +38,6 @@ public class VoogaBoolean implements VoogaData {
 
 		this.valueProperty.addListener((obs, old, n) -> {
 			this.myValue = (Boolean) n;
-			System.out.println(n);
 		});
 	}
 

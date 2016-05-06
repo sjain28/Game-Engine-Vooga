@@ -1,30 +1,32 @@
  package stats.database;
 
-//import java.time.Instant;
-import java.util.Date;
-
+ import java.util.Date;
 import tools.VoogaDate;
 import tools.VoogaNumber;
 
-
 /**
- * Authoring Session is a type of VoogaSession. An authoring session is different from a playing session in that 
- * there are extra parameters logged for authoring session, such as sprites added.
- * 
- * @author Joshua Xu, Krista Opsahl-Ong
+ * Authoring Session Stats Cell
+ * Allows the database to save interesting stats
+ * about any given authoring session for a user to 
+ * analyze
+ * @author Krista
  *
  */
-
 public class AuthorSession extends VoogaSession{
-//	private Instant startInstant;
-//	private Instant endInstant;
 	public static final String DATE_AUTHORED = "date_authored";
 	public static final String AUTHOR_DURATION = "author_duration";
 	public static final String SPRITES_ADDED = "sprites_added";
+	/**
+	 * Author Session Constructor
+	 * @param dateauthored
+	 */
 	public AuthorSession(Date dateauthored){
 		setProperty(DATE_AUTHORED, new VoogaDate(dateauthored));
 		super.startSession();
 	}
+	/**
+	 * Sets the duration from the super class
+	 */
 	@Override
 	
 	/**

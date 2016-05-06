@@ -25,7 +25,11 @@ public class CreateCommand implements Command {
     private static final String DEFAULT_PROJECT_NAME = "My DoovalSalad Project";
     private static final String DEFAULT_DESCRIPTION = "A game I built with DoovalSalad";
     private static final String LOAD = "load";
+    private static final String GAME_STRING = "games/";
 
+    /**
+     * Executes the command to open up the create game screen
+     */
     @Override
     public void execute () {
         ProjectChooseAuthoringTypePrompt authoringTypePrompt =
@@ -81,10 +85,10 @@ public class CreateCommand implements Command {
                 List<CompleteAuthoringModelable> models = new ArrayList<>();
                 Preferences p =
                         (Preferences) Deserializer
-                                .deserialize(1, "games/" + name + "/" + name + ".xml").get(0);
+                                .deserialize(1, GAME_STRING + name + "/" + name + ".xml").get(0);
                 storeInfo(name, p.getDescription(), p.getWidth(), p.getHeight());
 
-                String prefixPath = "games/" + name + "/levels/";
+                String prefixPath = GAME_STRING + name + "/levels/";
                 File levelsFolder = new File(prefixPath);
                 for (File level : levelsFolder.listFiles()) {
                     String levelPath = prefixPath + level.getName();
@@ -94,11 +98,9 @@ public class CreateCommand implements Command {
                     em.setName(level.getName().replace(".xml", ""));
                     models.add(em);
                 }
-                System.out.println("someError");
                 open(models, LOAD);
             }
             catch (VoogaException ex) {
-                System.out.println("Error");
             }
         });
         prompt.show();
@@ -121,7 +123,7 @@ public class CreateCommand implements Command {
     @SuppressWarnings("unchecked")
     private void open (Object models, String tag) {
         CurrentSessionStats stats = new CurrentSessionStats();
-        stats.startAuthoringSession();
+        stats.startAuthoringSession(); 
         UIManager manager;
         if (tag.equals(LOAD)) {
             manager = new UIManager((List<CompleteAuthoringModelable>) models);

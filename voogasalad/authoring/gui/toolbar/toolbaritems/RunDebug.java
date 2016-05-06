@@ -8,18 +8,21 @@ import resources.VoogaBundles;
 
 
 public class RunDebug extends ToolbarItemHandler {
-	Save save;
-	private UIManager model;
+    Save save;
+    private UIManager model;
 
-	public RunDebug (Menuable model) {
-		//save = new Save(model);
-		this.model = (UIManager) model;
-	}
+    public RunDebug (Menuable model) {
+        // save = new Save(model);
+        this.model = (UIManager) model;
+    }
 
-	@Override
-	public void handle () {
-		GameRunner gameRunner = new GameRunner();
-		gameRunner.testLevel("games/" + VoogaBundles.preferences.getProperty("GameName") 
-							+ "/levels/" + model.getManager().getName() + ".xml");
-	}
+    /**
+     * Defines what to do when the button is clicked
+     */
+    @Override
+    public void handle () {
+        GameRunner gameRunner = new GameRunner();
+        gameRunner.testLevel("games/" + VoogaBundles.preferences.getProperty("GameName") +
+                             "/levels/" + model.getManager().getName() + ".xml");
+    }
 }

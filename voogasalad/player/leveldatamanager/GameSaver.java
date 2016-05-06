@@ -79,4 +79,10 @@ public class GameSaver implements IGameSaver {
 		CurrentSessionStats currentCell = new CurrentSessionStats();
 		currentCell.saveGameProgress(playerName);
 	}
+
+	@Override
+	public void saveCurrentProgress(String nameOfGame) {
+		// TODO Auto-generated method stub
+		
+	}
 }

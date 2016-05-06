@@ -14,7 +14,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontWeight;
 import tools.GUIUtils;
-
+/**
+ * Opens all the Current Games
+ * 
+ * @author Nick
+ *
+ */
 public class ProjectOpenAllPrompt extends StarterPrompt {
 	
 	private static final double WINDOW_WIDTH = 600;

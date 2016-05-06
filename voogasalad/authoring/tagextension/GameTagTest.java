@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * Game Tag Test class to push
+ * @author Arjun Desai
+ *
+ */
 public class GameTagTest {
 
 	@Test
@@ -16,7 +21,6 @@ public class GameTagTest {
 		listoftags.add("vector");
 		listoftags.add("character");
 		List<String> listofgamenames = taglibrary.getListOfGameNamesByTag(listoftags);
-		//System.out.println(listofgamenames);
 	}
 
 }

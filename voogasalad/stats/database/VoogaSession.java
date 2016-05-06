@@ -16,25 +16,23 @@ public abstract class VoogaSession extends CellEntry{
 	private Instant startInstant;
 	private Instant endInstant;
 	private double gap;
-	
 	/**
-	 * This method should be called when a session is initiated, typically after logging in and beginning to play the game
-	 * or authoring a game.
+	 * Starts session
 	 */
-	
 	public void startSession(){
 		startInstant = Instant.now();
 	}
-	
 	/**
-	 * This method should be called when a session is ended, typically after closing out of the screen, or when a next
-	 * action must be performed.
+	 * Ends the sessions
 	 */
-	
 	public void endSession(){
 		endInstant = Instant.now();
 		gap = ChronoUnit.MINUTES.between(startInstant,endInstant);
 		setDurationProperty(gap);
 	}
+	/**
+	 * Sets the duration property
+	 * @param gap
+	 */
 	protected abstract void setDurationProperty(double gap);
 }
