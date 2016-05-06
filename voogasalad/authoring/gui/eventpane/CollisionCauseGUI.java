@@ -33,7 +33,7 @@ public class CollisionCauseGUI implements EventGUI{
         group1.display();
         group2.display();
         collisionType = new ComboBox<>();
-        collisionType.getItems().addAll("Horizontal","Above", "Below");
+        collisionType.getItems().addAll("Horizontal","Above", "Below", "None");
         parent.getChildren().addAll(collisionType,hbox);
     }
 

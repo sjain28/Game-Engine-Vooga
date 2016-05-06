@@ -167,6 +167,7 @@ public class GameRunner implements IGameRunner {
 		myLevelReached++;
 		myCurrentLevelString = fileName;
 		myLevelData.refreshLevelData(myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX);
+		System.out.println("What is " +myLevelMapCreator.getGameFilePath() + LEVELS_PATH + fileName + XML_EXTENSION_SUFFIX );
 		addScrolling();
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
 	}

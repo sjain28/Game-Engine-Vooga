@@ -45,6 +45,21 @@ public class VariableCause extends Cause{
 	}
 	
 	/**
+	 * Separate constructor taking String instead of Double as target. Needed for Reflection.
+	 * @param variableName
+	 * @param predicate
+	 * @param targetValue
+	 * @param voogaEvent
+	 */
+	public VariableCause(String variableName, String predicate, String targetValue, VoogaEvent voogaEvent) {		
+		super(voogaEvent);
+		myTarget = targetValue;
+		myOperation = predicate;
+		myVarName = variableName;
+	}
+	
+	
+	/**
 	 * Applies predicate to variable and returns result of predicate
 	 */
 	@Override

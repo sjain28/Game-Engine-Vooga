@@ -54,24 +54,49 @@ public class SpriteCause extends VariableCause {
 		setTarget(target);
 	}
 	/**
+	 * Separate constructor to take a Double instead of a Boolean. Needed for Reflection in factory.
+	 * @param spriteID
+	 * @param varName
+	 * @param predicate
+	 * @param target
+	 * @param voogaEvent
+	 */
+	public SpriteCause(String spriteID, String varName, String predicate, String target, VoogaEvent voogaEvent) {
+		this(spriteID, varName, predicate, voogaEvent);
+		setTarget(target);
+	}
+	/**
 	 * Applies predicate to Sprite property and returns result of predicate.
 	 * Uses logic from super to check predicate.
 	 */
 	@Override
 	public boolean check(ILevelData data){
-		
+		boolean myVal = false;
 		mySprites.clear();
-		Sprite temp = data.getSpriteByID(mySpriteID);		
-		mySprites.add(temp);
-		
-		super.setVariable(temp.getProperty(myVarName));
-		
-		if(super.check(data)){
-			getEvent().addSpritesFromCause(mySprites);
-			return true;
+		ArrayList<Sprite> trueSprites = new ArrayList<>();
+		if(mySpriteID.matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")){		
+			mySprites.add(data.getSpriteByID(mySpriteID)); //If contains dash, it's a Sprite ID
 		}
-		return false;
+		else{
+			mySprites.addAll(data.getSpritesByArch(mySpriteID));//Else, it's an arch name
+		}
+		
+//		Sprite temp = data.getSpriteByID(mySpriteID);		
+//		mySprites.add(temp);
+		
+		for(Sprite sprite: mySprites){
+			super.setVariable(sprite.getProperty(myVarName));
+			if(super.check(data)){
+				trueSprites.add(sprite);
+				myVal = true;
+			}
+		}
+		getEvent().addSpritesFromCause(trueSprites);
+		trueSprites.clear();
+	
+		return myVal;
 	}
+
 	
 	@Override
 	public String toString(){
