@@ -1,5 +1,6 @@
 package events;
 
+import gameengine.Sprite;
 import physics.StandardPhysics;
 import player.leveldatamanager.ILevelData;
 import tools.Velocity;
@@ -14,14 +15,27 @@ public class ProjectileEffect extends SpawnEffect {
 		super(archetype, xPos, yPos, voogaEvent);
 		myVelocity = new Velocity(xVelocity, yVelocity);
 	}
+	
+	public ProjectileEffect(String archetype, String targetID, Double xPos, Double yPos, Double velocityScaleFactor, VoogaEvent voogaEvent) {
+		super(archetype, targetID, xPos, yPos, voogaEvent);
+		myShooterID = targetID;
+		myVelocityScale = velocityScaleFactor;
+	}
+	
 	public ProjectileEffect(String archetype, String targetID, Double xPos, Double yPos, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
 		super(archetype, targetID, xPos, yPos, voogaEvent);
 		myShooterID = targetID;
 		myVelocity = new Velocity(xVelocity, yVelocity);
 	}
 
-	public ProjectileEffect(String archetype, String targetID, Double xPos, Double yPos, Double velocityScaleFactor, VoogaEvent voogaEvent) {
-		super(archetype, targetID, xPos, yPos, voogaEvent);
+	public ProjectileEffect(String archetype, String targetID, Boolean needsSprites, Double xPos, Double yPos, Double xVelocity, Double yVelocity, VoogaEvent voogaEvent) {
+		super(archetype, targetID, needsSprites, xPos, yPos, voogaEvent);
+		myShooterID = targetID;
+		myVelocity = new Velocity(xVelocity, yVelocity);
+	}
+
+	public ProjectileEffect(String archetype, String targetID, Boolean needsSprites, Double xPos, Double yPos, Double velocityScaleFactor, VoogaEvent voogaEvent) {
+		super(archetype, targetID, needsSprites, xPos, yPos, voogaEvent);
 		myShooterID = targetID;
 		myVelocityScale = velocityScaleFactor;
 	}
@@ -36,8 +50,10 @@ public class ProjectileEffect extends SpawnEffect {
 		}
 		
 		super.execute(data);
-		getNewSprite().setVelocity(new Velocity(myVelocity.getX()*StandardPhysics.REDUCE_FACTOR, 
+		for (Sprite sprite : getNewSprites()){
+		sprite.setVelocity(new Velocity(myVelocity.getX()*StandardPhysics.REDUCE_FACTOR, 
 				myVelocity.getY()*StandardPhysics.REDUCE_FACTOR));
+		}
 
 	}
 

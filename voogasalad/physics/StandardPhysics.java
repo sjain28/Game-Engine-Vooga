@@ -59,6 +59,9 @@ public class StandardPhysics implements IPhysicsEngine {
 		Bounds boundB = spriteB.getImage().getBoundsInParent();
 		double diffRight = Math.abs(boundB.getMinX() - boundA.getMaxX());
 		double diffLeft = Math.abs(boundA.getMinX() - boundB.getMaxX());
+		
+		System.out.println("diff right = " + diffRight);
+		System.out.println("diff left = " + diffLeft);
 
 		if (boundA.intersects(boundB)) {
 			if (diffRight < COLLISION_CHECK || diffLeft < COLLISION_CHECK) {

@@ -17,6 +17,12 @@ public class VariableCause extends Cause{
 	private String myVarName;
 	private Class<?> variableClass;
 	
+	public VariableCause(String variableName, String predicate, String targetValue, VoogaEvent voogaEvent) {		
+		super(voogaEvent);
+		myTarget = targetValue;
+		myOperation = predicate;
+		myVarName = variableName;
+	}
 	/**
 	 * 
 	 * @param variableName Name of the variable that's being checked

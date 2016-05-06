@@ -5,17 +5,19 @@ import java.util.List;
 
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
-	/**
-	 *A class to define event causes based on the state of a Sprite 
-	 * @author Saumya Jain
-	 *
-	 */
+/**
+ *A class to define event causes based on the state of a Sprite 
+ * @author Saumya Jain
+ *
+ */
 public class SpriteCause extends VariableCause {
-	
+
 	private List<Sprite> mySprites;
 	private String mySpriteID;
 	private String myVarName;
-	
+
+
+
 	/**
 	 * 
 	 * @param spriteID ID of the Sprite being checked
@@ -59,20 +61,32 @@ public class SpriteCause extends VariableCause {
 	 */
 	@Override
 	public boolean check(ILevelData data){
-		
+		boolean myVal = false;
 		mySprites.clear();
-		Sprite temp = data.getSpriteByID(mySpriteID);		
-		mySprites.add(temp);
-		
-		super.setVariable(temp.getProperty(myVarName));
-		
-		if(super.check(data)){
-			getEvent().addSpritesFromCause(mySprites);
-			return true;
+		ArrayList<Sprite> trueSprites = new ArrayList<>();
+		if(mySpriteID.matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")){		
+			mySprites.add(data.getSpriteByID(mySpriteID)); //If contains dash, it's a Sprite ID
 		}
-		return false;
+		else{
+			mySprites.addAll(data.getSpritesByArch(mySpriteID));//Else, it's an arch name
+		}
+
+		//			Sprite temp = data.getSpriteByID(mySpriteID);		
+		//			mySprites.add(temp);
+
+		for(Sprite sprite: mySprites){
+			super.setVariable(sprite.getProperty(myVarName));
+			if(super.check(data)){
+				trueSprites.add(sprite);
+				myVal = true;
+			}
+		}
+		getEvent().addSpritesFromCause(trueSprites);
+		trueSprites.clear();
+
+		return myVal;
 	}
-	
+
 	@Override
 	public String toString(){
 		return "Checking if the variable " + myVarName + " in Sprite " + mySpriteID + " is equal to " + super.getTarget();

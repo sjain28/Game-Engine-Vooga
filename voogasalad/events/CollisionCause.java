@@ -78,7 +78,13 @@ public class CollisionCause extends Cause{
 		for(Sprite a: getSprites(data,archA)){
 			for(Sprite b: getSprites(data,archB)){
 				if(myDirection.equals(VoogaBundles.EventMethods.getString("None"))){
+					
+					System.out.println(physics.checkCollisionX(a, b));
+					System.out.println(physics.checkCollisionY(a, b));
+					
 					if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
+						
+						System.out.println("Collided");
 						addSprites(a,b);
 						myVal = true;
 					}
