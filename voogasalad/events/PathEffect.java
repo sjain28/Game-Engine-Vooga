@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import gameengine.Sprite;
-import physics.StandardPhysics;
+import physics.PhysicsRunner;
 import player.leveldatamanager.ILevelData;
 import tools.Position;
 import tools.Vector;
@@ -48,8 +48,8 @@ public class PathEffect extends SpriteEffect{
 
 			for (Sprite sprite : getSprites()){
 				Vector nextVector = createSpline(myCounter);
-				data.getPhysicsEngine().translateX(sprite, nextVector.getX() / StandardPhysics.REDUCE_FACTOR);
-				data.getPhysicsEngine().translateY(sprite, nextVector.getY() / StandardPhysics.REDUCE_FACTOR);
+				data.getPhysicsEngine().translateX(sprite, nextVector.getX() / PhysicsRunner.REDUCE_FACTOR);
+				data.getPhysicsEngine().translateY(sprite, nextVector.getY() / PhysicsRunner.REDUCE_FACTOR);
 				setPastVelocities(sprite);
 			}
 		}

@@ -1,9 +1,19 @@
+/**
+ * This is entire file is part of my masterpiece.
+ * @author HarryGuo
+ * 
+ * I decided to make these changes because there were some code smells 
+ * with a subclass (Standard Physics). I fixed those smells along 
+ * with changing this interface to match the changes in that class and 
+ * vice versa.
+ * 
+ */
+
 package physics;
 
 import gameengine.Sprite;
-import tools.Acceleration;
-import tools.Position;
-import tools.Velocity;
+
+
 
 public interface IPhysicsEngine {
 
@@ -46,40 +56,4 @@ public interface IPhysicsEngine {
 	 */
 	void jump(Sprite sprite, Double jumpMagnitude);
 
-	/**
-	 * Set a sprite's position to a new vector
-	 * 
-	 * @param sprite
-	 * @param newPosition
-	 */
-	@Deprecated
-	void setPosition(Sprite sprite, Position newPosition);
-	
-	/**
-	 * Set a sprite's velocity to a new vector
-	 * 
-	 * @param sprite
-	 * @param newVelocity
-	 */
-	@Deprecated
-	void setVelocity(Sprite sprite, Velocity newVelocity);
-	
-	/**
-	 * Take in a sprite's velocity and add acceleration per frame
-	 * 
-	 * @param sprite
-	 * @param change
-	 */
-	@Deprecated
-	void accelerate(Sprite sprite, Acceleration change);
-	
-	/**
-	 * Produce an acceleration vector in the same direction per sprite motion
-	 * and call accelerate() to modify its velocity per the coefficient's factor.
-	 * 
-	 * @param sprite
-	 * @param frictionCoefficeint
-	 */
-	@Deprecated
-	void friction(Sprite sprite, Double frictionCoefficeint);
 }

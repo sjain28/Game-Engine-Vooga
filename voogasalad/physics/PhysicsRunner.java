@@ -1,10 +1,26 @@
+/**
+ * This is entire file is part of my masterpiece.
+ * @author HarryGuo
+ * 
+ * I decided to make these changes because there were some code smells 
+ * in this class: unused code and repeat code. I fixed these smells along 
+ * with changing the interface to match the changes in this class and 
+ * vice versa. I also decided to put the following variables
+ * into a resource file because I think something that can be extended on in
+ * the future is allowing the user to define the type of physics they want.
+ * For example, if they wanted a "moon-like" physics rather than this "Standard 
+ * Physics" they could just load that resource file with the following parameters 
+ * and the rest of the game would work accordingly. I renamed this class Physics
+ * Runner for that reason and created an enum class Physics Type to help determine
+ * the type, and then they can pick accordingly. I renamed this class to be Physics 
+ * Runner just 
+ * 
+ */
+
 package physics;
 
 import gameengine.Sprite;
 import javafx.geometry.Bounds;
-import tools.Acceleration;
-import tools.Position;
-import tools.Velocity;
 
 /**
  * Standard Physics Module
@@ -13,7 +29,7 @@ import tools.Velocity;
  * @author Hunter, Michael
  *
  */
-public class StandardPhysics implements IPhysicsEngine {
+public class PhysicsRunner implements IPhysicsEngine {
 	
 	public static final double REDUCE_FACTOR = 0.1;
 	private static final double VELOCITY_FACTOR = 0.00001;
@@ -101,12 +117,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
-		if (sprite.getVelocity().getX() > 0) {
-			sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
-		}
-		else {
-			sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
-		}
+		bounceHelper(sprite);
 		sprite.getVelocity().setX(0);
 
 	}
@@ -118,14 +129,21 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void elasticBounceX(Sprite sprite, Double bounceCoefficient) {
+		bounceHelper(sprite);
+		sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
+	}
+
+	
+	private void bounceHelper(Sprite sprite) {
 		if (sprite.getVelocity().getX() > 0) {
 			sprite.getPosition().setX(sprite.getPosition().getX() - LIFT);
 		}
 		else {
 			sprite.getPosition().setX(sprite.getPosition().getX() + LIFT);
 		}
-		sprite.getVelocity().setX(-1 * sprite.getVelocity().getX() * bounceCoefficient);
 	}
+	
+
 	
 	/**
 	 * Elastic bounce in Y direction
@@ -163,24 +181,4 @@ public class StandardPhysics implements IPhysicsEngine {
 		}
 	}
 
-	@Override
-	public void friction(Sprite sprite, Double frictionCoefficient) {
-		Acceleration curr = new Acceleration(sprite.getVelocity().getX(), sprite.getVelocity().getY());
-		curr.setX(curr.getX()*frictionCoefficient);
-		curr.setY(curr.getY()*frictionCoefficient);
-		accelerate(sprite, curr);
-	}
-	@Override
-	public void accelerate(Sprite sprite, Acceleration change) {
-		sprite.getVelocity().setX(sprite.getVelocity().getX() + change.getX() * VELOCITY_FACTOR);
-		sprite.getVelocity().setY(sprite.getVelocity().getY() + change.getY() * VELOCITY_FACTOR);
-
-	}
-	@Override
-	public void setPosition(Sprite sprite, Position newPosition) {		
-	}
-
-	@Override
-	public void setVelocity(Sprite sprite, Velocity newVelocity) {		
-	}
 }

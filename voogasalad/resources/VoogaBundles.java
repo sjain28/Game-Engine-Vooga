@@ -15,6 +15,9 @@ import tools.OrderedProperties;
  *
  */
 public class VoogaBundles {
+	
+	public final static ResourceBundle standardPhysics = ResourceBundle.getBundle("resources/standardPhysics");
+	
     
 	public final static ResourceBundle extensionProperties = ResourceBundle.getBundle("resources/extensions");
 	public final static OrderedProperties menubarProperties = OrderedProperties.loadOrdered(new VoogaBundles().getClass().getResourceAsStream("/resources/menunames.properties"));
@@ -43,6 +46,8 @@ public class VoogaBundles {
 	public final static ResourceBundle databaseProperties = ResourceBundle.getBundle("resources/database");
 	public final static ResourceBundle leaderboardProperties = ResourceBundle.getBundle("resources/leaderboard");
 	public final static ResourceBundle randomcolorProperties = ResourceBundle.getBundle("resources/randomcolor");
+	
+	
 	
 	public final static ResourceBundle causeNames = ResourceBundle.getBundle("resources/causes");
 	public final static ResourceBundle effectNames = ResourceBundle.getBundle("resources/effects");
