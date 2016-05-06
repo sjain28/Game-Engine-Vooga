@@ -7,6 +7,12 @@
  * This class reflects good design because it is now a much more active class than it was before refactoring. Previously
  * all KeyCauses and all of their data was made visible to the EventManager, which checked each KeyCause in turn. 
  * Now, the checking logic is delegated to each KeyCause, so KeyCause is made fully responsible for updating itself.
+ * 
+ * Also i think that this class and its implementation demonstrate the benefits of our events API. This class itself
+ * has a fairly narrowly defined purpose; it's only job is to check for one kind of key action and return true or false.
+ * However, this Cause can be combined with other Causes and bundled with any combination of Effects. This shows how
+ * our Events API allows the user to combine a bunch of autonomous, simple parts into potentially highly complex 
+ * interactions like the ones shown in our demo.
  */
 package events;
 
