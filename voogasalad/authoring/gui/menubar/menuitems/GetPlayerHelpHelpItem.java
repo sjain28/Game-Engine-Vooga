@@ -21,7 +21,7 @@ import tools.VoogaException;
  */
 public class GetPlayerHelpHelpItem extends PlayerMenuItemHandler {
 
-	private static final String HELP_VIDEO_URL = "https://www.youtube.com/watch?v=znMmrxpFKEs";
+	private static final String HELP_VIDEO_URL = "http://adityasrinivasan.io/voogaplayertutorial.html";
 	private static final String EXIT_MESSAGE = "Press Ctrl + Z to exit full screen mode";
 
 	private WebView	myBrowser;
