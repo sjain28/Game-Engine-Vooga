@@ -1,0 +1,20 @@
+<object-stream>
+  <authoring.gui.cartography.NetworkContainer>
+    <mappings>
+      <entry>
+        <string>TestFire</string>
+        <string>ending</string>
+      </entry>
+    </mappings>
+    <levelTypes>
+      <entry>
+        <string>TestFire</string>
+        <authoring.gui.cartography.LevelType>ENTRYPOINT</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>ending</string>
+        <authoring.gui.cartography.LevelType>ENDPOINT</authoring.gui.cartography.LevelType>
+      </entry>
+    </levelTypes>
+  </authoring.gui.cartography.NetworkContainer>
+</object-stream>
