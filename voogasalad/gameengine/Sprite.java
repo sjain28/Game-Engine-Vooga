@@ -202,7 +202,7 @@ public class Sprite implements Moveable, Effectable, Elementable {
 		// Convert the Sprite's Cartesian Coordinates to display-able x and y's
 		myImage.setTranslateX(myLoc.getX() - myImage.getFitWidth() / RESIZE_FACTOR);
 		myImage.setTranslateY(myLoc.getY() - myImage.getFitHeight() / RESIZE_FACTOR);
-		myImage.setTranslateZ(myZ.doubleValue());
+		myImage.setTranslateZ((double) myProperties.get(VoogaBundles.spriteProperties.getString("Z_POS")).getValue());
 		
 		myX.set(myLoc.getX());
 		myY.set(myLoc.getY());

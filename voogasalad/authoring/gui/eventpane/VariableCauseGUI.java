@@ -7,7 +7,7 @@ import authoring.interfaces.model.EditEventable;
 
 public class VariableCauseGUI extends VariableGUIBasic implements EventGUI{
     
-	private static final String EQUALS = "Equals";
+    private static final String EQUALS = "Equals";
 	
     public VariableCauseGUI (EditEventable elementManager) {
         super(elementManager,EventParts.CAUSE);

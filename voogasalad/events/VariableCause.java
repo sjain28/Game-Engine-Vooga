@@ -44,6 +44,13 @@ public class VariableCause extends Cause{
 		myVarName = variableName;
 	}
 	
+	public VariableCause(String variableName, String predicate, String targetValue, VoogaEvent voogaEvent) {               
+            super(voogaEvent);
+            myTarget = targetValue;
+            myOperation = predicate;
+            myVarName = variableName;
+    }
+	
 	/**
 	 * Applies predicate to variable and returns result of predicate
 	 */

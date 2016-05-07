@@ -1,6 +1,7 @@
 package authoring.gui.eventpane;
 
 import authoring.gui.items.ArchetypeComboBox;
+import authoring.gui.items.ArchetypeSpriteCombo;
 import authoring.gui.items.NumberTextField;
 import authoring.gui.items.SpriteComboBox;
 import authoring.interfaces.model.EditEventable;
@@ -26,7 +27,7 @@ public class ProjectileEffectGUI implements EventGUI {
     private ComboBox<String> targetDesired;
     private ComboBox<String> velocityScaledDesired;
 
-    private SpriteComboBox targetId;
+    private ArchetypeSpriteCombo targetId;
     private NumberTextField posx;
     private NumberTextField posy;
     private NumberTextField velx;
@@ -40,7 +41,12 @@ public class ProjectileEffectGUI implements EventGUI {
         node = new VBox();
         initialize();
     }
-
+    
+    private void onChange(){
+        removeInactiveNodes(posx, posy);
+        addGUIElements(posx, posy, velocityScaledDesired);
+    }
+    
     private void createObjects () {
         archetypes = new ArchetypeComboBox(elementManager);
         archetypes.setPromptText("Select Archetype to Spawn");
@@ -53,7 +59,7 @@ public class ProjectileEffectGUI implements EventGUI {
         velocityScaledDesired.setPromptText("Scale Velocity Desired");
         velocityScaledDesired.getItems().addAll(SC_VEL,AB_VEL);
         
-        targetId = new SpriteComboBox(elementManager);
+        targetId = new ArchetypeSpriteCombo(elementManager,node,e->onChange(),true);
         
         posx = new NumberTextField();
         posx.setPadding(new Insets(PADDING));
@@ -83,18 +89,14 @@ public class ProjectileEffectGUI implements EventGUI {
 
         targetDesired.setOnAction(e -> {
             if (targetDesired.getValue().equals(REL_POS)) {
-                removeInactiveNodes(targetId, posx, posy);
-                addGUIElements(targetId);
+                removeInactiveNodes(posx, posy,velx,vely,amount);
+                targetId.display();
             }
             if (targetDesired.getValue().equals(ABS_POS)) {
-                removeInactiveNodes(targetId, posx, posy, velx, vely, targetId, amount);
-                addGUIElements(posx, posy, velx, vely);
+                node.getChildren().clear();
+                removeInactiveNodes(posx, posy, velx, vely,amount);
+                addGUIElements(archetypes, targetDesired, posx, posy, velx, vely);
             }
-        });
-
-        targetId.setOnAction(e -> {
-            removeInactiveNodes(posx, posy);
-            addGUIElements(posx, posy, velocityScaledDesired);
         });
 
         velocityScaledDesired.setOnAction(e -> {
@@ -134,7 +136,7 @@ public class ProjectileEffectGUI implements EventGUI {
     public String getDetails () throws VoogaException {
         String result = "events.ProjectileEffect," + archetypes.getValue() + ",";
         if (targetDesired.getValue().equals(REL_POS)) {
-            result += targetId.getSpriteId() + ",";
+            result += targetId.getDetails() + ",";
         }
         result += posx.getText() + "," + posy.getText() + ",";
 
