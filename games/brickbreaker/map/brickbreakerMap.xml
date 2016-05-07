@@ -1,0 +1,36 @@
+<object-stream>
+  <authoring.gui.cartography.NetworkContainer>
+    <mappings>
+      <entry>
+        <string>LoseScreen</string>
+        <string>level1</string>
+      </entry>
+      <entry>
+        <string>WelcomeScreen</string>
+        <string>level1</string>
+      </entry>
+      <entry>
+        <string>level1</string>
+        <string>LoseScreen</string>
+      </entry>
+    </mappings>
+    <levelTypes>
+      <entry>
+        <string>LoseScreen</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>WelcomeScreen</string>
+        <authoring.gui.cartography.LevelType>ENTRYPOINT</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>level1</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>WinScreen</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+    </levelTypes>
+  </authoring.gui.cartography.NetworkContainer>
+</object-stream>

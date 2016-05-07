@@ -1,0 +1,13 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>Plants Vs. Zombies</name>
+    <description>Take that tower defense</description>
+    <width>1280</width>
+    <height>720</height>
+    <managerNames>
+      <string>Basic Level</string>
+      <string>Level One</string>
+      <string>null</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>
