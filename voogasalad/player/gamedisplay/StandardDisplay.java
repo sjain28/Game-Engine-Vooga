@@ -43,7 +43,7 @@ public class StandardDisplay extends GameDisplay {
 	
 	private Node setBottom() {
 		// TODO Auto-generated method stub
-		return super.getControl().createControl();
+		return null;
 	}
 
 
