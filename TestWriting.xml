@@ -1,0 +1,467 @@
+<object-stream>
+  <data.DataContainerOfLists>
+    <eventList>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+      <events.VoogaEvent>
+        <myCauses>
+          <events.KeyCause>
+            <myEvent reference="../../.."/>
+            <myKeys class="java.util.Arrays$ArrayList">
+              <a class="string-array">
+                <string>k</string>
+              </a>
+            </myKeys>
+            <myValue>false</myValue>
+          </events.KeyCause>
+          <events.KeyCause reference="../events.KeyCause"/>
+        </myCauses>
+        <myEffects>
+          <events.VariableEffect>
+            <myEvent reference="../../.."/>
+            <myMethod>toggle</myMethod>
+            <myVariable>GameWon</myVariable>
+          </events.VariableEffect>
+          <events.VariableEffect reference="../events.VariableEffect"/>
+        </myEffects>
+        <myCauseSprites/>
+      </events.VoogaEvent>
+    </eventList>
+    <elementableList>
+      <gameengine.Sprite>
+        <isContinuous>false</isContinuous>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myAcceleration>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myAcceleration>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myLoc>
+        <myID>c3591724-359f-4358-8a04-c95587e8ffeb</myID>
+        <myProperties>
+          <entry>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>8.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Y Position</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.04</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>X Position</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>health</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>200.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>200.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/mario.png</myImagePath>
+        <myArchetype>Mario</myArchetype>
+      </gameengine.Sprite>
+      <gameengine.Sprite>
+        <isContinuous>false</isContinuous>
+        <myVelocity>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myVelocity>
+        <myAcceleration>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>0.0</x>
+          <y>0.0</y>
+        </myAcceleration>
+        <myLoc>
+          <xPrev>0.0</xPrev>
+          <yPrev>0.0</yPrev>
+          <x>20.0</x>
+          <y>20.0</y>
+        </myLoc>
+        <myID>c9caaca8-b695-46a6-bb3e-7b3784bcf0a9</myID>
+        <myProperties>
+          <entry>
+            <string>Mass</string>
+            <tools.VoogaNumber>
+              <myValue>1.0E12</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Y Position</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>X Position</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Height</string>
+            <tools.VoogaNumber>
+              <myValue>106.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Alive</string>
+            <tools.VoogaBoolean>
+              <myValue>true</myValue>
+            </tools.VoogaBoolean>
+          </entry>
+          <entry>
+            <string>Width</string>
+            <tools.VoogaNumber>
+              <myValue>804.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>softness</string>
+            <tools.VoogaNumber>
+              <myValue>10.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+          <entry>
+            <string>Gravity</string>
+            <tools.VoogaNumber>
+              <myValue>0.0</myValue>
+            </tools.VoogaNumber>
+          </entry>
+        </myProperties>
+        <myImagePath>/Grass.jpg</myImagePath>
+        <myArchetype>Grass Floor</myArchetype>
+      </gameengine.Sprite>
+    </elementableList>
+    <variableMap>
+      <entry>
+        <string>0</string>
+        <tools.VoogaNumber>
+          <myValue>0.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>1</string>
+        <tools.VoogaNumber>
+          <myValue>1.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>2</string>
+        <tools.VoogaNumber>
+          <myValue>2.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>3</string>
+        <tools.VoogaNumber>
+          <myValue>3.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>4</string>
+        <tools.VoogaNumber>
+          <myValue>4.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>5</string>
+        <tools.VoogaNumber>
+          <myValue>5.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>6</string>
+        <tools.VoogaNumber>
+          <myValue>6.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>7</string>
+        <tools.VoogaNumber>
+          <myValue>7.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>8</string>
+        <tools.VoogaNumber>
+          <myValue>8.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>9</string>
+        <tools.VoogaNumber>
+          <myValue>9.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+      <entry>
+        <string>LevelIndex</string>
+        <tools.VoogaNumber>
+          <myValue>-5.0</myValue>
+        </tools.VoogaNumber>
+      </entry>
+    </variableMap>
+    <archetypeMap/>
+  </data.DataContainerOfLists>
+</object-stream>
