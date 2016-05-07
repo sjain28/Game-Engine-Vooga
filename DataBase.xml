@@ -449,6 +449,22 @@
           </entry>
         </myPropertyMap>
       </stats.database.VoogaGame>
+      <stats.database.VoogaGame>
+        <myPropertyMap>
+          <entry>
+            <string>game_name</string>
+            <tools.VoogaString>
+              <myValue>FlappyBird</myValue>
+            </tools.VoogaString>
+          </entry>
+          <entry>
+            <string>game_description</string>
+            <tools.VoogaString>
+              <myValue>A game I built with DoovalSalad</myValue>
+            </tools.VoogaString>
+          </entry>
+        </myPropertyMap>
+      </stats.database.VoogaGame>
     </myGames>
     <myUsers>
       <stats.database.VoogaUser>
@@ -494,7 +510,7 @@
         <myPassword>a</myPassword>
       </stats.database.VoogaUser>
     </myUsers>
-    <totalrows>28</totalrows>
+    <totalrows>29</totalrows>
     <totalcols>2</totalcols>
     <myStatInfo>
       <list>
@@ -2370,6 +2386,76 @@
               <string>my_game</string>
               <tools.VoogaString>
                 <myValue>testttsdfasdfasdf</myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>latest_progress</string>
+              <tools.VoogaString>
+                <myValue></myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>my_user</string>
+              <tools.VoogaString>
+                <myValue>aditya</myValue>
+              </tools.VoogaString>
+            </entry>
+          </myPropertyMap>
+          <myAuthorStats serialization="custom">
+            <unserializable-parents/>
+            <vector>
+              <default>
+                <capacityIncrement>0</capacityIncrement>
+                <elementCount>0</elementCount>
+                <elementData>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                </elementData>
+              </default>
+            </vector>
+          </myAuthorStats>
+          <myPlayStats serialization="custom">
+            <unserializable-parents/>
+            <vector>
+              <default>
+                <capacityIncrement>0</capacityIncrement>
+                <elementCount>0</elementCount>
+                <elementData>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                </elementData>
+              </default>
+            </vector>
+          </myPlayStats>
+        </stats.database.StatCell>
+        <stats.database.StatCell>
+          <myPropertyMap>
+            <entry>
+              <string>last_saved_level_loc</string>
+              <tools.VoogaString>
+                <myValue></myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>my_game</string>
+              <tools.VoogaString>
+                <myValue>FlappyBird</myValue>
               </tools.VoogaString>
             </entry>
             <entry>
@@ -8324,6 +8410,144 @@
                 <elementData>
                   <null/>
                   <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                </elementData>
+              </default>
+            </vector>
+          </myPlayStats>
+        </stats.database.StatCell>
+        <stats.database.StatCell>
+          <myPropertyMap>
+            <entry>
+              <string>last_saved_level_loc</string>
+              <tools.VoogaString>
+                <myValue></myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>my_game</string>
+              <tools.VoogaString>
+                <myValue>FlappyBird</myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>latest_progress</string>
+              <tools.VoogaString>
+                <myValue></myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>my_user</string>
+              <tools.VoogaString>
+                <myValue>a</myValue>
+              </tools.VoogaString>
+            </entry>
+          </myPropertyMap>
+          <myAuthorStats serialization="custom">
+            <unserializable-parents/>
+            <vector>
+              <default>
+                <capacityIncrement>0</capacityIncrement>
+                <elementCount>1</elementCount>
+                <elementData>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-07 05:14:07.209 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462598047</long>
+                      <int>210000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462598111</long>
+                      <int>577000000</int>
+                    </endInstant>
+                    <gap>1.0</gap>
+                  </stats.database.AuthorSession>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                </elementData>
+              </default>
+            </vector>
+          </myAuthorStats>
+          <myPlayStats serialization="custom">
+            <unserializable-parents/>
+            <vector>
+              <default>
+                <capacityIncrement>0</capacityIncrement>
+                <elementCount>2</elementCount>
+                <elementData>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>true</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-07 05:14:16.628 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462598056</long>
+                      <int>628000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>true</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-07 05:14:34.255 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462598074</long>
+                      <int>255000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
                   <null/>
                   <null/>
                   <null/>
