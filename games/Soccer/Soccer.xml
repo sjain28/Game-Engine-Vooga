@@ -1,0 +1,11 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>Soccer</name>
+    <description>A game I built with DoovalSalad</description>
+    <width>600</width>
+    <height>600</height>
+    <managerNames>
+      <string>Lvl1</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>

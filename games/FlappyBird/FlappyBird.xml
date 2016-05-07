@@ -1,0 +1,15 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>FlappyBird</name>
+    <description>A game I built with DoovalSalad</description>
+    <width>600</width>
+    <height>600</height>
+    <managerNames>
+      <string>L1</string>
+      <string>L2</string>
+      <string>lose</string>
+      <string>start</string>
+      <string>win</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>

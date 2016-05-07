@@ -1,0 +1,14 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>brickbreaker</name>
+    <description>break bricks!</description>
+    <width>600</width>
+    <height>600</height>
+    <managerNames>
+      <string>level1</string>
+      <string>LoseScreen</string>
+      <string>WelcomeScreen</string>
+      <string>WinScreen</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>

@@ -1,0 +1,23 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>Arcade Games</name>
+    <description>all 3 games</description>
+    <width>600</width>
+    <height>600</height>
+    <managerNames>
+      <string>Infinite</string>
+      <string>L1</string>
+      <string>L2</string>
+      <string>level1</string>
+      <string>lose</string>
+      <string>LoseScreen</string>
+      <string>ShawtyMelody</string>
+      <string>SplashScreen</string>
+      <string>start</string>
+      <string>TeachMeDougie</string>
+      <string>WelcomeScreen</string>
+      <string>win</string>
+      <string>WinScreen</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>
