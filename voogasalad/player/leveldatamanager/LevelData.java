@@ -182,8 +182,9 @@ public class LevelData implements ILevelData {
 	 */
 	public void saveProgress(String filePath) {
 		myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
-		GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory,
-				myAnimationFactory);
+		// The client can use this instead of a previous method call which is more intuitive and easier to use
+		GameSaver saver = new GameSaver.SaverBuilder().elements(myElements).eventcontainer(myKeyEventContainer)
+				.globals(myGlobalVariables).sprite(mySpriteFactory).animation(myAnimationFactory).build();
 		saver.saveCurrentProgress(filePath);
 	}
 
