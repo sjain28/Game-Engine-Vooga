@@ -91,4 +91,8 @@ public class VoogaString implements VoogaData {
     public void setValue (String o) {
         myValue = o;
     }
+    
+    public boolean equals (String string) {
+        return string.equals(myValue);
+    } 
 }

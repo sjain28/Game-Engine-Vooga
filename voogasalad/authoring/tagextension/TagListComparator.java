@@ -28,14 +28,14 @@ public class TagListComparator implements Comparator<Object> {
 
 	    if(perc1 < perc2){return 1;}
 	    if(perc1 > perc2){return -1;}
+	    
 	    return 0;
 	}
 	private double generateTotalPercentMatch(List<Tag> taglist){
 		double percentmatch = 0.0;
 		for(String descrip : myDescripList){
 			for(Tag tag : taglist){
-				String tagname = tag.getName();
-				if(descrip.equals(tagname)){
+				if(descrip.equals(tag.getName())){
 					percentmatch += tag.getProbability();
 				}
 			}

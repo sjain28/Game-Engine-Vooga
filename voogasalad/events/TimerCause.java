@@ -22,13 +22,13 @@ public class TimerCause extends Cause {
 		myInterval = interval;
 	}
 	/**
-	 * Checks whether game time is past start time, and returns true periodically based on the interval
-	 */
+	* Checks whether game time is past start time, and returns true periodically based on the interval
+	*/
 	@Override
 	public boolean check(ILevelData data) {
 		Double time = (Double) data.getGlobalVar(VoogaBundles.defaultglobalvars.getProperty("Time")).getValue();
-		if(time >= myStartTime){
-			myStartTime += myInterval;
+		if(Math.round(time % myInterval)==0){
+			//myStartTime += myInterval;
 			return true;
 		}
 		return false;

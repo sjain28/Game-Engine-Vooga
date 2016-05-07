@@ -1,5 +1,6 @@
 package stats.visualization;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.chart.Axis;
@@ -7,6 +8,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
+import stats.database.CellEntry;
 /**
  * Graph Maker to make any sort of scatter plot with two lists of objects
  * @author Krista
@@ -27,7 +29,18 @@ public class GraphMaker {
 	 * @param yparams
 	 * @return
 	 */
-	public ScatterChart<?,?> createScatterPlot(String title, String xlabel, String ylabel, List<Object> xparams, List<Object> yparams){
+	public ScatterChart<?,?> createScatterPlot(String title, String xlabel, String ylabel, List<Object> xlist, List<Object> ylist){
+
+		List<Object> xparams = new ArrayList<Object>();
+		List<Object> yparams = new ArrayList<Object>();
+		
+		for(int i = 0; i<xlist.size(); i++){
+			if((xlist.get(i)!=null)&&(ylist.get(i)!=null)){
+				xparams.add(xlist.get(i));
+				yparams.add(ylist.get(i));
+			}
+		}
+		
 		//choose x axis type
 		if(xparams.get(0) instanceof Number){xAxis = new NumberAxis();}
 		else{xAxis = new CategoryAxis();}

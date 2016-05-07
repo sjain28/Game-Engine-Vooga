@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.scene.chart.ScatterChart;
 import resources.VoogaBundles;
+import stats.database.AuthorSession;
 import stats.database.CellEntry;
 /**
  * Allows visualization of stat parameters from the database

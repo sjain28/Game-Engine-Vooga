@@ -70,8 +70,8 @@ public class GlobalPropertiesManager implements Elementable {
         addProperty(VoogaBundles.defaultglobalvars.getProperty("Score"), new VoogaNumber(0.0));
         addProperty(VoogaBundles.defaultglobalvars.getProperty("SaveProgress"),
                     new VoogaBoolean(false));
-        addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"),
-                    new VoogaString(""));
+        //addProperty(VoogaBundles.defaultglobalvars.getProperty("CenteredCharacter"),
+          //          new VoogaString(""));
     }
 
     @Override

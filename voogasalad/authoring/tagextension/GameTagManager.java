@@ -34,10 +34,13 @@ import tools.VoogaException;
  *
  */
 public class GameTagManager {
-
+	/**
+	 * Constants
+	 */
     private ClarifaiClient clarifai;
     private static final String TAGS_FOLDER_LOCATION = "tags/";
     private static final String TAGS_SUFFIX = "_tags.xml";
+    private static final String GIF_SUFFIX = ".gif";
     private List<Tag> myTags;
 
     /**
@@ -53,28 +56,18 @@ public class GameTagManager {
     /**
      * Save tags to a game based on uploaded image
      * adds these tags to the current game
-     * 
-     * @param filename
      */
     public void addTagsFromImage (String filename) {
-        // set tags from current game
         loadCurrentGameTags();
-        
         try {
-        	if(filename.endsWith(".gif")) return;
-            if (!ResourceDecipherer.isImage(filename)) return;
+        	if(filename.endsWith(GIF_SUFFIX)|!ResourceDecipherer.isImage(filename)){
+        		return;
+        	}
         }
-        catch (VoogaException e) {
-        }
-        
-        // Retrieve recognition results
+        catch (VoogaException e) {}
         List<RecognitionResult> results =
                 clarifai.recognize(new RecognitionRequest(new File(filename)));
-
-        // add all of the Tags to a list
         myTags.addAll(results.get(0).getTags());
-
-        // save Tags
         saveCurrentGameTags();
     }
 
@@ -82,12 +75,8 @@ public class GameTagManager {
      * Serialize Tag list
      */
     private void saveCurrentGameTags () {
-        try {
-            Serializer.serializeLevel(myTags, getTagLocation());
-        }
-        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
-
-        }
+        try {Serializer.serializeLevel(myTags, getTagLocation());}
+        catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {}
     }
 
     /**
@@ -103,15 +92,11 @@ public class GameTagManager {
             List<Object> objects = Deserializer.deserialize(1, getTagLocation());
             myTags = (List<Tag>) objects.get(0);
         }
-        catch (VoogaException e) {
-
-        }
+        catch (VoogaException e) {}
     }
 
     /**
      * Get tag location based on current Game
-     * 
-     * @return
      */
     private String getTagLocation () {
         String gamename = VoogaBundles.preferences.getProperty("GameName");

@@ -11,7 +11,7 @@ import tools.VoogaException;
 /**
  * Library that returns the list of tagss for the game and stores the tag to game pairs
  * 
- * @author Aditya Srinivasan
+ * @author Krista, Aditya Srinivasan
  *
  */
 public class GameTagLibrary {

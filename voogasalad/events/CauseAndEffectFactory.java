@@ -22,7 +22,7 @@ public class CauseAndEffectFactory {
     public void create (VoogaEvent event, String inputString) throws VoogaException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException  {
     	String[] parameters = inputString.split(",");
         Class<?> c;
-        
+        System.out.println("Input to factory: " + inputString);
         c = Class.forName(parameters[0]); 
         
         Class[] paramClasses = new Class[parameters.length];

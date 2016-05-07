@@ -16,7 +16,7 @@ import resources.VoogaBundles;
  * This class detects collisions between Sprites
  *
  */
- 
+
 public class CollisionCause extends Cause{
 
 	private List<Sprite> collidedSprites; 
@@ -37,7 +37,7 @@ public class CollisionCause extends Cause{
 		initMap();
 		collidedSprites = new ArrayList<>();
 	}
-	
+
 	/**
 	 * 
 	 * @param spriteA Archetype or ID of a Sprite in the collision
@@ -57,7 +57,7 @@ public class CollisionCause extends Cause{
 	 */
 	private List<Sprite> getSprites(ILevelData data, String arch){
 		List<Sprite> group = new ArrayList<>();
-	        
+
 		if(arch.matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")){		
 			group.add(data.getSpriteByID(arch)); //If contains dash, it's a Sprite ID
 		}
@@ -71,20 +71,24 @@ public class CollisionCause extends Cause{
 	 */
 	@Override
 	public boolean check(ILevelData data) {
-		
+
 		collidedSprites = new ArrayList<>();
 		boolean myVal = false;
 		IPhysicsEngine physics = data.getPhysicsEngine();
+		
 		for(Sprite a: getSprites(data,archA)){
 			for(Sprite b: getSprites(data,archB)){
-				if(myDirection.equals(VoogaBundles.EventMethods.getString("None"))){
-					if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
-						addSprites(a,b);
-						myVal = true;
-					}
-				}else{
-					if(handleCollision(a,b,data)){
-						myVal = true;
+				if ((Boolean)a.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()
+						&& (Boolean)b.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){
+					if(myDirection.equals(VoogaBundles.EventMethods.getString("None"))){
+						if((physics.checkCollisionX(a, b) != 0) || (physics.checkCollisionY(a, b) != 0)){
+							addSprites(a,b);
+							myVal = true;
+						}
+					}else{
+						if(handleCollision(a,b,data)){
+							myVal = true;
+						}
 					}
 				}
 			}
@@ -140,7 +144,7 @@ public class CollisionCause extends Cause{
 	public List<Sprite> getAllCollidedSprites(){
 		return collidedSprites;
 	}
-	
+
 	@Override
 	public String toString(){
 		return archA + " is colliding with " + archB;

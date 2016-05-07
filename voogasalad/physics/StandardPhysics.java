@@ -133,7 +133,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	@Override
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
-		if (sprite.getVelocity().getY() < LIFT && sprite.getVelocity().getY() != 0.0) {
+		if (Math.abs(sprite.getVelocity().getY()) < LIFT && sprite.getVelocity().getY() != 0.0) {
 			sprite.getVelocity().setY(0.0);
 			sprite.getPosition().setY(sprite.getPosition().getY() - LIFT);
 		}
