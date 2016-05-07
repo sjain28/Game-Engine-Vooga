@@ -20,8 +20,6 @@ public interface IGameDisplay {
 	void readAndPopulate(List<Pair<Node, Boolean>> listToDisplay);
 
 	void display();
-	
-	void displayTestMode();
 		
 	void createPrompt(String message);
 	

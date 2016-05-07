@@ -182,7 +182,7 @@ public class GameRunner implements IGameRunner {
 		addScrolling();
 		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_WIDTH)), 
 				Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_HEIGHT)));
-		myGameDisplay.displayTestMode();
+		myGameDisplay.display();
 		run();
 	}
 	/**
