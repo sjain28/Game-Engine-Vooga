@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Hunter Lee
 /**
  * This class was modified for code masterpiece (hl130) line 158
  * 

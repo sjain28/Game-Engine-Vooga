@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Hunter Lee
+
 /**
  * Code Masterpiece - Hunter Lee (hl130)
  * 
