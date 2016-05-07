@@ -1,3 +1,8 @@
+/**
+ * This class was modified for code masterpiece (hl130) line 158
+ * 
+ */
+
 package player.leveldatamanager;
 
 import java.nio.file.Paths;
@@ -149,7 +154,9 @@ public class LevelData implements ILevelData {
 	 * @param levelfilename
 	 */
 	public void refreshLevelData(String levelfilename) {
-		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables, myNextLevelKey);
+		// The client can use this instead of a previous method call which is more intuitive and easier to use
+		myTransitioner = new LevelTransitioner.TransitionerBuilder().filename(levelfilename).elements(myElements)
+				.eventcontainer(myKeyEventContainer).globals(myGlobalVariables).levelkey(myNextLevelKey).build();
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
