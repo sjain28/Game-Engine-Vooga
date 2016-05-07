@@ -5,6 +5,7 @@ import java.util.List;
 
 import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
+import resources.VoogaBundles;
 import tools.interfaces.VoogaData;
 
 public class SpriteEffect extends VariableEffect{
@@ -66,8 +67,10 @@ public class SpriteEffect extends VariableEffect{
 		setSprites(data);
 		if (!mySprites.isEmpty() && mySprites.size() > 0){
 			for (Sprite sprite : mySprites){
-				VoogaData variable = sprite.getParameterMap().get(getVariable());
-				callEffectMethod(variable);
+				if((Boolean) sprite.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()) {
+					VoogaData variable = sprite.getParameterMap().get(getVariable());
+					callEffectMethod(variable);
+				}
 			}
 		}
 		mySprites.clear();
@@ -86,9 +89,10 @@ public class SpriteEffect extends VariableEffect{
 		if (getMyArchetype() != null){
 			List<Sprite> archSpriteIDs = data.getSpritesByArch(getMyArchetype());
 			if (!mySprites.isEmpty()){
-				for(Sprite causeSprite : mySprites){
+				for(int i = 0; i < mySprites.size(); i ++){
+					Sprite causeSprite = mySprites.get(i);
 					if(!archSpriteIDs.contains(causeSprite)){
-						mySprites.remove(causeSprite);
+						mySprites.remove(i);
 					}
 				}
 			}else {

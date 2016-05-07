@@ -25,7 +25,6 @@ import tools.VoogaJukebox;
 import tools.VoogaString;
 import tools.interfaces.VoogaData;
 
-
 /**
  * A centralized class to contain and access data including Sprites, Text,
  * Global Variables, and Events
@@ -70,7 +69,8 @@ public class LevelData implements ILevelData {
 	public List<Sprite> getSpritesByArch(String archetype) {
 		List<Sprite> list = new ArrayList<>();
 		for (String id : myElements.keySet()) {
-			if (myElements.get(id) instanceof Sprite && ((Sprite) myElements.get(id)).getArchetype().equals(archetype)) {
+			if (myElements.get(id) instanceof Sprite
+					&& ((Sprite) myElements.get(id)).getArchetype().equals(archetype)) {
 				list.add((Sprite) myElements.get(id));
 			}
 		}
@@ -129,8 +129,20 @@ public class LevelData implements ILevelData {
 	public List<Pair<Node, Boolean>> getDisplayableNodes() {
 		List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
 		for (Object key : myElements.keySet()) {
-			Boolean isStatic = (Boolean) myElements.get(key).getVoogaProperties().get(VoogaBundles.spriteProperties.getString("STATIC")).getProperty().getValue();
-			displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
+			boolean add = true;
+			// if the sprite is dead, don't let it be displayed
+			if (myElements.get(key) instanceof Sprite) {
+				if (!(Boolean) ((Sprite) myElements.get(key))
+						.getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()) {
+					add = false;
+				}
+			}
+			// otherwise, add it to the displayable nodes
+			if (add) {
+				Boolean isStatic = (Boolean) myElements.get(key).getVoogaProperties()
+						.get(VoogaBundles.spriteProperties.getString("STATIC")).getProperty().getValue();
+				displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
+			}
 		}
 		displayablenodes.sort(new PairZAxisComparator());
 		return displayablenodes;
@@ -149,12 +161,14 @@ public class LevelData implements ILevelData {
 	 * @param levelfilename
 	 */
 	public void refreshLevelData(String levelfilename) {
-		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables, myNextLevelKey);
+		myTransitioner = new LevelTransitioner(levelfilename, myElements, myKeyEventContainer, myGlobalVariables,
+				myNextLevelKey);
 		myElements = myTransitioner.populateNewSprites();
 		myKeyEventContainer = myTransitioner.populateNewEvents();
 		myGlobalVariables = myTransitioner.populateNewGlobals();
 		VoogaJukebox.getInstance().stopBGM();
-		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "")+"BGM").getValue());
+		VoogaJukebox.getInstance().setBGM((String) myGlobalVariables
+				.get(Paths.get(levelfilename).getFileName().toString().replace(".xml", "") + "BGM").getValue());
 		VoogaJukebox.getInstance().playBGM();
 		mySpriteFactory = myTransitioner.getNewSpriteFactory();
 		myMainCharID = myTransitioner.getMainCharID();

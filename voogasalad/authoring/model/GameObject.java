@@ -60,7 +60,7 @@ public class GameObject extends ImageView implements Moveable, AuthoringElementa
         this.setOnDragDetected(e -> onDrag(e));
         
         Tooltip tp = new Tooltip();
-        tp.setText("Name: "+name);
+        tp.setText("Name: "+name + "\nArchetype: " + sprite.getArchetype());
         
         Tooltip.install(this, tp);
     }

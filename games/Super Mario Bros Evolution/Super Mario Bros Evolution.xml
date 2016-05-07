@@ -1,0 +1,17 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>Super Mario Bros Evolution</name>
+    <description>Play as Mario and Luigi through the times!</description>
+    <width>1280</width>
+    <height>720</height>
+    <managerNames>
+      <string>Boss Level</string>
+      <string>Classic Old (Single Player)</string>
+      <string>Dark Level (Luigi)</string>
+      <string>Game Over Old</string>
+      <string>Opening (Player 1)</string>
+      <string>Opening (Player 2)</string>
+      <string>Water Level (Multiplayer)</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>

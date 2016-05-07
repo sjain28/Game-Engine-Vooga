@@ -40,7 +40,7 @@ import videos.ScreenProcessor;
  * @author Hunter, Krista, Michael, Josh
  */
 public class GameRunner implements IGameRunner {
-	public static final double FRAME_RATE = 60;
+	public static final double FRAME_RATE = 20;
 	private static final double MILLISECOND_DELAY = 1000 / FRAME_RATE;
 	private static final double SPEEDCONTROL = 10;
 	private static final String GAMES_PATH = "games/";

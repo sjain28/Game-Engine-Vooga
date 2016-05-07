@@ -15,12 +15,12 @@ import tools.Velocity;
  */
 public class StandardPhysics implements IPhysicsEngine {
 	
-	public static final double REDUCE_FACTOR = 0.1;
-	private static final double VELOCITY_FACTOR = 0.00001;
-	private static final double LIFT = 0.1;
-	private static final double ERROR = 0.01;
-	private static final double JUMP_FACTOR = 0.05;
-	private static final double COLLISION_CHECK = 1;
+	public static final double REDUCE_FACTOR = 0.9;
+	private static final double VELOCITY_FACTOR = 0.00045;
+	private static final double LIFT = 0.5;
+	private static final double ERROR = 0.9;
+	private static final double JUMP_FACTOR = 0.3;
+	private static final double COLLISION_CHECK = 5;
 	
 	/**
 	 * Checks whether a double is same as numToCompare
@@ -133,7 +133,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	@Override
 	public void elasticBounceY(Sprite sprite, Double bounceCoefficient) {
 		// If sprite's velocity is negligible and not 0 (at start, velocity is 0!)
-		if (sprite.getVelocity().getY() < LIFT && sprite.getVelocity().getY() != 0.0) {
+		if (Math.abs(sprite.getVelocity().getY()) < LIFT && sprite.getVelocity().getY() != 0.0) {
 			sprite.getVelocity().setY(0.0);
 			sprite.getPosition().setY(sprite.getPosition().getY() - LIFT);
 		}

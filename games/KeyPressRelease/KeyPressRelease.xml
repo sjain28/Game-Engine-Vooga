@@ -1,0 +1,11 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>KeyPressRelease</name>
+    <description>A game I built with DoovalSalad</description>
+    <width>1280</width>
+    <height>720</height>
+    <managerNames>
+      <string>Level1</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>

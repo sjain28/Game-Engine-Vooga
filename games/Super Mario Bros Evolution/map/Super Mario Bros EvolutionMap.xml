@@ -1,0 +1,60 @@
+<object-stream>
+  <authoring.gui.cartography.NetworkContainer>
+    <mappings>
+      <entry>
+        <string>Opening (Player 2)</string>
+        <string>Opening (Player 1)</string>
+      </entry>
+      <entry>
+        <string>Opening (Player 1)</string>
+        <string>Classic Old (Single Player)</string>
+      </entry>
+      <entry>
+        <string>Water Level (Multiplayer)</string>
+        <string>Dark Level (Luigi)</string>
+      </entry>
+      <entry>
+        <string>Classic Old (Single Player)</string>
+        <string>Water Level (Multiplayer)</string>
+      </entry>
+      <entry>
+        <string>Dark Level (Luigi)</string>
+        <string>Boss Level</string>
+      </entry>
+      <entry>
+        <string>Boss Level</string>
+        <string>Game Over Old</string>
+      </entry>
+    </mappings>
+    <levelTypes>
+      <entry>
+        <string>Game Over Old</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>Opening (Player 2)</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>Opening (Player 1)</string>
+        <authoring.gui.cartography.LevelType>ENTRYPOINT</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>Water Level (Multiplayer)</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>Classic Old (Single Player)</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>Boss Level</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+      <entry>
+        <string>Dark Level (Luigi)</string>
+        <authoring.gui.cartography.LevelType>NORMAL</authoring.gui.cartography.LevelType>
+      </entry>
+    </levelTypes>
+  </authoring.gui.cartography.NetworkContainer>
+</object-stream>

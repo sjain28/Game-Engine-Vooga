@@ -7,7 +7,7 @@ import resources.VoogaBundles;
  */
 public class ImageProperties extends NodeProperties {
 
-    Double positionX;
+    private Double positionX;
     Double positionY;
     Double positionZ;
 
