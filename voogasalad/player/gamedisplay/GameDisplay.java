@@ -15,6 +15,11 @@
  * I believed would stay constant in the Game Display and placed them in this class. These components include the read and populate
  * method, as well as the addEffects() method. Then, I made the Standard Display extend this class.
  * 
+ * 3) This class had many back-channel dependencies. For instance, there used to be a setSceneDimensions, which would set the dimensions of the
+ * standard display separate from its instantiation. However, if a class calls the getDimensions() method before establishing the dimensions of the
+ * display, this would lead to null pointer exceptions. I refactored this class so that this dependency of the display on the dimensions is clearly
+ * defined in the constructor. 
+ * 
  * Here are a few design patterns I would like to point out about this code. 
  * 
  * 1) The template method. This class is a superclass for all the different game displays. I determined that the methods
@@ -31,18 +36,21 @@
  * smart classes, each performing their own function. Thus, if one wanted to create a class that only logged key presses or key releases,
  * that could be easily done by editing the type of KeyHandler used.
  * 
- * In addition, I refactored out the class IKeyHandler to serve as an interface between KeyHandler and the Standard Display. Doing so in this manner
+ * 3) Model-View-Controller Design philosophy. I refactored out the class IKeyHandler to serve as an interface between KeyHandler and the Standard Display. Doing so in this manner
  * allows the functionality of handling key presses to be separate from the functionality of displaying all the nodes on
  * the screen. In a way, this could be viewed as the Model-View-Controller design pattern, in which back end components (the model)
  * is kept separate from the front end components (the nodes being displayed). 
  * 
- * The purpose of this interface is to not give the Game Display complete access to the key handler. In this manner,
- * the Game Display can only interact with the key handler through limited means, ala the methods outlined in this interface.
+ * The purpose of all of the interfaces, such as IKeyHandler, is to not give the Game Display complete access to its compositional componenents. 
+ * In this manner,the Game Display can only interact with its different parts through limited means (ala the methods defined in the interface).
  * 
  * In conclusion, this class fulfills SOLID design by fulfilling a single responsibility (being the master class for the
  * display), as well as the open/close principle (by defining preset addEffects() and readAndPopulate() methods). 
  * Finally, the subclass of this class, Standard Display, satisfies the Liskov Substitution principle, in which a standard display
- * could easily be substituted for another different display one. 
+ * could easily be substituted for another different display one. The Game Display uses interfaces instead of directly calling on objects, 
+ * and finally, this class is free of duplicated code, static classes, passive components, magic values, public instance variables,
+ * or variables that have a scope that is too global.
+ * 
  * 
  */
 package player.gamedisplay;
@@ -161,6 +169,11 @@ public abstract class GameDisplay implements IGameDisplay {
 		VoogaJukebox.getInstance().stopBGM();
 		myStage.close();
 	}
+	
+	/**
+	 *  A prompt can be created in the screen by the gameRunner if such a behavior were
+	 *  deemed to be necessary (such as winning the game or moving on to a level).
+	 */
 	public void createPrompt(String message) {
 		myPrompt.prompt(message);
 	}
@@ -199,7 +212,8 @@ public abstract class GameDisplay implements IGameDisplay {
 		return myGameScreen;
 	}
 	/**
-	 *  Only the subclass should have access to these methods. 
+	 *  Only the subclass should have access to these methods. They are used for ensuring that the subclass
+	 *  inherits the singleton BorderPane and GameRunner, rather than one instantiated in the subclass itself.
 	 */
 	protected BorderPane getBorderPane() {
 		return this.myPane;

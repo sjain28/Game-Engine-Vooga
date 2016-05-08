@@ -7,12 +7,12 @@
  * If  wanted to substitute a different type of Control (which is responsible for stopping, starting, and speeding up the game,
  * he could easily do so by creating a different class called Custom Control.
  *  
- * Notice that in the SetBorders class, not all the borders of the borderpane must be set. Rather, only the borders that 
+ * Notice that in the SetBorders class, not all the borders of the BorderPane must be set. Rather, only the borders that 
  * the programmer specifies in the subclass will be set. This gives the user the flexibility to customize the borders of the display
- * however he wants. I determined this to be good design. Although there is the downside that the display could override the center of the screen,
+ * however he wants. I determined this to be good design. Although there is the drawback that the display could override the center of the screen,
  * I left that to the discretion of the new game display. If such a GameDisplay specifies that it will contain something unrelated,
  * such as a map of England instead of the game objects, that is within the right of the Display to show that. I preferred to give flexibility
- * in order to reduce duplicated "setBottom", "setRight", "setTop" methods, by simply conglomerating them into the setBorders() method.
+ * in order to reduce duplicated "setBottom", "setRight", "setTop" methods, by simply combining them into the setBorders() method.
  */
 
 package player.gamedisplay;
@@ -40,18 +40,29 @@ public class StandardDisplay extends GameDisplay {
 		myControl = new StandardControl(myGameRunner);
 	}
 	
+	/**
+	 *  In the Standard Display, the top part of the BorderPane contains the menu.
+	 */
 	private Node setTop() {
 		return new MenuPanel(myGameRunner, e -> new MenuPanelHandlingMirror(e, myGameRunner), VoogaBundles.playerTesterMenubarProperties);
 	}
 	
+	/**
+	 *  In the Standard Display, the bottom part of the BorderPane contains the control buttons (such as pause, start, and fast forward). Not necessarily
+	 *  used in every Display type, but the Standard Display includes the control.
+	 */
 	private Node setBottom() {
 		return myControl.createControl();
 	}
-
+	
 	public IControl getControl() {
 		return myControl;
 	}
-
+	
+	/**
+	 *  Subclass abstract method used to set only the borders of the borderpane (including the top, left, right, and bottom). 
+	 */
+	
 	@Override
 	protected void setBorders() {
 		super.getBorderPane().setBottom(setBottom());
