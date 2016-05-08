@@ -19,6 +19,11 @@
  * think is more intuitive for the client. It is a good design because it gives me the control of the 
  * constructor and encapsulates the details of the GameSaver class by using a Builder object.
  * 
+ * The Builder pattern can be used for objects that contain flat data, that is to say, data that 
+ * can't be easily edited. This type of data cannot be edited step by step and must be edited at once. 
+ * The best way to construct such an object is to use a builder class. Because LevelTransitioner contains
+ * and operates on such data, I strongly believe this was a suitable change to make.
+ * 
  * Attribution: Effective Java, Joshua Block
  * 
  */
