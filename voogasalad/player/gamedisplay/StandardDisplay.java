@@ -60,7 +60,7 @@ public class StandardDisplay extends GameDisplay {
 	}
 	
 	/**
-	 *  Subclass abstract method used to set only the borders of the borderpane (including the top, left, right, and bottom). 
+	 *  Subclass abstract method used to set only the borders of the BorderPane (including the top, left, right, and bottom). 
 	 */
 	
 	@Override
