@@ -15,12 +15,21 @@ import tools.Velocity;
  */
 public class StandardPhysics implements IPhysicsEngine {
 	
-	public static final double REDUCE_FACTOR = 0.1;
-	private static final double VELOCITY_FACTOR = 0.00001;
+	private static final double REDUCE_FACTOR = 0.1;
+	private static final double VEL_FACTOR = 0.00001; 
 	private static final double LIFT = 0.1;
 	private static final double ERROR = 0.01;
 	private static final double JUMP_FACTOR = 0.05;
 	private static final double COLLISION_CHECK = 1;
+	private double myFramerate;
+	public double myReduceFactor;
+	private double myVelFactor;
+	
+	public StandardPhysics(double frameRate) {
+		this.myFramerate = frameRate;
+		this.myReduceFactor = REDUCE_FACTOR / frameRate;
+		this.myVelFactor = VEL_FACTOR / frameRate;
+	}
 	
 	/**
 	 * Checks whether a double is same as numToCompare
@@ -36,7 +45,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void translateX(Sprite sprite, Double change) {
-		sprite.getVelocity().setX(change * REDUCE_FACTOR);
+		sprite.getVelocity().setX(change * myReduceFactor);
 	}
 
 	/**
@@ -44,7 +53,7 @@ public class StandardPhysics implements IPhysicsEngine {
 	 */
 	@Override
 	public void translateY(Sprite sprite, Double change) {
-		sprite.getVelocity().setY(change * REDUCE_FACTOR);
+		sprite.getVelocity().setY(change * myReduceFactor);
 	}
 
 	/**
@@ -150,7 +159,7 @@ public class StandardPhysics implements IPhysicsEngine {
 		Double mass = (((Double) sprite.getPropertiesMap().get("Mass").getValue()).isInfinite()) 
 				? 0d : (Double) sprite.getPropertiesMap().get("Mass").getValue();
 		
-		sprite.getVelocity().setY(sprite.getVelocity().getY() + mass * gravityMagnitude * VELOCITY_FACTOR);
+		sprite.getVelocity().setY(sprite.getVelocity().getY() + mass * gravityMagnitude * myVelFactor);
 	}
 	
 	/**
@@ -172,8 +181,8 @@ public class StandardPhysics implements IPhysicsEngine {
 	}
 	@Override
 	public void accelerate(Sprite sprite, Acceleration change) {
-		sprite.getVelocity().setX(sprite.getVelocity().getX() + change.getX() * VELOCITY_FACTOR);
-		sprite.getVelocity().setY(sprite.getVelocity().getY() + change.getY() * VELOCITY_FACTOR);
+		sprite.getVelocity().setX(sprite.getVelocity().getX() + change.getX() * myVelFactor);
+		sprite.getVelocity().setY(sprite.getVelocity().getY() + change.getY() * myVelFactor);
 
 	}
 	@Override
@@ -182,5 +191,19 @@ public class StandardPhysics implements IPhysicsEngine {
 
 	@Override
 	public void setVelocity(Sprite sprite, Velocity newVelocity) {		
+	}
+
+	/**
+	 * @return the myFramerate
+	 */
+	public double getMyFramerate() {
+		return myFramerate;
+	}
+
+	/**
+	 * @param myFramerate the myFramerate to set
+	 */
+	public void setMyFramerate(int myFramerate) {
+		this.myFramerate = myFramerate;
 	}
 }

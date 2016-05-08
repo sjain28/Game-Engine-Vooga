@@ -72,7 +72,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	public GameRunner() {
 		myGameDisplay = new StandardDisplay(this);
-		myPhysicsEngine = new StandardPhysics();
+		myPhysicsEngine = new StandardPhysics(FRAME_RATE);
 		myElementUpdater = new ElementUpdater();
 		myEventManager = new EventManager();
 		myScreenProcessor = new ScreenProcessor();
