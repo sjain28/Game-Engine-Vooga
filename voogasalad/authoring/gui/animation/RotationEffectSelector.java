@@ -10,6 +10,7 @@ import tools.GUIUtils;
  * @author Aditya Srinivasan
  *
  */
+@Deprecated
 public class RotationEffectSelector extends AbstractEffectSelector {
 
 	/**

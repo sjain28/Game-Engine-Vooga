@@ -1,29 +1,37 @@
+// This entire file is part of my masterpiece.
+// Aditya Srinivasan
+
 package authoring.gui.animation;
 
-import java.util.List;
-
-import authoring.CustomText;
-import authoring.gui.items.NumberTextField;
-import authoring.resourceutility.ButtonMaker;
-import events.AnimationEvent;
-import events.AnimationFactory;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import tools.GUIUtils;
+import resources.VoogaBundles;
+import tools.VoogaAlert;
+import tools.VoogaException;
 
 /**
- * The interface for allowing users to define animation events, defined by one or less of each the following:
- * 1) Path (the spatial transformation of the sprite)
- * 2) Rotation (the rotational transformation of the sprite)
- * 3) Scale (the sizing transformation of the sprite)
- * 4) Image (the sequence of images to flip through)
- * 5) Duration (the length of the animation)
+ * This is the GUI for designing animation events. Prior to the code masterpiece, this class initialized several
+ * HBox objects and buttons for designing the event. Upon clicking the 'OK' button, each HBox was checked to see
+ * if a checkbox was selected. If so, a command was issued to the AnimationFactory corresponding to the HBox that
+ * was selected. This design was poor in many ways. Firstly, there were many if-statements required to manually
+ * check whether each checkbox was selected. Further, the design only supported specific kinds of HBox objects,
+ * namely those that had a checkbox. There was also no sense of closed-ness to modification, and adding new GUI
+ * elements required editing this class in multiple locations. Finally, there was no separation between GUI elements
+ * and the back-end, and GUI elements that spawned other GUI elements were not kept hidden from each other.
  * 
- * @author Aditya Srinivasan
+ * The code masterpiece attempts to solve one of the most pressing problems of front-end development, which is that
+ * of simplifying GUI flow. Many sophisticated GUIs feature dependence among components, in that triggering one
+ * element will bring up another related element. By programming this way naturally, there is a great amount of
+ * coupling that is formed. Further, it becomes difficult in many cases to extend the GUI to incorporate more
+ * elements without editing the GUI class itself and manually adding those Nodes to the Pane or VBox.
+ * 
+ * By design uses several design techniques, including reflection, Mediators, Command interfaces, and Templates in
+ * order to solve this problem. The new design renders this class open to extension and closed to modification.
+ * Adding new elements to the GUI is a matter of adding a line to an existing properties file (the only change necessary)
+ * and creating brand new classes. The system takes care of the automation such that the key-value pairs specified
+ * in the properties file are translated to dynamic visual components. I believe that this code truly demonstrates
+ * a strong understanding of design concepts learned throughout the course and applies them to solve a tough challenge.
  *
  */
 public class AnimationEventGUI extends Tab {
@@ -32,87 +40,27 @@ public class AnimationEventGUI extends Tab {
 	 * Constants
 	 */
 	private static final double SPACING = 10;
+	private static final String PACKAGE = "authoring.gui.animation.";
 
 	/**
-	 * Private instance variables
+	 * Private instance variable
 	 */
 	private VBox container;
-	private PathEffectSelector pathSelector;
-	private ScaleEffectSelector scaleSelector;
-	private RotationEffectSelector rotationSelector;
-	private ImageAnimationEffectSelector imageSelector;
-	private NumberTextField duration;
-	private TextField name;
-	private AnimationFactory factory;
-	private Button OK;
-	private Button preview;
 
 	/**
 	 * Declares the factory, establishes the container VBox, and adds all relevant nodes to the pane and tab.
 	 */
 	AnimationEventGUI() {
-		factory = AnimationFactory.getInstance();
 		container = new VBox(SPACING);
 		container.setPadding(new Insets(SPACING));
-		initializeSelectors();
-		duration = new NumberTextField();
-		duration.setPromptText("Duration in seconds");
-		duration.sanitizeForInteger();
-		name = new TextField();
-		container.getChildren().addAll(pathSelector,
-				scaleSelector,
-				rotationSelector,
-				imageSelector,
-				GUIUtils.makeRow(new CustomText("Duration: "), duration),
-				GUIUtils.makeRow(new CustomText("Name: "), name),
-				buttonRow());
+		try {
+			TriggerCommandGUIReflector reflector = new TriggerCommandGUIReflector(PACKAGE, VoogaBundles.animationGUIProperties, container);
+			reflector.initialize();
+		} catch(VoogaException e) {
+			VoogaAlert alert = new VoogaAlert(e.getMessage());
+			alert.showAndWait();
+		}
 		this.setContent(container);
-	}
-
-	/**
-	 * Instantiates the selectors used to add complexity to the animation.
-	 */
-	private void initializeSelectors() {
-		pathSelector = new PathEffectSelector();
-		scaleSelector = new ScaleEffectSelector();
-		rotationSelector = new RotationEffectSelector();
-		imageSelector = new ImageAnimationEffectSelector();
-	}
-
-	/**
-	 * Initializes the button row for adding the event and previewing it.
-	 * @return the row of buttons in the form of an HBox.
-	 */
-	private HBox buttonRow() {
-		OK = new ButtonMaker().makeButton("OK", e -> {
-			//TODO: implement once animation factory has been finalized.
-			AnimationEvent animationEvent = factory.makeAnimationEvent(name.getText(), Integer.parseInt(duration.getText()));
-			//TODO: use reflection to automate this (but tricky with the extra parameter in path effect)
-			if(pathSelector.selectEffect.isSelected()) {
-				factory.makePathEffect((String) pathSelector.getValue(), pathSelector.isReverse(), animationEvent);
-			}
-			if(rotationSelector.selectEffect.isSelected()) {
-				factory.makeRotateEffect((Double)rotationSelector.getValue(), animationEvent);
-			}
-			if(scaleSelector.selectEffect.isSelected()) {
-				factory.makeScaleAnimationEffect((Double)scaleSelector.getValue(), animationEvent);
-			}
-			if(imageSelector.selectEffect.isSelected()) {
-				factory.makeImageAnimationEffect((List<String>)imageSelector.getValue(), imageSelector.getNumberOfCycles(), animationEvent);
-			}
-		});
-		preview = new ButtonMaker().makeButton("Preview", e -> {
-			//TODO: allow users to preview their animation
-
-		});
-		return GUIUtils.makeRow(OK, preview);
-	}
-
-	/**
-	 * Updates the path listings inside of the path ComboBox.
-	 */
-	void updatePathListings() {
-		pathSelector.updatePathListings();
 	}
 
 }

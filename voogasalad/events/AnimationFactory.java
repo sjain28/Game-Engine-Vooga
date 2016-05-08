@@ -7,8 +7,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
-public class AnimationFactory {
+public class AnimationFactory extends Observable {
 
 	private Map<String, AnimationEvent> myAnimationEvents;
 	private Map<String, List<Double[]>> myPaths;
@@ -34,6 +35,11 @@ public class AnimationFactory {
 		myAnimationEvents.put(name, newEvent);
 		return newEvent;
 	}
+	
+	public void makePathEffect (String pathName, AnimationEvent event) {
+		makePathEffect(pathName, false, event);
+	}
+
 
 	public void makePathEffect (String pathName, Boolean reverse, AnimationEvent event) {
 		event.addPathEffect(
@@ -55,6 +61,8 @@ public class AnimationFactory {
 
 	public void addPath (String name, Double[] xCoord, Double[] yCoord) {
 		myPaths.put(name, new ArrayList<Double[]>(Arrays.asList(xCoord, yCoord)));
+		setChanged();
+		notifyObservers(myPaths);
 	}
 
 	public AnimationEvent cloneAnimationEvent (String eventName) {

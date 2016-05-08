@@ -11,6 +11,7 @@ import tools.GUIUtils;
  * @author Aditya Srinivasan
  *
  */
+@Deprecated
 public class ImageAnimationEffectSelector extends AbstractEffectSelector {
 	
 	/**
