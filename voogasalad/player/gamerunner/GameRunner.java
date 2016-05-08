@@ -108,7 +108,8 @@ public class GameRunner implements IGameRunner {
 		checkAndUpdateGlobalVariables();
 		myElementUpdater.update(myLevelData);
 		myGameDisplay.readAndPopulate(myLevelData.getDisplayableNodes());
-		myEventManager.update(myLevelData, myGameDisplay.getMyKeyPresses(), myGameDisplay.getMyKeyReleases());
+		myLevelData.getEventContainer().setKeyEvents(myGameDisplay.getKeyEvents());
+		myEventManager.update(myLevelData);
 		myGameDisplay.clearKeyEvents();
 		myScroller.increaseScrollingSpeed(myScroller.getScrollingSprite());
 	}
@@ -192,7 +193,7 @@ public class GameRunner implements IGameRunner {
 		myScroller = new DisplayScroller(myGameDisplay);
 		Sprite scrollingSprite = myScroller.createScrollingSprite(myLevelData.getGlobalVariables(), 
 				myCurrentLevelString, myLevelData.getMainSprite());
-		myLevelData.getElements().put(scrollingSprite.getId(), scrollingSprite);
+		myLevelData.putSprite(scrollingSprite);
 		myScroller.scroll(myLevelData.getGlobalVariables(), myCurrentLevelString, scrollingSprite);
 	}
 	/**

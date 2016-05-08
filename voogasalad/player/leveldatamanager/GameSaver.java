@@ -33,7 +33,7 @@ public class GameSaver implements IGameSaver {
 	private static final String LEVELS = "levels/";
 	private static final String SLASH = "/";
 	private Map<String, Elementable> myElements;
-	private KeyEventContainer myKeyEventContainer;
+	private EventsContainer myKeyEventContainer;
 	private Map<String, VoogaData> myGlobalVariables;
 	private SpriteFactory mySpriteFactory;
 	private AnimationFactory myAnimationFactory;
@@ -46,7 +46,7 @@ public class GameSaver implements IGameSaver {
 	 * @param globals
 	 * @param spritefactory
 	 */
-	public GameSaver(Map<String, Elementable> elements, KeyEventContainer container,
+	public GameSaver(Map<String, Elementable> elements, EventsContainer container,
 			Map<String, VoogaData> globals, SpriteFactory spritefactory, AnimationFactory AnimationFactory) {
 		myElements = elements;
 		myKeyEventContainer = container;

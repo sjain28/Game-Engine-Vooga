@@ -27,9 +27,9 @@ public interface IGameDisplay {
 	
 	List<KeyEvent> getKeyEvents();
 	
-	List<KeyEvent> getMyKeyPresses();
+	/*List<KeyEvent> getMyKeyPresses();
 	
-	List<KeyEvent> getMyKeyReleases();
+	List<KeyEvent> getMyKeyReleases();*/
 	
 	void clearKeyEvents();
 	

@@ -33,6 +33,22 @@
           </entry>
         </myPropertyMap>
       </stats.database.VoogaGame>
+      <stats.database.VoogaGame>
+        <myPropertyMap>
+          <entry>
+            <string>game_name</string>
+            <tools.VoogaString>
+              <myValue>game1</myValue>
+            </tools.VoogaString>
+          </entry>
+          <entry>
+            <string>game_description</string>
+            <tools.VoogaString>
+              <myValue>A game I built with DoovalSalad</myValue>
+            </tools.VoogaString>
+          </entry>
+        </myPropertyMap>
+      </stats.database.VoogaGame>
     </myGames>
     <myUsers>
       <stats.database.VoogaUser>
@@ -59,7 +75,7 @@
         <myPassword>password1</myPassword>
       </stats.database.VoogaUser>
     </myUsers>
-    <totalrows>2</totalrows>
+    <totalrows>3</totalrows>
     <totalcols>1</totalcols>
     <myStatInfo>
       <list>
@@ -95,7 +111,7 @@
             <vector>
               <default>
                 <capacityIncrement>0</capacityIncrement>
-                <elementCount>6</elementCount>
+                <elementCount>10</elementCount>
                 <elementData>
                   <stats.database.AuthorSession>
                     <myPropertyMap>
@@ -226,10 +242,114 @@
                     </endInstant>
                     <gap>1.0</gap>
                   </stats.database.AuthorSession>
-                  <null/>
-                  <null/>
-                  <null/>
-                  <null/>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-07 06:57:27.512 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462604247</long>
+                      <int>513000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462604286</long>
+                      <int>415000000</int>
+                    </endInstant>
+                    <gap>0.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-07 23:42:46.599 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>2.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462664566</long>
+                      <int>602000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462664727</long>
+                      <int>968000000</int>
+                    </endInstant>
+                    <gap>2.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:11:18.220 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>4.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462673478</long>
+                      <int>221000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462673761</long>
+                      <int>522000000</int>
+                    </endInstant>
+                    <gap>4.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:22:32.746 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462674152</long>
+                      <int>746000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462674158</long>
+                      <int>301000000</int>
+                    </endInstant>
+                    <gap>0.0</gap>
+                  </stats.database.AuthorSession>
                 </elementData>
               </default>
             </vector>
@@ -239,7 +359,7 @@
             <vector>
               <default>
                 <capacityIncrement>0</capacityIncrement>
-                <elementCount>14</elementCount>
+                <elementCount>19</elementCount>
                 <elementData>
                   <stats.database.PlaySession>
                     <myPropertyMap>
@@ -717,11 +837,140 @@
                     </startInstant>
                     <gap>0.0</gap>
                   </stats.database.PlaySession>
-                  <null/>
-                  <null/>
-                  <null/>
-                  <null/>
-                  <null/>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-07 06:57:35.219 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>2.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462604255</long>
+                      <int>219000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-07 23:44:59.473 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>2.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462664699</long>
+                      <int>473000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>true</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:11:30.336 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462673490</long>
+                      <int>336000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>true</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:11:36.714 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462673496</long>
+                      <int>714000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>true</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:15:55.198 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462673755</long>
+                      <int>198000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
                   <null/>
                 </elementData>
               </default>
@@ -812,6 +1061,690 @@
                   <null/>
                   <null/>
                   <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                  <null/>
+                </elementData>
+              </default>
+            </vector>
+          </myPlayStats>
+        </stats.database.StatCell>
+        <stats.database.StatCell>
+          <myPropertyMap>
+            <entry>
+              <string>last_saved_level_loc</string>
+              <tools.VoogaString>
+                <myValue></myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>my_game</string>
+              <tools.VoogaString>
+                <myValue>game1</myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>latest_progress</string>
+              <tools.VoogaString>
+                <myValue></myValue>
+              </tools.VoogaString>
+            </entry>
+            <entry>
+              <string>my_user</string>
+              <tools.VoogaString>
+                <myValue>klo14</myValue>
+              </tools.VoogaString>
+            </entry>
+          </myPropertyMap>
+          <myAuthorStats serialization="custom">
+            <unserializable-parents/>
+            <vector>
+              <default>
+                <capacityIncrement>0</capacityIncrement>
+                <elementCount>8</elementCount>
+                <elementData>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:23:07.197 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462674187</long>
+                      <int>197000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:34:53.845 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>18.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462674893</long>
+                      <int>846000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462675988</long>
+                      <int>717000000</int>
+                    </endInstant>
+                    <gap>18.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:53:32.237 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676012</long>
+                      <int>238000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:56:00.189 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676160</long>
+                      <int>190000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:58:11.413 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676291</long>
+                      <int>413000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676371</long>
+                      <int>406000000</int>
+                    </endInstant>
+                    <gap>1.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:07:43.600 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676863</long>
+                      <int>601000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676891</long>
+                      <int>778000000</int>
+                    </endInstant>
+                    <gap>0.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:15:47.390 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>3.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462677347</long>
+                      <int>391000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462677562</long>
+                      <int>916000000</int>
+                    </endInstant>
+                    <gap>3.0</gap>
+                  </stats.database.AuthorSession>
+                  <stats.database.AuthorSession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>date_authored</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 04:29:10.409 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>author_duration</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462681750</long>
+                      <int>409000000</int>
+                    </startInstant>
+                    <endInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462681763</long>
+                      <int>378000000</int>
+                    </endInstant>
+                    <gap>0.0</gap>
+                  </stats.database.AuthorSession>
+                  <null/>
+                  <null/>
+                </elementData>
+              </default>
+            </vector>
+          </myAuthorStats>
+          <myPlayStats serialization="custom">
+            <unserializable-parents/>
+            <vector>
+              <default>
+                <capacityIncrement>0</capacityIncrement>
+                <elementCount>13</elementCount>
+                <elementData>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:23:11.31 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462674191</long>
+                      <int>31000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:34:57.240 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462674897</long>
+                      <int>240000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:53:37.247 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676017</long>
+                      <int>247000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:56:05.129 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676165</long>
+                      <int>129000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:56:58.285 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676218</long>
+                      <int>285000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 02:59:14.37 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676354</long>
+                      <int>37000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:08:01.941 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462676881</long>
+                      <int>941000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:16:02.312 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462677362</long>
+                      <int>312000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:16:07.164 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462677367</long>
+                      <int>164000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:17:15.90 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462677435</long>
+                      <int>90000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:17:25.620 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462677445</long>
+                      <int>620000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 03:17:58.148 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462677478</long>
+                      <int>148000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
+                  <stats.database.PlaySession>
+                    <myPropertyMap>
+                      <entry>
+                        <string>score</string>
+                        <tools.VoogaNumber>
+                          <myValue>0.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                      <entry>
+                        <string>in_action</string>
+                        <tools.VoogaBoolean>
+                          <myValue>false</myValue>
+                        </tools.VoogaBoolean>
+                      </entry>
+                      <entry>
+                        <string>date_played</string>
+                        <tools.VoogaDate>
+                          <myDate>2016-05-08 04:29:15.23 UTC</myDate>
+                        </tools.VoogaDate>
+                      </entry>
+                      <entry>
+                        <string>level reached</string>
+                        <tools.VoogaNumber>
+                          <myValue>1.0</myValue>
+                        </tools.VoogaNumber>
+                      </entry>
+                    </myPropertyMap>
+                    <startInstant resolves-to="java.time.Ser">
+                      <byte>2</byte>
+                      <long>1462681755</long>
+                      <int>24000000</int>
+                    </startInstant>
+                    <gap>0.0</gap>
+                  </stats.database.PlaySession>
                   <null/>
                   <null/>
                   <null/>

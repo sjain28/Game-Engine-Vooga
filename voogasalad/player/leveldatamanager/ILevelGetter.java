@@ -20,8 +20,12 @@ public interface ILevelGetter {
     Sprite getMainSprite();
 
     Sprite getSpriteByID(String id);
+    
+    List<Sprite> getSpritesByArch(String archA);
 
     Sprite addSprite(String archetype);
+    
+    void putSprite(Sprite s);
 
     IPhysicsEngine getPhysicsEngine();
 
@@ -29,15 +33,11 @@ public interface ILevelGetter {
 
     AnimationEvent getAnimationFromFactory(String myAnimationName);
 
-    KeyEventContainer getKeyEventContainer();
+    EventsContainer getEventContainer();
 
     List<Pair<Node, Boolean>> getDisplayableNodes();
-
-    List<Sprite> getSpritesByArch(String archA);
 
     Set<Entry<String, Elementable>> getElementables();
 
     Map<String,VoogaData> getGlobalVariables();
-
-    Map<String, Elementable> getElements();
 }

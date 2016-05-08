@@ -24,6 +24,10 @@ import tools.VoogaJukebox;
  * Standard Display that creates a display with basic user-interaction controls
  * Uses composition to contain elements of the display
  * 
+ * This is part of my masterpiece
+ * got rid of duplicated code (mykeyevents was not being used)
+ * and reduced the duplication of having keypresses and key releases
+ * 
  * @author Hunter Lee
  */
 public class StandardDisplay implements IGameDisplay {
@@ -37,8 +41,6 @@ public class StandardDisplay implements IGameDisplay {
 	private Pane myUIScreen;
 	private StackPane myScreensHolder;
 	private List<KeyEvent> myKeyEvents;
-	private List<KeyEvent> myKeyPresses;
-	private List<KeyEvent> myKeyReleases;
 	private Pair<Double, Double> myDimensions;
 
 	/**
@@ -54,8 +56,6 @@ public class StandardDisplay implements IGameDisplay {
 		myScreensHolder = new StackPane();
 		myPrompt = new PromptFactory();
 		myKeyEvents = new ArrayList<>();
-		myKeyPresses = new ArrayList<>();
-		myKeyReleases = new ArrayList<>();	
 	}
 
 	/**
@@ -65,11 +65,11 @@ public class StandardDisplay implements IGameDisplay {
 		@Override
 		public void handle(KeyEvent event) {
 			myKeyEvents.add(event);
-			if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
+			/*if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
 				myKeyPresses.add(event);
 			} else {
 				myKeyReleases.add(event);
-			}
+			}*/
 		}
 	};
 	/**
@@ -170,13 +170,13 @@ public class StandardDisplay implements IGameDisplay {
 		myStage.close();
 	}
 
-	public List<KeyEvent> getMyKeyPresses() {
+	/*public List<KeyEvent> getMyKeyPresses() {
 		return myKeyPresses;
 	}
 
 	public List<KeyEvent> getMyKeyReleases() {
 		return myKeyReleases;
-	}
+	}*/
 
 	public Scene getMyScene() {
 		return myScene;

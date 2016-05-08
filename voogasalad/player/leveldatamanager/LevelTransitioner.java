@@ -33,7 +33,7 @@ public class LevelTransitioner {
     private DataContainerOfLists myData;
     private FileReaderToGameObjects myFileManager;
     private Map<String, Elementable> myElements;
-    private KeyEventContainer myKeyEventContainer;
+    private EventsContainer myKeyEventContainer;
     private Map<String, VoogaData> myGlobalVariables;
     private ResourceBundle myEventMethods;
     private String myLevelFileName;
@@ -49,7 +49,7 @@ public class LevelTransitioner {
      * @param globals
      * @param nextlevelkey
      */
-    public LevelTransitioner(String levelfilename, Map<String, Elementable> elements, KeyEventContainer container, 
+    public LevelTransitioner(String levelfilename, Map<String, Elementable> elements, EventsContainer container, 
     						 Map<String, VoogaData> globals, String nextlevelkey) {
     	myData = new DataContainerOfLists();
     	myElements = elements;
@@ -85,7 +85,7 @@ public class LevelTransitioner {
 	 * Returns a newly-populated myKeyEventContainer (Events, KeyEvents and Inputs)
 	 * @return KeyEventContainer
 	 */
-	public KeyEventContainer populateNewEvents() {
+	public EventsContainer populateNewEvents() {
 		myKeyEventContainer.clearAll();
 		List<VoogaEvent> eventObjects = myData.getEventList();
 		for (VoogaEvent event : eventObjects) {
