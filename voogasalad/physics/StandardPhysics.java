@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Hunter Lee
 package physics;
 
 import gameengine.Sprite;
@@ -25,6 +27,15 @@ public class StandardPhysics implements IPhysicsEngine {
 	public double myReduceFactor;
 	private double myVelFactor;
 	
+	/**
+	 * Code Masterpiece (hl130)
+	 * 
+	 * As mentioned in the comments, teammates requested that the physics module be pliable to 
+	 * changes in the framerate, so this constructor was added to give it different framerates
+	 * with scaling for reduce factors.
+	 * 
+	 * @param frameRate
+	 */
 	public StandardPhysics(double frameRate) {
 		this.myFramerate = frameRate;
 		this.myReduceFactor = REDUCE_FACTOR / frameRate;
