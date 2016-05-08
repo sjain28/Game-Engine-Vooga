@@ -5,15 +5,32 @@
  * Code Masterpiece - Hunter Lee (hl130)
  * 
  * To demonstrate my knowledge of Object-oriented programming, I chose a design pattern
- * that is relevant to this project. I had this in mind for a while--I wrote this GameSaver
+ * that is relevant to this project. We have studied and practiced the SOLID design principle.
+ * Also, Joshua Block as a designer of Java gives us further insight into how to patch up Java
+ * so that we could incorporate those principles in practice.
+ * I had this in mind for a while--I wrote this GameSaver
  * class, and when I did so, I felt that the constructor was taking too many arguments. So I learned
  * of an OOP design pattern called the Builder pattern, and I demonstrate my knowledge of the Builder
  * pattern here.
+ * 
+ * The original design opted for having a constructor with many parameters. Although the number of parameters
+ * doesn't border on the extreme (15+) but I felt that this class had a decent amount of parameters. Such
+ * brute force method is called the Telescoping Constructor Pattern. The problem with this pattern is that 
+ * once constructors are 4 or 5 parameters long it becomes difficult to remember the required order of 
+ * the parameters as well as what particular constructor you might want in a given situation. Another problem
+ * is that The problem here is that because the object is created over several calls it may be in an 
+ * inconsistent state part way through its construction. This also requires a lot of extra effort to ensure 
+ * thread safety.
  * 
  * Its advantages are 
  * 1) The Builder pattern allows you to vary a product’s internal representation.
  * 2) Encapsulates code for construction and representation.
  * 3) Provides control over steps of construction process.
+ * 
+ * This results in code that is easy to write and very easy to read and understand. And also if you suspect
+ * there might be more additions of parameters in the future, this Builder pattern proves useful as it is 
+ * designed to take in many parameters. Also I note that the constructor scope is changed to private, meaning
+ * that we are now effectively creating immutable objects.
  * 
  * This changes the way GameSaver is created on the client side (LevelData line 186), which I
  * think is more intuitive for the client. It is a good design because it gives me the control of the 
@@ -25,6 +42,7 @@
  * and operates on such data, I strongly believe this was a suitable change to make.
  * 
  * Attribution: Effective Java, Joshua Block
+ * 				StackOverflow
  * 
  */
 package player.leveldatamanager;
