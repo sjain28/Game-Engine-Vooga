@@ -2,7 +2,6 @@ package authoring.gui.eventpane;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.interfaces.model.EditEventable;
 import authoring.resourceutility.ButtonMaker;
 import javafx.geometry.Insets;
@@ -18,97 +17,103 @@ import resources.VoogaBundles;
 import tools.VoogaAlert;
 import tools.VoogaException;
 
+
 public class EventAccoridion extends Tab {
-	private List<TitledPane> tiles;
-	private EditEventable manager;
+    private List<TitledPane> tiles;
+    private EditEventable manager;
 
-	private BorderPane pane;
-	private Accordion accordion;
-	private HBox buttons;
+    private BorderPane pane;
+    private Accordion accordion;
+    private HBox buttons;
 
-	private String name = "";
-	private static final double BUTTON_PADDING = 10;
-	
-	public EventAccoridion(EditEventable manager, String name, Button... addedButtons) {
-		this.name = name;
-		this.manager = manager;
-		pane = new BorderPane();
-		accordion = new Accordion();
+    private String name = "";
+    private static final double BUTTON_PADDING = 10;
 
-		initializeButtons(addedButtons);
-		pane.setBottom(buttons);
-		pane.setCenter(accordion);
+    public EventAccoridion (EditEventable manager, String name, Button ... addedButtons) {
+        this.name = name;
+        this.manager = manager;
+        pane = new BorderPane();
+        accordion = new Accordion();
 
-		tiles = new ArrayList<>();
-		generateTiles(1);
+        initializeButtons(addedButtons);
+        pane.setBottom(buttons);
+        pane.setCenter(accordion);
 
-		this.setText(name);
-		this.setContent(pane);
-		this.setClosable(false);
-	}
+        tiles = new ArrayList<>();
+        generateTiles(1);
 
-	private void generateTiles(int count) {
-		for (int i = 0; i < count; i++) {
-			try {
-				tiles.add(populateTiles(name + " " + (tiles.size() + 1)));
-			} catch (VoogaException e) {
-				VoogaAlert alert = new VoogaAlert(e.getMessage());
-				alert.showAndWait();
-			}
-		}
-	}
+        this.setText(name);
+        this.setContent(pane);
+        this.setClosable(false);
+    }
 
-	private TitledPane populateTiles(String name) throws VoogaException {
-		TitledPane tile = createTile();
-		tile.setText(name);
-		tile.setOnMouseClicked((MouseEvent e) -> {
-			if (e.getButton() == MouseButton.SECONDARY) {
-				tiles.remove(tile);
-				accordion.getPanes().remove(tile);
-			}
-		});
-		accordion.getPanes().add(tile);
-		return tile;
-	}
+    private void generateTiles (int count) {
+        for (int i = 0; i < count; i++) {
+            try {
+                tiles.add(populateTiles(name + " " + (tiles.size() + 1)));
+            }
+            catch (VoogaException e) {
+                VoogaAlert alert = new VoogaAlert(e.getMessage());
+                alert.showAndWait();
+            }
+        }
+    }
 
-	private TitledPane createTile() throws VoogaException {
-		if (name == null) {
-			return null;
-		}
+    private TitledPane populateTiles (String name) throws VoogaException {
+        TitledPane tile = createTile();
+        tile.setText(name);
+        tile.setOnMouseClicked( (MouseEvent e) -> {
+            if (e.getButton() == MouseButton.SECONDARY) {
+                tiles.remove(tile);
+                accordion.getPanes().remove(tile);
+            }
+        });
+        accordion.getPanes().add(tile);
+        return tile;
+    }
 
-		String className = VoogaBundles.backendToGUIProperties.getString(name);
-		Class<?> c = null;
+    private TitledPane createTile () throws VoogaException {
+        if (name == null) {
+            return null;
+        }
 
-		try {
-			c = Class.forName(className);
-			EventTitledPane titledPane;
-			Object o = c.getConstructor(EditEventable.class).newInstance(manager);
-			titledPane = (EventTitledPane) o;
-			return titledPane;
-		} catch (Exception e) {
-			throw new VoogaException(e.getMessage());
-		}
-	}
+        String className = VoogaBundles.backendToGUIProperties.getString(name);
+        Class<?> c = null;
 
-	private void initializeButtons(Button... addedButtons) {
-		buttons = new HBox();
-		buttons.setPadding(new Insets(BUTTON_PADDING, BUTTON_PADDING, BUTTON_PADDING, BUTTON_PADDING));
-		buttons.getChildren().addAll(new ButtonMaker().makeButton("Add " + name, e -> generateTiles(1)));
-		buttons.getChildren().addAll(addedButtons);
-	}
+        try {
+            c = Class.forName(className);
+            EventTitledPane titledPane;
+            Object o = c.getConstructor(EditEventable.class).newInstance(manager);
+            titledPane = (EventTitledPane) o;
+            return titledPane;
+        }
+        catch (Exception e) {
+            throw new VoogaException(e.getMessage());
+        }
+    }
 
-	public List<String> getDetails() {
-		try {
-			List<String> eventList = new ArrayList<>();
-			for (TitledPane pane : accordion.getPanes()) {
-				EventTitledPane eventPane = (EventTitledPane) pane;
-				eventList.add(eventPane.getDetails());
-			}
-			return eventList;
-		} catch (VoogaException e) {
-			VoogaAlert va = new VoogaAlert(e.getMessage());
-			va.showAndWait();
-		}
-		return null;
-	}
+    private void initializeButtons (Button ... addedButtons) {
+        buttons = new HBox();
+        buttons.setPadding(new Insets(BUTTON_PADDING, BUTTON_PADDING, BUTTON_PADDING,
+                                      BUTTON_PADDING));
+        buttons.getChildren()
+                .addAll(new ButtonMaker().makeButton("Add " + name, e -> generateTiles(1)));
+        buttons.getChildren().addAll(addedButtons);
+    }
+
+    public List<String> getDetails () {
+        try {
+            List<String> eventList = new ArrayList<>();
+            for (TitledPane pane : accordion.getPanes()) {
+                EventTitledPane eventPane = (EventTitledPane) pane;
+                eventList.add(eventPane.getDetails());
+            }
+            return eventList;
+        }
+        catch (VoogaException e) {
+            VoogaAlert va = new VoogaAlert(e.getMessage());
+            va.showAndWait();
+        }
+        return null;
+    }
 }

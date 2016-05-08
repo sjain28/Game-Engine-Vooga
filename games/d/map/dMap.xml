@@ -1,0 +1,16 @@
+<object-stream>
+  <authoring.gui.cartography.NetworkContainer>
+    <mappings>
+      <entry>
+        <string>r</string>
+        <string>r</string>
+      </entry>
+    </mappings>
+    <levelTypes>
+      <entry>
+        <string>r</string>
+        <authoring.gui.cartography.LevelType>ENTRYPOINT</authoring.gui.cartography.LevelType>
+      </entry>
+    </levelTypes>
+  </authoring.gui.cartography.NetworkContainer>
+</object-stream>

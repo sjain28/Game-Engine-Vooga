@@ -1,0 +1,11 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>dope</name>
+    <description>111</description>
+    <width>600</width>
+    <height>600</height>
+    <managerNames>
+      <string>k</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>
