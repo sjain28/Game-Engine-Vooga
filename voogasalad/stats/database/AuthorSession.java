@@ -3,6 +3,7 @@
  import java.util.Date;
 import tools.VoogaDate;
 import tools.VoogaNumber;
+
 /**
  * Authoring Session Stats Cell
  * Allows the database to save interesting stats
@@ -27,6 +28,14 @@ public class AuthorSession extends VoogaSession{
 	 * Sets the duration from the super class
 	 */
 	@Override
+	
+	/**
+	 * Records how long 
+	 * 
+	 * @author Joshua Xu, Krista Opsahl-Ong
+	 *
+	 *@param 
+	 */
 	protected void setDurationProperty(double gap) {
 		setProperty(AUTHOR_DURATION, new VoogaNumber(gap));
 	}

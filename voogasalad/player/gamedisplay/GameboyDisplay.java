@@ -1,5 +1,5 @@
 package player.gamedisplay;
 
-public class GameBoyDisplay {
+public class GameboyDisplay {
 
 }

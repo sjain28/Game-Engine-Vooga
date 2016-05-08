@@ -27,12 +27,10 @@ public class CurrentSessionStats {
 	 */
 	public void saveGameProgress(String levelurl){
 		getCurrentStatCell().setProperty(StatCell.LAST_SAVED_LEVEL_LOC, new VoogaString(levelurl));
+		VoogaDataBase.getInstance().getStatByGameAndUser(myCurrentGame, myCurrentUser).getProperty(StatCell.LAST_SAVED_LEVEL_LOC);
 	}
-	/**
-	 * Returns the last saved level from the current game
-	 */
-	public void getLastSavedLevel(){
-		getCurrentStatCell().getProperty(StatCell.LAST_SAVED_LEVEL_LOC);
+	public String loadGameProgress(){
+		return (String) ((VoogaString) getCurrentStatCell().getProperty(StatCell.LAST_SAVED_LEVEL_LOC)).getValue();
 	}
 	/**
 	 * Initializes and begins an authoring session in the database
@@ -40,14 +38,14 @@ public class CurrentSessionStats {
 	 */
 	public void startAuthoringSession(){
     	StatCell statcell = getCurrentStatCell();
-    	statcell.addAuthoringSession(new AuthorSession(new Date()));
+    	statcell.addAuthorSession(new AuthorSession(new Date()));
 	}
 	/**
 	 * Ends the authoring session of a current game
 	 */
 	public void endCurrentAuthoringSession(){
     	StatCell statcell = getCurrentStatCell();
-    	statcell.getLatestAuthoringSession().endSession();
+    	statcell.peekLatestAuthoringSession().endSession();
 	}
 	/**
 	 * Initializes and begins the play session of the current game
@@ -63,8 +61,9 @@ public class CurrentSessionStats {
 	 * @param myLevelReached
 	 */
 	public void endCurrentPlaySession(double score, double myLevelReached){
-		PlaySession playsession = getCurrentStatCell().getLatestPlaySession();
-		playsession.endSession(new VoogaNumber(score), new VoogaNumber(myLevelReached));
+		StatCell statcell = getCurrentStatCell();
+		statcell.updatePlaySession(PlaySession.SCORE, new VoogaNumber(score));
+		statcell.updatePlaySession(PlaySession.LEVEL_REACHED, new VoogaNumber(myLevelReached));	
 	}
 	/**
 	 * Returns the StatCell belonging to the current game and user

@@ -37,12 +37,7 @@ public interface IGameDisplay {
 	
 	Pane getScreen();
 	
-	Pane getUI();
-	
 	void exit();
 
-	Scene getMyScene();
-	
-	void setSceneDimensions(double width, double height);
-
+	Scene getScene();
 }

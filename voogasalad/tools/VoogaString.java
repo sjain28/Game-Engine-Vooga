@@ -23,6 +23,10 @@ public class VoogaString implements VoogaData {
         initializeProperty();
     }
 
+    public Boolean equals(String value){
+    	return myValue.equals(value);
+    	}
+    
     /**
      * Initialize a string with value and listener
      */

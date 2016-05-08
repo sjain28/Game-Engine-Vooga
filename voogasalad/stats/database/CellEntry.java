@@ -7,6 +7,7 @@ import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tools.interfaces.VoogaData;
+
 /**
  * Cell entry meant to store data in the database
  * @author Krista

@@ -171,9 +171,11 @@ public class VoogaDataBase implements IDataBase{
 	 */
 	public void save(){
 		try {Serializer.serialize(this, FILE_LOCATION);}
+		
 		catch (ParserConfigurationException | TransformerException | IOException | SAXException e) {
 			e.printStackTrace();
 		}
+		System.out.println("HOW MANY TIMES DID I SAVE");
 	}
 	/**
 	 * Clears the database

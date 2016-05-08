@@ -29,7 +29,8 @@ import tools.ScoreCompare;
  * @author Nick
  *
  */
-public class LeaderBoards extends Stage {
+
+public class LeaderBoard extends Stage {
     private static final double WIDTH = 100;
     private static final double HEIGHT = 200;
     private VBox best;
@@ -47,7 +48,7 @@ public class LeaderBoards extends Stage {
      * 
      * @param game
      */
-    public LeaderBoards (String game) {
+    public LeaderBoard (String game) {
         this.game = game;
 
         leaderboardProperties = VoogaBundles.leaderboardProperties;
@@ -71,25 +72,26 @@ public class LeaderBoards extends Stage {
      * Initializes the values on the leader board based on information from the database.
      */
     private void makeLeaders () {
-        List<Pair<String, Double>> scores = new ArrayList<>();
+		List<Pair<String, Double>> scores = new ArrayList<>();
+		for(CellEntry c: database.getStatsbyGame(game)){
+			for(CellEntry e: ((StatCell) c).getPlayStats()){
+				System.out.println("The progress here is " + e.getProperty((PlaySession.LEVEL_REACHED)));
+				System.out.println("The cell entry here is " + e.getProperty((PlaySession.SCORE)));
+				scores.add(new Pair<String, Double>(c.getProperty(StatCell.MY_USER).getValue().toString(),
+						Double.parseDouble(e.getProperty(PlaySession.SCORE).getValue().toString())));
+			}
+		}
 
-        for (CellEntry c : database.getStatsbyGame(game)) {
-            for (CellEntry e : ((StatCell) c).getPlayStats()) {
-                scores.add(new Pair<String, Double>(e.getProperty(StatCell.MY_USER).getValue()
-                        .toString(),
-                                                    Double.parseDouble(e
-                                                            .getProperty(PlaySession.SCORE)
-                                                            .getValue()
-                                                            .toString())));
-            }
-        }
-        scores.sort(new ScoreCompare());
-        for (int i = 0; i < LEADERBOARD_MEMBER_COUNT; i++) {
-            if (scores.get(i) != null) {
-                best.getChildren().add(makeHBox(scores.get(i).getFirst(), scores.get(i).getLast()));
-            }
-        }
-    }
+
+		scores.sort(new ScoreCompare());
+		for (int i = 0; i < LEADERBOARD_MEMBER_COUNT;  i++) {
+//			System.out.println(scores.get(i));
+			if (i== scores.size()){
+				break;
+			}
+				best.getChildren().add(makeHBox(scores.get(i).getFirst(), scores.get(i).getLast()));
+		}
+	}
 
     /**
      * HBox to contain the value of the score

@@ -7,6 +7,7 @@ import player.gamerunner.GameRunner;
 import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
 import stats.database.VoogaDataBase;
+import stats.interaction.CurrentSessionStats;
 
 
 public class OpenCommand implements Command {
@@ -28,18 +29,20 @@ public class OpenCommand implements Command {
         });
         prompt.show();
     }
+	private void showPlayChoicePrompt(StarterPrompt projectPrompt) {
+		projectPrompt.setProceedEvent(ee -> {
+			projectPrompt.close();
+			String name = ((Button) ee.getSource()).getId();
+			//set the current gamename to the game being played
+			VoogaBundles.preferences.setProperty("GameName", name);
+			VoogaDataBase.getInstance().checkThenAddIfNewGame(name, "dragons!!");
+			CurrentSessionStats stats = new CurrentSessionStats();
+			stats.startPlaySession();
+			IGameRunner gameRunner = new GameRunner();
+	        gameRunner.playGame(name);
+		});
+		projectPrompt.show();
+	}
 
-    private void showPlayChoicePrompt (StarterPrompt projectPrompt) {
-        projectPrompt.setProceedEvent(ee -> {
-            projectPrompt.close();
-            String name = ((Button) ee.getSource()).getId();
-            // set the current gamename to the game being played
-            VoogaBundles.preferences.setProperty("GameName", name);
-            VoogaDataBase.getInstance().checkThenAddIfNewGame(name, "dragons!!");
-            IGameRunner gameRunner = new GameRunner();
-            gameRunner.playGame(name);
-        });
-        projectPrompt.show();
-    }
 
 }

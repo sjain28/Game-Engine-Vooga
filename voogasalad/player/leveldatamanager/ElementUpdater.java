@@ -27,7 +27,8 @@ public class ElementUpdater {
 			Elementable elem = elempair.getValue();
 			if(elem instanceof Sprite){
 				if(!(Boolean) ((Sprite) elem).getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){
-					leveldata.removeSpriteByID(elem.getId());
+					//leveldata.removeSpriteByID(elem.getId());
+					//do nothing
 				}
 				else{applyGravity((Sprite) elem,leveldata.getPhysicsEngine());}
 			}

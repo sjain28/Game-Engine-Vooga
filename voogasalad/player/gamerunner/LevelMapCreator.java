@@ -21,7 +21,7 @@ public class LevelMapCreator {
 	
     private static final String GAMES_PATH_PREFIX = "games/";
     private static final String SLASH = "/";
-    private static final String XML_EXTENSION = ".xml";
+    private static final String XML_EXTENSION = ".xml";  ;
 
     private Map<String,LevelType> myLevelMap;
     private String myGameFilePath;

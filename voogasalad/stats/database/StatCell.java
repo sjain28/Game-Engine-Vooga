@@ -4,7 +4,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
+import tools.VoogaNumber;
 import tools.VoogaString;
+import tools.interfaces.VoogaData;
+
 /**
  * Stat cell that stores a list of author stats and play stats
  * for each authoring and playing session for a given game and user
@@ -13,6 +16,7 @@ import tools.VoogaString;
  * @author Krista
  *
  */
+
 public class StatCell extends CellEntry {
 	private Stack<AuthorSession> myAuthorStats;
 	private Stack<PlaySession> myPlayStats;
@@ -41,35 +45,20 @@ public class StatCell extends CellEntry {
 	public List<CellEntry> getAuthorStats(){
 		return Collections.unmodifiableList(myAuthorStats);
 	}
-	/**
-	 * Adds an authoring session
-	 * @param authorsesh
-	 */
-	public void addAuthoringSession(AuthorSession authorsesh){
-		myAuthorStats.add(authorsesh);
-	}
-	/**
-	 * Returns all play session stats
-	 * @return
-	 */
+<<<<<<< HEAD
 	public List<CellEntry> getPlayStats(){
 		return Collections.unmodifiableList(myPlayStats);
 	}
-	/**
-	 * Returns the latest play session
-	 * @return
-	 */
-	public PlaySession getLatestPlaySession(){
+	public PlaySession peekLatestPlaySession(){
+//		System.out.println(myPlayStats.size());
 		if (myPlayStats.empty()){
 			return null;
 		}
 		return myPlayStats.peek();
+//		System.out.println()
 	}
-	/**
-	 * Returns the latest authoring session
-	 * @return
-	 */
-	public AuthorSession getLatestAuthoringSession(){
+	public AuthorSession peekLatestAuthoringSession(){
+
 		if (myAuthorStats.empty()){
 			return null;
 		}
@@ -80,7 +69,20 @@ public class StatCell extends CellEntry {
 	 * @param voogaplaysesh
 	 */
 	public void addPlaySession(PlaySession voogaplaysesh){
-		myPlayStats.add(voogaplaysesh);
+		myPlayStats.push(voogaplaysesh);
+	}
+	public void addAuthorSession(AuthorSession voogaauthorsesh){
+		myAuthorStats.push(voogaauthorsesh);
+	}
+	public void updateAuthorSession(String param, VoogaData value){
+		AuthorSession lastSession = myAuthorStats.pop();
+		lastSession.setProperty(param, value);
+		myAuthorStats.push(lastSession);
+	}
+	public void updatePlaySession(String param, VoogaData value){
+		PlaySession lastSession = myPlayStats.pop();
+		lastSession.setProperty(param, value);
+		myPlayStats.push(lastSession);
 	}
 	/**
 	 * Updates the checkpoint to a given level name

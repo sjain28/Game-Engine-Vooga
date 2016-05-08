@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
+import authoring.gui.LeaderBoard;
 import authoring.gui.cartography.LevelType;
 import authoring.interfaces.model.CompleteAuthoringModelable;
 import authoring.model.Preferences;
@@ -28,6 +28,7 @@ import player.leveldatamanager.IDisplayScroller;
 import player.leveldatamanager.ILevelData;
 import player.leveldatamanager.LevelData;
 import resources.VoogaBundles;
+import stats.database.PlaySession;
 import stats.database.VoogaDataBase;
 import stats.interaction.CurrentSessionStats;
 import tools.VoogaAlert;
@@ -71,7 +72,6 @@ public class GameRunner implements IGameRunner {
 	 * Default constructor
 	 */
 	public GameRunner() {
-		myGameDisplay = new StandardDisplay(this);
 		myPhysicsEngine = new StandardPhysics();
 		myElementUpdater = new ElementUpdater();
 		myEventManager = new EventManager();
@@ -122,32 +122,43 @@ public class GameRunner implements IGameRunner {
 			myLevelData.saveProgress(myCurrentGameString);
 		}
 		if (!myLevelData.getNextLevelName().equals(NULL_STRING)) {
-			playLevel(myLevelData.getNextLevelName());
 			if (myLevelMap.get(myLevelData.getNextLevelName())==LevelType.ENDPOINT) {
+				//TODO: Implement win screen
+				finishPlaySession();
 				myTimeline.stop();
+				LeaderBoard leaderBoard = new LeaderBoard(VoogaBundles.preferences.getProperty("GameName"));
 				return;
 			}
+			playLevel(myLevelData.getNextLevelName());
 		}
 	}
 	/**
 	 * Initializes myLevelList and plays the game
 	 */
 	public void playGame(String gameXmlList) {
-		myStats.startPlaySession();
-		playSessionActive = true;
 		myCurrentGameString = gameXmlList;
-		String latestLevelReached = NULL_STRING;
-		if (myStats.getCurrentStatCell().checkProgress() != null) {
-			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
-		} try {
+		try {
 			Preferences preferences = (Preferences) Deserializer.deserialize(1, GAMES_PATH + gameXmlList + SLASH + gameXmlList + XML_EXTENSION_SUFFIX).get(0);
-			myGameDisplay.setSceneDimensions(Double.parseDouble(preferences.getWidth()), Double.parseDouble(preferences.getHeight()));
 			VoogaBundles.preferences.setProperty(GAME_WIDTH, preferences.getWidth());
 			VoogaBundles.preferences.setProperty(GAME_HEIGHT, preferences.getHeight());
 			createLevelMap(gameXmlList);
 		} catch (Exception e) {
 			VoogaAlert alert = new VoogaAlert("Level list initialization failed. Try opening in author and re-saving.");
 			alert.showAndWait();
+		}
+		myGameDisplay = new StandardDisplay(this,Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_WIDTH)), 
+				Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_HEIGHT)));
+		String latestLevelReached = checkProgressInDatabase(); 
+		playLevel(latestLevelReached);
+		myGameDisplay.display();
+		run();
+	}
+
+	private String checkProgressInDatabase() {
+		playSessionActive = true;
+		String latestLevelReached = NULL_STRING;
+		if (myStats.getCurrentStatCell().checkProgress() != null) {
+			latestLevelReached = myStats.getCurrentStatCell().checkProgress();
 		}
 		if (latestLevelReached.equals(NULL_STRING)){
 			for (Entry<String, LevelType> entry : myLevelMap.entrySet()) {
@@ -156,9 +167,7 @@ public class GameRunner implements IGameRunner {
 				}
 			}
 		}
-		playLevel(latestLevelReached);
-		myGameDisplay.display();
-		run();
+		return latestLevelReached;
 	}
 	/**
 	 * Play a level, called by playGame
@@ -175,13 +184,13 @@ public class GameRunner implements IGameRunner {
 	 */
 	@Override
 	public void testLevel(String levelName) {
+		myGameDisplay = new StandardDisplay(this,Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_WIDTH)), 
+				Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_HEIGHT)));
 		myCurrentLevelString = levelName.substring(levelName.replace('\\', '/')
 				.lastIndexOf('/') + 1, levelName.indexOf(XML_EXTENSION_SUFFIX));
 		myLevelMap.put(levelName, LevelType.ENTRYPOINT);
 		myLevelData.refreshLevelData(levelName);
 		addScrolling();
-		myGameDisplay.setSceneDimensions(Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_WIDTH)), 
-				Double.parseDouble(VoogaBundles.preferences.getProperty(GAME_HEIGHT)));
 		myGameDisplay.display();
 		run();
 	}
@@ -231,7 +240,7 @@ public class GameRunner implements IGameRunner {
 	 */
 	@Override
 	public void takeSnapShot() {
-		Scene myScene = myGameDisplay.getMyScene();
+		Scene myScene = myGameDisplay.getScene();
 		String currentLevel = myCurrentLevelString;
 		String formattedDate = new SimpleDateFormat(VoogaBundles.imageProperties.getString("timeStamp")).format(new Date());
 		String fileName = currentLevel + formattedDate;
@@ -255,7 +264,7 @@ public class GameRunner implements IGameRunner {
 	@Override
 	public void finishPlaySession() {
 		if (playSessionActive) {
-			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()), myLevelReached);
+			myStats.endCurrentPlaySession(((Double) myLevelData.getGlobalVar("Score").getValue()),myLevelReached);
 			VoogaDataBase.getInstance().save();
 		}
 	}

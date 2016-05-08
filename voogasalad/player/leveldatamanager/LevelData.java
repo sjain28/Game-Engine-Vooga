@@ -129,12 +129,24 @@ public class LevelData implements ILevelData {
 	public List<Pair<Node, Boolean>> getDisplayableNodes() {
 		List<Pair<Node, Boolean>> displayablenodes = new ArrayList<>();
 		for (Object key : myElements.keySet()) {
-			Boolean isStatic = (Boolean) myElements.get(key).getVoogaProperties().get(VoogaBundles.spriteProperties.getString("STATIC")).getProperty().getValue();
-			displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
+			boolean add = true;
+			//if the sprite is dead, don't let it be displayed
+			if(myElements.get(key) instanceof Sprite){
+				if(!(Boolean) ((Sprite) myElements.get(key)).getProperty(VoogaBundles.spriteProperties.getString("ALIVE")).getValue()){
+					add = false;
+				}
+			}
+			//otherwise, add it to the displayable nodes
+			if(add){
+				Boolean isStatic = (Boolean) myElements.get(key).getVoogaProperties().get(VoogaBundles.spriteProperties.getString("STATIC")).getProperty().getValue();
+				displayablenodes.add(new Pair<Node, Boolean>(myElements.get(key).getNodeObject(), isStatic));
+			}
 		}
 		displayablenodes.sort(new PairZAxisComparator());
 		return displayablenodes;
 	}
+
+
 
 	/**
 	 * Add a given event and populate the pressed and released KeyCombos
@@ -177,7 +189,7 @@ public class LevelData implements ILevelData {
 		myGlobalVariables.put(SAVE_PROGRESS, new VoogaBoolean(false));
 		GameSaver saver = new GameSaver(myElements, myKeyEventContainer, myGlobalVariables, mySpriteFactory,
 				myAnimationFactory);
-		saver.saveCurrentProgress(filePath);
+		saver.saveCurrentProgress();
 	}
 
 	public String getNextLevelName() {
