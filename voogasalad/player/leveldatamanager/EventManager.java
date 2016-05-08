@@ -14,7 +14,6 @@ import javafx.scene.input.KeyEvent;
  *
  */
 public class EventManager implements Updatable {
-	
 	/**
 	 * Evaluates Key Causes with inputed Key Events, and calls update
 	 * on all other Events to update level logic. Once done updating,
