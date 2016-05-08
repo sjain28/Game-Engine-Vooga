@@ -48,10 +48,12 @@
  *   prevent overly long lines from preventing user readability.
  * * In general, I believe this code follows the SOLID principle which we discussed a few weeks ago.
  * 
- * One last warning! I've pulled the recent master push Hunter made which had the games and a few final 
+ * Two last warnings! I've pulled the recent master push Hunter made which had the games and a few final 
  * edits the team made in final debugging, but I can no longer run past games... I doubt you'll really
  * grade the design of this masterpiece based on running games, but if you do want to test the physics
  * or similar such and such, then you may have to make your own game. Sorry about that.
+ * Also, if the old games do work, then understand that now that all operations run off of the normal frame rate,
+ * the rates at which operations happen will be messed up from what they were.
  * 
  * That all said, this is my masterpiece and more specifically, this is my last sentence written 
  * for this class, so all that is left to say is thank you.
