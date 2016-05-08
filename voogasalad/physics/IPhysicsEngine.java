@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Michael Kuryshev (myk3)
 package physics;
 
 import gameengine.Sprite;
@@ -14,8 +16,6 @@ public interface IPhysicsEngine {
 	int checkCollisionX(Sprite spriteA, Sprite spriteB);
 
 	int checkCollisionY(Sprite spriteA, Sprite spriteB);
-	
-	void inelasticBounceX(Sprite sprite, Double bounceCoefficient);
 	
 	void elasticBounceX(Sprite sprite, Double bounceCoefficient);
 	
@@ -82,4 +82,7 @@ public interface IPhysicsEngine {
 	 */
 	@Deprecated
 	void friction(Sprite sprite, Double frictionCoefficeint);
+	
+	@Deprecated
+	void stopBounceX(Sprite sprite, Double bounceCoefficient);
 }

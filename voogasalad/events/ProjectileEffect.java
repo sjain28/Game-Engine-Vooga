@@ -1,6 +1,7 @@
 package events;
 
 import physics.StandardPhysics;
+import player.gamerunner.GameRunner;
 import player.leveldatamanager.ILevelData;
 import tools.Velocity;
 
@@ -36,8 +37,8 @@ public class ProjectileEffect extends SpawnEffect {
 		}
 		
 		super.execute(data);
-		getNewSprite().setVelocity(new Velocity(myVelocity.getX()*StandardPhysics.REDUCE_FACTOR, 
-				myVelocity.getY()*StandardPhysics.REDUCE_FACTOR));
+		getNewSprite().setVelocity(
+				new Velocity(myVelocity.getX(), myVelocity.getY()));
 
 	}
 

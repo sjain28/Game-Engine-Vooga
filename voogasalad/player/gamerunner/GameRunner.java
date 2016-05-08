@@ -97,7 +97,8 @@ public class GameRunner implements IGameRunner {
 	 */
 	public void run() {
 		myCurrentStep = 0;
-		myTimeline.setRate(FRAME_RATE);
+		//set to run at 60 frames per second anyway, so this shoudl have just been one
+		myTimeline.setRate(1);
 		myTimeline.play();
 	}
 	/**
@@ -116,7 +117,8 @@ public class GameRunner implements IGameRunner {
 	 * Checks and updates all LevelData GlobalVariables
 	 */
 	private void checkAndUpdateGlobalVariables() {
-		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE) / FRAME_RATE);
+		//a clear indicator that we are running at frame_rate*frame_rate
+		myLevelData.updatedGlobalTimer(myCurrentStep * (1 / FRAME_RATE));
 		if (myLevelData.getSaveNow()) {
 			myStats.saveGameProgress(myLevelMapCreator.getGameFilePath());
 			myLevelData.saveProgress(myCurrentGameString);

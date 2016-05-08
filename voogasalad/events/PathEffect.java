@@ -48,8 +48,8 @@ public class PathEffect extends SpriteEffect{
 
 			for (Sprite sprite : getSprites()){
 				Vector nextVector = createSpline(myCounter);
-				data.getPhysicsEngine().translateX(sprite, nextVector.getX() / StandardPhysics.REDUCE_FACTOR);
-				data.getPhysicsEngine().translateY(sprite, nextVector.getY() / StandardPhysics.REDUCE_FACTOR);
+				data.getPhysicsEngine().translateX(sprite, nextVector.getX());
+				data.getPhysicsEngine().translateY(sprite, nextVector.getY());
 				setPastVelocities(sprite);
 			}
 		}

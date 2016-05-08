@@ -104,7 +104,7 @@ public class BuggyPhysics implements IPhysicsEngine {
 	 * @param bounceCoefficient
 	 */
 	@Override
-	public void inelasticBounceX(Sprite sprite, Double bounceCoefficient) {
+	public void stopBounceX(Sprite sprite, Double bounceCoefficient) {
 		if (isThisNumber(sprite.getVelocity().getAngleDegree(), 90) || isThisNumber(sprite.getVelocity().getAngleDegree(), 270)) {
 		}
 		sprite.getVelocity().setX(0);
