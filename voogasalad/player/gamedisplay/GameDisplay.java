@@ -20,7 +20,7 @@
  * 1) The template method. This class is a superclass for all the different game displays. I determined that the methods
  * that remained constant among all displays would be in this class. Meanwhile, the things that varied about the display
  * would be abstracted in their own individual classes. Thus, this class is an abstract class, containing a single abstract method
- * called setPositionalNodes(). This setPositionalNodes() determines what the different parts of the BorderPane
+ * called setBorders(). This setBorders() method determines what the different parts of the BorderPane
  * contained in this class would contained. If one wanted to simply flip the screen such that the standard control
  * was at the top and the menu was at the bottom, it would be extremely easily to go into the Standard Display class, edit the
  * setPositionalNodes() method, and that change would be observed.
@@ -42,7 +42,7 @@
  * In conclusion, this class fulfills SOLID design by fulfilling a single responsibility (being the master class for the
  * display), as well as the open/close principle (by defining preset addEffects() and readAndPopulate() methods). 
  * Finally, the subclass of this class, Standard Display, satisfies the Liskov Substitution principle, in which a standard display
- * could easily be substituted for another one. 
+ * could easily be substituted for another different display one. 
  * 
  */
 package player.gamedisplay;
@@ -137,7 +137,7 @@ public abstract class GameDisplay implements IGameDisplay {
 	
 	/**
 	 * Add secondary effects to the stage, called by display and displayTestMode. These effects include making the 
-	 * scene receptive to event handlers, playing music through the jukebox, as well as specifying that the database will save when the stage is closed.
+	 * scene receptive to event handlers, playing music through the Jukebox, as well as specifying that the database will save when the stage is closed.
 	 */
 	private void addEffects() {
 		myStage.show();

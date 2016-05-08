@@ -8,7 +8,11 @@
  * he could easily do so by creating a different class called Custom Control.
  *  
  * Notice that in the SetBorders class, not all the borders of the borderpane must be set. Rather, only the borders that 
- * the programmer specifies in the subclass will be set. 
+ * the programmer specifies in the subclass will be set. This gives the user the flexibility to customize the borders of the display
+ * however he wants. I determined this to be good design. Although there is the downside that the display could override the center of the screen,
+ * I left that to the discretion of the new game display. If such a GameDisplay specifies that it will contain something unrelated,
+ * such as a map of England instead of the game objects, that is within the right of the Display to show that. I preferred to give flexibility
+ * in order to reduce duplicated "setBottom", "setRight", "setTop" methods, by simply conglomerating them into the setBorders() method.
  */
 
 package player.gamedisplay;
@@ -19,7 +23,7 @@ import player.gamerunner.IGameRunner;
 import resources.VoogaBundles;
 /**
  * Standard Display that creates a display with basic user-interaction controls
- * Uses composition to contain elements of the display
+ * A subclass of GameDisplay.
  * 
  * @author Hunter Lee, Joshua Xu
  */
