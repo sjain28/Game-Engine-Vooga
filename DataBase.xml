@@ -1,0 +1,35 @@
+<object-stream>
+  <stats.database.VoogaDataBase>
+    <myGames/>
+    <myUsers>
+      <stats.database.VoogaUser>
+        <myPropertyMap>
+          <entry>
+            <string>user_name</string>
+            <tools.VoogaString>
+              <myValue>a</myValue>
+            </tools.VoogaString>
+          </entry>
+          <entry>
+            <string>prof_pic_loc</string>
+            <tools.VoogaString>
+              <myValue></myValue>
+            </tools.VoogaString>
+          </entry>
+          <entry>
+            <string>display_name</string>
+            <tools.VoogaString>
+              <myValue>a</myValue>
+            </tools.VoogaString>
+          </entry>
+        </myPropertyMap>
+        <myPassword>a</myPassword>
+      </stats.database.VoogaUser>
+    </myUsers>
+    <totalrows>0</totalrows>
+    <totalcols>1</totalcols>
+    <myStatInfo>
+      <list/>
+    </myStatInfo>
+  </stats.database.VoogaDataBase>
+</object-stream>

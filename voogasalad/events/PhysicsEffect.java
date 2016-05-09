@@ -6,6 +6,11 @@ import gameengine.Sprite;
 import player.leveldatamanager.ILevelData;
 import resources.VoogaBundles;
 
+/**
+ * Effect that extends sprite effect to apply physics engine methods on specified sprites
+ * @author Anita
+ *
+ */
 public class PhysicsEffect extends SpriteEffect {
 
 	public PhysicsEffect(String spriteID, String method, Double parameter, VoogaEvent event) {

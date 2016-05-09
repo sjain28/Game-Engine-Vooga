@@ -7,6 +7,11 @@ import tools.Velocity;
 
 public class ProjectileEffect extends SpawnEffect {
 
+	/**
+	 * Effect extending spawn effect to not only create a sprite of a specified archetype dynamically,
+	 * but also specify either an absolute or relative velocity for the spawned sprite, known as the projectile
+	 */
+	
 	private Velocity myVelocity;
 	private String myShooterID;
 	private Double myVelocityScale;

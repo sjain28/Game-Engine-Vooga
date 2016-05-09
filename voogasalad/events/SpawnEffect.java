@@ -10,6 +10,11 @@ import tools.Position;
 
 public class SpawnEffect extends Effect {
 
+	/**
+	 * Effect that allows user to create a sprite of a specified archetype dynamically
+	 * Sprite can be "spawned" at an absolute, user determined position, or relative to another sprite
+	 * extends sprite effect to indicate the target sprite in the same manner.
+	 */
 	private String myArchetype;
 	private Position myPosition;
 	private String myTargetID;

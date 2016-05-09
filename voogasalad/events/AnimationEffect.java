@@ -38,18 +38,9 @@ public class AnimationEffect extends SpriteEffect {
 		setNeedsSprites(needsSprites);
 	}
 	/**
-	 * Another constructor that initializes Sprites from Event by default
-	 * @param animationEvent
-	 * @param voogaEvent
-	 */
-	public AnimationEffect(String animationEvent, VoogaEvent voogaEvent) {
-		super(voogaEvent);
-		myAnimationName = animationEvent;
-		setNeedsSprites(true);
-	}
-	/**
-	 * When triggered, this method creates an event bundling together several animation actions, 
-	 * and triggers a wrapper cause that allows those animation actions to execute.
+	 * When triggered, this method copies an existing user made event bundling together several animation actions, 
+	 * and triggers a wrapper cause that allows those animation actions to execute throughout the duration across
+	 * multiple update cycles.
 	 */
 	@Override
 	public void execute(ILevelData data) {

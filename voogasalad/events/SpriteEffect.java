@@ -8,6 +8,12 @@ import player.leveldatamanager.ILevelData;
 import resources.VoogaBundles;
 import tools.interfaces.VoogaData;
 
+/**
+ * Effect that specifies a sprite/sprites upon which a variable effect is executed.
+ * Extends variable effect, only adds sprites to be effected.
+ * @author Anita
+ *
+ */
 public class SpriteEffect extends VariableEffect{
 
 	private Boolean needsSprites;

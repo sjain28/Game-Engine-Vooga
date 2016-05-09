@@ -1,0 +1,11 @@
+<object-stream>
+  <authoring.model.Preferences>
+    <name>raptor_arcade_game</name>
+    <description>top_down_scroller</description>
+    <width>600</width>
+    <height>600</height>
+    <managerNames>
+      <string>level1</string>
+    </managerNames>
+  </authoring.model.Preferences>
+</object-stream>

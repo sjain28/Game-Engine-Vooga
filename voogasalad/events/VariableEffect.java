@@ -6,6 +6,11 @@ import player.leveldatamanager.ILevelData;
 import tools.VoogaException;
 import tools.interfaces.VoogaData;
 
+/**
+ * Effect for the events API that allows user to change global variables.
+ * @author Anita
+ *
+ */
 
 public class VariableEffect extends Effect {
 
@@ -47,6 +52,11 @@ public class VariableEffect extends Effect {
 		callEffectMethod(variableData);
 	}
 
+	/**
+	 * Uses reflection to call the corresponding method to the user's indicated method upon the user indicated
+	 * variable using the user indicated parameter as the method argument
+	 * @param variable
+	 */
 	protected void callEffectMethod(VoogaData variable){
 		Class dataType = variable.getClass();
 		try{
@@ -82,13 +92,5 @@ public class VariableEffect extends Effect {
 	}
 	protected Object getParameter(){
 		return myParameter;
-	}
-	
-	public void setParameter(Object parameter) throws VoogaException{
-		if (!parameter.getClass().equals(myParameter.getClass())){
-			throw new VoogaException("Please input a " + myParameter.getClass());
-		}else{
-			myParameter = parameter;
-		}
 	}	
 }
